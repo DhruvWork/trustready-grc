@@ -9,8 +9,6 @@ import (
 	"context"
 	"errors"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
@@ -20,6 +18,8 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 	"github.com/DhruvWork/trustready-grc/pkg/task"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // CreateTaskComment is the resolver for the createTaskComment field.

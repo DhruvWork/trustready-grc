@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -61,7 +61,7 @@ func NewCmdPublishLinear(f *cmdutil.Factory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "publish-linear <id>",
 		Short: "Publish a task as a new Linear issue",
-		Long:  "Publish a task as a new Linear issue. The Probo task status and content are left unchanged.",
+		Long:  "Publish a task as a new Linear issue. The TrustReady task status and content are left unchanged.",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := f.Config()

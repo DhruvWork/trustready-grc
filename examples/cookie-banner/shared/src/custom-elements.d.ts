@@ -8,7 +8,7 @@ type CE<T = object> = React.DetailedHTMLProps<
 declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
-      "probo-settings-link": CE;
+      "trustready-settings-link": CE;
     }
   }
 }

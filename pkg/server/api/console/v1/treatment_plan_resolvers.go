@@ -10,18 +10,18 @@ import (
 	"errors"
 	"time"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // CreateTreatmentPlan is the resolver for the createTreatmentPlan field.
@@ -261,7 +261,7 @@ func (r *treatmentPlanResolver) Owner(ctx context.Context, obj *types.TreatmentP
 // Risk is the resolver for the risk field.
 func (r *treatmentPlanResolver) Risk(ctx context.Context, obj *types.TreatmentPlan) (*types.Risk, error) {
 	resourceID := obj.Risk.ID
-	action := probo.ActionRiskGet
+	action := trustready.ActionRiskGet
 
 	if obj.AsOf != nil {
 		resourceID = obj.RiskAnalysis.ID
@@ -273,7 +273,7 @@ func (r *treatmentPlanResolver) Risk(ctx context.Context, obj *types.TreatmentPl
 		return nil, err
 	}
 
-	risk, err := r.probo.Risks.Get(ctx, scope, obj.Risk.ID)
+	risk, err := r.trustready.Risks.Get(ctx, scope, obj.Risk.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -319,7 +319,7 @@ func (r *treatmentPlanResolver) Organization(ctx context.Context, obj *types.Tre
 		if _, err := r.authorize(ctx, obj.RiskAnalysis.ID, riskmanagement.ActionTreatmentPlanList); err != nil {
 			return nil, err
 		}
-	} else if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	} else if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -346,7 +346,7 @@ func (r *treatmentPlanResolver) Measures(ctx context.Context, obj *types.Treatme
 	}
 
 	resourceID := obj.ID
-	action := probo.ActionMeasureList
+	action := trustready.ActionMeasureList
 
 	if asOf != nil {
 		resourceID = obj.RiskAnalysis.ID
@@ -402,7 +402,7 @@ func (r *treatmentPlanResolver) Measures(ctx context.Context, obj *types.Treatme
 		return connection, nil
 	}
 
-	page, err := r.probo.Measures.ListForTreatmentPlanID(ctx, scope, obj.ID, cursor, measureFilter)
+	page, err := r.trustready.Measures.ListForTreatmentPlanID(ctx, scope, obj.ID, cursor, measureFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list treatment plan measures", log.Error(err))
 		return nil, gqlutils.Internal(ctx)

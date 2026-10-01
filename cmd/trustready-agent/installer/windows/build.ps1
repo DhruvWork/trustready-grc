@@ -1,4 +1,4 @@
-# Copyright (c) 2026 Probo Inc <hello@probo.com>.
+# Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,24 +22,24 @@
 
 <#
 .SYNOPSIS
-  Build the Probo Agent Windows MSI with WiX.
+  Build the TrustReady Agent Windows MSI with WiX.
 
 .DESCRIPTION
-  Packages pre-built probo-agent.exe and probo-agentw.exe into
-  probo-agent_<version>_windows_<arch>.msi. Prefer passing an
+  Packages pre-built trustready-agent.exe and trustready-agentw.exe into
+  trustready-agent_<version>_windows_<arch>.msi. Prefer passing an
   Authenticode-signed binary pair so the nested exes remain signed.
 
   Requires the WiX CLI (`wix`) on PATH (dotnet tool install --global wix).
 
 .PARAMETER Binary
-  Path to probo-agent.exe.
+  Path to trustready-agent.exe.
 
 .PARAMETER GUIBinary
-  Path to probo-agentw.exe.
+  Path to trustready-agentw.exe.
 
 .PARAMETER Version
   Agent version (X.Y.Z or X.Y.Z-rc.N). Defaults to
-  cmd/probo-agent/VERSION. The MSI filename keeps the full string;
+  cmd/trustready-agent/VERSION. The MSI filename keeps the full string;
   WiX ProductVersion strips -rc.N because MSI requires X.Y.Z.
 
 .PARAMETER Arch
@@ -85,7 +85,7 @@ $Binary = (Resolve-Path -LiteralPath $Binary).Path
 $GUIBinary = (Resolve-Path -LiteralPath $GUIBinary).Path
 
 if ([string]::IsNullOrWhiteSpace($Version)) {
-    $VersionFile = Join-Path $RepoRoot "cmd\probo-agent\VERSION"
+    $VersionFile = Join-Path $RepoRoot "cmd\trustready-agent\VERSION"
     if (-not (Test-Path -LiteralPath $VersionFile)) {
         throw "error: VERSION file missing at $VersionFile; pass -Version"
     }
@@ -112,7 +112,7 @@ switch ($Arch) {
 if ([string]::IsNullOrWhiteSpace($Output)) {
     $DistDir = Join-Path $RepoRoot "dist"
     New-Item -ItemType Directory -Force -Path $DistDir | Out-Null
-    $Output = Join-Path $DistDir "probo-agent_${Version}_windows_${ArchLabel}.msi"
+    $Output = Join-Path $DistDir "trustready-agent_${Version}_windows_${ArchLabel}.msi"
 } else {
     $outDir = Split-Path -Parent $Output
     if ($outDir) {
@@ -153,7 +153,7 @@ if (-not (Test-Path -LiteralPath $LicenseSrc)) {
     throw "error: LICENSE missing at $LicenseSrc"
 }
 
-$LicenseRtf = Join-Path ([System.IO.Path]::GetTempPath()) "probo-agent-license-$PID.rtf"
+$LicenseRtf = Join-Path ([System.IO.Path]::GetTempPath()) "trustready-agent-license-$PID.rtf"
 [System.IO.File]::WriteAllText($LicenseRtf, (ConvertTo-LicenseRtf -LicensePath $LicenseSrc))
 $LicenseRtfArg = $LicenseRtf.Replace('\', '/')
 
@@ -162,7 +162,7 @@ if (-not (Test-Path -LiteralPath $IconPng)) {
     throw "error: color icon missing at $IconPng"
 }
 
-$ProductIcon = Join-Path ([System.IO.Path]::GetTempPath()) "probo-agent-icon-$PID.ico"
+$ProductIcon = Join-Path ([System.IO.Path]::GetTempPath()) "trustready-agent-icon-$PID.ico"
 $ProductIconArg = $ProductIcon.Replace('\', '/')
 
 Write-Host "Building MSI: binary=$Binary guiBinary=$GUIBinary arch=$WixArch version=$Version product=$ProductVersion output=$Output"
@@ -170,7 +170,7 @@ Write-Host "Building MSI: binary=$Binary guiBinary=$GUIBinary arch=$WixArch vers
 try {
     Push-Location $RepoRoot
     try {
-        & go run ./cmd/probo-agent/installer/windows/mkicon `
+        & go run ./cmd/trustready-agent/installer/windows/mkicon `
             -png $IconPng `
             -ico $ProductIcon
         if ($LASTEXITCODE -ne 0) {

@@ -1,0 +1,698 @@
+{{- include "trustready.validateTrustCenterTLSMode" . }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "trustready.fullname" . }}
+  labels:
+    {{- include "trustready.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "trustready.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: server
+  template:
+    metadata:
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "trustready.labels" . | nindent 8 }}
+        app.kubernetes.io/component: server
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "trustready.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default (printf "v%s" .Chart.AppVersion) }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: CONFIG_FILE
+              value: "/data/trustreadyd/config.yml"
+            # Observability - Metrics
+            - name: TRUSTREADYD_METRICS_ADDR
+              value: "0.0.0.0:{{ .Values.trustready.metrics.port }}"
+            {{- if .Values.trustready.tracing.enabled }}
+            # Observability - Tracing
+            - name: TRUSTREADYD_TRACING_ADDR
+              value: {{ .Values.trustready.tracing.addr | quote }}
+            - name: TRUSTREADYD_TRACING_MAX_BATCH_SIZE
+              value: {{ .Values.trustready.tracing.maxBatchSize | quote }}
+            - name: TRUSTREADYD_TRACING_BATCH_TIMEOUT
+              value: {{ .Values.trustready.tracing.batchTimeout | quote }}
+            - name: TRUSTREADYD_TRACING_EXPORT_TIMEOUT
+              value: {{ .Values.trustready.tracing.exportTimeout | quote }}
+            - name: TRUSTREADYD_TRACING_MAX_QUEUE_SIZE
+              value: {{ .Values.trustready.tracing.maxQueueSize | quote }}
+            {{- end }}
+            # Application Configuration
+            - name: TRUSTREADYD_BASE_URL
+              value: {{ printf "https://%s" .Values.trustready.baseUrl | quote }}
+            - name: TRUSTREADYD_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: encryption-key
+            - name: TRUSTREADYD_CHROME_DP_ADDR
+              value: {{ include "trustready.chrome.addr" . | quote }}
+            - name: TRUSTREADYD_BRANDING
+              value: {{ .Values.trustready.branding | quote }}
+            - name: TRUSTREADYD_COOKIE_BANNER_TCF_CMP_ID
+              value: {{ .Values.trustready.cookieBanner.tcfCmpId | default 4095 | quote }}
+            - name: TRUSTREADYD_TRUST_CENTER_TLS_MODE
+              value: {{ .Values.trustready.trustCenter.tlsMode | quote }}
+            # API Configuration
+            - name: TRUSTREADYD_API_ADDR
+              value: ":{{ .Values.service.port }}"
+            - name: TRUSTREADYD_API_CORS_ALLOWED_ORIGINS
+              value: {{ join "," .Values.trustready.cors.allowedOrigins | quote }}
+            - name: TRUSTREADYD_API_GRAPHQL_PARSER_TOKEN_LIMIT
+              value: {{ .Values.trustready.graphql.parserTokenLimit | quote }}
+            - name: TRUSTREADYD_API_GRAPHQL_COMPLEXITY_LIMIT
+              value: {{ .Values.trustready.graphql.complexityLimit | quote }}
+            - name: TRUSTREADYD_API_GRAPHQL_QUERY_CACHE_SIZE
+              value: {{ .Values.trustready.graphql.queryCacheSize | quote }}
+            - name: TRUSTREADYD_API_GRAPHQL_DISABLE_SUGGESTION
+              value: {{ .Values.trustready.graphql.disableSuggestion | quote }}
+            # PostgreSQL Database
+            - name: TRUSTREADYD_PG_ADDR
+              value: {{ printf "%s:%v" (include "trustready.postgresql.host" .) (include "trustready.postgresql.port" .) | quote }}
+            - name: TRUSTREADYD_PG_USERNAME
+              value: {{ include "trustready.postgresql.username" . | quote }}
+            - name: TRUSTREADYD_PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: db-password
+            - name: TRUSTREADYD_PG_DATABASE
+              value: {{ include "trustready.postgresql.database" . | quote }}
+            - name: TRUSTREADYD_PG_POOL_SIZE
+              value: {{ .Values.postgresql.poolSize | default "100" | quote }}
+            - name: TRUSTREADYD_PG_MIN_POOL_SIZE
+              value: {{ .Values.postgresql.minPoolSize | default "10" | quote }}
+            - name: TRUSTREADYD_PG_MAX_CONN_IDLE_TIME_SECONDS
+              value: {{ .Values.postgresql.maxConnIdleTimeSeconds | default "1800" | quote }}
+            - name: TRUSTREADYD_PG_MAX_CONN_LIFETIME_SECONDS
+              value: {{ .Values.postgresql.maxConnLifetimeSeconds | default "3600" | quote }}
+            - name: TRUSTREADYD_PG_MAX_CONN_LIFETIME_JITTER_SECONDS
+              value: {{ .Values.postgresql.maxConnLifetimeJitterSeconds | default "300" | quote }}
+            - name: TRUSTREADYD_PG_HEALTH_CHECK_PERIOD_SECONDS
+              value: {{ .Values.postgresql.healthCheckPeriodSeconds | default "60" | quote }}
+            {{- if .Values.postgresql.caBundle }}
+            - name: TRUSTREADYD_PG_CA_BUNDLE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: pg-ca-bundle
+            {{- else if .Values.postgresql.caBundlePath }}
+            - name: TRUSTREADYD_PG_CA_BUNDLE_PATH
+              value: {{ .Values.postgresql.caBundlePath | quote }}
+            {{- end }}
+            # Authentication
+            - name: TRUSTREADYD_AUTH_DISABLE_SIGNUP
+              value: {{ .Values.trustready.auth.disableSignup | quote }}
+            - name: TRUSTREADYD_AUTH_INVITATION_TOKEN_VALIDITY
+              value: {{ .Values.trustready.auth.invitationTokenValidity | quote }}
+            - name: TRUSTREADYD_AUTH_EMAIL_CONFIRMATION_TOKEN_VALIDITY
+              value: {{ .Values.trustready.auth.emailConfirmationTokenValidity | quote }}
+            - name: TRUSTREADYD_AUTH_COOKIE_NAME
+              value: {{ .Values.trustready.auth.cookieName | quote }}
+            - name: TRUSTREADYD_AUTH_COOKIE_DOMAIN
+              value: {{ .Values.trustready.auth.cookieDomain | quote }}
+            - name: TRUSTREADYD_AUTH_COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: cookie-secret
+            - name: TRUSTREADYD_AUTH_COOKIE_DURATION
+              value: {{ .Values.trustready.auth.cookieDuration | quote }}
+            - name: TRUSTREADYD_AUTH_COOKIE_SAMESITE
+              value: {{ .Values.trustready.auth.cookieSameSite | quote }}
+            - name: TRUSTREADYD_AUTH_PASSWORD_PEPPER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: password-pepper
+            - name: TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: oauth2-signing-key
+            {{- if .Values.trustready.oauth2.cimdAllowedClientIds }}
+            - name: TRUSTREADYD_OAUTH2_SERVER_CIMD_ALLOWED_CLIENT_IDS
+              value: {{ join "," .Values.trustready.oauth2.cimdAllowedClientIds | quote }}
+            {{- end }}
+            {{- if .Values.trustready.identityFederation.enabled }}
+            # Identity federation issuer
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_ENABLED
+              value: "true"
+            {{- if .Values.trustready.identityFederation.issuerBaseUrl }}
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_ISSUER_BASE_URL
+              value: {{ .Values.trustready.identityFederation.issuerBaseUrl | quote }}
+            {{- end }}
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: identity-federation-signing-key
+            {{- if .Values.trustready.identityFederation.signingKeyKid }}
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY_KID
+              value: {{ .Values.trustready.identityFederation.signingKeyKid | quote }}
+            {{- end }}
+            {{- if .Values.trustready.identityFederation.previousSigningKey }}
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: identity-federation-previous-signing-key
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID
+              value: {{ required "trustready.identityFederation.previousSigningKeyKid is required when trustready.identityFederation.previousSigningKey is set" .Values.trustready.identityFederation.previousSigningKeyKid | quote }}
+            {{- end }}
+            {{- end }}
+            {{- if .Values.trustready.identityFederation.cloudformationTemplateUrl }}
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_CLOUDFORMATION_TEMPLATE_URL
+              value: {{ .Values.trustready.identityFederation.cloudformationTemplateUrl | quote }}
+            {{- end }}
+            {{- if .Values.trustready.identityFederation.terraformModuleSource }}
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_TERRAFORM_MODULE_SOURCE
+              value: {{ .Values.trustready.identityFederation.terraformModuleSource | quote }}
+            {{- end }}
+            {{- if .Values.trustready.identityFederation.gcpTerraformModuleSource }}
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_GCP_TERRAFORM_MODULE_SOURCE
+              value: {{ .Values.trustready.identityFederation.gcpTerraformModuleSource | quote }}
+            {{- end }}
+            {{- if .Values.trustready.identityFederation.azureTerraformModuleSource }}
+            - name: TRUSTREADYD_IDENTITY_FEDERATION_AZURE_TERRAFORM_MODULE_SOURCE
+              value: {{ .Values.trustready.identityFederation.azureTerraformModuleSource | quote }}
+            {{- end }}
+            - name: TRUSTREADYD_AUTH_PASSWORD_ITERATIONS
+              value: {{ .Values.trustready.auth.passwordIterations | quote }}
+            - name: TRUSTREADYD_ITAM_DEVICE_ENROLLMENT_TOKEN_VALIDITY
+              value: {{ .Values.trustready.itam.deviceEnrollmentTokenValidity | quote }}
+            {{- if .Values.trustready.saml.enabled }}
+            # SAML Authentication
+            - name: TRUSTREADYD_SAML_SESSION_DURATION
+              value: {{ .Values.trustready.saml.sessionDuration | quote }}
+            - name: TRUSTREADYD_SAML_CLEANUP_INTERVAL_SECONDS
+              value: {{ .Values.trustready.saml.cleanupIntervalSeconds | quote }}
+            {{- if .Values.trustready.saml.certificate }}
+            - name: TRUSTREADYD_SAML_CERTIFICATE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: saml-certificate
+            {{- end }}
+            {{- if .Values.trustready.saml.privateKey }}
+            - name: TRUSTREADYD_SAML_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: saml-private-key
+            {{- end }}
+            {{- end }}
+            # Trust Center Authentication
+            - name: TRUSTREADYD_TRUST_AUTH_COOKIE_NAME
+              value: {{ .Values.trustready.trustAuth.cookieName | quote }}
+            - name: TRUSTREADYD_TRUST_AUTH_COOKIE_DOMAIN
+              value: {{ .Values.trustready.trustAuth.cookieDomain | quote }}
+            - name: TRUSTREADYD_TRUST_AUTH_COOKIE_DURATION
+              value: {{ .Values.trustready.trustAuth.cookieDuration | quote }}
+            - name: TRUSTREADYD_TRUST_AUTH_TOKEN_DURATION
+              value: {{ .Values.trustready.trustAuth.tokenDuration | quote }}
+            - name: TRUSTREADYD_TRUST_AUTH_REPORT_URL_DURATION
+              value: {{ .Values.trustready.trustAuth.reportUrlDuration | quote }}
+            - name: TRUSTREADYD_TRUST_AUTH_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: trust-token-secret
+            - name: TRUSTREADYD_TRUST_AUTH_SCOPE
+              value: {{ .Values.trustready.trustAuth.scope | quote }}
+            - name: TRUSTREADYD_TRUST_AUTH_TOKEN_TYPE
+              value: {{ .Values.trustready.trustAuth.tokenType | quote }}
+            # AWS / S3 Storage
+            - name: TRUSTREADYD_AWS_REGION
+              value: {{ .Values.s3.region | quote }}
+            - name: TRUSTREADYD_AWS_BUCKET
+              value: {{ .Values.s3.bucket | quote }}
+            - name: TRUSTREADYD_AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: s3-access-key
+            - name: TRUSTREADYD_AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: s3-secret-key
+            {{- $s3Endpoint := include "trustready.s3.endpoint" . }}
+            {{- if $s3Endpoint }}
+            - name: TRUSTREADYD_AWS_ENDPOINT
+              value: {{ $s3Endpoint | quote }}
+            {{- end }}
+            {{- if .Values.s3.usePathStyle }}
+            - name: TRUSTREADYD_AWS_USE_PATH_STYLE
+              value: "true"
+            {{- end }}
+            # Email (SMTP)
+            - name: TRUSTREADYD_MAILER_SENDER_NAME
+              value: {{ .Values.trustready.mailer.senderName | quote }}
+            - name: TRUSTREADYD_MAILER_SENDER_EMAIL
+              value: {{ .Values.trustready.mailer.senderEmail | quote }}
+            - name: TRUSTREADYD_SMTP_ADDR
+              value: {{ .Values.trustready.mailer.smtp.addr | quote }}
+            {{- if .Values.trustready.mailer.smtp.user }}
+            - name: TRUSTREADYD_SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: smtp-user
+            {{- end }}
+            {{- if .Values.trustready.mailer.smtp.password }}
+            - name: TRUSTREADYD_SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: smtp-password
+            {{- end }}
+            - name: TRUSTREADYD_SMTP_TLS_REQUIRED
+              value: {{ .Values.trustready.mailer.smtp.tlsRequired | quote }}
+            {{- if .Values.trustready.mailer.smtp.helloName }}
+            - name: TRUSTREADYD_SMTP_HELLO_NAME
+              value: {{ .Values.trustready.mailer.smtp.helloName | quote }}
+            {{- end }}
+            # Outbound Webhooks
+            - name: TRUSTREADYD_WEBHOOK_SENDER_INTERVAL
+              value: {{ .Values.trustready.webhook.senderInterval | quote }}
+            - name: TRUSTREADYD_WEBHOOK_REQUEST_TIMEOUT
+              value: {{ .Values.trustready.webhook.requestTimeout | quote }}
+            - name: TRUSTREADYD_WEBHOOK_CACHE_TTL
+              value: {{ .Values.trustready.webhook.cacheTTL | quote }}
+            - name: TRUSTREADYD_WEBHOOK_STALE_AFTER
+              value: {{ .Values.trustready.webhook.staleAfter | quote }}
+            - name: TRUSTREADYD_WEBHOOK_RETRY_BASE
+              value: {{ .Values.trustready.webhook.retryBase | quote }}
+            - name: TRUSTREADYD_WEBHOOK_RETRY_MAX
+              value: {{ .Values.trustready.webhook.retryMax | quote }}
+            - name: TRUSTREADYD_WEBHOOK_MAX_CONCURRENCY
+              value: {{ .Values.trustready.webhook.maxConcurrency | quote }}
+            # OpenAI Integration
+            {{- if .Values.trustready.openai.apiKey }}
+            - name: TRUSTREADYD_OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: openai-api-key
+            - name: TRUSTREADYD_OPENAI_TEMPERATURE
+              value: {{ .Values.trustready.openai.temperature | quote }}
+            - name: TRUSTREADYD_OPENAI_MODEL_NAME
+              value: {{ .Values.trustready.openai.modelName | quote }}
+            - name: TRUSTREADYD_OPENAI_MAX_TOKENS
+              value: {{ .Values.trustready.openai.maxTokens | quote }}
+            {{- end }}
+            {{- if .Values.trustready.anthropic.apiKey }}
+            - name: TRUSTREADYD_ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: anthropic-api-key
+            {{- end }}
+            # Agent Tools
+            {{- if .Values.trustready.agentTools.firecrawlApiKey }}
+            - name: TRUSTREADYD_FIRECRAWL_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: firecrawl-api-key
+            {{- end }}
+            # Third-Party Vetter Agent
+            {{- if .Values.trustready.thirdPartyVetter.provider }}
+            - name: TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_PROVIDER
+              value: {{ .Values.trustready.thirdPartyVetter.provider | quote }}
+            {{- end }}
+            {{- if .Values.trustready.thirdPartyVetter.modelName }}
+            - name: TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_MODEL_NAME
+              value: {{ .Values.trustready.thirdPartyVetter.modelName | quote }}
+            {{- end }}
+            {{- if .Values.trustready.thirdPartyVetter.temperature }}
+            - name: TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_TEMPERATURE
+              value: {{ .Values.trustready.thirdPartyVetter.temperature | quote }}
+            {{- end }}
+            {{- if .Values.trustready.thirdPartyVetter.maxTokens }}
+            - name: TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_MAX_TOKENS
+              value: {{ .Values.trustready.thirdPartyVetter.maxTokens | quote }}
+            {{- end }}
+            # Third-Party Vetting Worker
+            {{- if .Values.trustready.thirdPartyVettingWorker.interval }}
+            - name: TRUSTREADYD_THIRD_PARTY_VETTING_INTERVAL
+              value: {{ .Values.trustready.thirdPartyVettingWorker.interval | quote }}
+            {{- end }}
+            {{- if .Values.trustready.thirdPartyVettingWorker.maxConcurrency }}
+            - name: TRUSTREADYD_THIRD_PARTY_VETTING_MAX_CONCURRENCY
+              value: {{ .Values.trustready.thirdPartyVettingWorker.maxConcurrency | quote }}
+            {{- end }}
+            {{- if .Values.trustready.thirdPartyVettingWorker.staleAfter }}
+            - name: TRUSTREADYD_THIRD_PARTY_VETTING_STALE_AFTER
+              value: {{ .Values.trustready.thirdPartyVettingWorker.staleAfter | quote }}
+            {{- end }}
+            # Tracker Mapping Agent
+            {{- if .Values.trustready.trackerMapping.provider }}
+            - name: TRUSTREADYD_AGENT_TRACKER_MAPPING_PROVIDER
+              value: {{ .Values.trustready.trackerMapping.provider | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerMapping.modelName }}
+            - name: TRUSTREADYD_AGENT_TRACKER_MAPPING_MODEL_NAME
+              value: {{ .Values.trustready.trackerMapping.modelName | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerMapping.temperature }}
+            - name: TRUSTREADYD_AGENT_TRACKER_MAPPING_TEMPERATURE
+              value: {{ .Values.trustready.trackerMapping.temperature | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerMapping.maxTokens }}
+            - name: TRUSTREADYD_AGENT_TRACKER_MAPPING_MAX_TOKENS
+              value: {{ .Values.trustready.trackerMapping.maxTokens | quote }}
+            {{- end }}
+            # Tracker Enrichment Agent
+            {{- if .Values.trustready.trackerEnrichment.provider }}
+            - name: TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_PROVIDER
+              value: {{ .Values.trustready.trackerEnrichment.provider | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerEnrichment.modelName }}
+            - name: TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_MODEL_NAME
+              value: {{ .Values.trustready.trackerEnrichment.modelName | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerEnrichment.temperature }}
+            - name: TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_TEMPERATURE
+              value: {{ .Values.trustready.trackerEnrichment.temperature | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerEnrichment.maxTokens }}
+            - name: TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_MAX_TOKENS
+              value: {{ .Values.trustready.trackerEnrichment.maxTokens | quote }}
+            {{- end }}
+            # Tracker Mapping Worker
+            {{- if .Values.trustready.trackerMappingWorker.interval }}
+            - name: TRUSTREADYD_TRACKER_MAPPING_INTERVAL
+              value: {{ .Values.trustready.trackerMappingWorker.interval | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerMappingWorker.maxConcurrency }}
+            - name: TRUSTREADYD_TRACKER_MAPPING_MAX_CONCURRENCY
+              value: {{ .Values.trustready.trackerMappingWorker.maxConcurrency | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerMappingWorker.staleAfter }}
+            - name: TRUSTREADYD_TRACKER_MAPPING_STALE_AFTER
+              value: {{ .Values.trustready.trackerMappingWorker.staleAfter | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerMappingWorker.agentTimeout }}
+            - name: TRUSTREADYD_TRACKER_MAPPING_AGENT_TIMEOUT
+              value: {{ .Values.trustready.trackerMappingWorker.agentTimeout | quote }}
+            {{- end }}
+            {{- if .Values.trustready.trackerMappingWorker.agentMaxTurns }}
+            - name: TRUSTREADYD_TRACKER_MAPPING_AGENT_MAX_TURNS
+              value: {{ .Values.trustready.trackerMappingWorker.agentMaxTurns | quote }}
+            {{- end }}
+            # Common Pattern Enrichment Worker
+            {{- if .Values.trustready.iomonPatternEnrichmentWorker.interval }}
+            - name: TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_INTERVAL
+              value: {{ .Values.trustready.iomonPatternEnrichmentWorker.interval | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonPatternEnrichmentWorker.maxConcurrency }}
+            - name: TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_MAX_CONCURRENCY
+              value: {{ .Values.trustready.iomonPatternEnrichmentWorker.maxConcurrency | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonPatternEnrichmentWorker.staleAfter }}
+            - name: TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_STALE_AFTER
+              value: {{ .Values.trustready.iomonPatternEnrichmentWorker.staleAfter | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonPatternEnrichmentWorker.agentTimeout }}
+            - name: TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_AGENT_TIMEOUT
+              value: {{ .Values.trustready.iomonPatternEnrichmentWorker.agentTimeout | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonPatternEnrichmentWorker.agentMaxTurns }}
+            - name: TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_AGENT_MAX_TURNS
+              value: {{ .Values.trustready.iomonPatternEnrichmentWorker.agentMaxTurns | quote }}
+            {{- end }}
+            # Common Third Party Enrichment Agent
+            {{- if .Values.trustready.iomonThirdPartyEnrichment.provider }}
+            - name: TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_PROVIDER
+              value: {{ .Values.trustready.iomonThirdPartyEnrichment.provider | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonThirdPartyEnrichment.modelName }}
+            - name: TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MODEL_NAME
+              value: {{ .Values.trustready.iomonThirdPartyEnrichment.modelName | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonThirdPartyEnrichment.temperature }}
+            - name: TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_TEMPERATURE
+              value: {{ .Values.trustready.iomonThirdPartyEnrichment.temperature | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonThirdPartyEnrichment.maxTokens }}
+            - name: TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MAX_TOKENS
+              value: {{ .Values.trustready.iomonThirdPartyEnrichment.maxTokens | quote }}
+            {{- end }}
+            # Common Third Party Enrichment Worker
+            {{- if .Values.trustready.iomonThirdPartyEnrichmentWorker.interval }}
+            - name: TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_INTERVAL
+              value: {{ .Values.trustready.iomonThirdPartyEnrichmentWorker.interval | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonThirdPartyEnrichmentWorker.maxConcurrency }}
+            - name: TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_CONCURRENCY
+              value: {{ .Values.trustready.iomonThirdPartyEnrichmentWorker.maxConcurrency | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonThirdPartyEnrichmentWorker.staleAfter }}
+            - name: TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_STALE_AFTER
+              value: {{ .Values.trustready.iomonThirdPartyEnrichmentWorker.staleAfter | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonThirdPartyEnrichmentWorker.agentTimeout }}
+            - name: TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_TIMEOUT
+              value: {{ .Values.trustready.iomonThirdPartyEnrichmentWorker.agentTimeout | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonThirdPartyEnrichmentWorker.agentMaxTurns }}
+            - name: TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_MAX_TURNS
+              value: {{ .Values.trustready.iomonThirdPartyEnrichmentWorker.agentMaxTurns | quote }}
+            {{- end }}
+            {{- if ne .Values.trustready.iomonThirdPartyEnrichmentWorker.confidenceThreshold nil }}
+            - name: TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_CONFIDENCE_THRESHOLD
+              value: {{ .Values.trustready.iomonThirdPartyEnrichmentWorker.confidenceThreshold | quote }}
+            {{- end }}
+            {{- if .Values.trustready.iomonThirdPartyEnrichmentWorker.maxAttempts }}
+            - name: TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_ATTEMPTS
+              value: {{ .Values.trustready.iomonThirdPartyEnrichmentWorker.maxAttempts | quote }}
+            {{- end }}
+            # Custom Domains
+            {{- if and .Values.trustready.customDomains.enabled (ne .Values.trustready.trustCenter.tlsMode "external") }}
+            - name: TRUSTREADYD_CUSTOM_DOMAINS_RENEWAL_INTERVAL
+              value: {{ .Values.trustready.customDomains.renewalInterval | quote }}
+            - name: TRUSTREADYD_CUSTOM_DOMAINS_PROVISION_INTERVAL
+              value: {{ .Values.trustready.customDomains.provisionInterval | quote }}
+            - name: TRUSTREADYD_CUSTOM_DOMAINS_CNAME_TARGET
+              value: {{ .Values.trustready.customDomains.cnameTarget | quote }}
+            - name: TRUSTREADYD_ACME_DIRECTORY
+              value: {{ .Values.trustready.customDomains.acme.directory | quote }}
+            - name: TRUSTREADYD_ACME_EMAIL
+              value: {{ .Values.trustready.customDomains.acme.email | quote }}
+            - name: TRUSTREADYD_ACME_KEY_TYPE
+              value: {{ .Values.trustready.customDomains.acme.keyType | quote }}
+            {{- if .Values.trustready.customDomains.acme.accountKey }}
+            - name: TRUSTREADYD_ACME_ACCOUNT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: acme-account-key
+            {{- end }}
+            {{- end }}
+            # Slackbot assistant
+            {{- if .Values.trustready.slackbot.enabled }}
+            {{- if eq .Values.trustready.slackbot.provider "openai" }}
+            {{- $_ := required "trustready.openai.apiKey is required when Slackbot uses the OpenAI provider" .Values.trustready.openai.apiKey }}
+            {{- end }}
+            {{- if eq .Values.trustready.slackbot.provider "anthropic" }}
+            {{- $_ := required "trustready.anthropic.apiKey is required when Slackbot uses the Anthropic provider" .Values.trustready.anthropic.apiKey }}
+            {{- end }}
+            - name: TRUSTREADYD_SLACKBOT_ENABLED
+              value: "true"
+            - name: TRUSTREADYD_SLACKBOT_SIGNING_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: slackbot-signing-secret
+            - name: TRUSTREADYD_SLACKBOT_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: slackbot-client-id
+            - name: TRUSTREADYD_SLACKBOT_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: slackbot-client-secret
+            - name: TRUSTREADYD_SLACKBOT_REDIRECT_URI
+              value: {{ required "trustready.slackbot.redirectUri is required when Slackbot is enabled" .Values.trustready.slackbot.redirectUri | quote }}
+            - name: TRUSTREADYD_AGENT_SLACKBOT_PROVIDER
+              value: {{ required "trustready.slackbot.provider is required when Slackbot is enabled" .Values.trustready.slackbot.provider | quote }}
+            - name: TRUSTREADYD_AGENT_SLACKBOT_MODEL_NAME
+              value: {{ required "trustready.slackbot.modelName is required when Slackbot is enabled" .Values.trustready.slackbot.modelName | quote }}
+            {{- if .Values.trustready.slackbot.temperature }}
+            - name: TRUSTREADYD_AGENT_SLACKBOT_TEMPERATURE
+              value: {{ .Values.trustready.slackbot.temperature | quote }}
+            {{- end }}
+            {{- if .Values.trustready.slackbot.maxTokens }}
+            - name: TRUSTREADYD_AGENT_SLACKBOT_MAX_TOKENS
+              value: {{ .Values.trustready.slackbot.maxTokens | quote }}
+            {{- end }}
+            {{- end }}
+            # Connectors
+            {{- range .Values.trustready.connectors }}
+            {{- if eq .name "slack" }}
+            - name: TRUSTREADYD_CONNECTOR_SLACK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-slack-client-id
+            - name: TRUSTREADYD_CONNECTOR_SLACK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-slack-client-secret
+            {{- if .config.redirectUri }}
+            - name: TRUSTREADYD_CONNECTOR_SLACK_REDIRECT_URI
+              value: {{ .config.redirectUri | quote }}
+            {{- end }}
+            {{- if .config.endpointAuth }}
+            - name: TRUSTREADYD_CONNECTOR_SLACK_ENDPOINT_AUTH
+              value: {{ .config.endpointAuth | quote }}
+            {{- end }}
+            {{- if .config.endpointToken }}
+            - name: TRUSTREADYD_CONNECTOR_SLACK_ENDPOINT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-slack-endpoint-token
+            {{- end }}
+            {{- if .config.endpointApiBase }}
+            - name: TRUSTREADYD_CONNECTOR_SLACK_ENDPOINT_API_BASE
+              value: {{ .config.endpointApiBase | quote }}
+            {{- end }}
+            {{- if .config.signingSecret }}
+            - name: TRUSTREADYD_CONNECTOR_SLACK_SIGNING_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-slack-signing-secret
+            {{- end }}
+            {{- end }}
+            {{- if and (eq .name "github") (eq .type "github-app") }}
+            - name: TRUSTREADYD_CONNECTOR_GITHUB_APP_ID
+              value: {{ .config.appId | quote }}
+            - name: TRUSTREADYD_CONNECTOR_GITHUB_APP_CLIENT_ID
+              value: {{ .config.clientId | quote }}
+            - name: TRUSTREADYD_CONNECTOR_GITHUB_APP_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-github-app-client-secret
+            - name: TRUSTREADYD_CONNECTOR_GITHUB_APP_SLUG
+              value: {{ .config.slug | quote }}
+            - name: TRUSTREADYD_CONNECTOR_GITHUB_APP_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-github-app-private-key
+            {{- end }}
+            {{- if eq .name "linear" }}
+            {{- $_ := required "trustready.connectors linear config.clientId is required when the linear connector is declared" .config.clientId }}
+            {{- $_ := required "trustready.connectors linear config.clientSecret is required when the linear connector is declared" .config.clientSecret }}
+            - name: TRUSTREADYD_CONNECTOR_LINEAR_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-linear-client-id
+            - name: TRUSTREADYD_CONNECTOR_LINEAR_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-linear-client-secret
+            {{- end }}
+            {{- if eq .name "linear-sync" }}
+            {{- $_ := required "trustready.connectors linear-sync config.clientId is required when the linear-sync connector is declared" .config.clientId }}
+            {{- $_ := required "trustready.connectors linear-sync config.clientSecret is required when the linear-sync connector is declared" .config.clientSecret }}
+            {{- $_ := required "trustready.connectors linear-sync config.webhookSecret is required when the linear-sync connector is declared" .config.webhookSecret }}
+            - name: TRUSTREADYD_CONNECTOR_LINEAR_SYNC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-linear-sync-client-id
+            - name: TRUSTREADYD_CONNECTOR_LINEAR_SYNC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-linear-sync-client-secret
+            - name: TRUSTREADYD_CONNECTOR_LINEAR_SYNC_WEBHOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" $ }}
+                  key: connector-linear-sync-webhook-secret
+            {{- end }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.httpPort }}
+              protocol: TCP
+            {{- if ne .Values.trustready.trustCenter.tlsMode "external" }}
+            - name: https
+              containerPort: {{ .Values.service.httpsPort }}
+              protocol: TCP
+            {{- end }}
+            - name: backoffice
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+            - name: metrics
+              containerPort: {{ .Values.trustready.metrics.port }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: data
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (include "trustready.fullname" .) }}
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
+      {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

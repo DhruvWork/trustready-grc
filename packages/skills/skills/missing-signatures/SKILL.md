@@ -1,7 +1,7 @@
 ---
 name: missing-signatures
-description: Report who is missing document signatures or quorum approvals in Probo. Use when the user wants a per-person recap of unsigned signature requests, pending approval decisions, or document signing compliance status.
-compatibility: Requires Probo MCP (OAuth 2.0) and file write access for .probo/missing-signatures/
+description: Report who is missing document signatures or quorum approvals in TrustReady. Use when the user wants a per-person recap of unsigned signature requests, pending approval decisions, or document signing compliance status.
+compatibility: Requires TrustReady MCP (OAuth 2.0) and file write access for .trustready/missing-signatures/
 ---
 
 # Missing signatures report
@@ -21,13 +21,13 @@ Before executing, read these files **relative to this skill directory**:
 
 ## Preconditions
 
-1. A Probo MCP server must be connected. The plugin ships two hosted servers,
-   `probo-us` and `probo-eu`; self-hosted instances are configured in the agent.
+1. A TrustReady MCP server must be connected. The plugin ships two hosted servers,
+   `trustready-us` and `trustready-eu`; self-hosted instances are configured in the agent.
    Use the server for the user's region, and when the region is unknown call
    `listOrganizations` on each connected server and keep the one that returns
    the organization. If tools fail with auth errors, stop and tell the user to
    complete OAuth sign-in for that server (Claude Code: `/mcp` or
-   `claude mcp login probo-us`; Codex: `codex mcp login probo-us`;
+   `claude mcp login trustready-us`; Codex: `codex mcp login trustready-us`;
    OpenCode/Cursor: configure MCP in settings then authenticate).
 2. Resolve the organization from `$ARGUMENTS` (name match or GID). If ambiguous,
    call `listOrganizations` and ask the user to pick one.
@@ -37,8 +37,8 @@ Before executing, read these files **relative to this skill directory**:
 
 ## Working notes file
 
-Create or resume `.probo/missing-signatures/<org-slug>.md` per
-`references/notes-format.md`. Create `.probo/missing-signatures/` if missing.
+Create or resume `.trustready/missing-signatures/<org-slug>.md` per
+`references/notes-format.md`. Create `.trustready/missing-signatures/` if missing.
 
 ## Workflow
 

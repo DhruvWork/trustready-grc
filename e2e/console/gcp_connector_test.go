@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,9 +32,9 @@ import (
 )
 
 const (
-	gcpFixtureProviderResource = "projects/123456789012/locations/global/workloadIdentityPools/probo-pool/providers/probo"
-	gcpSecondProviderResource  = "projects/111111111111/locations/global/workloadIdentityPools/probo-pool/providers/probo"
-	gcpFixtureServiceAccount   = "probo-audit@example-project.iam.gserviceaccount.com"
+	gcpFixtureProviderResource = "projects/123456789012/locations/global/workloadIdentityPools/trustready-pool/providers/trustready"
+	gcpSecondProviderResource  = "projects/111111111111/locations/global/workloadIdentityPools/trustready-pool/providers/trustready"
+	gcpFixtureServiceAccount   = "trustready-audit@example-project.iam.gserviceaccount.com"
 )
 
 const gcpConnectorSetupQuery = `
@@ -151,7 +151,7 @@ func TestCreateGCPWorkloadIdentityConnector(t *testing.T) {
 func TestCreateGCPWorkloadIdentityConnector_InvalidProviderResource(t *testing.T) {
 	t.Parallel()
 	owner := testutil.NewClient(t, testutil.RoleOwner)
-	bogus := "projects/alice/locations/global/workloadIdentityPools/probo-pool/providers/probo"
+	bogus := "projects/alice/locations/global/workloadIdentityPools/trustready-pool/providers/trustready"
 
 	err := owner.Execute(createGCPWorkloadIdentityConnectorMutation, map[string]any{
 		"input": map[string]any{

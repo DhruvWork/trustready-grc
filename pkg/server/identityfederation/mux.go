@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 // Package identityfederation serves the two public documents a cloud provider fetches
-// to verify a Probo identity federation token. All routes are mounted at
+// to verify a TrustReady identity federation token. All routes are mounted at
 // /federation with no API version prefix: their paths and formats are defined by
 // OIDC Discovery, not by us.
 //
@@ -36,7 +36,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 )
 
 // NewMux returns the identity federation route tree. It is mounted with the /federation
@@ -44,7 +44,7 @@ import (
 func NewMux(
 	logger *log.Logger,
 	issuer *identityfederation.Issuer,
-	organizations *probo.OrganizationService,
+	organizations *trustready.OrganizationService,
 ) http.Handler {
 	h := &handler{
 		logger:        logger,

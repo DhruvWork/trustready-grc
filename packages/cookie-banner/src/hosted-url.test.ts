@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,37 +24,37 @@ import { rewriteLegacyConsoleHost } from "./hosted-url";
 
 describe("rewriteLegacyConsoleHost", () => {
   it("rewrites the EU console host", () => {
-    const url = new URL("https://eu.console.getprobo.com/api/cookie-banner/v1/");
+    const url = new URL("https://eu.console.trustready.io/api/cookie-banner/v1/");
     expect(rewriteLegacyConsoleHost(url).href).toBe(
-      "https://eu.probo.com/api/cookie-banner/v1/",
+      "https://eu.trustready.io/api/cookie-banner/v1/",
     );
   });
 
   it("rewrites the US console host", () => {
-    const url = new URL("https://us.console.getprobo.com/api/cookie-banner/v1/");
+    const url = new URL("https://us.console.trustready.io/api/cookie-banner/v1/");
     expect(rewriteLegacyConsoleHost(url).href).toBe(
-      "https://us.probo.com/api/cookie-banner/v1/",
+      "https://us.trustready.io/api/cookie-banner/v1/",
     );
   });
 
   it("matches the host case-insensitively", () => {
-    const url = new URL("https://EU.CONSOLE.GETPROBO.COM/api/cookie-banner/v1/");
+    const url = new URL("https://EU.CONSOLE.GETTRUSTREADY.COM/api/cookie-banner/v1/");
     expect(rewriteLegacyConsoleHost(url).href).toBe(
-      "https://eu.probo.com/api/cookie-banner/v1/",
+      "https://eu.trustready.io/api/cookie-banner/v1/",
     );
   });
 
   it("preserves path and query", () => {
     const url = new URL(
-      "https://us.console.getprobo.com/api/cookie-banner/v1/banner/consents?lang=fr",
+      "https://us.console.trustready.io/api/cookie-banner/v1/banner/consents?lang=fr",
     );
     expect(rewriteLegacyConsoleHost(url).href).toBe(
-      "https://us.probo.com/api/cookie-banner/v1/banner/consents?lang=fr",
+      "https://us.trustready.io/api/cookie-banner/v1/banner/consents?lang=fr",
     );
   });
 
   it("leaves already-migrated hosted URLs unchanged", () => {
-    const url = new URL("https://eu.probo.com/api/cookie-banner/v1/");
+    const url = new URL("https://eu.trustready.io/api/cookie-banner/v1/");
     expect(rewriteLegacyConsoleHost(url)).toBe(url);
   });
 
@@ -64,7 +64,7 @@ describe("rewriteLegacyConsoleHost", () => {
   });
 
   it("does not rewrite suffix hosts", () => {
-    const url = new URL("https://foo.eu.console.getprobo.com/api/cookie-banner/v1/");
+    const url = new URL("https://foo.eu.console.trustready.io/api/cookie-banner/v1/");
     expect(rewriteLegacyConsoleHost(url)).toBe(url);
   });
 });

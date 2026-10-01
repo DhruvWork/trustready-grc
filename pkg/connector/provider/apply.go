@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -91,7 +91,7 @@ func (r *Registry) ApplyOAuth2Defaults(p string, redirectURI string, c *connecto
 }
 
 // APIKeyFor returns the API key to present on outbound requests. For a
-// ManagedAPIKey provider it is the Probo-held key resolved at use time, so
+// ManagedAPIKey provider it is the TrustReady-held key resolved at use time, so
 // rotation takes effect without rewriting the connection row. For every
 // other provider it is the key stored on conn.
 //

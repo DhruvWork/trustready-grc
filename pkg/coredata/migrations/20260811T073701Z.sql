@@ -1,4 +1,4 @@
--- Copyright (c) 2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2026 TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -113,7 +113,7 @@ BEGIN
       t := t || jsonb_build_object('button_opt_out_ccpa', to_jsonb(opt_out));
     END IF;
 
-    -- When the stored CTA is still Probo's California default, replace it
+    -- When the stored CTA is still TrustReady's California default, replace it
     -- with the neutral label. Integrator-customized button_opt_out is left
     -- alone; button_opt_out_ccpa is backfilled from defaults below.
     IF is_shipped THEN

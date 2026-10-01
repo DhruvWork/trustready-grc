@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -50,8 +50,8 @@ func TestOauth2ClientIDFromContinueURL(t *testing.T) {
 		},
 		{
 			name:        "extracts client_id from absolute authorize URL",
-			continueURL: "https://auth.example.com/api/connect/v1/oauth2/authorize?client_id=gid%3A%2F%2Fprobo%2Foauth2_client%2Fabc",
-			want:        "gid://probo/oauth2_client/abc",
+			continueURL: "https://auth.example.com/api/connect/v1/oauth2/authorize?client_id=gid%3A%2F%2Ftrustready%2Foauth2_client%2Fabc",
+			want:        "gid://trustready/oauth2_client/abc",
 		},
 	}
 

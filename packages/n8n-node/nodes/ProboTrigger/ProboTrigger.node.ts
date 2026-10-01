@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,8 +30,8 @@ import {
 	type IWebhookResponseData,
 	type JsonObject,
 } from 'n8n-workflow';
-import { proboApiRequest } from '../Probo/GenericFunctions';
-import { WEBHOOK_EVENT_OPTIONS } from '../Probo/actions/webhook/events';
+import { trustreadyApiRequest } from '../TrustReady/GenericFunctions';
+import { WEBHOOK_EVENT_OPTIONS } from '../TrustReady/actions/webhook/events';
 
 function extractNode(response: IDataObject): IDataObject | undefined {
 	const data = response?.data as IDataObject | undefined;
@@ -57,11 +57,11 @@ async function deleteSubscription(this: IHookFunctions, subscriptionId: string):
 	`;
 
 	try {
-		await proboApiRequest.call(this, query, {
+		await trustreadyApiRequest.call(this, query, {
 			input: { webhookSubscriptionId: subscriptionId },
 		});
 	} catch (error) {
-		this.logger.error(`Failed to delete Probo webhook subscription "${subscriptionId}"`, {
+		this.logger.error(`Failed to delete TrustReady webhook subscription "${subscriptionId}"`, {
 			subscriptionId,
 			error,
 		});
@@ -73,21 +73,21 @@ async function deleteSubscription(this: IHookFunctions, subscriptionId: string):
 
 export class ProboTrigger implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Probo Trigger',
+		displayName: 'TrustReady Trigger',
 		name: 'proboTrigger',
-		icon: { light: 'file:../../icons/probo-light.svg', dark: 'file:../../icons/probo.svg' },
+		icon: { light: 'file:../../icons/trustready-light.svg', dark: 'file:../../icons/trustready.svg' },
 		group: ['trigger'],
 		version: 1,
 		subtitle: '={{$parameter["events"].join(", ")}}',
-		description: 'Starts a workflow when Probo events occur',
+		description: 'Starts a workflow when TrustReady events occur',
 		defaults: {
-			name: 'Probo Trigger',
+			name: 'TrustReady Trigger',
 		},
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
-				name: 'proboApi',
+				name: 'trustreadyApi',
 				required: true,
 			},
 		],
@@ -169,7 +169,7 @@ export class ProboTrigger implements INodeType {
 					}
 				`;
 
-				const response = await proboApiRequest.call(this, query, { id: subscriptionId });
+				const response = await trustreadyApiRequest.call(this, query, { id: subscriptionId });
 				const node = extractNode(response);
 
 				if (node?.id === undefined) {
@@ -216,7 +216,7 @@ export class ProboTrigger implements INodeType {
 
 				if (webhookUrl === undefined) {
 					throw new NodeApiError(this.getNode(), {
-						message: 'Cannot create Probo webhook subscription: no webhook URL available',
+						message: 'Cannot create TrustReady webhook subscription: no webhook URL available',
 					} as JsonObject);
 				}
 
@@ -233,7 +233,7 @@ export class ProboTrigger implements INodeType {
 					}
 				`;
 
-				const response = await proboApiRequest.call(this, query, {
+				const response = await trustreadyApiRequest.call(this, query, {
 					input: {
 						organizationId,
 						endpointUrl: webhookUrl,
@@ -248,7 +248,7 @@ export class ProboTrigger implements INodeType {
 
 				if (node?.id === undefined) {
 					throw new NodeApiError(this.getNode(), {
-						message: 'Cannot create Probo webhook subscription: unexpected API response',
+						message: 'Cannot create TrustReady webhook subscription: unexpected API response',
 					} as JsonObject);
 				}
 
@@ -287,18 +287,18 @@ export class ProboTrigger implements INodeType {
 		if (verifySignature) {
 			const webhookData = this.getWorkflowStaticData('node');
 			const signingSecret = webhookData.signingSecret as string | undefined;
-			const signature = headers['x-probo-webhook-signature'] as string | undefined;
-			const timestamp = headers['x-probo-webhook-timestamp'] as string | undefined;
+			const signature = headers['x-trustready-webhook-signature'] as string | undefined;
+			const timestamp = headers['x-trustready-webhook-timestamp'] as string | undefined;
 
 			const rejected = this.getResponseObject();
 
 			if (signingSecret === undefined || signature === undefined || timestamp === undefined) {
-				rejected.status(403).json({ message: 'Missing Probo webhook signature' });
+				rejected.status(403).json({ message: 'Missing TrustReady webhook signature' });
 				return { noWebhookResponse: true };
 			}
 
 			// n8n's webhook pipeline calls parseBody() -> req.readRawBody() before
-			// invoking this handler for application/json payloads (which Probo always
+			// invoking this handler for application/json payloads (which TrustReady always
 			// sends), so req.rawBody holds the exact bytes the signature was computed
 			// over. Re-serializing the parsed body would not match Go's json.Marshal
 			// output, so fail closed if the raw bytes are somehow unavailable.
@@ -308,7 +308,7 @@ export class ProboTrigger implements INodeType {
 			if (rawBody === undefined) {
 				rejected
 					.status(403)
-					.json({ message: 'Probo webhook raw body unavailable for signature verification' });
+					.json({ message: 'TrustReady webhook raw body unavailable for signature verification' });
 				return { noWebhookResponse: true };
 			}
 
@@ -324,7 +324,7 @@ export class ProboTrigger implements INodeType {
 				expectedBuffer.length !== receivedBuffer.length ||
 				!timingSafeEqual(expectedBuffer, receivedBuffer)
 			) {
-				rejected.status(403).json({ message: 'Invalid Probo webhook signature' });
+				rejected.status(403).json({ message: 'Invalid TrustReady webhook signature' });
 				return { noWebhookResponse: true };
 			}
 
@@ -340,7 +340,7 @@ export class ProboTrigger implements INodeType {
 					!Number.isFinite(timestampSeconds) ||
 					Math.abs(nowSeconds - timestampSeconds) > toleranceSeconds
 				) {
-					rejected.status(403).json({ message: 'Stale Probo webhook timestamp' });
+					rejected.status(403).json({ message: 'Stale TrustReady webhook timestamp' });
 					return { noWebhookResponse: true };
 				}
 			}

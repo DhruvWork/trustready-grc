@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright (c) 2026 TrustReady <hello@probo.com>.
+# Copyright (c) 2026 TrustReady <hello@trustready.io>.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,8 @@ CONNECT_API="$BASE_URL/api/connect/v1/graphql"
 COOKIE_JAR=$(mktemp)
 trap 'rm -f "$COOKIE_JAR"' EXIT
 
-EMAIL="seed@dev.probo.test"
-PASSWORD="seed@dev.probo.test"
+EMAIL="seed@dev.trustready.test"
+PASSWORD="seed@dev.trustready.test"
 FULL_NAME="Seed Admin"
 ORG_NAME="Acme Corp"
 
@@ -270,28 +270,28 @@ create_person() {
 
 create_person "Jane Cooper" \
   "Chief Information Security Officer" \
-  "jane.cooper@dev.probo.test"
+  "jane.cooper@dev.trustready.test"
 create_person "Marcus Chen" \
   "Security Engineer" \
-  "marcus.chen@dev.probo.test"
+  "marcus.chen@dev.trustready.test"
 create_person "Sofia Rodriguez" \
   "Compliance Manager" \
-  "sofia.rodriguez@dev.probo.test"
+  "sofia.rodriguez@dev.trustready.test"
 create_person "David Kim" \
   "IT Administrator" \
-  "david.kim@dev.probo.test"
+  "david.kim@dev.trustready.test"
 create_person "Emily Nakamura" \
   "VP Engineering" \
-  "emily.nakamura@dev.probo.test"
+  "emily.nakamura@dev.trustready.test"
 create_person "James O'Brien" \
   "Head of People" \
-  "james.obrien@dev.probo.test"
+  "james.obrien@dev.trustready.test"
 create_person "Priya Patel" \
   "Data Protection Officer" \
-  "priya.patel@dev.probo.test"
+  "priya.patel@dev.trustready.test"
 create_person "Alex Thompson" \
   "DevOps Lead" \
-  "alex.thompson@dev.probo.test"
+  "alex.thompson@dev.trustready.test"
 
 echo "    8 people created"
 

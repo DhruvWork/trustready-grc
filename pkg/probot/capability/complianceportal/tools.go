@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -108,7 +108,7 @@ func (c *Capability) Tools() []agent.Tool {
 		),
 		agent.FunctionTool(
 			"refresh_compliance_access_request_card",
-			"Rebuild the actionable compliance access request card in the current conversation from current Probo data.",
+			"Rebuild the actionable compliance access request card in the current conversation from current TrustReady data.",
 			func(ctx context.Context, _ emptyParams) (agent.ToolResult, error) {
 				message, err := c.messageFromRunContext(ctx)
 				if err != nil {

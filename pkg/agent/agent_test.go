@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -1563,7 +1563,7 @@ func TestRun_OutputType(t *testing.T) {
 
 	provider := &mockProvider{
 		responses: []*llm.ChatCompletionResponse{
-			stopResponse(`{"name":"Probo","country":"FR"}`),
+			stopResponse(`{"name":"TrustReady","country":"FR"}`),
 		},
 	}
 
@@ -1579,11 +1579,11 @@ func TestRun_OutputType(t *testing.T) {
 
 	result, err := ag.Run(
 		context.Background(),
-		[]llm.Message{userMessage("Tell me about Probo")},
+		[]llm.Message{userMessage("Tell me about TrustReady")},
 	)
 
 	require.NoError(t, err)
-	assert.Contains(t, result.FinalMessage().Text(), "Probo")
+	assert.Contains(t, result.FinalMessage().Text(), "TrustReady")
 }
 
 func TestRun_Approval(t *testing.T) {

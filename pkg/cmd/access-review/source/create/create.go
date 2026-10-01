@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -117,12 +117,12 @@ func NewCmdCreate(f *cmdutil.Factory) *cobra.Command {
   prb access-review source create --name "GitHub" --connector-id <connector-id>
 
   # Create an AWS workload-identity access source
-  prb access-review source create --name "AWS prod" --aws-role-arn arn:aws:iam::123456789012:role/ProboAudit
+  prb access-review source create --name "AWS prod" --aws-role-arn arn:aws:iam::123456789012:role/TrustReadyAudit
 
   # Create a GCP workload-identity access source
   prb access-review source create --name "GCP prod" \
-    --gcp-workload-identity-provider projects/123456789012/locations/global/workloadIdentityPools/probo/providers/probo \
-    --gcp-service-account-email probo-audit@my-project.iam.gserviceaccount.com
+    --gcp-workload-identity-provider projects/123456789012/locations/global/workloadIdentityPools/trustready/providers/trustready \
+    --gcp-service-account-email trustready-audit@my-project.iam.gserviceaccount.com
 
   # Create an Azure workload-identity access source
   prb access-review source create --name "Azure prod" \

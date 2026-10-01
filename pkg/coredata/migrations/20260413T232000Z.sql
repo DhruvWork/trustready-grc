@@ -1,4 +1,4 @@
--- Copyright (c) 2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2026 TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -18,7 +18,7 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 
--- Add offline_access scope to the Probo CLI OAuth2 client so the device
+-- Add offline_access scope to the TrustReady CLI OAuth2 client so the device
 -- authorization flow can request refresh tokens.
 UPDATE iam_oauth2_clients
 SET scopes = '{openid,profile,email,offline_access}',

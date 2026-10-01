@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Probo Inc <hello@probo.com>.
+ * Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +20,38 @@
  * SOFTWARE.
  */
 
-variable "probo_issuer_url" {
+variable "trustready_issuer_url" {
   type        = string
   description = <<-EOT
-    The issuer URL Probo mints its assertions under, unique to your Probo
+    The issuer URL TrustReady mints its assertions under, unique to your TrustReady
     organization. Copy it exactly: GCP compares it case-sensitively and the
     last path segment is a mixed-case identifier.
   EOT
 
   validation {
-    condition     = can(regex("^https://[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(/[A-Za-z0-9._~%-]+)*/?$", var.probo_issuer_url))
+    condition     = can(regex("^https://[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(/[A-Za-z0-9._~%-]+)*/?$", var.trustready_issuer_url))
     error_message = "The issuer must be an https:// URL with no port and no query string."
   }
 }
 
-variable "probo_subject" {
+variable "trustready_subject" {
   type        = string
   description = <<-EOT
-    The subject claim Probo asserts, identifying your Probo organization. The
+    The subject claim TrustReady asserts, identifying your TrustReady organization. The
     provider trusts this value and no other.
   EOT
 
   validation {
-    condition     = can(regex("^[A-Za-z0-9_-]+$", var.probo_subject))
-    error_message = "The subject must be the identifier Probo showed you."
+    condition     = can(regex("^[A-Za-z0-9_-]+$", var.trustready_subject))
+    error_message = "The subject must be the identifier TrustReady showed you."
   }
 }
 
 variable "service_account_name" {
   type        = string
-  default     = "probo-audit"
+  default     = "trustready-audit"
   description = <<-EOT
-    Account id of the service account Probo impersonates. Use the same name
+    Account id of the service account TrustReady impersonates. Use the same name
     in every project, and record the email on the connector if you change it.
   EOT
 
@@ -63,7 +63,7 @@ variable "service_account_name" {
 
 variable "pool_id" {
   type        = string
-  default     = "probo"
+  default     = "trustready"
   description = <<-EOT
     Workload Identity pool id. Change it only when this project already has
     a pool with this id.
@@ -77,7 +77,7 @@ variable "pool_id" {
 
 variable "provider_id" {
   type        = string
-  default     = "probo"
+  default     = "trustready"
   description = <<-EOT
     OIDC provider id inside the pool. Change it only when this pool already
     has a provider with this id.
@@ -94,7 +94,7 @@ variable "required_bucket_location" {
   default     = "global"
   description = <<-EOT
     Location of the project's _Required log bucket. Leave the default unless
-    Cloud Logging default resource settings moved that bucket. Probo queries
+    Cloud Logging default resource settings moved that bucket. TrustReady queries
     the same location; a mismatch leaves last login unknown.
   EOT
 

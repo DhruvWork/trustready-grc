@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -71,13 +71,13 @@ func TestIsTrustedWindowsSID(t *testing.T) {
 func TestIsPathUnderWindowsRoot(t *testing.T) {
 	t.Parallel()
 
-	root := `D:\Data\Probo`
+	root := `D:\Data\TrustReady`
 
-	assert.True(t, isPathUnderWindowsRoot(`D:\Data\Probo`, root))
-	assert.True(t, isPathUnderWindowsRoot(`D:\Data\Probo\run\enrolled`, root))
-	assert.True(t, isPathUnderWindowsRoot(`d:\data\probo\agent`, root))
+	assert.True(t, isPathUnderWindowsRoot(`D:\Data\TrustReady`, root))
+	assert.True(t, isPathUnderWindowsRoot(`D:\Data\TrustReady\run\enrolled`, root))
+	assert.True(t, isPathUnderWindowsRoot(`d:\data\trustready\agent`, root))
 	assert.False(t, isPathUnderWindowsRoot(`D:\Data`, root))
-	assert.False(t, isPathUnderWindowsRoot(`D:\Data\Probo2`, root))
+	assert.False(t, isPathUnderWindowsRoot(`D:\Data\TrustReady2`, root))
 	assert.False(t, isPathUnderWindowsRoot(`C:\Temp`, root))
 }
 
@@ -122,7 +122,7 @@ func TestEnsureWindowsProtectedDir_AgentOmitsUsers(t *testing.T) {
 func TestEnsureWindowsProtectedDir_RejectsUntrustedOwner(t *testing.T) {
 	t.Parallel()
 
-	dir := filepath.Join(t.TempDir(), "probo")
+	dir := filepath.Join(t.TempDir(), "trustready")
 	require.NoError(t, os.Mkdir(dir, 0o755))
 
 	trusted, err := isTrustedWindowsOwner(dir)

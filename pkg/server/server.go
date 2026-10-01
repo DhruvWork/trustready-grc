@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -48,7 +48,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 	"github.com/DhruvWork/trustready-grc/pkg/itam"
 	"github.com/DhruvWork/trustready-grc/pkg/mailman"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/probot"
 	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 	"github.com/DhruvWork/trustready-grc/pkg/probot/identitybinding"
@@ -73,7 +73,7 @@ type Config struct {
 	FileStorageOrigin       string
 	AllowedOrigins          []string
 	ExtraHeaderFields       map[string]string
-	Probo                   *probo.Service
+	TrustReady                   *trustready.Service
 	ResourceAlias           *resourcealias.Service
 	File                    *filemanager.Service
 	IAM                     *iam.Service
@@ -130,7 +130,7 @@ type Server struct {
 	router                       *chi.Mux
 	extraHeaderFields            map[string]string
 	baseURL                      string
-	proboService                 *probo.Service
+	trustreadyService                 *trustready.Service
 	iamService                   *iam.Service
 	logger                       *log.Logger
 }
@@ -139,7 +139,7 @@ func NewServer(cfg Config) (*Server, error) {
 	apiCfg := api.Config{
 		BaseURL:                  cfg.BaseURL,
 		AllowedOrigins:           cfg.AllowedOrigins,
-		Probo:                    cfg.Probo,
+		TrustReady:                    cfg.TrustReady,
 		ResourceAlias:            cfg.ResourceAlias,
 		File:                     cfg.File,
 		IAM:                      cfg.IAM,
@@ -220,14 +220,14 @@ func NewServer(cfg Config) (*Server, error) {
 	var identityFederationHandler http.Handler
 
 	if cfg.IdentityFederationIssuer != nil {
-		if cfg.Probo == nil || cfg.Probo.Organizations == nil {
+		if cfg.TrustReady == nil || cfg.TrustReady.Organizations == nil {
 			return nil, fmt.Errorf("cannot create server: identity federation issuer needs an organization service")
 		}
 
 		identityFederationHandler = server_identityfederation.NewMux(
 			cfg.Logger.Named("identityfederation"),
 			cfg.IdentityFederationIssuer,
-			cfg.Probo.Organizations,
+			cfg.TrustReady.Organizations,
 		)
 	}
 
@@ -243,7 +243,7 @@ func NewServer(cfg Config) (*Server, error) {
 		router:                       router,
 		extraHeaderFields:            cfg.ExtraHeaderFields,
 		baseURL:                      cfg.BaseURL.String(),
-		proboService:                 cfg.Probo,
+		trustreadyService:                 cfg.TrustReady,
 		iamService:                   cfg.IAM,
 		logger:                       cfg.Logger,
 	}

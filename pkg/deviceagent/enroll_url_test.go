@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,10 +36,10 @@ func TestParseEnrollURL(t *testing.T) {
 			t.Parallel()
 
 			serverURL, enrollmentToken, err := ParseEnrollURL(
-				"probo://enroll?server=https%3A%2F%2Fus.probo.com&token=secret-token",
+				"trustready://enroll?server=https%3A%2F%2Fus.trustready.io&token=secret-token",
 			)
 			require.NoError(t, err)
-			assert.Equal(t, "https://us.probo.com", serverURL)
+			assert.Equal(t, "https://us.trustready.io", serverURL)
 			assert.Equal(t, "secret-token", enrollmentToken)
 		},
 	)
@@ -50,23 +50,23 @@ func TestParseEnrollURL(t *testing.T) {
 			t.Parallel()
 
 			_, _, err := ParseEnrollURL(
-				"probo:///enroll?server=https%3A%2F%2Feu.probo.com&token=abc123",
+				"trustready:///enroll?server=https%3A%2F%2Feu.trustready.io&token=abc123",
 			)
 			require.Error(t, err)
-			assert.ErrorContains(t, err, "enrollment URL must be probo://enroll")
+			assert.ErrorContains(t, err, "enrollment URL must be trustready://enroll")
 		},
 	)
 
 	t.Run(
-		"rejects non probo scheme",
+		"rejects non trustready scheme",
 		func(t *testing.T) {
 			t.Parallel()
 
 			_, _, err := ParseEnrollURL(
-				"https://example.com/enroll?server=https%3A%2F%2Fus.probo.com&token=secret-token",
+				"https://example.com/enroll?server=https%3A%2F%2Fus.trustready.io&token=secret-token",
 			)
 			require.Error(t, err)
-			assert.ErrorContains(t, err, "probo scheme")
+			assert.ErrorContains(t, err, "trustready scheme")
 		},
 	)
 
@@ -76,7 +76,7 @@ func TestParseEnrollURL(t *testing.T) {
 			t.Parallel()
 
 			_, _, err := ParseEnrollURL(
-				"probo://enroll?server=https%3A%2F%2Fus.probo.com",
+				"trustready://enroll?server=https%3A%2F%2Fus.trustready.io",
 			)
 			require.Error(t, err)
 			assert.ErrorContains(t, err, "enrollment token is missing")
@@ -89,7 +89,7 @@ func TestParseEnrollURL(t *testing.T) {
 			t.Parallel()
 
 			_, _, err := ParseEnrollURL(
-				"probo://enroll?server=https%3A%2F%2Fus.probo.com%2Fextra&token=abc123",
+				"trustready://enroll?server=https%3A%2F%2Fus.trustready.io%2Fextra&token=abc123",
 			)
 			require.Error(t, err)
 			assert.ErrorContains(t, err, "invalid server")

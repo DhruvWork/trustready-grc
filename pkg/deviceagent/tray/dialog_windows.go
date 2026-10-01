@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,11 +31,11 @@ import (
 
 func showAbout(version string) {
 	message := fmt.Sprintf(
-		"Version %s\r\n\r\nReports device posture to your Probo workspace.",
+		"Version %s\r\n\r\nReports device posture to your TrustReady workspace.",
 		version,
 	)
 	_, _ = win32.MessageBox(
-		"Probo Device Posture Agent",
+		"TrustReady Device Posture Agent",
 		message,
 		windows.MB_OK|windows.MB_ICONINFORMATION,
 	)
@@ -43,7 +43,7 @@ func showAbout(version string) {
 
 func showEnrollmentError(message string) {
 	_, _ = win32.MessageBox(
-		"Probo Device Posture Agent",
+		"TrustReady Device Posture Agent",
 		message,
 		windows.MB_OK|windows.MB_ICONERROR,
 	)

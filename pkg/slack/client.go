@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -48,7 +48,7 @@ const (
 // slackWebhookHost is an inbound host CHECK, not an outbound endpoint.
 // UpdateInteractiveMessage posts to the response_url carried in the
 // interaction payload Slack sends us, so this is the guard that stops a forged
-// payload from making Probo POST to an attacker-chosen host. It is
+// payload from making TrustReady POST to an attacker-chosen host. It is
 // deliberately NOT derived from the API base: Slack serves response URLs from
 // hooks.slack.com, a different host from the API's, and widening the check to
 // follow an endpoint override would trade an SSRF guard for configurability.

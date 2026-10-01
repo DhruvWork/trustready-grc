@@ -1,4 +1,4 @@
-# Copyright (c) 2026 TrustReady <hello@probo.com>.
+# Copyright (c) 2026 TrustReady <hello@trustready.io>.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
 
 Description: >-
-  Grants Probo read-only audit access to this AWS account, and optionally to
-  every account in the organization, through OIDC web identity federation. Probo
+  Grants TrustReady read-only audit access to this AWS account, and optionally to
+  every account in the organization, through OIDC web identity federation. TrustReady
   holds no credential for this account: it presents a short-lived signed
   assertion that STS verifies against a public key set, and access is revoked by
   deleting the role created here.
@@ -41,10 +41,10 @@ Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
       - Label:
-          default: "Probo identity (prefilled — do not edit)"
+          default: "TrustReady identity (prefilled — do not edit)"
         Parameters:
-          - ProboIssuerURL
-          - ProboSubject
+          - TrustReadyIssuerURL
+          - TrustReadySubject
       - Label:
           default: "Role"
         Parameters:
@@ -57,10 +57,10 @@ Metadata:
           - OrganizationalUnitIds
           - UseDelegatedAdmin
     ParameterLabels:
-      ProboIssuerURL:
-        default: "Probo issuer URL"
-      ProboSubject:
-        default: "Probo subject"
+      TrustReadyIssuerURL:
+        default: "TrustReady issuer URL"
+      TrustReadySubject:
+        default: "TrustReady subject"
       RoleName:
         default: "Role name"
       CreateOIDCProvider:
@@ -73,7 +73,7 @@ Metadata:
         default: "Use the delegated administrator"
 
 Parameters:
-  ProboIssuerURL:
+  TrustReadyIssuerURL:
     Type: String
     MinLength: 12
     MaxLength: 255
@@ -86,32 +86,32 @@ Parameters:
     # member template when Fn::Sub interpolates this value raw.
     AllowedPattern: '^https://[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(/[A-Za-z0-9._~%-]+)*/?$'
     ConstraintDescription: >-
-      must be the https:// URL Probo showed you, with no port and no query
+      must be the https:// URL TrustReady showed you, with no port and no query
       string, copied exactly including capitalisation
     Description: >-
-      The issuer URL Probo mints its assertions under, unique to your Probo
+      The issuer URL TrustReady mints its assertions under, unique to your TrustReady
       organization. Copy it exactly.
 
-  ProboSubject:
+  TrustReadySubject:
     Type: String
     MinLength: 1
     MaxLength: 255
     AllowedPattern: '^[A-Za-z0-9_-]+$'
-    ConstraintDescription: must be the subject Probo showed you
+    ConstraintDescription: must be the subject TrustReady showed you
     Description: >-
-      The subject claim Probo asserts, identifying your Probo organization. The
+      The subject claim TrustReady asserts, identifying your TrustReady organization. The
       role trusts this value and no other.
 
   RoleName:
     Type: String
-    Default: "ProboAudit"
+    Default: "TrustReadyAudit"
     MinLength: 1
     MaxLength: 64
     AllowedPattern: '^[\w+=,.@-]+$'
     ConstraintDescription: must be a valid IAM role name
     Description: >-
-      Name of the role Probo assumes. The same name is used in every account.
-      If you change it, the RoleARN output changes. Paste that ARN into Probo.
+      Name of the role TrustReady assumes. The same name is used in every account.
+      If you change it, the RoleARN output changes. Paste that ARN into TrustReady.
 
   CreateOIDCProvider:
     Type: String
@@ -176,12 +176,12 @@ Conditions:
   ShouldCallAsDelegatedAdmin: !Equals [!Ref UseDelegatedAdmin, "Yes"]
 
 Resources:
-  ProboOIDCProvider:
+  TrustReadyOIDCProvider:
     Type: AWS::IAM::OIDCProvider
     Condition: ShouldCreateOIDCProvider
     Properties:
-      Url: !Ref ProboIssuerURL
-      # Probo always mints this audience; the connector cannot be told another.
+      Url: !Ref TrustReadyIssuerURL
+      # TrustReady always mints this audience; the connector cannot be told another.
       ClientIdList:
         - "sts.amazonaws.com"
       # ThumbprintList is documented as optional, but CloudFormation validation
@@ -191,12 +191,12 @@ Resources:
       ThumbprintList:
         - "ffffffffffffffffffffffffffffffffffffffff"
 
-  ProboAuditRole:
+  TrustReadyAuditRole:
     Type: AWS::IAM::Role
     Properties:
       RoleName: !Ref RoleName
-      Description: !Sub "Read-only audit access for Probo (${ProboIssuerURL})"
-      # One hour, matching the token lifetime Probo requests. Raising it widens
+      Description: !Sub "Read-only audit access for TrustReady (${TrustReadyIssuerURL})"
+      # One hour, matching the token lifetime TrustReady requests. Raising it widens
       # the window a leaked session credential stays usable.
       MaxSessionDuration: 3600
       # The trust policy is a JSON string, not a YAML mapping, because the two
@@ -221,7 +221,7 @@ Resources:
                   "Condition": {
                     "StringEquals": {
                       "${IssuerHostPath}:aud": "sts.amazonaws.com",
-                      "${IssuerHostPath}:sub": "${ProboSubject}"
+                      "${IssuerHostPath}:sub": "${TrustReadySubject}"
                     }
                   }
                 }
@@ -230,15 +230,15 @@ Resources:
           # The condition-key prefix and the provider ARN both use the issuer
           # with the scheme stripped. Deriving it here instead of taking a
           # second parameter is what stops the two from disagreeing.
-          - IssuerHostPath: !Select [1, !Split ["https://", !Ref ProboIssuerURL]]
+          - IssuerHostPath: !Select [1, !Split ["https://", !Ref TrustReadyIssuerURL]]
       ManagedPolicyArns:
         - !Sub "arn:${AWS::Partition}:iam::aws:policy/SecurityAudit"
         - !Sub "arn:${AWS::Partition}:iam::aws:policy/job-function/ViewOnlyAccess"
       Policies:
         # Keep in sync with the member-account template embedded in
-        # ProboAuditStackSet below. CloudFormation has no way to share a
+        # TrustReadyAuditStackSet below. CloudFormation has no way to share a
         # fragment between a stack and its StackSet's template body.
-        - PolicyName: ProboAuditIdentityRead
+        - PolicyName: TrustReadyAuditIdentityRead
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
@@ -267,10 +267,10 @@ Resources:
                   - "iam:GetCredentialReport"
                   - "iam:GetServiceLastAccessedDetails"
                 Resource: "*"
-        # Only this account gets Organizations reads: it is the account Probo
+        # Only this account gets Organizations reads: it is the account TrustReady
         # enumerates the organization from. Member accounts cannot call these
         # at all, so granting them there would be noise.
-        - PolicyName: ProboAuditOrganizationsRead
+        - PolicyName: TrustReadyAuditOrganizationsRead
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
@@ -289,12 +289,12 @@ Resources:
   # rollout is embedded in this ordinary stack rather than being a second step
   # the customer has to find. A service-managed StackSet cannot target the
   # account it is created from, which is why the role above is created directly.
-  ProboAuditStackSet:
+  TrustReadyAuditStackSet:
     Type: AWS::CloudFormation::StackSet
     Condition: ShouldDeployToOrganization
     Properties:
       StackSetName: !Ref AWS::StackName
-      Description: "Read-only audit access for Probo in every member account"
+      Description: "Read-only audit access for TrustReady in every member account"
       PermissionModel: SERVICE_MANAGED
       CallAs: !If [ShouldCallAsDelegatedAdmin, "DELEGATED_ADMIN", "SELF"]
       Capabilities:
@@ -311,7 +311,7 @@ Resources:
         RegionConcurrencyType: PARALLEL
         MaxConcurrentPercentage: 25
         # A single account that already carries a provider for this issuer
-        # must not block every other account. Probo reports the accounts it
+        # must not block every other account. TrustReady reports the accounts it
         # could not reach, so partial coverage is visible rather than silent.
         FailureTolerancePercentage: 10
       StackInstancesGroup:
@@ -324,32 +324,32 @@ Resources:
       # Inside this Fn::Sub, ${!Foo} renders as the literal ${Foo} for the
       # member-account template to resolve per account, while ${Foo} is
       # substituted here and once. Every AWS pseudo-parameter below is escaped
-      # for that reason; the Probo values deliberately are not.
+      # for that reason; the TrustReady values deliberately are not.
       TemplateBody:
         Fn::Sub:
           - |
             AWSTemplateFormatVersion: "2010-09-09"
 
             Description: >-
-              Read-only audit access for Probo in a member account. Managed by
+              Read-only audit access for TrustReady in a member account. Managed by
               the ${AWS::StackName} stack in the management account; edit that
               stack rather than this one.
 
             Resources:
-              ProboOIDCProvider:
+              TrustReadyOIDCProvider:
                 Type: AWS::IAM::OIDCProvider
                 Properties:
-                  Url: "${ProboIssuerURL}"
+                  Url: "${TrustReadyIssuerURL}"
                   ClientIdList:
                     - "sts.amazonaws.com"
                   ThumbprintList:
                     - "ffffffffffffffffffffffffffffffffffffffff"
 
-              ProboAuditRole:
+              TrustReadyAuditRole:
                 Type: AWS::IAM::Role
                 Properties:
                   RoleName: "${RoleName}"
-                  Description: "Read-only audit access for Probo"
+                  Description: "Read-only audit access for TrustReady"
                   MaxSessionDuration: 3600
                   AssumeRolePolicyDocument:
                     Fn::Sub: |
@@ -365,7 +365,7 @@ Resources:
                             "Condition": {
                               "StringEquals": {
                                 "${IssuerHostPath}:aud": "sts.amazonaws.com",
-                                "${IssuerHostPath}:sub": "${ProboSubject}"
+                                "${IssuerHostPath}:sub": "${TrustReadySubject}"
                               }
                             }
                           }
@@ -375,7 +375,7 @@ Resources:
                     - Fn::Sub: "arn:${!AWS::Partition}:iam::aws:policy/SecurityAudit"
                     - Fn::Sub: "arn:${!AWS::Partition}:iam::aws:policy/job-function/ViewOnlyAccess"
                   Policies:
-                    - PolicyName: ProboAuditIdentityRead
+                    - PolicyName: TrustReadyAuditIdentityRead
                       PolicyDocument:
                         Version: "2012-10-17"
                         Statement:
@@ -401,22 +401,22 @@ Resources:
 
             Outputs:
               RoleARN:
-                Description: "ARN of the role Probo assumes in this account"
+                Description: "ARN of the role TrustReady assumes in this account"
                 Value:
-                  Fn::GetAtt: [ProboAuditRole, Arn]
-          - IssuerHostPath: !Select [1, !Split ["https://", !Ref ProboIssuerURL]]
+                  Fn::GetAtt: [TrustReadyAuditRole, Arn]
+          - IssuerHostPath: !Select [1, !Split ["https://", !Ref TrustReadyIssuerURL]]
 
 Outputs:
   RoleARN:
-    Description: "ARN of the role Probo assumes. Paste this value into Probo."
-    Value: !GetAtt ProboAuditRole.Arn
+    Description: "ARN of the role TrustReady assumes. Paste this value into TrustReady."
+    Value: !GetAtt TrustReadyAuditRole.Arn
 
   RoleName:
     Description: "Name of the role, the same in every account"
-    Value: !Ref ProboAuditRole
+    Value: !Ref TrustReadyAuditRole
 
   ManagementAccountID:
-    Description: "The account Probo enumerates the organization from"
+    Description: "The account TrustReady enumerates the organization from"
     Value: !Ref AWS::AccountId
 
   OIDCProviderARN:
@@ -425,10 +425,10 @@ Outputs:
       created it
     Value: !Sub
       - "arn:${AWS::Partition}:iam::${AWS::AccountId}:oidc-provider/${IssuerHostPath}"
-      - IssuerHostPath: !Select [1, !Split ["https://", !Ref ProboIssuerURL]]
+      - IssuerHostPath: !Select [1, !Split ["https://", !Ref TrustReadyIssuerURL]]
 
   IssuerHostPath:
     Description: >-
       The issuer with the scheme stripped, which is the prefix of the trust
       policy condition keys. Useful when diagnosing an AccessDenied.
-    Value: !Select [1, !Split ["https://", !Ref ProboIssuerURL]]
+    Value: !Select [1, !Split ["https://", !Ref TrustReadyIssuerURL]]

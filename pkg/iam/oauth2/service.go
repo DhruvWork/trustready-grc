@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -43,8 +43,8 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
-// CLIClientID is the well-known OAuth2 client ID for the Probo CLI.
-// It is inserted into every Probo database via migration and hardcoded
+// CLIClientID is the well-known OAuth2 client ID for the TrustReady CLI.
+// It is inserted into every TrustReady database via migration and hardcoded
 // in the CLI binary for the device authorization flow.
 var CLIClientID = gid.MustParseGID("AAAAAAAAAAAASwAAAAAAAAAAcHJiY2xp")
 

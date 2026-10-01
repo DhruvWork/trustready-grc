@@ -1,12 +1,12 @@
 {
   "mcpServers": {
-    "probo-us": {
+    "trustready-us": {
       "type": "http",
-      "url": "https://us.probo.com/api/mcp/v1"
+      "url": "https://us.trustready.io/api/mcp/v1"
     },
-    "probo-eu": {
+    "trustready-eu": {
       "type": "http",
-      "url": "https://eu.probo.com/api/mcp/v1"
+      "url": "https://eu.trustready.io/api/mcp/v1"
     }
   }
 }

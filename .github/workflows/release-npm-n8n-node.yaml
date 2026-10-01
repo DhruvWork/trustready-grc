@@ -3,7 +3,7 @@ name: "Release n8n node"
 on:
   push:
     tags:
-      - "@trustready/n8n-nodes-probo/v*"
+      - "@trustready/n8n-nodes-trustready/v*"
 
 permissions:
   contents: "read"
@@ -26,7 +26,7 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "npm"
           registry-url: "https://registry.npmjs.org"
-          scope: "@probo"
+          scope: "@trustready"
       - run: "npm install -g npm@^12.0.2"
       - run: "npm ci"
       - name: "Verify package.json version matches tag"
@@ -37,7 +37,7 @@ jobs:
             echo "tag version ($TAG_VERSION) does not match package.json version ($PKG_VERSION)" >&2
             exit 1
           fi
-      - run: "npm --workspace @trustready/n8n-nodes-probo run build"
+      - run: "npm --workspace @trustready/n8n-nodes-trustready run build"
       - uses: "anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26" # v0.24.2
         with:
           path: ./packages/n8n-node
@@ -75,7 +75,7 @@ jobs:
       - name: "Publish to npm"
         run: |
           PKG_VERSION="$(node -p "require('./packages/n8n-node/package.json').version")"
-          if npm view "@trustready/n8n-nodes-probo@${PKG_VERSION}" version >/dev/null 2>&1; then
+          if npm view "@trustready/n8n-nodes-trustready@${PKG_VERSION}" version >/dev/null 2>&1; then
             echo "Version ${PKG_VERSION} already on npm; skipping publish"
           else
             npm publish "packages/n8n-node/${PACKFILE}" --access public

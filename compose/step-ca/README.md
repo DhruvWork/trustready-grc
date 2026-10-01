@@ -23,7 +23,7 @@ which forwards to trustreadyd's trust-center HTTP listener on the host.
 
 ## Custom domain DNS (optional)
 
-Managed compliance-page domains (`*.probopage.localhost`) resolve via the
+Managed compliance-page domains (`*.trustreadypage.localhost`) resolve via the
 `.localhost` TLD and skip DNS checks.
 
 For customer custom domains in local dev, point DNS at the host via

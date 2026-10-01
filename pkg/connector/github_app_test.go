@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -95,12 +95,12 @@ func TestGitHubAppConnector_InstallationFlow(t *testing.T) {
 		AppID:        "123456",
 		ClientID:     "github-app-client-id",
 		ClientSecret: "github-app-client-secret",
-		Slug:         "probo-test",
+		Slug:         "trustready-test",
 		PrivateKey:   privateKey,
 		InstallBase:  "https://github.com/apps",
 		TokenURL:     server.URL + "/login/oauth/access_token",
 		APIBase:      server.URL,
-		RedirectURI:  "https://probo.test/api/console/v1/connectors/github-app/complete",
+		RedirectURI:  "https://trustready.test/api/console/v1/connectors/github-app/complete",
 		HTTPClient:   server.Client(),
 	}
 	organizationID := gid.New(gid.NewTenantID(), 0)
@@ -166,7 +166,7 @@ func TestGitHubAppConnector_RejectsInvalidState(t *testing.T) {
 		AppID:        "123456",
 		ClientID:     "github-app-client-id",
 		ClientSecret: "github-app-client-secret",
-		Slug:         "probo-test",
+		Slug:         "trustready-test",
 		PrivateKey:   newGitHubAppTestPrivateKey(t),
 		InstallBase:  "https://github.com/apps",
 	}
@@ -223,7 +223,7 @@ func TestGitHubAppConnector_RequiresInstallWhenNoOrganization(t *testing.T) {
 
 	parsedInstallURL, err := url.Parse(installURL)
 	require.NoError(t, err)
-	assert.Equal(t, "/apps/probo-test/installations/new", parsedInstallURL.Path)
+	assert.Equal(t, "/apps/trustready-test/installations/new", parsedInstallURL.Path)
 	assert.Equal(t, state, parsedInstallURL.Query().Get("state"))
 }
 
@@ -267,12 +267,12 @@ func TestGitHubAppConnector_RejectsUnauthorizedInstallation(t *testing.T) {
 		AppID:        "123456",
 		ClientID:     "github-app-client-id",
 		ClientSecret: "github-app-client-secret",
-		Slug:         "probo-test",
+		Slug:         "trustready-test",
 		PrivateKey:   newGitHubAppTestPrivateKey(t),
 		InstallBase:  "https://github.com/apps",
 		TokenURL:     server.URL + "/login/oauth/access_token",
 		APIBase:      server.URL,
-		RedirectURI:  "https://probo.test/api/console/v1/connectors/github-app/complete",
+		RedirectURI:  "https://trustready.test/api/console/v1/connectors/github-app/complete",
 		HTTPClient:   server.Client(),
 	}
 
@@ -342,12 +342,12 @@ func newGitHubAppCompleteFixture(t *testing.T, installationsJSON string) (*GitHu
 		AppID:        "123456",
 		ClientID:     "github-app-client-id",
 		ClientSecret: "github-app-client-secret",
-		Slug:         "probo-test",
+		Slug:         "trustready-test",
 		PrivateKey:   newGitHubAppTestPrivateKey(t),
 		InstallBase:  "https://github.com/apps",
 		TokenURL:     server.URL + "/login/oauth/access_token",
 		APIBase:      server.URL,
-		RedirectURI:  "https://probo.test/api/console/v1/connectors/github-app/complete",
+		RedirectURI:  "https://trustready.test/api/console/v1/connectors/github-app/complete",
 		HTTPClient:   server.Client(),
 	}
 

@@ -294,7 +294,7 @@ interactions:
         proto_minor: 0
         content_length: -1
         uncompressed: true
-        body: '{"clientId":"EU.2222222222222222","name":"probo-oauth","flow":"AUTHORIZATION_CODE","identity":null,"callbackUrls":["https://eu.probo.com/cb"],"description":"app"}'
+        body: '{"clientId":"EU.2222222222222222","name":"trustready-oauth","flow":"AUTHORIZATION_CODE","identity":null,"callbackUrls":["https://eu.trustready.io/cb"],"description":"app"}'
         headers:
             Content-Type:
                 - application/json; charset=utf-8

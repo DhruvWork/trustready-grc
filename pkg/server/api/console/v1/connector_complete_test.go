@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -80,7 +80,7 @@ func TestFinishConnectorCompletion_FailedInstallCheck(t *testing.T) {
 				return host == "console.example"
 			})
 
-			// A nil probo service panics if the connection reaches Create.
+			// A nil trustready service panics if the connection reaches Create.
 			finishConnectorCompletion(
 				recorder,
 				req,
@@ -120,7 +120,7 @@ func TestHandleConnectorCallbackError_GitHubAppPreservesContinuation(t *testing.
 		ClientID:     "client-id",
 		ClientSecret: "client-secret",
 		InstallBase:  "https://github.example/apps",
-		RedirectURI:  "https://probo.test/api/console/v1/connectors/github-app/complete",
+		RedirectURI:  "https://trustready.test/api/console/v1/connectors/github-app/complete",
 	}
 	registry := connector.NewConnectorRegistry()
 	require.NoError(

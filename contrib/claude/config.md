@@ -13,10 +13,10 @@ When a configuration field is added, renamed, or removed in the Go config struct
 | 5 | `GNUmakefile` (`dev-config` target) | Env vars fed to `trustreadyd-bootstrap` to regenerate `cfg/dev.yaml` (file itself is gitignored) |
 | 6 | `e2e/internal/testutil/testutil.go` | E2E env-var map fed to `bootstrap.NewBuilder` |
 | 7 | `contrib/lima/provision.sh` | Sandbox env vars passed to `trustreadyd-bootstrap` |
-| 8 | `contrib/helm/charts/probo/values.yaml` | Helm default values |
-| 9 | `contrib/helm/charts/probo/values-production.yaml.example` | Helm production template |
-| 10 | `contrib/helm/charts/probo/templates/deployment.yaml` | Helm deployment — maps values → env vars |
-| 11 | `contrib/helm/charts/probo/templates/secret.yaml` | Helm secret — sensitive values |
+| 8 | `contrib/helm/charts/trustready/values.yaml` | Helm default values |
+| 9 | `contrib/helm/charts/trustready/values-production.yaml.example` | Helm production template |
+| 10 | `contrib/helm/charts/trustready/templates/deployment.yaml` | Helm deployment — maps values → env vars |
+| 11 | `contrib/helm/charts/trustready/templates/secret.yaml` | Helm secret — sensitive values |
 
 ## Flow
 
@@ -48,7 +48,7 @@ Go struct (pkg/trustreadyd/)
 4. **`make dev-config`** writes `cfg/dev.yaml` via `trustreadyd-bootstrap` with safe, non-production defaults (plaintext passwords, `localhost`, `secure: false`). The generated file and the per-dev signing keys — OAuth2 (`cfg/.dev-oauth2-signing-key.pem`) and identity federation (`cfg/.dev-identity-federation-signing-key.pem`) — are all gitignored. The recipe sources `.env` at the repo root if present so devs can override any env var without editing the `GNUmakefile`; keep `.env.example` in sync when you add or rename env vars.
 5. **`e2e/internal/testutil/testutil.go`** builds the e2e config through `bootstrap.NewBuilder` with a test-only env-var map (different ports, `trustreadyd_test` DB, shorter intervals). Any new field whose test value differs from the bootstrap default must be added to that map.
 6. **`provision.sh`** only sets env vars that differ from `builder.go` defaults (e.g. `TRUSTREADYD_BASE_URL`, `TRUSTREADYD_AUTH_COOKIE_DOMAIN`, `TRUSTREADYD_AUTH_COOKIE_SECURE`). If the new field's default is acceptable in the sandbox, no env var is needed.
-7. **Helm `values.yaml`** exposes the field under the appropriate `probo.*` key with a sensible default. `values-production.yaml.example` includes it only when the production value differs or the user must set it.
+7. **Helm `values.yaml`** exposes the field under the appropriate `trustready.*` key with a sensible default. `values-production.yaml.example` includes it only when the production value differs or the user must set it.
 8. **Optional features** (custom domains, SAML, connectors, tracing) are gated by `{{- if }}` blocks in the Helm templates; follow the same pattern for new optional fields.
 9. **Bootstrap tests** (`pkg/bootstrap/builder_test.go`) must cover the new env var mapping.
 

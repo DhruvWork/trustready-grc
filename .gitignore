@@ -17,7 +17,7 @@ sbom-docker.json
 *.key
 *.tsbuildinfo
 cmd/trustready-agent/rsrc_windows_*.syso
-compose/keycloak/probo-realm.json
+compose/keycloak/trustready-realm.json
 compose/step-ca/config/
 compose/step-ca/db/
 compose/step-ca/secrets/

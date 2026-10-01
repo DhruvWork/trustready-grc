@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import (
 type TaskExternalLinkOrigin string
 
 const (
-	TaskExternalLinkOriginProbo  TaskExternalLinkOrigin = "PROBO"
+	TaskExternalLinkOriginTrustReady  TaskExternalLinkOrigin = "TRUSTREADY"
 	TaskExternalLinkOriginLinear TaskExternalLinkOrigin = "LINEAR"
 )
 
@@ -40,7 +40,7 @@ var (
 
 func TaskExternalLinkOrigins() []TaskExternalLinkOrigin {
 	return []TaskExternalLinkOrigin{
-		TaskExternalLinkOriginProbo,
+		TaskExternalLinkOriginTrustReady,
 		TaskExternalLinkOriginLinear,
 	}
 }
@@ -48,7 +48,7 @@ func TaskExternalLinkOrigins() []TaskExternalLinkOrigin {
 func (v TaskExternalLinkOrigin) IsValid() bool {
 	switch v {
 	case
-		TaskExternalLinkOriginProbo,
+		TaskExternalLinkOriginTrustReady,
 		TaskExternalLinkOriginLinear:
 		return true
 	}

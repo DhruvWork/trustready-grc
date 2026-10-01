@@ -11,10 +11,10 @@ public enum AgentAuthError: LocalizedError {
     case signatureRejected(OSStatus)
 
     public var errorDescription: String? {
-        let path = ProboAgentHelperConstants.agentExecutablePath
+        let path = TrustReadyAgentHelperConstants.agentExecutablePath
         switch self {
         case .missing:
-            return "probo-agent is not installed at \(path)"
+            return "trustready-agent is not installed at \(path)"
         case .notRegularFile:
             return "\(path) is not a regular file"
         case .missingRequirement:
@@ -22,7 +22,7 @@ public enum AgentAuthError: LocalizedError {
         case .invalidRequirement:
             return "invalid agent code-signing requirement"
         case .signatureRejected(let status):
-            return "\(path) failed the Probo code-signing requirement (status=\(status))"
+            return "\(path) failed the TrustReady code-signing requirement (status=\(status))"
         }
     }
 }
@@ -30,12 +30,12 @@ public enum AgentAuthError: LocalizedError {
 /// Checks the privileged agent binary before a helper or URL-handler exec.
 public enum AgentAuth {
     private static let log = Logger(
-        subsystem: "com.probo.agent.helper",
+        subsystem: "com.trustready.agent.helper",
         category: "AgentAuth"
     )
 
     public static func verify() throws {
-        try verify(path: ProboAgentHelperConstants.agentExecutablePath)
+        try verify(path: TrustReadyAgentHelperConstants.agentExecutablePath)
     }
 
     public static func verify(path: String) throws {
@@ -103,12 +103,12 @@ public enum AgentAuth {
     }
 
     private static func agentRequirement() -> String? {
-        guard let teamID = ProboAgentSigningConstants.teamID, !teamID.isEmpty else {
+        guard let teamID = TrustReadyAgentSigningConstants.teamID, !teamID.isEmpty else {
             return nil
         }
 
         return """
-            anchor apple generic and identifier "\(ProboAgentHelperConstants.agentIdentifier)" \
+            anchor apple generic and identifier "\(TrustReadyAgentHelperConstants.agentIdentifier)" \
             and certificate leaf[subject.OU] = "\(teamID)"
             """
     }

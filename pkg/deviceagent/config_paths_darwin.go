@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ package deviceagent
 import "path/filepath"
 
 const (
-	privilegedExecutableDir  = "/Library/Probo"
+	privilegedExecutableDir  = "/Library/TrustReady"
 	privilegedExecutableName = "trustready-agent"
 	legacyExecutablePath     = "/usr/local/bin/trustready-agent"
 )

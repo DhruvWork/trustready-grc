@@ -2,17 +2,17 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "trustready-grc",
   "version": "0.3.2",
-  "description": "Open-source compliance workflows powered by the Probo MCP API",
+  "description": "Open-source compliance workflows powered by the TrustReady MCP API",
   "author": {
     "name": "TrustReady",
-    "email": "hello@probo.com",
-    "url": "https://www.probo.com"
+    "email": "hello@trustready.io",
+    "url": "https://www.trustready.io"
   },
-  "homepage": "https://github.com/getprobo/probo/tree/main/packages/skills",
-  "repository": "https://github.com/getprobo/probo",
+  "homepage": "https://github.com/getprobo/trustready/tree/main/packages/skills",
+  "repository": "https://github.com/getprobo/trustready",
   "license": "MIT",
   "keywords": [
-    "probo",
+    "trustready",
     "compliance",
     "grc",
     "mcp",

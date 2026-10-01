@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,11 +33,11 @@ import (
 func TestBuildConnectorSetup(t *testing.T) {
 	t.Parallel()
 
-	issuer := "https://proboidentity.com/" + setupOrganizationID
+	issuer := "https://trustreadyidentity.com/" + setupOrganizationID
 	subject := setupOrganizationID
 
 	t.Run(
-		"fills every Probo-derived value and preserves issuer casing",
+		"fills every TrustReady-derived value and preserves issuer casing",
 		func(t *testing.T) {
 			t.Parallel()
 
@@ -56,8 +56,8 @@ func TestBuildConnectorSetup(t *testing.T) {
 			assert.Equal(t, cloudazure.DefaultApplicationName, setup.SuggestedApplicationName)
 			assert.Contains(t, setup.TerraformSnippet, strconv.Quote(issuer))
 			assert.Contains(t, setup.TerraformSnippet, strconv.Quote(subject))
-			assert.Contains(t, setup.TerraformSnippet, "probo_issuer_url")
-			assert.Contains(t, setup.TerraformSnippet, "probo_subject")
+			assert.Contains(t, setup.TerraformSnippet, "trustready_issuer_url")
+			assert.Contains(t, setup.TerraformSnippet, "trustready_subject")
 			assert.Contains(t, setup.TerraformSnippet, "application_display_name")
 			assert.Contains(t, setup.TerraformSnippet, "subscription_id")
 			assert.Contains(t, setup.TerraformSnippet, strconv.Quote("SUBSCRIPTION_ID"))

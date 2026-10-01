@@ -1,1 +1,1 @@
-Move to [probo.com/docs](https://www.probo.com/docs)
+Move to [trustready.io/docs](https://www.trustready.io/docs)

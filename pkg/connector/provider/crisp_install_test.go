@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -195,7 +195,7 @@ func TestCrispInstallVerify_Terminal(t *testing.T) {
 		assert.NotErrorIs(t, err, provider.ErrInstallVerificationTransient)
 	})
 
-	// Every 4xx that is not about Probo's own credential is a request this
+	// Every 4xx that is not about TrustReady's own credential is a request this
 	// code would keep making identically.
 	for name, status := range map[string]int{
 		"400 bad request":   http.StatusBadRequest,
@@ -227,7 +227,7 @@ func TestCrispInstallVerify_Terminal(t *testing.T) {
 		})
 	}
 
-	// 404 is Crisp saying Probo's plugin is not subscribed to this website. No
+	// 404 is Crisp saying TrustReady's plugin is not subscribed to this website. No
 	// retry installs it for them.
 	t.Run("404 plugin not subscribed", func(t *testing.T) {
 		t.Parallel()
@@ -260,7 +260,7 @@ func TestCrispInstallVerify_Terminal(t *testing.T) {
 func TestCrispInstallVerify_Transient(t *testing.T) {
 	t.Parallel()
 
-	// 401/403 are Crisp refusing PROBO's plugin credential, never the
+	// 401/403 are Crisp refusing TRUSTREADY's plugin credential, never the
 	// customer's proof, so they release too: the customer cannot fix a token
 	// mid-rotation, and burning their state over it would cost them a ceremony
 	// they completed correctly.
@@ -270,8 +270,8 @@ func TestCrispInstallVerify_Transient(t *testing.T) {
 		"502 bad gateway":               http.StatusBadGateway,
 		"503 unavailable":               http.StatusServiceUnavailable,
 		"504 vendor timeout":            http.StatusGatewayTimeout,
-		"401 on Probo's own credential": http.StatusUnauthorized,
-		"403 on Probo's own credential": http.StatusForbidden,
+		"401 on TrustReady's own credential": http.StatusUnauthorized,
+		"403 on TrustReady's own credential": http.StatusForbidden,
 	} {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()

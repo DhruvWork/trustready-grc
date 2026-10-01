@@ -107,7 +107,7 @@ First return is always `nil`. Authorization errors are returned and handled like
 Use `Authorize` with an early return:
 
 ```go
-scope, err := r.Authorize(ctx, input.OrganizationID, probo.ActionThirdPartyList)
+scope, err := r.Authorize(ctx, input.OrganizationID, trustready.ActionThirdPartyList)
 if err != nil {
 	return nil, types.ListThirdPartiesOutput{}, err
 }
@@ -120,11 +120,11 @@ MCP clients commonly authenticate with OAuth2 access tokens. Every action passed
 **List with pagination:**
 ```go
 func (r *Resolver) ListThirdPartiesTool(ctx context.Context, req *mcp.CallToolRequest, input *types.ListThirdPartiesInput) (*mcp.CallToolResult, types.ListThirdPartiesOutput, error) {
-	if _, err := r.Authorize(ctx, input.OrganizationID, probo.ActionThirdPartyList); err != nil {
+	if _, err := r.Authorize(ctx, input.OrganizationID, trustready.ActionThirdPartyList); err != nil {
 		return nil, types.ListThirdPartiesOutput{}, err
 	}
 
-	prb := r.ProboService(ctx, input.OrganizationID)
+	prb := r.TrustReadyService(ctx, input.OrganizationID)
 
 	pageOrderBy := page.OrderBy[coredata.ThirdPartyOrderField]{
 		Field:     coredata.ThirdPartyOrderFieldCreatedAt,
@@ -151,11 +151,11 @@ func (r *Resolver) ListThirdPartiesTool(ctx context.Context, req *mcp.CallToolRe
 **Get single resource:**
 ```go
 func (r *Resolver) GetRiskTool(ctx context.Context, req *mcp.CallToolRequest, input *types.GetRiskInput) (*mcp.CallToolResult, types.GetRiskOutput, error) {
-	if _, err := r.Authorize(ctx, input.ID, probo.ActionRiskGet); err != nil {
+	if _, err := r.Authorize(ctx, input.ID, trustready.ActionRiskGet); err != nil {
 		return nil, types.GetRiskOutput{}, err
 	}
 
-	prb := r.ProboService(ctx, input.ID)
+	prb := r.TrustReadyService(ctx, input.ID)
 
 	risk, err := prb.Risks.Get(ctx, input.ID)
 	if err != nil {
@@ -169,13 +169,13 @@ func (r *Resolver) GetRiskTool(ctx context.Context, req *mcp.CallToolRequest, in
 **Create:**
 ```go
 func (r *Resolver) AddRiskTool(ctx context.Context, req *mcp.CallToolRequest, input *types.AddRiskInput) (*mcp.CallToolResult, types.AddRiskOutput, error) {
-	if _, err := r.Authorize(ctx, input.OrganizationID, probo.ActionRiskCreate); err != nil {
+	if _, err := r.Authorize(ctx, input.OrganizationID, trustready.ActionRiskCreate); err != nil {
 		return nil, types.AddRiskOutput{}, err
 	}
 
-	svc := r.ProboService(ctx, input.OrganizationID)
+	svc := r.TrustReadyService(ctx, input.OrganizationID)
 
-	risk, err := svc.Risks.Create(ctx, probo.CreateRiskRequest{
+	risk, err := svc.Risks.Create(ctx, trustready.CreateRiskRequest{
 		OrganizationID: input.OrganizationID,
 		Name:           input.Name,
 		Description:    input.Description,

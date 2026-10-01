@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,8 +33,8 @@ func TestConsoleExecutablePath_ReturnsSiblingExecutable(t *testing.T) {
 
 	assert.Equal(
 		t,
-		`C:\Program Files\Probo\trustready-agent.exe`,
-		consoleExecutablePath(`C:\Program Files\Probo\trustready-agentw.exe`),
+		`C:\Program Files\TrustReady\trustready-agent.exe`,
+		consoleExecutablePath(`C:\Program Files\TrustReady\trustready-agentw.exe`),
 	)
 	assert.Equal(
 		t,
@@ -43,7 +43,7 @@ func TestConsoleExecutablePath_ReturnsSiblingExecutable(t *testing.T) {
 	)
 	assert.Equal(
 		t,
-		`C:\Program Files\Probo\trustready-agent.exe`,
-		consoleExecutablePath(`C:\Program Files\Probo\trustready-agent.exe.old`),
+		`C:\Program Files\TrustReady\trustready-agent.exe`,
+		consoleExecutablePath(`C:\Program Files\TrustReady\trustready-agent.exe.old`),
 	)
 }

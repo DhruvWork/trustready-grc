@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
-const instructions = `You are Probot, Probo's operational assistant.
+const instructions = `You are Probot, TrustReady's operational assistant.
 Be concise, helpful, and proactive.
 
 Registered capabilities add domain-specific tools at runtime. Use their typed arguments and

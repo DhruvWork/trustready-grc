@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,26 +31,26 @@ import (
 
 const (
 	// Leaf SPKI SHA-256 pins for the current ACM certificates.
-	// A key rotation fails Probo API calls until these are updated.
+	// A key rotation fails TrustReady API calls until these are updated.
 	usConsoleLeafSPKI = "bc0eedef1d599ad6a77372303b8cc80b3e849c5142a94e8eaec21e369b07b370"
 	euConsoleLeafSPKI = "8df5e1fd2cf07827d75ad186510f5bb203b438617640ecbfc0543ef81c029dad"
 )
 
 var (
-	proboCloudLeafSPKIPins = mustSPKIPins(usConsoleLeafSPKI, euConsoleLeafSPKI)
+	trustreadyCloudLeafSPKIPins = mustSPKIPins(usConsoleLeafSPKI, euConsoleLeafSPKI)
 
-	ErrProboCloudPinMismatch = errors.New("TLS certificate is not a pinned Probo key")
+	ErrTrustReadyCloudPinMismatch = errors.New("TLS certificate is not a pinned TrustReady key")
 )
 
-func proboCloudTLSConfig() *tls.Config {
+func trustreadyCloudTLSConfig() *tls.Config {
 	return &tls.Config{
 		MinVersion:            tls.VersionTLS12,
-		VerifyPeerCertificate: verifyProboCloudSPKI,
+		VerifyPeerCertificate: verifyTrustReadyCloudSPKI,
 	}
 }
 
-func verifyProboCloudSPKI(_ [][]byte, verifiedChains [][]*x509.Certificate) error {
-	return verifySPKIPins(verifiedChains, proboCloudLeafSPKIPins)
+func verifyTrustReadyCloudSPKI(_ [][]byte, verifiedChains [][]*x509.Certificate) error {
+	return verifySPKIPins(verifiedChains, trustreadyCloudLeafSPKIPins)
 }
 
 func verifySPKIPins(verifiedChains [][]*x509.Certificate, pins [][32]byte) error {
@@ -62,7 +62,7 @@ func verifySPKIPins(verifiedChains [][]*x509.Certificate, pins [][32]byte) error
 		}
 	}
 
-	return ErrProboCloudPinMismatch
+	return ErrTrustReadyCloudPinMismatch
 }
 
 func spkiPinned(cert *x509.Certificate, pins [][32]byte) bool {
@@ -88,7 +88,7 @@ func mustSPKIPins(hexes ...string) [][32]byte {
 	for i, raw := range hexes {
 		decoded, err := hex.DecodeString(raw)
 		if err != nil || len(decoded) != sha256.Size {
-			panic("invalid Probo SPKI pin")
+			panic("invalid TrustReady SPKI pin")
 		}
 
 		copy(pins[i][:], decoded)

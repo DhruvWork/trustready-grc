@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -66,9 +66,9 @@ type allowedLiteral struct {
 //     individual scope STRINGS need no entry: knownOAuth2Scopes below derives
 //     them from the registry, so a new scope needs no test change. Only the
 //     bare prefix, which no registration declares, is listed.
-//   - A different Probo subsystem that happens to share a vendor with a
+//   - A different TrustReady subsystem that happens to share a vendor with a
 //     connector. Signing in with Google is not the Google Analytics
-//     connector; the agent's self-updater downloading getprobo/probo releases
+//     connector; the agent's self-updater downloading trustready/trustready releases
 //     is not the GitHub connector. Repointing the connector must NOT move
 //     these, so threading the registration's Endpoints here would be the bug,
 //     not the fix.
@@ -86,12 +86,12 @@ var literalAllowlist = []allowedLiteral{
 	{
 		file:    "pkg/iam/oidc/service.go",
 		literal: "https://accounts.google.com/o/oauth2/v2/auth",
-		reason:  "Probo's own sign-in-with-Google, a separate OAuth client from the Google Analytics connector that shares the host",
+		reason:  "TrustReady's own sign-in-with-Google, a separate OAuth client from the Google Analytics connector that shares the host",
 	},
 	{
 		file:    "pkg/iam/oidc/service.go",
 		literal: "https://oauth2.googleapis.com/token",
-		reason:  "Probo's own sign-in-with-Google token exchange; see above",
+		reason:  "TrustReady's own sign-in-with-Google token exchange; see above",
 	},
 	{
 		file:    "pkg/iam/oidc/service.go",
@@ -101,7 +101,7 @@ var literalAllowlist = []allowedLiteral{
 	{
 		file:    "pkg/deviceagent/update/update.go",
 		literal: "https://api.github.com",
-		reason:  "defaultAPIBaseURL: the agent's self-updater reads Probo's OWN getprobo/probo releases, not a customer's GitHub connector",
+		reason:  "defaultAPIBaseURL: the agent's self-updater reads TrustReady's OWN trustready/trustready releases, not a customer's GitHub connector",
 	},
 	{
 		file:    "pkg/deviceagent/update/update.go",

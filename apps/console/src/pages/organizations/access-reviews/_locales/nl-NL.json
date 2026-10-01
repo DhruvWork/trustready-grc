@@ -11,7 +11,7 @@
       "audience": "Audience",
       "subject": "Subject",
       "workloadIdentityProviderHelp": "bijv. projects/123456789012/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID",
-      "serviceAccountEmailHelp": "bijv. probo-audit@PROJECT_ID.iam.gserviceaccount.com"
+      "serviceAccountEmailHelp": "bijv. trustready-audit@PROJECT_ID.iam.gserviceaccount.com"
     },
     "messages": {
       "copyFailed": "Kopiëren mislukt",
@@ -28,7 +28,7 @@
       "workloadIdentityProvider": "Voer een geldige Workload Identity-providerresource in.",
       "serviceAccountEmail": "Voer een geldig e-mailadres van een serviceaccount in.",
       "create": "Aanmaken van de connector mislukt. Controleer de providerresource en het e-mailadres van het serviceaccount en probeer het opnieuw.",
-      "disconnected": "Probo kon het audit-serviceaccount niet impersoneren. Controleer of de module in dit project is toegepast en of de issuer en het subject overeenkomen met de waarden die tijdens de installatie zijn getoond.",
+      "disconnected": "TrustReady kon het audit-serviceaccount niet impersoneren. Controleer of de module in dit project is toegepast en of de issuer en het subject overeenkomen met de waarden die tijdens de installatie zijn getoond.",
       "delete": "Kan de connector niet verwijderen. Probeer het opnieuw.",
       "source": "Aanmaken van toegangsbron mislukt",
       "copy": "Kopieer de waarde handmatig."
@@ -82,7 +82,7 @@
       "clientId": "Voer een geldige applicatie-ID (client) in.",
       "subscriptionId": "Voer een geldige abonnements-ID in.",
       "create": "Aanmaken van de connector mislukt. Controleer de tenant-, client- en abonnements-ID’s en probeer het opnieuw.",
-      "disconnected": "Probo kon de audit-identiteit niet aannemen. Controleer of de module is toegepast en of de issuer en het subject overeenkomen. Federatie kan enkele minuten duren.",
+      "disconnected": "TrustReady kon de audit-identiteit niet aannemen. Controleer of de module is toegepast en of de issuer en het subject overeenkomen. Federatie kan enkele minuten duren.",
       "delete": "Kan de connector niet verwijderen. Probeer het opnieuw.",
       "source": "Aanmaken van toegangsbron mislukt",
       "copy": "Kopieer de waarde handmatig."

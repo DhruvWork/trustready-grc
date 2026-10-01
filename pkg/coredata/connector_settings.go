@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ import (
 const (
 	// DefaultAWSRoleName is the role name the customer setup template
 	// creates, used when a connector names none.
-	DefaultAWSRoleName = "ProboAudit"
+	DefaultAWSRoleName = "TrustReadyAudit"
 )
 
 type (
@@ -262,12 +262,12 @@ type (
 		Network string `json:"network"`
 	}
 
-	// AWSConnectorSettings names the IAM role Probo assumes. Every field is
+	// AWSConnectorSettings names the IAM role TrustReady assumes. Every field is
 	// public knowledge — the account owns the trust, and the connection
 	// itself holds no credential — so unlike the connection blob these stay
 	// in plain settings JSONB.
 	AWSConnectorSettings struct {
-		// RoleARN is the IAM role the customer created for Probo. The account
+		// RoleARN is the IAM role the customer created for TrustReady. The account
 		// is the one that ARN names; it is not stored separately.
 		RoleARN string `json:"role_arn"`
 		// MemberRoleName is the IAM role assumed in each member account of an
@@ -276,7 +276,7 @@ type (
 	}
 
 	// GCPConnectorSettings names the workload identity provider and the
-	// service account Probo impersonates. Every field is public knowledge —
+	// service account TrustReady impersonates. Every field is public knowledge —
 	// the project owns the trust, and the connection itself holds no
 	// credential — so unlike the connection blob these stay in plain
 	// settings JSONB.
@@ -289,7 +289,7 @@ type (
 		Parent string `json:"parent,omitempty"`
 	}
 
-	// AzureConnectorSettings names the Entra application Probo federates
+	// AzureConnectorSettings names the Entra application TrustReady federates
 	// with and the subscription it reviews. Every field is public knowledge —
 	// the tenant owns the trust, and the connection itself holds no
 	// credential — so unlike the connection blob these stay in plain

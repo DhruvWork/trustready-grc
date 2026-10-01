@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 )
 
@@ -39,7 +39,7 @@ var errInvalidReconnectConnector = errors.New("invalid reconnect connector")
 
 func handleConnectorInitiate(
 	logger *log.Logger,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	iamSvc *iam.Service,
 	connectorRegistry *connector.Registry,
 ) http.HandlerFunc {
@@ -82,7 +82,7 @@ func handleConnectorInitiate(
 			Principal: identity.ID,
 			Resource:  organizationID,
 			Session:   &session.ID,
-			Action:    probo.ActionConnectorInitiate,
+			Action:    trustready.ActionConnectorInitiate,
 		})
 		if err != nil {
 			httpserver.RenderError(w, http.StatusForbidden, err)
@@ -90,7 +90,7 @@ func handleConnectorInitiate(
 		}
 
 		requestedScopes := r.URL.Query()["scope"]
-		prb := proboSvc
+		prb := trustreadySvc
 
 		// Look up the connector this flow reconnects, if any, so we can
 		// union its stored scopes into the new auth request.
@@ -154,7 +154,7 @@ func handleConnectorInitiate(
 // (fresh-connect path).
 func loadExistingConnector(
 	r *http.Request,
-	prb *probo.Service,
+	prb *trustready.Service,
 	scope coredata.Scoper,
 ) (*coredata.Connector, error) {
 	explicitID := r.URL.Query().Get("connector_id")

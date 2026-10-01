@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,11 +32,11 @@ import (
 const (
 	// DefaultTerraformModuleSource is the public registry address of the Azure
 	// audit-role module.
-	DefaultTerraformModuleSource = "getprobo/audit-role/azurerm"
+	DefaultTerraformModuleSource = "trustready/audit-role/azurerm"
 
 	// DefaultApplicationName is the Entra application the customer setup
 	// template creates.
-	DefaultApplicationName = "Probo Access Review"
+	DefaultApplicationName = "TrustReady Access Review"
 )
 
 type (
@@ -56,7 +56,7 @@ type (
 		TerraformModuleSource string
 	}
 
-	// ConnectorSetupInput is what BuildConnectorSetup needs. Every Probo-derived
+	// ConnectorSetupInput is what BuildConnectorSetup needs. Every TrustReady-derived
 	// string is supplied already resolved so this function never talks to config
 	// or an issuer.
 	ConnectorSetupInput struct {
@@ -118,14 +118,14 @@ func terraformSnippet(moduleSource, issuerURL, subject string) string {
 	}
 
 	var b strings.Builder
-	b.WriteString("module \"probo_audit\" {\n")
+	b.WriteString("module \"trustready_audit\" {\n")
 	b.WriteString("  source = ")
 	b.WriteString(strconv.Quote(moduleSource))
 	b.WriteString("\n\n")
-	b.WriteString("  probo_issuer_url         = ")
+	b.WriteString("  trustready_issuer_url         = ")
 	b.WriteString(strconv.Quote(issuerURL))
 	b.WriteString("\n")
-	b.WriteString("  probo_subject            = ")
+	b.WriteString("  trustready_subject            = ")
 	b.WriteString(strconv.Quote(subject))
 	b.WriteString("\n")
 	b.WriteString("  application_display_name = ")

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -735,7 +735,7 @@ func TestClient_LinkAttachment(t *testing.T) {
 		context.Background(),
 		"issue-1",
 		"https://app.example/organizations/org/governance/tasks/task",
-		"Probo task",
+		"TrustReady task",
 	)
 
 	require.NoError(t, handlerErr)
@@ -748,7 +748,7 @@ func TestClient_LinkAttachment(t *testing.T) {
 	require.True(t, ok)
 	assert.Equal(t, "issue-1", input["issueId"])
 	assert.Equal(t, "https://app.example/organizations/org/governance/tasks/task", input["url"])
-	assert.Equal(t, "Probo task", input["title"])
+	assert.Equal(t, "TrustReady task", input["title"])
 }
 
 func TestClient_OrganizationID(t *testing.T) {

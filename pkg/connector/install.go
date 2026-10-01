@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ const (
 	// data rather than in the type, so one shared validator serves every
 	// install provider; the callback handler rejects a state whose provider
 	// does not match the route it arrived on.
-	TokenTypeConnectorInstall = "probo/connector/install"
+	TokenTypeConnectorInstall = "trustready/connector/install"
 
 	// installStateTTL is the house window for a redirect the customer walks
 	// through by hand, the same one OAuth2 state and the Slack install use.
@@ -57,7 +57,7 @@ type InstallState struct {
 	//
 	// It is not audit metadata. Server-side verification of the vendor's proof
 	// establishes only that the browser came from a real install of that vendor
-	// tenant; it says nothing about which Probo organization the tenant belongs
+	// tenant; it says nothing about which TrustReady organization the tenant belongs
 	// in. Without this check, anyone holding ActionConnectorInitiate in any
 	// organization can mint a state, hand the vendor's own install link to an
 	// administrator of an unrelated tenant, and capture that tenant on a wholly
@@ -102,7 +102,7 @@ func NewInstallState(
 }
 
 // ValidateInstallState checks the signature, the token type and the expiry. It
-// proves only that Probo minted this state for someone: the caller must still
+// proves only that TrustReady minted this state for someone: the caller must still
 // match the identity against the session cookie, re-authorize it against the
 // organization, and spend the state exactly once.
 func ValidateInstallState(

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,8 +40,8 @@ import (
 )
 
 const (
-	hostEU = "eu.probo.com"
-	hostUS = "us.probo.com"
+	hostEU = "eu.trustready.io"
+	hostUS = "us.trustready.io"
 
 	regionEU     = "eu"
 	regionUS     = "us"
@@ -85,27 +85,27 @@ func NewCmdLogin(f *cmdutil.Factory) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "login",
-		Short: "Authenticate with a Probo host",
+		Short: "Authenticate with a TrustReady host",
 		Example: `  # Interactive login (select region, opens browser for device authorization)
   prb auth login
 
-  # Login to Probo EU
-  prb auth login --hostname eu.probo.com
+  # Login to TrustReady EU
+  prb auth login --hostname eu.trustready.io
 
-  # Login to Probo US
-  prb auth login --hostname us.probo.com
+  # Login to TrustReady US
+  prb auth login --hostname us.trustready.io
 
   # Login to a self-hosted instance
-  prb auth login --hostname probo.example.com`,
+  prb auth login --hostname trustready.example.com`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if f.IOStreams.IsInteractive() && flagHost == "" {
 				var region string
 
 				err := huh.NewSelect[string]().
-					Title("Where is your Probo account hosted?").
+					Title("Where is your TrustReady account hosted?").
 					Options(
-						huh.NewOption("Probo EU (eu.probo.com)", regionEU),
-						huh.NewOption("Probo US (us.probo.com)", regionUS),
+						huh.NewOption("TrustReady EU (eu.trustready.io)", regionEU),
+						huh.NewOption("TrustReady US (us.trustready.io)", regionUS),
 						huh.NewOption("Other (custom domain)", regionCustom),
 					).
 					Value(&region).
@@ -121,8 +121,8 @@ func NewCmdLogin(f *cmdutil.Factory) *cobra.Command {
 					flagHost = hostUS
 				case regionCustom:
 					err := huh.NewInput().
-						Title("Probo hostname").
-						Placeholder("probo.example.com").
+						Title("TrustReady hostname").
+						Placeholder("trustready.example.com").
 						Value(&flagHost).
 						Run()
 					if err != nil {
@@ -251,7 +251,7 @@ func NewCmdLogin(f *cmdutil.Factory) *cobra.Command {
 		&flagHost,
 		"hostname",
 		"",
-		"Probo hostname (e.g. eu.probo.com, us.probo.com)",
+		"TrustReady hostname (e.g. eu.trustready.io, us.trustready.io)",
 	)
 	cmd.Flags().StringVar(
 		&flagOrganization,

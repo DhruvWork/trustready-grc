@@ -1,5 +1,5 @@
 import Foundation
-import ProboAgentShared
+import TrustReadyAgentShared
 
 public struct EnrollPreflightResult: Decodable {
     public let server: String
@@ -12,7 +12,7 @@ public struct EnrollPreflightResult: Decodable {
 }
 
 public enum EnrollmentFlow {
-    private static let agentExecutablePath = ProboAgentHelperConstants.agentExecutablePath
+    private static let agentExecutablePath = TrustReadyAgentHelperConstants.agentExecutablePath
 
     public static func runPreflight(rawURL: String) throws -> EnrollPreflightResult {
         try AgentAuth.verify()
@@ -42,7 +42,7 @@ public enum EnrollmentFlow {
         try HelperClient.shared.install(
             serverURL: preflight.server,
             enrollmentToken: preflight.token,
-            configDir: ProboAgentHelperConstants.defaultConfigDir
+            configDir: TrustReadyAgentHelperConstants.defaultConfigDir
         )
     }
 }

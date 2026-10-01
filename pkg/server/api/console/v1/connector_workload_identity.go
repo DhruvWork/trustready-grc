@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ import (
 	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
 	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
 	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
@@ -69,8 +69,8 @@ func (r *Resolver) workloadIdentitySettings(
 	ctx context.Context,
 	input types.CreateWorkloadIdentityConnectorInput,
 ) ([]byte, error) {
-	raw, err := probo.MarshalWorkloadIdentitySettings(
-		probo.WorkloadIdentitySettingsInput{
+	raw, err := trustready.MarshalWorkloadIdentitySettings(
+		trustready.WorkloadIdentitySettingsInput{
 			Provider:                    input.Provider,
 			AWSRoleARN:                  ref.UnrefOrZero(input.AWSRoleArn),
 			GCPWorkloadIdentityProvider: ref.UnrefOrZero(input.GCPWorkloadIdentityProvider),
@@ -82,7 +82,7 @@ func (r *Resolver) workloadIdentitySettings(
 		},
 	)
 	if err != nil {
-		if errors.Is(err, probo.ErrMarshalWorkloadIdentitySettings) {
+		if errors.Is(err, trustready.ErrMarshalWorkloadIdentitySettings) {
 			r.logger.ErrorCtx(ctx, "cannot marshal workload identity connector settings", log.Error(err))
 
 			return nil, gqlutils.Internal(ctx)
@@ -98,8 +98,8 @@ func (r *Resolver) organizationConnectorSettings(
 	ctx context.Context,
 	input types.CreateOrganizationConnectorInput,
 ) ([]byte, error) {
-	raw, err := probo.MarshalWorkloadIdentitySettings(
-		probo.WorkloadIdentitySettingsInput{
+	raw, err := trustready.MarshalWorkloadIdentitySettings(
+		trustready.WorkloadIdentitySettingsInput{
 			Provider:                    input.Provider,
 			AWSRoleARN:                  ref.UnrefOrZero(input.AWSRoleArn),
 			AWSMemberRoleName:           ref.UnrefOrZero(input.AWSMemberRoleName),
@@ -112,7 +112,7 @@ func (r *Resolver) organizationConnectorSettings(
 		},
 	)
 	if err != nil {
-		if errors.Is(err, probo.ErrMarshalWorkloadIdentitySettings) {
+		if errors.Is(err, trustready.ErrMarshalWorkloadIdentitySettings) {
 			r.logger.ErrorCtx(ctx, "cannot marshal organization connector settings", log.Error(err))
 
 			return nil, gqlutils.Internal(ctx)

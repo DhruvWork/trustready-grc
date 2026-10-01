@@ -1,17 +1,17 @@
 {
-  "node": "@trustready/n8n-nodes-probo.proboTrigger",
+  "node": "@trustready/n8n-nodes-trustready.proboTrigger",
   "nodeVersion": "1.0",
   "codexVersion": "1.0",
   "categories": ["Development", "Utility"],
   "resources": {
     "credentialDocumentation": [
       {
-        "url": "https://www.probo.com/docs"
+        "url": "https://www.trustready.io/docs"
       }
     ],
     "primaryDocumentation": [
       {
-        "url": "https://www.probo.com/docs"
+        "url": "https://www.trustready.io/docs"
       }
     ],
     "generic": []

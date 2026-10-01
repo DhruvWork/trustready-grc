@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,48 +24,48 @@ import { floatingCard } from "./shared";
 // Opt-out (CCPA-style): trackers fire immediately; the visitor acknowledges or
 // opts out. Compact banner for first paint / non-CCPA reopen; Privacy Choices
 // panel for CCPA's Alternative Opt-out Link (layout.reopen_state). The statutory
-// "Your Privacy Choices" link is handled by <probo-settings-link>.
+// "Your Privacy Choices" link is handled by <trustready-settings-link>.
 export function renderOptOut(position: string): string {
   const banner = `
-    <probo-banner>
+    <trustready-banner>
       ${floatingCard(
         position,
-        { labelledby: "probo-banner-title", describedby: "probo-banner-desc" },
+        { labelledby: "trustready-banner-title", describedby: "trustready-banner-desc" },
         `
-        <p class="title" id="probo-banner-title" data-text="banner_title_opt_out" data-text-fallback="banner_title"></p>
-        <p class="description" id="probo-banner-desc" data-text="banner_description_opt_out" data-text-fallback="banner_description"></p>
+        <p class="title" id="trustready-banner-title" data-text="banner_title_opt_out" data-text-fallback="banner_title"></p>
+        <p class="description" id="trustready-banner-desc" data-text="banner_description_opt_out" data-text-fallback="banner_description"></p>
         <div class="buttons">
-          <probo-accept-button><button class="btn btn-primary" data-text="button_acknowledge" data-text-fallback="button_accept_all"></button></probo-accept-button>
-          <probo-reject-button><button class="btn" data-text="button_opt_out" data-text-fallback="button_reject_all"></button></probo-reject-button>
+          <trustready-accept-button><button class="btn btn-primary" data-text="button_acknowledge" data-text-fallback="button_accept_all"></button></trustready-accept-button>
+          <trustready-reject-button><button class="btn" data-text="button_opt_out" data-text-fallback="button_reject_all"></button></trustready-reject-button>
         </div>
         ${BRANDING}`,
       )}
-    </probo-banner>`;
+    </trustready-banner>`;
 
   const privacyChoices = `
-    <probo-privacy-choices>
+    <trustready-privacy-choices>
       ${floatingCard(
         position,
         {
-          labelledby: "probo-privacy-choices-title",
-          describedby: "probo-privacy-choices-desc",
+          labelledby: "trustready-privacy-choices-title",
+          describedby: "trustready-privacy-choices-desc",
         },
         `
         <div class="panel-header">
           <div class="panel-header-title">
-            <p class="title" id="probo-privacy-choices-title" style="margin:0" data-text="privacy_choices_title_ccpa" data-text-fallback="privacy_choices_title"></p>
+            <p class="title" id="trustready-privacy-choices-title" style="margin:0" data-text="privacy_choices_title_ccpa" data-text-fallback="privacy_choices_title"></p>
             <button class="panel-close" data-action="close-privacy-choices" data-aria-text="aria_close">
               ${CLOSE_ICON}
             </button>
           </div>
-          <p class="description" id="probo-privacy-choices-desc" data-text="privacy_choices_intro_ccpa" data-text-fallback="privacy_choices_intro"></p>
+          <p class="description" id="trustready-privacy-choices-desc" data-text="privacy_choices_intro_ccpa" data-text-fallback="privacy_choices_intro"></p>
         </div>
         <div class="privacy-choices-body">
           <section class="privacy-choices-section">
             <p class="privacy-choices-section-title" data-text="privacy_choices_sale_title_ccpa" data-text-fallback="privacy_choices_sale_title"></p>
             <p class="description" data-text="privacy_choices_sale_description_ccpa" data-text-fallback="privacy_choices_sale_description"></p>
             <div class="buttons">
-              <probo-reject-button><button class="btn" data-text="button_opt_out" data-text-fallback="button_reject_all"></button></probo-reject-button>
+              <trustready-reject-button><button class="btn" data-text="button_opt_out" data-text-fallback="button_reject_all"></button></trustready-reject-button>
             </div>
           </section>
           <section class="privacy-choices-section privacy-choices-section-spi">
@@ -77,7 +77,7 @@ export function renderOptOut(position: string): string {
           ${BRANDING}
         </div>`,
       )}
-    </probo-privacy-choices>`;
+    </trustready-privacy-choices>`;
 
   return banner + privacyChoices;
 }

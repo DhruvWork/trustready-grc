@@ -62,7 +62,7 @@ interactions:
         proto_minor: 1
         content_length: -1
         uncompressed: true
-        body: '{"value":[{"@odata.type":"#microsoft.graph.user","id":"22222222-2222-4222-8222-222222222222","displayName":"Alice Chen","mail":"alice@probo-azure.test","userPrincipalName":"alice@probo-azure.test","accountEnabled":true},{"@odata.type":"#microsoft.graph.group","id":"33333333-3333-4333-8333-333333333333","displayName":"Engineering","mail":"eng@probo-azure.test"},{"@odata.type":"#microsoft.graph.servicePrincipal","id":"44444444-4444-4444-8444-444444444444","displayName":"CI Deploy","accountEnabled":false},{"id":"55555555-5555-4555-8555-555555555555"}]}'
+        body: '{"value":[{"@odata.type":"#microsoft.graph.user","id":"22222222-2222-4222-8222-222222222222","displayName":"Alice Chen","mail":"alice@trustready-azure.test","userPrincipalName":"alice@trustready-azure.test","accountEnabled":true},{"@odata.type":"#microsoft.graph.group","id":"33333333-3333-4333-8333-333333333333","displayName":"Engineering","mail":"eng@trustready-azure.test"},{"@odata.type":"#microsoft.graph.servicePrincipal","id":"44444444-4444-4444-8444-444444444444","displayName":"CI Deploy","accountEnabled":false},{"id":"55555555-5555-4555-8555-555555555555"}]}'
         headers:
             Content-Type:
                 - application/json

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -112,7 +112,7 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 				MaxQueueSize:  b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACING_MAX_QUEUE_SIZE", 2048),
 			},
 		},
-		Probod: trustreadydconfig.Config{
+		TrustReadyd: trustreadydconfig.Config{
 			BaseURL:       b.resolver.getEnv("TRUSTREADYD_BASE_URL"),
 			EncryptionKey: b.resolver.getEnv("TRUSTREADYD_ENCRYPTION_KEY"),
 			ChromeDPAddr:  b.resolver.getEnv("TRUSTREADYD_CHROME_DP_ADDR"),
@@ -285,7 +285,7 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 						Temperature: new(b.resolver.getEnvFloatOrDefault("TRUSTREADYD_AGENT_DEFAULT_TEMPERATURE", 0.1)),
 						MaxTokens:   new(b.resolver.getEnvIntOrDefault("TRUSTREADYD_AGENT_DEFAULT_MAX_TOKENS", 4096)),
 					},
-					Probo: trustreadydconfig.LLMAgentConfig{
+					TrustReady: trustreadydconfig.LLMAgentConfig{
 						Provider:    b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_TRUSTREADY_PROVIDER", ""),
 						ModelName:   b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_TRUSTREADY_MODEL_NAME", ""),
 						Temperature: b.resolver.getEnvFloatPtr("TRUSTREADYD_AGENT_TRUSTREADY_TEMPERATURE"),
@@ -344,7 +344,7 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 			CustomDomains: trustreadydconfig.CustomDomainsConfig{
 				RenewalInterval:   b.resolver.getEnvIntOrDefault("TRUSTREADYD_CUSTOM_DOMAINS_RENEWAL_INTERVAL", 3600),
 				ProvisionInterval: b.resolver.getEnvIntOrDefault("TRUSTREADYD_CUSTOM_DOMAINS_PROVISION_INTERVAL", 30),
-				CnameTarget:       b.resolver.getEnvOrDefault("TRUSTREADYD_CUSTOM_DOMAINS_CNAME_TARGET", "custom.getprobo.com"),
+				CnameTarget:       b.resolver.getEnvOrDefault("TRUSTREADYD_CUSTOM_DOMAINS_CNAME_TARGET", "custom.trustready.io"),
 				ResolverAddr:      b.resolver.getEnv("TRUSTREADYD_CUSTOM_DOMAINS_RESOLVER_ADDR"),
 				CAAIssuerDomain:   b.resolver.getEnvOrDefault("TRUSTREADYD_CUSTOM_DOMAINS_CAA_ISSUER_DOMAIN", "letsencrypt.org"),
 				ACME: trustreadydconfig.ACMEConfig{
@@ -409,13 +409,13 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 		},
 	}
 
-	if err := validateCookieBannerTCFCmpID(cfg.Probod.CookieBanner.TCFCMPID); err != nil {
+	if err := validateCookieBannerTCFCmpID(cfg.TrustReadyd.CookieBanner.TCFCMPID); err != nil {
 		return nil, err
 	}
 
 	if slackClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_SLACK_CLIENT_ID"); slackClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "SLACK",
 				Protocol: "oauth2",
@@ -431,8 +431,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if hubspotClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_HUBSPOT_CLIENT_ID"); hubspotClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "HUBSPOT",
 				Protocol: "oauth2",
@@ -445,8 +445,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if docusignClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_DOCUSIGN_CLIENT_ID"); docusignClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "DOCUSIGN",
 				Protocol: "oauth2",
@@ -459,8 +459,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if notionClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_NOTION_CLIENT_ID"); notionClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "NOTION",
 				Protocol: "oauth2",
@@ -473,8 +473,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if githubClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_CLIENT_ID"); githubClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "GITHUB",
 				Protocol: "oauth2",
@@ -487,8 +487,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if githubAppID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_APP_ID"); githubAppID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "GITHUB",
 				Protocol: connector.ProtocolGitHubApp,
@@ -504,8 +504,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if sentryClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_SENTRY_CLIENT_ID"); sentryClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "SENTRY",
 				Protocol: "oauth2",
@@ -518,8 +518,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if intercomClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_INTERCOM_CLIENT_ID"); intercomClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "INTERCOM",
 				Protocol: "oauth2",
@@ -532,8 +532,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if brexClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_BREX_CLIENT_ID"); brexClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "BREX",
 				Protocol: "oauth2",
@@ -546,8 +546,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if googleWorkspaceClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_ID"); googleWorkspaceClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "GOOGLE_WORKSPACE",
 				Protocol: "oauth2",
@@ -560,8 +560,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if microsoft365ClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_MICROSOFT_365_CLIENT_ID"); microsoft365ClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "MICROSOFT_365",
 				Protocol: "oauth2",
@@ -598,8 +598,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 			continue
 		}
 
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: provider,
 				Protocol: "oauth2",
@@ -612,15 +612,15 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	}
 
 	if webhookSecret := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_LINEAR_SYNC_WEBHOOK_SECRET"); webhookSecret != "" {
-		for i := range cfg.Probod.Connectors {
-			if cfg.Probod.Connectors[i].Provider != "LINEAR_SYNC" {
+		for i := range cfg.TrustReadyd.Connectors {
+			if cfg.TrustReadyd.Connectors[i].Provider != "LINEAR_SYNC" {
 				continue
 			}
 
-			cfg.Probod.Connectors[i].RawSettings = map[string]any{
+			cfg.TrustReadyd.Connectors[i].RawSettings = map[string]any{
 				"webhook-secret": webhookSecret,
 			}
-			cfg.Probod.Connectors[i].Settings = map[string]any{
+			cfg.TrustReadyd.Connectors[i].Settings = map[string]any{
 				"webhook-secret": webhookSecret,
 			}
 		}
@@ -629,8 +629,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	// Vercel needs the operator-supplied integration slug to resolve the
 	// templated AuthURL ("https://vercel.com/integrations/{integration_slug}/new").
 	if vercelClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_VERCEL_CLIENT_ID"); vercelClientID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "VERCEL",
 				Protocol: "oauth2",
@@ -643,7 +643,7 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 		)
 	}
 
-	// Crisp is a ManagedAPIKey (Model B) connector: Probo holds one
+	// Crisp is a ManagedAPIKey (Model B) connector: TrustReady holds one
 	// Marketplace plugin token (the verbatim "identifier:key" pair) shared
 	// across all customer connections, and each connection carries only a
 	// Website ID. The plugin ID is a separate value (the token's Basic
@@ -658,8 +658,8 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 
 	crispPluginID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_CRISP_PLUGIN_ID")
 	if crispPluginToken != "" && crispPluginID != "" {
-		cfg.Probod.Connectors = append(
-			cfg.Probod.Connectors,
+		cfg.TrustReadyd.Connectors = append(
+			cfg.TrustReadyd.Connectors,
 			trustreadydconfig.ConnectorConfig{
 				Provider: "CRISP",
 				Protocol: "api_key",
@@ -676,13 +676,13 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 		return nil, err
 	}
 
-	cfg.Probod.ConnectorEndpoints = connectorEndpoints
+	cfg.TrustReadyd.ConnectorEndpoints = connectorEndpoints
 
 	if b.resolver.Err() != nil {
 		return nil, b.resolver.Err()
 	}
 
-	if err := cfg.Probod.Auth.Cookie.Validate(); err != nil {
+	if err := cfg.TrustReadyd.Auth.Cookie.Validate(); err != nil {
 		return nil, fmt.Errorf("cannot validate auth cookie config: %w", err)
 	}
 

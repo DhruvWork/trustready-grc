@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -45,7 +45,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
-const awsTestIssuerBase = "https://proboidentity.com"
+const awsTestIssuerBase = "https://trustreadyidentity.com"
 
 func awsTestIssuer(t *testing.T) *identityfederation.Issuer {
 	t.Helper()
@@ -100,7 +100,7 @@ func TestAWSRegistration(t *testing.T) {
 	require.True(t, ok)
 
 	assert.Equal(t, "Amazon Web Services", reg.DisplayName)
-	assert.Equal(t, "https://www.probo.com/docs/product/access-review/aws", reg.DocumentationURL)
+	assert.Equal(t, "https://www.trustready.io/docs/product/access-review/aws", reg.DocumentationURL)
 	assert.True(t, reg.SupportsWorkloadIdentity())
 	assert.False(t, reg.SupportsAPIKey())
 	assert.False(t, reg.IsManagedAPIKey())
@@ -126,7 +126,7 @@ func TestAWSNewNameResolver(t *testing.T) {
 	require.NotNil(t, reg.WorkloadIdentity.NewNameResolver)
 
 	conn := awsTestConnector(t, coredata.AWSConnectorSettings{
-		RoleARN: "arn:aws:iam::123456789012:role/ProboAudit",
+		RoleARN: "arn:aws:iam::123456789012:role/TrustReadyAudit",
 	})
 	logger := log.NewLogger(log.WithOutput(io.Discard))
 
@@ -199,7 +199,7 @@ func TestAWSNewDriver(t *testing.T) {
 		t.Parallel()
 
 		conn := awsTestConnector(t, coredata.AWSConnectorSettings{
-			RoleARN: "arn:aws:iam::123456789012:role/ProboAudit",
+			RoleARN: "arn:aws:iam::123456789012:role/TrustReadyAudit",
 		})
 
 		_, err := reg.WorkloadIdentity.NewDriver(
@@ -216,7 +216,7 @@ func TestAWSNewDriver(t *testing.T) {
 		t.Parallel()
 
 		conn := awsTestConnector(t, coredata.AWSConnectorSettings{
-			RoleARN: "arn:aws:iam::123456789012:role/ProboAudit",
+			RoleARN: "arn:aws:iam::123456789012:role/TrustReadyAudit",
 		})
 
 		session, err := reg.WorkloadIdentity.NewSession(context.Background(), awsTestIssuer(t), conn, "")
@@ -293,7 +293,7 @@ func TestAWSDiscoverAccounts_FallsBackToSessionAccount(t *testing.T) {
 	require.NotNil(t, reg.WorkloadIdentity.DiscoverAccounts)
 
 	conn := awsTestConnector(t, coredata.AWSConnectorSettings{
-		RoleARN: "arn:aws:iam::" + awsDiscoverAccountID + ":role/ProboAudit",
+		RoleARN: "arn:aws:iam::" + awsDiscoverAccountID + ":role/TrustReadyAudit",
 	})
 
 	cases := []struct {
@@ -330,7 +330,7 @@ func TestAWSDiscoverAccounts_ReturnsOtherOrganizationsErrors(t *testing.T) {
 	require.NotNil(t, reg.WorkloadIdentity.DiscoverAccounts)
 
 	conn := awsTestConnector(t, coredata.AWSConnectorSettings{
-		RoleARN: "arn:aws:iam::" + awsDiscoverAccountID + ":role/ProboAudit",
+		RoleARN: "arn:aws:iam::" + awsDiscoverAccountID + ":role/TrustReadyAudit",
 	})
 
 	_, err := reg.WorkloadIdentity.DiscoverAccounts(

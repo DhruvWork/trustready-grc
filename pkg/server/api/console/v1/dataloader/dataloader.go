@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 	"github.com/DhruvWork/trustready-grc/pkg/task"
@@ -127,7 +127,7 @@ type (
 	}
 
 	batchFetcher struct {
-		probo            *probo.Service
+		trustready            *trustready.Service
 		iam              *iam.Service
 		cookieBanner     *cookiebanner.Service
 		thirdParty       *thirdparty.Service
@@ -144,7 +144,7 @@ func FromContext(ctx context.Context) *Loaders {
 }
 
 func NewMiddleware(
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	iamSvc *iam.Service,
 	cookieBannerSvc *cookiebanner.Service,
 	thirdPartySvc *thirdparty.Service,
@@ -156,7 +156,7 @@ func NewMiddleware(
 		return http.HandlerFunc(
 			func(w http.ResponseWriter, r *http.Request) {
 				f := &batchFetcher{
-					probo:            proboSvc,
+					trustready:            trustreadySvc,
 					iam:              iamSvc,
 					cookieBanner:     cookieBannerSvc,
 					thirdParty:       thirdPartySvc,
@@ -488,7 +488,7 @@ func (f *batchFetcher) fetchCompliancePortalDocumentAccessesByFile(
 func (f *batchFetcher) fetchOrganizations(ctx context.Context, keys []gid.GID) (map[gid.GID]*coredata.Organization, error) {
 	scope := coredata.NewScopeFromObjectID(keys[0])
 
-	orgs, err := f.probo.Organizations.GetByIDs(ctx, scope, keys...)
+	orgs, err := f.trustready.Organizations.GetByIDs(ctx, scope, keys...)
 	if err != nil {
 		return nil, fmt.Errorf("cannot batch load organizations: %w", err)
 	}
@@ -504,7 +504,7 @@ func (f *batchFetcher) fetchOrganizations(ctx context.Context, keys []gid.GID) (
 func (f *batchFetcher) fetchFrameworks(ctx context.Context, keys []gid.GID) (map[gid.GID]*coredata.Framework, error) {
 	scope := coredata.NewScopeFromObjectID(keys[0])
 
-	frameworks, err := f.probo.Frameworks.GetByIDs(ctx, scope, keys...)
+	frameworks, err := f.trustready.Frameworks.GetByIDs(ctx, scope, keys...)
 	if err != nil {
 		return nil, fmt.Errorf("cannot batch load frameworks: %w", err)
 	}
@@ -520,7 +520,7 @@ func (f *batchFetcher) fetchFrameworks(ctx context.Context, keys []gid.GID) (map
 func (f *batchFetcher) fetchControls(ctx context.Context, keys []gid.GID) (map[gid.GID]*coredata.Control, error) {
 	scope := coredata.NewScopeFromObjectID(keys[0])
 
-	controls, err := f.probo.Controls.GetByIDs(ctx, scope, keys...)
+	controls, err := f.trustready.Controls.GetByIDs(ctx, scope, keys...)
 	if err != nil {
 		return nil, fmt.Errorf("cannot batch load controls: %w", err)
 	}
@@ -536,7 +536,7 @@ func (f *batchFetcher) fetchControls(ctx context.Context, keys []gid.GID) (map[g
 func (f *batchFetcher) fetchThirdParties(ctx context.Context, keys []gid.GID) (map[gid.GID]*coredata.ThirdParty, error) {
 	scope := coredata.NewScopeFromObjectID(keys[0])
 
-	thirdParties, err := f.probo.ThirdParties.GetByIDs(ctx, scope, keys...)
+	thirdParties, err := f.trustready.ThirdParties.GetByIDs(ctx, scope, keys...)
 	if err != nil {
 		return nil, fmt.Errorf("cannot batch load thirdParties: %w", err)
 	}
@@ -552,7 +552,7 @@ func (f *batchFetcher) fetchThirdParties(ctx context.Context, keys []gid.GID) (m
 func (f *batchFetcher) fetchDocuments(ctx context.Context, keys []gid.GID) (map[gid.GID]*coredata.Document, error) {
 	scope := coredata.NewScopeFromObjectID(keys[0])
 
-	documents, err := f.probo.Documents.GetByIDs(ctx, scope, keys...)
+	documents, err := f.trustready.Documents.GetByIDs(ctx, scope, keys...)
 	if err != nil {
 		return nil, fmt.Errorf("cannot batch load documents: %w", err)
 	}
@@ -601,7 +601,7 @@ func (f *batchFetcher) fetchIdentities(
 func (f *batchFetcher) fetchRisks(ctx context.Context, keys []gid.GID) (map[gid.GID]*coredata.Risk, error) {
 	scope := coredata.NewScopeFromObjectID(keys[0])
 
-	risks, err := f.probo.Risks.GetByIDs(ctx, scope, keys...)
+	risks, err := f.trustready.Risks.GetByIDs(ctx, scope, keys...)
 	if err != nil {
 		return nil, fmt.Errorf("cannot batch load risks: %w", err)
 	}
@@ -631,7 +631,7 @@ func (f *batchFetcher) fetchTreatmentProgress(
 func (f *batchFetcher) fetchMeasures(ctx context.Context, keys []gid.GID) (map[gid.GID]*coredata.Measure, error) {
 	scope := coredata.NewScopeFromObjectID(keys[0])
 
-	measures, err := f.probo.Measures.GetByIDs(ctx, scope, keys...)
+	measures, err := f.trustready.Measures.GetByIDs(ctx, scope, keys...)
 	if err != nil {
 		return nil, fmt.Errorf("cannot batch load measures: %w", err)
 	}
@@ -698,7 +698,7 @@ func (f *batchFetcher) fetchFiles(ctx context.Context, keys []gid.GID) (map[gid.
 	}
 
 	for tenantID, fileIDs := range fileIDsByTenant {
-		files, err := f.probo.Files.GetByIDs(ctx, coredata.NewScope(tenantID), fileIDs...)
+		files, err := f.trustready.Files.GetByIDs(ctx, coredata.NewScope(tenantID), fileIDs...)
 		if err != nil {
 			return nil, fmt.Errorf("cannot batch load files: %w", err)
 		}
@@ -774,7 +774,7 @@ func (f *batchFetcher) fetchCommonThirdParties(ctx context.Context, keys []gid.G
 func (f *batchFetcher) fetchThirdPartyAdministratorIDs(ctx context.Context, keys []gid.GID) (map[gid.GID][]gid.GID, error) {
 	scope := coredata.NewScopeFromObjectID(keys[0])
 
-	administratorIDsByThirdPartyID, err := f.probo.ThirdParties.MapAdministratorIDsForThirdPartyIDs(ctx, scope, keys)
+	administratorIDsByThirdPartyID, err := f.trustready.ThirdParties.MapAdministratorIDsForThirdPartyIDs(ctx, scope, keys)
 	if err != nil {
 		return nil, fmt.Errorf("cannot batch load third party administrator ids: %w", err)
 	}

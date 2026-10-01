@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +21,9 @@
 // Package aws vends read-only AWS credentials for a customer account by OIDC
 // web identity federation.
 //
-// Probo holds no AWS credential for any customer. It mints a short-lived
+// TrustReady holds no AWS credential for any customer. It mints a short-lived
 // assertion (pkg/identityfederation), calls sts:AssumeRoleWithWebIdentity, and
-// STS verifies the assertion against Probo's published JWKS before evaluating
+// STS verifies the assertion against TrustReady's published JWKS before evaluating
 // the customer's own trust policy. The customer revokes by deleting their role.
 package aws
 
@@ -66,9 +66,9 @@ const (
 	DefaultChinaRegion = "cn-north-1"
 
 	// roleSessionNamePrefix labels the assumed-role session in the customer's
-	// CloudTrail, so they can attribute every call to the Probo organization
+	// CloudTrail, so they can attribute every call to the TrustReady organization
 	// that made it. GID characters are all within the session-name charset.
-	roleSessionNamePrefix = "probo-"
+	roleSessionNamePrefix = "trustready-"
 )
 
 type (
@@ -156,7 +156,7 @@ func NewSession(
 
 	// AssumeRoleWithWebIdentity is the one STS call that takes no credential —
 	// the assertion is the credential. Signing it anonymously also keeps any
-	// ambient credentials in Probo's own environment out of the exchange.
+	// ambient credentials in TrustReady's own environment out of the exchange.
 	stsClient := sts.NewFromConfig(stsConfig)
 
 	provider := stscreds.NewWebIdentityRoleProvider(
@@ -208,7 +208,7 @@ func isLoopback(endpoint string) (bool, error) {
 
 // MemberRoleARN builds the IAM role ARN assumed in a member account of an
 // organization install. The partition comes from managementRoleARN, never
-// the literal "aws". memberRoleName defaults to ProboAudit when empty.
+// the literal "aws". memberRoleName defaults to TrustReadyAudit when empty.
 func MemberRoleARN(managementRoleARN, accountID, memberRoleName string) (string, error) {
 	parsedARN, err := arn.Parse(managementRoleARN)
 	if err != nil {

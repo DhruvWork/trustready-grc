@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -345,7 +345,7 @@ func TestClientWithOptions_AuthorizationCodeKeepsStoredToken(t *testing.T) {
 // TestClientWithOptions_ClientCredentialsRejectionIsProviderVerdict pins the
 // error TYPE, not just the failure. accessreview.IsProviderVerdict recognises
 // *oauth2.RetrieveError as the provider's answer; an untyped error here is
-// charged to Probo's error budget and logged at ERROR with full detail
+// charged to TrustReady's error budget and logged at ERROR with full detail
 // instead. An expired client secret is the first thing every
 // client-credentials customer hits, and Atlas forces one within 365 days.
 func TestClientWithOptions_ClientCredentialsRejectionIsProviderVerdict(t *testing.T) {
@@ -1109,7 +1109,7 @@ func TestInitiateWithState_PerSiteAuthURL(t *testing.T) {
 	c := &OAuth2Connector{
 		ClientID:            "cid",
 		ClientSecret:        "secret",
-		RedirectURI:         "https://probo.example/cb",
+		RedirectURI:         "https://trustready.example/cb",
 		RequiresPKCE:        true,
 		BuildAuthURLForSite: DatadogAuthorizeURL,
 	}
@@ -1177,7 +1177,7 @@ func TestCompleteWithState_PerDomainTokenURL(t *testing.T) {
 	c := &OAuth2Connector{
 		ClientID:     "cid",
 		ClientSecret: "secret",
-		RedirectURI:  "https://probo.example/cb",
+		RedirectURI:  "https://trustready.example/cb",
 		RequiresPKCE: true,
 		HTTPClient:   httpclient.DefaultClient(httpclient.WithSSRFProtection(), httpclient.WithSSRFAllowLoopback()),
 		BuildTokenURLForDomain: func(domain string) (string, error) {
@@ -1194,7 +1194,7 @@ func TestCompleteWithState_PerDomainTokenURL(t *testing.T) {
 	require.NoError(t, err)
 
 	req := httptest.NewRequest(http.MethodGet,
-		"https://probo.example/cb?code=abc&state="+state+"&domain=us3.datadoghq.com", nil)
+		"https://trustready.example/cb?code=abc&state="+state+"&domain=us3.datadoghq.com", nil)
 
 	conn, _, err := c.CompleteWithState(context.Background(), req)
 	require.NoError(t, err)
@@ -1211,7 +1211,7 @@ func TestCompleteWithState_MissingDomainForMultiSite(t *testing.T) {
 	c := &OAuth2Connector{
 		ClientID:               "cid",
 		ClientSecret:           "secret",
-		RedirectURI:            "https://probo.example/cb",
+		RedirectURI:            "https://trustready.example/cb",
 		HTTPClient:             httpclient.DefaultClient(httpclient.WithSSRFProtection(), httpclient.WithSSRFAllowLoopback()),
 		BuildTokenURLForDomain: func(string) (string, error) { return "", fmt.Errorf("unused") },
 	}
@@ -1221,7 +1221,7 @@ func TestCompleteWithState_MissingDomainForMultiSite(t *testing.T) {
 	require.NoError(t, err)
 
 	req := httptest.NewRequest(http.MethodGet,
-		"https://probo.example/cb?code=abc&state="+state, nil)
+		"https://trustready.example/cb?code=abc&state="+state, nil)
 
 	_, _, err = c.CompleteWithState(context.Background(), req)
 	require.Error(t, err)
@@ -1236,7 +1236,7 @@ func TestCompleteWithState_InvalidDomainRejected(t *testing.T) {
 	c := &OAuth2Connector{
 		ClientID:               "cid",
 		ClientSecret:           "secret",
-		RedirectURI:            "https://probo.example/cb",
+		RedirectURI:            "https://trustready.example/cb",
 		HTTPClient:             httpclient.DefaultClient(httpclient.WithSSRFProtection(), httpclient.WithSSRFAllowLoopback()),
 		BuildTokenURLForDomain: DatadogTokenURL,
 	}
@@ -1246,7 +1246,7 @@ func TestCompleteWithState_InvalidDomainRejected(t *testing.T) {
 	require.NoError(t, err)
 
 	req := httptest.NewRequest(http.MethodGet,
-		"https://probo.example/cb?code=abc&state="+state+"&domain=evil.example.com", nil)
+		"https://trustready.example/cb?code=abc&state="+state+"&domain=evil.example.com", nil)
 
 	_, _, err = c.CompleteWithState(context.Background(), req)
 	require.Error(t, err)
@@ -1262,7 +1262,7 @@ func TestInitiateWithState_PersistsSiteInState(t *testing.T) {
 	c := &OAuth2Connector{
 		ClientID:     "cid",
 		ClientSecret: "secret",
-		RedirectURI:  "https://probo.example/cb",
+		RedirectURI:  "https://trustready.example/cb",
 		BuildAuthURLForSite: func(site string) (string, error) {
 			return "https://" + site + ".zendesk.com/oauth/authorizations/new", nil
 		},
@@ -1302,7 +1302,7 @@ func TestCompleteWithState_PerSiteTokenURL(t *testing.T) {
 	c := &OAuth2Connector{
 		ClientID:     "cid",
 		ClientSecret: "secret",
-		RedirectURI:  "https://probo.example/cb",
+		RedirectURI:  "https://trustready.example/cb",
 		HTTPClient:   httpclient.DefaultClient(httpclient.WithSSRFProtection(), httpclient.WithSSRFAllowLoopback()),
 		BuildTokenURLForSite: func(site string) (string, error) {
 			if site != "acme" {
@@ -1318,7 +1318,7 @@ func TestCompleteWithState_PerSiteTokenURL(t *testing.T) {
 	require.NoError(t, err)
 
 	req := httptest.NewRequest(http.MethodGet,
-		"https://probo.example/cb?code=abc&state="+state, nil)
+		"https://trustready.example/cb?code=abc&state="+state, nil)
 
 	conn, _, err := c.CompleteWithState(context.Background(), req)
 	require.NoError(t, err)
@@ -1337,7 +1337,7 @@ func TestCompleteWithState_MissingSiteForSiteTokenURL(t *testing.T) {
 	c := &OAuth2Connector{
 		ClientID:             "cid",
 		ClientSecret:         "secret",
-		RedirectURI:          "https://probo.example/cb",
+		RedirectURI:          "https://trustready.example/cb",
 		HTTPClient:           httpclient.DefaultClient(httpclient.WithSSRFProtection(), httpclient.WithSSRFAllowLoopback()),
 		BuildTokenURLForSite: func(string) (string, error) { return "", fmt.Errorf("unused") },
 	}
@@ -1347,7 +1347,7 @@ func TestCompleteWithState_MissingSiteForSiteTokenURL(t *testing.T) {
 	require.NoError(t, err)
 
 	req := httptest.NewRequest(http.MethodGet,
-		"https://probo.example/cb?code=abc&state="+state, nil)
+		"https://trustready.example/cb?code=abc&state="+state, nil)
 
 	_, _, err = c.CompleteWithState(context.Background(), req)
 	require.Error(t, err)
@@ -1363,7 +1363,7 @@ func TestCompleteWithState_InvalidSiteRejected(t *testing.T) {
 	c := &OAuth2Connector{
 		ClientID:             "cid",
 		ClientSecret:         "secret",
-		RedirectURI:          "https://probo.example/cb",
+		RedirectURI:          "https://trustready.example/cb",
 		HTTPClient:           httpclient.DefaultClient(httpclient.WithSSRFProtection(), httpclient.WithSSRFAllowLoopback()),
 		BuildTokenURLForSite: ZendeskTokenURL,
 	}
@@ -1373,7 +1373,7 @@ func TestCompleteWithState_InvalidSiteRejected(t *testing.T) {
 	require.NoError(t, err)
 
 	req := httptest.NewRequest(http.MethodGet,
-		"https://probo.example/cb?code=abc&state="+state, nil)
+		"https://trustready.example/cb?code=abc&state="+state, nil)
 
 	_, _, err = c.CompleteWithState(context.Background(), req)
 	require.Error(t, err)
@@ -1529,7 +1529,7 @@ func TestCompleteWithState_PublicClientCIMD(t *testing.T) {
 	defer server.Close()
 
 	c := &OAuth2Connector{
-		ClientID:          "https://probo.example.com/api/console/v1/connectors/oauth-client-metadata",
+		ClientID:          "https://trustready.example.com/api/console/v1/connectors/oauth-client-metadata",
 		ClientSecret:      "", // public client: no secret
 		StateSigningKey:   "server-side-signing-key",
 		RedirectURI:       "https://example.com/cb",
@@ -1602,7 +1602,7 @@ func TestRefreshableClient_PublicClientOmitsSecret(t *testing.T) {
 	}
 
 	cfg := OAuth2RefreshConfig{
-		ClientID:          "https://probo.example.com/api/console/v1/connectors/oauth-client-metadata",
+		ClientID:          "https://trustready.example.com/api/console/v1/connectors/oauth-client-metadata",
 		ClientSecret:      "", // public client
 		TokenURL:          server.URL,
 		TokenEndpointAuth: "none",

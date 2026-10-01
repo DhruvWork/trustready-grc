@@ -9,21 +9,21 @@ import (
 	"context"
 	"errors"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // Organization is the resolver for the organization field.
 func (r *aiSystemResolver) Organization(ctx context.Context, obj *types.AiSystem) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -76,7 +76,7 @@ func (r *aiSystemResolver) Permission(ctx context.Context, obj *types.AiSystem, 
 
 // TotalCount is the resolver for the totalCount field.
 func (r *aiSystemConnectionResolver) TotalCount(ctx context.Context, obj *types.AiSystemConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionAiSystemList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionAiSystemList)
 	if err != nil {
 		return 0, err
 	}
@@ -93,7 +93,7 @@ func (r *aiSystemConnectionResolver) TotalCount(ctx context.Context, obj *types.
 
 	filter := coredata.NewAiSystemFilter(status, riskClassification)
 
-	count, err := r.probo.AiSystems.CountForOrganizationID(ctx, scope, obj.ParentID, filter)
+	count, err := r.trustready.AiSystems.CountForOrganizationID(ctx, scope, obj.ParentID, filter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot count ai systems", log.Error(err))
 		return 0, gqlutils.Internal(ctx)
@@ -104,14 +104,14 @@ func (r *aiSystemConnectionResolver) TotalCount(ctx context.Context, obj *types.
 
 // CreateAiSystem is the resolver for the createAiSystem field.
 func (r *mutationResolver) CreateAiSystem(ctx context.Context, input types.CreateAiSystemInput) (*types.CreateAiSystemPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionAiSystemCreate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionAiSystemCreate)
 	if err != nil {
 		return nil, err
 	}
 
 	riskClassification := input.RiskClassification
 
-	req := probo.CreateAiSystemRequest{
+	req := trustready.CreateAiSystemRequest{
 		OrganizationID:          input.OrganizationID,
 		Name:                    input.Name,
 		Version:                 input.Version,
@@ -132,7 +132,7 @@ func (r *mutationResolver) CreateAiSystem(ctx context.Context, input types.Creat
 		Notes:                   input.Notes,
 	}
 
-	aiSystem, err := r.probo.AiSystems.Create(ctx, scope, &req)
+	aiSystem, err := r.trustready.AiSystems.Create(ctx, scope, &req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -154,12 +154,12 @@ func (r *mutationResolver) CreateAiSystem(ctx context.Context, input types.Creat
 
 // UpdateAiSystem is the resolver for the updateAiSystem field.
 func (r *mutationResolver) UpdateAiSystem(ctx context.Context, input types.UpdateAiSystemInput) (*types.UpdateAiSystemPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionAiSystemUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionAiSystemUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.UpdateAiSystemRequest{
+	req := trustready.UpdateAiSystemRequest{
 		ID:                      input.ID,
 		Name:                    gqlutils.UnwrapOmittable(input.Name),
 		Version:                 gqlutils.UnwrapOmittable(input.Version),
@@ -180,7 +180,7 @@ func (r *mutationResolver) UpdateAiSystem(ctx context.Context, input types.Updat
 		Notes:                   gqlutils.UnwrapOmittable(input.Notes),
 	}
 
-	aiSystem, err := r.probo.AiSystems.Update(ctx, scope, &req)
+	aiSystem, err := r.trustready.AiSystems.Update(ctx, scope, &req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -202,12 +202,12 @@ func (r *mutationResolver) UpdateAiSystem(ctx context.Context, input types.Updat
 
 // DeleteAiSystem is the resolver for the deleteAiSystem field.
 func (r *mutationResolver) DeleteAiSystem(ctx context.Context, input types.DeleteAiSystemInput) (*types.DeleteAiSystemPayload, error) {
-	scope, err := r.authorize(ctx, input.AiSystemID, probo.ActionAiSystemDelete)
+	scope, err := r.authorize(ctx, input.AiSystemID, trustready.ActionAiSystemDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.AiSystems.Delete(ctx, scope, input.AiSystemID); err != nil {
+	if err := r.trustready.AiSystems.Delete(ctx, scope, input.AiSystemID); err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
 		}
@@ -224,12 +224,12 @@ func (r *mutationResolver) DeleteAiSystem(ctx context.Context, input types.Delet
 
 // PublishAiSystemList is the resolver for the publishAiSystemList field.
 func (r *mutationResolver) PublishAiSystemList(ctx context.Context, input types.PublishAiSystemListInput) (*types.PublishAiSystemListPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionAiSystemPublish)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionAiSystemPublish)
 	if err != nil {
 		return nil, err
 	}
 
-	document, documentVersion, err := r.probo.GeneratedDocuments.PublishAiSystemList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
+	document, documentVersion, err := r.trustready.GeneratedDocuments.PublishAiSystemList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceAlreadyExists) {
 			return nil, gqlutils.Conflict(ctx, err)

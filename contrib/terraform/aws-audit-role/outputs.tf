@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Probo Inc <hello@probo.com>.
+ * Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,12 @@
  */
 
 output "role_arn" {
-  value       = aws_iam_role.probo_audit.arn
-  description = "ARN of the role Probo assumes in this account."
+  value       = aws_iam_role.trustready_audit.arn
+  description = "ARN of the role TrustReady assumes in this account."
 }
 
 output "role_name" {
-  value       = aws_iam_role.probo_audit.name
+  value       = aws_iam_role.trustready_audit.name
   description = "Name of the role. Use the same name in every account."
 }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 
 import type { ConsentAction } from "./types";
 
-export const COOKIE_NAME = "probo_consent";
+export const COOKIE_NAME = "trustready_consent";
 const SECONDS_PER_DAY = 86400;
 
 export interface ConsentCookie {

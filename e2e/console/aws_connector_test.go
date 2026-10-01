@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,8 +35,8 @@ import (
 )
 
 const (
-	awsFixtureRoleARN = "arn:aws:iam::123456789012:role/ProboAudit"
-	awsSecondRoleARN  = "arn:aws:iam::111111111111:role/ProboAudit"
+	awsFixtureRoleARN = "arn:aws:iam::123456789012:role/TrustReadyAudit"
+	awsSecondRoleARN  = "arn:aws:iam::111111111111:role/TrustReadyAudit"
 )
 
 const awsConnectorSetupQuery = `
@@ -227,7 +227,7 @@ func TestCreateWorkloadIdentityConnector_InvalidRoleARN(t *testing.T) {
 	assert.NotContains(t, strings.ToLower(err.Error()), "arn:aws")
 }
 
-// A role Probo cannot assume is reported as DISCONNECTED rather than as an
+// A role TrustReady cannot assume is reported as DISCONNECTED rather than as an
 // error, so the response now travels to the client on the failure path too:
 // assert the redaction against the whole payload, not just an error message.
 func TestConnectorConnectionStatus_AssumeRoleFailure(t *testing.T) {

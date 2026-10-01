@@ -8,14 +8,14 @@ package console_v1
 import (
 	"context"
 
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 )
 
 // Logo is the resolver for the logo field.
 func (r *commonThirdPartyResolver) Logo(ctx context.Context, obj *types.CommonThirdParty) (*types.File, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionCommonThirdPartyGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionCommonThirdPartyGet); err != nil {
 		return nil, err
 	}
 

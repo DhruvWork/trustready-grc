@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,18 +21,18 @@
 // Injected into the themed-banner shadow so TCF can widen the preference
 // panel without changing the GDPR category layout.
 export const TCF_PANEL_STYLES = `<style>
-  probo-banner .tcf-disclosures {
+  trustready-banner .tcf-disclosures {
     display: flex;
     flex-direction: column;
     gap: 6px;
     margin: 0 0 16px;
   }
 
-  probo-banner .tcf-disclosures .description {
+  trustready-banner .tcf-disclosures .description {
     margin: 0;
   }
 
-  probo-preference-panel.tcf-panel .card {
+  trustready-preference-panel.tcf-panel .card {
     max-width: 720px;
   }
 

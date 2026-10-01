@@ -51,7 +51,7 @@ During provisioning, the sandbox automatically generates:
 - **`/etc/trustreadyd/config.yml`** — trustreadyd config with the VM IP as cookie domain, `secure: false`, and correct CORS origins
 - **`apps/console/.env`** and **`apps/compliance-portal/.env`** — `VITE_API_URL` pointing to the VM IP
 
-Probod config is at `/etc/trustreadyd/config.yml`.
+TrustReadyd config is at `/etc/trustreadyd/config.yml`.
 
 ### Custom environment variables
 
@@ -72,16 +72,16 @@ The sandbox provisions four systemd services:
 
 | Service                    | Description                                                | Starts on boot |
 | -------------------------- | ---------------------------------------------------------- | -------------- |
-| `probo-stack`              | Docker Compose stack (Postgres, SeaweedFS, Keycloak, etc.) | Yes            |
-| `trustreadyd`                   | Probo API server (depends on `probo-stack`)                | No             |
-| `probo-console`            | Console frontend dev server                                | No             |
-| `probo-compliance-portal`  | Compliance portal frontend dev server                     | No             |
+| `trustready-stack`              | Docker Compose stack (Postgres, SeaweedFS, Keycloak, etc.) | Yes            |
+| `trustreadyd`                   | TrustReady API server (depends on `trustready-stack`)                | No             |
+| `trustready-console`            | Console frontend dev server                                | No             |
+| `trustready-compliance-portal`  | Compliance portal frontend dev server                     | No             |
 
-`probo-stack` starts automatically when the VM boots. `trustreadyd`, `probo-console`, and `probo-compliance-portal` must be started manually after building.
+`trustready-stack` starts automatically when the VM boots. `trustreadyd`, `trustready-console`, and `trustready-compliance-portal` must be started manually after building.
 
 Manage them with `systemctl`:
 ```bash
-./contrib/lima/sandbox.sh exec -- sudo systemctl start trustreadyd probo-console probo-compliance-portal
+./contrib/lima/sandbox.sh exec -- sudo systemctl start trustreadyd trustready-console trustready-compliance-portal
 ./contrib/lima/sandbox.sh exec -- sudo systemctl stop trustreadyd
 ./contrib/lima/sandbox.sh exec -- sudo systemctl restart trustreadyd
 ./contrib/lima/sandbox.sh exec -- sudo systemctl status trustreadyd

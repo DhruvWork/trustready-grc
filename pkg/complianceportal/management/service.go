@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -35,7 +35,7 @@ const (
 	TitleMaxLength         = 1000
 	ContentMaxLength       = 5000
 	MemberCandidateLimit   = 20
-	DefaultNDAContactEmail = "security@probo.com"
+	DefaultNDAContactEmail = "security@trustready.io"
 )
 
 type (

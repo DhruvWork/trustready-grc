@@ -1,7 +1,7 @@
 # Agent skills (`packages/skills`)
 
 npm package [`@trustready/skills`](../../packages/skills) ships multi-agent
-compliance skills and agent plugin wiring powered by the Probo MCP API. It is an
+compliance skills and agent plugin wiring powered by the TrustReady MCP API. It is an
 [Agent Plugins 1.0.0](https://agent-plugins.org/) package, and also carries
 client-specific manifests for **Claude Code**, **Codex**, **OpenCode**, and
 **Cursor**. See [`COMPATIBILITY.md`](../../packages/skills/COMPATIBILITY.md).
@@ -20,12 +20,12 @@ A **skills package** bundling:
 | `agents/` | Optional specialized subagents |
 | `hooks/` | Optional event automation |
 
-Individual capabilities are namespaced under `probo`:
+Individual capabilities are namespaced under `trustready`:
 
-- Skills: `/probo:<skill-name>` (e.g. `/probo:open-source-compliance`,
-  `/probo:missing-signatures`, `/probo:access-review`)
-- Commands: `/probo:<command-name>` (e.g. `/probo:access-review`,
-  `/probo:missing-signatures`)
+- Skills: `/trustready:<skill-name>` (e.g. `/trustready:open-source-compliance`,
+  `/trustready:missing-signatures`, `/trustready:access-review`)
+- Commands: `/trustready:<command-name>` (e.g. `/trustready:access-review`,
+  `/trustready:missing-signatures`)
 
 Published to npm as `@trustready/skills`. Agent-specific manifests (`.claude-plugin/`,
 `.codex-plugin/`) ship inside the same package.
@@ -33,8 +33,8 @@ Published to npm as `@trustready/skills`. Agent-specific manifests (`.claude-plu
 ## Directory structure
 
 ```
-.claude-plugin/marketplace.json   # repo root — Claude catalog for getprobo/probo
-.agents/plugins/marketplace.json   # repo root — Codex catalog for getprobo/probo
+.claude-plugin/marketplace.json   # repo root — Claude catalog for trustready/trustready
+.agents/plugins/marketplace.json   # repo root — Codex catalog for trustready/trustready
 
 packages/skills/
   plugin.json             # Agent Plugins manifest (required, spec §5)
@@ -74,8 +74,8 @@ top-level field is a violation, and client-specific data belongs under
 | `$schema` | Required in both files; must be the canonical `…/schemas/1.0.0/{plugin,mcp}.schema.json` identifier, and the versions must match |
 | `name` | 1–64 chars, lowercase alphanumeric plus `-` and `.`, alphanumeric at both ends, no `--` or `..` |
 | Transports | `stdio`, `streamable-http`, `sse` — Claude's `http` keyword is not portable |
-| Remote URLs | Absolute, literal HTTPS, no userinfo or fragment. **No placeholder or env-var expansion**, so a self-hosted Probo URL cannot ship in the package |
-| `headers` | Visible package data — never put credentials there. Probo MCP is OAuth 2.0 only |
+| Remote URLs | Absolute, literal HTTPS, no userinfo or fragment. **No placeholder or env-var expansion**, so a self-hosted TrustReady URL cannot ship in the package |
+| `headers` | Visible package data — never put credentials there. TrustReady MCP is OAuth 2.0 only |
 | Skills | Immediate children of `skills/` containing `SKILL.md`; frontmatter `name` must match the directory name |
 
 ## Claude plugin.json rules
@@ -84,22 +84,22 @@ Claude Code validates its own manifest strictly. Common pitfalls:
 
 | Field | Expected type | Notes |
 | --- | --- | --- |
-| `name` | string | Skill namespace (`probo` → `/probo:open-source-compliance`) |
+| `name` | string | Skill namespace (`trustready` → `/trustready:open-source-compliance`) |
 | `repository` | string URL | **Not** the npm-style `{ type, url }` object |
 | `bugs` | string URL | **Not** the npm-style `{ url }` object |
 | `version` | string | Must match `package.json`; validation enforces it |
 
 Run `npm --workspace @trustready/skills run validate` before publishing.
 
-## Probo MCP configuration
+## TrustReady MCP configuration
 
 Both hosted instances ship as literal endpoints, in `mcp.json`
 (`streamable-http`) and mirrored in `.mcp.json` (`http`):
 
 | Server | Endpoint |
 | --- | --- |
-| `probo-us` | `https://us.probo.com/api/mcp/v1` |
-| `probo-eu` | `https://eu.probo.com/api/mcp/v1` |
+| `trustready-us` | `https://us.trustready.io/api/mcp/v1` |
+| `trustready-eu` | `https://eu.trustready.io/api/mcp/v1` |
 
 The MCP API is mounted at `<instance-root>/api/mcp/v1` (`/api` prefix included
 — `/mcp/v1` hits the console SPA). Self-hosted instances are added in the agent
@@ -107,7 +107,7 @@ because the spec forbids expansion in remote URLs.
 
 Authentication is OAuth 2.0 only, discovered from
 `/.well-known/oauth-protected-resource` on the instance root. Users complete
-sign-in via `/mcp` or `claude mcp login probo-us`. Do not document API keys or
+sign-in via `/mcp` or `claude mcp login trustready-us`. Do not document API keys or
 bearer tokens in the plugin config — a pre-set `Authorization` header prevents
 Claude Code from starting the OAuth flow.
 
@@ -121,7 +121,7 @@ Claude Code from starting the OAuth flow.
 ```bash
 npm --workspace @trustready/skills run validate
 claude --plugin-dir ./packages/skills
-/probo:<name>
+/trustready:<name>
 ```
 
 4. Update `packages/skills/CHANGELOG.md` under `## Unreleased`.
@@ -141,7 +141,7 @@ OpenCode load the same workflow. Reference docs live under
    `argument-hint`, `disable-model-invocation: true` when writes are involved).
 2. Add reference docs under `skills/<name>/references/`.
 3. Register paths in `scripts/validate.mjs`.
-4. Test: `/probo:<name> <args>` after `claude --plugin-dir ./packages/skills`.
+4. Test: `/trustready:<name> <args>` after `claude --plugin-dir ./packages/skills`.
 
 ## Distribution
 

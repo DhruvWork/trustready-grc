@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Probo Inc <hello@probo.com>.
+ * Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,44 +20,44 @@
  * SOFTWARE.
  */
 
-variable "probo_issuer_url" {
+variable "trustready_issuer_url" {
   type        = string
   description = <<-EOT
-    The issuer URL Probo mints its assertions under, unique to your Probo
+    The issuer URL TrustReady mints its assertions under, unique to your TrustReady
     organization. Copy it exactly: AWS compares it case-sensitively and the
     last path segment is a mixed-case identifier.
   EOT
 
   validation {
-    condition     = can(regex("^https://[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(/[A-Za-z0-9._~%-]+)*/?$", var.probo_issuer_url))
+    condition     = can(regex("^https://[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(/[A-Za-z0-9._~%-]+)*/?$", var.trustready_issuer_url))
     error_message = "The issuer must be an https:// URL with no port and no query string."
   }
 
   validation {
     # AWS rejects an OIDC provider URL longer than this.
-    condition     = length(var.probo_issuer_url) <= 255
+    condition     = length(var.trustready_issuer_url) <= 255
     error_message = "The issuer must be at most 255 characters."
   }
 }
 
-variable "probo_subject" {
+variable "trustready_subject" {
   type        = string
   description = <<-EOT
-    The subject claim Probo asserts, identifying your Probo organization. The
+    The subject claim TrustReady asserts, identifying your TrustReady organization. The
     role trusts this value and no other.
   EOT
 
   validation {
-    condition     = can(regex("^[A-Za-z0-9_-]+$", var.probo_subject))
-    error_message = "The subject must be the identifier Probo showed you."
+    condition     = can(regex("^[A-Za-z0-9_-]+$", var.trustready_subject))
+    error_message = "The subject must be the identifier TrustReady showed you."
   }
 }
 
 variable "role_name" {
   type        = string
-  default     = "ProboAudit"
+  default     = "TrustReadyAudit"
   description = <<-EOT
-    Name of the role Probo assumes. Use the same name in every account, and
+    Name of the role TrustReady assumes. Use the same name in every account, and
     record it on the connector if you change it.
   EOT
 
@@ -83,7 +83,7 @@ variable "grant_organizations_read" {
   type        = bool
   default     = false
   description = <<-EOT
-    Grant the Organizations reads Probo needs to enumerate the organization.
+    Grant the Organizations reads TrustReady needs to enumerate the organization.
     Set true for the management account (or the delegated administrator) and
     false for member accounts, which cannot make these calls at all.
   EOT

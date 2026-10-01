@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -73,7 +73,7 @@ func TestCassettesUseSyntheticEmails(t *testing.T) {
 		"linear.linear.app":      true,
 		"intercom.io":            true,
 		// Synthetic Entra tenant used in hand-authored Azure cassettes.
-		"probo-azure.test": true,
+		"trustready-azure.test": true,
 	}
 
 	matches, err := filepath.Glob("testdata/*.yaml")

@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -78,8 +78,8 @@ func DefaultPresenterConfig(baseURL string) PresenterConfig {
 		APIBaseURL:                      baseURL, // always API base URL
 		BaseURL:                         baseURL, // can change to custom domain when needed
 		PoweredByLogoPath:               brand.StaticPath(brand.PoweredByLogo),
-		SenderCompanyName:               "Probo",
-		SenderCompanyWebsiteURL:         "https://www.probo.com",
+		SenderCompanyName:               "TrustReady",
+		SenderCompanyWebsiteURL:         "https://www.trustready.io",
 		SenderCompanyLogoPath:           brand.StaticPath(brand.SenderCompanyLogo),
 		SenderCompanyHeadquarterAddress: "TrustReady, 490 Post St, STE 640, San Francisco, CA, 94102, US",
 	}
@@ -102,7 +102,7 @@ func NewPresenter(baseURL string, fullName string) *Presenter {
 const (
 	subjectConfirmEmail                           = "Confirm your email address"
 	subjectPasswordReset                          = "Reset your password"
-	subjectInvitation                             = "Invitation to join %s on Probo"
+	subjectInvitation                             = "Invitation to join %s on TrustReady"
 	subjectDocumentApproval                       = "Action Required – Please review and approve %s compliance documents"
 	subjectDocumentSigning                        = "Action Required – Please review and sign %s compliance documents"
 	subjectDocumentExport                         = "Your document export is ready"

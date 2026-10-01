@@ -84,7 +84,7 @@
       "linked": "Tâche liée à Linear.",
       "confirmLink": {
         "title": "Lier l'issue Linear",
-        "description": "Cela mettra à jour la tâche Probo avec l'issue Linear."
+        "description": "Cela mettra à jour la tâche TrustReady avec l'issue Linear."
       },
       "unlinked": "Issue Linear dissociée.",
       "errors": {

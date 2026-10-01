@@ -151,7 +151,7 @@ import (
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	complianceportal_v1 "github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1"
 )
 ```

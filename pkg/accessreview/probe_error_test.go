@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -103,7 +103,7 @@ func TestProbeFailureCodeIsSafeToLog(t *testing.T) {
 	awsCode := accessreview.ProbeFailureCode(
 		fmt.Errorf("cannot reach aws account: %w", &smithy.GenericAPIError{
 			Code:    "AccessDenied",
-			Message: "User: arn:aws:sts::123456789012:assumed-role/probo is not authorized",
+			Message: "User: arn:aws:sts::123456789012:assumed-role/trustready is not authorized",
 		}),
 	)
 	assert.Equal(t, "aws_AccessDenied", awsCode)
@@ -194,13 +194,13 @@ func TestIsProviderVerdict(t *testing.T) {
 	assert.True(t, accessreview.IsProviderVerdict(&url.Error{Op: "Get", URL: "https://x.example", Err: errors.New("refused")}))
 	assert.True(t, accessreview.IsProviderVerdict(&oauth2.RetrieveError{ErrorCode: "invalid_grant"}))
 	// A workload identity connector is answered by STS through the SDK, so an
-	// AWS API error is the provider's verdict, not a Probo failure.
+	// AWS API error is the provider's verdict, not a TrustReady failure.
 	assert.True(t, accessreview.IsProviderVerdict(fmt.Errorf("cannot reach aws account: %w", &smithy.GenericAPIError{Code: "AccessDenied", Message: "not authorized"})))
 	assert.True(t, accessreview.IsProviderVerdict(gcpImpersonationDenied(http.StatusForbidden, "forbidden")))
 	assert.True(t, accessreview.IsProviderVerdict(gcpImpersonationDenied(http.StatusBadRequest, "")))
 	assert.False(t, accessreview.IsProviderVerdict(gcpImpersonationDenied(http.StatusInternalServerError, "")))
 
-	// Probo never got as far as asking. Defaulting these to "ours" keeps a
+	// TrustReady never got as far as asking. Defaulting these to "ours" keeps a
 	// settings decode or a request we could not build in the error budget,
 	// with its message, instead of being blamed on the customer's credential.
 	assert.False(t, accessreview.IsProviderVerdict(errors.New("cannot read crisp connector settings: unexpected end of JSON input")))

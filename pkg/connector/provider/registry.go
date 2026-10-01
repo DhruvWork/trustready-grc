@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -51,12 +51,12 @@ import (
 type Registry struct {
 	mu        sync.RWMutex
 	providers map[coredata.ConnectorProvider]*Registration
-	// managedAPIKeys holds the Probo-supplied API key for providers with
+	// managedAPIKeys holds the TrustReady-supplied API key for providers with
 	// ManagedAPIKey registrations (e.g. Crisp's marketplace plugin token).
 	// Populated by trustreadyd from bootstrap config via SetManagedAPIKey; empty
 	// until the operator configures the credential.
 	managedAPIKeys map[coredata.ConnectorProvider]string
-	// managedResourceIDs holds an optional Probo-supplied resource identifier
+	// managedResourceIDs holds an optional TrustReady-supplied resource identifier
 	// for a ManagedAPIKey provider, distinct from the credential. Crisp needs
 	// it: the plugin token's Basic identifier is not the plugin ID, yet the
 	// per-website plugin API (used for ownership verification) requires the
@@ -118,7 +118,7 @@ func (r *Registry) Register(reg *Registration) error {
 		}
 	}
 
-	// A key format describes what the customer pastes, so a Probo-held key has
+	// A key format describes what the customer pastes, so a TrustReady-held key has
 	// nothing to describe; a pattern not written with a leading ^ would pass a
 	// key with anything in front of it, since ValidateAPIKey matches
 	// unanchored; and an example its own pattern rejects would tell the
@@ -152,7 +152,7 @@ func (r *Registry) Register(reg *Registration) error {
 		return fmt.Errorf("cannot register connector provider %q: CheckSettings needs a Probe closure and ExtraSettings", reg.Provider)
 	}
 
-	// A Probo-held key ignores any customer credential, so pairing it with the
+	// A TrustReady-held key ignores any customer credential, so pairing it with the
 	// client-credentials path would advertise a credential field whose value is
 	// silently discarded. Its former conflict with a customer-supplied API key
 	// is now unrepresentable: Managed is a variant of the one API-key path.
@@ -169,11 +169,11 @@ func (r *Registry) Register(reg *Registration) error {
 	}
 
 	// A workload identity provider holds no credential, so the customer never
-	// supplies one and Probo never injects one. Pairing it with a
+	// supplies one and TrustReady never injects one. Pairing it with a
 	// credential-bearing path would advertise a credential field the driver
 	// cannot reach — the same silent-winner class rejected above.
 	// Note APIKey != nil rather than SupportsAPIKey(), which answers the
-	// narrower "does the customer paste a key": a Probo-held key conflicts with
+	// narrower "does the customer paste a key": a TrustReady-held key conflicts with
 	// workload identity just as much as a customer-pasted one.
 	if reg.SupportsWorkloadIdentity() &&
 		(reg.APIKey != nil || reg.SupportsClientCredentials()) {
@@ -290,7 +290,7 @@ func (r *Registry) Register(reg *Registration) error {
 
 		// url.Parse accepts a relative reference and any scheme, so parsing
 		// alone would let a hostless or javascript: template through and the
-		// initiate handler would redirect the customer to Probo's own origin,
+		// initiate handler would redirect the customer to TrustReady's own origin,
 		// or worse. The destination is a vendor's install page; it is always
 		// absolute and always https.
 		//
@@ -311,8 +311,8 @@ func (r *Registry) Register(reg *Registration) error {
 			return fmt.Errorf("cannot register connector provider %q: Install has no dialog to collect APIKey.ExtraSettings", reg.Provider)
 		}
 
-		// The ceremony yields a tenant id bound to Probo's own app credential,
-		// so the provider must hold a Probo-supplied key and the app id the
+		// The ceremony yields a tenant id bound to TrustReady's own app credential,
+		// so the provider must hold a TrustReady-supplied key and the app id the
 		// initiate URL interpolates. A customer-pasted key would have nothing
 		// to verify against, and the console would offer both a redirect and a
 		// key dialog.
@@ -459,7 +459,7 @@ func (r *Registry) NewAPIKeyConnection(
 }
 
 // InstallURL builds the vendor page the customer is sent to in order to install
-// Probo's app, interpolating this deployment's app id (Crisp's plugin ID) into
+// TrustReady's app, interpolating this deployment's app id (Crisp's plugin ID) into
 // Endpoints.Install and attaching the signed state under the provider's own
 // echo parameter. The app id comes from operator config, never from a request,
 // which is what makes interpolating it straight into the URL safe.
@@ -504,7 +504,7 @@ func (r *Registry) InstallURL(p coredata.ConnectorProvider, state string) (strin
 
 // ValidateAPIKey checks a customer-pasted key against the shape its provider
 // declares, if it declares one. A provider with no KeyFormat, or one whose key
-// Probo supplies itself, accepts anything here and lets the connection check
+// TrustReady supplies itself, accepts anything here and lets the connection check
 // be the judge. The error reaches the customer, so it names the expected shape
 // and never the key.
 func (r *Registry) ValidateAPIKey(p coredata.ConnectorProvider, key string) error {
@@ -524,7 +524,7 @@ func (r *Registry) ValidateAPIKey(p coredata.ConnectorProvider, key string) erro
 	return nil
 }
 
-// SetManagedAPIKey records the Probo-supplied API key for a
+// SetManagedAPIKey records the TrustReady-supplied API key for a
 // ManagedAPIKey provider (e.g. Crisp). trustreadyd calls this from bootstrap
 // config so the create-connector resolver can inject the key and the
 // driver catalog can surface the provider. An empty key is treated as
@@ -540,7 +540,7 @@ func (r *Registry) SetManagedAPIKey(p coredata.ConnectorProvider, key string) {
 	r.managedAPIKeys[p] = key
 }
 
-// ManagedAPIKey returns the Probo-supplied API key configured for a
+// ManagedAPIKey returns the TrustReady-supplied API key configured for a
 // ManagedAPIKey provider and whether one is set. The boolean is false
 // (and the string empty) until the operator configures the credential
 // via bootstrap, which is what keeps such a provider deactivated.
@@ -553,7 +553,7 @@ func (r *Registry) ManagedAPIKey(p coredata.ConnectorProvider) (string, bool) {
 	return key, ok
 }
 
-// SetManagedResourceID records an optional Probo-supplied resource
+// SetManagedResourceID records an optional TrustReady-supplied resource
 // identifier for a ManagedAPIKey provider (e.g. the Crisp plugin ID used
 // by the per-website plugin API). trustreadyd calls this from bootstrap config
 // alongside SetManagedAPIKey. An empty id is treated as "not configured":
@@ -569,7 +569,7 @@ func (r *Registry) SetManagedResourceID(p coredata.ConnectorProvider, id string)
 	r.managedResourceIDs[p] = id
 }
 
-// ManagedResourceID returns the Probo-supplied resource identifier
+// ManagedResourceID returns the TrustReady-supplied resource identifier
 // configured for a ManagedAPIKey provider and whether one is set. The
 // boolean is false (and the string empty) until the operator configures it
 // via bootstrap.
@@ -583,7 +583,7 @@ func (r *Registry) ManagedResourceID(p coredata.ConnectorProvider) (string, bool
 }
 
 // ManagedConnectorReady reports whether a ManagedAPIKey provider is fully
-// configured for this deployment: its Probo-held key is set and, when the
+// configured for this deployment: its TrustReady-held key is set and, when the
 // provider also requires a resource ID (RequiresManagedResourceID, e.g. the
 // Crisp plugin ID), that is set too. A provider that is not ready is kept out
 // of the driver catalog, since connecting it would fail at verify time. It is

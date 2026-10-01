@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,14 +37,14 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/connector"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/saferedirect"
 )
 
 func handleConnectorComplete(
 	logger *log.Logger,
 	baseURL *baseurl.BaseURL,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	accessReviewSvc *accessreview.Service,
 	connectorRegistry *connector.Registry,
 	safeRedirect *saferedirect.SafeRedirect,
@@ -94,7 +94,7 @@ func handleConnectorComplete(
 			r,
 			logger,
 			baseURL,
-			proboSvc,
+			trustreadySvc,
 			accessReviewSvc,
 			safeRedirect,
 			completion,
@@ -107,7 +107,7 @@ func handleConnectorComplete(
 func handleConnectorGitHubAppComplete(
 	logger *log.Logger,
 	baseURL *baseurl.BaseURL,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	accessReviewSvc *accessreview.Service,
 	connectorRegistry *connector.Registry,
 	safeRedirect *saferedirect.SafeRedirect,
@@ -150,7 +150,7 @@ func handleConnectorGitHubAppComplete(
 			r,
 			logger,
 			baseURL,
-			proboSvc,
+			trustreadySvc,
 			accessReviewSvc,
 			safeRedirect,
 			completion,
@@ -326,7 +326,7 @@ func finishConnectorCompletion(
 	r *http.Request,
 	logger *log.Logger,
 	baseURL *baseurl.BaseURL,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	accessReviewSvc *accessreview.Service,
 	safeRedirect *saferedirect.SafeRedirect,
 	completion *connector.CompletionState,
@@ -384,10 +384,10 @@ func finishConnectorCompletion(
 			return
 		}
 
-		cnnctr, err = proboSvc.Connectors.Reconnect(
+		cnnctr, err = trustreadySvc.Connectors.Reconnect(
 			r.Context(),
 			scope,
-			probo.ReconnectConnectorRequest{
+			trustready.ReconnectConnectorRequest{
 				ConnectorID:    connectorID,
 				OrganizationID: organizationID,
 				Provider:       connectorProvider,
@@ -409,7 +409,7 @@ func finishConnectorCompletion(
 		// The source referencing this connector is created by the
 		// console after the redirect; a flow abandoned in between
 		// strands the connector row.
-		createReq := probo.CreateConnectorRequest{
+		createReq := trustready.CreateConnectorRequest{
 			OrganizationID: organizationID,
 			Provider:       connectorProvider,
 			Protocol:       coredata.ConnectorProtocol(connection.Type()),
@@ -447,7 +447,7 @@ func finishConnectorCompletion(
 			createReq.RawSettings = rawSettings
 		}
 
-		cnnctr, err = proboSvc.Connectors.Create(r.Context(), scope, createReq)
+		cnnctr, err = trustreadySvc.Connectors.Create(r.Context(), scope, createReq)
 		if err != nil {
 			logger.ErrorCtx(r.Context(), "cannot create connector", log.Error(err))
 			httpserver.RenderError(w, http.StatusInternalServerError, fmt.Errorf("internal error"))

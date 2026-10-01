@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,13 +35,13 @@ import (
 )
 
 const (
-	DefaultCloudFormationTemplateURL = "https://probo-cloudformation-template.s3.us-east-2.amazonaws.com/aws-audit-role.yaml"
-	DefaultTerraformModuleSource     = "getprobo/audit-role/aws"
+	DefaultCloudFormationTemplateURL = "https://trustready-cloudformation-template.s3.us-east-2.amazonaws.com/aws-audit-role.yaml"
+	DefaultTerraformModuleSource     = "trustready/audit-role/aws"
 
 	cloudFormationConsoleHost   = "us-east-1.console.aws.amazon.com"
 	cloudFormationConsolePath   = "/cloudformation/home"
 	cloudFormationConsoleRegion = "us-east-1"
-	cloudFormationStackName     = "probo-audit"
+	cloudFormationStackName     = "trustready-audit"
 )
 
 var (
@@ -69,7 +69,7 @@ type (
 		TerraformModuleSource     string
 	}
 
-	// ConnectorSetupInput is what BuildConnectorSetup needs. Every Probo-derived
+	// ConnectorSetupInput is what BuildConnectorSetup needs. Every TrustReady-derived
 	// string is supplied already resolved so this function never talks to config
 	// or an issuer.
 	ConnectorSetupInput struct {
@@ -178,14 +178,14 @@ func terraformSnippet(moduleSource, issuerURL, subject string) string {
 	}
 
 	var b strings.Builder
-	b.WriteString("module \"probo_audit\" {\n")
+	b.WriteString("module \"trustready_audit\" {\n")
 	b.WriteString("  source = ")
 	b.WriteString(strconv.Quote(moduleSource))
 	b.WriteString("\n\n")
-	b.WriteString("  probo_issuer_url = ")
+	b.WriteString("  trustready_issuer_url = ")
 	b.WriteString(strconv.Quote(issuerURL))
 	b.WriteString("\n")
-	b.WriteString("  probo_subject    = ")
+	b.WriteString("  trustready_subject    = ")
 	b.WriteString(strconv.Quote(subject))
 	b.WriteString("\n")
 	b.WriteString("  role_name        = ")
@@ -214,8 +214,8 @@ func cloudFormationQuickCreateURL(templateURL, issuerURL, subject string) (strin
 	fragmentQuery := url.Values{}
 	fragmentQuery.Set("templateURL", templateURL)
 	fragmentQuery.Set("stackName", cloudFormationStackName)
-	fragmentQuery.Set("param_ProboIssuerURL", issuerURL)
-	fragmentQuery.Set("param_ProboSubject", subject)
+	fragmentQuery.Set("param_TrustReadyIssuerURL", issuerURL)
+	fragmentQuery.Set("param_TrustReadySubject", subject)
 	fragmentQuery.Set("param_RoleName", coredata.DefaultAWSRoleName)
 
 	withFragment, err := url.Parse(consoleURL.String() + "#" + "/stacks/quickcreate?" + fragmentQuery.Encode())

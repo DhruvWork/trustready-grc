@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,8 +36,8 @@ import (
 const (
 	DefaultHTTPTimeout = 30 * time.Second
 
-	// CLIClientID is the well-known OAuth2 client ID for the Probo CLI,
-	// pre-provisioned in every Probo database via migration.
+	// CLIClientID is the well-known OAuth2 client ID for the TrustReady CLI,
+	// pre-provisioned in every TrustReady database via migration.
 	CLIClientID = "AAAAAAAAAAAASwAAAAAAAAAAcHJiY2xp"
 
 	// CLIClientScopes is the space-separated scope string requested at prb login.

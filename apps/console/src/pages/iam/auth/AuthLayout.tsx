@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import { Card } from "@trustready/ui/src/v2/Card/Card";
-import { ProboLogo } from "@trustready/ui/src/v2/ProboLogo/ProboLogo";
+import { TrustReadyLogo } from "@trustready/ui/src/v2/TrustReadyLogo/TrustReadyLogo";
 import type { PropsWithChildren } from "react";
 import { Outlet, useSearchParams } from "react-router";
 
@@ -39,7 +39,7 @@ export default function AuthLayout(props: PropsWithChildren) {
       <div className={slots.column()}>
         {!isAuthorizeFlow && (
           <div className={slots.header()}>
-            <ProboLogo className="h-6 w-auto text-sand-12" />
+            <TrustReadyLogo className="h-6 w-auto text-sand-12" />
           </div>
         )}
         <div className={slots.stack()}>

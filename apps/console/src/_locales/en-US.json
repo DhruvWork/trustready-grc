@@ -1256,7 +1256,7 @@
     },
     "messages": { "created": "Account created successfully" },
     "errors": { "failed": "Sign up failed" },
-    "unavailable": { "title": "Registration unavailable", "description": "New account registration is currently disabled. Please contact your administrator or reach out to Probo for assistance." },
+    "unavailable": { "title": "Registration unavailable", "description": "New account registration is currently disabled. Please contact your administrator or reach out to TrustReady for assistance." },
     "fields": { "fullName": "Full Name", "fullNamePlaceholder": "John Doe", "email": "Email", "emailPlaceholder": "name@example.com", "password": "Password" },
     "actions": { "backToLogin": "Back to login", "creating": "Creating account...", "signUpWithEmail": "Sign up with email", "logIn": "Log in here", "resend": "Resend confirmation email" }
   },
@@ -1291,7 +1291,7 @@
     "title": "Sign in to your account",
     "authorize": { "title": "Sign in to continue", "titleWithClient": "Sign in to {{name}}", "description": "Use your email or a connected account to continue" },
     "or": "Or",
-    "newToProbo": "New to Probo?",
+    "newToTrustReady": "New to TrustReady?",
     "actions": { "usePassword": "Use a password", "createAccount": "Create account" }
   },
   "oidcButton": { "signInWith": "Sign in with {{provider}}" },
@@ -1331,7 +1331,7 @@
     "pageTitle": "New OAuth token",
     "breadcrumb": "New token",
     "title": "New OAuth token",
-    "description": "Create a bearer token with scoped access to the Probo API.",
+    "description": "Create a bearer token with scoped access to the TrustReady API.",
     "messages": { "created": "OAuth token created successfully." },
     "errors": { "create": "Failed to create OAuth token" },
     "fields": { "name": "Name", "expiration": "Expiration", "scopes": "Scopes" },
@@ -1512,7 +1512,7 @@
     "searchPlaceholder": "Search users...",
     "contract": { "range": "{{start}} – {{end}}", "empty": "—" },
     "created": "Created {{date}}",
-    "filters": { "allStatuses": "All statuses", "status": "Status", "pending": "Pending", "active": "Active", "deactivated": "Deactivated", "allRoles": "All roles", "allTypes": "All user types", "role": "Probo role", "type": "User type" }
+    "filters": { "allStatuses": "All statuses", "status": "Status", "pending": "Pending", "active": "Active", "deactivated": "Deactivated", "allRoles": "All roles", "allTypes": "All user types", "role": "TrustReady role", "type": "User type" }
   },
   "userListItem": {
     "messages": { "invitationSent": "Invitation sent successfully", "deactivated": "User deactivated successfully", "removed": "User removed successfully", "roleUpdated": "Role updated" },
@@ -1527,7 +1527,7 @@
     "fields": {
       "fullName": "Full name",
       "emailAddress": "Email address",
-      "role": "Probo role",
+      "role": "TrustReady role",
       "type": "User type",
       "position": "Position",
       "positionPlaceholder": "e.g. CEO, CFO, etc.",
@@ -1608,11 +1608,11 @@
   "slackBotSettingsPage": {
     "title": "SlackBot",
     "connectionTitle": "Slack",
-    "emptyDescription": "Install the Probo Slack app to receive notifications",
-    "installed": "The Probo Slack app is installed",
-    "uninstallConfirmation": "Uninstall the Probo Slack app? Probo will stop receiving Slack events and sending notifications to this workspace.",
-    "messages": { "uninstalled": "The Probo Slack app was uninstalled" },
-    "errors": { "uninstall": "Failed to uninstall the Probo Slack app" },
+    "emptyDescription": "Install the TrustReady Slack app to receive notifications",
+    "installed": "The TrustReady Slack app is installed",
+    "uninstallConfirmation": "Uninstall the TrustReady Slack app? TrustReady will stop receiving Slack events and sending notifications to this workspace.",
+    "messages": { "uninstalled": "The TrustReady Slack app was uninstalled" },
+    "errors": { "uninstall": "Failed to uninstall the TrustReady Slack app" },
     "actions": { "install": "Install", "configure": "Configure", "uninstall": "Uninstall", "uninstalling": "Uninstalling..." }
   },
   "editSamlConfigurationForm": {
@@ -1781,17 +1781,17 @@
     "organizations": {
       "empty": {
         "title": "{{provider}} returned no organizations",
-        "description": "The organization may not have approved Probo's access yet, or the connected account may be a personal account rather than an organization. Entering a slug below only works once Probo has access.",
-        "remediation": "Review Probo's access",
+        "description": "The organization may not have approved TrustReady's access yet, or the connected account may be a personal account rather than an organization. Entering a slug below only works once TrustReady has access.",
+        "remediation": "Review TrustReady's access",
         "manualLabel": "Enter the organization slug manually"
       },
       "unavailable": {
         "reconnectTitle": "{{provider}} is disconnected",
         "credentialsTitle": "{{provider}} credentials are invalid",
         "reconnectDescription": "Reconnect this source to restore access to organizations.",
-        "credentialsDescription": "Probo cannot read this source with the current credentials. Check the credentials and the permissions they carry on {{provider}}.",
+        "credentialsDescription": "TrustReady cannot read this source with the current credentials. Check the credentials and the permissions they carry on {{provider}}.",
         "notAuthorizedTitle": "{{provider}} refused this request",
-        "notAuthorizedDescription": "{{provider}} accepted the credential but refused the request Probo made. Check the settings entered for this source, the permissions this credential has on {{provider}}, and whether your plan includes the API Probo uses."
+        "notAuthorizedDescription": "{{provider}} accepted the credential but refused the request TrustReady made. Check the settings entered for this source, the permissions this credential has on {{provider}}, and whether your plan includes the API TrustReady uses."
       }
     }
   },
@@ -1919,7 +1919,7 @@
       "issuer": "Issuer",
       "audience": "Audience",
       "subject": "Subject",
-      "roleArnHelp": "e.g. arn:aws:iam::123456789012:role/ProboAudit"
+      "roleArnHelp": "e.g. arn:aws:iam::123456789012:role/TrustReadyAudit"
     },
     "messages": {
       "copyFailed": "Copy failed",
@@ -1935,7 +1935,7 @@
     "errors": {
       "roleArn": "Enter a valid IAM role ARN.",
       "create": "Could not create the connector. Check the role ARN and try again.",
-      "disconnected": "Probo could not assume the audit role. Confirm the stack is deployed in this account and that the issuer and subject match the values shown during setup.",
+      "disconnected": "TrustReady could not assume the audit role. Confirm the stack is deployed in this account and that the issuer and subject match the values shown during setup.",
       "delete": "Could not delete the connector. Try again.",
       "source": "Failed to create access source",
       "copy": "Copy the value manually."
@@ -3297,7 +3297,7 @@
   },
   "devices": {
     "title": "Devices",
-    "description": "Manage computers enrolled with the Probo posture agent.",
+    "description": "Manage computers enrolled with the TrustReady posture agent.",
     "empty": "No devices enrolled yet",
     "actions": { "add": "Add device", "new": "New device", "reassign": "Re-assign", "revoke": "Revoke", "delete": "Delete" },
     "fields": { "organization": "Organization", "hostname": "Hostname", "owner": "Owner", "state": "State", "platform": "Platform", "osVersion": "OS version", "hardwareUuid": "Hardware UUID", "serialNumber": "Serial number", "agentVersion": "Agent version", "enrolledAt": "Enrolled at", "lastSeen": "Last seen" },

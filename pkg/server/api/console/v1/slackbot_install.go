@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 	"github.com/DhruvWork/trustready-grc/pkg/saferedirect"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
@@ -67,7 +67,7 @@ func handleSlackbotInstallInitiate(
 				Principal: identity.ID,
 				Resource:  organizationID,
 				Session:   &session.ID,
-				Action:    probo.ActionConnectorInitiate,
+				Action:    trustready.ActionConnectorInitiate,
 			},
 		); err != nil {
 			httpserver.RenderError(w, http.StatusForbidden, err)

@@ -1,7 +1,7 @@
-# Portal mechanics: creating and updating commitments via the Probo MCP
+# Portal mechanics: creating and updating commitments via the TrustReady MCP
 
-Read this before making any write call. All tool names below are Probo MCP tools; the server prefix
-varies by environment (there may be more than one Probo server, e.g. US and EU). Use the server whose
+Read this before making any write call. All tool names below are TrustReady MCP tools; the server prefix
+varies by environment (there may be more than one TrustReady server, e.g. US and EU). Use the server whose
 `listOrganizations` returns the target organization.
 
 ## Tool sequence
@@ -67,7 +67,7 @@ Sensible mappings:
 
 - **`insufficient scope`.** The connected MCP token may be read-only for the compliance portal, or may not yet
   have commitment write scope at all. If creates fail with `insufficient scope`, nothing was written.
-  Tell the user to re-authorize / refresh the Probo MCP connection with compliance-portal write scope, then
+  Tell the user to re-authorize / refresh the TrustReady MCP connection with compliance-portal write scope, then
   retry the same batch. Do not keep retrying the identical call; the scope has to change first.
 - **One group only.** All commitments belong under a single group titled "Security at <company name>". If
   the portal already has a group (whatever its title), reuse it rather than creating a second one; rename it

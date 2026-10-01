@@ -1,15 +1,15 @@
 import Foundation
-import ProboAgentShared
+import TrustReadyAgentShared
 import os
 
-final class Helper: NSObject, ProboAgentHelperProtocol, NSXPCListenerDelegate {
+final class Helper: NSObject, TrustReadyAgentHelperProtocol, NSXPCListenerDelegate {
     private static let log = Logger(
-        subsystem: "com.probo.agent.helper",
+        subsystem: "com.trustready.agent.helper",
         category: "Helper"
     )
 
     func getVersion(withReply reply: @escaping (String) -> Void) {
-        reply(ProboAgentHelperConstants.helperVersion)
+        reply(TrustReadyAgentHelperConstants.helperVersion)
     }
 
     func ping(withReply reply: @escaping (Bool) -> Void) {
@@ -36,16 +36,16 @@ final class Helper: NSObject, ProboAgentHelperProtocol, NSXPCListenerDelegate {
 
         // Pass the token via env rather than argv so it does not show up in
         // process listings (ps / Activity Monitor). Install already accepts
-        // PROBO_ENROLLMENT_TOKEN when --enrollment-token is omitted.
+        // TRUSTREADY_ENROLLMENT_TOKEN when --enrollment-token is omitted.
         // Pin --dir so a replaced preflight binary cannot choose the state tree.
         let args = [
             "install",
             "--server", trimmedServer,
-            "--dir", ProboAgentHelperConstants.defaultConfigDir,
+            "--dir", TrustReadyAgentHelperConstants.defaultConfigDir,
         ]
 
         var environment = ProcessInfo.processInfo.environment
-        environment["PROBO_ENROLLMENT_TOKEN"] = trimmedToken
+        environment["TRUSTREADY_ENROLLMENT_TOKEN"] = trimmedToken
 
         let result = runAgent(args: args, environment: environment)
         reply(result.exitCode, result.output)
@@ -62,7 +62,7 @@ final class Helper: NSObject, ProboAgentHelperProtocol, NSXPCListenerDelegate {
 
         Self.log.info(
             "accepted XPC connection pid=\(connection.processIdentifier, privacy: .public)")
-        connection.exportedInterface = NSXPCInterface(with: ProboAgentHelperProtocol.self)
+        connection.exportedInterface = NSXPCInterface(with: TrustReadyAgentHelperProtocol.self)
         connection.exportedObject = self
         connection.resume()
         return true
@@ -81,7 +81,7 @@ final class Helper: NSObject, ProboAgentHelperProtocol, NSXPCListenerDelegate {
         }
 
         let process = Process()
-        process.executableURL = URL(fileURLWithPath: ProboAgentHelperConstants.agentExecutablePath)
+        process.executableURL = URL(fileURLWithPath: TrustReadyAgentHelperConstants.agentExecutablePath)
         process.arguments = args
         if let environment {
             process.environment = environment

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Build a Probo device posture agent macOS installer (.pkg) from a
+# Build a TrustReady device posture agent macOS installer (.pkg) from a
 # pre-built fat `trustready-agent` binary (arm64 + x86_64).
 #
 # Required arguments:
@@ -14,7 +14,7 @@
 #
 # Required environment variables:
 #   CODESIGN_IDENTITY    Developer ID Application identity. Signs the
-#                        agent binary, Probo Agent.app, and embedded helper.
+#                        agent binary, TrustReady Agent.app, and embedded helper.
 #   APPLE_TEAM_ID        Apple Developer Team ID (helper client requirement).
 #
 # Optional (auditor-mode compatible):
@@ -34,8 +34,8 @@
 # is not on submit argv for the long --wait.
 #
 # Must run on macOS: pkgbuild, productbuild, and swift build are
-# Apple-only tools. The build also compiles Probo Agent.app (the
-# probo:// URL handler + privileged helper) from enroll-ui/.
+# Apple-only tools. The build also compiles TrustReady Agent.app (the
+# trustready:// URL handler + privileged helper) from enroll-ui/.
 
 set -euo pipefail
 
@@ -46,10 +46,10 @@ ENROLL_UI_DIR="${SCRIPT_DIR}/enroll-ui"
 BINARY=""
 VERSION=""
 OUTPUT=""
-IDENTIFIER="com.probo.agent"
-APP_NAME="Probo Agent.app"
+IDENTIFIER="com.trustready.agent"
+APP_NAME="TrustReady Agent.app"
 URL_HANDLER_NAME="trustready-agent-url-handler"
-HELPER_LABEL="com.probo.agent.helper"
+HELPER_LABEL="com.trustready.agent.helper"
 CODESIGN_IDENTITY="${CODESIGN_IDENTITY:-}"
 INSTALLER_IDENTITY="${INSTALLER_IDENTITY:-}"
 APPLE_ID="${APPLE_ID:-}"
@@ -136,7 +136,7 @@ if ! command -v pkgbuild >/dev/null 2>&1 || ! command -v productbuild >/dev/null
   exit 1
 fi
 if ! command -v swift >/dev/null 2>&1; then
-  echo "error: swift is required to build Probo Agent.app (run on macOS)" >&2
+  echo "error: swift is required to build TrustReady Agent.app (run on macOS)" >&2
   exit 1
 fi
 if [ -z "${CODESIGN_IDENTITY}" ]; then
@@ -174,7 +174,7 @@ codesign_runtime() {
 }
 
 client_requirement() {
-  printf 'anchor apple generic and identifier "com.probo.agent.url-handler" and certificate leaf[subject.OU] = "%s"' "${APPLE_TEAM_ID}"
+  printf 'anchor apple generic and identifier "com.trustready.agent.url-handler" and certificate leaf[subject.OU] = "%s"' "${APPLE_TEAM_ID}"
 }
 
 team_id_option() {
@@ -234,9 +234,9 @@ generate_app_icon_icns() {
   iconutil -c icns "${iconset}" -o "${icns_out}"
 }
 
-# Build Probo Agent.app (URL handler + embedded privileged helper) into
+# Build TrustReady Agent.app (URL handler + embedded privileged helper) into
 # parent_dir. Signs nested Mach-Os then the .app bundle (bottom-up).
-build_probo_agent_app() {
+build_trustready_agent_app() {
   local parent_dir="$1"
   local build_dir render_dir
   local helper_info_plist helper_launchd_plist
@@ -349,8 +349,8 @@ build_probo_agent_app() {
     echo "error: rendered Info.plist failed plutil -lint" >&2
     exit 1
   fi
-  if ! grep -q '<string>probo</string>' "${plist}"; then
-    echo "error: Info.plist is missing probo URL scheme" >&2
+  if ! grep -q '<string>trustready</string>' "${plist}"; then
+    echo "error: Info.plist is missing trustready URL scheme" >&2
     exit 1
   fi
 
@@ -403,13 +403,13 @@ trap 'rm -rf "${STAGE}"' EXIT
 PAYLOAD="${STAGE}/payload"
 SCRIPTS="${STAGE}/scripts"
 RESOURCES="${STAGE}/Resources"
-mkdir -p "${PAYLOAD}/Library/Probo" "${SCRIPTS}" "${RESOURCES}"
+mkdir -p "${PAYLOAD}/Library/TrustReady" "${SCRIPTS}" "${RESOURCES}"
 
-install -m 0755 "${BINARY}" "${PAYLOAD}/Library/Probo/trustready-agent"
-codesign_runtime "${PAYLOAD}/Library/Probo/trustready-agent" "com.probo.agent"
+install -m 0755 "${BINARY}" "${PAYLOAD}/Library/TrustReady/trustready-agent"
+codesign_runtime "${PAYLOAD}/Library/TrustReady/trustready-agent" "com.trustready.agent"
 
 mkdir -p "${PAYLOAD}/Applications"
-build_probo_agent_app "${PAYLOAD}/Applications"
+build_trustready_agent_app "${PAYLOAD}/Applications"
 APP_PATH="${PAYLOAD}/Applications/${APP_NAME}"
 
 if [ "${notarize_enabled}" = true ]; then
@@ -419,7 +419,7 @@ if [ "${notarize_enabled}" = true ]; then
     --apple-id "${APPLE_ID}" \
     --password "${APPLE_ID_PASSWORD}" \
     --team-id "${APPLE_TEAM_ID}"
-  echo "Notarizing Probo Agent.app before packaging..."
+  echo "Notarizing TrustReady Agent.app before packaging..."
   zip_path="${STAGE}/trustready-agent-app.zip"
   ditto -c -k --keepParent "${APP_PATH}" "${zip_path}"
   notarytool_submit "${zip_path}"

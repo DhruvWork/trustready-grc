@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ import (
 const (
 	vcrGCPProjectNumber = "123456789012"
 	vcrGCPAccessToken   = "vcr-gcp-access-token"
-	vcrGCPServiceEmail  = "probo-audit@my-project.iam.gserviceaccount.com"
+	vcrGCPServiceEmail  = "trustready-audit@my-project.iam.gserviceaccount.com"
 )
 
 func newGCPTestSession(t *testing.T, rec *recorder.Recorder) *cloudgcp.Session {

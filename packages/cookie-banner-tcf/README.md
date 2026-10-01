@@ -108,11 +108,11 @@ If CSP blocks inline scripts, either:
 <script
   src="https://cdn.jsdelivr.net/npm/@trustready/cookie-banner-tcf/dist/cookie-banner-tcf.iife.js"
   data-banner-id="YOUR_BANNER_ID"
-  data-base-url="https://your-probo-instance.com/api/cookie-banner/v1/"
+  data-base-url="https://your-trustready-instance.com/api/cookie-banner/v1/"
   data-position="bottom-left"
 ></script>
 
-<probo-settings-link></probo-settings-link>
+<trustready-settings-link></trustready-settings-link>
 ```
 
 ## ES module
@@ -131,16 +131,16 @@ registerCookieBanner();
 ```
 
 ```html
-<probo-cookie-banner
+<trustready-cookie-banner
   banner-id="YOUR_BANNER_ID"
-  base-url="https://your-probo-instance.com/api/cookie-banner/v1/"
+  base-url="https://your-trustready-instance.com/api/cookie-banner/v1/"
   position="bottom-left"
-></probo-cookie-banner>
+></trustready-cookie-banner>
 
-<probo-settings-link></probo-settings-link>
+<trustready-settings-link></trustready-settings-link>
 ```
 
 `bootCookieBanner()` is the IIFE entry: it registers the element and
 mounts from `document.currentScript`. That property is null in ES
-modules, so module callers must declare `<probo-cookie-banner>`
+modules, so module callers must declare `<trustready-cookie-banner>`
 themselves.

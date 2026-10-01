@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -137,14 +137,14 @@ var (
 		TermsOfServiceURL    string
 		SubprocessorsListURL string
 	}{
-		Name:                 "Probo",
-		Description:          "Probo is an open-source compliance platform that helps startups achieve SOC 2 and ISO 27001 certifications quickly and affordably, with expert guidance and no thirdParty lock-in.",
+		Name:                 "TrustReady",
+		Description:          "TrustReady is an open-source compliance platform that helps startups achieve SOC 2 and ISO 27001 certifications quickly and affordably, with expert guidance and no thirdParty lock-in.",
 		LegalName:            "TrustReady.",
 		HeadquarterAddress:   "490 Post St, Suite 640,San Francisco, CA 94102, United States",
-		WebsiteURL:           "https://www.probo.com/",
-		PrivacyPolicyURL:     "https://www.probo.com/privacy",
-		TermsOfServiceURL:    "https://www.probo.com/terms",
-		SubprocessorsListURL: "https://www.probo.com/subprocessors",
+		WebsiteURL:           "https://www.trustready.io/",
+		PrivacyPolicyURL:     "https://www.trustready.io/privacy",
+		TermsOfServiceURL:    "https://www.trustready.io/terms",
+		SubprocessorsListURL: "https://www.trustready.io/subprocessors",
 	}
 )
 
@@ -764,7 +764,7 @@ func (s *OrganizationService) CreateOrganization(
 				return fmt.Errorf("cannot insert organization context: %w", err)
 			}
 
-			proboData := &coredata.ThirdParty{
+			trustreadyData := &coredata.ThirdParty{
 				ID:                     gid.New(scope.GetTenantID(), coredata.ThirdPartyEntityType),
 				OrganizationID:         organization.ID,
 				Name:                   proboThirdParty.Name,
@@ -782,7 +782,7 @@ func (s *OrganizationService) CreateOrganization(
 				UpdatedAt:              now,
 			}
 
-			if err := proboData.Insert(ctx, tx, scope); err != nil {
+			if err := trustreadyData.Insert(ctx, tx, scope); err != nil {
 				return fmt.Errorf("cannot insert thirdParty: %w", err)
 			}
 

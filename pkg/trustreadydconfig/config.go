@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ type (
 	// This is used by bootstrap to generate the YAML config file.
 	FullConfig struct {
 		Unit   UnitConfig `json:"unit"`
-		Probod Config     `json:"trustreadyd"`
+		TrustReadyd Config     `json:"trustreadyd"`
 	}
 
 	// UnitConfig contains unit framework configuration.

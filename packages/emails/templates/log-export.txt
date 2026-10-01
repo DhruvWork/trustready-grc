@@ -1,4 +1,4 @@
-Probo
+TrustReady
 
 Hi {{.RecipientFullName}},
 
@@ -7,4 +7,4 @@ Your {{.ExportLabel}} export has been completed successfully. Click the link bel
 {{.DownloadUrl}}
 
 {{.SenderCompanyHeadquarterAddress}}
-Powered By Probo
+Powered By TrustReady

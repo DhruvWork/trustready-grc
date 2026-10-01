@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,22 +21,22 @@
 import type { CookieItem } from "../types";
 import { humanizeDuration } from "../cookie-utils";
 import { getCookieDetailLabels, getTrackerTypeLabel, interpolate } from "../i18n";
-import { ProboElement } from "./base";
-import type { ProboCategory } from "./category";
-import type { ProboCookieBannerRoot } from "./cookie-banner-root";
+import { TrustReadyElement } from "./base";
+import type { TrustReadyCategory } from "./category";
+import type { TrustReadyCookieBannerRoot } from "./cookie-banner-root";
 
-export class ProboCookieList extends ProboElement {
-  private category: ProboCategory | null = null;
+export class TrustReadyCookieList extends TrustReadyElement {
+  private category: TrustReadyCategory | null = null;
   private template: HTMLTemplateElement | null = null;
 
   connectedCallback(): void {
     this.template = this.querySelector("template");
     if (!this.template) {
-      this.warn("<probo-cookie-list> requires a <template> child");
+      this.warn("<trustready-cookie-list> requires a <template> child");
       return;
     }
 
-    this.category = this.findAncestor<ProboCategory>("probo-category");
+    this.category = this.findAncestor<TrustReadyCategory>("trustready-category");
 
     this.scheduleValidation(() => this.stamp());
   }
@@ -44,7 +44,7 @@ export class ProboCookieList extends ProboElement {
   private stamp(): void {
     if (!this.template || !this.category) return;
 
-    const root = this.findAncestor<ProboCookieBannerRoot>("probo-cookie-banner-root");
+    const root = this.findAncestor<TrustReadyCookieBannerRoot>("trustready-cookie-banner-root");
     const lang = root?.bannerConfig?.language ?? "en";
     const labels = getCookieDetailLabels(lang);
 
@@ -63,7 +63,7 @@ export class ProboCookieList extends ProboElement {
 
     const type = getTrackerTypeLabel(cookie.tracker_type);
 
-    const wrapper = document.createElement("probo-cookie");
+    const wrapper = document.createElement("trustready-cookie");
     wrapper.setAttribute("name", cookie.name);
     const clone = this.template.content.cloneNode(true) as DocumentFragment;
     this.fillSlots(clone, {
@@ -122,4 +122,4 @@ export class ProboCookieList extends ProboElement {
   }
 }
 
-export class ProboCookie extends ProboElement {}
+export class TrustReadyCookie extends TrustReadyElement {}

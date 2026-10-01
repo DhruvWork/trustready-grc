@@ -1,4 +1,4 @@
--- Copyright (c) 2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2026 TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -19,11 +19,11 @@
 -- SOFTWARE.
 
 -- Allow system-level OAuth2 clients that don't belong to any tenant or
--- organization (e.g. the Probo CLI).
+-- organization (e.g. the TrustReady CLI).
 ALTER TABLE iam_oauth2_clients ALTER COLUMN tenant_id DROP NOT NULL;
 ALTER TABLE iam_oauth2_clients ALTER COLUMN organization_id DROP NOT NULL;
 
--- Well-known OAuth2 client for the Probo CLI (prb).
+-- Well-known OAuth2 client for the TrustReady CLI (prb).
 -- This client is hardcoded in the CLI binary and used for the device
 -- authorization flow. Same pattern as GitHub CLI + GitHub Enterprise Server.
 INSERT INTO iam_oauth2_clients (
@@ -43,7 +43,7 @@ INSERT INTO iam_oauth2_clients (
     'AAAAAAAAAAAASwAAAAAAAAAAcHJiY2xp',
     NULL,
     NULL,
-    'Probo CLI',
+    'TrustReady CLI',
     'public',
     '{}',
     '{openid,profile,email}',

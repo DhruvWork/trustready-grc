@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ export interface Config {
   gcmEnabled: boolean;
 }
 
-const STORAGE_KEY = "probo-example-config";
+const STORAGE_KEY = "trustready-example-config";
 
 const defaultConfig: Config = {
   bannerId: bundledConfig.bannerId,

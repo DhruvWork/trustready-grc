@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,9 +24,9 @@ import EmailLayout, { bodyText, button, buttonContainer, footerText } from './co
 
 export const Invitation = () => {
   return (
-    <EmailLayout subject={'Invitation to join {{.OrganizationName}} on Probo'}>
+    <EmailLayout subject={'Invitation to join {{.OrganizationName}} on TrustReady'}>
       <Text style={bodyText}>
-        You have been invited to join organization <strong>{'{{.OrganizationName}}'}</strong> on Probo. Click the button below to activate your account:
+        You have been invited to join organization <strong>{'{{.OrganizationName}}'}</strong> on TrustReady. Click the button below to activate your account:
       </Text>
 
       <Section style={buttonContainer}>

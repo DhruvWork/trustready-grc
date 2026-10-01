@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,9 +19,9 @@
 // SOFTWARE.
 
 // Package azure vends authenticated access to one customer Azure subscription
-// by presenting a Probo-minted OIDC token as an Entra client assertion.
+// by presenting a TrustReady-minted OIDC token as an Entra client assertion.
 //
-// Probo holds no Azure credential for any customer. It mints a short-lived
+// TrustReady holds no Azure credential for any customer. It mints a short-lived
 // assertion (pkg/identityfederation), presents it at the environment's
 // authority, and azidentity caches the resulting tokens per scope. The
 // customer revokes by deleting the federated identity credential.

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,12 +38,12 @@ func ParseEnrollURL(raw string) (serverURL string, enrollmentToken string, err e
 		return "", "", fmt.Errorf("cannot parse enrollment URL: %w", err)
 	}
 
-	if parsed.Scheme != "probo" {
-		return "", "", errors.New("enrollment URL must use probo scheme")
+	if parsed.Scheme != "trustready" {
+		return "", "", errors.New("enrollment URL must use trustready scheme")
 	}
 
 	if parsed.Host != "enroll" {
-		return "", "", errors.New("enrollment URL must be probo://enroll")
+		return "", "", errors.New("enrollment URL must be trustready://enroll")
 	}
 
 	query := parsed.Query()

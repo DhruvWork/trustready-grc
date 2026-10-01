@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -175,7 +175,7 @@ func oauthClient(
 // buildHTTPClient returns an HTTP client for the given connection.
 // For OAuth2 connections it delegates to oauthClient so that token refresh
 // is handled transparently. For API-key connections it overlays a
-// Probo-held key onto a copy when the provider is managed, so the loaded
+// TrustReady-held key onto a copy when the provider is managed, so the loaded
 // row is never mutated. Other connection types use the standard Client
 // method.
 func buildHTTPClient(
@@ -223,8 +223,8 @@ func (s *Service) resolveDriver(
 			return drivers.NewCSVDriver(strings.NewReader(*source.CsvData)), nil
 		}
 
-		// Built-in driver: default to ProboMemberships
-		return drivers.NewProboMembershipsDriver(s.pg, scope, source.OrganizationID), nil
+		// Built-in driver: default to TrustReadyMemberships
+		return drivers.NewTrustReadyMembershipsDriver(s.pg, scope, source.OrganizationID), nil
 	}
 
 	account := &coredata.ConnectorAccount{}

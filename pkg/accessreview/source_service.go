@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -801,7 +801,7 @@ func (s *Service) ProbeConnector(
 	}
 
 	// Only a ProbeError means the credential or the provider is at fault;
-	// everything else returned here is Probo's own.
+	// everything else returned here is TrustReady's own.
 	switch conn := dbConnector.Connection.(type) {
 	case *connector.WorkloadIdentityConnection:
 		session, err := s.OpenSession(ctx, dbConnector, "")

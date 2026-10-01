@@ -2,8 +2,8 @@
 
 Multi-agent compliance skills for open-source GRC workflows. Ships an
 [Agent Plugins 1.0.0](https://agent-plugins.org/) package: Agent
-Skills–compatible instructions plus portable MCP wiring to the [Probo MCP
-API](https://github.com/getprobo/probo/tree/main/pkg/server/api/mcp/v1) over
+Skills–compatible instructions plus portable MCP wiring to the [TrustReady MCP
+API](https://github.com/getprobo/trustready/tree/main/pkg/server/api/mcp/v1) over
 OAuth 2.0.
 
 **Supported agents:** any Agent Plugins client, plus Claude Code, Codex,
@@ -14,24 +14,24 @@ root. Client-specific manifests (`.claude-plugin/`, `.codex-plugin/`,
 `.mcp.json`) and marketplace catalogs sit alongside it. See
 [COMPATIBILITY.md](./COMPATIBILITY.md).
 
-## Probo MCP servers
+## TrustReady MCP servers
 
-Both hosted Probo instances ship in `mcp.json`; connect the one for your
+Both hosted TrustReady instances ship in `mcp.json`; connect the one for your
 region and sign in with OAuth 2.0.
 
 | Server | Endpoint |
 | --- | --- |
-| `probo-us` | `https://us.probo.com/api/mcp/v1` |
-| `probo-eu` | `https://eu.probo.com/api/mcp/v1` |
+| `trustready-us` | `https://us.trustready.io/api/mcp/v1` |
+| `trustready-eu` | `https://eu.trustready.io/api/mcp/v1` |
 
 Agent Plugins 1.0.0 defines no placeholder expansion for remote MCP URLs, so a
 self-hosted instance is added in the agent instead of in the package:
 
 ```bash
-claude mcp add --transport http probo https://probo.example.com/api/mcp/v1
+claude mcp add --transport http trustready https://trustready.example.com/api/mcp/v1
 ```
 
-No API token or bearer header belongs in any of these configs. Probo MCP
+No API token or bearer header belongs in any of these configs. TrustReady MCP
 authenticates with OAuth 2.0, discovered from
 `/.well-known/oauth-protected-resource` on the instance root.
 
@@ -48,11 +48,11 @@ skills under `skills/`, and loads both servers from `mcp.json`.
 **From GitHub** (repo-root catalog at `.claude-plugin/marketplace.json`):
 
 ```bash
-claude plugin marketplace add getprobo/probo
+claude plugin marketplace add trustready/trustready
 # or, from a local clone:
 claude plugin marketplace add .
-claude plugin install probo@probo
-claude mcp login probo-us   # or /mcp in session
+claude plugin install trustready@trustready
+claude mcp login trustready-us   # or /mcp in session
 ```
 
 **From the package directory** (catalog at
@@ -61,7 +61,7 @@ from npm):
 
 ```bash
 claude plugin marketplace add ./packages/skills/.claude-plugin
-claude plugin install probo@probo
+claude plugin install trustready@trustready
 ```
 
 ### Local development
@@ -75,13 +75,13 @@ claude --plugin-dir ./packages/skills
 | Component | Location | Purpose |
 | --- | --- | --- |
 | Manifest | `plugin.json` | Agent Plugins 1.0.0 plugin identity |
-| MCP | `mcp.json` | Portable hosted Probo servers |
+| MCP | `mcp.json` | Portable hosted TrustReady servers |
 | Skills | `skills/` | Compliance workflows |
 | Commands | `commands/` | `access-review`, `missing-signatures` — semi-auto workflows (Claude Code) |
 
-Skills: `/probo:<skill-name>` (e.g. `/probo:open-source-compliance`, `/probo:missing-signatures`).
+Skills: `/trustready:<skill-name>` (e.g. `/trustready:open-source-compliance`, `/trustready:missing-signatures`).
 
-Commands: `/probo:<command-name>` (e.g. `/probo:access-review`, `/probo:missing-signatures`).
+Commands: `/trustready:<command-name>` (e.g. `/trustready:access-review`, `/trustready:missing-signatures`).
 
 ## Adding content
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -184,7 +184,7 @@ func TestApplyOAuth2Defaults_CopiesSiteClosures(t *testing.T) {
 	}))
 
 	var c connector.OAuth2Connector
-	require.NoError(t, r.ApplyOAuth2Defaults("DATADOG", "https://probo.example/cb", &c))
+	require.NoError(t, r.ApplyOAuth2Defaults("DATADOG", "https://trustready.example/cb", &c))
 	require.NotNil(t, c.BuildAuthURLForSite)
 	require.NotNil(t, c.BuildTokenURLForDomain)
 
@@ -220,7 +220,7 @@ func TestApplyOAuth2Defaults_CopiesTokenURLForSiteClosure(t *testing.T) {
 	}))
 
 	var c connector.OAuth2Connector
-	require.NoError(t, r.ApplyOAuth2Defaults("ZENDESK", "https://probo.example/cb", &c))
+	require.NoError(t, r.ApplyOAuth2Defaults("ZENDESK", "https://trustready.example/cb", &c))
 	require.NotNil(t, c.BuildAuthURLForSite)
 	require.NotNil(t, c.BuildTokenURLForSite)
 	require.Nil(t, c.BuildTokenURLForDomain)

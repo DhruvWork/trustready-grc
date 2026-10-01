@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,17 +34,17 @@ type CSSVariable = {
 };
 
 const CSS_VARIABLES: CSSVariable[] = [
-  { key: "--probo-bg", label: "Background", defaultValue: "#ffffff", type: "color" },
-  { key: "--probo-text", label: "Text", defaultValue: "#1a1a1a", type: "color" },
-  { key: "--probo-text-secondary", label: "Text Secondary", defaultValue: "#555555", type: "color" },
-  { key: "--probo-border", label: "Border", defaultValue: "#e0e0e0", type: "color" },
-  { key: "--probo-accent", label: "Accent", defaultValue: "#1a1a1a", type: "color" },
-  { key: "--probo-accent-text", label: "Accent Text", defaultValue: "#ffffff", type: "color" },
-  { key: "--probo-radius", label: "Border Radius", defaultValue: "12px", type: "text" },
-  { key: "--probo-btn-radius", label: "Button Radius", defaultValue: "8px", type: "text" },
-  { key: "--probo-font-size", label: "Font Size", defaultValue: "14px", type: "text" },
-  { key: "--probo-font-family", label: "Font Family", defaultValue: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif", type: "text" },
-  { key: "--probo-shadow", label: "Shadow", defaultValue: "0 4px 24px rgba(0, 0, 0, 0.12)", type: "text" },
+  { key: "--trustready-bg", label: "Background", defaultValue: "#ffffff", type: "color" },
+  { key: "--trustready-text", label: "Text", defaultValue: "#1a1a1a", type: "color" },
+  { key: "--trustready-text-secondary", label: "Text Secondary", defaultValue: "#555555", type: "color" },
+  { key: "--trustready-border", label: "Border", defaultValue: "#e0e0e0", type: "color" },
+  { key: "--trustready-accent", label: "Accent", defaultValue: "#1a1a1a", type: "color" },
+  { key: "--trustready-accent-text", label: "Accent Text", defaultValue: "#ffffff", type: "color" },
+  { key: "--trustready-radius", label: "Border Radius", defaultValue: "12px", type: "text" },
+  { key: "--trustready-btn-radius", label: "Button Radius", defaultValue: "8px", type: "text" },
+  { key: "--trustready-font-size", label: "Font Size", defaultValue: "14px", type: "text" },
+  { key: "--trustready-font-family", label: "Font Family", defaultValue: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif", type: "text" },
+  { key: "--trustready-shadow", label: "Shadow", defaultValue: "0 4px 24px rgba(0, 0, 0, 0.12)", type: "text" },
 ];
 
 function buildCSSSnippet(values: Record<string, string>, defaultComment: string): string {
@@ -56,7 +56,7 @@ function buildCSSSnippet(values: Record<string, string>, defaultComment: string)
     return defaultComment;
   }
 
-  return `probo-cookie-banner {\n${overrides.join("\n")}\n}`;
+  return `trustready-cookie-banner {\n${overrides.join("\n")}\n}`;
 }
 
 export const themePreviewFragment = graphql`
@@ -135,7 +135,7 @@ export function ThemePreview({ cookieBannerKey }: ThemePreviewProps) {
             {colorVariables.map(v => (
               <div key={v.key} className="flex flex-col gap-1.5">
                 <label className="text-sm font-medium text-txt-primary">
-                  {t(`themePreview.variables.${v.key.replace("--probo-", "").replaceAll("-", "")}`)}
+                  {t(`themePreview.variables.${v.key.replace("--trustready-", "").replaceAll("-", "")}`)}
                 </label>
                 <div className="flex items-center gap-2">
                   <input
@@ -155,7 +155,7 @@ export function ThemePreview({ cookieBannerKey }: ThemePreviewProps) {
 
           <div className="grid grid-cols-2 gap-4">
             {textVariables.map(v => (
-              <Field key={v.key} label={t(`themePreview.variables.${v.key.replace("--probo-", "").replaceAll("-", "")}`)}>
+              <Field key={v.key} label={t(`themePreview.variables.${v.key.replace("--trustready-", "").replaceAll("-", "")}`)}>
                 <Input
                   value={values[v.key]}
                   onChange={e => setValue(v.key, e.target.value)}
@@ -195,12 +195,12 @@ function BannerPreview({ showBranding }: { showBranding: boolean }) {
   return (
     <div
       style={{
-        background: "var(--probo-bg, #ffffff)",
-        color: "var(--probo-text, #1a1a1a)",
-        borderRadius: "var(--probo-radius, 12px)",
-        boxShadow: "var(--probo-shadow, 0 4px 24px rgba(0, 0, 0, 0.12))",
-        fontFamily: "var(--probo-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)",
-        fontSize: "var(--probo-font-size, 14px)",
+        background: "var(--trustready-bg, #ffffff)",
+        color: "var(--trustready-text, #1a1a1a)",
+        borderRadius: "var(--trustready-radius, 12px)",
+        boxShadow: "var(--trustready-shadow, 0 4px 24px rgba(0, 0, 0, 0.12))",
+        fontFamily: "var(--trustready-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)",
+        fontSize: "var(--trustready-font-size, 14px)",
         lineHeight: 1.5,
         maxWidth: 450,
         width: "100%",
@@ -209,7 +209,7 @@ function BannerPreview({ showBranding }: { showBranding: boolean }) {
     >
       <p
         style={{
-          fontSize: "calc(var(--probo-font-size, 14px) + 2px)",
+          fontSize: "calc(var(--trustready-font-size, 14px) + 2px)",
           fontWeight: 600,
           margin: "0 0 8px",
         }}
@@ -218,7 +218,7 @@ function BannerPreview({ showBranding }: { showBranding: boolean }) {
       </p>
       <p
         style={{
-          color: "var(--probo-text-secondary, #555555)",
+          color: "var(--trustready-text-secondary, #555555)",
           margin: "0 0 20px",
         }}
       >
@@ -231,7 +231,7 @@ function BannerPreview({ showBranding }: { showBranding: boolean }) {
                 href="#"
                 onClick={e => e.preventDefault()}
                 style={{
-                  color: "var(--probo-accent, #1a1a1a)",
+                  color: "var(--trustready-accent, #1a1a1a)",
                   textDecoration: "underline",
                 }}
               />
@@ -245,12 +245,12 @@ function BannerPreview({ showBranding }: { showBranding: boolean }) {
             type="button"
             style={{
               padding: "8px 10px",
-              borderRadius: "var(--probo-btn-radius, 8px)",
-              border: "1px solid var(--probo-accent, #1a1a1a)",
-              background: "var(--probo-accent, #1a1a1a)",
-              color: "var(--probo-accent-text, #ffffff)",
+              borderRadius: "var(--trustready-btn-radius, 8px)",
+              border: "1px solid var(--trustready-accent, #1a1a1a)",
+              background: "var(--trustready-accent, #1a1a1a)",
+              color: "var(--trustready-accent-text, #ffffff)",
               fontFamily: "inherit",
-              fontSize: "var(--probo-font-size, 14px)",
+              fontSize: "var(--trustready-font-size, 14px)",
               fontWeight: 500,
               lineHeight: "normal",
               cursor: "pointer",
@@ -265,12 +265,12 @@ function BannerPreview({ showBranding }: { showBranding: boolean }) {
             type="button"
             style={{
               padding: "8px 10px",
-              borderRadius: "var(--probo-btn-radius, 8px)",
-              border: "1px solid var(--probo-border, #e0e0e0)",
-              background: "color-mix(in srgb, var(--probo-text, #1a1a1a) 8%, var(--probo-bg, #ffffff))",
-              color: "var(--probo-text, #1a1a1a)",
+              borderRadius: "var(--trustready-btn-radius, 8px)",
+              border: "1px solid var(--trustready-border, #e0e0e0)",
+              background: "color-mix(in srgb, var(--trustready-text, #1a1a1a) 8%, var(--trustready-bg, #ffffff))",
+              color: "var(--trustready-text, #1a1a1a)",
               fontFamily: "inherit",
-              fontSize: "var(--probo-font-size, 14px)",
+              fontSize: "var(--trustready-font-size, 14px)",
               fontWeight: 500,
               lineHeight: "normal",
               cursor: "pointer",
@@ -285,12 +285,12 @@ function BannerPreview({ showBranding }: { showBranding: boolean }) {
             type="button"
             style={{
               padding: "8px 10px",
-              borderRadius: "var(--probo-btn-radius, 8px)",
+              borderRadius: "var(--trustready-btn-radius, 8px)",
               border: "none",
               background: "transparent",
-              color: "var(--probo-accent, #1a1a1a)",
+              color: "var(--trustready-accent, #1a1a1a)",
               fontFamily: "inherit",
-              fontSize: "var(--probo-font-size, 14px)",
+              fontSize: "var(--trustready-font-size, 14px)",
               fontWeight: 500,
               lineHeight: "normal",
               cursor: "pointer",
@@ -306,9 +306,9 @@ function BannerPreview({ showBranding }: { showBranding: boolean }) {
         <div
           style={{
             textAlign: "center",
-            fontSize: "calc(var(--probo-font-size, 14px) - 2px)",
+            fontSize: "calc(var(--trustready-font-size, 14px) - 2px)",
             fontWeight: 400,
-            color: "var(--probo-text-secondary, #555555)",
+            color: "var(--trustready-text-secondary, #555555)",
           }}
         >
           {t("themePreview.banner.privacyBy")}

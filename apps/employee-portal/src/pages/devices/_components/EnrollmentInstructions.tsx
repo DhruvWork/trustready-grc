@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,16 +32,16 @@ import { CopyableCodeBlock } from "./CopyableCodeBlock";
 import { enrollmentInstructions } from "./variants";
 
 const AGENT_RELEASES_URL
-  = "https://github.com/getprobo/probo/releases?q=trustready-agent";
+  = "https://github.com/getprobo/trustready/releases?q=trustready-agent";
 
-const UNIX_DOWNLOAD_COMMAND = `curl -fsSL "https://github.com/getprobo/probo/releases/download/trustready-agent/vX.Y.Z/trustready-agent_OS_ARCH.tar.gz" -o /tmp/trustready-agent.tar.gz
+const UNIX_DOWNLOAD_COMMAND = `curl -fsSL "https://github.com/getprobo/trustready/releases/download/trustready-agent/vX.Y.Z/trustready-agent_OS_ARCH.tar.gz" -o /tmp/trustready-agent.tar.gz
 tar -xzf /tmp/trustready-agent.tar.gz -C /tmp
 sudo install -m 0755 /tmp/trustready-agent_OS_ARCH/trustready-agent /usr/local/bin/trustready-agent
 rm -rf /tmp/trustready-agent.tar.gz /tmp/trustready-agent_OS_ARCH`;
 
 const WINDOWS_DOWNLOAD_COMMAND = `$zip = "$env:TEMP\\trustready-agent.zip"
-$dst = "$env:ProgramFiles\\Probo"
-Invoke-WebRequest -Uri "https://github.com/getprobo/probo/releases/download/trustready-agent/vX.Y.Z/trustready-agent_Windows_ARCH.zip" -OutFile $zip
+$dst = "$env:ProgramFiles\\TrustReady"
+Invoke-WebRequest -Uri "https://github.com/getprobo/trustready/releases/download/trustready-agent/vX.Y.Z/trustready-agent_Windows_ARCH.zip" -OutFile $zip
 Expand-Archive -Path $zip -DestinationPath $env:TEMP -Force
 New-Item -ItemType Directory -Force -Path $dst | Out-Null
 Move-Item -Force "$env:TEMP\\trustready-agent_Windows_ARCH\\trustready-agent.exe" "$dst\\trustready-agent.exe"
@@ -72,7 +72,7 @@ sudo /usr/local/bin/trustready-agent install \\
   const windowsDownloadCommand = `${downloadComment}
 ${WINDOWS_DOWNLOAD_COMMAND}`;
   const windowsInstallCommand = `${enrollComment}
-& "$env:ProgramFiles\\Probo\\trustready-agent.exe" install \`
+& "$env:ProgramFiles\\TrustReady\\trustready-agent.exe" install \`
   --server ${serverUrl} \`
   --enrollment-token '${enrollmentToken}'`;
 

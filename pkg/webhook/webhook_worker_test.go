@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -63,10 +63,10 @@ func TestDoHTTPCall_SendsStableDeliveryIdentityAndSignature(t *testing.T) {
 				require.NoError(t, err)
 
 				assert.Equal(t, eventID.String(), r.Header.Get("Idempotency-Key"))
-				assert.Equal(t, eventID.String(), r.Header.Get("X-Probo-Webhook-Delivery-Id"))
-				assert.Equal(t, "user:created", r.Header.Get("X-Probo-Webhook-Event"))
-				assert.Equal(t, expectedTimestamp, r.Header.Get("X-Probo-Webhook-Timestamp"))
-				receivedSignature = r.Header.Get("X-Probo-Webhook-Signature")
+				assert.Equal(t, eventID.String(), r.Header.Get("X-TrustReady-Webhook-Delivery-Id"))
+				assert.Equal(t, "user:created", r.Header.Get("X-TrustReady-Webhook-Event"))
+				assert.Equal(t, expectedTimestamp, r.Header.Get("X-TrustReady-Webhook-Timestamp"))
+				receivedSignature = r.Header.Get("X-TrustReady-Webhook-Signature")
 
 				w.WriteHeader(http.StatusAlreadyReported)
 			},

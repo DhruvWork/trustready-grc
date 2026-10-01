@@ -1,4 +1,4 @@
-Probo
+TrustReady
 
 Hi {{.RecipientFullName}},
 
@@ -9,4 +9,4 @@ Your access request to the following files in {{.OrganizationName}}'s compliance
 {{end}}
 
 {{.SenderCompanyHeadquarterAddress}}
-Powered By Probo
+Powered By TrustReady

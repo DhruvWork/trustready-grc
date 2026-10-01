@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -227,7 +227,7 @@ func Invalidf(ctx context.Context, format string, a ...any) *gqlerror.Error {
 
 // InvalidField reports a value refused by a check only the server can run,
 // such as asking a provider. The message is shown as-is next to field, so it
-// must be Probo's own words; cause is a stable code a client can key on.
+// must be TrustReady's own words; cause is a stable code a client can key on.
 func InvalidField(ctx context.Context, field, cause, message string) *gqlerror.Error {
 	return &gqlerror.Error{
 		Message: message,

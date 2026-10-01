@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,9 +38,9 @@ func mintGitHubAppStateToken(t *testing.T) string {
 
 	githubApp := &connector.GitHubAppConnector{
 		ClientSecret: "github-app-client-secret",
-		Slug:         "probo-test",
+		Slug:         "trustready-test",
 		InstallBase:  "https://github.com/apps",
-		RedirectURI:  "https://probo.test/api/console/v1/connectors/github-app/complete",
+		RedirectURI:  "https://trustready.test/api/console/v1/connectors/github-app/complete",
 	}
 	organizationID := gid.New(gid.NewTenantID(), 0)
 	installURL, err := githubApp.Initiate(
@@ -120,9 +120,9 @@ func TestInitiateGitHubApp_BuildsAuthorizeURL(t *testing.T) {
 	githubApp := &connector.GitHubAppConnector{
 		ClientID:     "github-app-client-id",
 		ClientSecret: "github-app-client-secret",
-		Slug:         "probo-test",
+		Slug:         "trustready-test",
 		InstallBase:  "https://github.com/apps",
-		RedirectURI:  "https://probo.test/api/console/v1/connectors/github-app/complete",
+		RedirectURI:  "https://trustready.test/api/console/v1/connectors/github-app/complete",
 	}
 	require.NoError(
 		t,
@@ -152,7 +152,7 @@ func TestGitHubAppInstallationURL_BuildsInstallURL(t *testing.T) {
 	registry := connector.NewConnectorRegistry()
 	githubApp := &connector.GitHubAppConnector{
 		ClientSecret: "github-app-client-secret",
-		Slug:         "probo-test",
+		Slug:         "trustready-test",
 		InstallBase:  "https://github.com/apps",
 	}
 	require.NoError(
@@ -166,7 +166,7 @@ func TestGitHubAppInstallationURL_BuildsInstallURL(t *testing.T) {
 
 	parsed, err := url.Parse(installURL)
 	require.NoError(t, err)
-	assert.Equal(t, "/apps/probo-test/installations/new", parsed.Path)
+	assert.Equal(t, "/apps/trustready-test/installations/new", parsed.Path)
 	assert.Equal(t, state, parsed.Query().Get("state"))
 }
 

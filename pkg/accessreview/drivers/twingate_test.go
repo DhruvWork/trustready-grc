@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -150,7 +150,7 @@ func TestTwingateDriver(t *testing.T) {
 	// Twingate authenticates via the X-API-KEY header, not Authorization.
 	client := newVCRClientWithHeader(rec, "X-API-KEY", os.Getenv("TWINGATE_API_KEY"))
 
-	driver := NewTwingateDriver(client, "https://probo.twingate.com/api/graphql/")
+	driver := NewTwingateDriver(client, "https://trustready.twingate.com/api/graphql/")
 	records, err := driver.ListAccounts(context.Background())
 	require.NoError(t, err)
 	require.Len(t, records, 1)

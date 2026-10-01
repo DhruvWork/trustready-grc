@@ -18,7 +18,7 @@ when the resource lookup changes.
 
 ```go
 // GOOD — scope comes from authorize, fed straight to the service
-scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyList)
+scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyList)
 if err != nil {
 	return nil, err
 }
@@ -26,7 +26,7 @@ if err != nil {
 thirdPartyIDs, err := r.cookieBanner.LoadDistinctThirdPartyIDsByCookieBannerID(ctx, scope, obj.ID)
 
 // BAD — authorize discards scope, then we rebuild it from the same GID
-if _, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyList); err != nil {
+if _, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyList); err != nil {
 	return nil, err
 }
 
@@ -45,7 +45,7 @@ methods are unscoped. The returned scope would be derived from the identity
 ```go
 // GOOD — global catalog, downstream is unscoped
 identity := authn.IdentityFromContext(ctx)
-if _, err := r.authorize(ctx, identity.ID, probo.ActionCommonThirdPartyList); err != nil {
+if _, err := r.authorize(ctx, identity.ID, trustready.ActionCommonThirdPartyList); err != nil {
 	return nil, err
 }
 

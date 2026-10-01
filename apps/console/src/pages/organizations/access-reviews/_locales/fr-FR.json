@@ -11,7 +11,7 @@
       "audience": "Audience",
       "subject": "Sujet",
       "workloadIdentityProviderHelp": "ex. projects/123456789012/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID",
-      "serviceAccountEmailHelp": "ex. probo-audit@PROJECT_ID.iam.gserviceaccount.com"
+      "serviceAccountEmailHelp": "ex. trustready-audit@PROJECT_ID.iam.gserviceaccount.com"
     },
     "messages": {
       "copyFailed": "Échec de la copie",
@@ -28,7 +28,7 @@
       "workloadIdentityProvider": "Saisissez une ressource de fournisseur d’identité de charge de travail valide.",
       "serviceAccountEmail": "Saisissez un e-mail de compte de service valide.",
       "create": "Échec de la création du connecteur. Vérifiez la ressource du fournisseur et l’e-mail du compte de service, puis réessayez.",
-      "disconnected": "Probo n’a pas pu usurper le compte de service d’audit. Vérifiez que le module est appliqué dans ce projet et que l’émetteur et le sujet correspondent aux valeurs affichées lors de la configuration.",
+      "disconnected": "TrustReady n’a pas pu usurper le compte de service d’audit. Vérifiez que le module est appliqué dans ce projet et que l’émetteur et le sujet correspondent aux valeurs affichées lors de la configuration.",
       "delete": "Impossible de supprimer le connecteur. Réessayez.",
       "source": "Échec de la création de la source d’accès",
       "copy": "Copiez la valeur manuellement."
@@ -82,7 +82,7 @@
       "clientId": "Saisissez un ID d’application (client) valide.",
       "subscriptionId": "Saisissez un ID d’abonnement valide.",
       "create": "Échec de la création du connecteur. Vérifiez les identifiants de locataire, d’application et d’abonnement, puis réessayez.",
-      "disconnected": "Probo n’a pas pu assumer l’identité d’audit. Vérifiez que le module est appliqué et que l’émetteur et le sujet correspondent aux valeurs affichées. La fédération peut prendre quelques minutes.",
+      "disconnected": "TrustReady n’a pas pu assumer l’identité d’audit. Vérifiez que le module est appliqué et que l’émetteur et le sujet correspondent aux valeurs affichées. La fédération peut prendre quelques minutes.",
       "delete": "Impossible de supprimer le connecteur. Réessayez.",
       "source": "Échec de la création de la source d’accès",
       "copy": "Copiez la valeur manuellement."

@@ -3,21 +3,21 @@
     {
       "id": "us",
       "title": "United States",
-      "subtitle": "us.probo.com",
+      "subtitle": "us.trustready.io",
       "flag": "🇺🇸",
-      "server_url": "https://us.probo.com"
+      "server_url": "https://us.trustready.io"
     },
     {
       "id": "eu",
       "title": "European Union",
-      "subtitle": "eu.probo.com",
+      "subtitle": "eu.trustready.io",
       "flag": "🇪🇺",
-      "server_url": "https://eu.probo.com"
+      "server_url": "https://eu.trustready.io"
     },
     {
       "id": "self_hosted",
       "title": "Self hosted",
-      "subtitle": "Your own Probo instance",
+      "subtitle": "Your own TrustReady instance",
       "flag": "🌐",
       "server_url": null
     }

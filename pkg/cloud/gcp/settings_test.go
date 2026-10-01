@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,9 +29,9 @@ import (
 )
 
 const (
-	testProviderResource   = "projects/123456789012/locations/global/workloadIdentityPools/probo/providers/probo"
-	testServiceAccount     = "probo-audit@my-project.iam.gserviceaccount.com"
-	testS3NSServiceAccount = "probo-audit@my-project.s3ns.iam.gserviceaccount.com"
+	testProviderResource   = "projects/123456789012/locations/global/workloadIdentityPools/trustready/providers/trustready"
+	testServiceAccount     = "trustready-audit@my-project.iam.gserviceaccount.com"
+	testS3NSServiceAccount = "trustready-audit@my-project.s3ns.iam.gserviceaccount.com"
 )
 
 func TestNewConnectorSettings(t *testing.T) {
@@ -89,14 +89,14 @@ func TestNewConnectorSettings(t *testing.T) {
 			resource string
 		}{
 			{name: "empty", resource: ""},
-			{name: "project id instead of number", resource: "projects/my-project/locations/global/workloadIdentityPools/probo/providers/probo"},
-			{name: "regional location", resource: "projects/123456789012/locations/us-central1/workloadIdentityPools/probo/providers/probo"},
-			{name: "missing provider", resource: "projects/123456789012/locations/global/workloadIdentityPools/probo"},
-			{name: "uppercase pool", resource: "projects/123456789012/locations/global/workloadIdentityPools/Probo/providers/probo"},
-			{name: "short pool id", resource: "projects/123456789012/locations/global/workloadIdentityPools/ab/providers/probo"},
-			{name: "pool id ending with hyphen", resource: "projects/123456789012/locations/global/workloadIdentityPools/pool-/providers/probo"},
-			{name: "provider id ending with hyphen", resource: "projects/123456789012/locations/global/workloadIdentityPools/probo/providers/probo-"},
-			{name: "pool id starting with hyphen", resource: "projects/123456789012/locations/global/workloadIdentityPools/-pool/providers/probo"},
+			{name: "project id instead of number", resource: "projects/my-project/locations/global/workloadIdentityPools/trustready/providers/trustready"},
+			{name: "regional location", resource: "projects/123456789012/locations/us-central1/workloadIdentityPools/trustready/providers/trustready"},
+			{name: "missing provider", resource: "projects/123456789012/locations/global/workloadIdentityPools/trustready"},
+			{name: "uppercase pool", resource: "projects/123456789012/locations/global/workloadIdentityPools/TrustReady/providers/trustready"},
+			{name: "short pool id", resource: "projects/123456789012/locations/global/workloadIdentityPools/ab/providers/trustready"},
+			{name: "pool id ending with hyphen", resource: "projects/123456789012/locations/global/workloadIdentityPools/pool-/providers/trustready"},
+			{name: "provider id ending with hyphen", resource: "projects/123456789012/locations/global/workloadIdentityPools/trustready/providers/trustready-"},
+			{name: "pool id starting with hyphen", resource: "projects/123456789012/locations/global/workloadIdentityPools/-pool/providers/trustready"},
 		}
 
 		for _, tt := range tests {

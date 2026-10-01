@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ import (
 const sourceFetchFailureMessage = "We couldn't fetch accounts from this source. Verify the source configuration and try again."
 
 // fetchFailureMessage is the user-facing message for a failed fetch: a refused
-// setting's own explanation, which is Probo's fixed text, or the generic one.
+// setting's own explanation, which is TrustReady's fixed text, or the generic one.
 func fetchFailureMessage(err error) string {
 	if rejected, ok := errors.AsType[*drivers.SettingRejectedError](err); ok && rejected != nil {
 		return rejected.Message

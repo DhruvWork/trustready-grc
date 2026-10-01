@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+# Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 # SPDX-License-Identifier: MIT
 
 set -euo pipefail
@@ -94,7 +94,7 @@ VM_IP=$(ip -4 -j addr show dev lima0 | jq -r '.[0].addr_info[0].local')
 
 su - "${LIMA_USER}" -c "export PATH=/usr/local/go/bin:\$HOME/go/bin:\$PATH && cd /workspace && make bin/trustreadyd-bootstrap"
 
-make -C /workspace compose/step-ca/certs/root_ca.crt compose/keycloak/probo-realm.json
+make -C /workspace compose/step-ca/certs/root_ca.crt compose/keycloak/trustready-realm.json
 
 mkdir -p /etc/trustreadyd
 
@@ -133,7 +133,7 @@ TRUSTREADYD_BASE_URL="http://${VM_IP}:8080" \
   TRUSTREADYD_AWS_SECRET_ACCESS_KEY="thisisnotasecret" \
   TRUSTREADYD_AWS_USE_PATH_STYLE=true \
   TRUSTREADYD_ACME_DIRECTORY="https://127.0.0.1:9000/acme/acme/directory" \
-  TRUSTREADYD_ACME_EMAIL="admin@probo.com" \
+  TRUSTREADYD_ACME_EMAIL="admin@trustready.io" \
   TRUSTREADYD_ACME_KEY_TYPE="EC256" \
   TRUSTREADYD_ACME_ROOT_CA="$(cat /workspace/compose/step-ca/certs/root_ca.crt)" \
   /workspace/bin/trustreadyd-bootstrap -output /etc/trustreadyd/config.yml
@@ -144,28 +144,28 @@ chown "${LIMA_USER}:${LIMA_USER}" /etc/trustreadyd/config.yml "${OAUTH2_SIGNING_
 
 # Bind-mount VM-local node_modules over the shared workspace to avoid
 # platform conflicts between macOS host and Linux VM native binaries.
-cat >/etc/systemd/system/probo-node-modules.service <<EOF
+cat >/etc/systemd/system/trustready-node-modules.service <<EOF
 [Unit]
 Description=Bind-mount VM-local node_modules over workspace
 DefaultDependencies=no
-Before=probo-console.service probo-compliance-portal.service probo-employee-portal.service
+Before=trustready-console.service trustready-compliance-portal.service trustready-employee-portal.service
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStartPre=/bin/mkdir -p /var/lib/probo/node_modules /workspace/node_modules
-ExecStart=/bin/mount --bind /var/lib/probo/node_modules /workspace/node_modules
-ExecStartPost=/bin/chown ${LIMA_USER}:${LIMA_USER} /var/lib/probo/node_modules
+ExecStartPre=/bin/mkdir -p /var/lib/trustready/node_modules /workspace/node_modules
+ExecStart=/bin/mount --bind /var/lib/trustready/node_modules /workspace/node_modules
+ExecStartPost=/bin/chown ${LIMA_USER}:${LIMA_USER} /var/lib/trustready/node_modules
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable --now probo-node-modules.service
+systemctl enable --now trustready-node-modules.service
 
 # Populate VM-local node_modules with Linux-native binaries (esbuild, etc.).
-# The host's node_modules is macOS; `probo-node-modules.service` bind-mounts an
+# The host's node_modules is macOS; `trustready-node-modules.service` bind-mounts an
 # empty tree over /workspace/node_modules, and we install into it once here so
 # the dev servers can run without cross-platform mismatches.
 su - "${LIMA_USER}" -c "cd /workspace && npm ci"
@@ -179,9 +179,9 @@ echo "VITE_API_URL=http://${VM_IP}:8080" >/workspace/apps/compliance-portal/.env
 echo "VITE_API_URL=http://${VM_IP}:8080" >/workspace/apps/employee-portal/.env
 
 # Install systemd services for the sandbox
-cat >/etc/systemd/system/probo-stack.service <<EOF
+cat >/etc/systemd/system/trustready-stack.service <<EOF
 [Unit]
-Description=Probo Docker Compose Stack
+Description=TrustReady Docker Compose Stack
 Requires=docker.service
 After=docker.service
 
@@ -201,9 +201,9 @@ EOF
 
 cat >/etc/systemd/system/trustreadyd.service <<EOF
 [Unit]
-Description=Probo API Server
-Requires=probo-stack.service
-After=probo-stack.service
+Description=TrustReady API Server
+Requires=trustready-stack.service
+After=trustready-stack.service
 
 [Service]
 Type=simple
@@ -219,11 +219,11 @@ Environment=PATH=/usr/local/go/bin:/usr/local/bin:/usr/bin:/bin
 WantedBy=multi-user.target
 EOF
 
-cat >/etc/systemd/system/probo-console.service <<EOF
+cat >/etc/systemd/system/trustready-console.service <<EOF
 [Unit]
-Description=Probo Console Dev Server
-Requires=probo-node-modules.service
-After=probo-node-modules.service trustreadyd.service
+Description=TrustReady Console Dev Server
+Requires=trustready-node-modules.service
+After=trustready-node-modules.service trustreadyd.service
 
 [Service]
 Type=simple
@@ -237,11 +237,11 @@ RestartSec=3s
 WantedBy=multi-user.target
 EOF
 
-cat >/etc/systemd/system/probo-compliance-portal.service <<EOF
+cat >/etc/systemd/system/trustready-compliance-portal.service <<EOF
 [Unit]
-Description=Probo Compliance Portal Dev Server
-Requires=probo-node-modules.service
-After=probo-node-modules.service trustreadyd.service
+Description=TrustReady Compliance Portal Dev Server
+Requires=trustready-node-modules.service
+After=trustready-node-modules.service trustreadyd.service
 
 [Service]
 Type=simple
@@ -255,11 +255,11 @@ RestartSec=3s
 WantedBy=multi-user.target
 EOF
 
-cat >/etc/systemd/system/probo-employee-portal.service <<EOF
+cat >/etc/systemd/system/trustready-employee-portal.service <<EOF
 [Unit]
-Description=Probo Employee Portal Dev Server
-Requires=probo-node-modules.service
-After=probo-node-modules.service trustreadyd.service
+Description=TrustReady Employee Portal Dev Server
+Requires=trustready-node-modules.service
+After=trustready-node-modules.service trustreadyd.service
 
 [Service]
 Type=simple
@@ -274,5 +274,5 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable --now probo-stack.service
-systemctl enable --now trustreadyd.service probo-console.service probo-compliance-portal.service probo-employee-portal.service
+systemctl enable --now trustready-stack.service
+systemctl enable --now trustreadyd.service trustready-console.service trustready-compliance-portal.service trustready-employee-portal.service

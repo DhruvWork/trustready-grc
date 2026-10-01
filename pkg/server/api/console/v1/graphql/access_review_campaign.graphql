@@ -315,7 +315,7 @@ prevents the member listing that the access review actually runs.
 
 - EMPTY means the provider answered and owns no organization we can see.
   On GitHub this is usually an organization that enabled OAuth App access
-  restrictions without approving Probo, or a personal account (which never
+  restrictions without approving TrustReady, or a personal account (which never
   appears in the org listing). The user acts on remediationUrl.
 - UNAVAILABLE means the call itself failed: revoked or expired credential,
   a missing scope, or a provider outage. The user must reconnect or retry;
@@ -328,7 +328,7 @@ type ProviderOrganizations {
     """
     Where the user can act when the list is EMPTY — for GitHub, the page
     listing their authorized OAuth Apps, where an org owner can be asked
-    to approve Probo. Null when we know of no such page.
+    to approve TrustReady. Null when we know of no such page.
     """
     remediationUrl: String
 }

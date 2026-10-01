@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -76,7 +76,7 @@ func reviewIntent(items []bot.ItemIntent) bot.MessageIntent {
 				Style: bot.ActionStyleDanger,
 			},
 			{
-				Label: "Open in Probo",
+				Label: "Open in TrustReady",
 				URL:   "https://app.example.com/access",
 			},
 		},
@@ -130,10 +130,10 @@ func TestRenderMessageIntent_RendersHeaderContextAndBulkActions(t *testing.T) {
 	assert.Equal(t, "primary", grantAll["style"])
 	assert.Equal(t, "compliance_access.approve_all", grantAll["action_id"])
 
-	openInProbo, ok := buttons[2].(map[string]any)
+	openInTrustReady, ok := buttons[2].(map[string]any)
 	require.True(t, ok)
-	assert.Equal(t, "https://app.example.com/access", openInProbo["url"])
-	assert.NotContains(t, openInProbo, "action_id")
+	assert.Equal(t, "https://app.example.com/access", openInTrustReady["url"])
+	assert.NotContains(t, openInTrustReady, "action_id")
 }
 
 func TestRenderMessageIntent_RendersPendingItemAsSingleRowWithMenu(t *testing.T) {
@@ -252,7 +252,7 @@ func TestRenderMessageIntent_TruncatesWithinSlackBlockLimit(t *testing.T) {
 
 	noticeText, ok := elements(t, notice, "elements")[0].(map[string]any)
 	require.True(t, ok)
-	assert.Equal(t, "16 more items are only listed in Probo.", noticeText["text"])
+	assert.Equal(t, "16 more items are only listed in TrustReady.", noticeText["text"])
 }
 
 func TestRenderMessageIntent_OmitsBlocksForPlainText(t *testing.T) {

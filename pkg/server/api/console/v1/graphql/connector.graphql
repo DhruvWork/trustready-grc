@@ -177,7 +177,7 @@ type ConnectorProviderInfo {
     provider: ConnectorProvider!
     displayName: String!
     """
-    documentationUrl is the public probo.com docs page for connecting this
+    documentationUrl is the public trustready.io docs page for connecting this
     provider as an access source, or null when no doc page exists yet.
     """
     documentationUrl: String
@@ -196,7 +196,7 @@ type ConnectorProviderInfo {
     configuredProtocols: [ConnectorProtocol!]!
     apiKeySupported: Boolean!
     """
-    apiKeyManaged is true when the provider connects with a Probo-supplied
+    apiKeyManaged is true when the provider connects with a TrustReady-supplied
     API key (Model B) that the operator has configured, through the API-key
     form: the customer supplies only the extra settings, not the key. False
     until the key is configured, which keeps such a provider out of the
@@ -240,7 +240,7 @@ type ConnectorProviderInfo {
     clientCredentialsTokenUrl: String
     """
     workloadIdentitySupported is true when this provider connects by federating
-    a Probo-issued OIDC token into the customer's cloud account, and this
+    a TrustReady-issued OIDC token into the customer's cloud account, and this
     deployment has the identity federation issuer enabled.
     """
     workloadIdentitySupported: Boolean!
@@ -252,10 +252,10 @@ type ConnectorProviderInfo {
     workloadIdentityExtraSettings: [ConnectorProviderSettingInfo!]!
     """
     installSupported is true when this provider is connected by installing
-    Probo's app at the vendor: the client redirects to the install ceremony
+    TrustReady's app at the vendor: the client redirects to the install ceremony
     instead of rendering a credential form, and the vendor tenant is proven
     server-side on the way back. False until the operator has configured the
-    Probo-held credentials the ceremony needs.
+    TrustReady-held credentials the ceremony needs.
     """
     installSupported: Boolean!
     """
@@ -327,7 +327,7 @@ input ConnectorFilter {
 Why a connector's credential is or is not usable right now.
 
 DISCONNECTED covers every reason the credential itself did not work —
-revoked, expired, a role Probo cannot assume, a provider outage — because
+revoked, expired, a role TrustReady cannot assume, a provider outage — because
 the underlying failure wraps provider-controlled text and stays
 server-side. A credential the provider took before refusing the operation
 is NOT_AUTHORIZED instead: a different thing for the customer to fix.
@@ -363,7 +363,7 @@ type Connector implements Node {
     """
     displayName: String! @goField(forceResolver: true)
     """
-    documentationUrl is the public probo.com docs page for connecting this
+    documentationUrl is the public trustready.io docs page for connecting this
     provider as an access source, or null when no doc page exists yet.
     """
     documentationUrl: String @goField(forceResolver: true)
@@ -494,7 +494,7 @@ input CreateAPIKeyConnectorInput {
     """
     apiKey is the customer-supplied credential. It is null for
     ManagedAPIKey (Model B) providers such as Crisp, where the server
-    injects Probo's own key and the customer provides only the extra
+    injects TrustReady's own key and the customer provides only the extra
     settings.
     """
     apiKey: String

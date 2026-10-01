@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -77,7 +77,7 @@ func TestCrispDriver(t *testing.T) {
 	// operators/list carries no account-status signal, so Active stays nil.
 	assert.Nil(t, owner.Active)
 
-	// Regression: "sandbox" is the Marketplace plugin developer (Probo itself),
+	// Regression: "sandbox" is the Marketplace plugin developer (TrustReady itself),
 	// not a workspace member. It repeats the operator's email under its own
 	// user_id, so before the type filter it landed as a second account for the
 	// same human in every Crisp review.

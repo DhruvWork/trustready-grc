@@ -25,4 +25,4 @@ If empty or non-user-facing only, do not release this track.
 ## Notes
 
 CI builds binaries for 9 OS/arch targets, publishes a GitHub Release,
-and updates the Homebrew formula at `getprobo/homebrew-tap`.
+and updates the Homebrew formula at `trustready/homebrew-tap`.

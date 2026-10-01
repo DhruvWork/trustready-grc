@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import (
 
 	"go.gearno.de/kit/log"
 	"go.gearno.de/x/ref"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/mcp/v1/types"
 )
 
@@ -35,8 +35,8 @@ func (r *Resolver) workloadIdentitySettings(
 	ctx context.Context,
 	input *types.CreateWorkloadIdentityConnectorInput,
 ) ([]byte, error) {
-	raw, err := probo.MarshalWorkloadIdentitySettings(
-		probo.WorkloadIdentitySettingsInput{
+	raw, err := trustready.MarshalWorkloadIdentitySettings(
+		trustready.WorkloadIdentitySettingsInput{
 			Provider:                    input.Provider,
 			AWSRoleARN:                  ref.UnrefOrZero(input.AwsRoleArn),
 			GCPWorkloadIdentityProvider: ref.UnrefOrZero(input.GcpWorkloadIdentityProvider),
@@ -48,7 +48,7 @@ func (r *Resolver) workloadIdentitySettings(
 		},
 	)
 	if err != nil {
-		if errors.Is(err, probo.ErrMarshalWorkloadIdentitySettings) {
+		if errors.Is(err, trustready.ErrMarshalWorkloadIdentitySettings) {
 			r.logger.ErrorCtx(ctx, "cannot marshal workload identity connector settings", log.Error(err))
 
 			return nil, fmt.Errorf("internal server error")
@@ -64,8 +64,8 @@ func (r *Resolver) organizationConnectorSettings(
 	ctx context.Context,
 	input *types.CreateOrganizationConnectorInput,
 ) ([]byte, error) {
-	raw, err := probo.MarshalWorkloadIdentitySettings(
-		probo.WorkloadIdentitySettingsInput{
+	raw, err := trustready.MarshalWorkloadIdentitySettings(
+		trustready.WorkloadIdentitySettingsInput{
 			Provider:                    input.Provider,
 			AWSRoleARN:                  ref.UnrefOrZero(input.AwsRoleArn),
 			AWSMemberRoleName:           ref.UnrefOrZero(input.AwsMemberRoleName),
@@ -78,7 +78,7 @@ func (r *Resolver) organizationConnectorSettings(
 		},
 	)
 	if err != nil {
-		if errors.Is(err, probo.ErrMarshalWorkloadIdentitySettings) {
+		if errors.Is(err, trustready.ErrMarshalWorkloadIdentitySettings) {
 			r.logger.ErrorCtx(ctx, "cannot marshal organization connector settings", log.Error(err))
 
 			return nil, fmt.Errorf("internal server error")

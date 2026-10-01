@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -152,23 +152,23 @@ func TestAzureIdentityRecord_PrincipalTypes(t *testing.T) {
 			name: "user",
 			identity: azureIdentity{
 				PrincipalType:  azurePrincipalUser,
-				Email:          "alice@probo-azure.test",
+				Email:          "alice@trustready-azure.test",
 				AccountEnabled: new(true),
 			},
 			accountType: coredata.AccessReviewEntryAccountTypeUser,
 			authMethod:  coredata.AccessReviewEntryAuthMethodSSO,
 			active:      new(true),
-			email:       "alice@probo-azure.test",
+			email:       "alice@trustready-azure.test",
 		},
 		{
 			name: "group",
 			identity: azureIdentity{
 				PrincipalType: azurePrincipalGroup,
-				Email:         "eng@probo-azure.test",
+				Email:         "eng@trustready-azure.test",
 			},
 			accountType: coredata.AccessReviewEntryAccountTypeUser,
 			authMethod:  coredata.AccessReviewEntryAuthMethodUnknown,
-			email:       "eng@probo-azure.test",
+			email:       "eng@trustready-azure.test",
 		},
 		{
 			name: "disabled service principal",

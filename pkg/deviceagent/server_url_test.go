@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,17 +36,17 @@ func TestNormalizeServerURL(t *testing.T) {
 		want    string
 		wantErr bool
 	}{
-		{name: "adds https to bare hostnames", input: "eu.probo.com", want: EUConsoleURL},
-		{name: "trims trailing slash", input: "https://us.probo.com/", want: USConsoleURL},
+		{name: "adds https to bare hostnames", input: "eu.trustready.io", want: EUConsoleURL},
+		{name: "trims trailing slash", input: "https://us.trustready.io/", want: USConsoleURL},
 		{name: "rejects whitespace-only input", input: "   ", wantErr: true},
-		{name: "rejects paths", input: "https://probo.example.com/workspace", wantErr: true},
-		{name: "accepts uppercase scheme", input: "HTTPS://eu.probo.com/", want: EUConsoleURL},
-		{name: "lowercases mixed-case hostname", input: "HTTPS://US.Probo.Com/", want: USConsoleURL},
-		{name: "lowercases bare mixed-case hostname", input: "EU.probo.com", want: EUConsoleURL},
+		{name: "rejects paths", input: "https://trustready.example.com/workspace", wantErr: true},
+		{name: "accepts uppercase scheme", input: "HTTPS://eu.trustready.io/", want: EUConsoleURL},
+		{name: "lowercases mixed-case hostname", input: "HTTPS://US.TrustReady.Com/", want: USConsoleURL},
+		{name: "lowercases bare mixed-case hostname", input: "EU.trustready.io", want: EUConsoleURL},
 		{name: "lowercases hostname with port", input: "http://LocalHost:3000", want: "http://localhost:3000"},
-		{name: "rejects user credentials", input: "https://user@eu.probo.com", wantErr: true},
-		{name: "rejects query parameters", input: "https://eu.probo.com?foo=bar", wantErr: true},
-		{name: "rejects fragments", input: "https://eu.probo.com#fragment", wantErr: true},
+		{name: "rejects user credentials", input: "https://user@eu.trustready.io", wantErr: true},
+		{name: "rejects query parameters", input: "https://eu.trustready.io?foo=bar", wantErr: true},
+		{name: "rejects fragments", input: "https://eu.trustready.io#fragment", wantErr: true},
 		{name: "rejects port-only host", input: "https://:443", wantErr: true},
 		{name: "rejects bare port", input: ":443", wantErr: true},
 	}
@@ -109,7 +109,7 @@ func TestConsoleEnrollURL(t *testing.T) {
 	}
 }
 
-func TestIsProboServers(t *testing.T) {
+func TestIsTrustReadyServers(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
@@ -119,11 +119,11 @@ func TestIsProboServers(t *testing.T) {
 	}{
 		{name: "US console", input: USConsoleURL, want: true},
 		{name: "EU console", input: EUConsoleURL, want: true},
-		{name: "mixed-case US host", input: "HTTPS://US.Probo.Com", want: true},
-		{name: "bare EU host", input: "eu.probo.com", want: true},
-		{name: "self-hosted", input: "https://probo.example.com", want: false},
+		{name: "mixed-case US host", input: "HTTPS://US.TrustReady.Com", want: true},
+		{name: "bare EU host", input: "eu.trustready.io", want: true},
+		{name: "self-hosted", input: "https://trustready.example.com", want: false},
 		{name: "http self-hosted", input: "http://localhost:3000", want: false},
-		{name: "lookalike host", input: "https://us.probo.com.evil.example", want: false},
+		{name: "lookalike host", input: "https://us.trustready.io.evil.example", want: false},
 		{name: "empty", input: "", want: false},
 	}
 
@@ -133,7 +133,7 @@ func TestIsProboServers(t *testing.T) {
 			func(t *testing.T) {
 				t.Parallel()
 
-				assert.Equal(t, tt.want, IsProboServers(tt.input))
+				assert.Equal(t, tt.want, IsTrustReadyServers(tt.input))
 			},
 		)
 	}
@@ -142,7 +142,7 @@ func TestIsProboServers(t *testing.T) {
 func TestRequiresEnrollmentConfirm(t *testing.T) {
 	t.Parallel()
 
-	assert.False(t, RequiresEnrollmentConfirm(TrustProboCloud))
+	assert.False(t, RequiresEnrollmentConfirm(TrustTrustReadyCloud))
 	assert.True(t, RequiresEnrollmentConfirm(TrustUnverified))
 	assert.True(t, RequiresEnrollmentConfirm(TrustInsecure))
 	assert.True(t, RequiresEnrollmentConfirm(TrustUnknown))
@@ -159,21 +159,21 @@ func TestEnrollmentConfirmMessage(t *testing.T) {
 	}{
 		{
 			name:      "unverified host",
-			serverURL: "https://probo.example.com",
+			serverURL: "https://trustready.example.com",
 			trust:     TrustUnverified,
-			want:      "This device will report to https://probo.example.com.\n\nThis is not a Probo server.",
+			want:      "This device will report to https://trustready.example.com.\n\nThis is not a TrustReady server.",
 		},
 		{
 			name:      "cleartext http",
-			serverURL: "http://us.probo.com",
+			serverURL: "http://us.trustready.io",
 			trust:     TrustInsecure,
-			want:      "This device will report to http://us.probo.com.\n\nThis connection is not encrypted (http).",
+			want:      "This device will report to http://us.trustready.io.\n\nThis connection is not encrypted (http).",
 		},
 		{
 			name:      "probe failed",
 			serverURL: USConsoleURL,
 			trust:     TrustUnknown,
-			want:      "This device will report to https://us.probo.com.\n\nCould not verify TLS for this server.",
+			want:      "This device will report to https://us.trustready.io.\n\nCould not verify TLS for this server.",
 		},
 	}
 

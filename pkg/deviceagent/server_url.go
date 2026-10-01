@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +28,8 @@ import (
 )
 
 const (
-	USConsoleHost = "us.probo.com"
-	EUConsoleHost = "eu.probo.com"
+	USConsoleHost = "us.trustready.io"
+	EUConsoleHost = "eu.trustready.io"
 )
 
 const (
@@ -93,8 +93,8 @@ func ConsoleEnrollURL(serverURL string) (string, error) {
 	return enrollURL, nil
 }
 
-// IsProboServers reports whether serverURL is a US or EU Probo host.
-func IsProboServers(serverURL string) bool {
+// IsTrustReadyServers reports whether serverURL is a US or EU TrustReady host.
+func IsTrustReadyServers(serverURL string) bool {
 	normalized, err := NormalizeServerURL(serverURL)
 	if err != nil {
 		return false
@@ -111,9 +111,9 @@ func IsProboServers(serverURL string) bool {
 }
 
 // RequiresEnrollmentConfirm reports whether the browser-enrollment path
-// must show a native confirm dialog. Pinned Probo hosts skip it.
+// must show a native confirm dialog. Pinned TrustReady hosts skip it.
 func RequiresEnrollmentConfirm(trust EnrollmentTrust) bool {
-	return trust != TrustProboCloud
+	return trust != TrustTrustReadyCloud
 }
 
 // EnrollmentConfirmMessage is the body of the browser-enrollment confirm dialog.
@@ -126,6 +126,6 @@ func EnrollmentConfirmMessage(serverURL string, trust EnrollmentTrust) string {
 	case TrustUnknown:
 		return message + "\n\nCould not verify TLS for this server."
 	default:
-		return message + "\n\nThis is not a Probo server."
+		return message + "\n\nThis is not a TrustReady server."
 	}
 }

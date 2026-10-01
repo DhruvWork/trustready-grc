@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/saferedirect"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 )
@@ -59,9 +59,9 @@ var (
 // query param on the connections page, which already toasts it. They say what
 // the customer can do and nothing about which check failed.
 const (
-	installMessageAlreadyUsed  = "This installation link was already used. Start the connection again from Probo."
+	installMessageAlreadyUsed  = "This installation link was already used. Start the connection again from TrustReady."
 	installMessageUnavailable  = "The provider could not be reached to verify the installation. Please try again in a moment."
-	installMessageNotVerified  = "The installation could not be verified. Start the connection again from Probo."
+	installMessageNotVerified  = "The installation could not be verified. Start the connection again from TrustReady."
 	installMessageNotPermitted = "You no longer have permission to connect this provider for this organization."
 	installMessageInternal     = "Something went wrong while finishing the installation. Please try again."
 )
@@ -131,7 +131,7 @@ func installAuthorizationFailure(err error) (int, error) {
 const installClaimedWorkTimeout = 30 * time.Second
 
 // handleConnectorInstallComplete finishes an app-install ceremony: the vendor
-// top-level-redirects the customer's browser here with Probo's signed state and
+// top-level-redirects the customer's browser here with TrustReady's signed state and
 // its own proof of the installed tenant.
 //
 // The ordering below is load-bearing. The state is validated before Postgres is
@@ -143,7 +143,7 @@ func handleConnectorInstallComplete(
 	logger *log.Logger,
 	iamSvc *iam.Service,
 	baseURL *baseurl.BaseURL,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	providerRegistry *provider.Registry,
 	installStateKey string,
 	safeRedirect *saferedirect.SafeRedirect,
@@ -208,7 +208,7 @@ func handleConnectorInstallComplete(
 
 		// The state is spendable only by the human it was minted for. Verifying
 		// the vendor's proof establishes that the browser came from a real
-		// install of that tenant; it says nothing about which Probo organization
+		// install of that tenant; it says nothing about which TrustReady organization
 		// the tenant belongs in. Without this, anyone holding
 		// ActionConnectorInitiate anywhere could hand the vendor's own install
 		// link to an administrator of an unrelated tenant and capture it on a
@@ -244,7 +244,7 @@ func handleConnectorInstallComplete(
 				Principal: identity.ID,
 				Resource:  organizationID,
 				Session:   &session.ID,
-				Action:    probo.ActionConnectorInitiate,
+				Action:    trustready.ActionConnectorInitiate,
 			},
 		); err != nil {
 			// The authorizer's own error is logged and never rendered: this
@@ -266,9 +266,9 @@ func handleConnectorInstallComplete(
 
 		// Claimed before the outbound call, so a refresh or a link-preview
 		// prefetch cannot run a second verification in parallel with this one.
-		processingToken, err := proboSvc.Connectors.ClaimInstallState(ctx, scope, organizationID, state)
+		processingToken, err := trustreadySvc.Connectors.ClaimInstallState(ctx, scope, organizationID, state)
 		if err != nil {
-			if errors.Is(err, probo.ErrInstallStateAlreadyUsed) {
+			if errors.Is(err, trustready.ErrInstallStateAlreadyUsed) {
 				redirectInstallOutcome(w, r, logger, baseURL, safeRedirect, organizationID, installMessageAlreadyUsed)
 				return
 			}
@@ -302,7 +302,7 @@ func handleConnectorInstallComplete(
 
 		httpClient, err := providerRegistry.NewAPIKeyConnection(p, managedKey).Client(ctx)
 		if err != nil {
-			releaseInstallState(ctx, logger, proboSvc, scope, organizationID, state, processingToken)
+			releaseInstallState(ctx, logger, trustreadySvc, scope, organizationID, state, processingToken)
 			logger.ErrorCtx(ctx, "cannot build connector install verification client", log.Error(err))
 			redirectInstallOutcome(w, r, logger, baseURL, safeRedirect, organizationID, installMessageInternal)
 
@@ -316,7 +316,7 @@ func handleConnectorInstallComplete(
 			// gets exactly one attempt. The classification is the provider's,
 			// taken on the vendor's status and never on an error string.
 			if errors.Is(err, provider.ErrInstallVerificationTransient) {
-				releaseInstallState(ctx, logger, proboSvc, scope, organizationID, state, processingToken)
+				releaseInstallState(ctx, logger, trustreadySvc, scope, organizationID, state, processingToken)
 				logger.WarnCtx(
 					ctx,
 					"connector install verification is temporarily unavailable",
@@ -328,7 +328,7 @@ func handleConnectorInstallComplete(
 				return
 			}
 
-			burnInstallState(ctx, logger, proboSvc, scope, organizationID, state, processingToken)
+			burnInstallState(ctx, logger, trustreadySvc, scope, organizationID, state, processingToken)
 			logger.WarnCtx(
 				ctx,
 				"rejecting connector install callback whose proof did not verify",
@@ -352,7 +352,7 @@ func handleConnectorInstallComplete(
 				Principal: identity.ID,
 				Resource:  organizationID,
 				Session:   &session.ID,
-				Action:    probo.ActionConnectorInitiate,
+				Action:    trustready.ActionConnectorInitiate,
 			},
 		); err != nil {
 			// A denial is final for this state; a storage failure is not, and
@@ -361,9 +361,9 @@ func handleConnectorInstallComplete(
 			message := installMessageNotPermitted
 
 			if installAuthorizationDenied(err) {
-				burnInstallState(ctx, logger, proboSvc, scope, organizationID, state, processingToken)
+				burnInstallState(ctx, logger, trustreadySvc, scope, organizationID, state, processingToken)
 			} else {
-				releaseInstallState(ctx, logger, proboSvc, scope, organizationID, state, processingToken)
+				releaseInstallState(ctx, logger, trustreadySvc, scope, organizationID, state, processingToken)
 
 				message = installMessageInternal
 			}
@@ -381,11 +381,11 @@ func handleConnectorInstallComplete(
 		}
 
 		// The key is empty by design: (*provider.Registry).APIKeyFor substitutes
-		// the Probo-held key at every use, so anything stored here is discarded.
-		cnnctr, err := proboSvc.Connectors.CompleteInstall(
+		// the TrustReady-held key at every use, so anything stored here is discarded.
+		cnnctr, err := trustreadySvc.Connectors.CompleteInstall(
 			claimedCtx,
 			scope,
-			probo.CompleteConnectorInstallRequest{
+			trustready.CompleteConnectorInstallRequest{
 				OrganizationID:  organizationID,
 				Provider:        p,
 				SettingsKey:     reg.Install.SettingsResourceKey,
@@ -398,7 +398,7 @@ func handleConnectorInstallComplete(
 		if err != nil {
 			// The burn lives inside that transaction, so it rolled back with
 			// it: the claim is still held and a retry is the right answer.
-			releaseInstallState(ctx, logger, proboSvc, scope, organizationID, state, processingToken)
+			releaseInstallState(ctx, logger, trustreadySvc, scope, organizationID, state, processingToken)
 			logger.ErrorCtx(ctx, "cannot complete connector install", log.Error(err))
 			redirectInstallOutcome(w, r, logger, baseURL, safeRedirect, organizationID, installMessageInternal)
 
@@ -460,13 +460,13 @@ func redirectInstallOutcome(
 func releaseInstallState(
 	ctx context.Context,
 	logger *log.Logger,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	scope coredata.Scoper,
 	organizationID gid.GID,
 	state string,
 	processingToken string,
 ) {
-	if err := proboSvc.Connectors.ReleaseInstallState(
+	if err := trustreadySvc.Connectors.ReleaseInstallState(
 		context.WithoutCancel(ctx),
 		scope,
 		organizationID,
@@ -482,13 +482,13 @@ func releaseInstallState(
 func burnInstallState(
 	ctx context.Context,
 	logger *log.Logger,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	scope coredata.Scoper,
 	organizationID gid.GID,
 	state string,
 	processingToken string,
 ) {
-	if err := proboSvc.Connectors.BurnInstallState(
+	if err := trustreadySvc.Connectors.BurnInstallState(
 		context.WithoutCancel(ctx),
 		scope,
 		organizationID,

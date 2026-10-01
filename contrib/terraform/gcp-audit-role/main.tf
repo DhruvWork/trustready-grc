@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Probo Inc <hello@probo.com>.
+ * Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,53 +37,53 @@ locals {
   # The federated principal is the organization subject on this pool, not a
   # principalSet. A wildcard here would let any subject this issuer can mint
   # impersonate the service account.
-  workload_identity_user = "principal://iam.googleapis.com/projects/${data.google_project.current.number}/locations/global/workloadIdentityPools/${google_iam_workload_identity_pool.probo.workload_identity_pool_id}/subject/${var.probo_subject}"
+  workload_identity_user = "principal://iam.googleapis.com/projects/${data.google_project.current.number}/locations/global/workloadIdentityPools/${google_iam_workload_identity_pool.trustready.workload_identity_pool_id}/subject/${var.trustready_subject}"
 }
 
-resource "google_iam_workload_identity_pool" "probo" {
+resource "google_iam_workload_identity_pool" "trustready" {
   workload_identity_pool_id = var.pool_id
-  display_name              = "Probo"
-  description               = "Workload Identity Federation pool for Probo (${var.probo_issuer_url})"
+  display_name              = "TrustReady"
+  description               = "Workload Identity Federation pool for TrustReady (${var.trustready_issuer_url})"
 }
 
-resource "google_iam_workload_identity_pool_provider" "probo" {
-  workload_identity_pool_id          = google_iam_workload_identity_pool.probo.workload_identity_pool_id
+resource "google_iam_workload_identity_pool_provider" "trustready" {
+  workload_identity_pool_id          = google_iam_workload_identity_pool.trustready.workload_identity_pool_id
   workload_identity_pool_provider_id = var.provider_id
-  display_name                       = "Probo"
-  description                        = "OIDC provider for Probo (${var.probo_issuer_url})"
+  display_name                       = "TrustReady"
+  description                        = "OIDC provider for TrustReady (${var.trustready_issuer_url})"
 
-  # google.subject is the only attribute Probo needs. The condition pins the
+  # google.subject is the only attribute TrustReady needs. The condition pins the
   # subject to this organization; CEL == is StringEquals, not a prefix match.
   attribute_mapping = {
     "google.subject" = "assertion.sub"
   }
 
-  attribute_condition = "assertion.sub == \"${var.probo_subject}\""
+  attribute_condition = "assertion.sub == \"${var.trustready_subject}\""
 
   oidc {
-    issuer_uri = var.probo_issuer_url
+    issuer_uri = var.trustready_issuer_url
     # allowed_audiences is deliberately unset. An empty list tells GCP to
     # accept the default provider URL, with or without the https: prefix.
-    # Probo mints that URL as the JWT aud; the STS exchange uses the // form.
+    # TrustReady mints that URL as the JWT aud; the STS exchange uses the // form.
   }
 }
 
-resource "google_service_account" "probo_audit" {
+resource "google_service_account" "trustready_audit" {
   account_id   = var.service_account_name
-  display_name = "Probo Audit"
-  description  = "Read-only audit access for Probo (${var.probo_issuer_url})"
+  display_name = "TrustReady Audit"
+  description  = "Read-only audit access for TrustReady (${var.trustready_issuer_url})"
 }
 
 resource "google_project_iam_member" "security_reviewer" {
   project = data.google_project.current.project_id
   role    = "roles/iam.securityReviewer"
-  member  = "serviceAccount:${google_service_account.probo_audit.email}"
+  member  = "serviceAccount:${google_service_account.trustready_audit.email}"
 }
 
 resource "google_project_iam_member" "service_account_viewer" {
   project = data.google_project.current.project_id
   role    = "roles/iam.serviceAccountViewer"
-  member  = "serviceAccount:${google_service_account.probo_audit.email}"
+  member  = "serviceAccount:${google_service_account.trustready_audit.email}"
 }
 
 resource "google_logging_log_view_iam_member" "required_logs" {
@@ -92,17 +92,17 @@ resource "google_logging_log_view_iam_member" "required_logs" {
   bucket   = "_Required"
   name     = "_AllLogs"
   role     = "roles/logging.viewAccessor"
-  member   = "serviceAccount:${google_service_account.probo_audit.email}"
+  member   = "serviceAccount:${google_service_account.trustready_audit.email}"
 }
 
 resource "google_project_iam_member" "policy_analyzer" {
   project = data.google_project.current.project_id
   role    = "roles/policyanalyzer.activityAnalysisViewer"
-  member  = "serviceAccount:${google_service_account.probo_audit.email}"
+  member  = "serviceAccount:${google_service_account.trustready_audit.email}"
 }
 
 resource "google_service_account_iam_member" "workload_identity_user" {
-  service_account_id = google_service_account.probo_audit.name
+  service_account_id = google_service_account.trustready_audit.name
   role               = "roles/iam.workloadIdentityUser"
   member             = local.workload_identity_user
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ import (
 // separate `go test` package processes sharing trustreadyd_test would otherwise
 // consume each other's fixtures.
 func RunGlobalQueuePackage(m *testing.M) int {
-	lockPath := filepath.Join(os.TempDir(), "probo-global-queue-tests.lock")
+	lockPath := filepath.Join(os.TempDir(), "trustready-global-queue-tests.lock")
 
 	lockFile, err := os.OpenFile(lockPath, os.O_CREATE|os.O_RDWR, 0o600)
 	if err != nil {

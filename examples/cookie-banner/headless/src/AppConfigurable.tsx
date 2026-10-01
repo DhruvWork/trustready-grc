@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,11 +41,11 @@ import { headlessRootHTML } from "./markup";
 const headlessLogger = getExampleLogger("headless");
 
 const headlessActions: Record<string, string> = {
-  "PROBO-ACKNOWLEDGE-BUTTON": "Acknowledge",
-  "PROBO-ACCEPT-BUTTON": "Accept All",
-  "PROBO-REJECT-BUTTON": "Reject All",
-  "PROBO-CUSTOMIZE-BUTTON": "Customize",
-  "PROBO-SAVE-BUTTON": "Save Preferences",
+  "TRUSTREADY-ACKNOWLEDGE-BUTTON": "Acknowledge",
+  "TRUSTREADY-ACCEPT-BUTTON": "Accept All",
+  "TRUSTREADY-REJECT-BUTTON": "Reject All",
+  "TRUSTREADY-CUSTOMIZE-BUTTON": "Customize",
+  "TRUSTREADY-SAVE-BUTTON": "Save Preferences",
 };
 
 function headlessActionLabel(target: EventTarget | null): string | null {
@@ -54,13 +54,13 @@ function headlessActionLabel(target: EventTarget | null): string | null {
   }
 
   const host = target.closest(
-    "probo-acknowledge-button, probo-accept-button, probo-reject-button, probo-customize-button, probo-save-button",
+    "trustready-acknowledge-button, trustready-accept-button, trustready-reject-button, trustready-customize-button, trustready-save-button",
   );
   if (!host) {
     return null;
   }
 
-  if (host.tagName === "PROBO-REJECT-BUTTON" && host.closest("probo-privacy-choices")) {
+  if (host.tagName === "TRUSTREADY-REJECT-BUTTON" && host.closest("trustready-privacy-choices")) {
     return "Do Not Sell";
   }
 
@@ -96,24 +96,24 @@ export function App() {
     };
     container.addEventListener("click", onClick);
 
-    const root = container.querySelector("probo-cookie-banner-root");
+    const root = container.querySelector("trustready-cookie-banner-root");
     if (root) {
-      root.addEventListener("probo-ready", (e: Event) => {
+      root.addEventListener("trustready-ready", (e: Event) => {
         const detail = (e as CustomEvent).detail as {
           config?: BannerConfig;
         };
         const bannerConfig = detail?.config;
         enableNamedLoggers();
-        headlessLogger.debug("[headless] probo-ready", detail);
-        pushEvent("probo-ready", {
+        headlessLogger.debug("[headless] trustready-ready", detail);
+        pushEvent("trustready-ready", {
           ...detail,
           layout: bannerConfig ? resolveLayout(bannerConfig) : null,
           bannerText: bannerConfig ? resolveBannerText(bannerConfig) : null,
         });
       });
-      root.addEventListener("probo-consent", (e: Event) => {
-        headlessLogger.debug("[headless] probo-consent", (e as CustomEvent).detail);
-        pushEvent("probo-consent", (e as CustomEvent).detail);
+      root.addEventListener("trustready-consent", (e: Event) => {
+        headlessLogger.debug("[headless] trustready-consent", (e as CustomEvent).detail);
+        pushEvent("trustready-consent", (e as CustomEvent).detail);
       });
     }
 

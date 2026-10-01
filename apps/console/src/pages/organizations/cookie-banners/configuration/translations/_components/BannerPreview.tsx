@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -47,14 +47,14 @@ export function BannerPreview({
   return (
     <div
       style={{
-        background: "var(--probo-bg, #ffffff)",
-        color: "var(--probo-text, #1a1a1a)",
-        borderRadius: "var(--probo-radius, 12px)",
+        background: "var(--trustready-bg, #ffffff)",
+        color: "var(--trustready-text, #1a1a1a)",
+        borderRadius: "var(--trustready-radius, 12px)",
         boxShadow:
-          "var(--probo-shadow, 0 4px 24px rgba(0, 0, 0, 0.12))",
+          "var(--trustready-shadow, 0 4px 24px rgba(0, 0, 0, 0.12))",
         fontFamily:
-          "var(--probo-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)",
-        fontSize: "var(--probo-font-size, 14px)",
+          "var(--trustready-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)",
+        fontSize: "var(--trustready-font-size, 14px)",
         lineHeight: 1.5,
         maxWidth: 450,
         width: "100%",
@@ -63,7 +63,7 @@ export function BannerPreview({
     >
       <p
         style={{
-          fontSize: "calc(var(--probo-font-size, 14px) + 2px)",
+          fontSize: "calc(var(--trustready-font-size, 14px) + 2px)",
           fontWeight: 600,
           margin: "0 0 8px",
         }}
@@ -72,7 +72,7 @@ export function BannerPreview({
       </p>
       <p
         style={{
-          color: "var(--probo-text-secondary, #555555)",
+          color: "var(--trustready-text-secondary, #555555)",
           margin: "0 0 20px",
         }}
       >
@@ -83,14 +83,14 @@ export function BannerPreview({
                   <span key={`p${pi}`}>
                     {privPart}
                     {pi < arr.length - 1 && (
-                      <a href="#" onClick={e => e.preventDefault()} style={{ color: "var(--probo-accent, #1a1a1a)", textDecoration: "underline" }}>
+                      <a href="#" onClick={e => e.preventDefault()} style={{ color: "var(--trustready-accent, #1a1a1a)", textDecoration: "underline" }}>
                         {privacyPolicyLinkText}
                       </a>
                     )}
                   </span>
                 ))}
                 {ci < cookieParts.length - 1 && (
-                  <a href="#" onClick={e => e.preventDefault()} style={{ color: "var(--probo-accent, #1a1a1a)", textDecoration: "underline" }}>
+                  <a href="#" onClick={e => e.preventDefault()} style={{ color: "var(--trustready-accent, #1a1a1a)", textDecoration: "underline" }}>
                     {cookiePolicyLinkText}
                   </a>
                 )}
@@ -111,12 +111,12 @@ export function BannerPreview({
             type="button"
             style={{
               padding: "8px 10px",
-              borderRadius: "var(--probo-btn-radius, 8px)",
-              border: "1px solid var(--probo-accent, #1a1a1a)",
-              background: "var(--probo-accent, #1a1a1a)",
-              color: "var(--probo-accent-text, #ffffff)",
+              borderRadius: "var(--trustready-btn-radius, 8px)",
+              border: "1px solid var(--trustready-accent, #1a1a1a)",
+              background: "var(--trustready-accent, #1a1a1a)",
+              color: "var(--trustready-accent-text, #ffffff)",
               fontFamily: "inherit",
-              fontSize: "var(--probo-font-size, 14px)",
+              fontSize: "var(--trustready-font-size, 14px)",
               fontWeight: 500,
               lineHeight: "normal",
               cursor: "pointer",
@@ -131,13 +131,13 @@ export function BannerPreview({
             type="button"
             style={{
               padding: "8px 10px",
-              borderRadius: "var(--probo-btn-radius, 8px)",
-              border: "1px solid var(--probo-border, #e0e0e0)",
+              borderRadius: "var(--trustready-btn-radius, 8px)",
+              border: "1px solid var(--trustready-border, #e0e0e0)",
               background:
-                "color-mix(in srgb, var(--probo-text, #1a1a1a) 8%, var(--probo-bg, #ffffff))",
-              color: "var(--probo-text, #1a1a1a)",
+                "color-mix(in srgb, var(--trustready-text, #1a1a1a) 8%, var(--trustready-bg, #ffffff))",
+              color: "var(--trustready-text, #1a1a1a)",
               fontFamily: "inherit",
-              fontSize: "var(--probo-font-size, 14px)",
+              fontSize: "var(--trustready-font-size, 14px)",
               fontWeight: 500,
               lineHeight: "normal",
               cursor: "pointer",
@@ -152,12 +152,12 @@ export function BannerPreview({
             type="button"
             style={{
               padding: "8px 10px",
-              borderRadius: "var(--probo-btn-radius, 8px)",
+              borderRadius: "var(--trustready-btn-radius, 8px)",
               border: "none",
               background: "transparent",
-              color: "var(--probo-accent, #1a1a1a)",
+              color: "var(--trustready-accent, #1a1a1a)",
               fontFamily: "inherit",
-              fontSize: "var(--probo-font-size, 14px)",
+              fontSize: "var(--trustready-font-size, 14px)",
               fontWeight: 500,
               lineHeight: "normal",
               cursor: "pointer",
@@ -173,9 +173,9 @@ export function BannerPreview({
         <div
           style={{
             textAlign: "center",
-            fontSize: "calc(var(--probo-font-size, 14px) - 2px)",
+            fontSize: "calc(var(--trustready-font-size, 14px) - 2px)",
             fontWeight: 400,
-            color: "var(--probo-text-secondary, #555555)",
+            color: "var(--trustready-text-secondary, #555555)",
           }}
         >
           Privacy by

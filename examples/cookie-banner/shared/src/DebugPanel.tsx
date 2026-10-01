@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -45,7 +45,7 @@ function readSnapshot(): ConsentSnapshot {
 function readVisitorId(bannerId: string): string | null {
   if (!bannerId) return null;
   try {
-    return localStorage.getItem(`probo_consent:${bannerId}:vid`);
+    return localStorage.getItem(`trustready_consent:${bannerId}:vid`);
   } catch {
     return null;
   }
@@ -53,7 +53,7 @@ function readVisitorId(bannerId: string): string | null {
 
 function readCookie(): string | null {
   try {
-    const prefix = "probo_consent=";
+    const prefix = "trustready_consent=";
     const entry = document.cookie
       .split("; ")
       .find((c) => c.startsWith(prefix));
@@ -197,7 +197,7 @@ export function DebugPanel({ bannerId, gcmEnabled, children }: DebugPanelProps) 
         <div style={{ marginBottom: 12 }}>
           <strong>Visitor ID</strong>{" "}
           <span style={{ fontFamily: "monospace", fontSize: 13, color: "#666" }}>
-            (localStorage: probo_consent:{bannerId || "?"}:vid)
+            (localStorage: trustready_consent:{bannerId || "?"}:vid)
           </span>
           <pre
             style={{
@@ -213,7 +213,7 @@ export function DebugPanel({ bannerId, gcmEnabled, children }: DebugPanelProps) 
         </div>
 
         <div>
-          <strong>probo_consent cookie</strong>
+          <strong>trustready_consent cookie</strong>
           <pre
             style={{
               background: "#f0f0f0",

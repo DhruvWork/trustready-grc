@@ -48,12 +48,12 @@ jobs:
 
           \`\`\`bash
           aws cloudformation create-stack \\
-            --stack-name probo-audit \\
+            --stack-name trustready-audit \\
             --template-body file://aws-audit-role-${VERSION}.yaml \\
             --capabilities CAPABILITY_NAMED_IAM \\
             --parameters \\
-              ParameterKey=ProboIssuerURL,ParameterValue=<issuer> \\
-              ParameterKey=ProboSubject,ParameterValue=<subject>
+              ParameterKey=TrustReadyIssuerURL,ParameterValue=<issuer> \\
+              ParameterKey=TrustReadySubject,ParameterValue=<subject>
           \`\`\`
 
           CloudFormation quick-create needs a public S3 \`templateURL\`. This

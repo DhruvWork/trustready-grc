@@ -1,4 +1,4 @@
-# Copyright (c) 2026 Probo Inc <hello@getprobo.com>.
+# Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
 #
 # Permission to use, copy, modify, and/or distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -14,19 +14,19 @@
 
 [CmdletBinding()]
 param(
-    [string]$AgentPath = "$env:ProgramFiles\Probo\probo-agentw.exe"
+    [string]$AgentPath = "$env:ProgramFiles\TrustReady\trustready-agentw.exe"
 )
 
 if (-not (Test-Path -LiteralPath $AgentPath)) {
-    throw "probo-agent GUI executable not found at $AgentPath"
+    throw "trustready-agent GUI executable not found at $AgentPath"
 }
 
-$protocolRoot = "HKCU:\Software\Classes\probo"
+$protocolRoot = "HKCU:\Software\Classes\trustready"
 $commandRoot = Join-Path $protocolRoot "shell\open\command"
 
 New-Item -Path $commandRoot -Force | Out-Null
-Set-ItemProperty -Path $protocolRoot -Name "(Default)" -Value "URL:Probo Enrollment Protocol"
+Set-ItemProperty -Path $protocolRoot -Name "(Default)" -Value "URL:TrustReady Enrollment Protocol"
 Set-ItemProperty -Path $protocolRoot -Name "URL Protocol" -Value ""
 Set-ItemProperty -Path $commandRoot -Name "(Default)" -Value "`"$AgentPath`" `"%1`""
 
-Write-Host "Registered probo:// protocol for current user."
+Write-Host "Registered trustready:// protocol for current user."

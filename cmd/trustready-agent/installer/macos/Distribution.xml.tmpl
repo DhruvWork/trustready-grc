@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Productbuild distribution definition for the Probo device posture
+  Productbuild distribution definition for the TrustReady device posture
   agent.
 
   Placeholders are substituted by build.sh:
 
     @@VERSION@@              agent version, e.g. 0.1.0 or 0.1.0-rc.1
     @@INSTALLER_VERSION@@    X.Y.Z stripped of -rc.N (pkg-ref)
-    @@IDENTIFIER@@           package identifier (default com.probo.agent)
+    @@IDENTIFIER@@           package identifier (default com.trustready.agent)
 
   hostArchitectures is fixed to arm64,x86_64 (fat binary installer).
 -->
 <installer-gui-script minSpecVersion="2">
-    <title>Probo Device Posture Agent @@VERSION@@</title>
+    <title>TrustReady Device Posture Agent @@VERSION@@</title>
 
     <!--
       Single-pane install. Customization is disabled because the agent
@@ -51,8 +51,8 @@
 
     <choice id="default"/>
     <choice id="@@IDENTIFIER@@"
-            title="Probo Device Posture Agent"
-            description="Installs the Probo agent and menu bar helper. Enroll after install at your Probo /enroll page.">
+            title="TrustReady Device Posture Agent"
+            description="Installs the TrustReady agent and menu bar helper. Enroll after install at your TrustReady /enroll page.">
         <pkg-ref id="@@IDENTIFIER@@"/>
     </choice>
 </installer-gui-script>

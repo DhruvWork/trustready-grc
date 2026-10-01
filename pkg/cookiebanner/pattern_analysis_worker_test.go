@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -250,7 +250,7 @@ func TestHeuristicTemplate(t *testing.T) {
 		},
 		{
 			name:     "no variable tokens",
-			input:    "probo_consent_given",
+			input:    "trustready_consent_given",
 			template: "",
 			changed:  false,
 		},
@@ -562,14 +562,14 @@ func TestGlobMatch(t *testing.T) {
 		},
 		{
 			name:    "exact match without wildcard",
-			pattern: "probo_consent",
-			input:   "probo_consent",
+			pattern: "trustready_consent",
+			input:   "trustready_consent",
 			match:   true,
 		},
 		{
 			name:    "no match without wildcard",
-			pattern: "probo_consent",
-			input:   "probo_consent2",
+			pattern: "trustready_consent",
+			input:   "trustready_consent2",
 			match:   false,
 		},
 		{

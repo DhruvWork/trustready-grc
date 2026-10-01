@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -51,14 +51,14 @@ export function PanelPreview({
   return (
     <div
       style={{
-        background: "var(--probo-bg, #ffffff)",
-        color: "var(--probo-text, #1a1a1a)",
-        borderRadius: "var(--probo-radius, 12px)",
+        background: "var(--trustready-bg, #ffffff)",
+        color: "var(--trustready-text, #1a1a1a)",
+        borderRadius: "var(--trustready-radius, 12px)",
         boxShadow:
-          "var(--probo-shadow, 0 4px 24px rgba(0, 0, 0, 0.12))",
+          "var(--trustready-shadow, 0 4px 24px rgba(0, 0, 0, 0.12))",
         fontFamily:
-          "var(--probo-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)",
-        fontSize: "var(--probo-font-size, 14px)",
+          "var(--trustready-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)",
+        fontSize: "var(--trustready-font-size, 14px)",
         lineHeight: 1.5,
         maxWidth: 380,
         width: "100%",
@@ -67,7 +67,7 @@ export function PanelPreview({
     >
       <p
         style={{
-          fontSize: "calc(var(--probo-font-size, 14px) + 2px)",
+          fontSize: "calc(var(--trustready-font-size, 14px) + 2px)",
           fontWeight: 600,
           margin: "0 0 8px",
         }}
@@ -76,9 +76,9 @@ export function PanelPreview({
       </p>
       <p
         style={{
-          color: "var(--probo-text-secondary, #555555)",
+          color: "var(--trustready-text-secondary, #555555)",
           margin: "0 0 20px",
-          fontSize: "calc(var(--probo-font-size, 14px) - 1px)",
+          fontSize: "calc(var(--trustready-font-size, 14px) - 1px)",
         }}
       >
         {hasPlaceholder
@@ -103,7 +103,7 @@ export function PanelPreview({
               alignItems: "center",
               justifyContent: "space-between",
               padding: "8px 0",
-              borderBottom: "1px solid var(--probo-border, #e0e0e0)",
+              borderBottom: "1px solid var(--trustready-border, #e0e0e0)",
             }}
           >
             <div style={{ display: "flex", flexDirection: "column", gap: 2, flex: 1, minWidth: 0 }}>
@@ -111,8 +111,8 @@ export function PanelPreview({
               {cat.description && (
                 <span
                   style={{
-                    fontSize: "calc(var(--probo-font-size, 14px) - 2px)",
-                    color: "var(--probo-text-secondary, #555555)",
+                    fontSize: "calc(var(--trustready-font-size, 14px) - 2px)",
+                    color: "var(--trustready-text-secondary, #555555)",
                   }}
                 >
                   {cat.description}
@@ -126,8 +126,8 @@ export function PanelPreview({
                 borderRadius: 10,
                 background:
                   cat.isNecessary
-                    ? "var(--probo-accent, #1a1a1a)"
-                    : "var(--probo-border, #e0e0e0)",
+                    ? "var(--trustready-accent, #1a1a1a)"
+                    : "var(--trustready-border, #e0e0e0)",
                 position: "relative",
                 cursor: "default",
                 flexShrink: 0,
@@ -139,7 +139,7 @@ export function PanelPreview({
                   width: 16,
                   height: 16,
                   borderRadius: "50%",
-                  background: "var(--probo-bg, #ffffff)",
+                  background: "var(--trustready-bg, #ffffff)",
                   position: "absolute",
                   top: 2,
                   left: cat.isNecessary ? 18 : 2,
@@ -164,12 +164,12 @@ export function PanelPreview({
           type="button"
           style={{
             padding: "8px 10px",
-            borderRadius: "var(--probo-btn-radius, 8px)",
-            border: "1px solid var(--probo-accent, #1a1a1a)",
-            background: "var(--probo-accent, #1a1a1a)",
-            color: "var(--probo-accent-text, #ffffff)",
+            borderRadius: "var(--trustready-btn-radius, 8px)",
+            border: "1px solid var(--trustready-accent, #1a1a1a)",
+            background: "var(--trustready-accent, #1a1a1a)",
+            color: "var(--trustready-accent-text, #ffffff)",
             fontFamily: "inherit",
-            fontSize: "var(--probo-font-size, 14px)",
+            fontSize: "var(--trustready-font-size, 14px)",
             fontWeight: 500,
             lineHeight: "normal",
             cursor: "pointer",
@@ -182,13 +182,13 @@ export function PanelPreview({
           type="button"
           style={{
             padding: "8px 10px",
-            borderRadius: "var(--probo-btn-radius, 8px)",
-            border: "1px solid var(--probo-border, #e0e0e0)",
+            borderRadius: "var(--trustready-btn-radius, 8px)",
+            border: "1px solid var(--trustready-border, #e0e0e0)",
             background:
-              "color-mix(in srgb, var(--probo-text, #1a1a1a) 8%, var(--probo-bg, #ffffff))",
-            color: "var(--probo-text, #1a1a1a)",
+              "color-mix(in srgb, var(--trustready-text, #1a1a1a) 8%, var(--trustready-bg, #ffffff))",
+            color: "var(--trustready-text, #1a1a1a)",
             fontFamily: "inherit",
-            fontSize: "var(--probo-font-size, 14px)",
+            fontSize: "var(--trustready-font-size, 14px)",
             fontWeight: 500,
             lineHeight: "normal",
             cursor: "pointer",
@@ -201,12 +201,12 @@ export function PanelPreview({
           type="button"
           style={{
             padding: "8px 10px",
-            borderRadius: "var(--probo-btn-radius, 8px)",
+            borderRadius: "var(--trustready-btn-radius, 8px)",
             border: "none",
             background: "transparent",
-            color: "var(--probo-accent, #1a1a1a)",
+            color: "var(--trustready-accent, #1a1a1a)",
             fontFamily: "inherit",
-            fontSize: "var(--probo-font-size, 14px)",
+            fontSize: "var(--trustready-font-size, 14px)",
             fontWeight: 500,
             lineHeight: "normal",
             cursor: "pointer",

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
-const testIssuerBase = "https://proboidentity.com"
+const testIssuerBase = "https://trustreadyidentity.com"
 
 func testIssuer(t *testing.T) *identityfederation.Issuer {
 	t.Helper()

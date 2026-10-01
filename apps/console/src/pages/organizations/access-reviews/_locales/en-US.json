@@ -11,7 +11,7 @@
       "audience": "Audience",
       "subject": "Subject",
       "workloadIdentityProviderHelp": "e.g. projects/123456789012/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID",
-      "serviceAccountEmailHelp": "e.g. probo-audit@PROJECT_ID.iam.gserviceaccount.com"
+      "serviceAccountEmailHelp": "e.g. trustready-audit@PROJECT_ID.iam.gserviceaccount.com"
     },
     "messages": {
       "copyFailed": "Copy failed",
@@ -28,7 +28,7 @@
       "workloadIdentityProvider": "Enter a valid workload identity provider resource.",
       "serviceAccountEmail": "Enter a valid service account email.",
       "create": "Could not create the connector. Check the provider resource and the service account email, then try again.",
-      "disconnected": "Probo could not impersonate the audit service account. Confirm that the module is applied in this project and that the issuer and subject match the values shown during setup.",
+      "disconnected": "TrustReady could not impersonate the audit service account. Confirm that the module is applied in this project and that the issuer and subject match the values shown during setup.",
       "delete": "Could not delete the connector. Try again.",
       "source": "Failed to create access source",
       "copy": "Copy the value manually."
@@ -82,7 +82,7 @@
       "clientId": "Enter a valid application (client) ID.",
       "subscriptionId": "Enter a valid subscription ID.",
       "create": "Could not create the connector. Check the tenant, client, and subscription IDs, then try again.",
-      "disconnected": "Probo could not assume the audit identity. Confirm that the module is applied and that the issuer and subject match the values shown during setup. Federation can take a few minutes.",
+      "disconnected": "TrustReady could not assume the audit identity. Confirm that the module is applied and that the issuer and subject match the values shown during setup. Federation can take a few minutes.",
       "delete": "Could not delete the connector. Try again.",
       "source": "Failed to create access source",
       "copy": "Copy the value manually."

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -361,7 +361,7 @@ export function NavRail({ organizationKey, slackbotAvailable }: NavRailProps) {
         <NavRailItem
           icon={LifebuoyIcon}
           label={t("nav.help")}
-          href="mailto:support@probo.com"
+          href="mailto:support@trustready.io"
           weight="regular"
         />
         <ViewerMembershipMenu organizationKey={organization} />

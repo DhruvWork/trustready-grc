@@ -9,26 +9,26 @@ import (
 	"context"
 	"errors"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // CreateObligation is the resolver for the createObligation field.
 func (r *mutationResolver) CreateObligation(ctx context.Context, input types.CreateObligationInput) (*types.CreateObligationPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionObligationCreate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionObligationCreate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.CreateObligationRequest{
+	req := trustready.CreateObligationRequest{
 		OrganizationID:         input.OrganizationID,
 		Area:                   input.Area,
 		Source:                 input.Source,
@@ -42,7 +42,7 @@ func (r *mutationResolver) CreateObligation(ctx context.Context, input types.Cre
 		Type:                   input.Type,
 	}
 
-	obligation, err := r.probo.Obligations.Create(ctx, scope, &req)
+	obligation, err := r.trustready.Obligations.Create(ctx, scope, &req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -60,12 +60,12 @@ func (r *mutationResolver) CreateObligation(ctx context.Context, input types.Cre
 
 // UpdateObligation is the resolver for the updateObligation field.
 func (r *mutationResolver) UpdateObligation(ctx context.Context, input types.UpdateObligationInput) (*types.UpdateObligationPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionObligationUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionObligationUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.UpdateObligationRequest{
+	req := trustready.UpdateObligationRequest{
 		ID:                     input.ID,
 		Area:                   gqlutils.UnwrapOmittable(input.Area),
 		Source:                 gqlutils.UnwrapOmittable(input.Source),
@@ -79,7 +79,7 @@ func (r *mutationResolver) UpdateObligation(ctx context.Context, input types.Upd
 		Type:                   input.Type,
 	}
 
-	obligation, err := r.probo.Obligations.Update(ctx, scope, &req)
+	obligation, err := r.trustready.Obligations.Update(ctx, scope, &req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -97,12 +97,12 @@ func (r *mutationResolver) UpdateObligation(ctx context.Context, input types.Upd
 
 // DeleteObligation is the resolver for the deleteObligation field.
 func (r *mutationResolver) DeleteObligation(ctx context.Context, input types.DeleteObligationInput) (*types.DeleteObligationPayload, error) {
-	scope, err := r.authorize(ctx, input.ObligationID, probo.ActionObligationDelete)
+	scope, err := r.authorize(ctx, input.ObligationID, trustready.ActionObligationDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.Obligations.Delete(ctx, scope, input.ObligationID); err != nil {
+	if err := r.trustready.Obligations.Delete(ctx, scope, input.ObligationID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete obligation", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -114,12 +114,12 @@ func (r *mutationResolver) DeleteObligation(ctx context.Context, input types.Del
 
 // PublishObligationList is the resolver for the publishObligationList field.
 func (r *mutationResolver) PublishObligationList(ctx context.Context, input types.PublishObligationListInput) (*types.PublishObligationListPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionObligationPublish)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionObligationPublish)
 	if err != nil {
 		return nil, err
 	}
 
-	document, documentVersion, err := r.probo.GeneratedDocuments.PublishObligationList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
+	document, documentVersion, err := r.trustready.GeneratedDocuments.PublishObligationList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceAlreadyExists) {
 			return nil, gqlutils.Conflict(ctx, err)
@@ -138,7 +138,7 @@ func (r *mutationResolver) PublishObligationList(ctx context.Context, input type
 
 // Organization is the resolver for the organization field.
 func (r *obligationResolver) Organization(ctx context.Context, obj *types.Obligation) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -187,14 +187,14 @@ func (r *obligationResolver) Permission(ctx context.Context, obj *types.Obligati
 
 // TotalCount is the resolver for the totalCount field.
 func (r *obligationConnectionResolver) TotalCount(ctx context.Context, obj *types.ObligationConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionObligationList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionObligationList)
 	if err != nil {
 		return 0, err
 	}
 
 	switch obj.Resolver.(type) {
 	case *organizationResolver:
-		count, err := r.probo.Obligations.CountForOrganizationID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.Obligations.CountForOrganizationID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count obligations", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -202,7 +202,7 @@ func (r *obligationConnectionResolver) TotalCount(ctx context.Context, obj *type
 
 		return count, nil
 	case *riskResolver:
-		count, err := r.probo.Obligations.CountForRiskID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.Obligations.CountForRiskID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count risk obligations", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -210,7 +210,7 @@ func (r *obligationConnectionResolver) TotalCount(ctx context.Context, obj *type
 
 		return count, nil
 	case *controlResolver:
-		count, err := r.probo.Obligations.CountForControlID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.Obligations.CountForControlID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count control obligations", log.Error(err))
 			return 0, gqlutils.Internal(ctx)

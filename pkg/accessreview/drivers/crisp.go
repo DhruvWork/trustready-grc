@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,11 +39,11 @@ import (
 // callers distinguish it with errors.Is.
 var ErrCrispPluginNotSubscribed = errors.New("crisp plugin not subscribed to website")
 
-// CrispSubscription is the Probo plugin's subscription to one Crisp website.
+// CrispSubscription is the TrustReady plugin's subscription to one Crisp website.
 // Only the field the install callback verifies against is modeled.
 type CrispSubscription struct {
 	// Token is the per-(website, plugin) secret Crisp also hands the browser
-	// on the install callback. Reading it back server-side with Probo's own
+	// on the install callback. Reading it back server-side with TrustReady's own
 	// plugin credential is what makes that callback verifiable.
 	Token string `json:"token"`
 }
@@ -73,7 +73,7 @@ type crispSubscriptionResponse struct {
 }
 
 const (
-	// crispTierHeader selects the token tier on every Crisp request. A Probo
+	// crispTierHeader selects the token tier on every Crisp request. A TrustReady
 	// connection uses a plugin token, so the value is always "plugin". This is
 	// not authentication (the Basic credential is attached by the transport),
 	// so the driver, probe and name resolver each set it explicitly.
@@ -198,7 +198,7 @@ func (d *CrispDriver) ListAccounts(ctx context.Context) ([]AccountRecord, error)
 	return records, nil
 }
 
-// GetCrispSubscription reads the Probo plugin's subscription to a website so
+// GetCrispSubscription reads the TrustReady plugin's subscription to a website so
 // the install callback can verify that the browser-supplied token is the one
 // Crisp issued for that (website, plugin) pair. The httpClient must already
 // attach the plugin Basic credential (identifier:key); this helper only sets

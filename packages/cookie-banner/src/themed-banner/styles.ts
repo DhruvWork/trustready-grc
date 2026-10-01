@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,18 +20,18 @@
 
 export const THEMED_STYLES = `
   :host {
-    --_font: var(--probo-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
-    --_bg: var(--probo-bg, #ffffff);
-    --_text: var(--probo-text, #1a1a1a);
-    --_text-secondary: var(--probo-text-secondary, #555555);
-    --_border: var(--probo-border, #e0e0e0);
-    --_radius: var(--probo-radius, 12px);
-    --_shadow: var(--probo-shadow, 0 4px 24px rgba(0, 0, 0, 0.12));
-    --_accent: var(--probo-accent, #1a1a1a);
-    --_accent-text: var(--probo-accent-text, #ffffff);
-    --_z-index: var(--probo-z-index, 2147483646);
-    --_btn-radius: var(--probo-btn-radius, 8px);
-    --_font-size: var(--probo-font-size, 14px);
+    --_font: var(--trustready-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+    --_bg: var(--trustready-bg, #ffffff);
+    --_text: var(--trustready-text, #1a1a1a);
+    --_text-secondary: var(--trustready-text-secondary, #555555);
+    --_border: var(--trustready-border, #e0e0e0);
+    --_radius: var(--trustready-radius, 12px);
+    --_shadow: var(--trustready-shadow, 0 4px 24px rgba(0, 0, 0, 0.12));
+    --_accent: var(--trustready-accent, #1a1a1a);
+    --_accent-text: var(--trustready-accent-text, #ffffff);
+    --_z-index: var(--trustready-z-index, 2147483646);
+    --_btn-radius: var(--trustready-btn-radius, 8px);
+    --_font-size: var(--trustready-font-size, 14px);
 
     all: initial;
     font-family: var(--_font);
@@ -94,32 +94,32 @@ export const THEMED_STYLES = `
     pointer-events: auto;
   }
 
-  probo-banner .card {
+  trustready-banner .card {
     max-width: 450px;
     padding: 24px 24px 12px 24px;
   }
 
-  probo-banner .buttons {
+  trustready-banner .buttons {
     padding-bottom: 12px;
   }
 
-  probo-preference-panel .card {
+  trustready-preference-panel .card {
     max-width: 520px;
     max-height: 75vh;
     display: flex;
     flex-direction: column;
   }
 
-  probo-privacy-choices .card {
+  trustready-privacy-choices .card {
     max-width: 540px;
     max-height: 75vh;
     display: flex;
     flex-direction: column;
   }
 
-  probo-preference-panel .panel-body,
-  probo-preference-panel probo-category-list,
-  probo-privacy-choices .privacy-choices-body {
+  trustready-preference-panel .panel-body,
+  trustready-preference-panel trustready-category-list,
+  trustready-privacy-choices .privacy-choices-body {
     overflow-y: auto;
     overscroll-behavior: contain;
     flex: 1;
@@ -212,7 +212,7 @@ export const THEMED_STYLES = `
     color: var(--_text);
   }
 
-  probo-category-list,
+  trustready-category-list,
   .panel-body {
     display: flex;
     flex-direction: column;
@@ -236,13 +236,13 @@ export const THEMED_STYLES = `
     flex-shrink: 0;
   }
 
-  probo-preference-panel .footer,
-  probo-privacy-choices .footer {
+  trustready-preference-panel .footer,
+  trustready-privacy-choices .footer {
     border-top: 1px solid var(--_border);
     padding: 10px 24px;
   }
 
-  probo-preference-panel .buttons {
+  trustready-preference-panel .buttons {
     padding: 10px 0;
   }
 
@@ -273,14 +273,14 @@ export const THEMED_STYLES = `
     margin-bottom: 0;
   }
 
-  probo-category {
+  trustready-category {
     display: block;
     border-bottom: 1px solid var(--_border);
     padding: 12px 40px;
     position: relative;
   }
 
-  probo-category:last-child {
+  trustready-category:last-child {
     border-bottom: none;
   }
 
@@ -385,7 +385,7 @@ export const THEMED_STYLES = `
     transform: rotate(0deg);
   }
 
-  probo-cookie-list {
+  trustready-cookie-list {
     display: flex;
     flex-direction: column;
     margin-top: 10px;

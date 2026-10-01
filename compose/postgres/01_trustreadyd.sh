@@ -15,11 +15,11 @@ EOF
 psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d trustreadyd <<-EOF
 ALTER SCHEMA public OWNER TO trustreadyd;
 GRANT ALL ON SCHEMA public TO trustreadyd;
-ALTER DATABASE trustreadyd SET probo.trust_center_base_domain TO 'probopage.localhost';
+ALTER DATABASE trustreadyd SET trustready.trust_center_base_domain TO 'trustreadypage.localhost';
 EOF
 
 psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d trustreadyd_test <<-EOF
 ALTER SCHEMA public OWNER TO trustreadyd;
 GRANT ALL ON SCHEMA public TO trustreadyd;
-ALTER DATABASE trustreadyd_test SET probo.trust_center_base_domain TO 'probopage.localhost';
+ALTER DATABASE trustreadyd_test SET trustready.trust_center_base_domain TO 'trustreadypage.localhost';
 EOF

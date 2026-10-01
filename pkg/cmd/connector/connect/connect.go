@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -102,16 +102,16 @@ func NewCmdConnect(f *cmdutil.Factory) *cobra.Command {
 		Short: "Create a workload-identity connector",
 		Example: `  # Connect an AWS account
   prb connector connect --provider AWS \
-    --aws-role-arn arn:aws:iam::123456789012:role/ProboAudit
+    --aws-role-arn arn:aws:iam::123456789012:role/TrustReadyAudit
 
   # Connect an AWS organization
   prb connector connect --organization --provider AWS \
-    --aws-role-arn arn:aws:iam::111111111111:role/ProboAudit
+    --aws-role-arn arn:aws:iam::111111111111:role/TrustReadyAudit
 
   # Connect a GCP organization
   prb connector connect --organization --provider GCP \
-    --gcp-workload-identity-provider projects/123/locations/global/workloadIdentityPools/probo/providers/probo \
-    --gcp-service-account-email probo-audit@my-project.iam.gserviceaccount.com \
+    --gcp-workload-identity-provider projects/123/locations/global/workloadIdentityPools/trustready/providers/trustready \
+    --gcp-service-account-email trustready-audit@my-project.iam.gserviceaccount.com \
     --gcp-parent organizations/123456789`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -244,7 +244,7 @@ func renderTruncationBlock(hiddenCount int) map[string]any {
 		"block_id": "truncation",
 		"elements": []any{
 			markdownText(
-				fmt.Sprintf("%d more %s only listed in Probo.", hiddenCount, noun),
+				fmt.Sprintf("%d more %s only listed in TrustReady.", hiddenCount, noun),
 				textLimit,
 			),
 		},

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,19 +18,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { ProboElement } from "./base";
-import type { ProboRootElement } from "./base";
-import type { ProboCategory } from "./category";
-import type { ProboCookieBannerRoot } from "./cookie-banner-root";
+import { TrustReadyElement } from "./base";
+import type { TrustReadyRootElement } from "./base";
+import type { TrustReadyCategory } from "./category";
+import type { TrustReadyCookieBannerRoot } from "./cookie-banner-root";
 
-export class ProboCategoryToggle extends ProboElement {
-  private root: ProboRootElement | null = null;
-  private category: ProboCategory | null = null;
+export class TrustReadyCategoryToggle extends TrustReadyElement {
+  private root: TrustReadyRootElement | null = null;
+  private category: TrustReadyCategory | null = null;
   private checkbox: HTMLInputElement | null = null;
 
   connectedCallback(): void {
-    this.root = this.findAncestor<ProboCookieBannerRoot>("probo-cookie-banner-root");
-    this.category = this.findAncestor<ProboCategory>("probo-category");
+    this.root = this.findAncestor<TrustReadyCookieBannerRoot>("trustready-cookie-banner-root");
+    this.category = this.findAncestor<TrustReadyCategory>("trustready-category");
 
     this.scheduleValidation(() => this.setup());
   }
@@ -70,7 +70,7 @@ export class ProboCategoryToggle extends ProboElement {
     this.checkbox.addEventListener("change", this.handleChange);
 
     if (this.root) {
-      this.root.addEventListener("probo-state", (e: Event) => {
+      this.root.addEventListener("trustready-state", (e: Event) => {
         const { state } = (e as CustomEvent).detail;
         if (state === "panel" && this.checkbox && this.category && this.root) {
           this.checkbox.checked = !!this.root.consentDraft[this.category.categorySlug];

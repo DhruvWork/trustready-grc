@@ -37,7 +37,7 @@ UNAME_M:=		$(shell uname -m)
 
 ifeq ($(UNAME_S),Darwin)
 OS_LABEL=	Darwin
-BINARY=		/Library/Probo/trustready-agent
+BINARY=		/Library/TrustReady/trustready-agent
 else ifeq ($(UNAME_S),Linux)
 OS_LABEL=	Linux
 BINARY=		/usr/local/bin/trustready-agent
@@ -131,7 +131,7 @@ clean: uninstall clean-build ## uninstall + wipe build caches
 clean-build: ## Wipe local build caches (no sudo)
 	$(RMRF) "$(STATE_DIR)" "$(CACHE_ROOT)" "$(ENROLL_UI_BUILD)"
 	-$(RMRF) "$(PKG)" "$(FAT_BINARY)" "$(THIN_ARM64)" "$(THIN_AMD64)"
-	@# Native binary under /Library/Probo or /usr/local is owned by root
+	@# Native binary under /Library/TrustReady or /usr/local is owned by root
 	@# after install; leave it to `uninstall`. Never remove it here without sudo.
 
 # --- macOS PKG ---------------------------------------------------------------
@@ -175,7 +175,7 @@ else
 	@exit 1
 endif
 
-# --- CLI-only (no Probo Agent.app / helper) ----------------------------------
+# --- CLI-only (no TrustReady Agent.app / helper) ----------------------------------
 
 install-cli: $(ARCHIVE_PATH) ## Install binary only via install.sh
 	@$(SUDO) $(INSTALL_ENV) sh "$(INSTALL_SCRIPT)" $(INSTALL_ARGS)

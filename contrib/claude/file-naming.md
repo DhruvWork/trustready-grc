@@ -8,8 +8,8 @@ Template files use the extension pattern `<name>.<output-ext>.tmpl`:
 pkg/complianceportal/visitor/sitemap.xml.tmpl
 pkg/server/mailactions/templates/page.html.tmpl
 pkg/cookiebanner/prompts/tracker_identification.txt.tmpl
-pkg/probo/templates/risk_list.json.tmpl
-compose/keycloak/probo-realm.json.tmpl
+pkg/trustready/templates/risk_list.json.tmpl
+compose/keycloak/trustready-realm.json.tmpl
 pkg/esign/certificate.html.tmpl
 ```
 

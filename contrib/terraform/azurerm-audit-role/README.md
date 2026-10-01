@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2026 TrustReady <hello@probo.com>.
+Copyright (c) 2026 TrustReady <hello@trustready.io>.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-# `getprobo/audit-role/azurerm`
+# `trustready/audit-role/azurerm`
 
-Grants Probo read-only audit access to one Azure subscription through
-workload identity federation. Probo holds no Azure credential. Probo
+Grants TrustReady read-only audit access to one Azure subscription through
+workload identity federation. TrustReady holds no Azure credential. TrustReady
 presents a short-lived signed assertion. Entra verifies that assertion
 against a public key set. You revoke access when you delete the
 application or the federated credential.
@@ -43,7 +43,7 @@ Administrator** on that subscription.
 
 In most organizations those are different people. Set
 `grant_directory_read = false` so the Azure-side operator can apply the
-module today. Directory grants can follow later. Until they land, Probo
+module today. Directory grants can follow later. Until they land, TrustReady
 resolves principals as bare GUIDs.
 
 ## Usage
@@ -62,39 +62,39 @@ provider "azurerm" {
 
 provider "azuread" {}
 
-module "probo_audit" {
-  source = "getprobo/audit-role/azurerm"
+module "trustready_audit" {
+  source = "trustready/audit-role/azurerm"
 
-  probo_issuer_url     = "https://proboidentity.com/e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
-  probo_subject        = "e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
+  trustready_issuer_url     = "https://trustreadyidentity.com/e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
+  trustready_subject        = "e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
   subscription_id      = "00000000-0000-0000-0000-000000000000"
   grant_directory_read = false
 }
 
-output "probo_tenant_id" {
-  value = module.probo_audit.tenant_id
+output "trustready_tenant_id" {
+  value = module.trustready_audit.tenant_id
 }
 
-output "probo_client_id" {
-  value = module.probo_audit.client_id
+output "trustready_client_id" {
+  value = module.trustready_audit.client_id
 }
 
-output "probo_subscription_id" {
-  value = module.probo_audit.subscription_id
+output "trustready_subscription_id" {
+  value = module.trustready_audit.subscription_id
 }
 ```
 
 If you are a Global Administrator or Privileged Role Administrator,
 omit `grant_directory_read` or set it `true`. The default is `true`.
 
-Give Probo the `tenant_id`, `client_id`, and `subscription_id` outputs
+Give TrustReady the `tenant_id`, `client_id`, and `subscription_id` outputs
 when you create the connector.
 
 ## Sovereign clouds
 
 Set `environment` on the **root** providers. This module does not set
 it. GCC High and DoD both use `usgovernment` on the providers. The Graph
-host is a Probo connector setting, not a Terraform setting.
+host is a TrustReady connector setting, not a Terraform setting.
 
 ### Azure Government (GCC High and DoD)
 
@@ -131,7 +131,7 @@ A clean `apply` does not prove that federation works. A wrong `subject`
 creates successfully and fails at token exchange. Microsoft documents
 that you will not get an error at create time.
 
-Use the Probo console probe after you apply. Isolation is the
+Use the TrustReady console probe after you apply. Isolation is the
 per-organization issuer and the exact subject. Entra matches both
 case-sensitively.
 
@@ -142,8 +142,8 @@ with `AADSTS70021`. Wait, then probe again.
 
 | Resource | Notes |
 |---|---|
-| `azuread_application_registration` | `Probo Access Review` by default. |
-| `azuread_application_federated_identity_credential` | Issuer is `probo_issuer_url`. Subject is `probo_subject`. Audience is `api://AzureADTokenExchange`. |
+| `azuread_application_registration` | `TrustReady Access Review` by default. |
+| `azuread_application_federated_identity_credential` | Issuer is `trustready_issuer_url`. Subject is `trustready_subject`. Audience is `api://AzureADTokenExchange`. |
 | `azuread_service_principal` | Linked to the application. |
 | `azurerm_role_assignment` | `Reader` on `/subscriptions/{subscription_id}`. |
 | `azuread_app_role_assignment` ×2 | `Directory.Read.All` and `AuditLog.Read.All`, when `grant_directory_read` is true. |

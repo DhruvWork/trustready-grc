@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 
 const MIN_CONTRAST = 5;
 const PRIMARY_CTA_BUTTONS =
-  "probo-accept-button button, probo-reject-button button, probo-acknowledge-button button";
+  "trustready-accept-button button, trustready-reject-button button, trustready-acknowledge-button button";
 const warned = new WeakSet<object>();
 
 interface RGB {
@@ -149,7 +149,7 @@ export function warnFirstLayerCtas(root: ParentNode): void {
   }
   warned.add(root);
 
-  const banner = root.querySelector("probo-banner");
+  const banner = root.querySelector("trustready-banner");
   if (!banner) {
     return;
   }
@@ -168,12 +168,12 @@ export function warnFirstLayerCtas(root: ParentNode): void {
 
   const message = formatFirstLayerCtaWarning(firstLayerCtaIssues(ctas));
   if (message) {
-    console.warn(`[probo] ${message}`);
+    console.warn(`[trustready] ${message}`);
   }
 }
 
 function ctaName(button: Element): string {
-  if (button.closest("probo-reject-button")) {
+  if (button.closest("trustready-reject-button")) {
     return "secondary CTA";
   }
   return "primary CTA";

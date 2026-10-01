@@ -84,7 +84,7 @@
       "linked": "Task linked to Linear.",
       "confirmLink": {
         "title": "Link Linear issue",
-        "description": "This will update the Probo task with the Linear issue."
+        "description": "This will update the TrustReady task with the Linear issue."
       },
       "unlinked": "Linear issue unlinked.",
       "errors": {

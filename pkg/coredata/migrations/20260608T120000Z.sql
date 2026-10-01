@@ -1,4 +1,4 @@
--- Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -111,7 +111,7 @@ WHERE NOT EXISTS (
 
 -- Resolve each third party's hierarchy-qualified path (root → self, base names
 -- joined by "/"), mirroring the console/vetting naming convention. A copy under
--- parent P is named "<child base> (<path of P>)", e.g. "Google Workspace (Probo)".
+-- parent P is named "<child base> (<path of P>)", e.g. "Google Workspace (TrustReady)".
 -- The base name strips any trailing " (…)" suffix exactly like the app regex.
 WITH RECURSIVE tp_path AS (
     SELECT
@@ -194,7 +194,7 @@ SELECT
     -- Copies are sub-third-parties (level >= 2), never first-level roots.
     false,
     -- Level follows the parent, not the copied child: a first-level child
-    -- (level 1) copied under Probo (level 1) becomes a level-2 sub-third-party.
+    -- (level 1) copied under TrustReady (level 1) becomes a level-2 sub-third-party.
     pp.level + 1,
     tp.created_at,
     tp.updated_at

@@ -15,7 +15,7 @@ The themed app never loads `@trustready/cookie-banner-tcf`. The headless app onl
 registers headless components.
 
 Banner ID, base URL, and GCM persist in each app's `localStorage` under
-`probo-example-config` when the playground is configurable. The apps run
+`trustready-example-config` when the playground is configurable. The apps run
 on different ports, so each keeps its own copy.
 
 When both `PUBLIC_COOKIE_BANNER_ID` and

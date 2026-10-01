@@ -1,7 +1,7 @@
 {
   "bind": {
-    "title": "Koppel Slack aan Probo",
-    "description": "Koppel dit Slack-account aan uw Probo-identiteit zodat Probot u kan helpen.",
+    "title": "Koppel Slack aan TrustReady",
+    "description": "Koppel dit Slack-account aan uw TrustReady-identiteit zodat Probot u kan helpen.",
     "breadcrumb": "Koppelen",
     "fields": {
       "tenant": "Werkruimte",
@@ -11,7 +11,7 @@
       "confirm": "Slack-account koppelen"
     },
     "messages": {
-      "linked": "Uw Slack-account is nu gekoppeld aan Probo."
+      "linked": "Uw Slack-account is nu gekoppeld aan TrustReady."
     },
     "missingToken": {
       "title": "Geen bevestigingslink",

@@ -10,13 +10,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/management"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/probot"
 	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 	"github.com/DhruvWork/trustready-grc/pkg/resourcealias"
@@ -24,7 +21,10 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // Permission is the resolver for the permission field.
@@ -38,7 +38,7 @@ func (r *complianceFrameworkResolver) Framework(ctx context.Context, obj *types.
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	if _, err := r.authorize(ctx, obj.Framework.ID, probo.ActionFrameworkGet); err != nil {
+	if _, err := r.authorize(ctx, obj.Framework.ID, trustready.ActionFrameworkGet); err != nil {
 		return nil, err
 	}
 
@@ -101,7 +101,7 @@ func (r *compliancePortalResolver) Nda(ctx context.Context, obj *types.Complianc
 
 // Organization is the resolver for the organization field.
 func (r *compliancePortalResolver) Organization(ctx context.Context, obj *types.CompliancePortal) (*types.Organization, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func (r *compliancePortalResolver) Organization(ctx context.Context, obj *types.
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	organization, err := r.probo.Organizations.Get(ctx, scope, compliancePortal.OrganizationID)
+	organization, err := r.trustready.Organizations.Get(ctx, scope, compliancePortal.OrganizationID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -132,7 +132,7 @@ func (r *compliancePortalResolver) SlackbotNotificationChannel(ctx context.Conte
 		return nil, nil
 	}
 
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionConnectorInitiate)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionConnectorInitiate)
 	if err != nil {
 		if gqlutils.IsForbidden(err) {
 			return nil, nil
@@ -615,12 +615,12 @@ func (r *compliancePortalAccessResourceConnectionResolver) TotalCount(ctx contex
 
 // Audit is the resolver for the audit field.
 func (r *compliancePortalAuditResolver) Audit(ctx context.Context, obj *types.CompliancePortalAudit) (*types.Audit, error) {
-	scope, err := r.authorize(ctx, obj.Audit.ID, probo.ActionAuditGet)
+	scope, err := r.authorize(ctx, obj.Audit.ID, trustready.ActionAuditGet)
 	if err != nil {
 		return nil, err
 	}
 
-	audit, err := r.probo.Audits.Get(ctx, scope, obj.Audit.ID)
+	audit, err := r.trustready.Audits.Get(ctx, scope, obj.Audit.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -725,7 +725,7 @@ func (r *compliancePortalConnectionResolver) TotalCount(ctx context.Context, obj
 
 // Document is the resolver for the document field.
 func (r *compliancePortalDocumentResolver) Document(ctx context.Context, obj *types.CompliancePortalDocument) (*types.Document, error) {
-	if _, err := r.authorize(ctx, obj.Document.ID, probo.ActionDocumentGet); err != nil {
+	if _, err := r.authorize(ctx, obj.Document.ID, trustready.ActionDocumentGet); err != nil {
 		return nil, err
 	}
 
@@ -749,12 +749,12 @@ func (r *compliancePortalDocumentAccessResolver) Document(ctx context.Context, o
 		return nil, nil
 	}
 
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	document, err := r.probo.Documents.Get(ctx, scope, obj.Document.ID)
+	document, err := r.trustready.Documents.Get(ctx, scope, obj.Document.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -774,7 +774,7 @@ func (r *compliancePortalDocumentAccessResolver) ReportFile(ctx context.Context,
 		return nil, nil
 	}
 
-	if _, err := r.authorize(ctx, obj.ReportFile.ID, probo.ActionFileGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ReportFile.ID, trustready.ActionFileGet); err != nil {
 		return nil, err
 	}
 
@@ -800,12 +800,12 @@ func (r *compliancePortalDocumentAccessResolver) Audit(ctx context.Context, obj 
 		return nil, nil
 	}
 
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionAuditGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionAuditGet)
 	if err != nil {
 		return nil, err
 	}
 
-	audit, err := r.probo.Audits.GetByReportFileID(ctx, scope, obj.ReportFile.ID)
+	audit, err := r.trustready.Audits.GetByReportFileID(ctx, scope, obj.ReportFile.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -860,7 +860,7 @@ func (r *compliancePortalFileResolver) Alias(ctx context.Context, obj *types.Com
 
 // Organization is the resolver for the organization field.
 func (r *compliancePortalFileResolver) Organization(ctx context.Context, obj *types.CompliancePortalFile) (*types.Organization, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet)
 	if err != nil {
 		return nil, err
 	}
@@ -871,7 +871,7 @@ func (r *compliancePortalFileResolver) Organization(ctx context.Context, obj *ty
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	organization, err := r.probo.Organizations.Get(ctx, scope, compliancePortalFile.OrganizationID)
+	organization, err := r.trustready.Organizations.Get(ctx, scope, compliancePortalFile.OrganizationID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -966,7 +966,7 @@ func (r *compliancePortalReferenceConnectionResolver) TotalCount(ctx context.Con
 
 // ThirdParty is the resolver for the thirdParty field.
 func (r *compliancePortalThirdPartyResolver) ThirdParty(ctx context.Context, obj *types.CompliancePortalThirdParty) (*types.ThirdParty, error) {
-	if _, err := r.authorize(ctx, obj.ThirdParty.ID, probo.ActionThirdPartyGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ThirdParty.ID, trustready.ActionThirdPartyGet); err != nil {
 		return nil, err
 	}
 
@@ -1580,7 +1580,7 @@ func (r *mutationResolver) UpdateCompliancePortalAccess(ctx context.Context, inp
 
 	audits := make([]*types.Audit, 0, len(input.Reports))
 	for _, reportAccess := range input.Reports {
-		audit, err := r.probo.Audits.GetByReportFileID(ctx, scope, reportAccess.ID)
+		audit, err := r.trustready.Audits.GetByReportFileID(ctx, scope, reportAccess.ID)
 		if err != nil {
 			if errors.Is(err, coredata.ErrResourceNotFound) {
 				return nil, gqlutils.NotFound(ctx, err)

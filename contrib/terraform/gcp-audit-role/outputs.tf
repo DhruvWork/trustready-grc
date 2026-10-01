@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Probo Inc <hello@probo.com>.
+ * Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +21,16 @@
  */
 
 output "workload_identity_provider" {
-  value       = google_iam_workload_identity_pool_provider.probo.name
+  value       = google_iam_workload_identity_pool_provider.trustready.name
   description = <<-EOT
-    Resource name of the OIDC provider. Paste this into the Probo connector
+    Resource name of the OIDC provider. Paste this into the TrustReady connector
     as the workload identity provider.
   EOT
 }
 
 output "service_account_email" {
-  value       = google_service_account.probo_audit.email
-  description = "Email of the service account Probo impersonates."
+  value       = google_service_account.trustready_audit.email
+  description = "Email of the service account TrustReady impersonates."
 }
 
 output "project_number" {

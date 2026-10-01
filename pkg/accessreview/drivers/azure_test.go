@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -82,7 +82,7 @@ func TestAzureDriver(t *testing.T) {
 	}
 
 	alice := byID[vcrAzureAliceID]
-	assert.Equal(t, "alice@probo-azure.test", alice.Email)
+	assert.Equal(t, "alice@trustready-azure.test", alice.Email)
 	assert.Equal(t, "Alice Chen", alice.FullName)
 	assert.Equal(t, []string{"Owner"}, alice.Roles)
 	assert.Equal(t, coredata.AccessReviewEntryAccountTypeUser, alice.AccountType)
@@ -97,7 +97,7 @@ func TestAzureDriver(t *testing.T) {
 	assert.Nil(t, alice.CreatedAt)
 
 	eng := byID[vcrAzureEngID]
-	assert.Equal(t, "eng@probo-azure.test", eng.Email)
+	assert.Equal(t, "eng@trustready-azure.test", eng.Email)
 	assert.Equal(t, "Engineering", eng.FullName)
 	assert.Equal(t, []string{"Reader"}, eng.Roles)
 	assert.Equal(t, coredata.AccessReviewEntryAccountTypeUser, eng.AccountType)
@@ -141,7 +141,7 @@ func TestAzureDriver_Government(t *testing.T) {
 	require.NoError(t, err)
 	require.Len(t, records, 1)
 	assert.Equal(t, vcrAzureAliceID, records[0].ExternalID)
-	assert.Equal(t, "alice@probo-azure.test", records[0].Email)
+	assert.Equal(t, "alice@trustready-azure.test", records[0].Email)
 	assert.Equal(t, coredata.MFAStatusEnabled, records[0].MFAStatus)
 	require.NotNil(t, records[0].LastLogin)
 	assert.True(t, records[0].LastLogin.Equal(azureAliceLastLogin))
@@ -169,7 +169,7 @@ func TestAzureDriver_ListsManagementGroupCustomRole(t *testing.T) {
 	assert.True(t, *alice.IsAdmin)
 
 	morgan := byID[vcrAzureMorganID]
-	assert.Equal(t, "morgan@probo-azure.test", morgan.Email)
+	assert.Equal(t, "morgan@trustready-azure.test", morgan.Email)
 	assert.Equal(t, "Morgan Lee", morgan.FullName)
 	assert.Equal(t, []string{"Landing Zone Auditor"}, morgan.Roles)
 	assert.Nil(t, morgan.IsAdmin)

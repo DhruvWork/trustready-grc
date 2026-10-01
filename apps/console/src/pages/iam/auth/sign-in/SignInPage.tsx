@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -138,7 +138,7 @@ export default function SignInPage(props: Props) {
 
       <CreateAccountFooter
         queryKey={data}
-        prefix={t("signInPage.newToProbo")}
+        prefix={t("signInPage.newToTrustReady")}
         label={t("signInPage.actions.createAccount")}
       />
     </div>

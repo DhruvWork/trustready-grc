@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -179,7 +179,7 @@ func newFakeReleaseServer(t *testing.T, tag, version string, layout AssetLayout,
 	}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/repos/getprobo/probo/releases", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/repos/trustready/trustready/releases", func(w http.ResponseWriter, r *http.Request) {
 		base := "http://" + r.Host
 
 		assets := []map[string]any{
@@ -321,7 +321,7 @@ func buildZip(t *testing.T, layout AssetLayout, binary, guiBinary []byte) []byte
 
 func newTestUpdater(server *fakeReleaseServer, currentVersion, exePath, goos, goarch string) *Updater {
 	return &Updater{
-		Repo:           "getprobo/probo",
+		Repo:           "trustready/trustready",
 		TagPrefix:      DefaultTagPrefix,
 		APIBaseURL:     server.URL(),
 		AssetBaseURL:   server.URL(),

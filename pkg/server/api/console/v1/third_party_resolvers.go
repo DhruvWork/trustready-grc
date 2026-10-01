@@ -10,39 +10,39 @@ import (
 	"errors"
 	"fmt"
 
-	pgx "github.com/jackc/pgx/v5"
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/management"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 	"github.com/DhruvWork/trustready-grc/pkg/thirdparty"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	pgx "github.com/jackc/pgx/v5"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // CreateThirdParty is the resolver for the createThirdParty field.
 func (r *mutationResolver) CreateThirdParty(ctx context.Context, input types.CreateThirdPartyInput) (*types.CreateThirdPartyPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionThirdPartyCreate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionThirdPartyCreate)
 	if err != nil {
 		return nil, err
 	}
 
 	if input.ParentThirdPartyID != nil {
-		if _, err := r.authorize(ctx, *input.ParentThirdPartyID, probo.ActionThirdPartyRelationCreate); err != nil {
+		if _, err := r.authorize(ctx, *input.ParentThirdPartyID, trustready.ActionThirdPartyRelationCreate); err != nil {
 			return nil, err
 		}
 	}
 
-	thirdParty, err := r.probo.ThirdParties.Create(
+	thirdParty, err := r.trustready.ThirdParties.Create(
 		ctx, scope,
-		probo.CreateThirdPartyRequest{
+		trustready.CreateThirdPartyRequest{
 			OrganizationID:                input.OrganizationID,
 			Name:                          input.Name,
 			Description:                   input.Description,
@@ -86,14 +86,14 @@ func (r *mutationResolver) CreateThirdParty(ctx context.Context, input types.Cre
 
 // ImportThirdPartyFromCommon is the resolver for the importThirdPartyFromCommon field.
 func (r *mutationResolver) ImportThirdPartyFromCommon(ctx context.Context, input types.ImportThirdPartyFromCommonInput) (*types.ImportThirdPartyFromCommonPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionThirdPartyCreate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionThirdPartyCreate)
 	if err != nil {
 		return nil, err
 	}
 
-	thirdParty, created, err := r.probo.ThirdParties.ImportFromCommon(
+	thirdParty, created, err := r.trustready.ThirdParties.ImportFromCommon(
 		ctx, scope,
-		probo.ImportThirdPartyFromCommonRequest{
+		trustready.ImportThirdPartyFromCommonRequest{
 			OrganizationID:     input.OrganizationID,
 			CommonThirdPartyID: input.CommonThirdPartyID,
 		},
@@ -116,7 +116,7 @@ func (r *mutationResolver) ImportThirdPartyFromCommon(ctx context.Context, input
 
 // UpdateThirdParty is the resolver for the updateThirdParty field.
 func (r *mutationResolver) UpdateThirdParty(ctx context.Context, input types.UpdateThirdPartyInput) (*types.UpdateThirdPartyPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionThirdPartyUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionThirdPartyUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -126,9 +126,9 @@ func (r *mutationResolver) UpdateThirdParty(ctx context.Context, input types.Upd
 		administratorIDs = &input.AdministratorIds
 	}
 
-	thirdParty, err := r.probo.ThirdParties.Update(
+	thirdParty, err := r.trustready.ThirdParties.Update(
 		ctx, scope,
-		probo.UpdateThirdPartyRequest{
+		trustready.UpdateThirdPartyRequest{
 			ID:                            input.ID,
 			Name:                          input.Name,
 			Description:                   gqlutils.UnwrapOmittable(input.Description),
@@ -167,12 +167,12 @@ func (r *mutationResolver) UpdateThirdParty(ctx context.Context, input types.Upd
 
 // DeleteThirdParty is the resolver for the deleteThirdParty field.
 func (r *mutationResolver) DeleteThirdParty(ctx context.Context, input types.DeleteThirdPartyInput) (*types.DeleteThirdPartyPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyDelete)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.ThirdParties.Delete(ctx, scope, input.ThirdPartyID); err != nil {
+	if err := r.trustready.ThirdParties.Delete(ctx, scope, input.ThirdPartyID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete thirdParty", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -184,12 +184,12 @@ func (r *mutationResolver) DeleteThirdParty(ctx context.Context, input types.Del
 
 // CreateThirdPartyContact is the resolver for the createThirdPartyContact field.
 func (r *mutationResolver) CreateThirdPartyContact(ctx context.Context, input types.CreateThirdPartyContactInput) (*types.CreateThirdPartyContactPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyContactCreate)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyContactCreate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.CreateThirdPartyContactRequest{
+	req := trustready.CreateThirdPartyContactRequest{
 		ThirdPartyID: input.ThirdPartyID,
 		FullName:     input.FullName,
 		Email:        input.Email,
@@ -197,7 +197,7 @@ func (r *mutationResolver) CreateThirdPartyContact(ctx context.Context, input ty
 		Role:         input.Role,
 	}
 
-	thirdPartyContact, err := r.probo.ThirdPartyContacts.Create(ctx, scope, req)
+	thirdPartyContact, err := r.trustready.ThirdPartyContacts.Create(ctx, scope, req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -215,12 +215,12 @@ func (r *mutationResolver) CreateThirdPartyContact(ctx context.Context, input ty
 
 // UpdateThirdPartyContact is the resolver for the updateThirdPartyContact field.
 func (r *mutationResolver) UpdateThirdPartyContact(ctx context.Context, input types.UpdateThirdPartyContactInput) (*types.UpdateThirdPartyContactPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionThirdPartyContactUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionThirdPartyContactUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.UpdateThirdPartyContactRequest{
+	req := trustready.UpdateThirdPartyContactRequest{
 		ID:       input.ID,
 		FullName: gqlutils.UnwrapOmittable(input.FullName),
 		Email:    gqlutils.UnwrapOmittable(input.Email),
@@ -228,7 +228,7 @@ func (r *mutationResolver) UpdateThirdPartyContact(ctx context.Context, input ty
 		Role:     gqlutils.UnwrapOmittable(input.Role),
 	}
 
-	thirdPartyContact, err := r.probo.ThirdPartyContacts.Update(ctx, scope, req)
+	thirdPartyContact, err := r.trustready.ThirdPartyContacts.Update(ctx, scope, req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -246,12 +246,12 @@ func (r *mutationResolver) UpdateThirdPartyContact(ctx context.Context, input ty
 
 // DeleteThirdPartyContact is the resolver for the deleteThirdPartyContact field.
 func (r *mutationResolver) DeleteThirdPartyContact(ctx context.Context, input types.DeleteThirdPartyContactInput) (*types.DeleteThirdPartyContactPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyContactID, probo.ActionThirdPartyContactDelete)
+	scope, err := r.authorize(ctx, input.ThirdPartyContactID, trustready.ActionThirdPartyContactDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.ThirdPartyContacts.Delete(ctx, scope, input.ThirdPartyContactID); err != nil {
+	if err := r.trustready.ThirdPartyContacts.Delete(ctx, scope, input.ThirdPartyContactID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete thirdParty contact", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -263,18 +263,18 @@ func (r *mutationResolver) DeleteThirdPartyContact(ctx context.Context, input ty
 
 // CreateThirdPartyService is the resolver for the createThirdPartyService field.
 func (r *mutationResolver) CreateThirdPartyService(ctx context.Context, input types.CreateThirdPartyServiceInput) (*types.CreateThirdPartyServicePayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyServiceCreate)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyServiceCreate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.CreateThirdPartyServiceRequest{
+	req := trustready.CreateThirdPartyServiceRequest{
 		ThirdPartyID: input.ThirdPartyID,
 		Name:         input.Name,
 		Description:  input.Description,
 	}
 
-	thirdPartyService, err := r.probo.ThirdPartyServices.Create(ctx, scope, req)
+	thirdPartyService, err := r.trustready.ThirdPartyServices.Create(ctx, scope, req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -292,18 +292,18 @@ func (r *mutationResolver) CreateThirdPartyService(ctx context.Context, input ty
 
 // UpdateThirdPartyService is the resolver for the updateThirdPartyService field.
 func (r *mutationResolver) UpdateThirdPartyService(ctx context.Context, input types.UpdateThirdPartyServiceInput) (*types.UpdateThirdPartyServicePayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionThirdPartyServiceUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionThirdPartyServiceUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.UpdateThirdPartyServiceRequest{
+	req := trustready.UpdateThirdPartyServiceRequest{
 		ID:          input.ID,
 		Name:        input.Name,
 		Description: gqlutils.UnwrapOmittable(input.Description),
 	}
 
-	thirdPartyService, err := r.probo.ThirdPartyServices.Update(ctx, scope, req)
+	thirdPartyService, err := r.trustready.ThirdPartyServices.Update(ctx, scope, req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -321,12 +321,12 @@ func (r *mutationResolver) UpdateThirdPartyService(ctx context.Context, input ty
 
 // DeleteThirdPartyService is the resolver for the deleteThirdPartyService field.
 func (r *mutationResolver) DeleteThirdPartyService(ctx context.Context, input types.DeleteThirdPartyServiceInput) (*types.DeleteThirdPartyServicePayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyServiceID, probo.ActionThirdPartyServiceDelete)
+	scope, err := r.authorize(ctx, input.ThirdPartyServiceID, trustready.ActionThirdPartyServiceDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.ThirdPartyServices.Delete(ctx, scope, input.ThirdPartyServiceID); err != nil {
+	if err := r.trustready.ThirdPartyServices.Delete(ctx, scope, input.ThirdPartyServiceID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete thirdParty service", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -338,16 +338,16 @@ func (r *mutationResolver) DeleteThirdPartyService(ctx context.Context, input ty
 
 // UploadThirdPartyComplianceReport is the resolver for the uploadThirdPartyComplianceReport field.
 func (r *mutationResolver) UploadThirdPartyComplianceReport(ctx context.Context, input types.UploadThirdPartyComplianceReportInput) (*types.UploadThirdPartyComplianceReportPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyComplianceReportUpload)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyComplianceReportUpload)
 	if err != nil {
 		return nil, err
 	}
 
-	thirdPartyComplianceReport, err := r.probo.ThirdPartyComplianceReports.Upload(
+	thirdPartyComplianceReport, err := r.trustready.ThirdPartyComplianceReports.Upload(
 		ctx, scope,
 		input.ThirdPartyID,
-		&probo.ThirdPartyComplianceReportCreateRequest{
-			File:       probo.FileUpload{Filename: input.File.Filename, Size: input.File.Size, Content: input.File.File, ContentType: input.File.ContentType},
+		&trustready.ThirdPartyComplianceReportCreateRequest{
+			File:       trustready.FileUpload{Filename: input.File.Filename, Size: input.File.Size, Content: input.File.File, ContentType: input.File.ContentType},
 			ReportDate: input.ReportDate,
 			ValidUntil: input.ValidUntil,
 			ReportName: input.ReportName,
@@ -370,12 +370,12 @@ func (r *mutationResolver) UploadThirdPartyComplianceReport(ctx context.Context,
 
 // DeleteThirdPartyComplianceReport is the resolver for the deleteThirdPartyComplianceReport field.
 func (r *mutationResolver) DeleteThirdPartyComplianceReport(ctx context.Context, input types.DeleteThirdPartyComplianceReportInput) (*types.DeleteThirdPartyComplianceReportPayload, error) {
-	scope, err := r.authorize(ctx, input.ReportID, probo.ActionThirdPartyComplianceReportDelete)
+	scope, err := r.authorize(ctx, input.ReportID, trustready.ActionThirdPartyComplianceReportDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.ThirdPartyComplianceReports.Delete(ctx, scope, input.ReportID); err != nil {
+	if err := r.trustready.ThirdPartyComplianceReports.Delete(ctx, scope, input.ReportID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete thirdParty compliance report", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -387,17 +387,17 @@ func (r *mutationResolver) DeleteThirdPartyComplianceReport(ctx context.Context,
 
 // UploadThirdPartyBusinessAssociateAgreement is the resolver for the uploadThirdPartyBusinessAssociateAgreement field.
 func (r *mutationResolver) UploadThirdPartyBusinessAssociateAgreement(ctx context.Context, input types.UploadThirdPartyBusinessAssociateAgreementInput) (*types.UploadThirdPartyBusinessAssociateAgreementPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyBusinessAssociateAgreementUpload)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyBusinessAssociateAgreementUpload)
 	if err != nil {
 		return nil, err
 	}
 
 	validFrom, validUntil := types.PeriodInputDates(input.Validity)
 
-	thirdPartyBusinessAssociateAgreement, _, err := r.probo.ThirdPartyBusinessAssociateAgreements.Upload(
+	thirdPartyBusinessAssociateAgreement, _, err := r.trustready.ThirdPartyBusinessAssociateAgreements.Upload(
 		ctx, scope,
 		input.ThirdPartyID,
-		&probo.ThirdPartyBusinessAssociateAgreementCreateRequest{
+		&trustready.ThirdPartyBusinessAssociateAgreementCreateRequest{
 			File:       input.File.File,
 			ValidFrom:  validFrom,
 			ValidUntil: validUntil,
@@ -421,17 +421,17 @@ func (r *mutationResolver) UploadThirdPartyBusinessAssociateAgreement(ctx contex
 
 // UpdateThirdPartyBusinessAssociateAgreement is the resolver for the updateThirdPartyBusinessAssociateAgreement field.
 func (r *mutationResolver) UpdateThirdPartyBusinessAssociateAgreement(ctx context.Context, input types.UpdateThirdPartyBusinessAssociateAgreementInput) (*types.UpdateThirdPartyBusinessAssociateAgreementPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyBusinessAssociateAgreementUpdate)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyBusinessAssociateAgreementUpdate)
 	if err != nil {
 		return nil, err
 	}
 
 	validFrom, validUntil := types.PeriodInputOmittableDates(input.Validity)
 
-	thirdPartyBusinessAssociateAgreement, _, err := r.probo.ThirdPartyBusinessAssociateAgreements.Update(
+	thirdPartyBusinessAssociateAgreement, _, err := r.trustready.ThirdPartyBusinessAssociateAgreements.Update(
 		ctx, scope,
 		input.ThirdPartyID,
-		&probo.ThirdPartyBusinessAssociateAgreementUpdateRequest{
+		&trustready.ThirdPartyBusinessAssociateAgreementUpdateRequest{
 			ValidFrom:  validFrom,
 			ValidUntil: validUntil,
 		},
@@ -453,12 +453,12 @@ func (r *mutationResolver) UpdateThirdPartyBusinessAssociateAgreement(ctx contex
 
 // DeleteThirdPartyBusinessAssociateAgreement is the resolver for the deleteThirdPartyBusinessAssociateAgreement field.
 func (r *mutationResolver) DeleteThirdPartyBusinessAssociateAgreement(ctx context.Context, input types.DeleteThirdPartyBusinessAssociateAgreementInput) (*types.DeleteThirdPartyBusinessAssociateAgreementPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyBusinessAssociateAgreementDelete)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyBusinessAssociateAgreementDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.ThirdPartyBusinessAssociateAgreements.DeleteByThirdPartyID(ctx, scope, input.ThirdPartyID); err != nil {
+	if err := r.trustready.ThirdPartyBusinessAssociateAgreements.DeleteByThirdPartyID(ctx, scope, input.ThirdPartyID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete thirdParty business associate agreement", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -470,17 +470,17 @@ func (r *mutationResolver) DeleteThirdPartyBusinessAssociateAgreement(ctx contex
 
 // UploadThirdPartyDataPrivacyAgreement is the resolver for the uploadThirdPartyDataPrivacyAgreement field.
 func (r *mutationResolver) UploadThirdPartyDataPrivacyAgreement(ctx context.Context, input types.UploadThirdPartyDataPrivacyAgreementInput) (*types.UploadThirdPartyDataPrivacyAgreementPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyDataPrivacyAgreementUpload)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyDataPrivacyAgreementUpload)
 	if err != nil {
 		return nil, err
 	}
 
 	validFrom, validUntil := types.PeriodInputDates(input.Validity)
 
-	thirdPartyDataPrivacyAgreement, _, err := r.probo.ThirdPartyDataPrivacyAgreements.Upload(
+	thirdPartyDataPrivacyAgreement, _, err := r.trustready.ThirdPartyDataPrivacyAgreements.Upload(
 		ctx, scope,
 		input.ThirdPartyID,
-		&probo.ThirdPartyDataPrivacyAgreementCreateRequest{
+		&trustready.ThirdPartyDataPrivacyAgreementCreateRequest{
 			File:       input.File.File,
 			ValidFrom:  validFrom,
 			ValidUntil: validUntil,
@@ -504,17 +504,17 @@ func (r *mutationResolver) UploadThirdPartyDataPrivacyAgreement(ctx context.Cont
 
 // UpdateThirdPartyDataPrivacyAgreement is the resolver for the updateThirdPartyDataPrivacyAgreement field.
 func (r *mutationResolver) UpdateThirdPartyDataPrivacyAgreement(ctx context.Context, input types.UpdateThirdPartyDataPrivacyAgreementInput) (*types.UpdateThirdPartyDataPrivacyAgreementPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyDataPrivacyAgreementUpdate)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyDataPrivacyAgreementUpdate)
 	if err != nil {
 		return nil, err
 	}
 
 	validFrom, validUntil := types.PeriodInputOmittableDates(input.Validity)
 
-	thirdPartyDataPrivacyAgreement, _, err := r.probo.ThirdPartyDataPrivacyAgreements.Update(
+	thirdPartyDataPrivacyAgreement, _, err := r.trustready.ThirdPartyDataPrivacyAgreements.Update(
 		ctx, scope,
 		input.ThirdPartyID,
-		&probo.ThirdPartyDataPrivacyAgreementUpdateRequest{
+		&trustready.ThirdPartyDataPrivacyAgreementUpdateRequest{
 			ValidFrom:  validFrom,
 			ValidUntil: validUntil,
 		},
@@ -536,12 +536,12 @@ func (r *mutationResolver) UpdateThirdPartyDataPrivacyAgreement(ctx context.Cont
 
 // DeleteThirdPartyDataPrivacyAgreement is the resolver for the deleteThirdPartyDataPrivacyAgreement field.
 func (r *mutationResolver) DeleteThirdPartyDataPrivacyAgreement(ctx context.Context, input types.DeleteThirdPartyDataPrivacyAgreementInput) (*types.DeleteThirdPartyDataPrivacyAgreementPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyDataPrivacyAgreementDelete)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyDataPrivacyAgreementDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.ThirdPartyDataPrivacyAgreements.DeleteByThirdPartyID(ctx, scope, input.ThirdPartyID); err != nil {
+	if err := r.trustready.ThirdPartyDataPrivacyAgreements.DeleteByThirdPartyID(ctx, scope, input.ThirdPartyID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete thirdParty data privacy agreement", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -553,14 +553,14 @@ func (r *mutationResolver) DeleteThirdPartyDataPrivacyAgreement(ctx context.Cont
 
 // CreateThirdPartyRiskAssessment is the resolver for the createThirdPartyRiskAssessment field.
 func (r *mutationResolver) CreateThirdPartyRiskAssessment(ctx context.Context, input types.CreateThirdPartyRiskAssessmentInput) (*types.CreateThirdPartyRiskAssessmentPayload, error) {
-	scope, err := r.authorize(ctx, input.ThirdPartyID, probo.ActionThirdPartyRiskAssessmentCreate)
+	scope, err := r.authorize(ctx, input.ThirdPartyID, trustready.ActionThirdPartyRiskAssessmentCreate)
 	if err != nil {
 		return nil, err
 	}
 
-	thirdPartyRiskAssessment, err := r.probo.ThirdParties.CreateRiskAssessment(
+	thirdPartyRiskAssessment, err := r.trustready.ThirdParties.CreateRiskAssessment(
 		ctx, scope,
-		probo.CreateThirdPartyRiskAssessmentRequest{
+		trustready.CreateThirdPartyRiskAssessmentRequest{
 			ThirdPartyID:    input.ThirdPartyID,
 			ExpiresAt:       input.ExpiresAt,
 			DataSensitivity: input.DataSensitivity,
@@ -585,7 +585,7 @@ func (r *mutationResolver) CreateThirdPartyRiskAssessment(ctx context.Context, i
 
 // VetThirdParty is the resolver for the vetThirdParty field.
 func (r *mutationResolver) VetThirdParty(ctx context.Context, input types.VetThirdPartyInput) (*types.VetThirdPartyPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionThirdPartyVet)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionThirdPartyVet)
 	if err != nil {
 		return nil, err
 	}
@@ -627,12 +627,12 @@ func (r *mutationResolver) VetThirdParty(ctx context.Context, input types.VetThi
 
 // PublishThirdPartyList is the resolver for the publishThirdPartyList field.
 func (r *mutationResolver) PublishThirdPartyList(ctx context.Context, input types.PublishThirdPartyListInput) (*types.PublishThirdPartyListPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionThirdPartyPublish)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionThirdPartyPublish)
 	if err != nil {
 		return nil, err
 	}
 
-	document, documentVersion, err := r.probo.GeneratedDocuments.PublishThirdPartyList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
+	document, documentVersion, err := r.trustready.GeneratedDocuments.PublishThirdPartyList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceAlreadyExists) {
 			return nil, gqlutils.Conflict(ctx, err)
@@ -651,7 +651,7 @@ func (r *mutationResolver) PublishThirdPartyList(ctx context.Context, input type
 
 // Organization is the resolver for the organization field.
 func (r *thirdPartyResolver) Organization(ctx context.Context, obj *types.ThirdParty) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -701,7 +701,7 @@ func (r *thirdPartyResolver) CompliancePortalThirdParty(ctx context.Context, obj
 
 // ComplianceReports is the resolver for the complianceReports field.
 func (r *thirdPartyResolver) ComplianceReports(ctx context.Context, obj *types.ThirdParty, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ThirdPartyComplianceReportOrderBy) (*types.ThirdPartyComplianceReportConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyComplianceReportList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyComplianceReportList)
 	if err != nil {
 		return nil, err
 	}
@@ -720,7 +720,7 @@ func (r *thirdPartyResolver) ComplianceReports(ctx context.Context, obj *types.T
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.ThirdPartyComplianceReports.ListForThirdPartyID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.ThirdPartyComplianceReports.ListForThirdPartyID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list thirdParty compliance reports", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -731,12 +731,12 @@ func (r *thirdPartyResolver) ComplianceReports(ctx context.Context, obj *types.T
 
 // BusinessAssociateAgreement is the resolver for the businessAssociateAgreement field.
 func (r *thirdPartyResolver) BusinessAssociateAgreement(ctx context.Context, obj *types.ThirdParty) (*types.ThirdPartyBusinessAssociateAgreement, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyBusinessAssociateAgreementGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyBusinessAssociateAgreementGet)
 	if err != nil {
 		return nil, err
 	}
 
-	thirdPartyBusinessAssociateAgreement, _, err := r.probo.ThirdPartyBusinessAssociateAgreements.GetByThirdPartyID(ctx, scope, obj.ID)
+	thirdPartyBusinessAssociateAgreement, _, err := r.trustready.ThirdPartyBusinessAssociateAgreements.GetByThirdPartyID(ctx, scope, obj.ID)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, nil
@@ -752,12 +752,12 @@ func (r *thirdPartyResolver) BusinessAssociateAgreement(ctx context.Context, obj
 
 // DataPrivacyAgreement is the resolver for the dataPrivacyAgreement field.
 func (r *thirdPartyResolver) DataPrivacyAgreement(ctx context.Context, obj *types.ThirdParty) (*types.ThirdPartyDataPrivacyAgreement, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyDataPrivacyAgreementGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyDataPrivacyAgreementGet)
 	if err != nil {
 		return nil, err
 	}
 
-	thirdPartyDataPrivacyAgreement, _, err := r.probo.ThirdPartyDataPrivacyAgreements.GetByThirdPartyID(ctx, scope, obj.ID)
+	thirdPartyDataPrivacyAgreement, _, err := r.trustready.ThirdPartyDataPrivacyAgreements.GetByThirdPartyID(ctx, scope, obj.ID)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, nil
@@ -773,7 +773,7 @@ func (r *thirdPartyResolver) DataPrivacyAgreement(ctx context.Context, obj *type
 
 // Contacts is the resolver for the contacts field.
 func (r *thirdPartyResolver) Contacts(ctx context.Context, obj *types.ThirdParty, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ThirdPartyContactOrderBy) (*types.ThirdPartyContactConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyContactList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyContactList)
 	if err != nil {
 		return nil, err
 	}
@@ -792,7 +792,7 @@ func (r *thirdPartyResolver) Contacts(ctx context.Context, obj *types.ThirdParty
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.ThirdPartyContacts.List(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.ThirdPartyContacts.List(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list thirdParty contacts", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -803,7 +803,7 @@ func (r *thirdPartyResolver) Contacts(ctx context.Context, obj *types.ThirdParty
 
 // Services is the resolver for the services field.
 func (r *thirdPartyResolver) Services(ctx context.Context, obj *types.ThirdParty, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ThirdPartyServiceOrderBy) (*types.ThirdPartyServiceConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyServiceList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyServiceList)
 	if err != nil {
 		return nil, err
 	}
@@ -822,7 +822,7 @@ func (r *thirdPartyResolver) Services(ctx context.Context, obj *types.ThirdParty
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.ThirdPartyServices.List(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.ThirdPartyServices.List(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list thirdParty services", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -833,7 +833,7 @@ func (r *thirdPartyResolver) Services(ctx context.Context, obj *types.ThirdParty
 
 // RiskAssessments is the resolver for the riskAssessments field.
 func (r *thirdPartyResolver) RiskAssessments(ctx context.Context, obj *types.ThirdParty, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ThirdPartyRiskAssessmentOrder) (*types.ThirdPartyRiskAssessmentConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyRiskAssessmentList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyRiskAssessmentList)
 	if err != nil {
 		return nil, err
 	}
@@ -852,7 +852,7 @@ func (r *thirdPartyResolver) RiskAssessments(ctx context.Context, obj *types.Thi
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.ThirdParties.ListRiskAssessments(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.ThirdParties.ListRiskAssessments(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list thirdParty risk assessments", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -863,7 +863,7 @@ func (r *thirdPartyResolver) RiskAssessments(ctx context.Context, obj *types.Thi
 
 // Measures is the resolver for the measures field.
 func (r *thirdPartyResolver) Measures(ctx context.Context, obj *types.ThirdParty, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.MeasureOrderBy, filter *types.MeasureFilter) (*types.MeasureConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionMeasureList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionMeasureList)
 	if err != nil {
 		return nil, err
 	}
@@ -886,7 +886,7 @@ func (r *thirdPartyResolver) Measures(ctx context.Context, obj *types.ThirdParty
 		measureFilter = coredata.NewMeasureFilter(filter.Query, filter.State, filter.Category)
 	}
 
-	page, err := r.probo.Measures.ListForThirdPartyID(ctx, scope, obj.ID, cursor, measureFilter)
+	page, err := r.trustready.Measures.ListForThirdPartyID(ctx, scope, obj.ID, cursor, measureFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list third party measures", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -897,7 +897,7 @@ func (r *thirdPartyResolver) Measures(ctx context.Context, obj *types.ThirdParty
 
 // Administrators is the resolver for the administrators field.
 func (r *thirdPartyResolver) Administrators(ctx context.Context, obj *types.ThirdParty) ([]*types.Profile, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyGet); err != nil {
 		return nil, err
 	}
 
@@ -942,7 +942,7 @@ func (r *thirdPartyResolver) ParentThirdParty(ctx context.Context, obj *types.Th
 		return nil, nil
 	}
 
-	if _, err := r.authorize(ctx, obj.ParentThirdParty.ID, probo.ActionThirdPartyGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ParentThirdParty.ID, trustready.ActionThirdPartyGet); err != nil {
 		return nil, err
 	}
 
@@ -964,12 +964,12 @@ func (r *thirdPartyResolver) ParentThirdParty(ctx context.Context, obj *types.Th
 
 // Ancestors is the resolver for the ancestors field.
 func (r *thirdPartyResolver) Ancestors(ctx context.Context, obj *types.ThirdParty) ([]*types.ThirdParty, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyGet)
 	if err != nil {
 		return nil, err
 	}
 
-	ancestors, err := r.probo.ThirdParties.GetAncestors(ctx, scope, obj.ID)
+	ancestors, err := r.trustready.ThirdParties.GetAncestors(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot load ancestors", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -985,7 +985,7 @@ func (r *thirdPartyResolver) Ancestors(ctx context.Context, obj *types.ThirdPart
 
 // ChildThirdParties is the resolver for the childThirdParties field.
 func (r *thirdPartyResolver) ChildThirdParties(ctx context.Context, obj *types.ThirdParty, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ThirdPartyOrderBy) (*types.ThirdPartyConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyRelationList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyRelationList)
 	if err != nil {
 		return nil, err
 	}
@@ -1003,7 +1003,7 @@ func (r *thirdPartyResolver) ChildThirdParties(ctx context.Context, obj *types.T
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.ThirdParties.ListForParentThirdPartyID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.ThirdParties.ListForParentThirdPartyID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list child third parties", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1014,7 +1014,7 @@ func (r *thirdPartyResolver) ChildThirdParties(ctx context.Context, obj *types.T
 
 // VettingStatus is the resolver for the vettingStatus field.
 func (r *thirdPartyResolver) VettingStatus(ctx context.Context, obj *types.ThirdParty) (*coredata.ThirdPartyVettingStatus, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyGet)
 	if err != nil {
 		return nil, err
 	}
@@ -1035,12 +1035,12 @@ func (r *thirdPartyResolver) Permission(ctx context.Context, obj *types.ThirdPar
 
 // ThirdParty is the resolver for the thirdParty field.
 func (r *thirdPartyBusinessAssociateAgreementResolver) ThirdParty(ctx context.Context, obj *types.ThirdPartyBusinessAssociateAgreement) (*types.ThirdParty, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyGet)
 	if err != nil {
 		return nil, err
 	}
 
-	thirdParty, err := r.probo.ThirdParties.Get(ctx, scope, obj.ThirdParty.ID)
+	thirdParty, err := r.trustready.ThirdParties.Get(ctx, scope, obj.ThirdParty.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -1054,7 +1054,7 @@ func (r *thirdPartyBusinessAssociateAgreementResolver) ThirdParty(ctx context.Co
 
 // File is the resolver for the file field.
 func (r *thirdPartyBusinessAssociateAgreementResolver) File(ctx context.Context, obj *types.ThirdPartyBusinessAssociateAgreement) (*types.File, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionFileGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionFileGet); err != nil {
 		return nil, err
 	}
 
@@ -1068,12 +1068,12 @@ func (r *thirdPartyBusinessAssociateAgreementResolver) Permission(ctx context.Co
 
 // ThirdParty is the resolver for the thirdParty field.
 func (r *thirdPartyComplianceReportResolver) ThirdParty(ctx context.Context, obj *types.ThirdPartyComplianceReport) (*types.ThirdParty, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyGet)
 	if err != nil {
 		return nil, err
 	}
 
-	thirdParty, err := r.probo.ThirdParties.Get(ctx, scope, obj.ThirdParty.ID)
+	thirdParty, err := r.trustready.ThirdParties.Get(ctx, scope, obj.ThirdParty.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -1089,12 +1089,12 @@ func (r *thirdPartyComplianceReportResolver) ThirdParty(ctx context.Context, obj
 
 // File is the resolver for the file field.
 func (r *thirdPartyComplianceReportResolver) File(ctx context.Context, obj *types.ThirdPartyComplianceReport) (*types.File, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionFileGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionFileGet)
 	if err != nil {
 		return nil, err
 	}
 
-	evidence, err := r.probo.ThirdPartyComplianceReports.Get(ctx, scope, obj.ID)
+	evidence, err := r.trustready.ThirdPartyComplianceReports.Get(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot load evidence", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1104,7 +1104,7 @@ func (r *thirdPartyComplianceReportResolver) File(ctx context.Context, obj *type
 		return nil, nil
 	}
 
-	file, err := r.probo.Files.Get(ctx, scope, *evidence.ReportFileId)
+	file, err := r.trustready.Files.Get(ctx, scope, *evidence.ReportFileId)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -1125,14 +1125,14 @@ func (r *thirdPartyComplianceReportResolver) Permission(ctx context.Context, obj
 
 // TotalCount is the resolver for the totalCount field.
 func (r *thirdPartyConnectionResolver) TotalCount(ctx context.Context, obj *types.ThirdPartyConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionThirdPartyList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionThirdPartyList)
 	if err != nil {
 		return 0, err
 	}
 
 	switch obj.Resolver.(type) {
 	case *organizationResolver:
-		count, err := r.probo.ThirdParties.CountForOrganizationID(ctx, scope, obj.ParentID, obj.Filters)
+		count, err := r.trustready.ThirdParties.CountForOrganizationID(ctx, scope, obj.ParentID, obj.Filters)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count thirdParties", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -1140,7 +1140,7 @@ func (r *thirdPartyConnectionResolver) TotalCount(ctx context.Context, obj *type
 
 		return count, nil
 	case *assetResolver:
-		count, err := r.probo.ThirdParties.CountForAssetID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.ThirdParties.CountForAssetID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count thirdParties", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -1148,7 +1148,7 @@ func (r *thirdPartyConnectionResolver) TotalCount(ctx context.Context, obj *type
 
 		return count, nil
 	case *datumResolver:
-		count, err := r.probo.ThirdParties.CountForDatumID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.ThirdParties.CountForDatumID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count thirdParties", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -1156,11 +1156,11 @@ func (r *thirdPartyConnectionResolver) TotalCount(ctx context.Context, obj *type
 
 		return count, nil
 	case *thirdPartyResolver:
-		if _, err := r.authorize(ctx, obj.ParentID, probo.ActionThirdPartyRelationList); err != nil {
+		if _, err := r.authorize(ctx, obj.ParentID, trustready.ActionThirdPartyRelationList); err != nil {
 			return 0, err
 		}
 
-		count, err := r.probo.ThirdParties.CountForParentThirdPartyID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.ThirdParties.CountForParentThirdPartyID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count child third parties", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -1168,7 +1168,7 @@ func (r *thirdPartyConnectionResolver) TotalCount(ctx context.Context, obj *type
 
 		return count, nil
 	case *measureResolver:
-		count, err := r.probo.ThirdParties.CountForMeasureID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.ThirdParties.CountForMeasureID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count thirdParties", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -1176,7 +1176,7 @@ func (r *thirdPartyConnectionResolver) TotalCount(ctx context.Context, obj *type
 
 		return count, nil
 	case *businessFunctionResolver:
-		count, err := r.probo.BusinessFunctions.CountThirdParties(ctx, scope, obj.ParentID)
+		count, err := r.trustready.BusinessFunctions.CountThirdParties(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count business function third parties", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -1192,19 +1192,19 @@ func (r *thirdPartyConnectionResolver) TotalCount(ctx context.Context, obj *type
 
 // ThirdParty is the resolver for the thirdParty field.
 func (r *thirdPartyContactResolver) ThirdParty(ctx context.Context, obj *types.ThirdPartyContact) (*types.ThirdParty, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyGet)
 	if err != nil {
 		return nil, err
 	}
 
 	// Get the thirdParty contact to access the ThirdPartyID
-	thirdPartyContact, err := r.probo.ThirdPartyContacts.Get(ctx, scope, obj.ID)
+	thirdPartyContact, err := r.trustready.ThirdPartyContacts.Get(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get thirdParty contact", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	thirdParty, err := r.probo.ThirdParties.Get(ctx, scope, thirdPartyContact.ThirdPartyID)
+	thirdParty, err := r.trustready.ThirdParties.Get(ctx, scope, thirdPartyContact.ThirdPartyID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -1225,12 +1225,12 @@ func (r *thirdPartyContactResolver) Permission(ctx context.Context, obj *types.T
 
 // ThirdParty is the resolver for the thirdParty field.
 func (r *thirdPartyDataPrivacyAgreementResolver) ThirdParty(ctx context.Context, obj *types.ThirdPartyDataPrivacyAgreement) (*types.ThirdParty, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyGet)
 	if err != nil {
 		return nil, err
 	}
 
-	thirdParty, err := r.probo.ThirdParties.Get(ctx, scope, obj.ThirdParty.ID)
+	thirdParty, err := r.trustready.ThirdParties.Get(ctx, scope, obj.ThirdParty.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -1246,7 +1246,7 @@ func (r *thirdPartyDataPrivacyAgreementResolver) ThirdParty(ctx context.Context,
 
 // File is the resolver for the file field.
 func (r *thirdPartyDataPrivacyAgreementResolver) File(ctx context.Context, obj *types.ThirdPartyDataPrivacyAgreement) (*types.File, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionFileGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionFileGet); err != nil {
 		return nil, err
 	}
 
@@ -1260,12 +1260,12 @@ func (r *thirdPartyDataPrivacyAgreementResolver) Permission(ctx context.Context,
 
 // ThirdParty is the resolver for the thirdParty field.
 func (r *thirdPartyRiskAssessmentResolver) ThirdParty(ctx context.Context, obj *types.ThirdPartyRiskAssessment) (*types.ThirdParty, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyGet)
 	if err != nil {
 		return nil, err
 	}
 
-	thirdParty, err := r.probo.ThirdParties.GetByRiskAssessmentID(ctx, scope, obj.ID)
+	thirdParty, err := r.trustready.ThirdParties.GetByRiskAssessmentID(ctx, scope, obj.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -1286,7 +1286,7 @@ func (r *thirdPartyRiskAssessmentResolver) Permission(ctx context.Context, obj *
 
 // ThirdParty is the resolver for the thirdParty field.
 func (r *thirdPartyServiceResolver) ThirdParty(ctx context.Context, obj *types.ThirdPartyService) (*types.ThirdParty, error) {
-	if _, err := r.authorize(ctx, obj.ThirdParty.ID, probo.ActionThirdPartyGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ThirdParty.ID, trustready.ActionThirdPartyGet); err != nil {
 		return nil, err
 	}
 

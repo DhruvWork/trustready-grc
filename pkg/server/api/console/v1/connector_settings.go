@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ import (
 
 // resolveAPIKeyConnectorCredential returns the API key to persist on a new
 // API-key connection. For ManagedAPIKey providers (Model B, e.g. Crisp) it
-// persists NOTHING (empty string): the Probo-held key is resolved at
+// persists NOTHING (empty string): the TrustReady-held key is resolved at
 // use time by (*provider.Registry).APIKeyFor, so it survives key
 // rotation and is not duplicated across tenant rows. It still requires the
 // key to be configured, which is what keeps the provider deactivated, and

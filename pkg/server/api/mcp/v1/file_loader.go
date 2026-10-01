@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ func (r *Resolver) loadFile(
 	scope *coredata.Scope,
 	fileID gid.GID,
 ) (*types.File, error) {
-	file, err := r.proboSvc.Files.Get(ctx, scope, fileID)
+	file, err := r.trustreadySvc.Files.Get(ctx, scope, fileID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, fmt.Errorf("file not found")

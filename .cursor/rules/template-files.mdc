@@ -15,7 +15,7 @@ Template files use the extension pattern `<name>.<output-ext>.tmpl`:
 ```
 pkg/trust/sitemap.xml.tmpl
 pkg/cookiebanner/prompts/tracker_identification.txt.tmpl
-pkg/probo/templates/risk_list.json.tmpl
+pkg/trustready/templates/risk_list.json.tmpl
 ```
 
 ## Dynamic values over hardcoded lists

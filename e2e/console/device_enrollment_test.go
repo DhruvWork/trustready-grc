@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -271,7 +271,7 @@ func assertEnrollmentURLs(t *testing.T, serverURL, enrollmentURL, enrollmentToke
 
 	parsed, err := url.Parse(enrollmentURL)
 	require.NoError(t, err)
-	require.Equal(t, "probo", parsed.Scheme)
+	require.Equal(t, "trustready", parsed.Scheme)
 	require.Equal(t, "enroll", parsed.Host)
 	require.Equal(t, serverURL, parsed.Query().Get("server"))
 	require.Equal(t, enrollmentToken, parsed.Query().Get("token"))

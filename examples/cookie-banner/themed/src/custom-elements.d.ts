@@ -8,8 +8,8 @@ type CE<T = object> = React.DetailedHTMLProps<
 declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
-      "probo-settings-link": CE;
-      "probo-cookie-banner": CE<{
+      "trustready-settings-link": CE;
+      "trustready-cookie-banner": CE<{
         "banner-id"?: string;
         "base-url"?: string;
         position?: string;

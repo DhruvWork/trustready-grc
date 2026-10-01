@@ -52,8 +52,8 @@ jobs:
           ## Install
 
           \`\`\`hcl
-          module "probo_audit" {
-            source  = "getprobo/audit-role/aws"
+          module "trustready_audit" {
+            source  = "trustready/audit-role/aws"
             version = "${VERSION}"
           }
           \`\`\`
@@ -78,14 +78,14 @@ jobs:
     steps:
       - uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v6
       - uses: "runs-on/action@46910bf61b41721b0579f237e186afb35477007a" # v2
-      - name: "Update getprobo/terraform-aws-audit-role"
+      - name: "Update trustready/terraform-aws-audit-role"
         env:
           GH_TOKEN: ${{ secrets.TERRAFORM_MODULE_GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           VERSION="${GITHUB_REF_NAME##*/v}"
-          REPO="getprobo/terraform-aws-audit-role"
-          HEADLINE="Release v${VERSION} from getprobo/probo@${GITHUB_SHA}"
+          REPO="trustready/terraform-aws-audit-role"
+          HEADLINE="Release v${VERSION} from trustready/trustready@${GITHUB_SHA}"
 
           if gh api "repos/${REPO}/git/ref/tags/v${VERSION}" >/dev/null 2>&1; then
             echo "tag v${VERSION} already exists; skipping"
@@ -133,7 +133,7 @@ jobs:
           QUERY='mutation($headline: String!, $oid: GitObjectID!, $additions: [FileAddition!]!, $deletions: [FileDeletion!]!) {
             createCommitOnBranch(input: {
               branch: {
-                repositoryNameWithOwner: "getprobo/terraform-aws-audit-role"
+                repositoryNameWithOwner: "trustready/terraform-aws-audit-role"
                 branchName: "main"
               }
               message: { headline: $headline }

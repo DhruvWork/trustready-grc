@@ -19,7 +19,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/iam"
+	"go.trustready.io/trustready/pkg/iam"
 )
 
 // BAD — three groups (stdlib / third-party / internal separated)
@@ -29,13 +29,13 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"go.probo.inc/probo/pkg/iam"
+	"go.trustready.io/trustready/pkg/iam"
 )
 
 // BAD — no separation at all
 import (
 	"context"
 	"github.com/go-chi/chi/v5"
-	"go.probo.inc/probo/pkg/iam"
+	"go.trustready.io/trustready/pkg/iam"
 )
 ```

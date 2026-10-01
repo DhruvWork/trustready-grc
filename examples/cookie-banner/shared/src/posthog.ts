@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ export type ExplicitConsentStatus = "granted" | "denied" | "pending";
 
 /**
  * Fallback category slug to gate PostHog when the banner config does not flag
- * any category with `posthog_consent: true`. Most Probo banners ship with an
+ * any category with `posthog_consent: true`. Most TrustReady banners ship with an
  * "analytics" category, hence this default.
  */
 const FALLBACK_CATEGORY_SLUG = "analytics";
@@ -78,7 +78,7 @@ let cachedStatus: PosthogStatus = {
  * decisions are mirrored to PostHog.
  *
  * Note: this does NOT call `posthog.init()`. Init is deferred to
- * {@link configurePosthogFromBanner}, which the `probo-ready` event handler
+ * {@link configurePosthogFromBanner}, which the `trustready-ready` event handler
  * should invoke with the banner config (so opt-out-by-default can be derived
  * from the consent snapshot before the first capture).
  *
@@ -107,7 +107,7 @@ export function initPosthog(): void {
 /**
  * Initialize PostHog (on first call) and route opt-in / opt-out decisions
  * through the category flagged with `posthog_consent: true` in the banner
- * config. Call this from the `probo-ready` event handler.
+ * config. Call this from the `trustready-ready` event handler.
  *
  * Always uses `cookieless_mode: "on_reject"` so a later analytics accept can
  * leave cookieless mode, call `identify()`, and evaluate feature flags.
@@ -129,7 +129,7 @@ export function configurePosthogFromBanner(config: BannerConfig): void {
 
     const analyticsAllowed = consent.getAll()[slug] === true;
     posthog.init(apiKey, {
-      api_host: "https://t.probo.com",
+      api_host: "https://t.trustready.io",
       ui_host: "https://us.posthog.com",
       cookieless_mode: "on_reject",
       opt_out_capturing_by_default: !analyticsAllowed,

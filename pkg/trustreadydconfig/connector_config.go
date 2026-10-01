@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,12 +36,12 @@ type ConnectorConfig struct {
 	RawConfig   any                    `json:"config,omitempty"`
 	Settings    any                    `json:"-"`
 	RawSettings any                    `json:"settings,omitempty"`
-	// APIKey holds the Probo-supplied credential for an api_key-protocol
+	// APIKey holds the TrustReady-supplied credential for an api_key-protocol
 	// connector (ManagedAPIKey providers such as Crisp). It is resolved
 	// from RawConfig by UnmarshalJSON and registered on the provider
 	// Registry by trustreadyd. Empty for OAuth2 connectors.
 	APIKey string `json:"-"`
-	// ResourceID holds an optional Probo-supplied resource identifier for an
+	// ResourceID holds an optional TrustReady-supplied resource identifier for an
 	// api_key-protocol connector, distinct from the credential (e.g. the
 	// Crisp plugin ID required by the per-website plugin API). Resolved from
 	// RawConfig by UnmarshalJSON and registered on the provider Registry by
@@ -94,7 +94,7 @@ type ConnectorConfigGitHubApp struct {
 	PrivateKey   string `json:"private-key"`
 }
 
-// ConnectorConfigAPIKey carries the Probo-held API key for a
+// ConnectorConfigAPIKey carries the TrustReady-held API key for a
 // ManagedAPIKey connector (e.g. Crisp's marketplace plugin token). The
 // operator supplies it via bootstrap env; trustreadyd registers it on the
 // provider Registry so the create-connector resolver can inject it.

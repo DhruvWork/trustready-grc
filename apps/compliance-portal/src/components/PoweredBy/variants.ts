@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 
 import { tv } from "tailwind-variants/lite";
 
-// "Powered by Probo" footer (Figma "Powered by"): a borderless, full-width row
+// "Powered by TrustReady" footer (Figma "Powered by"): a borderless, full-width row
 // on the body surface, with a dotted texture that fades in from the bottom.
 export const poweredBy = tv({
   slots: {

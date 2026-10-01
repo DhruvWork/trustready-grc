@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,12 +19,12 @@
 // SOFTWARE.
 
 import type { Category } from "../types";
-import { ProboElement } from "./base";
-import type { ProboRootElement } from "./base";
-import type { ProboCookieBannerRoot } from "./cookie-banner-root";
+import { TrustReadyElement } from "./base";
+import type { TrustReadyRootElement } from "./base";
+import type { TrustReadyCookieBannerRoot } from "./cookie-banner-root";
 
-export class ProboCategoryList extends ProboElement {
-  private root: ProboRootElement | null = null;
+export class TrustReadyCategoryList extends TrustReadyElement {
+  private root: TrustReadyRootElement | null = null;
   private template: HTMLTemplateElement | null = null;
   private onReady = (e: Event): void => {
     const { config } = (e as CustomEvent).detail;
@@ -34,11 +34,11 @@ export class ProboCategoryList extends ProboElement {
   connectedCallback(): void {
     this.template = this.querySelector("template");
     if (!this.template) {
-      this.warn("<probo-category-list> requires a <template> child");
+      this.warn("<trustready-category-list> requires a <template> child");
       return;
     }
 
-    this.root = this.findAncestor<ProboCookieBannerRoot>("probo-cookie-banner-root");
+    this.root = this.findAncestor<TrustReadyCookieBannerRoot>("trustready-cookie-banner-root");
     if (!this.root) return;
 
     this.validateTemplate();
@@ -47,13 +47,13 @@ export class ProboCategoryList extends ProboElement {
       const config = this.root.bannerConfig;
       this.stamp(config.categories);
     } catch {
-      this.root.addEventListener("probo-ready", this.onReady, { once: true });
+      this.root.addEventListener("trustready-ready", this.onReady, { once: true });
     }
   }
 
   disconnectedCallback(): void {
     if (this.root) {
-      this.root.removeEventListener("probo-ready", this.onReady);
+      this.root.removeEventListener("trustready-ready", this.onReady);
     }
   }
 
@@ -61,7 +61,7 @@ export class ProboCategoryList extends ProboElement {
     if (!this.template) return;
 
     for (const cat of categories) {
-      const wrapper = document.createElement("probo-category");
+      const wrapper = document.createElement("trustready-category");
       wrapper.setAttribute("name", cat.name);
       wrapper.setAttribute("slug", cat.slug);
       wrapper.setAttribute("kind", cat.kind);
@@ -77,7 +77,7 @@ export class ProboCategoryList extends ProboElement {
       const hasCookies = cat.cookies && cat.cookies.length > 0;
       if (!hasCookies) {
         clone.querySelector("[data-action=toggle-cookies]")?.remove();
-        clone.querySelector("probo-cookie-list")?.remove();
+        clone.querySelector("trustready-cookie-list")?.remove();
       }
 
       wrapper.appendChild(clone);
@@ -89,14 +89,14 @@ export class ProboCategoryList extends ProboElement {
     if (!this.template) return;
     const content = this.template.content;
     const missing: string[] = [];
-    if (!content.querySelector("probo-category-toggle")) {
-      missing.push("probo-category-toggle");
+    if (!content.querySelector("trustready-category-toggle")) {
+      missing.push("trustready-category-toggle");
     }
-    if (!content.querySelector("probo-cookie-list")) {
-      missing.push("probo-cookie-list");
+    if (!content.querySelector("trustready-cookie-list")) {
+      missing.push("trustready-cookie-list");
     }
     if (missing.length > 0) {
-      this.warn(`<probo-category-list> template is missing required elements: ${missing.join(", ")}`);
+      this.warn(`<trustready-category-list> template is missing required elements: ${missing.join(", ")}`);
       this.emitValidation(missing);
     }
   }

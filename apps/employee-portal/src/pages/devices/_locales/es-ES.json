@@ -38,20 +38,20 @@
   "steps": {
     "review": {
       "title": "Revisar la información del dispositivo",
-      "description": "Consulte qué datos guardará Probo Agent."
+      "description": "Consulte qué datos guardará TrustReady Agent."
     },
     "download": {
       "title": "Descargar el agente",
       "description": "Instale el agente de escritorio"
     },
     "enroll": {
-      "title": "Abrir Probo Agent",
+      "title": "Abrir TrustReady Agent",
       "description": "Termine de registrar este dispositivo."
     }
   },
   "review": {
     "title": "Revisar los datos recopilados",
-    "description": "Probo recopila los siguientes metadatos del dispositivo para el inventario y los informes de postura de seguridad.",
+    "description": "TrustReady recopila los siguientes metadatos del dispositivo para el inventario y los informes de postura de seguridad.",
     "understand": "Lo entiendo",
     "thisDevice": {
       "title": "Este dispositivo",
@@ -69,7 +69,7 @@
       "title": "Detalles del sistema",
       "platform": "Plataforma",
       "osVersion": "Versión del sistema operativo",
-      "agentVersion": "Versión de Probo Agent"
+      "agentVersion": "Versión de TrustReady Agent"
     },
     "activity": {
       "title": "Señales de actividad",
@@ -79,9 +79,9 @@
     }
   },
   "download": {
-    "title": "Descargar Probo Agent",
+    "title": "Descargar TrustReady Agent",
     "description": "Instale la aplicación para proteger este dispositivo y conectarlo con su organización.",
-    "featured": "Probo Agent para macOS",
+    "featured": "TrustReady Agent para macOS",
     "continue": "Continuar",
     "download": "Descargar",
     "downloadNamed": "Descargar {{title}}",
@@ -96,8 +96,8 @@
   },
   "enroll": {
     "title": "Continuar en la aplicación",
-    "description": "Abra Probo Agent para terminar de registrar este dispositivo.",
-    "open": "Abrir Probo Agent",
+    "description": "Abra TrustReady Agent para terminar de registrar este dispositivo.",
+    "open": "Abrir TrustReady Agent",
     "preparing": "Preparando…",
     "waiting": "Esperando la primera conexión del agente…",
     "timedOut": "Todavía no hemos recibido respuesta del agente. Compruebe que el agente de escritorio esté instalado y en ejecución e inténtelo de nuevo.",

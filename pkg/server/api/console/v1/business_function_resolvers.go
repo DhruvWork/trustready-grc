@@ -9,22 +9,22 @@ import (
 	"context"
 	"errors"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // Organization is the resolver for the organization field.
 func (r *businessFunctionResolver) Organization(ctx context.Context, obj *types.BusinessFunction) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -72,7 +72,7 @@ func (r *businessFunctionResolver) Owner(ctx context.Context, obj *types.Busines
 
 // Assets is the resolver for the assets field.
 func (r *businessFunctionResolver) Assets(ctx context.Context, obj *types.BusinessFunction, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.AssetOrderBy) (*types.AssetConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionAssetList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionAssetList)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ func (r *businessFunctionResolver) Assets(ctx context.Context, obj *types.Busine
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	pageResult, err := r.probo.BusinessFunctions.ListAssets(ctx, scope, obj.ID, cursor)
+	pageResult, err := r.trustready.BusinessFunctions.ListAssets(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list business function assets", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -102,7 +102,7 @@ func (r *businessFunctionResolver) Assets(ctx context.Context, obj *types.Busine
 
 // ThirdParties is the resolver for the thirdParties field.
 func (r *businessFunctionResolver) ThirdParties(ctx context.Context, obj *types.BusinessFunction, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ThirdPartyOrderBy) (*types.ThirdPartyConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyList)
 	if err != nil {
 		return nil, err
 	}
@@ -121,7 +121,7 @@ func (r *businessFunctionResolver) ThirdParties(ctx context.Context, obj *types.
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	pageResult, err := r.probo.BusinessFunctions.ListThirdParties(ctx, scope, obj.ID, cursor)
+	pageResult, err := r.trustready.BusinessFunctions.ListThirdParties(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list business function third parties", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -137,7 +137,7 @@ func (r *businessFunctionResolver) Permission(ctx context.Context, obj *types.Bu
 
 // TotalCount is the resolver for the totalCount field.
 func (r *businessFunctionConnectionResolver) TotalCount(ctx context.Context, obj *types.BusinessFunctionConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionBusinessFunctionList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionBusinessFunctionList)
 	if err != nil {
 		return 0, err
 	}
@@ -149,7 +149,7 @@ func (r *businessFunctionConnectionResolver) TotalCount(ctx context.Context, obj
 
 	filter := coredata.NewBusinessFunctionFilter(classification)
 
-	count, err := r.probo.BusinessFunctions.CountForOrganizationID(ctx, scope, obj.ParentID, filter)
+	count, err := r.trustready.BusinessFunctions.CountForOrganizationID(ctx, scope, obj.ParentID, filter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot count business functions", log.Error(err))
 		return 0, gqlutils.Internal(ctx)
@@ -160,12 +160,12 @@ func (r *businessFunctionConnectionResolver) TotalCount(ctx context.Context, obj
 
 // CreateBusinessFunction is the resolver for the createBusinessFunction field.
 func (r *mutationResolver) CreateBusinessFunction(ctx context.Context, input types.CreateBusinessFunctionInput) (*types.CreateBusinessFunctionPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionBusinessFunctionCreate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionBusinessFunctionCreate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.CreateBusinessFunctionRequest{
+	req := trustready.CreateBusinessFunctionRequest{
 		OrganizationID:  input.OrganizationID,
 		Name:            input.Name,
 		Classification:  input.Classification,
@@ -179,7 +179,7 @@ func (r *mutationResolver) CreateBusinessFunction(ctx context.Context, input typ
 		ThirdPartyIDs:   input.ThirdPartyIds,
 	}
 
-	businessFunction, err := r.probo.BusinessFunctions.Create(ctx, scope, &req)
+	businessFunction, err := r.trustready.BusinessFunctions.Create(ctx, scope, &req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -201,12 +201,12 @@ func (r *mutationResolver) CreateBusinessFunction(ctx context.Context, input typ
 
 // UpdateBusinessFunction is the resolver for the updateBusinessFunction field.
 func (r *mutationResolver) UpdateBusinessFunction(ctx context.Context, input types.UpdateBusinessFunctionInput) (*types.UpdateBusinessFunctionPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionBusinessFunctionUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionBusinessFunctionUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.UpdateBusinessFunctionRequest{
+	req := trustready.UpdateBusinessFunctionRequest{
 		ID:              input.ID,
 		Name:            input.Name,
 		Classification:  input.Classification,
@@ -226,7 +226,7 @@ func (r *mutationResolver) UpdateBusinessFunction(ctx context.Context, input typ
 		req.ThirdPartyIDs = &input.ThirdPartyIds
 	}
 
-	businessFunction, err := r.probo.BusinessFunctions.Update(ctx, scope, &req)
+	businessFunction, err := r.trustready.BusinessFunctions.Update(ctx, scope, &req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -248,12 +248,12 @@ func (r *mutationResolver) UpdateBusinessFunction(ctx context.Context, input typ
 
 // DeleteBusinessFunction is the resolver for the deleteBusinessFunction field.
 func (r *mutationResolver) DeleteBusinessFunction(ctx context.Context, input types.DeleteBusinessFunctionInput) (*types.DeleteBusinessFunctionPayload, error) {
-	scope, err := r.authorize(ctx, input.BusinessFunctionID, probo.ActionBusinessFunctionDelete)
+	scope, err := r.authorize(ctx, input.BusinessFunctionID, trustready.ActionBusinessFunctionDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.BusinessFunctions.Delete(ctx, scope, input.BusinessFunctionID); err != nil {
+	if err := r.trustready.BusinessFunctions.Delete(ctx, scope, input.BusinessFunctionID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete business function", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -265,12 +265,12 @@ func (r *mutationResolver) DeleteBusinessFunction(ctx context.Context, input typ
 
 // PublishBusinessFunctionList is the resolver for the publishBusinessFunctionList field.
 func (r *mutationResolver) PublishBusinessFunctionList(ctx context.Context, input types.PublishBusinessFunctionListInput) (*types.PublishBusinessFunctionListPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionBusinessFunctionPublish)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionBusinessFunctionPublish)
 	if err != nil {
 		return nil, err
 	}
 
-	document, documentVersion, err := r.probo.GeneratedDocuments.PublishBusinessFunctionList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
+	document, documentVersion, err := r.trustready.GeneratedDocuments.PublishBusinessFunctionList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceAlreadyExists) {
 			return nil, gqlutils.Conflict(ctx, err)

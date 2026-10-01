@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,11 +19,11 @@
 // SOFTWARE.
 
 const LEGACY_CONSOLE_HOSTS: Record<string, string> = {
-  "eu.console.getprobo.com": "eu.probo.com",
-  "us.console.getprobo.com": "us.probo.com",
+  "eu.console.trustready.io": "eu.trustready.io",
+  "us.console.trustready.io": "us.trustready.io",
 };
 
-// Snippets copied while the console lived on *.console.getprobo.com still
+// Snippets copied while the console lived on *.console.trustready.io still
 // pass that host as baseUrl. Rewrite so API calls hit the current hosted
 // domains; self-hosted and already-migrated URLs are left alone.
 export function rewriteLegacyConsoleHost(url: URL): URL {

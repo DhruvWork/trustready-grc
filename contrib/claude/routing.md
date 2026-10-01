@@ -1,6 +1,6 @@
 # Routing, navigation, and auth
 
-Probo frontends route with [React Router](https://reactrouter.com/) (`react-router` v8), wrapped by the **`@trustready/routes`** helpers and lazy-loaded with **`@trustready/react-lazy`**. This guide covers how routes are declared, how to navigate and read params, how to use the URL as state, and how authenticated/protected routes are composed. Folder placement of route files is covered in [`app-arborescence.md`](app-arborescence.md); this guide is about the routing API itself.
+TrustReady frontends route with [React Router](https://reactrouter.com/) (`react-router` v8), wrapped by the **`@trustready/routes`** helpers and lazy-loaded with **`@trustready/react-lazy`**. This guide covers how routes are declared, how to navigate and read params, how to use the URL as state, and how authenticated/protected routes are composed. Folder placement of route files is covered in [`app-arborescence.md`](app-arborescence.md); this guide is about the routing API itself.
 
 ## Related guides
 

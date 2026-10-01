@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ export const ConfirmEmail = () => {
   return (
     <EmailLayout subject="Confirm your email address">
       <Text style={bodyText}>
-        Thanks for joining Probo! Please confirm your email address by clicking the button below:
+        Thanks for joining TrustReady! Please confirm your email address by clicking the button below:
       </Text>
 
       <Section style={buttonContainer}>
@@ -36,7 +36,7 @@ export const ConfirmEmail = () => {
       </Section>
 
       <Text style={footerText}>
-        If you did not sign up for Probo, please ignore this email.
+        If you did not sign up for TrustReady, please ignore this email.
       </Text>
     </EmailLayout>
   );

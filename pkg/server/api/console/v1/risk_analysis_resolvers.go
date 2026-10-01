@@ -10,17 +10,17 @@ import (
 	"errors"
 	"time"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // CreateRiskAnalysis is the resolver for the createRiskAnalysis field.
@@ -885,7 +885,7 @@ func (r *mutationResolver) PublishRiskAnalysis(ctx context.Context, input types.
 		return nil, err
 	}
 
-	document, documentVersion, err := r.probo.GeneratedDocuments.PublishRiskAnalysis(ctx, scope, input.RiskAnalysisID, input.ApproverIds, input.Minor)
+	document, documentVersion, err := r.trustready.GeneratedDocuments.PublishRiskAnalysis(ctx, scope, input.RiskAnalysisID, input.ApproverIds, input.Minor)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceAlreadyExists) {
 			return nil, gqlutils.Conflict(ctx, err)
@@ -908,7 +908,7 @@ func (r *riskAnalysisResolver) Document(ctx context.Context, obj *types.RiskAnal
 		return nil, nil
 	}
 
-	if _, err := r.authorize(ctx, obj.Document.ID, probo.ActionDocumentGet); err != nil {
+	if _, err := r.authorize(ctx, obj.Document.ID, trustready.ActionDocumentGet); err != nil {
 		return nil, err
 	}
 
@@ -930,7 +930,7 @@ func (r *riskAnalysisResolver) Document(ctx context.Context, obj *types.RiskAnal
 
 // Organization is the resolver for the organization field.
 func (r *riskAnalysisResolver) Organization(ctx context.Context, obj *types.RiskAnalysis) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -1047,7 +1047,7 @@ func (r *riskAnalysisResolver) MatrixCells(ctx context.Context, obj *types.RiskA
 
 // ScenarioRisks is the resolver for the scenarioRisks field.
 func (r *riskAnalysisResolver) ScenarioRisks(ctx context.Context, obj *types.RiskAnalysis, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.RiskOrderBy, filter *types.RiskFilter) (*types.RiskConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionRiskList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionRiskList)
 	if err != nil {
 		return nil, err
 	}
@@ -1380,7 +1380,7 @@ func (r *riskAnalysisScenarioResolver) Threats(ctx context.Context, obj *types.R
 
 // Risks is the resolver for the risks field.
 func (r *riskAnalysisScenarioResolver) Risks(ctx context.Context, obj *types.RiskAnalysisScenario, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.RiskOrderBy) (*types.RiskConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionRiskList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionRiskList)
 	if err != nil {
 		return nil, err
 	}

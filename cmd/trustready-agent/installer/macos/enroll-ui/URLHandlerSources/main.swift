@@ -18,10 +18,10 @@ private final class URLHandlerApp: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        NSLog("probo-agent url-handler: launched")
+        NSLog("trustready-agent url-handler: launched")
         idleTimer = Timer.scheduledTimer(withTimeInterval: 15, repeats: false) { [weak self] _ in
             guard let self, !self.didReceiveURL else { return }
-            NSLog("probo-agent url-handler: no URL received; exiting")
+            NSLog("trustready-agent url-handler: no URL received; exiting")
             NSApp.terminate(nil)
         }
     }
@@ -52,26 +52,26 @@ private final class URLHandlerApp: NSObject, NSApplicationDelegate {
     }
 
     private func runEnrollment(for rawURL: String) {
-        NSLog("probo-agent url-handler: starting enrollment")
+        NSLog("trustready-agent url-handler: starting enrollment")
 
         DispatchQueue.global(qos: .userInitiated).async {
             do {
-                NSLog("probo-agent url-handler: preflight…")
+                NSLog("trustready-agent url-handler: preflight…")
                 let preflight = try EnrollmentFlow.runPreflight(rawURL: rawURL)
                 if preflight.alreadyEnrolled {
-                    NSLog("probo-agent url-handler: already enrolled")
+                    NSLog("trustready-agent url-handler: already enrolled")
                     DispatchQueue.main.async {
                         NSApp.terminate(nil)
                     }
                     return
                 }
 
-                if preflight.trust != "probo_cloud" {
+                if preflight.trust != "trustready_cloud" {
                     let confirmed = DispatchQueue.main.sync {
                         self.presentEnrollmentConfirm(preflight: preflight)
                     }
                     if !confirmed {
-                        NSLog("probo-agent url-handler: enrollment canceled")
+                        NSLog("trustready-agent url-handler: enrollment canceled")
                         DispatchQueue.main.async {
                             NSApp.terminate(nil)
                         }
@@ -79,16 +79,16 @@ private final class URLHandlerApp: NSObject, NSApplicationDelegate {
                     }
                 }
 
-                NSLog("probo-agent url-handler: install via helper…")
+                NSLog("trustready-agent url-handler: install via helper…")
                 try EnrollmentFlow.installViaHelper(preflight: preflight)
-                NSLog("probo-agent url-handler: install completed")
+                NSLog("trustready-agent url-handler: install completed")
 
                 DispatchQueue.main.async {
                     NSApp.terminate(nil)
                 }
             } catch {
                 NSLog(
-                    "probo-agent url-handler: enrollment failed: %@",
+                    "trustready-agent url-handler: enrollment failed: %@",
                     error.localizedDescription
                 )
                 DispatchQueue.main.async {

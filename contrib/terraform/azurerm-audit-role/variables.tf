@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Probo Inc <hello@probo.com>.
+ * Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +20,38 @@
  * SOFTWARE.
  */
 
-variable "probo_issuer_url" {
+variable "trustready_issuer_url" {
   type        = string
   description = <<-EOT
-    The issuer URL Probo mints its assertions under, unique to your Probo
+    The issuer URL TrustReady mints its assertions under, unique to your TrustReady
     organization. Copy it exactly: Entra compares it case-sensitively and the
     last path segment is a mixed-case identifier.
   EOT
 
   validation {
-    condition     = can(regex("^https://[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(/[A-Za-z0-9._~%-]+)*/?$", var.probo_issuer_url))
+    condition     = can(regex("^https://[A-Za-z0-9]([A-Za-z0-9.-]*[A-Za-z0-9])?(/[A-Za-z0-9._~%-]+)*/?$", var.trustready_issuer_url))
     error_message = "The issuer must be an https:// URL with no port and no query string."
   }
 }
 
-variable "probo_subject" {
+variable "trustready_subject" {
   type        = string
   description = <<-EOT
-    The subject claim Probo asserts, identifying your Probo organization. The
+    The subject claim TrustReady asserts, identifying your TrustReady organization. The
     federated credential trusts this value and no other. A wrong subject
     creates successfully and fails later at token exchange.
   EOT
 
   validation {
-    condition     = can(regex("^[A-Za-z0-9_-]+$", var.probo_subject))
-    error_message = "The subject must be the identifier Probo showed you."
+    condition     = can(regex("^[A-Za-z0-9_-]+$", var.trustready_subject))
+    error_message = "The subject must be the identifier TrustReady showed you."
   }
 }
 
 variable "subscription_id" {
   type        = string
   description = <<-EOT
-    Azure subscription ID that Probo reviews. The module grants Reader on this
+    Azure subscription ID that TrustReady reviews. The module grants Reader on this
     subscription only.
   EOT
 
@@ -63,7 +63,7 @@ variable "subscription_id" {
 
 variable "application_display_name" {
   type        = string
-  default     = "Probo Access Review"
+  default     = "TrustReady Access Review"
   description = <<-EOT
     Display name of the Entra application registration. Change it only when
     this tenant already has an application with this name.
@@ -77,7 +77,7 @@ variable "application_display_name" {
 
 variable "federated_credential_name" {
   type        = string
-  default     = "probo-access-review"
+  default     = "trustready-access-review"
   description = <<-EOT
     Name of the federated identity credential. Entra stores this as Graph
     name: 3 to 120 characters, letters, digits, dash, and underscore, first

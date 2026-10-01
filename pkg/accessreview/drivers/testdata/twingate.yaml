@@ -7,14 +7,14 @@ interactions:
         proto_major: 1
         proto_minor: 1
         content_length: 250
-        host: probo.twingate.com
+        host: trustready.twingate.com
         body: '{"query":"query($after: String, $first: Int!) {\n  users(after: $after, first: $first) {\n    pageInfo { hasNextPage endCursor }\n    edges { node { id email firstName lastName role isAdmin state type createdAt } }\n  }\n}","variables":{"first":100}}'
         headers:
             Accept:
                 - application/json
             Content-Type:
                 - application/json
-        url: https://probo.twingate.com/api/graphql/
+        url: https://trustready.twingate.com/api/graphql/
         method: POST
       response:
         proto: HTTP/2.0

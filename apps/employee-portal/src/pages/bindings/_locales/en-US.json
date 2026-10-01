@@ -1,7 +1,7 @@
 {
   "bind": {
-    "title": "Connect Slack to Probo",
-    "description": "Link this Slack account to your Probo identity so Probot can help you.",
+    "title": "Connect Slack to TrustReady",
+    "description": "Link this Slack account to your TrustReady identity so Probot can help you.",
     "breadcrumb": "Connect",
     "fields": {
       "tenant": "Workspace",
@@ -11,7 +11,7 @@
       "confirm": "Link Slack account"
     },
     "messages": {
-      "linked": "Your Slack account is now linked to Probo."
+      "linked": "Your Slack account is now linked to TrustReady."
     },
     "missingToken": {
       "title": "No confirmation link",

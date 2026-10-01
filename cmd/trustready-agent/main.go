@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -60,7 +60,7 @@ const restartExitCode = 75
 const collectTimeout = 5 * time.Minute
 
 // Cobra prints a "this is a command line tool" splash and exits 1 when the
-// parent process is explorer.exe. The shell is what launches the probo://
+// parent process is explorer.exe. The shell is what launches the trustready://
 // handler and the HKLM Run entry, so the splash would break both browser
 // enrollment and tray auto-start.
 func init() {
@@ -93,8 +93,8 @@ func main() {
 func newRootCmd() *cobra.Command {
 	root := &cobra.Command{
 		Use:           "trustready-agent",
-		Short:         "Probo device posture agent",
-		Long:          "trustready-agent runs as a managed OS service, reporting device posture to Probo.",
+		Short:         "TrustReady device posture agent",
+		Long:          "trustready-agent runs as a managed OS service, reporting device posture to TrustReady.",
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		Version:       version,
@@ -165,8 +165,8 @@ func newEnrollURLCmd() *cobra.Command {
 
 			if runtime.GOOS == "darwin" {
 				return fmt.Errorf(
-					"macOS browser enrollment must use the signed Probo Agent.app " +
-						"(probo:// deeplink); for CLI use: sudo trustready-agent install " +
+					"macOS browser enrollment must use the signed TrustReady Agent.app " +
+						"(trustready:// deeplink); for CLI use: sudo trustready-agent install " +
 						"--server … --enrollment-token …",
 				)
 			}
@@ -424,7 +424,7 @@ func newInstallCmd() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&serverURL, "server", "", "Probo server base URL (e.g. https://your-probo-host.example.com)")
+	cmd.Flags().StringVar(&serverURL, "server", "", "TrustReady server base URL (e.g. https://your-trustready-host.example.com)")
 	cmd.Flags().StringVar(&enrollmentToken, "enrollment-token", "", "one-shot enrollment token issued when the device was created")
 	cmd.Flags().BoolVar(&skipService, "skip-service", false, "register the device but do not install the OS service")
 	cmd.Flags().BoolVar(&noAutoUpdate, "no-auto-update", false, "disable automatic upgrades of the agent binary")

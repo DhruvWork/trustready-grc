@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -45,8 +45,8 @@ import (
 )
 
 const (
-	exchangeProviderResource = "projects/123456789012/locations/global/workloadIdentityPools/probo/providers/probo"
-	exchangeServiceAccount   = "probo-audit@my-project.iam.gserviceaccount.com"
+	exchangeProviderResource = "projects/123456789012/locations/global/workloadIdentityPools/trustready/providers/trustready"
+	exchangeServiceAccount   = "trustready-audit@my-project.iam.gserviceaccount.com"
 	exchangeIAMPath          = "/v1/projects/-/serviceAccounts/" + exchangeServiceAccount + ":generateAccessToken"
 	exchangeFederatedToken   = "federated-access-token"
 	exchangeSAToken          = "sa-access-token"
@@ -57,15 +57,15 @@ func TestAudienceForms(t *testing.T) {
 
 	p := providerResource{
 		projectNumber: "123456789012",
-		poolID:        "probo",
-		providerID:    "probo",
+		poolID:        "trustready",
+		providerID:    "trustready",
 	}
 
 	jwt, err := jwtAudience(p)
 	require.NoError(t, err)
 	assert.Equal(
 		t,
-		"https://iam.googleapis.com/projects/123456789012/locations/global/workloadIdentityPools/probo/providers/probo",
+		"https://iam.googleapis.com/projects/123456789012/locations/global/workloadIdentityPools/trustready/providers/trustready",
 		jwt,
 	)
 
@@ -73,7 +73,7 @@ func TestAudienceForms(t *testing.T) {
 	require.NoError(t, err)
 	assert.Equal(
 		t,
-		"//iam.googleapis.com/projects/123456789012/locations/global/workloadIdentityPools/probo/providers/probo",
+		"//iam.googleapis.com/projects/123456789012/locations/global/workloadIdentityPools/trustready/providers/trustready",
 		sts,
 	)
 }
@@ -88,12 +88,12 @@ func TestCheckAccess_ExchangesAndImpersonates(t *testing.T) {
 
 	assert.Equal(
 		t,
-		"https://iam.googleapis.com/projects/123456789012/locations/global/workloadIdentityPools/probo/providers/probo",
+		"https://iam.googleapis.com/projects/123456789012/locations/global/workloadIdentityPools/trustready/providers/trustready",
 		probe.jwtAudience,
 	)
 	assert.Equal(
 		t,
-		"//iam.googleapis.com/projects/123456789012/locations/global/workloadIdentityPools/probo/providers/probo",
+		"//iam.googleapis.com/projects/123456789012/locations/global/workloadIdentityPools/trustready/providers/trustready",
 		probe.stsAudience,
 	)
 	assert.Equal(t, "Bearer "+exchangeFederatedToken, probe.iamAuth)
@@ -279,7 +279,7 @@ func exchangeTestIssuer(t *testing.T) *identityfederation.Issuer {
 	)
 	require.NoError(t, err)
 
-	base, err := baseurl.Parse("https://proboidentity.com")
+	base, err := baseurl.Parse("https://trustreadyidentity.com")
 	require.NoError(t, err)
 
 	issuer, err := identityfederation.NewIssuer(base, keyRing, identityfederation.DefaultTokenTTL)

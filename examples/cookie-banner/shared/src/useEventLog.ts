@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -80,8 +80,8 @@ export function useEventLog(): {
     const attach = (): void => {
       const dl = getDataLayer();
       ingest(dl);
-      const current = dl.push as typeof dl.push & { __proboExampleGcm?: boolean };
-      if (current.__proboExampleGcm) {
+      const current = dl.push as typeof dl.push & { __trustreadyExampleGcm?: boolean };
+      if (current.__trustreadyExampleGcm) {
         return;
       }
       const original = dl.push;
@@ -91,8 +91,8 @@ export function useEventLog(): {
           ingest(this);
         }
         return n;
-      } as typeof dl.push & { __proboExampleGcm?: boolean };
-      wrapped.__proboExampleGcm = true;
+      } as typeof dl.push & { __trustreadyExampleGcm?: boolean };
+      wrapped.__trustreadyExampleGcm = true;
       dl.push = wrapped;
       wrappedLayer = dl;
       wrappedOriginal = original;
@@ -106,7 +106,7 @@ export function useEventLog(): {
       if (
         wrappedLayer &&
         wrappedOriginal &&
-        (wrappedLayer.push as { __proboExampleGcm?: boolean }).__proboExampleGcm
+        (wrappedLayer.push as { __trustreadyExampleGcm?: boolean }).__trustreadyExampleGcm
       ) {
         wrappedLayer.push = wrappedOriginal;
       }

@@ -1,20 +1,20 @@
 {
   "name": "trustready-grc",
-  "description": "Probo Claude Code plugins",
+  "description": "TrustReady Claude Code plugins",
   "owner": {
     "name": "TrustReady",
-    "email": "hello@probo.com"
+    "email": "hello@trustready.io"
   },
   "plugins": [
     {
       "name": "trustready-grc",
-      "description": "Open-source compliance workflows powered by Probo MCP",
+      "description": "Open-source compliance workflows powered by TrustReady MCP",
       "source": "./packages/skills",
-      "homepage": "https://github.com/getprobo/probo/tree/main/packages/skills",
-      "repository": "https://github.com/getprobo/probo",
+      "homepage": "https://github.com/getprobo/trustready/tree/main/packages/skills",
+      "repository": "https://github.com/getprobo/trustready",
       "license": "MIT",
       "keywords": [
-        "probo",
+        "trustready",
         "compliance",
         "grc",
         "mcp",

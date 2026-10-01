@@ -1,5 +1,5 @@
 # CI-only compose override: pull Docker Hub images through the Harbor proxy
-# cache (artifact.probo.inc/dockerhub). Used with compose.yaml in GitHub Actions.
+# cache (artifact.trustready.io/dockerhub). Used with compose.yaml in GitHub Actions.
 #
 # Harbor resolves digest refs as <repo>@sha256:..., not <repo>:tag@sha256:...
 # Images from other registries (ghcr.io, quay.io) are unchanged in compose.yaml.

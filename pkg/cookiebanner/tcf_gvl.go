@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ import (
 
 const (
 	// DefaultTCFCmpID is used when trustreadyd config omits a CMP ID.
-	// Placeholder until IAB Europe issues Probo a CMP ID. The official IAB
+	// Placeholder until IAB Europe issues TrustReady a CMP ID. The official IAB
 	// libraries reject ids below 2, so 0 cannot be encoded or passed to CmpApi.
 	DefaultTCFCmpID         = 4095
 	tcfCmpVersion           = 1

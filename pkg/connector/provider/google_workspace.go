@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ func googleWorkspaceRegistration() *Registration {
 		Provider:    coredata.ConnectorProviderGoogleWorkspace,
 		DisplayName: "Google Workspace",
 		// APIBase is deliberately empty. Unlike every other provider here, the
-		// Admin Directory host is not a Probo literal: it lives in the Google
+		// Admin Directory host is not a TrustReady literal: it lives in the Google
 		// SDK's generated basePath, which admin.NewService picks up (see
 		// drivers.GoogleWorkspaceDriver). Honouring an override would mean
 		// threading option.WithEndpoint into the SDK, and the SDK expects a

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -66,7 +66,7 @@ func Install(cfg Config) error {
 		"start=",
 		"auto",
 		"DisplayName=",
-		"Probo Device Posture Agent",
+		"TrustReady Device Posture Agent",
 	).CombinedOutput(); err != nil {
 		return fmt.Errorf("cannot run sc.exe create: %w: %s", err, strings.TrimSpace(string(out)))
 	}

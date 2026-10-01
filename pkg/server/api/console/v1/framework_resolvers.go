@@ -10,22 +10,22 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // Organization is the resolver for the organization field.
 func (r *frameworkResolver) Organization(ctx context.Context, obj *types.Framework) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -47,7 +47,7 @@ func (r *frameworkResolver) Organization(ctx context.Context, obj *types.Framewo
 
 // Controls is the resolver for the controls field.
 func (r *frameworkResolver) Controls(ctx context.Context, obj *types.Framework, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ControlOrderBy, filter *types.ControlFilter) (*types.ControlConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionControlList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionControlList)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func (r *frameworkResolver) Controls(ctx context.Context, obj *types.Framework, 
 		controlFilter = coredata.NewControlFilter(filter.Query)
 	}
 
-	page, err := r.probo.Controls.ListForFrameworkID(ctx, scope, obj.ID, cursor, controlFilter)
+	page, err := r.trustready.Controls.ListForFrameworkID(ctx, scope, obj.ID, cursor, controlFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list controls", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -82,7 +82,7 @@ func (r *frameworkResolver) Controls(ctx context.Context, obj *types.Framework, 
 
 // LightLogo is the resolver for the lightLogo field.
 func (r *frameworkResolver) LightLogo(ctx context.Context, obj *types.Framework) (*types.File, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionFrameworkGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionFrameworkGet); err != nil {
 		return nil, err
 	}
 
@@ -95,7 +95,7 @@ func (r *frameworkResolver) LightLogo(ctx context.Context, obj *types.Framework)
 
 // DarkLogo is the resolver for the darkLogo field.
 func (r *frameworkResolver) DarkLogo(ctx context.Context, obj *types.Framework) (*types.File, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionFrameworkGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionFrameworkGet); err != nil {
 		return nil, err
 	}
 
@@ -113,14 +113,14 @@ func (r *frameworkResolver) Permission(ctx context.Context, obj *types.Framework
 
 // TotalCount is the resolver for the totalCount field.
 func (r *frameworkConnectionResolver) TotalCount(ctx context.Context, obj *types.FrameworkConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionFrameworkList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionFrameworkList)
 	if err != nil {
 		return 0, err
 	}
 
 	switch obj.Resolver.(type) {
 	case *organizationResolver:
-		count, err := r.probo.Frameworks.CountForOrganizationID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.Frameworks.CountForOrganizationID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count frameworks", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -136,14 +136,14 @@ func (r *frameworkConnectionResolver) TotalCount(ctx context.Context, obj *types
 
 // CreateFramework is the resolver for the createFramework field.
 func (r *mutationResolver) CreateFramework(ctx context.Context, input types.CreateFrameworkInput) (*types.CreateFrameworkPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionFrameworkCreate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionFrameworkCreate)
 	if err != nil {
 		return nil, err
 	}
 
-	framework, err := r.probo.Frameworks.Create(
+	framework, err := r.trustready.Frameworks.Create(
 		ctx, scope,
-		probo.CreateFrameworkRequest{
+		trustready.CreateFrameworkRequest{
 			OrganizationID: input.OrganizationID,
 			Name:           input.Name,
 		},
@@ -165,14 +165,14 @@ func (r *mutationResolver) CreateFramework(ctx context.Context, input types.Crea
 
 // UpdateFramework is the resolver for the updateFramework field.
 func (r *mutationResolver) UpdateFramework(ctx context.Context, input types.UpdateFrameworkInput) (*types.UpdateFrameworkPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionFrameworkUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionFrameworkUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	framework, err := r.probo.Frameworks.Update(
+	framework, err := r.trustready.Frameworks.Update(
 		ctx, scope,
-		probo.UpdateFrameworkRequest{
+		trustready.UpdateFrameworkRequest{
 			ID:          input.ID,
 			Name:        input.Name,
 			Description: gqlutils.UnwrapOmittable(input.Description),
@@ -195,18 +195,18 @@ func (r *mutationResolver) UpdateFramework(ctx context.Context, input types.Upda
 
 // ImportFramework is the resolver for the importFramework field.
 func (r *mutationResolver) ImportFramework(ctx context.Context, input types.ImportFrameworkInput) (*types.ImportFrameworkPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionFrameworkImport)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionFrameworkImport)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.ImportFrameworkRequest{}
+	req := trustready.ImportFrameworkRequest{}
 	if err := json.NewDecoder(input.File.File).Decode(&req.Framework); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot decode framework", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	framework, err := r.probo.Frameworks.Import(ctx, scope, input.OrganizationID, req)
+	framework, err := r.trustready.Frameworks.Import(ctx, scope, input.OrganizationID, req)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceAlreadyExists) {
 			return nil, gqlutils.Conflict(ctx, err)
@@ -224,12 +224,12 @@ func (r *mutationResolver) ImportFramework(ctx context.Context, input types.Impo
 
 // DeleteFramework is the resolver for the deleteFramework field.
 func (r *mutationResolver) DeleteFramework(ctx context.Context, input types.DeleteFrameworkInput) (*types.DeleteFrameworkPayload, error) {
-	scope, err := r.authorize(ctx, input.FrameworkID, probo.ActionFrameworkDelete)
+	scope, err := r.authorize(ctx, input.FrameworkID, trustready.ActionFrameworkDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.Frameworks.Delete(ctx, scope, input.FrameworkID); err != nil {
+	if err := r.trustready.Frameworks.Delete(ctx, scope, input.FrameworkID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete framework", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -241,14 +241,14 @@ func (r *mutationResolver) DeleteFramework(ctx context.Context, input types.Dele
 
 // ExportFramework is the resolver for the exportFramework field.
 func (r *mutationResolver) ExportFramework(ctx context.Context, input types.ExportFrameworkInput) (*types.ExportFrameworkPayload, error) {
-	scope, err := r.authorize(ctx, input.FrameworkID, probo.ActionFrameworkExport)
+	scope, err := r.authorize(ctx, input.FrameworkID, trustready.ActionFrameworkExport)
 	if err != nil {
 		return nil, err
 	}
 
 	identity := authn.IdentityFromContext(ctx)
 
-	exportJob, exportErr := r.probo.Frameworks.RequestExport(
+	exportJob, exportErr := r.trustready.Frameworks.RequestExport(
 		ctx, scope,
 		input.FrameworkID,
 		identity.EmailAddress,

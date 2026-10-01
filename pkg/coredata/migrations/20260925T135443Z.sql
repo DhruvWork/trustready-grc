@@ -1,4 +1,4 @@
--- Copyright (c) 2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2026 TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ UPDATE task_external_links
 SET provider = 'LINEAR_SYNC'
 WHERE provider = 'LINEAR';
 
--- Linear comments whose author is not a Probo member are stored without an
+-- Linear comments whose author is not a TrustReady member are stored without an
 -- owner. GraphQL and other create paths still require one.
 ALTER TABLE task_comments
     ALTER COLUMN owner_profile_id DROP NOT NULL;

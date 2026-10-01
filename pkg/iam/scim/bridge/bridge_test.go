@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -60,7 +60,7 @@ func TestBridge_Run_DeletesInactiveExcludedUsers(t *testing.T) {
 				"startIndex": 1,
 				"itemsPerPage": 100,
 				"Resources": [{
-					"id": "gid://probo/MembershipProfile/abc",
+					"id": "gid://trustready/MembershipProfile/abc",
 					"userName": "excluded@example.com",
 					"displayName": "Excluded User",
 					"active": false,

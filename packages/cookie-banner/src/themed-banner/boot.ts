@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,13 @@ import { getConsent } from "../consent";
 import { registerCookieBanner } from "./index";
 
 // IIFE-only: classic scripts expose document.currentScript. ES-module
-// callers must declare <probo-cookie-banner> after registerCookieBanner().
+// callers must declare <trustready-cookie-banner> after registerCookieBanner().
 export function bootFromCurrentScript(): void {
   const w = window as unknown as Record<string, unknown>;
-  if (!w.Probo) {
-    w.Probo = {};
+  if (!w.TrustReady) {
+    w.TrustReady = {};
   }
-  (w.Probo as Record<string, unknown>).consent = getConsent();
+  (w.TrustReady as Record<string, unknown>).consent = getConsent();
 
   const script = document.currentScript as HTMLScriptElement | null;
 
@@ -44,7 +44,7 @@ export function bootFromCurrentScript(): void {
   }
 
   const mount = (): void => {
-    const el = document.createElement("probo-cookie-banner");
+    const el = document.createElement("trustready-cookie-banner");
     el.setAttribute("banner-id", bannerId);
     el.setAttribute("base-url", baseUrl);
 
@@ -75,7 +75,7 @@ export function bootFromCurrentScript(): void {
 
 // Registers the themed element and, for the classic IIFE only, mounts
 // it from the current script's data-* attributes. Module integrations
-// should call registerCookieBanner() and declare <probo-cookie-banner>.
+// should call registerCookieBanner() and declare <trustready-cookie-banner>.
 export function bootCookieBanner(): void {
   registerCookieBanner();
   bootFromCurrentScript();

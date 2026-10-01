@@ -29,7 +29,7 @@ on the path. If empty or non-user-facing only, do not release this track.
 
 CI checks that `VERSION` matches the tag, runs `terraform fmt -check`,
 creates a GitHub Release on this repository, then copies the module into
-`getprobo/terraform-azurerm-audit-role` and tags `v<version>` there. The
+`trustready/terraform-azurerm-audit-role` and tags `v<version>` there. The
 module-repo commit is created with GitHub's `createCommitOnBranch`
 mutation (same as the Homebrew tap) so it satisfies the org signed-commit
 rule; a local `git commit` plus `git push` would be rejected.
@@ -37,8 +37,8 @@ rule; a local `git commit` plus `git push` would be rejected.
 The primary consumer address is the Terraform Registry module:
 
 ```hcl
-module "probo_audit" {
-  source  = "getprobo/audit-role/azurerm"
+module "trustready_audit" {
+  source  = "trustready/audit-role/azurerm"
   version = "0.1.0"
 }
 ```
@@ -50,21 +50,21 @@ Consumers can also pin a Git source:
 source = "github.com/getprobo/terraform-azurerm-audit-role?ref=v0.1.0"
 
 # Monorepo subdirectory
-source = "github.com/getprobo/probo//contrib/terraform/azurerm-audit-role?ref=terraform-azurerm-audit-role/v0.1.0"
+source = "github.com/getprobo/trustready//contrib/terraform/azurerm-audit-role?ref=terraform-azurerm-audit-role/v0.1.0"
 ```
 
-Connecting `getprobo/terraform-azurerm-audit-role` to the public Terraform
+Connecting `trustready/terraform-azurerm-audit-role` to the public Terraform
 Registry is a separate step after the first `v*` tag exists there. The
-registry address is `getprobo/audit-role/azurerm`.
+registry address is `trustready/audit-role/azurerm`.
 
 ### One-time setup (before the first release)
 
-1. Create the public repository `getprobo/terraform-azurerm-audit-role`. Give
+1. Create the public repository `trustready/terraform-azurerm-audit-role`. Give
    it a one-sentence GitHub description (the registry uses it later) and
    an MIT license. An empty `main` branch is enough; the first release
    fills it.
 2. Reuse the Actions secret `TERRAFORM_MODULE_GITHUB_TOKEN` on
-   `getprobo/probo`. Grant it `contents:write` on this module repository
-   as well as `getprobo/terraform-aws-audit-role` and
-   `getprobo/terraform-gcp-audit-role`. The workflow uses that token with
+   `trustready/trustready`. Grant it `contents:write` on this module repository
+   as well as `trustready/terraform-aws-audit-role` and
+   `trustready/terraform-gcp-audit-role`. The workflow uses that token with
    `gh api`, not `git push`.

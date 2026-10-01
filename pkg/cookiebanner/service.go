@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -795,9 +795,9 @@ func (s *Service) CreateCookieBanner(
 						CookieBannerID:   banner.ID,
 						CookieCategoryID: category.ID,
 						TrackerType:      coredata.TrackerTypeCookie,
-						Pattern:          "probo_consent",
+						Pattern:          "trustready_consent",
 						MatchType:        coredata.TrackerPatternMatchTypeExact,
-						DisplayName:      "probo_consent",
+						DisplayName:      "trustready_consent",
 						MaxAgeSeconds:    &consentMaxAge,
 						Description:      "Stores your cookie consent preferences for this website.",
 						Source:           new(coredata.CookieSourceScript),
@@ -805,7 +805,7 @@ func (s *Service) CreateCookieBanner(
 						UpdatedAt:        now,
 					}
 					if err := consentPattern.Insert(ctx, tx, scope); err != nil {
-						return fmt.Errorf("cannot insert probo_consent pattern: %w", err)
+						return fmt.Errorf("cannot insert trustready_consent pattern: %w", err)
 					}
 				}
 			}

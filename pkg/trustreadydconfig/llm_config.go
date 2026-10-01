@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -106,7 +106,7 @@ type (
 	AgentsConfig struct {
 		Providers                  map[string]LLMProviderConfig `json:"providers,omitempty"`
 		Default                    LLMAgentConfig               `json:"defaults"`
-		Probo                      LLMAgentConfig               `json:"probo,omitzero"`
+		TrustReady                      LLMAgentConfig               `json:"trustready,omitzero"`
 		EvidenceDescriber          LLMAgentConfig               `json:"evidence-describer,omitzero"`
 		ThirdPartyVetter           LLMAgentConfig               `json:"third-party-vetter,omitzero"`
 		TrackerMapping             LLMAgentConfig               `json:"tracker-mapping,omitzero"`

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ const magicLinkConfirmPath = "/auth/magic-link"
 
 type MagicLinkHandler struct {
 	iam           *iam.Service
-	proboBaseURL  *baseurl.BaseURL
+	trustreadyBaseURL  *baseurl.BaseURL
 	sessionCookie *authn.Cookie
 	safeRedirect  *saferedirect.SafeRedirect
 	logger        *log.Logger
@@ -47,14 +47,14 @@ type MagicLinkHandler struct {
 
 func NewMagicLinkHandler(
 	iamSvc *iam.Service,
-	proboBaseURL *baseurl.BaseURL,
+	trustreadyBaseURL *baseurl.BaseURL,
 	cookieConfig securecookie.Config,
 	logger *log.Logger,
 	allowedHost saferedirect.AllowedHostFunc,
 ) *MagicLinkHandler {
 	return &MagicLinkHandler{
 		iam:           iamSvc,
-		proboBaseURL:  proboBaseURL,
+		trustreadyBaseURL:  trustreadyBaseURL,
 		sessionCookie: authn.NewCookie(&cookieConfig),
 		safeRedirect:  saferedirect.New(allowedHost),
 		logger:        logger,
@@ -102,12 +102,12 @@ func (h *MagicLinkHandler) SendHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	proboURL := h.proboBaseURL.String()
+	trustreadyURL := h.trustreadyBaseURL.String()
 
 	req := &iam.SendMagicLinkRequest{
 		Email:            emailAddr,
 		URLPath:          magicLinkConfirmPath,
-		MagicLinkBaseURL: &proboURL,
+		MagicLinkBaseURL: &trustreadyURL,
 		Continue:         &safeContinue,
 	}
 
@@ -190,7 +190,7 @@ func (h *MagicLinkHandler) VerifyHandler(w http.ResponseWriter, r *http.Request)
 	h.sessionCookie.Set(w, session)
 
 	metadata := OAuth2ServerMetadata(
-		h.proboBaseURL,
+		h.trustreadyBaseURL,
 		h.iam.OAuth2ScopeRegistry.RegisteredScopes(),
 	)
 

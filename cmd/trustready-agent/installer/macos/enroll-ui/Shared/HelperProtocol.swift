@@ -1,7 +1,7 @@
 import Foundation
 
-@objc(ProboAgentHelperProtocol)
-public protocol ProboAgentHelperProtocol: NSObjectProtocol {
+@objc(TrustReadyAgentHelperProtocol)
+public protocol TrustReadyAgentHelperProtocol: NSObjectProtocol {
     func getVersion(withReply reply: @escaping (String) -> Void)
     func ping(withReply reply: @escaping (Bool) -> Void)
     func install(

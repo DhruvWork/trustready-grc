@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,13 +38,13 @@ func TestParseCodeSigningIdentity(t *testing.T) {
 		{
 			name: "developer id signed binary",
 			out: "" +
-				"Executable=/Library/Probo/trustready-agent\n" +
-				"Identifier=com.probo.agent\n" +
+				"Executable=/Library/TrustReady/trustready-agent\n" +
+				"Identifier=com.trustready.agent\n" +
 				"Format=Mach-O thin (arm64)\n" +
 				"TeamIdentifier=ABCD123456\n",
 			want: codeSigningIdentity{
 				Team:       "ABCD123456",
-				Identifier: "com.probo.agent",
+				Identifier: "com.trustready.agent",
 			},
 		},
 		{
@@ -93,7 +93,7 @@ func TestCodeSigningIdentitiesCompatible(t *testing.T) {
 
 	stable := codeSigningIdentity{
 		Team:       "ABCD123456",
-		Identifier: "com.probo.agent",
+		Identifier: "com.trustready.agent",
 	}
 
 	cases := []struct {
@@ -107,7 +107,7 @@ func TestCodeSigningIdentitiesCompatible(t *testing.T) {
 			current: codeSigningIdentity{},
 			candidate: codeSigningIdentity{
 				Team:       "ABCD123456",
-				Identifier: "com.probo.agent",
+				Identifier: "com.trustready.agent",
 			},
 		},
 		{
@@ -119,7 +119,7 @@ func TestCodeSigningIdentitiesCompatible(t *testing.T) {
 			name:    "refuses signed to unsigned downgrade",
 			current: stable,
 			candidate: codeSigningIdentity{
-				Identifier: "com.probo.agent",
+				Identifier: "com.trustready.agent",
 			},
 			wantErr: "refusing signature downgrade",
 		},
@@ -128,7 +128,7 @@ func TestCodeSigningIdentitiesCompatible(t *testing.T) {
 			current: stable,
 			candidate: codeSigningIdentity{
 				Team:       "OTHERTEAM1",
-				Identifier: "com.probo.agent",
+				Identifier: "com.trustready.agent",
 			},
 			wantErr: "does not match current Team ID",
 		},
@@ -137,7 +137,7 @@ func TestCodeSigningIdentitiesCompatible(t *testing.T) {
 			current: stable,
 			candidate: codeSigningIdentity{
 				Team:       "ABCD123456",
-				Identifier: "com.probo.agent.other",
+				Identifier: "com.trustready.agent.other",
 			},
 			wantErr: "does not match current Identifier",
 		},

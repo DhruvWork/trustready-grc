@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -155,9 +155,9 @@ func DomainLabel(raw string) string {
 
 // FilterFirstPartyDomains removes domains that match the eTLD+1 of
 // siteOrigin. Tracker scripts loaded through a first-party proxy (e.g.
-// t.probo.com proxying PostHog on a probo.com site) share the site's
+// t.trustready.io proxying PostHog on a trustready.io site) share the site's
 // eTLD+1 and carry no signal about the actual third party. siteOrigin
-// is a full URL such as "https://app.probo.com". The input domains are
+// is a full URL such as "https://app.trustready.io". The input domains are
 // expected to be eTLD+1 strings (as produced by ExtractDomain).
 func FilterFirstPartyDomains(domains []string, siteOrigin string) []string {
 	siteDomain := ExtractDomain(siteOrigin)

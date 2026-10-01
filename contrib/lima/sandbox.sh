@@ -1,15 +1,15 @@
 #!/bin/bash
-# Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+# Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 # SPDX-License-Identifier: MIT
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-TEMPLATE="${SCRIPT_DIR}/probo.yaml"
+TEMPLATE="${SCRIPT_DIR}/trustready.yaml"
 
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 WORKTREE_NAME="$(basename "${REPO_ROOT}")"
-VM_NAME="probo-${WORKTREE_NAME}"
+VM_NAME="trustready-${WORKTREE_NAME}"
 
 usage() {
   cat <<EOF
@@ -25,7 +25,7 @@ Commands:
   ssh                                          Open interactive shell in /workspace
   exec -- CMD                                  Run a command in the sandbox
   status                                       Show sandbox state, IP, and services
-  list                                         List all probo-* VMs
+  list                                         List all trustready-* VMs
 
 VM name: ${VM_NAME} (derived from worktree directory)
 EOF
@@ -154,7 +154,7 @@ cmd_list() {
   printf "%-25s %-12s %s\n" "NAME" "STATE" "IP"
 
   limactl list --json 2>/dev/null | jq -r '
-        select(.name | startswith("probo-")) |
+        select(.name | startswith("trustready-")) |
         [.name, .status] | @tsv
     ' | while IFS=$'\t' read -r name status; do
     local ip="-"

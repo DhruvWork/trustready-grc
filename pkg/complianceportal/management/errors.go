@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -22,7 +22,7 @@ var (
 	ErrCustomDomainNotActive = errors.New("custom domain SSL certificate is not active")
 
 	// ErrCustomDomainManaged is returned when an operation is attempted on the
-	// managed probopage subdomain that is only allowed on customer domains.
+	// managed trustreadypage subdomain that is only allowed on customer domains.
 	ErrCustomDomainManaged = errors.New("managed custom domain cannot be modified")
 
 	// ErrCustomDomainNotFound is returned when no custom domain exists for the

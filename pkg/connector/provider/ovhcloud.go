@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,11 +33,11 @@ import (
 //
 // Two connect paths, both single-tenant: an OVHcloud credential is bound to
 // exactly one account, so there is no organisation to pick and no settings
-// struct. OVHcloud's OAuth2 client namespace is global, so one Probo-side app
+// struct. OVHcloud's OAuth2 client namespace is global, so one TrustReady-side app
 // serves every customer on the authorization-code path.
 //
 // EU only: OAuth2 clients are region-local and Endpoints.Token is one pinned
-// value. Another region needs its own Probo account and client. The commit body
+// value. Another region needs its own TrustReady account and client. The commit body
 // carries the rest of the reasoning.
 func ovhcloudRegistration() *Registration {
 	return &Registration{

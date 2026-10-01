@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -90,7 +90,7 @@ func TestHandleGetStaticFile(t *testing.T) {
 	)
 
 	rec := httptest.NewRecorder()
-	req := httptest.NewRequest(http.MethodGet, "/static/probo.png", nil)
+	req := httptest.NewRequest(http.MethodGet, "/static/trustready.png", nil)
 	mux.ServeHTTP(rec, req)
 
 	require.Equal(t, http.StatusOK, rec.Code)
@@ -101,7 +101,7 @@ func TestHandleGetStaticFile(t *testing.T) {
 	require.True(t, strings.HasPrefix(etag, `"`) && strings.HasSuffix(etag, `"`))
 
 	recNotModified := httptest.NewRecorder()
-	reqNotModified := httptest.NewRequest(http.MethodGet, "/static/probo.png", nil)
+	reqNotModified := httptest.NewRequest(http.MethodGet, "/static/trustready.png", nil)
 	reqNotModified.Header.Set("If-None-Match", etag)
 	mux.ServeHTTP(recNotModified, reqNotModified)
 
@@ -122,7 +122,7 @@ func TestHandleGetFile_UnauthenticatedReturns401(t *testing.T) {
 	mux := NewMux(
 		log.NewLogger(log.WithOutput(io.Discard)),
 		nil, // fileSvc — not reached
-		nil, // proboSvc — not reached
+		nil, // trustreadySvc — not reached
 		nil, // iamSvc — not reached when no token/cookie present
 		securecookie.Config{},
 		"test-secret",

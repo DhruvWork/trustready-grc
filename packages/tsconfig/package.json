@@ -1,7 +1,7 @@
 {
   "name": "@trustready/tsconfig",
   "version": "0.0.1",
-  "description": "Probo default typescript configs",
+  "description": "TrustReady default typescript configs",
   "publishConfig": {
     "access": "public"
   },

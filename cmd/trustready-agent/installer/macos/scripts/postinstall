@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# probo-agent macOS PKG postinstall script.
+# trustready-agent macOS PKG postinstall script.
 #
 # Runs as root inside the macOS Installer.app sandbox after the
 # payload has been laid down. Standard pkgbuild positional args:
@@ -16,18 +16,18 @@
 
 set -u
 
-LOG_FILE="/var/log/probo-agent-install.log"
-PROBO_DIR="/Library/Probo"
-BINARY="${PROBO_DIR}/probo-agent"
-LEGACY_BINARY="/usr/local/bin/probo-agent"
-STATE_DIR="/var/lib/probo-agent"
-RUN_DIR="/var/run/probo-agent"
-CONF_FILE="/tmp/probo-agent.conf"
-DAEMON_PLIST="/Library/LaunchDaemons/com.probo.agent.plist"
-HELPER_LABEL="com.probo.agent.helper"
+LOG_FILE="/var/log/trustready-agent-install.log"
+TRUSTREADY_DIR="/Library/TrustReady"
+BINARY="${TRUSTREADY_DIR}/trustready-agent"
+LEGACY_BINARY="/usr/local/bin/trustready-agent"
+STATE_DIR="/var/lib/trustready-agent"
+RUN_DIR="/var/run/trustready-agent"
+CONF_FILE="/tmp/trustready-agent.conf"
+DAEMON_PLIST="/Library/LaunchDaemons/com.trustready.agent.plist"
+HELPER_LABEL="com.trustready.agent.helper"
 HELPER_PLIST="/Library/LaunchDaemons/${HELPER_LABEL}.plist"
 HELPER_BINARY="/Library/PrivilegedHelperTools/${HELPER_LABEL}"
-APP_PATH="/Applications/Probo Agent.app"
+APP_PATH="/Applications/TrustReady Agent.app"
 
 # Mirror everything to the install log. We keep stdout/stderr open
 # too so failures still surface in macOS Installer.app's log pane.
@@ -35,7 +35,7 @@ mkdir -p "$(dirname "${LOG_FILE}")"
 exec > >(tee -a "${LOG_FILE}") 2>&1
 
 echo
-echo "=== probo-agent postinstall $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+echo "=== trustready-agent postinstall $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
 echo "pkg=$1 target=$2 mount=$3 root=$4"
 
 if [ ! -x "${BINARY}" ]; then
@@ -43,9 +43,9 @@ if [ ! -x "${BINARY}" ]; then
     exit 1
 fi
 
-mkdir -p "${PROBO_DIR}"
-chown root:wheel "${PROBO_DIR}"
-chmod 0755 "${PROBO_DIR}"
+mkdir -p "${TRUSTREADY_DIR}"
+chown root:wheel "${TRUSTREADY_DIR}"
+chmod 0755 "${TRUSTREADY_DIR}"
 chown root:wheel "${BINARY}"
 chmod 0755 "${BINARY}"
 
@@ -61,7 +61,7 @@ register_enrollment_url_scheme() {
     local lsregister
 
     if [ ! -d "${APP_PATH}" ]; then
-        echo "warning: ${APP_PATH} not found; cannot register probo:// URL scheme."
+        echo "warning: ${APP_PATH} not found; cannot register trustready:// URL scheme."
         return 0
     fi
 
@@ -72,11 +72,11 @@ register_enrollment_url_scheme() {
     fi
 
     if ! "${lsregister}" -f "${APP_PATH}"; then
-        echo "warning: failed to register probo:// URL scheme."
+        echo "warning: failed to register trustready:// URL scheme."
         return 0
     fi
 
-    echo "Registered probo:// URL scheme."
+    echo "Registered trustready:// URL scheme."
 }
 
 # Install the privileged helper as root during PKG install so browser
@@ -118,7 +118,7 @@ install_privileged_helper() {
 	</dict>
 	<key>AssociatedBundleIdentifiers</key>
 	<array>
-		<string>com.probo.agent.url-handler</string>
+		<string>com.trustready.agent.url-handler</string>
 	</array>
 </dict>
 </plist>
@@ -136,7 +136,7 @@ EOF
 }
 
 # Restart a previously enrolled LaunchDaemon after upgrades. Preinstall
-# boots it out so the binary can be replaced; without /tmp/probo-agent.conf
+# boots it out so the binary can be replaced; without /tmp/trustready-agent.conf
 # enrollment is skipped and nothing else would load it again.
 retarget_existing_daemon() {
     if [ ! -f "${DAEMON_PLIST}" ]; then
@@ -167,13 +167,13 @@ restart_existing_daemon() {
     return 0
 }
 
-# An admin (or MDM) may stage /tmp/probo-agent.conf to drive an
+# An admin (or MDM) may stage /tmp/trustready-agent.conf to drive an
 # unattended enrollment. Recognized keys (shell-style):
 #
-#   PROBO_SERVER_URL=https://your-probo-host.example.com
-#   PROBO_ENROLLMENT_TOKEN=<enrollment-token>
-#   PROBO_NO_AUTO_UPDATE=true
-#   PROBO_ALLOW_PRERELEASES=true
+#   TRUSTREADY_SERVER_URL=https://your-trustready-host.example.com
+#   TRUSTREADY_ENROLLMENT_TOKEN=<enrollment-token>
+#   TRUSTREADY_NO_AUTO_UPDATE=true
+#   TRUSTREADY_ALLOW_PRERELEASES=true
 #
 # Parse KEY=VALUE lines without sourcing or eval so a crafted conf
 # file cannot execute arbitrary shell as root.
@@ -200,23 +200,23 @@ if [ -f "${CONF_FILE}" ]; then
         [ -z "$line" ] && continue
 
         case "$line" in
-            PROBO_SERVER_URL=*)
-                CONF_SERVER="$(strip_conf_value "${line#PROBO_SERVER_URL=}")"
+            TRUSTREADY_SERVER_URL=*)
+                CONF_SERVER="$(strip_conf_value "${line#TRUSTREADY_SERVER_URL=}")"
                 ;;
-            PROBO_ENROLLMENT_TOKEN=*)
-                CONF_ENROLLMENT_TOKEN="$(strip_conf_value "${line#PROBO_ENROLLMENT_TOKEN=}")"
+            TRUSTREADY_ENROLLMENT_TOKEN=*)
+                CONF_ENROLLMENT_TOKEN="$(strip_conf_value "${line#TRUSTREADY_ENROLLMENT_TOKEN=}")"
                 ;;
-            PROBO_NO_AUTO_UPDATE=*)
-                CONF_NOUPDATE="$(strip_conf_value "${line#PROBO_NO_AUTO_UPDATE=}")"
+            TRUSTREADY_NO_AUTO_UPDATE=*)
+                CONF_NOUPDATE="$(strip_conf_value "${line#TRUSTREADY_NO_AUTO_UPDATE=}")"
                 ;;
-            PROBO_ALLOW_PRERELEASES=*)
-                CONF_ALLOW_PRERELEASES="$(strip_conf_value "${line#PROBO_ALLOW_PRERELEASES=}")"
+            TRUSTREADY_ALLOW_PRERELEASES=*)
+                CONF_ALLOW_PRERELEASES="$(strip_conf_value "${line#TRUSTREADY_ALLOW_PRERELEASES=}")"
                 ;;
         esac
     done < "${CONF_FILE}"
 
     if [ -z "${CONF_SERVER}" ] || [ -z "${CONF_ENROLLMENT_TOKEN}" ]; then
-        echo "warning: ${CONF_FILE} is missing PROBO_SERVER_URL or PROBO_ENROLLMENT_TOKEN; skipping enrollment."
+        echo "warning: ${CONF_FILE} is missing TRUSTREADY_SERVER_URL or TRUSTREADY_ENROLLMENT_TOKEN; skipping enrollment."
     else
         # Build argv from the first element so "${INSTALL_ARGS[@]}"
         # is never empty — macOS /bin/bash 3.2 treats an unset empty
@@ -236,7 +236,7 @@ if [ -f "${CONF_FILE}" ]; then
         if "${BINARY}" "${INSTALL_ARGS[@]}"; then
             echo "Device enrolled and service installed."
         else
-            echo "warning: probo-agent install failed; the binary is in place and can be re-run by an admin."
+            echo "warning: trustready-agent install failed; the binary is in place and can be re-run by an admin."
         fi
     fi
 

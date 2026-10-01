@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ package trustreadydconfig
 type CookieBannerConfig struct {
 	// TCFCMPID is the IAB TCF CMP ID encoded in consent strings and
 	// reported on __tcfapi. 4095 is a placeholder until IAB Europe
-	// issues Probo a registered ID. Self-hosted instances that
+	// issues TrustReady a registered ID. Self-hosted instances that
 	// register their own CMP must set this to that ID. Valid IAB CMP
 	// IDs are 2–4095.
 	TCFCMPID int `json:"tcf-cmp-id"`

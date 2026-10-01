@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -55,7 +55,7 @@ await Promise.all([
     entryPoints: ["src/themed-banner/iife.ts"],
     outfile: "dist/cookie-banner.iife.js",
     format: "iife",
-    globalName: "ProboCookieBanner",
+    globalName: "TrustReadyCookieBanner",
     minify: true,
   }),
 ]);

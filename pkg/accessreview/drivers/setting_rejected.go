@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import (
 )
 
 // SettingRejectedError reports that the provider accepted the credential and
-// refused a connector setting. Code and Message are Probo's own text, safe to
+// refused a connector setting. Code and Message are TrustReady's own text, safe to
 // log and to show. Setting is the ExtraSetting key the connection check blames,
 // empty when the credential cannot reach what the setting names.
 type SettingRejectedError struct {

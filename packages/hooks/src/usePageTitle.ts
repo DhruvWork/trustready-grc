@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +22,9 @@ import { useEffect } from "react";
 
 export function usePageTitle(title: string) {
     useEffect(() => {
-        document.title = title + " - Probo";
+        document.title = title + " - TrustReady";
         return () => {
-            document.title = "Probo";
+            document.title = "TrustReady";
         };
     }, [title]);
 }

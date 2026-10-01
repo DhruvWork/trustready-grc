@@ -96,8 +96,8 @@ type Task implements Node {
 
 enum TaskExternalLinkOrigin
     @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskExternalLinkOrigin") {
-    PROBO
-        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskExternalLinkOriginProbo")
+    TRUSTREADY
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskExternalLinkOriginTrustReady")
     LINEAR
         @goEnum(
             value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskExternalLinkOriginLinear"

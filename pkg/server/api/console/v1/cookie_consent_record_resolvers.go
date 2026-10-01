@@ -9,20 +9,20 @@ import (
 	"context"
 	"errors"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/cookiebanner"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // CookieBanner is the resolver for the cookieBanner field.
 func (r *cookieConsentRecordResolver) CookieBanner(ctx context.Context, obj *types.CookieConsentRecord) (*types.CookieBanner, error) {
-	if _, err := r.authorize(ctx, obj.CookieBanner.ID, probo.ActionCookieBannerGet); err != nil {
+	if _, err := r.authorize(ctx, obj.CookieBanner.ID, trustready.ActionCookieBannerGet); err != nil {
 		return nil, err
 	}
 
@@ -44,7 +44,7 @@ func (r *cookieConsentRecordResolver) CookieBanner(ctx context.Context, obj *typ
 
 // CookieBannerVersion is the resolver for the cookieBannerVersion field.
 func (r *cookieConsentRecordResolver) CookieBannerVersion(ctx context.Context, obj *types.CookieConsentRecord) (*types.CookieBannerVersion, error) {
-	scope, err := r.authorize(ctx, obj.CookieBannerVersion.ID, probo.ActionCookieBannerVersionGet)
+	scope, err := r.authorize(ctx, obj.CookieBannerVersion.ID, trustready.ActionCookieBannerVersionGet)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func (r *cookieConsentRecordResolver) CookieBannerVersion(ctx context.Context, o
 
 // TotalCount is the resolver for the totalCount field.
 func (r *cookieConsentRecordConnectionResolver) TotalCount(ctx context.Context, obj *types.CookieConsentRecordConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionCookieConsentRecordList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionCookieConsentRecordList)
 	if err != nil {
 		return 0, err
 	}

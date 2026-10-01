@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ let warnedResourceReporting = false;
 // resolveResourceReportingEnabled returns whether the SDK should run the
 // resource detector. The SDK and backend are released together, so
 // `resource_reporting_enabled` is always present in practice; the only way it
-// can be missing is a self-hosted Probo backend older than the first release
+// can be missing is a self-hosted TrustReady backend older than the first release
 // that sends it.
 export function resolveResourceReportingEnabled(config: BannerConfig): boolean {
   if (typeof config.resource_reporting_enabled === "boolean") {
@@ -40,7 +40,7 @@ export function resolveResourceReportingEnabled(config: BannerConfig): boolean {
   if (!warnedResourceReporting) {
     warnedResourceReporting = true;
     console.error(
-      "[probo] banner config has no `resource_reporting_enabled`: your self-hosted Probo backend (trustreadyd) is older than this SDK. Update trustreadyd to match this SDK. Falling back to resource reporting enabled.",
+      "[trustready] banner config has no `resource_reporting_enabled`: your self-hosted TrustReady backend (trustreadyd) is older than this SDK. Update trustreadyd to match this SDK. Falling back to resource reporting enabled.",
     );
   }
 

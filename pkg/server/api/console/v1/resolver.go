@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 	"github.com/DhruvWork/trustready-grc/pkg/itam"
 	"github.com/DhruvWork/trustready-grc/pkg/mailman"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/probot"
 	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 	"github.com/DhruvWork/trustready-grc/pkg/probot/identitybinding"
@@ -78,7 +78,7 @@ type (
 	Resolver struct {
 		authorize               authz.AuthorizeFunc
 		batchAuthorize          authz.BatchAuthorizeFunc
-		probo                   *probo.Service
+		trustready                   *trustready.Service
 		resourceAlias           *resourcealias.Service
 		iam                     *iam.Service
 		esign                   *esign.Service
@@ -111,7 +111,7 @@ type (
 
 func NewMux(
 	logger *log.Logger,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	resourceAliasSvc *resourcealias.Service,
 	iamSvc *iam.Service,
 	esignSvc *esign.Service,
@@ -149,7 +149,7 @@ func NewMux(
 
 	graphqlHandler := NewGraphQLHandler(
 		iamSvc,
-		proboSvc,
+		trustreadySvc,
 		resourceAliasSvc,
 		esignSvc,
 		managementSvc,
@@ -186,7 +186,7 @@ func NewMux(
 		r.Use(authn.NewIdentityPresenceMiddleware(baseURL))
 		r.Use(newMembershipAccessMiddleware(iamSvc, logger))
 		r.Use(dataloader.NewMiddleware(
-			proboSvc,
+			trustreadySvc,
 			iamSvc,
 			cookieBannerSvc,
 			thirdPartySvc,
@@ -199,12 +199,12 @@ func NewMux(
 
 		r.Get(
 			"/connectors/initiate",
-			handleConnectorInitiate(logger, proboSvc, iamSvc, connectorRegistry),
+			handleConnectorInitiate(logger, trustreadySvc, iamSvc, connectorRegistry),
 		)
 
 		r.Get(
 			"/connectors/github-app/initiate",
-			handleConnectorGitHubAppInitiate(logger, proboSvc, iamSvc, connectorRegistry),
+			handleConnectorGitHubAppInitiate(logger, trustreadySvc, iamSvc, connectorRegistry),
 		)
 
 		r.Get(
@@ -217,7 +217,7 @@ func NewMux(
 			handleConnectorComplete(
 				logger,
 				baseURL,
-				proboSvc,
+				trustreadySvc,
 				accessReviewSvc,
 				connectorRegistry,
 				safeRedirect,
@@ -229,7 +229,7 @@ func NewMux(
 			handleConnectorGitHubAppComplete(
 				logger,
 				baseURL,
-				proboSvc,
+				trustreadySvc,
 				accessReviewSvc,
 				connectorRegistry,
 				safeRedirect,
@@ -247,7 +247,7 @@ func NewMux(
 	})
 
 	// Public in the sense that the vendor top-level-redirects the customer's
-	// browser here carrying no Probo credentials of its own, so the full auth
+	// browser here carrying no TrustReady credentials of its own, so the full auth
 	// group above -- API key, OAuth2 access token, identity presence,
 	// membership -- cannot gate it. NewSessionMiddleware is mounted alone
 	// because it is the one middleware that is non-blocking when no cookie is
@@ -272,7 +272,7 @@ func NewMux(
 				logger,
 				iamSvc,
 				baseURL,
-				proboSvc,
+				trustreadySvc,
 				providerRegistry,
 				installStateKey,
 				safeRedirect,
@@ -292,7 +292,7 @@ func NewMux(
 
 	// Public, unauthenticated: the OAuth Client ID Metadata Document (CIMD)
 	// is fetched server-to-server by public-client providers (PostHog)
-	// during authorization, with no Probo credentials. Mounted outside the
+	// during authorization, with no TrustReady credentials. Mounted outside the
 	// auth group above.
 	r.Get("/connectors/oauth-client-metadata", handleConnectorOAuth2ClientMetadata(baseURL))
 

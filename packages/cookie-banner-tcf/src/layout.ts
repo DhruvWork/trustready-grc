@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -96,7 +96,7 @@ export function wireTCFLayout(root: LayoutHost, host: ShadowRoot): void {
 
   applyLastTC(host);
 
-  host.addEventListener("probo-state", (e: Event) => {
+  host.addEventListener("trustready-state", (e: Event) => {
     if ((e as CustomEvent).detail.state === "panel") {
       applyLastTC(host);
       syncChoices(host);
@@ -113,17 +113,17 @@ export function wireTCFLayout(root: LayoutHost, host: ShadowRoot): void {
   host.addEventListener(
     "click",
     (e: Event) => {
-      if (isClickOn(e, "probo-reject-button")) {
+      if (isClickOn(e, "trustready-reject-button")) {
         persistAction(root, "REJECT_ALL", () => root.client.rejectAll?.());
         e.stopImmediatePropagation();
         return;
       }
-      if (isClickOn(e, "probo-accept-button")) {
+      if (isClickOn(e, "trustready-accept-button")) {
         persistAction(root, "ACCEPT_ALL", () => root.client.acceptAll?.());
         e.stopImmediatePropagation();
         return;
       }
-      if (isClickOn(e, "probo-save-button")) {
+      if (isClickOn(e, "trustready-save-button")) {
         syncChoices(host);
       }
     },
@@ -132,7 +132,7 @@ export function wireTCFLayout(root: LayoutHost, host: ShadowRoot): void {
 
   host.querySelector("[data-action=open-vendors]")?.addEventListener("click", () => {
     root.setState("panel");
-    host.getElementById("probo-tcf-vendors")?.scrollIntoView({ block: "start" });
+    host.getElementById("trustready-tcf-vendors")?.scrollIntoView({ block: "start" });
   });
 }
 
@@ -173,22 +173,22 @@ function renderBanner(config: BannerConfig, gvl: TCFGVL, position: string): stri
     </div>`;
 
   return `
-    <probo-banner>
+    <trustready-banner>
       ${floatingCard(
         position,
-        { labelledby: "probo-banner-title", describedby: "probo-banner-desc" },
+        { labelledby: "trustready-banner-title", describedby: "trustready-banner-desc" },
         `
-        <p class="title" id="probo-banner-title" data-text="banner_title"></p>
-        <p class="description" id="probo-banner-desc" data-text="banner_description"></p>
+        <p class="title" id="trustready-banner-title" data-text="banner_title"></p>
+        <p class="description" id="trustready-banner-desc" data-text="banner_description"></p>
         ${extras}
         <div class="buttons">
-          <probo-accept-button><button class="btn btn-primary" data-text="button_accept_all"></button></probo-accept-button>
-          <probo-reject-button><button class="btn" data-text="button_reject_all"></button></probo-reject-button>
-          <probo-customize-button><button class="btn btn-link" data-text="button_customize"></button></probo-customize-button>
+          <trustready-accept-button><button class="btn btn-primary" data-text="button_accept_all"></button></trustready-accept-button>
+          <trustready-reject-button><button class="btn" data-text="button_reject_all"></button></trustready-reject-button>
+          <trustready-customize-button><button class="btn btn-link" data-text="button_customize"></button></trustready-customize-button>
         </div>
         ${BRANDING}`,
       )}
-    </probo-banner>`;
+    </trustready-banner>`;
 }
 
 function renderPanel(config: BannerConfig, gvl: TCFGVL, position: string): string {
@@ -205,24 +205,24 @@ function renderPanel(config: BannerConfig, gvl: TCFGVL, position: string): strin
   const liPurposeIDs = purposeLIIds(gvl);
   const { stacks, ungrouped } = groupPurposes(gvl, purposes);
   const storageCopy = interpolate(
-    text(config, "tcf_storage", "Your choices are stored in the probo_consent cookie for {{days}} days."),
+    text(config, "tcf_storage", "Your choices are stored in the trustready_consent cookie for {{days}} days."),
     { days: String(config.consent_expiry_days) },
   );
 
   return `
-    <probo-preference-panel class="tcf-panel">
+    <trustready-preference-panel class="tcf-panel">
       ${floatingCard(
         position,
-        { labelledby: "probo-panel-title", describedby: "probo-panel-desc" },
+        { labelledby: "trustready-panel-title", describedby: "trustready-panel-desc" },
         `
         <div class="panel-header">
           <div class="panel-header-title">
-            <p class="title" id="probo-panel-title" style="margin:0" data-text="panel_title"></p>
+            <p class="title" id="trustready-panel-title" style="margin:0" data-text="panel_title"></p>
             <button class="panel-close" data-action="back" data-aria-text="aria_close">
               ${CLOSE_ICON}
             </button>
           </div>
-          <p class="description" id="probo-panel-desc" data-text="tcf_panel_description">Choose which purposes and partners to allow. Consent and legitimate interest can be set separately when both apply.</p>
+          <p class="description" id="trustready-panel-desc" data-text="tcf_panel_description">Choose which purposes and partners to allow. Consent and legitimate interest can be set separately when both apply.</p>
           ${
             liPurposeIDs.size
               ? `<p class="description"><span data-text="tcf_disclosure_data">Personal data processed includes unique identifiers and browsing data.</span> <span data-text="tcf_disclosure_scope">These choices apply to this site only (service-specific).</span></p>`
@@ -248,22 +248,22 @@ function renderPanel(config: BannerConfig, gvl: TCFGVL, position: string): strin
             "Partners",
             vendors.map((v) => vendorRow(v, catalogs)).join(""),
             "tcf_section_partners",
-            "probo-tcf-vendors",
+            "trustready-tcf-vendors",
           )}
           ${sectionGroup("Storage", `<p class="tcf-storage">${esc(storageCopy)}</p>`, "tcf_section_storage")}
         </div>
         <div class="footer">
           <div class="buttons">
-            <probo-accept-button><button class="btn btn-primary" data-text="button_accept_all"></button></probo-accept-button>
-            <probo-reject-button><button class="btn" data-text="button_reject_all"></button></probo-reject-button>
-            <probo-save-button>
+            <trustready-accept-button><button class="btn btn-primary" data-text="button_accept_all"></button></trustready-accept-button>
+            <trustready-reject-button><button class="btn" data-text="button_reject_all"></button></trustready-reject-button>
+            <trustready-save-button>
               <button class="btn btn-link" style="flex:1" data-text="button_save"></button>
-            </probo-save-button>
+            </trustready-save-button>
           </div>
           ${BRANDING}
         </div>`,
       )}
-    </probo-preference-panel>`;
+    </trustready-preference-panel>`;
 }
 
 function purposesSection(
@@ -834,7 +834,7 @@ function persistAction(
   run();
   root.setState("hidden");
   root.dispatchEvent(
-    new CustomEvent("probo-consent", {
+    new CustomEvent("trustready-consent", {
       bubbles: true,
       composed: true,
       detail: { action },

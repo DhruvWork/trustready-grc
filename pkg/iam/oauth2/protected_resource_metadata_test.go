@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
 	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2scope"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
@@ -37,8 +37,8 @@ func TestNewProtectedResourceMetadata(t *testing.T) {
 
 	reg := oauth2scope.NewRegistry().Register(
 		map[coredata.OAuth2Scope][]string{
-			probo.ScopeV1DocumentRead: {"core:document:get"},
-			probo.ScopeV1Document:     {"core:document:create"},
+			trustready.ScopeV1DocumentRead: {"core:document:get"},
+			trustready.ScopeV1Document:     {"core:document:create"},
 		},
 	)
 
@@ -52,7 +52,7 @@ func TestNewProtectedResourceMetadata(t *testing.T) {
 	assert.Equal(t, []uri.URI{authorizationServer}, metadata.AuthorizationServers)
 	assert.Equal(t, []string{"header"}, metadata.BearerMethodsSupported)
 	assert.Contains(t, metadata.ScopesSupported, oauth2.ScopeOpenID)
-	assert.Contains(t, metadata.ScopesSupported, probo.ScopeV1Document)
-	assert.NotContains(t, metadata.ScopesSupported, probo.ScopeV1DocumentRead)
+	assert.Contains(t, metadata.ScopesSupported, trustready.ScopeV1Document)
+	assert.NotContains(t, metadata.ScopesSupported, trustready.ScopeV1DocumentRead)
 	assert.NotContains(t, metadata.ScopesSupported, oauth2.ScopeProfile)
 }

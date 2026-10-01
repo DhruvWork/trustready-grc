@@ -1,15 +1,15 @@
 # n8n Node (`packages/n8n-node`)
 
-Community node package `@trustready/n8n-nodes-probo` exposing the Probo API as n8n operations. One `Probo` node with many resources; each resource maps to a set of GraphQL operations against the Console or Connect API.
+Community node package `@trustready/n8n-nodes-trustready` exposing the TrustReady API as n8n operations. One `TrustReady` node with many resources; each resource maps to a set of GraphQL operations against the Console or Connect API.
 
 ## Directory structure
 
 ```
 packages/n8n-node/
-  credentials/ProboApi.credentials.ts   # API key credential (Bearer token)
-  nodes/Probo/
-    Probo.node.ts                       # Node class — resource picker, dispatch
-    Probo.node.json                     # n8n codex metadata
+  credentials/TrustReadyApi.credentials.ts   # API key credential (Bearer token)
+  nodes/TrustReady/
+    TrustReady.node.ts                       # Node class — resource picker, dispatch
+    TrustReady.node.json                     # n8n codex metadata
     GenericFunctions.ts                 # GraphQL request helpers, pagination
     actions/
       index.ts                          # Resource registry, dispatch, field aggregators
@@ -38,7 +38,7 @@ export const resources: Record<string, ResourceModule> = {
 };
 ```
 
-**2. `Probo.node.ts`** — add a Resource dropdown entry in the `properties` array:
+**2. `TrustReady.node.ts`** — add a Resource dropdown entry in the `properties` array:
 
 ```typescript
 {
@@ -157,7 +157,7 @@ export async function execute(
         }
     `;
 
-    const responseData = await proboApiRequest.call(this, query, {
+    const responseData = await trustreadyApiRequest.call(this, query, {
         input: { organizationId, name },
     });
 
@@ -174,18 +174,18 @@ All helpers live in `GenericFunctions.ts`.
 
 | Helper | API endpoint | Use case |
 |--------|-------------|----------|
-| `proboApiRequest` | `/api/console/v1/graphql` | Single mutations and queries |
-| `proboConnectApiRequest` | `/api/connect/v1/graphql` | Organization/user operations (IAM) |
-| `proboApiRequestAllItems` | Console API | Cursor-paginated list queries |
-| `proboConnectApiRequestAllItems` | Connect API | Cursor-paginated list queries (IAM) |
-| `proboApiMultipartRequest` | Console API | File upload mutations (multipart/form-data) |
+| `trustreadyApiRequest` | `/api/console/v1/graphql` | Single mutations and queries |
+| `trustreadyConnectApiRequest` | `/api/connect/v1/graphql` | Organization/user operations (IAM) |
+| `trustreadyApiRequestAllItems` | Console API | Cursor-paginated list queries |
+| `trustreadyConnectApiRequestAllItems` | Connect API | Cursor-paginated list queries (IAM) |
+| `trustreadyApiMultipartRequest` | Console API | File upload mutations (multipart/form-data) |
 
-### Pagination (`proboApiRequestAllItems`)
+### Pagination (`trustreadyApiRequestAllItems`)
 
 Caller supplies a `getConnection` function that navigates from the raw GraphQL response to the Relay connection object (must have `edges` and `pageInfo`):
 
 ```typescript
-const items = await proboApiRequestAllItems.call(
+const items = await trustreadyApiRequestAllItems.call(
     this,
     query,
     { organizationId },
@@ -213,9 +213,9 @@ if (additionalFields.description !== undefined) {
 
 ## Adding a new resource — checklist
 
-1. **Directory** — create `nodes/Probo/actions/<resource>/` with `index.ts` and one `*.operation.ts` per operation
+1. **Directory** — create `nodes/TrustReady/actions/<resource>/` with `index.ts` and one `*.operation.ts` per operation
 2. **Operations** — each file exports `description` (fields gated with `displayOptions`) and `execute` (reads params, calls GraphQL, returns `{ json, pairedItem }`)
 3. **Index** — `<resource>/index.ts` defines the operation dropdown, spreads all descriptions, re-exports ops with matching value names
 4. **Register** — import and add to `resources` map in `actions/index.ts`
-5. **Node** — add Resource dropdown entry in `Probo.node.ts` properties
+5. **Node** — add Resource dropdown entry in `TrustReady.node.ts` properties
 6. **Verify** — `npx n8n-node lint` must pass

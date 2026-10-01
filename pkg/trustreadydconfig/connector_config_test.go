@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -96,7 +96,7 @@ func TestConnectorConfig_GitHubAppRoundTrip(t *testing.T) {
 			AppID:        "123456",
 			ClientID:     "Iv1.example",
 			ClientSecret: "client-secret",
-			Slug:         "probo",
+			Slug:         "trustready",
 			PrivateKey:   "private-key",
 		},
 	}
@@ -115,6 +115,6 @@ func TestConnectorConfig_GitHubAppRoundTrip(t *testing.T) {
 	assert.Equal(t, "123456", gitHubApp.AppID)
 	assert.Equal(t, "Iv1.example", gitHubApp.ClientID)
 	assert.Equal(t, "client-secret", gitHubApp.ClientSecret)
-	assert.Equal(t, "probo", gitHubApp.Slug)
+	assert.Equal(t, "trustready", gitHubApp.Slug)
 	assert.Equal(t, "private-key", gitHubApp.PrivateKey)
 }

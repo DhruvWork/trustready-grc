@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -389,7 +389,7 @@ func TestRegistry_Register(t *testing.T) {
 
 	// Same pairing rule as OAuth2/Endpoints.Auth above, plus the two things an
 	// install ceremony cannot work without: something to verify the vendor's
-	// proof against, and Probo's own app credential to verify it with.
+	// proof against, and TrustReady's own app credential to verify it with.
 	t.Run("Install block and Endpoints.Install imply each other", func(t *testing.T) {
 		t.Parallel()
 
@@ -485,7 +485,7 @@ func TestRegistry_Register(t *testing.T) {
 
 		// url.Parse accepts a relative reference and any scheme, so parsing
 		// alone is not enough: a hostless template would send the customer
-		// back into Probo's own origin rather than out to the vendor.
+		// back into TrustReady's own origin rather than out to the vendor.
 		for name, template := range map[string]string{
 			"a relative reference": "/initiate/plugin/%s/",
 			"no host":              "https:///initiate/plugin/%s/",
@@ -992,7 +992,7 @@ func TestRegistry_InstallURL(t *testing.T) {
 // TestRegistry_Register.
 
 // TestRegistry_APIKeyFor verifies a managed provider resolves the
-// Probo-held key without mutating the stored connection, while a
+// TrustReady-held key without mutating the stored connection, while a
 // non-managed provider returns the key already on the connection.
 func TestRegistry_APIKeyFor(t *testing.T) {
 	t.Parallel()

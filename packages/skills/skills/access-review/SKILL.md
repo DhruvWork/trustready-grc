@@ -1,7 +1,7 @@
 ---
 name: access-review
-description: Run a semi-automated Probo access review campaign. Use when the user wants to review access entries, decide approve/revoke/escalate, or resume an in-progress campaign with MCP and .probo/access-reviews/ notes.
-compatibility: Requires Probo MCP (OAuth 2.0) and file write access for .probo/access-reviews/
+description: Run a semi-automated TrustReady access review campaign. Use when the user wants to review access entries, decide approve/revoke/escalate, or resume an in-progress campaign with MCP and .trustready/access-reviews/ notes.
+compatibility: Requires TrustReady MCP (OAuth 2.0) and file write access for .trustready/access-reviews/
 ---
 
 # Access review
@@ -18,11 +18,11 @@ Before executing, read these files **relative to this skill directory**:
 
 ## Preconditions
 
-1. A Probo MCP server must be connected. The plugin ships two hosted servers,
-   `probo-us` and `probo-eu`; self-hosted instances are configured in the agent.
+1. A TrustReady MCP server must be connected. The plugin ships two hosted servers,
+   `trustready-us` and `trustready-eu`; self-hosted instances are configured in the agent.
    If tools fail with auth errors, stop and tell the user to complete OAuth
-   sign-in for that server (Claude Code: `/mcp` or `claude mcp login probo-us`;
-   Codex: `codex mcp login probo-us`; OpenCode/Cursor: configure MCP in settings
+   sign-in for that server (Claude Code: `/mcp` or `claude mcp login trustready-us`;
+   Codex: `codex mcp login trustready-us`; OpenCode/Cursor: configure MCP in settings
    then authenticate).
 2. Resolve **the server**, then **the organization**. These are separate
    choices: one server can hold several organizations, and the caller can have
@@ -46,8 +46,8 @@ Before executing, read these files **relative to this skill directory**:
 
 ## Working notes file
 
-Create or resume `.probo/access-reviews/<campaign-slug>.md` per
-`references/notes-format.md`. Create `.probo/access-reviews/` if missing.
+Create or resume `.trustready/access-reviews/<campaign-slug>.md` per
+`references/notes-format.md`. Create `.trustready/access-reviews/` if missing.
 
 ## Workflow
 

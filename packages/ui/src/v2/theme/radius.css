@@ -1,4 +1,4 @@
-/* Copyright (c) 2026 TrustReady <hello@probo.com>.
+/* Copyright (c) 2026 TrustReady <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 /* ---------------------------------------------------------------------------
  * Radius — Radix Themes radius scale (steps 1–6)
  *
- * Sourced from the "Probo Radix UI" Figma file, which defaults to the
+ * Sourced from the "TrustReady Radix UI" Figma file, which defaults to the
  * Radix "Medium" radius set. Exposed as rounded-1 … rounded-6, matching the
  * numbered convention used for color and type.
  *

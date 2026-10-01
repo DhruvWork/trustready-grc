@@ -4,11 +4,11 @@ import os
 
 public enum ClientAuth {
     private static let log = Logger(
-        subsystem: "com.probo.agent.helper",
+        subsystem: "com.trustready.agent.helper",
         category: "ClientAuth"
     )
 
-    /// Validates an incoming XPC connection from the Probo Agent URL handler app.
+    /// Validates an incoming XPC connection from the TrustReady Agent URL handler app.
     public static func accepts(connection: NSXPCConnection) -> Bool {
         guard let code = copyGuestCode(for: connection) else {
             return false
@@ -172,11 +172,11 @@ public enum ClientAuth {
     }
 
     private static func clientRequirement() -> String? {
-        guard let teamID = ProboAgentSigningConstants.teamID, !teamID.isEmpty else {
+        guard let teamID = TrustReadyAgentSigningConstants.teamID, !teamID.isEmpty else {
             return nil
         }
         return """
-            anchor apple generic and identifier "\(ProboAgentHelperConstants.clientBundleID)" \
+            anchor apple generic and identifier "\(TrustReadyAgentHelperConstants.clientBundleID)" \
             and certificate leaf[subject.OU] = "\(teamID)"
             """
     }

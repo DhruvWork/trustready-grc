@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Probo Inc <hello@probo.com>.
+ * Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -41,11 +41,11 @@ locals {
   # The prefix of the trust policy's condition keys and the suffix of the OIDC
   # provider ARN are both the issuer with the scheme stripped. Deriving it once
   # is what stops the two from disagreeing.
-  issuer_host_path = trimprefix(var.probo_issuer_url, "https://")
+  issuer_host_path = trimprefix(var.trustready_issuer_url, "https://")
 
   oidc_provider_arn = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${local.issuer_host_path}"
 
-  # Probo always mints this audience; the connector cannot be told another.
+  # TrustReady always mints this audience; the connector cannot be told another.
   audience = "sts.amazonaws.com"
 }
 
@@ -54,10 +54,10 @@ locals {
 # AWS validates publicly trusted certificates from its own CA library and
 # ignores the value, so pinning one here would only produce a perpetual diff
 # every time AWS reports back what it actually uses.
-resource "aws_iam_openid_connect_provider" "probo" {
+resource "aws_iam_openid_connect_provider" "trustready" {
   count = var.create_oidc_provider ? 1 : 0
 
-  url            = var.probo_issuer_url
+  url            = var.trustready_issuer_url
   client_id_list = [local.audience]
 
   tags = var.tags
@@ -86,33 +86,33 @@ data "aws_iam_policy_document" "assume_role" {
     condition {
       test     = "StringEquals"
       variable = "${local.issuer_host_path}:sub"
-      values   = [var.probo_subject]
+      values   = [var.trustready_subject]
     }
   }
 }
 
-resource "aws_iam_role" "probo_audit" {
+resource "aws_iam_role" "trustready_audit" {
   name        = var.role_name
-  description = "Read-only audit access for Probo (${var.probo_issuer_url})"
+  description = "Read-only audit access for TrustReady (${var.trustready_issuer_url})"
 
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 
-  # One hour, matching the token lifetime Probo requests. Raising it widens the
+  # One hour, matching the token lifetime TrustReady requests. Raising it widens the
   # window a leaked session credential stays usable.
   max_session_duration = 3600
 
   tags = var.tags
 
-  depends_on = [aws_iam_openid_connect_provider.probo]
+  depends_on = [aws_iam_openid_connect_provider.trustready]
 }
 
 resource "aws_iam_role_policy_attachment" "security_audit" {
-  role       = aws_iam_role.probo_audit.name
+  role       = aws_iam_role.trustready_audit.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/SecurityAudit"
 }
 
 resource "aws_iam_role_policy_attachment" "view_only_access" {
-  role       = aws_iam_role.probo_audit.name
+  role       = aws_iam_role.trustready_audit.name
   policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/job-function/ViewOnlyAccess"
 }
 
@@ -156,8 +156,8 @@ data "aws_iam_policy_document" "identity_read" {
 }
 
 resource "aws_iam_role_policy" "identity_read" {
-  name   = "ProboAuditIdentityRead"
-  role   = aws_iam_role.probo_audit.id
+  name   = "TrustReadyAuditIdentityRead"
+  role   = aws_iam_role.trustready_audit.id
   policy = data.aws_iam_policy_document.identity_read.json
 }
 
@@ -182,7 +182,7 @@ data "aws_iam_policy_document" "organizations_read" {
 resource "aws_iam_role_policy" "organizations_read" {
   count = var.grant_organizations_read ? 1 : 0
 
-  name   = "ProboAuditOrganizationsRead"
-  role   = aws_iam_role.probo_audit.id
+  name   = "TrustReadyAuditOrganizationsRead"
+  role   = aws_iam_role.trustready_audit.id
   policy = data.aws_iam_policy_document.organizations_read.json
 }

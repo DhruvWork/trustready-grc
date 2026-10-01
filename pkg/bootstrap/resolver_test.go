@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -70,9 +70,9 @@ func TestResolver_ResolveEmptyAWSParameterStoreRef(t *testing.T) {
 func TestParseAWSSecretsManagerRef(t *testing.T) {
 	t.Parallel()
 
-	secretID, ok := parseAWSSecretsManagerRef("awssm://probo/trustreadyd/encryption_key")
+	secretID, ok := parseAWSSecretsManagerRef("awssm://trustready/trustreadyd/encryption_key")
 	require.True(t, ok)
-	assert.Equal(t, "probo/trustreadyd/encryption_key", secretID)
+	assert.Equal(t, "trustready/trustreadyd/encryption_key", secretID)
 
 	_, ok = parseAWSSecretsManagerRef("literal-value")
 	assert.False(t, ok)
@@ -80,17 +80,17 @@ func TestParseAWSSecretsManagerRef(t *testing.T) {
 	_, ok = parseAWSSecretsManagerRef("awssm://")
 	assert.False(t, ok)
 
-	legacySecretID, ok := parseAWSSecretsManagerRef("aws://probo/trustreadyd/encryption_key")
+	legacySecretID, ok := parseAWSSecretsManagerRef("aws://trustready/trustreadyd/encryption_key")
 	require.True(t, ok)
-	assert.Equal(t, "probo/trustreadyd/encryption_key", legacySecretID)
+	assert.Equal(t, "trustready/trustreadyd/encryption_key", legacySecretID)
 }
 
 func TestParseAWSParameterStoreRef(t *testing.T) {
 	t.Parallel()
 
-	paramName, ok := parseAWSParameterStoreRef("awsps:///probo/trustreadyd/encryption_key")
+	paramName, ok := parseAWSParameterStoreRef("awsps:///trustready/trustreadyd/encryption_key")
 	require.True(t, ok)
-	assert.Equal(t, "/probo/trustreadyd/encryption_key", paramName)
+	assert.Equal(t, "/trustready/trustreadyd/encryption_key", paramName)
 
 	_, ok = parseAWSParameterStoreRef("literal-value")
 	assert.False(t, ok)
@@ -108,6 +108,6 @@ func TestEmptyAWSRefPrefix(t *testing.T) {
 		assert.Equal(t, value, prefix)
 	}
 
-	_, empty := emptyAWSRefPrefix("awssm://probo/trustreadyd/encryption_key")
+	_, empty := emptyAWSRefPrefix("awssm://trustready/trustreadyd/encryption_key")
 	assert.False(t, empty)
 }

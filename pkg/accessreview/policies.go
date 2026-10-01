@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -68,7 +68,7 @@ var DriverCatalogPolicy = policy.NewPolicy(
 // PolicySet returns the PolicySet for the access-review service. It is owned by
 // this package and registered into the authorizer at composition time so the
 // access-review authorization rules live alongside the access-review domain
-// logic instead of in the core probo policy set.
+// logic instead of in the core trustready policy set.
 func PolicySet() *iam.PolicySet {
 	return iam.NewPolicySet().
 		AddRolePolicy("OWNER", FullAccessPolicy).

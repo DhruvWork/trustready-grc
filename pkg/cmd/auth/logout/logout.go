@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -46,12 +46,12 @@ func NewCmdLogout(f *cmdutil.Factory) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "logout",
-		Short: "Log out of a Probo host",
+		Short: "Log out of a TrustReady host",
 		Example: `  # Log out of the active host
   prb auth logout
 
   # Log out of a specific host
-  prb auth logout --hostname app.getprobo.com`,
+  prb auth logout --hostname app.trustready.io`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := f.Config()
 			if err != nil {
@@ -111,7 +111,7 @@ func NewCmdLogout(f *cmdutil.Factory) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&flagHost, "hostname", "", "Probo hostname to log out of")
+	cmd.Flags().StringVar(&flagHost, "hostname", "", "TrustReady hostname to log out of")
 
 	return cmd
 }

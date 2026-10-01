@@ -1890,7 +1890,7 @@
     },
     "unavailable": {
       "title": "Inscription indisponible",
-      "description": "L’inscription de nouveaux comptes est actuellement désactivée. Contactez votre administrateur ou l’équipe Probo pour obtenir de l’aide."
+      "description": "L’inscription de nouveaux comptes est actuellement désactivée. Contactez votre administrateur ou l’équipe TrustReady pour obtenir de l’aide."
     },
     "fields": {
       "fullName": "Nom complet",
@@ -1980,7 +1980,7 @@
       "description": "Utilisez votre e-mail ou un compte connecté pour continuer"
     },
     "or": "Ou",
-    "newToProbo": "Nouveau sur Probo ?",
+    "newToTrustReady": "Nouveau sur TrustReady ?",
     "actions": {
       "usePassword": "Utiliser un mot de passe",
       "createAccount": "Créer un compte"
@@ -2065,7 +2065,7 @@
     "pageTitle": "Nouveau jeton OAuth",
     "breadcrumb": "Nouveau jeton",
     "title": "Nouveau jeton OAuth",
-    "description": "Créez un jeton porteur avec un accès limité à l’API Probo.",
+    "description": "Créez un jeton porteur avec un accès limité à l’API TrustReady.",
     "messages": {
       "created": "Jeton OAuth créé avec succès."
     },
@@ -2337,7 +2337,7 @@
       "deactivated": "Désactivé",
       "allRoles": "Tous les rôles",
       "allTypes": "Tous les types d’utilisateur",
-      "role": "Rôle Probo",
+      "role": "Rôle TrustReady",
       "type": "Type d’utilisateur"
     }
   },
@@ -2385,7 +2385,7 @@
     "fields": {
       "fullName": "Nom complet",
       "emailAddress": "Adresse e-mail",
-      "role": "Rôle Probo",
+      "role": "Rôle TrustReady",
       "type": "Type d’utilisateur",
       "position": "Poste",
       "positionPlaceholder": "ex. PDG, DAF, etc.",
@@ -2482,14 +2482,14 @@
   "slackBotSettingsPage": {
     "title": "SlackBot",
     "connectionTitle": "Slack",
-    "emptyDescription": "Installez l’application Slack Probo pour recevoir des notifications",
-    "installed": "L’application Slack Probo est installée",
-    "uninstallConfirmation": "Désinstaller l’application Slack Probo ? Probo cessera de recevoir les événements Slack et d’envoyer des notifications dans cet espace de travail.",
+    "emptyDescription": "Installez l’application Slack TrustReady pour recevoir des notifications",
+    "installed": "L’application Slack TrustReady est installée",
+    "uninstallConfirmation": "Désinstaller l’application Slack TrustReady ? TrustReady cessera de recevoir les événements Slack et d’envoyer des notifications dans cet espace de travail.",
     "messages": {
-      "uninstalled": "L’application Slack Probo a été désinstallée"
+      "uninstalled": "L’application Slack TrustReady a été désinstallée"
     },
     "errors": {
-      "uninstall": "Échec de la désinstallation de l’application Slack Probo"
+      "uninstall": "Échec de la désinstallation de l’application Slack TrustReady"
     },
     "actions": {
       "install": "Installer",
@@ -2811,17 +2811,17 @@
     "organizations": {
       "empty": {
         "title": "{{provider}} n’a renvoyé aucune organisation",
-        "description": "L’organisation n’a peut-être pas encore approuvé l’accès de Probo, ou le compte connecté est un compte personnel et non une organisation. Saisir un identifiant ci-dessous ne fonctionnera qu’une fois l’accès accordé à Probo.",
-        "remediation": "Vérifier l’accès de Probo",
+        "description": "L’organisation n’a peut-être pas encore approuvé l’accès de TrustReady, ou le compte connecté est un compte personnel et non une organisation. Saisir un identifiant ci-dessous ne fonctionnera qu’une fois l’accès accordé à TrustReady.",
+        "remediation": "Vérifier l’accès de TrustReady",
         "manualLabel": "Saisir l’identifiant de l’organisation manuellement"
       },
       "unavailable": {
         "reconnectTitle": "{{provider}} est déconnecté",
         "credentialsTitle": "Les identifiants de {{provider}} sont invalides",
         "reconnectDescription": "Reconnectez cette source pour rétablir l’accès aux organisations.",
-        "credentialsDescription": "Probo ne peut pas lire cette source avec les identifiants actuels. Vérifiez les identifiants et les permissions dont ils disposent sur {{provider}}.",
+        "credentialsDescription": "TrustReady ne peut pas lire cette source avec les identifiants actuels. Vérifiez les identifiants et les permissions dont ils disposent sur {{provider}}.",
         "notAuthorizedTitle": "{{provider}} a refusé cette requête",
-        "notAuthorizedDescription": "{{provider}} a accepté les identifiants mais a refusé la requête envoyée par Probo. Vérifiez les paramètres saisis pour cette source, les permissions dont disposent ces identifiants sur {{provider}}, et si votre offre inclut l’API utilisée par Probo."
+        "notAuthorizedDescription": "{{provider}} a accepté les identifiants mais a refusé la requête envoyée par TrustReady. Vérifiez les paramètres saisis pour cette source, les permissions dont disposent ces identifiants sur {{provider}}, et si votre offre inclut l’API utilisée par TrustReady."
       }
     }
   },
@@ -3145,7 +3145,7 @@
       "issuer": "Émetteur",
       "audience": "Audience",
       "subject": "Sujet",
-      "roleArnHelp": "ex. arn:aws:iam::123456789012:role/ProboAudit"
+      "roleArnHelp": "ex. arn:aws:iam::123456789012:role/TrustReadyAudit"
     },
     "messages": {
       "copyFailed": "Échec de la copie",
@@ -3161,7 +3161,7 @@
     "errors": {
       "roleArn": "Saisissez un ARN de rôle IAM valide.",
       "create": "Échec de la création du connecteur. Vérifiez l’ARN du rôle et réessayez.",
-      "disconnected": "Probo n’a pas pu endosser le rôle d’audit. Vérifiez que la stack est déployée dans ce compte et que l’émetteur et le sujet correspondent aux valeurs affichées lors de la configuration.",
+      "disconnected": "TrustReady n’a pas pu endosser le rôle d’audit. Vérifiez que la stack est déployée dans ce compte et que l’émetteur et le sujet correspondent aux valeurs affichées lors de la configuration.",
       "delete": "Impossible de supprimer le connecteur. Réessayez.",
       "source": "Échec de la création de la source d’accès",
       "copy": "Copiez la valeur manuellement."
@@ -6106,7 +6106,7 @@
   },
   "devices": {
     "title": "Appareils",
-    "description": "Gérez les ordinateurs enrôlés avec l’agent de posture Probo.",
+    "description": "Gérez les ordinateurs enrôlés avec l’agent de posture TrustReady.",
     "empty": "Aucun appareil enrôlé pour le moment",
     "actions": {
       "add": "Ajouter un appareil",

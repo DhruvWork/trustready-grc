@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,17 @@ import { CookieBannerClient } from "../client";
 import { resolveGcmEnabled } from "../integrations";
 import { resolveLayout } from "../layout";
 import type { BannerConfig, BannerLayout, Regulation } from "../types";
-import { ProboElement } from "./base";
-import type { ProboState, ProboRootElement, ConsentDraft } from "./base";
+import { TrustReadyElement } from "./base";
+import type { TrustReadyState, TrustReadyRootElement, ConsentDraft } from "./base";
 
-function uiVisible(state: ProboState): boolean {
+function uiVisible(state: TrustReadyState): boolean {
   return state === "banner" || state === "panel" || state === "privacy_choices";
 }
 
-export class ProboCookieBannerRoot extends ProboElement implements ProboRootElement {
+export class TrustReadyCookieBannerRoot extends TrustReadyElement implements TrustReadyRootElement {
   private _client: CookieBannerClient | null = null;
   private _config: BannerConfig | null = null;
-  private _state: ProboState = "loading";
+  private _state: TrustReadyState = "loading";
   private _draft: ConsentDraft = {};
 
   static get observedAttributes(): string[] {
@@ -42,19 +42,19 @@ export class ProboCookieBannerRoot extends ProboElement implements ProboRootElem
 
   get client(): CookieBannerClient {
     if (!this._client) {
-      throw new Error("<probo-cookie-banner-root> not loaded yet");
+      throw new Error("<trustready-cookie-banner-root> not loaded yet");
     }
     return this._client;
   }
 
   get bannerConfig(): BannerConfig {
     if (!this._config) {
-      throw new Error("<probo-cookie-banner-root> not loaded yet");
+      throw new Error("<trustready-cookie-banner-root> not loaded yet");
     }
     return this._config;
   }
 
-  get state(): ProboState {
+  get state(): TrustReadyState {
     return this._state;
   }
 
@@ -80,17 +80,17 @@ export class ProboCookieBannerRoot extends ProboElement implements ProboRootElem
     return this._config ? resolveLayout(this._config) : null;
   }
 
-  get reopenState(): ProboState {
+  get reopenState(): TrustReadyState {
     return this.layout?.reopen_state ?? "panel";
   }
 
   connectedCallback(): void {
-    document.addEventListener("probo-open-preferences", this.onOpenPreferences);
+    document.addEventListener("trustready-open-preferences", this.onOpenPreferences);
     this.initClient();
   }
 
   disconnectedCallback(): void {
-    document.removeEventListener("probo-open-preferences", this.onOpenPreferences);
+    document.removeEventListener("trustready-open-preferences", this.onOpenPreferences);
     if (this._client) {
       this._client.destroy();
       this._client = null;
@@ -101,12 +101,12 @@ export class ProboCookieBannerRoot extends ProboElement implements ProboRootElem
     this.setState(this.reopenState);
   };
 
-  setState(state: ProboState): void {
+  setState(state: TrustReadyState): void {
     const prev = this._state;
     this._state = state;
     getTCFRuntime()?.onUIVisible?.(uiVisible(state));
     this.dispatchEvent(
-      new CustomEvent("probo-state", {
+      new CustomEvent("trustready-state", {
         bubbles: true,
         composed: true,
         detail: { state, prev },
@@ -146,7 +146,7 @@ export class ProboCookieBannerRoot extends ProboElement implements ProboRootElem
     const baseUrl = this.getAttribute("base-url");
 
     if (!bannerId || !baseUrl) {
-      this.warn("<probo-cookie-banner-root> requires banner-id and base-url attributes");
+      this.warn("<trustready-cookie-banner-root> requires banner-id and base-url attributes");
       return;
     }
 
@@ -176,7 +176,7 @@ export class ProboCookieBannerRoot extends ProboElement implements ProboRootElem
     this._draft = this.buildDraft(this._config);
 
     this.dispatchEvent(
-      new CustomEvent("probo-ready", {
+      new CustomEvent("trustready-ready", {
         bubbles: true,
         composed: true,
         detail: { config: this._config, gpcApplied: this.gpcApplied, regulation: this._client.regulation },
@@ -193,11 +193,11 @@ export class ProboCookieBannerRoot extends ProboElement implements ProboRootElem
   }
 
   private validateSettingsLink(): void {
-    if (!document.querySelector("probo-settings-link")) {
+    if (!document.querySelector("trustready-settings-link")) {
       this.warn(
-        "<probo-settings-link> is required in the header or footer to reopen cookie preferences",
+        "<trustready-settings-link> is required in the header or footer to reopen cookie preferences",
       );
-      this.emitValidation(["probo-settings-link"]);
+      this.emitValidation(["trustready-settings-link"]);
     }
   }
 }

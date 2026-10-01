@@ -1,6 +1,6 @@
 # Access review notes file
 
-Path: `.probo/access-reviews/<campaign-slug>.md`
+Path: `.trustready/access-reviews/<campaign-slug>.md`
 
 `<campaign-slug>` — lowercase campaign name with non-alphanumerics replaced by
 hyphens (e.g. `Q3 GitHub Review` → `q3-github-review`).

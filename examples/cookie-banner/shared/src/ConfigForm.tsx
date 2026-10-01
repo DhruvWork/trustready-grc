@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -87,7 +87,7 @@ export function ConfigForm() {
           type="text"
           value={baseUrl}
           onChange={(e) => setBaseUrl(e.target.value)}
-          placeholder="e.g. https://cookie-banner.getprobo.com/v1/banners/"
+          placeholder="e.g. https://cookie-banner.trustready.io/v1/banners/"
           style={{
             width: "100%",
             maxWidth: 500,

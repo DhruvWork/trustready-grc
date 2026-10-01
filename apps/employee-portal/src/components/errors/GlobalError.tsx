@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ interface ErrorContent {
   descriptionKey: string;
 }
 
-const SUPPORT_HREF = "mailto:support@probo.com";
+const SUPPORT_HREF = "mailto:support@trustready.io";
 
 // Map a caught error to the page-level copy. Recognizes the typed error
 // classes first, then falls back to the code embedded in generic Error

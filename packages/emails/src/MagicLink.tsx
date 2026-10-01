@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import EmailLayout, {
 
 export const MagicLink = () => {
   return (
-    <EmailLayout subject="Probo Magic Link">
+    <EmailLayout subject="TrustReady Magic Link">
       <Text style={bodyText}>{"Please use this link to connect to {{.OrganizationName}}'s Compliance Page:"}</Text>
 
       <Section style={buttonContainer}>

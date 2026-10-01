@@ -29,7 +29,7 @@ on the path. If empty or non-user-facing only, do not release this track.
 
 CI checks that `VERSION` matches the tag, runs `terraform fmt -check`,
 creates a GitHub Release on this repository, then copies the module into
-`getprobo/terraform-aws-audit-role` and tags `v<version>` there. The
+`trustready/terraform-aws-audit-role` and tags `v<version>` there. The
 module-repo commit is created with GitHub's `createCommitOnBranch`
 mutation (same as the Homebrew tap) so it satisfies the org signed-commit
 rule; a local `git commit` plus `git push` would be rejected.
@@ -37,8 +37,8 @@ rule; a local `git commit` plus `git push` would be rejected.
 The primary consumer address is the Terraform Registry module:
 
 ```hcl
-module "probo_audit" {
-  source  = "getprobo/audit-role/aws"
+module "trustready_audit" {
+  source  = "trustready/audit-role/aws"
   version = "0.1.3"
 }
 ```
@@ -50,20 +50,20 @@ Consumers can also pin a Git source:
 source = "github.com/getprobo/terraform-aws-audit-role?ref=v0.1.3"
 
 # Monorepo subdirectory
-source = "github.com/getprobo/probo//contrib/terraform/aws-audit-role?ref=terraform-aws-audit-role/v0.1.3"
+source = "github.com/getprobo/trustready//contrib/terraform/aws-audit-role?ref=terraform-aws-audit-role/v0.1.3"
 ```
 
-Connecting `getprobo/terraform-aws-audit-role` to the public Terraform
+Connecting `trustready/terraform-aws-audit-role` to the public Terraform
 Registry is a separate step after the first `v*` tag exists there. The
-registry address is `getprobo/audit-role/aws`.
+registry address is `trustready/audit-role/aws`.
 
 ### One-time setup (before the first release)
 
-1. Create the public repository `getprobo/terraform-aws-audit-role`. Give
+1. Create the public repository `trustready/terraform-aws-audit-role`. Give
    it a one-sentence GitHub description (the registry uses it later) and
    an MIT license. An empty `main` branch is enough; the first release
    fills it.
 2. Add the Actions secret `TERRAFORM_MODULE_GITHUB_TOKEN` on
-   `getprobo/probo` with `contents:write` on the module repository (same
+   `trustready/trustready` with `contents:write` on the module repository (same
    idea as `HOMEBREW_TAP_GITHUB_TOKEN` for the Homebrew tap). The
    workflow uses that token with `gh api`, not `git push`.

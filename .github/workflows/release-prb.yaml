@@ -189,8 +189,8 @@ jobs:
           # frozen_string_literal: true
 
           class Prb < Formula
-            desc "Probo CLI"
-            homepage "https://github.com/getprobo/probo"
+            desc "TrustReady CLI"
+            homepage "https://github.com/getprobo/trustready"
             version "${VERSION}"
             license "MIT"
 
@@ -227,13 +227,13 @@ jobs:
           RUBY
 
           CONTENT=$(base64 -w0 prb.rb)
-          HEAD_OID=$(gh api "repos/getprobo/homebrew-tap/git/ref/heads/main" --jq '.object.sha')
+          HEAD_OID=$(gh api "repos/trustready/homebrew-tap/git/ref/heads/main" --jq '.object.sha')
 
           gh api graphql -f query='
             mutation($headline: String!, $oid: GitObjectID!, $contents: Base64String!) {
               createCommitOnBranch(input: {
                 branch: {
-                  repositoryNameWithOwner: "getprobo/homebrew-tap"
+                  repositoryNameWithOwner: "trustready/homebrew-tap"
                   branchName: "main"
                 }
                 message: { headline: $headline }

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -172,7 +172,7 @@ export function APIKeyConnectorDialog({
 
   const connectAPIKeyProvider = () => {
     // Managed providers (Model B) supply no customer key: the server injects
-    // Probo's own credential, so only the extra settings are required.
+    // TrustReady's own credential, so only the extra settings are required.
     if (!provider || (!provider.apiKeyManaged && !trimmedAPIKey)) {
       return;
     }

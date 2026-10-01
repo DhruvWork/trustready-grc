@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -72,8 +72,8 @@ import (
 func NewCmdRoot(f *cmdutil.Factory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:           "prb <command> [flags]",
-		Short:         "Probo CLI",
-		Long:          "prb is a command-line tool for interacting with the Probo platform.",
+		Short:         "TrustReady CLI",
+		Long:          "prb is a command-line tool for interacting with the TrustReady platform.",
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {

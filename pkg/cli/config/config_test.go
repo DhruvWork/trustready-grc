@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,13 +36,13 @@ func TestDefaultHost(t *testing.T) {
 			t.Setenv("TRUSTREADY_HOST", "")
 
 			cfg := &config.Config{
-				ActiveHost: "beta.probo.inc",
+				ActiveHost: "beta.trustready.io",
 				Hosts: map[string]*config.HostConfig{
-					"alpha.probo.inc": {
+					"alpha.trustready.io": {
 						Token:        "old-alpha",
 						Organization: "org-alpha",
 					},
-					"beta.probo.inc": {
+					"beta.trustready.io": {
 						Token:        "old-beta",
 						Organization: "org-beta",
 					},
@@ -51,7 +51,7 @@ func TestDefaultHost(t *testing.T) {
 
 			host, hc, err := cfg.DefaultHost()
 			require.NoError(t, err)
-			assert.Equal(t, "beta.probo.inc", host)
+			assert.Equal(t, "beta.trustready.io", host)
 			assert.Equal(t, "tok_test", hc.Token)
 			assert.Equal(t, "org-beta", hc.Organization)
 		},
@@ -65,11 +65,11 @@ func TestDefaultHost(t *testing.T) {
 
 			cfg := &config.Config{
 				Hosts: map[string]*config.HostConfig{
-					"alpha.probo.inc": {
+					"alpha.trustready.io": {
 						Token:        "old",
 						Organization: "org-alpha",
 					},
-					"beta.probo.inc": {
+					"beta.trustready.io": {
 						Token:        "old",
 						Organization: "org-beta",
 					},
@@ -78,7 +78,7 @@ func TestDefaultHost(t *testing.T) {
 
 			host, hc, err := cfg.DefaultHost()
 			require.NoError(t, err)
-			assert.Equal(t, "alpha.probo.inc", host)
+			assert.Equal(t, "alpha.trustready.io", host)
 			assert.Equal(t, "tok_test", hc.Token)
 			assert.Equal(t, "org-alpha", hc.Organization)
 		},
@@ -87,13 +87,13 @@ func TestDefaultHost(t *testing.T) {
 	t.Run(
 		"TRUSTREADY_HOST takes precedence over everything",
 		func(t *testing.T) {
-			t.Setenv("TRUSTREADY_HOST", "custom.probo.inc")
+			t.Setenv("TRUSTREADY_HOST", "custom.trustready.io")
 			t.Setenv("TRUSTREADY_TOKEN", "tok_env")
 
 			cfg := &config.Config{
-				ActiveHost: "beta.probo.inc",
+				ActiveHost: "beta.trustready.io",
 				Hosts: map[string]*config.HostConfig{
-					"beta.probo.inc": {
+					"beta.trustready.io": {
 						Token:        "old",
 						Organization: "org-beta",
 					},
@@ -102,7 +102,7 @@ func TestDefaultHost(t *testing.T) {
 
 			host, hc, err := cfg.DefaultHost()
 			require.NoError(t, err)
-			assert.Equal(t, "custom.probo.inc", host)
+			assert.Equal(t, "custom.trustready.io", host)
 			assert.Equal(t, "tok_env", hc.Token)
 		},
 	)
@@ -114,13 +114,13 @@ func TestDefaultHost(t *testing.T) {
 			t.Setenv("TRUSTREADY_TOKEN", "")
 
 			cfg := &config.Config{
-				ActiveHost: "beta.probo.inc",
+				ActiveHost: "beta.trustready.io",
 				Hosts: map[string]*config.HostConfig{
-					"alpha.probo.inc": {
+					"alpha.trustready.io": {
 						Token:        "tok-alpha",
 						Organization: "org-alpha",
 					},
-					"beta.probo.inc": {
+					"beta.trustready.io": {
 						Token:        "tok-beta",
 						Organization: "org-beta",
 					},
@@ -129,7 +129,7 @@ func TestDefaultHost(t *testing.T) {
 
 			host, hc, err := cfg.DefaultHost()
 			require.NoError(t, err)
-			assert.Equal(t, "beta.probo.inc", host)
+			assert.Equal(t, "beta.trustready.io", host)
 			assert.Equal(t, "tok-beta", hc.Token)
 			assert.Equal(t, "org-beta", hc.Organization)
 		},

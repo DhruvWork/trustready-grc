@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,50 +25,50 @@ import { CATEGORY_LIST, floatingCard } from "./shared";
 // consents. Offers accept / reject / customize and a full preference panel.
 export function renderOptIn(position: string): string {
   const banner = `
-    <probo-banner>
+    <trustready-banner>
       ${floatingCard(
         position,
-        { labelledby: "probo-banner-title", describedby: "probo-banner-desc" },
+        { labelledby: "trustready-banner-title", describedby: "trustready-banner-desc" },
         `
-        <p class="title" id="probo-banner-title" data-text="banner_title"></p>
-        <p class="description" id="probo-banner-desc" data-text="banner_description"></p>
+        <p class="title" id="trustready-banner-title" data-text="banner_title"></p>
+        <p class="description" id="trustready-banner-desc" data-text="banner_description"></p>
         <div class="buttons">
-          <probo-accept-button><button class="btn btn-primary" data-text="button_accept_all"></button></probo-accept-button>
-          <probo-reject-button><button class="btn" data-text="button_reject_all"></button></probo-reject-button>
-          <probo-customize-button><button class="btn btn-link" data-text="button_customize"></button></probo-customize-button>
+          <trustready-accept-button><button class="btn btn-primary" data-text="button_accept_all"></button></trustready-accept-button>
+          <trustready-reject-button><button class="btn" data-text="button_reject_all"></button></trustready-reject-button>
+          <trustready-customize-button><button class="btn btn-link" data-text="button_customize"></button></trustready-customize-button>
         </div>
         ${BRANDING}`,
       )}
-    </probo-banner>`;
+    </trustready-banner>`;
 
   const panel = `
-    <probo-preference-panel>
+    <trustready-preference-panel>
       ${floatingCard(
         position,
-        { labelledby: "probo-panel-title", describedby: "probo-panel-desc" },
+        { labelledby: "trustready-panel-title", describedby: "trustready-panel-desc" },
         `
         <div class="panel-header">
           <div class="panel-header-title">
-            <p class="title" id="probo-panel-title" style="margin:0" data-text="panel_title"></p>
+            <p class="title" id="trustready-panel-title" style="margin:0" data-text="panel_title"></p>
             <button class="panel-close" data-action="back" data-aria-text="aria_close">
               ${CLOSE_ICON}
             </button>
           </div>
-          <p class="description" id="probo-panel-desc" data-text="panel_description"></p>
+          <p class="description" id="trustready-panel-desc" data-text="panel_description"></p>
         </div>
         ${CATEGORY_LIST}
         <div class="footer">
           <div class="buttons">
-            <probo-accept-button><button class="btn btn-primary" data-text="button_accept_all"></button></probo-accept-button>
-            <probo-reject-button><button class="btn" data-text="button_reject_all"></button></probo-reject-button>
-            <probo-save-button>
+            <trustready-accept-button><button class="btn btn-primary" data-text="button_accept_all"></button></trustready-accept-button>
+            <trustready-reject-button><button class="btn" data-text="button_reject_all"></button></trustready-reject-button>
+            <trustready-save-button>
               <button class="btn btn-link" style="flex:1" data-text="button_save"></button>
-            </probo-save-button>
+            </trustready-save-button>
           </div>
           ${BRANDING}
         </div>`,
       )}
-    </probo-preference-panel>`;
+    </trustready-preference-panel>`;
 
   return banner + panel;
 }

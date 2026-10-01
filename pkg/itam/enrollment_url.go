@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
 )
 
-// EnrollmentURLs holds the public API origin and probo:// deep link issued
+// EnrollmentURLs holds the public API origin and trustready:// deep link issued
 // when a device enrollment token is created.
 type EnrollmentURLs struct {
 	ServerURL     string
@@ -51,7 +51,7 @@ func BuildEnrollmentURLs(baseURL *baseurl.BaseURL, enrollmentToken string) (Enro
 	}).String()
 
 	enrollURL := &url.URL{
-		Scheme: "probo",
+		Scheme: "trustready",
 		Host:   "enroll",
 	}
 	query := enrollURL.Query()

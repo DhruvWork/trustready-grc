@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,14 +39,14 @@ import (
 func azureTestRecords() []AccountRecord {
 	return []AccountRecord{
 		{
-			Email:       "alice@probo-azure.test",
+			Email:       "alice@trustready-azure.test",
 			ExternalID:  vcrAzureAliceID,
 			AccountType: coredata.AccessReviewEntryAccountTypeUser,
 			AuthMethod:  coredata.AccessReviewEntryAuthMethodSSO,
 			MFAStatus:   coredata.MFAStatusUnknown,
 		},
 		{
-			Email:       "eng@probo-azure.test",
+			Email:       "eng@trustready-azure.test",
 			ExternalID:  vcrAzureEngID,
 			AccountType: coredata.AccessReviewEntryAccountTypeUser,
 			AuthMethod:  coredata.AccessReviewEntryAuthMethodUnknown,
@@ -331,21 +331,21 @@ func TestFetchAzureActivity_KeepsSuccessfulBatchItemsWhenOneFails(t *testing.T) 
 		session,
 		[]AccountRecord{
 			{
-				Email:       "alice@probo-azure.test",
+				Email:       "alice@trustready-azure.test",
 				ExternalID:  vcrAzureAliceID,
 				AccountType: coredata.AccessReviewEntryAccountTypeUser,
 				AuthMethod:  coredata.AccessReviewEntryAuthMethodSSO,
 				MFAStatus:   coredata.MFAStatusUnknown,
 			},
 			{
-				Email:       "bob@probo-azure.test",
+				Email:       "bob@trustready-azure.test",
 				ExternalID:  vcrAzureBobID,
 				AccountType: coredata.AccessReviewEntryAccountTypeUser,
 				AuthMethod:  coredata.AccessReviewEntryAuthMethodSSO,
 				MFAStatus:   coredata.MFAStatusUnknown,
 			},
 			{
-				Email:       "dana@probo-azure.test",
+				Email:       "dana@trustready-azure.test",
 				ExternalID:  vcrAzureDanaID,
 				AccountType: coredata.AccessReviewEntryAccountTypeUser,
 				AuthMethod:  coredata.AccessReviewEntryAuthMethodSSO,
@@ -382,7 +382,7 @@ func TestFetchAzureActivity_SkipsGroupsAndServicePrincipals(t *testing.T) {
 		),
 		[]AccountRecord{
 			{
-				Email:       "eng@probo-azure.test",
+				Email:       "eng@trustready-azure.test",
 				ExternalID:  vcrAzureEngID,
 				AccountType: coredata.AccessReviewEntryAccountTypeUser,
 				AuthMethod:  coredata.AccessReviewEntryAuthMethodUnknown,

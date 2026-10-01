@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
 	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2scope"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
@@ -115,7 +115,7 @@ func TestNewMetadata(t *testing.T) {
 
 	reg := oauth2scope.NewRegistry().Register(
 		map[coredata.OAuth2Scope][]string{
-			probo.ScopeV1DocumentRead: {"core:document:get"},
+			trustready.ScopeV1DocumentRead: {"core:document:get"},
 		},
 	)
 
@@ -176,7 +176,7 @@ func TestNewMetadata(t *testing.T) {
 
 			assert.Equal(t, expectedScopes, metadata.ScopesSupported)
 			assert.Contains(t, metadata.ScopesSupported, oauth2.ScopeOpenID)
-			assert.Contains(t, metadata.ScopesSupported, probo.ScopeV1DocumentRead)
+			assert.Contains(t, metadata.ScopesSupported, trustready.ScopeV1DocumentRead)
 		},
 	)
 

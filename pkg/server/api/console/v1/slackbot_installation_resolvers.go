@@ -8,12 +8,12 @@ package console_v1
 import (
 	"context"
 
-	"go.gearno.de/kit/log"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/probot"
 	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
+	"go.gearno.de/kit/log"
 )
 
 // SetSlackbotNotificationChannel is the resolver for the setSlackbotNotificationChannel field.
@@ -27,7 +27,7 @@ func (r *mutationResolver) SetSlackbotNotificationChannel(ctx context.Context, i
 	scope, err := r.authorize(
 		ctx,
 		input.CompliancePortalID,
-		probo.ActionConnectorInitiate,
+		trustready.ActionConnectorInitiate,
 	)
 	if err != nil {
 		return nil, err
@@ -74,7 +74,7 @@ func (r *mutationResolver) ClearSlackbotNotificationChannel(ctx context.Context,
 	scope, err := r.authorize(
 		ctx,
 		input.CompliancePortalID,
-		probo.ActionConnectorInitiate,
+		trustready.ActionConnectorInitiate,
 	)
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ func (r *mutationResolver) UninstallSlackbot(ctx context.Context, input types.Un
 	scope, err := r.authorize(
 		ctx,
 		input.OrganizationID,
-		probo.ActionConnectorDelete,
+		trustready.ActionConnectorDelete,
 	)
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ func (r *mutationResolver) UninstallSlackbot(ctx context.Context, input types.Un
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	organization, err := r.probo.Organizations.Get(
+	organization, err := r.trustready.Organizations.Get(
 		ctx,
 		scope,
 		input.OrganizationID,

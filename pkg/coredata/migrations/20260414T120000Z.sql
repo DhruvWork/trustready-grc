@@ -1,4 +1,4 @@
--- Copyright (c) 2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2026 TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -18,7 +18,7 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 
--- The index constraint is already respected in Probo's production environment.
+-- The index constraint is already respected in TrustReady's production environment.
 -- The deletion is here in case duplicates were created directly via SQL in
 -- other contexts.
 DELETE FROM document_versions

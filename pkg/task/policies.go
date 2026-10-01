@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ var writeActions = []string{
 }
 
 // FullAccessPolicy grants complete task access to organization owners and
-// admins. Owner and admin already match core:* on the probo role policy;
+// admins. Owner and admin already match core:* on the trustready role policy;
 // this set keeps task authorization next to the domain after extraction.
 var FullAccessPolicy = policy.NewPolicy(
 	"task:full-access",
@@ -68,7 +68,7 @@ var ReadAccessPolicy = policy.NewPolicy(
 // author can update; the author can delete; owner/admin still delete any
 // comment through core:* on their role policy.
 var TaskCommentOwnershipPolicy = policy.NewPolicy(
-	"probo:task-comment-ownership",
+	"trustready:task-comment-ownership",
 	"Task Comment Ownership",
 	policy.Deny(ActionTaskCommentUpdate).
 		WithSID("deny-update-others-task-comments").
@@ -81,7 +81,7 @@ var TaskCommentOwnershipPolicy = policy.NewPolicy(
 // PolicySet returns the PolicySet for the task service. It is owned by this
 // package and registered into the authorizer at composition time so task
 // authorization rules live alongside the domain logic instead of in the
-// core probo policy set.
+// core trustready policy set.
 func PolicySet() *iam.PolicySet {
 	return iam.NewPolicySet().
 		AddRolePolicy("OWNER", FullAccessPolicy, TaskCommentOwnershipPolicy).

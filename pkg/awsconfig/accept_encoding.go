@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -72,7 +72,7 @@ func unsignedAcceptEncoding(stack *middleware.Stack) error {
 
 	err := stack.Finalize.Insert(
 		middleware.FinalizeMiddlewareFunc(
-			"proboStripAcceptEncodingBeforeSigning",
+			"trustreadyStripAcceptEncodingBeforeSigning",
 			func(
 				ctx context.Context,
 				in middleware.FinalizeInput,
@@ -101,7 +101,7 @@ func unsignedAcceptEncoding(stack *middleware.Stack) error {
 
 	err = stack.Finalize.Insert(
 		middleware.FinalizeMiddlewareFunc(
-			"proboRestoreAcceptEncodingAfterSigning",
+			"trustreadyRestoreAcceptEncodingAfterSigning",
 			func(
 				ctx context.Context,
 				in middleware.FinalizeInput,

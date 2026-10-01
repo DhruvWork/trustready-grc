@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -28,7 +28,7 @@ import (
 )
 
 type OAuthInitiateHandler struct {
-	proboBaseURL *baseurl.BaseURL
+	trustreadyBaseURL *baseurl.BaseURL
 	visitor      *visitor.Service
 	safeRedirect *saferedirect.SafeRedirect
 	httpClient   *http.Client
@@ -36,16 +36,16 @@ type OAuthInitiateHandler struct {
 }
 
 func NewOAuthInitiateHandler(
-	proboBaseURL *baseurl.BaseURL,
+	trustreadyBaseURL *baseurl.BaseURL,
 	visitorSvc *visitor.Service,
 	allowedHost saferedirect.AllowedHostFunc,
 	logger *log.Logger,
 ) *OAuthInitiateHandler {
 	return &OAuthInitiateHandler{
-		proboBaseURL: proboBaseURL,
+		trustreadyBaseURL: trustreadyBaseURL,
 		visitor:      visitorSvc,
 		safeRedirect: saferedirect.New(allowedHost),
-		// proboBaseURL is server config, not user input — loopback is expected in dev.
+		// trustreadyBaseURL is server config, not user input — loopback is expected in dev.
 		httpClient: httpclient.DefaultClient(
 			httpclient.WithLogger(logger),
 			httpclient.WithSSRFProtection(),
@@ -101,7 +101,7 @@ func (h *OAuthInitiateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	metadata, err := oauth2.FetchServerMetadata(ctx, h.httpClient, h.proboBaseURL.String())
+	metadata, err := oauth2.FetchServerMetadata(ctx, h.httpClient, h.trustreadyBaseURL.String())
 	if err != nil {
 		h.logger.ErrorCtx(ctx, "cannot fetch discovery metadata", log.Error(err))
 		httpserver.RenderError(w, http.StatusInternalServerError, errInternal)

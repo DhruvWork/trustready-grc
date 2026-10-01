@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ func crispRegistration() *Registration {
 		),
 		DisplayName:      "Crisp",
 		DocumentationURL: accessReviewDocsURL("crisp"),
-		// Model B: the plugin token is Probo's own Crisp Marketplace plugin
+		// Model B: the plugin token is TrustReady's own Crisp Marketplace plugin
 		// credential, held server-side in bootstrap config, not pasted by
 		// the customer. ManagedAPIKey injects it at connect time; the customer
 		// supplies nothing at all, the install ceremony below yielding the
@@ -79,12 +79,12 @@ func crispRegistration() *Registration {
 			// version segment stays in APIBase.
 			APIBase: "https://api.crisp.chat/v1",
 			// Crisp forces https and takes one callback URL per plugin, so each
-			// Probo deployment registers its own Crisp Marketplace plugin. %s
+			// TrustReady deployment registers its own Crisp Marketplace plugin. %s
 			// is the plugin id.
 			Install: "https://app.crisp.chat/initiate/plugin/%s/",
 		},
 		// Crisp carries no redirect_uri of its own: the return URL is typed into
-		// the Marketplace plugin's own settings, once per plugin. Each Probo
+		// the Marketplace plugin's own settings, once per plugin. Each TrustReady
 		// deployment therefore needs its own plugin, whose Callback URL must be
 		// exactly
 		//
@@ -124,7 +124,7 @@ func crispRegistration() *Registration {
 				// burns their ten-minute window over a vendor blip.
 				sub, err := drivers.GetCrispSubscription(ctx, c, websiteID, pluginID)
 				if err != nil {
-					// Probo's plugin is not subscribed to this website. No
+					// TrustReady's plugin is not subscribed to this website. No
 					// retry installs it for them.
 					if errors.Is(err, drivers.ErrCrispPluginNotSubscribed) {
 						return "", err
@@ -137,7 +137,7 @@ func crispRegistration() *Registration {
 							return "", fmt.Errorf("%w: %w", ErrInstallVerificationTransient, err)
 						case statusErr.Code == http.StatusUnauthorized,
 							statusErr.Code == http.StatusForbidden:
-							// Crisp rejecting PROBO's plugin credential, not the
+							// Crisp rejecting TRUSTREADY's plugin credential, not the
 							// customer's proof: a token mid-rotation, a
 							// half-propagated deploy, a plugin id cross-wired
 							// with another environment's key. The customer can

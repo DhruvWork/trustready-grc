@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# probo-agent macOS PKG preinstall script.
+# trustready-agent macOS PKG preinstall script.
 #
 # Runs as root before the payload is laid down. Used to stop previous
 # LaunchAgent / LaunchDaemon instances so upgrades replace cleanly.
@@ -8,11 +8,11 @@
 
 set -u
 
-LOG_FILE="/var/log/probo-agent-install.log"
-TRAY_LABEL="com.probo.agent.tray"
+LOG_FILE="/var/log/trustready-agent-install.log"
+TRAY_LABEL="com.trustready.agent.tray"
 TRAY_PLIST="/Library/LaunchAgents/${TRAY_LABEL}.plist"
-DAEMON_PLIST="/Library/LaunchDaemons/com.probo.agent.plist"
-HELPER_LABEL="com.probo.agent.helper"
+DAEMON_PLIST="/Library/LaunchDaemons/com.trustready.agent.plist"
+HELPER_LABEL="com.trustready.agent.helper"
 HELPER_PLIST="/Library/LaunchDaemons/${HELPER_LABEL}.plist"
 HELPER_BINARY="/Library/PrivilegedHelperTools/${HELPER_LABEL}"
 
@@ -20,7 +20,7 @@ mkdir -p "$(dirname "${LOG_FILE}")"
 exec > >(tee -a "${LOG_FILE}") 2>&1
 
 echo
-echo "=== probo-agent preinstall $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+echo "=== trustready-agent preinstall $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
 
 bootout_tray_for_user() {
     local username="$1"

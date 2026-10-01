@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,12 +20,12 @@
 
 import { CCPA_OPT_OUT_ICON, CCPA_PRIVACY_CHOICES_LABEL } from "../html";
 import { getGpcLabel } from "../i18n";
-import type { ProboCookieBannerRoot } from "./cookie-banner-root";
+import type { TrustReadyCookieBannerRoot } from "./cookie-banner-root";
 
-const AUTO_ATTR = "data-probo-auto";
+const AUTO_ATTR = "data-trustready-auto";
 
-export class ProboSettingsLink extends HTMLElement {
-  private root: ProboCookieBannerRoot | null = null;
+export class TrustReadySettingsLink extends HTMLElement {
+  private root: TrustReadyCookieBannerRoot | null = null;
   private attached = false;
   private pendingOpen = false;
 
@@ -35,7 +35,7 @@ export class ProboSettingsLink extends HTMLElement {
     if (this.root) {
       this.attach(this.root);
     } else {
-      document.addEventListener("probo-ready", this.onProboReady, { once: true });
+      document.addEventListener("trustready-ready", this.onTrustReadyReady, { once: true });
     }
 
     this.addEventListener("click", this.handleClick);
@@ -45,29 +45,29 @@ export class ProboSettingsLink extends HTMLElement {
   disconnectedCallback(): void {
     this.removeEventListener("click", this.handleClick);
     this.removeEventListener("keydown", this.handleKeydown);
-    document.removeEventListener("probo-ready", this.onProboReady);
+    document.removeEventListener("trustready-ready", this.onTrustReadyReady);
     if (this.root) {
-      this.root.removeEventListener("probo-ready", this.onRootReady);
-      this.root.removeEventListener("probo-consent", this.onConsent);
+      this.root.removeEventListener("trustready-ready", this.onRootReady);
+      this.root.removeEventListener("trustready-consent", this.onConsent);
     }
     this.root = null;
     this.attached = false;
     this.pendingOpen = false;
   }
 
-  private attach(root: ProboCookieBannerRoot): void {
+  private attach(root: TrustReadyCookieBannerRoot): void {
     this.root = root;
 
     if (!this.attached) {
       this.attached = true;
-      root.addEventListener("probo-consent", this.onConsent);
+      root.addEventListener("trustready-consent", this.onConsent);
     }
 
     try {
       this.applyContent(root);
       this.applyGpc(root.gpcApplied, root.bannerConfig.language);
     } catch {
-      root.addEventListener("probo-ready", this.onRootReady, { once: true });
+      root.addEventListener("trustready-ready", this.onRootReady, { once: true });
     }
 
     this.flushPendingOpen();
@@ -83,7 +83,7 @@ export class ProboSettingsLink extends HTMLElement {
     this.applyGpc(!!detail.gpcApplied, detail.config?.language ?? "en");
   };
 
-  private applyContent(root: ProboCookieBannerRoot): void {
+  private applyContent(root: TrustReadyCookieBannerRoot): void {
     this.style.display = "inline-flex";
     this.style.alignItems = "center";
     this.style.gap = "6px";
@@ -158,11 +158,11 @@ export class ProboSettingsLink extends HTMLElement {
   }
 
   private applyGpc(applied: boolean, language: string): void {
-    this.querySelector("[data-probo-gpc]")?.remove();
+    this.querySelector("[data-trustready-gpc]")?.remove();
     if (!applied) return;
 
     const badge = document.createElement("span");
-    badge.setAttribute("data-probo-gpc", "");
+    badge.setAttribute("data-trustready-gpc", "");
     badge.textContent = getGpcLabel(language);
     badge.style.fontSize = "11px";
     badge.style.fontWeight = "600";
@@ -180,21 +180,21 @@ export class ProboSettingsLink extends HTMLElement {
     }
   };
 
-  private findRoot(): ProboCookieBannerRoot | null {
-    const direct = document.querySelector("probo-cookie-banner-root") as ProboCookieBannerRoot | null;
+  private findRoot(): TrustReadyCookieBannerRoot | null {
+    const direct = document.querySelector("trustready-cookie-banner-root") as TrustReadyCookieBannerRoot | null;
     if (direct) return direct;
 
-    const themed = document.querySelector("probo-cookie-banner");
+    const themed = document.querySelector("trustready-cookie-banner");
     if (themed?.shadowRoot) {
-      return themed.shadowRoot.querySelector("probo-cookie-banner-root") as ProboCookieBannerRoot | null;
+      return themed.shadowRoot.querySelector("trustready-cookie-banner-root") as TrustReadyCookieBannerRoot | null;
     }
 
     return null;
   }
 
-  private onProboReady = (e: Event): void => {
-    const root = (e as CustomEvent).target as ProboCookieBannerRoot | null;
-    if (root?.tagName.toLowerCase() === "probo-cookie-banner-root") {
+  private onTrustReadyReady = (e: Event): void => {
+    const root = (e as CustomEvent).target as TrustReadyCookieBannerRoot | null;
+    if (root?.tagName.toLowerCase() === "trustready-cookie-banner-root") {
       this.attach(root);
       return;
     }
@@ -206,7 +206,7 @@ export class ProboSettingsLink extends HTMLElement {
     }
 
     if (this.pendingOpen) {
-      document.addEventListener("probo-ready", this.onProboReady, { once: true });
+      document.addEventListener("trustready-ready", this.onTrustReadyReady, { once: true });
     }
   };
 
@@ -236,8 +236,8 @@ export class ProboSettingsLink extends HTMLElement {
       return;
     }
     this.pendingOpen = true;
-    document.addEventListener("probo-ready", this.onProboReady, { once: true });
-    document.dispatchEvent(new CustomEvent("probo-open-preferences"));
+    document.addEventListener("trustready-ready", this.onTrustReadyReady, { once: true });
+    document.dispatchEvent(new CustomEvent("trustready-open-preferences"));
   };
 
   private handleKeydown = (e: KeyboardEvent): void => {

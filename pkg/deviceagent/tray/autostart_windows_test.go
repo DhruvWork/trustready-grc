@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,13 +33,13 @@ func TestTrayRunCommand_QuotesPaths(t *testing.T) {
 	t.Parallel()
 
 	got := trayRunCommand(
-		`C:\Program Files\Probo\trustready-agentw.exe`,
-		`C:\ProgramData\Probo\run`,
+		`C:\Program Files\TrustReady\trustready-agentw.exe`,
+		`C:\ProgramData\TrustReady\run`,
 	)
 
 	assert.Equal(
 		t,
-		`"C:\Program Files\Probo\trustready-agentw.exe" tray --run-dir "C:\ProgramData\Probo\run"`,
+		`"C:\Program Files\TrustReady\trustready-agentw.exe" tray --run-dir "C:\ProgramData\TrustReady\run"`,
 		got,
 	)
 }
@@ -49,8 +49,8 @@ func TestGUIExecutablePath_ReturnsSiblingExecutable(t *testing.T) {
 
 	assert.Equal(
 		t,
-		`C:\Program Files\Probo\trustready-agentw.exe`,
-		guiExecutablePath(`C:\Program Files\Probo\trustready-agent.exe`),
+		`C:\Program Files\TrustReady\trustready-agentw.exe`,
+		guiExecutablePath(`C:\Program Files\TrustReady\trustready-agent.exe`),
 	)
 	assert.Equal(
 		t,
@@ -59,8 +59,8 @@ func TestGUIExecutablePath_ReturnsSiblingExecutable(t *testing.T) {
 	)
 	assert.Equal(
 		t,
-		`C:\Program Files\Probo\trustready-agentw.exe`,
-		guiExecutablePath(`C:\Program Files\Probo\trustready-agent.exe.old`),
+		`C:\Program Files\TrustReady\trustready-agentw.exe`,
+		guiExecutablePath(`C:\Program Files\TrustReady\trustready-agent.exe.old`),
 	)
 }
 

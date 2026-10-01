@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -61,7 +61,7 @@ func TestEmailVerification_PasswordSignInRequiresVerifiedEmail(t *testing.T) {
 	client := newUser.Client()
 
 	uniqueID := fmt.Sprintf("%d", time.Now().UnixNano())
-	email := fmt.Sprintf("unverified-%s@e2e.probo.test", uniqueID)
+	email := fmt.Sprintf("unverified-%s@e2e.trustready.test", uniqueID)
 	password := "TestPassword123!"
 	fullName := fmt.Sprintf("Unverified User %s", uniqueID)
 
@@ -261,5 +261,5 @@ func TestEmailVerification_ResendIsEnumerationSafe(t *testing.T) {
 
 	client := testutil.NewUnauthenticatedClient(t)
 
-	client.ResendVerificationEmail(fmt.Sprintf("missing-%d@e2e.probo.test", time.Now().UnixNano()))
+	client.ResendVerificationEmail(fmt.Sprintf("missing-%d@e2e.trustready.test", time.Now().UnixNano()))
 }

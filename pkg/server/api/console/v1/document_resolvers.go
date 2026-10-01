@@ -11,15 +11,12 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/management"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
 	"github.com/DhruvWork/trustready-grc/pkg/pdfutils"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/resourcealias"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/clientip"
@@ -27,7 +24,10 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // Alias is the resolver for the alias field.
@@ -42,7 +42,7 @@ func (r *documentResolver) Alias(ctx context.Context, obj *types.Document) (*str
 
 // Organization is the resolver for the organization field.
 func (r *documentResolver) Organization(ctx context.Context, obj *types.Document) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -120,7 +120,7 @@ func (r *documentResolver) CompliancePortalDocumentAccess(ctx context.Context, o
 
 // Versions is the resolver for the versions field.
 func (r *documentResolver) Versions(ctx context.Context, obj *types.Document, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.DocumentVersionOrderBy, filter *types.DocumentVersionFilter) (*types.DocumentVersionConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentVersionList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentVersionList)
 	if err != nil {
 		return nil, err
 	}
@@ -144,7 +144,7 @@ func (r *documentResolver) Versions(ctx context.Context, obj *types.Document, fi
 		versionFilter = versionFilter.WithStatuses(filter.Statuses...)
 	}
 
-	page, err := r.probo.Documents.ListVersions(ctx, scope, obj.ID, cursor, versionFilter)
+	page, err := r.trustready.Documents.ListVersions(ctx, scope, obj.ID, cursor, versionFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list document versions", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -155,7 +155,7 @@ func (r *documentResolver) Versions(ctx context.Context, obj *types.Document, fi
 
 // Controls is the resolver for the controls field.
 func (r *documentResolver) Controls(ctx context.Context, obj *types.Document, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ControlOrderBy, filter *types.ControlFilter) (*types.ControlConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionControlList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionControlList)
 	if err != nil {
 		return nil, err
 	}
@@ -179,7 +179,7 @@ func (r *documentResolver) Controls(ctx context.Context, obj *types.Document, fi
 		controlFilter = coredata.NewControlFilter(filter.Query)
 	}
 
-	page, err := r.probo.Controls.ListForDocumentID(ctx, scope, obj.ID, cursor, controlFilter)
+	page, err := r.trustready.Controls.ListForDocumentID(ctx, scope, obj.ID, cursor, controlFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list document controls", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -190,12 +190,12 @@ func (r *documentResolver) Controls(ctx context.Context, obj *types.Document, fi
 
 // DefaultApprovers is the resolver for the defaultApprovers field.
 func (r *documentResolver) DefaultApprovers(ctx context.Context, obj *types.Document) ([]*types.Profile, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	profiles, err := r.probo.Documents.GetDefaultApprovers(ctx, scope, obj.ID)
+	profiles, err := r.trustready.Documents.GetDefaultApprovers(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get default approvers", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -216,14 +216,14 @@ func (r *documentResolver) Permission(ctx context.Context, obj *types.Document, 
 
 // TotalCount is the resolver for the totalCount field.
 func (r *documentConnectionResolver) TotalCount(ctx context.Context, obj *types.DocumentConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionDocumentList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionDocumentList)
 	if err != nil {
 		return 0, err
 	}
 
 	switch obj.Resolver.(type) {
 	case *controlResolver:
-		count, err := r.probo.Documents.CountForControlID(ctx, scope, obj.ParentID, obj.Filters)
+		count, err := r.trustready.Documents.CountForControlID(ctx, scope, obj.ParentID, obj.Filters)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count controls", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -231,7 +231,7 @@ func (r *documentConnectionResolver) TotalCount(ctx context.Context, obj *types.
 
 		return count, nil
 	case *organizationResolver:
-		count, err := r.probo.Documents.CountForOrganizationID(ctx, scope, obj.ParentID, obj.Filters)
+		count, err := r.trustready.Documents.CountForOrganizationID(ctx, scope, obj.ParentID, obj.Filters)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count documents", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -239,7 +239,7 @@ func (r *documentConnectionResolver) TotalCount(ctx context.Context, obj *types.
 
 		return count, nil
 	case *riskResolver:
-		count, err := r.probo.Documents.CountForRiskID(ctx, scope, obj.ParentID, obj.Filters)
+		count, err := r.trustready.Documents.CountForRiskID(ctx, scope, obj.ParentID, obj.Filters)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count risks", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -247,7 +247,7 @@ func (r *documentConnectionResolver) TotalCount(ctx context.Context, obj *types.
 
 		return count, nil
 	case *measureResolver:
-		count, err := r.probo.Documents.CountForMeasureID(ctx, scope, obj.ParentID, obj.Filters)
+		count, err := r.trustready.Documents.CountForMeasureID(ctx, scope, obj.ParentID, obj.Filters)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count documents", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -263,7 +263,7 @@ func (r *documentConnectionResolver) TotalCount(ctx context.Context, obj *types.
 
 // Document is the resolver for the document field.
 func (r *documentVersionResolver) Document(ctx context.Context, obj *types.DocumentVersion) (*types.Document, error) {
-	if _, err := r.authorize(ctx, obj.Document.ID, probo.ActionDocumentGet); err != nil {
+	if _, err := r.authorize(ctx, obj.Document.ID, trustready.ActionDocumentGet); err != nil {
 		return nil, err
 	}
 
@@ -309,7 +309,7 @@ func (r *documentVersionResolver) Approvers(ctx context.Context, obj *types.Docu
 
 	c := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	p, err := r.probo.Documents.ListVersionApprovers(ctx, scope, obj.ID, c)
+	p, err := r.trustready.Documents.ListVersionApprovers(ctx, scope, obj.ID, c)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list document version approvers", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -320,7 +320,7 @@ func (r *documentVersionResolver) Approvers(ctx context.Context, obj *types.Docu
 
 // Signatures is the resolver for the signatures field.
 func (r *documentVersionResolver) Signatures(ctx context.Context, obj *types.DocumentVersion, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.DocumentVersionSignatureOrder, filter *types.DocumentVersionSignatureFilter) (*types.DocumentVersionSignatureConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentVersionSignatureList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentVersionSignatureList)
 	if err != nil {
 		return nil, err
 	}
@@ -361,7 +361,7 @@ func (r *documentVersionResolver) Signatures(ctx context.Context, obj *types.Doc
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.Documents.ListSignatures(ctx, scope, obj.ID, cursor, signatureFilter)
+	page, err := r.trustready.Documents.ListSignatures(ctx, scope, obj.ID, cursor, signatureFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list document version signatures", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -372,7 +372,7 @@ func (r *documentVersionResolver) Signatures(ctx context.Context, obj *types.Doc
 
 // ApprovalQuorums is the resolver for the approvalQuorums field.
 func (r *documentVersionResolver) ApprovalQuorums(ctx context.Context, obj *types.DocumentVersion, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.DocumentVersionApprovalQuorumOrder) (*types.DocumentVersionApprovalQuorumConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentVersionApprovalList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentVersionApprovalList)
 	if err != nil {
 		return nil, err
 	}
@@ -391,7 +391,7 @@ func (r *documentVersionResolver) ApprovalQuorums(ctx context.Context, obj *type
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	p, err := r.probo.DocumentApprovals.ListQuorums(ctx, scope, obj.ID, cursor)
+	p, err := r.trustready.DocumentApprovals.ListQuorums(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list approval quorums", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -402,14 +402,14 @@ func (r *documentVersionResolver) ApprovalQuorums(ctx context.Context, obj *type
 
 // Signed is the resolver for the signed field.
 func (r *documentVersionResolver) Signed(ctx context.Context, obj *types.DocumentVersion) (bool, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentVersionGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentVersionGet)
 	if err != nil {
 		return false, err
 	}
 
 	identity := authn.IdentityFromContext(ctx)
 
-	signed, err := r.probo.Documents.IsVersionSignedByUserEmail(ctx, scope, obj.ID, identity.EmailAddress)
+	signed, err := r.trustready.Documents.IsVersionSignedByUserEmail(ctx, scope, obj.ID, identity.EmailAddress)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot check if document version is signed", log.Error(err))
 		return false, gqlutils.Internal(ctx)
@@ -425,12 +425,12 @@ func (r *documentVersionResolver) Permission(ctx context.Context, obj *types.Doc
 
 // Quorum is the resolver for the quorum field.
 func (r *documentVersionApprovalDecisionResolver) Quorum(ctx context.Context, obj *types.DocumentVersionApprovalDecision) (*types.DocumentVersionApprovalQuorum, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentVersionApprovalList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentVersionApprovalList)
 	if err != nil {
 		return nil, err
 	}
 
-	quorum, err := r.probo.DocumentApprovals.GetQuorum(ctx, scope, obj.Quorum.ID)
+	quorum, err := r.trustready.DocumentApprovals.GetQuorum(ctx, scope, obj.Quorum.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -446,12 +446,12 @@ func (r *documentVersionApprovalDecisionResolver) Quorum(ctx context.Context, ob
 
 // DocumentVersion is the resolver for the documentVersion field.
 func (r *documentVersionApprovalDecisionResolver) DocumentVersion(ctx context.Context, obj *types.DocumentVersionApprovalDecision) (*types.DocumentVersion, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentVersionGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentVersionGet)
 	if err != nil {
 		return nil, err
 	}
 
-	quorum, err := r.probo.DocumentApprovals.GetQuorum(ctx, scope, obj.Quorum.ID)
+	quorum, err := r.trustready.DocumentApprovals.GetQuorum(ctx, scope, obj.Quorum.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -462,7 +462,7 @@ func (r *documentVersionApprovalDecisionResolver) DocumentVersion(ctx context.Co
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	documentVersion, err := r.probo.Documents.GetVersion(ctx, scope, quorum.VersionID)
+	documentVersion, err := r.trustready.Documents.GetVersion(ctx, scope, quorum.VersionID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -498,13 +498,13 @@ func (r *documentVersionApprovalDecisionResolver) Approver(ctx context.Context, 
 
 // ConsentText is the resolver for the consentText field.
 func (r *documentVersionApprovalDecisionResolver) ConsentText(ctx context.Context, obj *types.DocumentVersionApprovalDecision) (string, error) {
-	return probo.DocumentApprovalConsentText, nil
+	return trustready.DocumentApprovalConsentText, nil
 }
 
 // Permission is the resolver for the permission field.
 func (r *documentVersionApprovalDecisionResolver) Permission(ctx context.Context, obj *types.DocumentVersionApprovalDecision, action string) (bool, error) {
 	// Approve and reject actions are only allowed for the viewer's own decision.
-	if action == probo.ActionDocumentVersionApprove || action == probo.ActionDocumentVersionReject {
+	if action == trustready.ActionDocumentVersionApprove || action == trustready.ActionDocumentVersionReject {
 		identity := authn.IdentityFromContext(ctx)
 
 		profile, err := r.iam.OrganizationService.GetProfile(ctx, obj.Approver.ID)
@@ -530,7 +530,7 @@ func (r *documentVersionApprovalDecisionConnectionResolver) TotalCount(ctx conte
 		return 0, nil
 	}
 
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionDocumentVersionApprovalList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionDocumentVersionApprovalList)
 	if err != nil {
 		return 0, err
 	}
@@ -540,7 +540,7 @@ func (r *documentVersionApprovalDecisionConnectionResolver) TotalCount(ctx conte
 		filter = obj.Filters
 	}
 
-	count, err := r.probo.DocumentApprovals.CountDecisions(ctx, scope, obj.ParentID, filter)
+	count, err := r.trustready.DocumentApprovals.CountDecisions(ctx, scope, obj.ParentID, filter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot count approval decisions", log.Error(err))
 		return 0, gqlutils.Internal(ctx)
@@ -551,12 +551,12 @@ func (r *documentVersionApprovalDecisionConnectionResolver) TotalCount(ctx conte
 
 // DocumentVersion is the resolver for the documentVersion field.
 func (r *documentVersionApprovalQuorumResolver) DocumentVersion(ctx context.Context, obj *types.DocumentVersionApprovalQuorum) (*types.DocumentVersion, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentVersionGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentVersionGet)
 	if err != nil {
 		return nil, err
 	}
 
-	documentVersion, err := r.probo.Documents.GetVersion(ctx, scope, obj.DocumentVersion.ID)
+	documentVersion, err := r.trustready.Documents.GetVersion(ctx, scope, obj.DocumentVersion.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -572,7 +572,7 @@ func (r *documentVersionApprovalQuorumResolver) DocumentVersion(ctx context.Cont
 
 // Decisions is the resolver for the decisions field.
 func (r *documentVersionApprovalQuorumResolver) Decisions(ctx context.Context, obj *types.DocumentVersionApprovalQuorum, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.DocumentVersionApprovalDecisionOrder, filter *types.DocumentVersionApprovalDecisionFilter) (*types.DocumentVersionApprovalDecisionConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentVersionApprovalList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentVersionApprovalList)
 	if err != nil {
 		return nil, err
 	}
@@ -598,7 +598,7 @@ func (r *documentVersionApprovalQuorumResolver) Decisions(ctx context.Context, o
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	p, err := r.probo.DocumentApprovals.ListDecisions(ctx, scope, obj.ID, cursor, approvalFilter)
+	p, err := r.trustready.DocumentApprovals.ListDecisions(ctx, scope, obj.ID, cursor, approvalFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list approval decisions", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -614,12 +614,12 @@ func (r *documentVersionApprovalQuorumResolver) Permission(ctx context.Context, 
 
 // TotalCount is the resolver for the totalCount field.
 func (r *documentVersionApprovalQuorumConnectionResolver) TotalCount(ctx context.Context, obj *types.DocumentVersionApprovalQuorumConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionDocumentVersionApprovalList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionDocumentVersionApprovalList)
 	if err != nil {
 		return 0, err
 	}
 
-	count, err := r.probo.DocumentApprovals.CountQuorums(ctx, scope, obj.ParentID)
+	count, err := r.trustready.DocumentApprovals.CountQuorums(ctx, scope, obj.ParentID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot count approval quorums", log.Error(err))
 		return 0, gqlutils.Internal(ctx)
@@ -630,7 +630,7 @@ func (r *documentVersionApprovalQuorumConnectionResolver) TotalCount(ctx context
 
 // TotalCount is the resolver for the totalCount field.
 func (r *documentVersionConnectionResolver) TotalCount(ctx context.Context, obj *types.DocumentVersionConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionDocumentVersionList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionDocumentVersionList)
 	if err != nil {
 		return 0, err
 	}
@@ -642,7 +642,7 @@ func (r *documentVersionConnectionResolver) TotalCount(ctx context.Context, obj 
 			filter = obj.Filters
 		}
 
-		count, err := r.probo.Documents.CountVersionsForDocumentID(ctx, scope, obj.ParentID, filter)
+		count, err := r.trustready.Documents.CountVersionsForDocumentID(ctx, scope, obj.ParentID, filter)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count document versions", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -658,12 +658,12 @@ func (r *documentVersionConnectionResolver) TotalCount(ctx context.Context, obj 
 
 // DocumentVersion is the resolver for the documentVersion field.
 func (r *documentVersionSignatureResolver) DocumentVersion(ctx context.Context, obj *types.DocumentVersionSignature) (*types.DocumentVersion, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentVersionGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentVersionGet)
 	if err != nil {
 		return nil, err
 	}
 
-	documentVersion, err := r.probo.Documents.GetVersion(ctx, scope, obj.DocumentVersion.ID)
+	documentVersion, err := r.trustready.Documents.GetVersion(ctx, scope, obj.DocumentVersion.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -706,7 +706,7 @@ func (r *documentVersionSignatureResolver) Permission(ctx context.Context, obj *
 
 // TotalCount is the resolver for the totalCount field.
 func (r *documentVersionSignatureConnectionResolver) TotalCount(ctx context.Context, obj *types.DocumentVersionSignatureConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionDocumentVersionSignatureList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionDocumentVersionSignatureList)
 	if err != nil {
 		return 0, err
 	}
@@ -718,7 +718,7 @@ func (r *documentVersionSignatureConnectionResolver) TotalCount(ctx context.Cont
 			filter = obj.Filters
 		}
 
-		count, err := r.probo.Documents.CountSignaturesForVersionID(ctx, scope, obj.ParentID, filter)
+		count, err := r.trustready.Documents.CountSignaturesForVersionID(ctx, scope, obj.ParentID, filter)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count signatures", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -734,14 +734,14 @@ func (r *documentVersionSignatureConnectionResolver) TotalCount(ctx context.Cont
 
 // Signed is the resolver for the signed field.
 func (r *employeeDocumentResolver) Signed(ctx context.Context, obj *types.EmployeeDocument) (*bool, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionEmployeeDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionEmployeeDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
 	identity := authn.IdentityFromContext(ctx)
 
-	signed, err := r.probo.Documents.IsSigned(ctx, scope, obj.ID, identity.EmailAddress)
+	signed, err := r.trustready.Documents.IsSigned(ctx, scope, obj.ID, identity.EmailAddress)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -757,14 +757,14 @@ func (r *employeeDocumentResolver) Signed(ctx context.Context, obj *types.Employ
 
 // ApprovalState is the resolver for the approvalState field.
 func (r *employeeDocumentResolver) ApprovalState(ctx context.Context, obj *types.EmployeeDocument) (*coredata.DocumentVersionApprovalDecisionState, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionEmployeeDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionEmployeeDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
 	identity := authn.IdentityFromContext(ctx)
 
-	state, err := r.probo.Documents.GetViewerApprovalState(ctx, scope, obj.ID, identity.ID)
+	state, err := r.trustready.Documents.GetViewerApprovalState(ctx, scope, obj.ID, identity.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -780,7 +780,7 @@ func (r *employeeDocumentResolver) ApprovalState(ctx context.Context, obj *types
 
 // Versions is the resolver for the versions field.
 func (r *employeeDocumentResolver) Versions(ctx context.Context, obj *types.EmployeeDocument, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.DocumentVersionOrderBy) (*types.EmployeeDocumentVersionConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionEmployeeDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionEmployeeDocumentGet)
 	if err != nil {
 		return nil, err
 	}
@@ -824,7 +824,7 @@ func (r *employeeDocumentResolver) Versions(ctx context.Context, obj *types.Empl
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	versionsPage, err := r.probo.Documents.ListVersions(ctx, scope, obj.ID, cursor, versionFilter)
+	versionsPage, err := r.trustready.Documents.ListVersions(ctx, scope, obj.ID, cursor, versionFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list employee document versions", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -858,12 +858,12 @@ func (r *employeeDocumentResolver) Versions(ctx context.Context, obj *types.Empl
 
 // TotalCount is the resolver for the totalCount field.
 func (r *employeeDocumentConnectionResolver) TotalCount(ctx context.Context, obj *types.EmployeeDocumentConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionEmployeeDocumentList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionEmployeeDocumentList)
 	if err != nil {
 		return 0, err
 	}
 
-	count, err := r.probo.Documents.CountForOrganizationID(ctx, scope, obj.ParentID, obj.Filters)
+	count, err := r.trustready.Documents.CountForOrganizationID(ctx, scope, obj.ParentID, obj.Filters)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot count employee documents", log.Error(err))
 		return 0, gqlutils.Internal(ctx)
@@ -874,14 +874,14 @@ func (r *employeeDocumentConnectionResolver) TotalCount(ctx context.Context, obj
 
 // Signed is the resolver for the signed field.
 func (r *employeeDocumentVersionResolver) Signed(ctx context.Context, obj *types.EmployeeDocumentVersion) (bool, error) {
-	scope, err := r.authorize(ctx, obj.DocumentID, probo.ActionEmployeeDocumentGet)
+	scope, err := r.authorize(ctx, obj.DocumentID, trustready.ActionEmployeeDocumentGet)
 	if err != nil {
 		return false, err
 	}
 
 	identity := authn.IdentityFromContext(ctx)
 
-	signed, err := r.probo.Documents.IsVersionSignedByUserEmail(ctx, scope, obj.ID, identity.EmailAddress)
+	signed, err := r.trustready.Documents.IsVersionSignedByUserEmail(ctx, scope, obj.ID, identity.EmailAddress)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot check if version is signed", log.Error(err))
 		return false, gqlutils.Internal(ctx)
@@ -892,19 +892,19 @@ func (r *employeeDocumentVersionResolver) Signed(ctx context.Context, obj *types
 
 // ConsentText is the resolver for the consentText field.
 func (r *employeeDocumentVersionResolver) ConsentText(ctx context.Context, obj *types.EmployeeDocumentVersion) (string, error) {
-	return probo.DocumentSignatureConsentText, nil
+	return trustready.DocumentSignatureConsentText, nil
 }
 
 // ApprovalDecision is the resolver for the approvalDecision field.
 func (r *employeeDocumentVersionResolver) ApprovalDecision(ctx context.Context, obj *types.EmployeeDocumentVersion) (*types.DocumentVersionApprovalDecision, error) {
-	scope, err := r.authorize(ctx, obj.DocumentID, probo.ActionEmployeeDocumentGet)
+	scope, err := r.authorize(ctx, obj.DocumentID, trustready.ActionEmployeeDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
 	identity := authn.IdentityFromContext(ctx)
 
-	decision, err := r.probo.DocumentApprovals.GetViewerDecision(ctx, scope, obj.ID, identity.ID)
+	decision, err := r.trustready.DocumentApprovals.GetViewerDecision(ctx, scope, obj.ID, identity.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -920,7 +920,7 @@ func (r *employeeDocumentVersionResolver) ApprovalDecision(ctx context.Context, 
 
 // TotalCount is the resolver for the totalCount field.
 func (r *employeeDocumentVersionConnectionResolver) TotalCount(ctx context.Context, obj *types.EmployeeDocumentVersionConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionEmployeeDocumentGet)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionEmployeeDocumentGet)
 	if err != nil {
 		return 0, err
 	}
@@ -930,7 +930,7 @@ func (r *employeeDocumentVersionConnectionResolver) TotalCount(ctx context.Conte
 		filter = obj.Filters
 	}
 
-	count, err := r.probo.Documents.CountVersionsForDocumentID(ctx, scope, obj.ParentID, filter)
+	count, err := r.trustready.Documents.CountVersionsForDocumentID(ctx, scope, obj.ParentID, filter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot count employee document versions", log.Error(err))
 		return 0, gqlutils.Internal(ctx)
@@ -941,7 +941,7 @@ func (r *employeeDocumentVersionConnectionResolver) TotalCount(ctx context.Conte
 
 // CreateDocument is the resolver for the createDocument field.
 func (r *mutationResolver) CreateDocument(ctx context.Context, input types.CreateDocumentInput) (*types.CreateDocumentPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionDocumentCreate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionDocumentCreate)
 	if err != nil {
 		return nil, err
 	}
@@ -951,9 +951,9 @@ func (r *mutationResolver) CreateDocument(ctx context.Context, input types.Creat
 		content = *input.Content
 	}
 
-	document, documentVersion, err := r.probo.Documents.Create(
+	document, documentVersion, err := r.trustready.Documents.Create(
 		ctx, scope,
-		probo.CreateDocumentRequest{
+		trustready.CreateDocumentRequest{
 			OrganizationID:     input.OrganizationID,
 			Title:              input.Title,
 			Content:            content,
@@ -984,7 +984,7 @@ func (r *mutationResolver) CreateDocument(ctx context.Context, input types.Creat
 
 // UpdateDocument is the resolver for the updateDocument field.
 func (r *mutationResolver) UpdateDocument(ctx context.Context, input types.UpdateDocumentInput) (*types.UpdateDocumentPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionDocumentUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionDocumentUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -994,9 +994,9 @@ func (r *mutationResolver) UpdateDocument(ctx context.Context, input types.Updat
 		defaultApproverIDs = &input.DefaultApproverIds
 	}
 
-	document, documentVersion, draftCreated, err := r.probo.Documents.Update(
+	document, documentVersion, draftCreated, err := r.trustready.Documents.Update(
 		ctx, scope,
-		probo.UpdateDocumentRequest{
+		trustready.UpdateDocumentRequest{
 			DocumentID:         input.ID,
 			Title:              input.Title,
 			Content:            input.Content,
@@ -1010,11 +1010,11 @@ func (r *mutationResolver) UpdateDocument(ctx context.Context, input types.Updat
 			return nil, gqlutils.NotFound(ctx, err)
 		}
 
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
-		if errGenerated, ok := errors.AsType[*probo.ErrDocumentVersionGenerated](err); ok {
+		if errGenerated, ok := errors.AsType[*trustready.ErrDocumentVersionGenerated](err); ok {
 			return nil, gqlutils.Conflict(ctx, errGenerated)
 		}
 
@@ -1047,22 +1047,22 @@ func (r *mutationResolver) UpdateDocument(ctx context.Context, input types.Updat
 
 // DeleteDocumentDraft is the resolver for the deleteDocumentDraft field.
 func (r *mutationResolver) DeleteDocumentDraft(ctx context.Context, input types.DeleteDocumentDraftInput) (*types.DeleteDocumentDraftPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentID, probo.ActionDocumentDeleteDraft)
+	scope, err := r.authorize(ctx, input.DocumentID, trustready.ActionDocumentDeleteDraft)
 	if err != nil {
 		return nil, err
 	}
 
-	document, err := r.probo.Documents.DeleteDraft(ctx, scope, input.DocumentID)
+	document, err := r.trustready.Documents.DeleteDraft(ctx, scope, input.DocumentID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
 		}
 
-		if errNotDeletable, ok := errors.AsType[*probo.ErrDocumentDraftNotDeletable](err); ok {
+		if errNotDeletable, ok := errors.AsType[*trustready.ErrDocumentDraftNotDeletable](err); ok {
 			return nil, gqlutils.Conflict(ctx, errNotDeletable)
 		}
 
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
@@ -1078,14 +1078,14 @@ func (r *mutationResolver) DeleteDocumentDraft(ctx context.Context, input types.
 
 // ArchiveDocument is the resolver for the archiveDocument field.
 func (r *mutationResolver) ArchiveDocument(ctx context.Context, input types.ArchiveDocumentInput) (*types.ArchiveDocumentPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentID, probo.ActionDocumentArchive)
+	scope, err := r.authorize(ctx, input.DocumentID, trustready.ActionDocumentArchive)
 	if err != nil {
 		return nil, err
 	}
 
-	document, err := r.probo.Documents.Archive(ctx, scope, input.DocumentID)
+	document, err := r.trustready.Documents.Archive(ctx, scope, input.DocumentID)
 	if err != nil {
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
@@ -1101,14 +1101,14 @@ func (r *mutationResolver) ArchiveDocument(ctx context.Context, input types.Arch
 
 // UnarchiveDocument is the resolver for the unarchiveDocument field.
 func (r *mutationResolver) UnarchiveDocument(ctx context.Context, input types.UnarchiveDocumentInput) (*types.UnarchiveDocumentPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentID, probo.ActionDocumentUnarchive)
+	scope, err := r.authorize(ctx, input.DocumentID, trustready.ActionDocumentUnarchive)
 	if err != nil {
 		return nil, err
 	}
 
-	document, err := r.probo.Documents.Unarchive(ctx, scope, input.DocumentID)
+	document, err := r.trustready.Documents.Unarchive(ctx, scope, input.DocumentID)
 	if err != nil {
-		if errNotArchived, ok := errors.AsType[*probo.ErrDocumentNotArchived](err); ok {
+		if errNotArchived, ok := errors.AsType[*trustready.ErrDocumentNotArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errNotArchived)
 		}
 
@@ -1124,12 +1124,12 @@ func (r *mutationResolver) UnarchiveDocument(ctx context.Context, input types.Un
 
 // DeleteDocument is the resolver for the deleteDocument field.
 func (r *mutationResolver) DeleteDocument(ctx context.Context, input types.DeleteDocumentInput) (*types.DeleteDocumentPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentID, probo.ActionDocumentDelete)
+	scope, err := r.authorize(ctx, input.DocumentID, trustready.ActionDocumentDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.Documents.SoftDelete(ctx, scope, input.DocumentID); err != nil {
+	if err := r.trustready.Documents.SoftDelete(ctx, scope, input.DocumentID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot soft delete document", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -1141,31 +1141,31 @@ func (r *mutationResolver) DeleteDocument(ctx context.Context, input types.Delet
 
 // PublishDocument is the resolver for the publishDocument field.
 func (r *mutationResolver) PublishDocument(ctx context.Context, input types.PublishDocumentInput) (*types.PublishDocumentPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentID, probo.ActionDocumentVersionPublish)
+	scope, err := r.authorize(ctx, input.DocumentID, trustready.ActionDocumentVersionPublish)
 	if err != nil {
 		return nil, err
 	}
 
-	result, err := r.probo.Documents.PublishVersion(ctx, scope, probo.PublishDocumentRequest{
+	result, err := r.trustready.Documents.PublishVersion(ctx, scope, trustready.PublishDocumentRequest{
 		DocumentID:  input.DocumentID,
 		Minor:       input.Minor,
 		ApproverIDs: input.ApproverIds,
 		Changelog:   input.Changelog,
 	})
 	if err != nil {
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
-		if errNotDraft, ok := errors.AsType[*probo.ErrDocumentVersionNotDraft](err); ok {
+		if errNotDraft, ok := errors.AsType[*trustready.ErrDocumentVersionNotDraft](err); ok {
 			return nil, gqlutils.Invalid(ctx, errNotDraft)
 		}
 
-		if errPending, ok := errors.AsType[*probo.ErrDocumentVersionPendingApproval](err); ok {
+		if errPending, ok := errors.AsType[*trustready.ErrDocumentVersionPendingApproval](err); ok {
 			return nil, gqlutils.Conflict(ctx, errPending)
 		}
 
-		if errContractEnded, ok := errors.AsType[*probo.ErrProfileContractEnded](err); ok {
+		if errContractEnded, ok := errors.AsType[*trustready.ErrProfileContractEnded](err); ok {
 			return nil, gqlutils.Conflict(ctx, errContractEnded)
 		}
 
@@ -1200,14 +1200,14 @@ func (r *mutationResolver) BulkPublishDocuments(ctx context.Context, input types
 	}
 
 	for _, documentID := range input.DocumentIds {
-		if _, err := r.authorize(ctx, documentID, probo.ActionDocumentVersionPublish); err != nil {
+		if _, err := r.authorize(ctx, documentID, trustready.ActionDocumentVersionPublish); err != nil {
 			return nil, err
 		}
 	}
 
 	scope := coredata.NewScopeFromObjectID(input.DocumentIds[0])
 
-	versions, documents, err := r.probo.DocumentApprovals.BulkPublishVersions(ctx, scope, probo.BulkPublishVersionsRequest{
+	versions, documents, err := r.trustready.DocumentApprovals.BulkPublishVersions(ctx, scope, trustready.BulkPublishVersionsRequest{
 		DocumentIDs: input.DocumentIds,
 		Minor:       input.Minor,
 		Changelog:   input.Changelog,
@@ -1217,11 +1217,11 @@ func (r *mutationResolver) BulkPublishDocuments(ctx context.Context, input types
 			return nil, gqlutils.NotFound(ctx, err)
 		}
 
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
-		if errNotDraft, ok := errors.AsType[*probo.ErrDocumentVersionNotDraft](err); ok {
+		if errNotDraft, ok := errors.AsType[*trustready.ErrDocumentVersionNotDraft](err); ok {
 			return nil, gqlutils.Invalid(ctx, errNotDraft)
 		}
 
@@ -1248,22 +1248,22 @@ func (r *mutationResolver) BulkPublishDocuments(ctx context.Context, input types
 
 // VoidDocumentVersionApproval is the resolver for the voidDocumentVersionApproval field.
 func (r *mutationResolver) VoidDocumentVersionApproval(ctx context.Context, input types.VoidDocumentVersionApprovalInput) (*types.VoidDocumentVersionApprovalPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentVersionID, probo.ActionDocumentVersionVoidApproval)
+	scope, err := r.authorize(ctx, input.DocumentVersionID, trustready.ActionDocumentVersionVoidApproval)
 	if err != nil {
 		return nil, err
 	}
 
-	quorum, documentVersion, err := r.probo.DocumentApprovals.VoidApproval(ctx, scope, input.DocumentVersionID)
+	quorum, documentVersion, err := r.trustready.DocumentApprovals.VoidApproval(ctx, scope, input.DocumentVersionID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
 		}
 
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
-		if errNotPending, ok := errors.AsType[*probo.ErrDocumentVersionNotPendingApproval](err); ok {
+		if errNotPending, ok := errors.AsType[*trustready.ErrDocumentVersionNotPendingApproval](err); ok {
 			return nil, gqlutils.Conflict(ctx, errNotPending)
 		}
 
@@ -1287,13 +1287,13 @@ func (r *mutationResolver) BulkDeleteDocuments(ctx context.Context, input types.
 	}
 
 	for _, documentID := range input.DocumentIds {
-		if _, err := r.authorize(ctx, documentID, probo.ActionDocumentDelete); err != nil {
+		if _, err := r.authorize(ctx, documentID, trustready.ActionDocumentDelete); err != nil {
 			return nil, err
 		}
 	}
 
 	scope := coredata.NewScopeFromObjectID(input.DocumentIds[0])
-	if err := r.probo.Documents.BulkSoftDelete(ctx, scope, input.DocumentIds); err != nil {
+	if err := r.trustready.Documents.BulkSoftDelete(ctx, scope, input.DocumentIds); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot bulk delete documents", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -1312,13 +1312,13 @@ func (r *mutationResolver) BulkArchiveDocuments(ctx context.Context, input types
 	}
 
 	for _, documentID := range input.DocumentIds {
-		if _, err := r.authorize(ctx, documentID, probo.ActionDocumentArchive); err != nil {
+		if _, err := r.authorize(ctx, documentID, trustready.ActionDocumentArchive); err != nil {
 			return nil, err
 		}
 	}
 
 	scope := coredata.NewScopeFromObjectID(input.DocumentIds[0])
-	if err := r.probo.Documents.BulkArchive(ctx, scope, input.DocumentIds); err != nil {
+	if err := r.trustready.Documents.BulkArchive(ctx, scope, input.DocumentIds); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot bulk archive documents", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -1337,13 +1337,13 @@ func (r *mutationResolver) BulkUnarchiveDocuments(ctx context.Context, input typ
 	}
 
 	for _, documentID := range input.DocumentIds {
-		if _, err := r.authorize(ctx, documentID, probo.ActionDocumentUnarchive); err != nil {
+		if _, err := r.authorize(ctx, documentID, trustready.ActionDocumentUnarchive); err != nil {
 			return nil, err
 		}
 	}
 
 	scope := coredata.NewScopeFromObjectID(input.DocumentIds[0])
-	if err := r.probo.Documents.BulkUnarchive(ctx, scope, input.DocumentIds); err != nil {
+	if err := r.trustready.Documents.BulkUnarchive(ctx, scope, input.DocumentIds); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot bulk unarchive documents", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -1362,7 +1362,7 @@ func (r *mutationResolver) BulkExportDocuments(ctx context.Context, input types.
 
 	// TODO have a way to batch authorize for resources
 	for _, documentID := range input.DocumentIds {
-		if _, err := r.authorize(ctx, documentID, probo.ActionDocumentVersionExport); err != nil {
+		if _, err := r.authorize(ctx, documentID, trustready.ActionDocumentVersionExport); err != nil {
 			return nil, err
 		}
 	}
@@ -1385,13 +1385,13 @@ func (r *mutationResolver) BulkExportDocuments(ctx context.Context, input types.
 		}
 	}
 
-	options := probo.ExportPDFOptions{
+	options := trustready.ExportPDFOptions{
 		WithWatermark:  input.WithWatermark,
 		WithSignatures: input.WithSignatures,
 		WatermarkText:  watermarkText,
 	}
 
-	documentExport, exportErr := r.probo.Documents.RequestExport(ctx, scope, input.DocumentIds, identity.EmailAddress, identity.FullName, options)
+	documentExport, exportErr := r.trustready.Documents.RequestExport(ctx, scope, input.DocumentIds, identity.EmailAddress, identity.FullName, options)
 	if exportErr != nil {
 		r.logger.ErrorCtx(ctx, "cannot request document export", log.Error(exportErr))
 		return nil, gqlutils.Internal(ctx)
@@ -1404,14 +1404,14 @@ func (r *mutationResolver) BulkExportDocuments(ctx context.Context, input types.
 
 // RequestSignature is the resolver for the requestSignature field.
 func (r *mutationResolver) RequestSignature(ctx context.Context, input types.RequestSignatureInput) (*types.RequestSignaturePayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentVersionID, probo.ActionDocumentVersionSignatureRequest)
+	scope, err := r.authorize(ctx, input.DocumentVersionID, trustready.ActionDocumentVersionSignatureRequest)
 	if err != nil {
 		return nil, err
 	}
 
-	documentVersionSignature, err := r.probo.Documents.RequestSignature(
+	documentVersionSignature, err := r.trustready.Documents.RequestSignature(
 		ctx, scope,
-		probo.RequestSignatureRequest{
+		trustready.RequestSignatureRequest{
 			DocumentVersionID: input.DocumentVersionID,
 			Signatory:         input.SignatoryID,
 		},
@@ -1421,19 +1421,19 @@ func (r *mutationResolver) RequestSignature(ctx context.Context, input types.Req
 			return nil, gqlutils.NotFound(ctx, err)
 		}
 
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
-		if errNotPublished, ok := errors.AsType[*probo.ErrDocumentVersionNotPublished](err); ok {
+		if errNotPublished, ok := errors.AsType[*trustready.ErrDocumentVersionNotPublished](err); ok {
 			return nil, gqlutils.Conflict(ctx, errNotPublished)
 		}
 
-		if errNotCurrent, ok := errors.AsType[*probo.ErrDocumentVersionNotCurrent](err); ok {
+		if errNotCurrent, ok := errors.AsType[*trustready.ErrDocumentVersionNotCurrent](err); ok {
 			return nil, gqlutils.Conflict(ctx, errNotCurrent)
 		}
 
-		if errContractEnded, ok := errors.AsType[*probo.ErrProfileContractEnded](err); ok {
+		if errContractEnded, ok := errors.AsType[*trustready.ErrProfileContractEnded](err); ok {
 			return nil, gqlutils.Conflict(ctx, errContractEnded)
 		}
 
@@ -1456,16 +1456,16 @@ func (r *mutationResolver) BulkRequestSignatures(ctx context.Context, input type
 	}
 
 	for _, documentID := range input.DocumentIds {
-		if _, err := r.authorize(ctx, documentID, probo.ActionDocumentVersionSignatureRequest); err != nil {
+		if _, err := r.authorize(ctx, documentID, trustready.ActionDocumentVersionSignatureRequest); err != nil {
 			return nil, err
 		}
 	}
 
 	scope := coredata.NewScopeFromObjectID(input.DocumentIds[0])
 
-	documentVersionSignatures, err := r.probo.Documents.BulkRequestSignatures(
+	documentVersionSignatures, err := r.trustready.Documents.BulkRequestSignatures(
 		ctx, scope,
-		probo.BulkRequestSignaturesRequest{
+		trustready.BulkRequestSignaturesRequest{
 			DocumentIDs:  input.DocumentIds,
 			SignatoryIDs: input.SignatoryIds,
 		},
@@ -1475,11 +1475,11 @@ func (r *mutationResolver) BulkRequestSignatures(ctx context.Context, input type
 			return nil, gqlutils.NotFound(ctx, err)
 		}
 
-		if errNotPublished, ok := errors.AsType[*probo.ErrDocumentVersionNotPublished](err); ok {
+		if errNotPublished, ok := errors.AsType[*trustready.ErrDocumentVersionNotPublished](err); ok {
 			return nil, gqlutils.Conflict(ctx, errNotPublished)
 		}
 
-		if errContractEnded, ok := errors.AsType[*probo.ErrProfileContractEnded](err); ok {
+		if errContractEnded, ok := errors.AsType[*trustready.ErrProfileContractEnded](err); ok {
 			return nil, gqlutils.Conflict(ctx, errContractEnded)
 		}
 
@@ -1495,13 +1495,13 @@ func (r *mutationResolver) BulkRequestSignatures(ctx context.Context, input type
 
 // CancelSignatureRequest is the resolver for the cancelSignatureRequest field.
 func (r *mutationResolver) CancelSignatureRequest(ctx context.Context, input types.CancelSignatureRequestInput) (*types.CancelSignatureRequestPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentVersionSignatureID, probo.ActionDocumentVersionCancelSignature)
+	scope, err := r.authorize(ctx, input.DocumentVersionSignatureID, trustready.ActionDocumentVersionCancelSignature)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.Documents.CancelSignatureRequest(ctx, scope, input.DocumentVersionSignatureID); err != nil {
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+	if err := r.trustready.Documents.CancelSignatureRequest(ctx, scope, input.DocumentVersionSignatureID); err != nil {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
@@ -1517,7 +1517,7 @@ func (r *mutationResolver) CancelSignatureRequest(ctx context.Context, input typ
 
 // SignDocument is the resolver for the signDocument field.
 func (r *mutationResolver) SignDocument(ctx context.Context, input types.SignDocumentInput) (*types.SignDocumentPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentVersionID, probo.ActionDocumentVersionSign)
+	scope, err := r.authorize(ctx, input.DocumentVersionID, trustready.ActionDocumentVersionSign)
 	if err != nil {
 		return nil, err
 	}
@@ -1527,10 +1527,10 @@ func (r *mutationResolver) SignDocument(ctx context.Context, input types.SignDoc
 
 	signerIP := clientip.Extract(httpReq)
 
-	documentVersionSignature, err := r.probo.Documents.SignDocumentVersionByIdentity(
+	documentVersionSignature, err := r.trustready.Documents.SignDocumentVersionByIdentity(
 		ctx,
 		scope,
-		probo.SignDocumentVersionRequest{
+		trustready.SignDocumentVersionRequest{
 			DocumentVersionID: input.DocumentVersionID,
 			IdentityID:        identity.ID,
 			SignerFullName:    identity.FullName,
@@ -1540,15 +1540,15 @@ func (r *mutationResolver) SignDocument(ctx context.Context, input types.SignDoc
 		},
 	)
 	if err != nil {
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
-		if errNotPublished, ok := errors.AsType[*probo.ErrDocumentVersionNotPublished](err); ok {
+		if errNotPublished, ok := errors.AsType[*trustready.ErrDocumentVersionNotPublished](err); ok {
 			return nil, gqlutils.Invalid(ctx, errNotPublished)
 		}
 
-		if errAlreadySigned, ok := errors.AsType[*probo.ErrDocumentVersionSignatureAlreadySigned](err); ok {
+		if errAlreadySigned, ok := errors.AsType[*trustready.ErrDocumentVersionSignatureAlreadySigned](err); ok {
 			return nil, gqlutils.Conflict(ctx, errAlreadySigned)
 		}
 
@@ -1568,7 +1568,7 @@ func (r *mutationResolver) SignDocument(ctx context.Context, input types.SignDoc
 
 // ApproveDocumentVersion is the resolver for the approveDocumentVersion field.
 func (r *mutationResolver) ApproveDocumentVersion(ctx context.Context, input types.ApproveDocumentVersionInput) (*types.ApproveDocumentVersionPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentVersionID, probo.ActionDocumentVersionApprove)
+	scope, err := r.authorize(ctx, input.DocumentVersionID, trustready.ActionDocumentVersionApprove)
 	if err != nil {
 		return nil, err
 	}
@@ -1578,7 +1578,7 @@ func (r *mutationResolver) ApproveDocumentVersion(ctx context.Context, input typ
 
 	signerIP := clientip.Extract(httpReq)
 
-	decision, err := r.probo.DocumentApprovals.Approve(ctx, scope, probo.ApproveDocumentVersionRequest{
+	decision, err := r.trustready.DocumentApprovals.Approve(ctx, scope, trustready.ApproveDocumentVersionRequest{
 		DocumentVersionID: input.DocumentVersionID,
 		IdentityID:        identity.ID,
 		Comment:           input.Comment,
@@ -1588,15 +1588,15 @@ func (r *mutationResolver) ApproveDocumentVersion(ctx context.Context, input typ
 		SignerUA:          httpReq.UserAgent(),
 	})
 	if err != nil {
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
-		if errNotPending, ok := errors.AsType[*probo.ErrDocumentVersionNotPendingApproval](err); ok {
+		if errNotPending, ok := errors.AsType[*trustready.ErrDocumentVersionNotPendingApproval](err); ok {
 			return nil, gqlutils.Invalid(ctx, errNotPending)
 		}
 
-		if errAlready, ok := errors.AsType[*probo.ErrApprovalDecisionAlreadyMade](err); ok {
+		if errAlready, ok := errors.AsType[*trustready.ErrApprovalDecisionAlreadyMade](err); ok {
 			return nil, gqlutils.Conflict(ctx, errAlready)
 		}
 
@@ -1616,28 +1616,28 @@ func (r *mutationResolver) ApproveDocumentVersion(ctx context.Context, input typ
 
 // RejectDocumentVersion is the resolver for the rejectDocumentVersion field.
 func (r *mutationResolver) RejectDocumentVersion(ctx context.Context, input types.RejectDocumentVersionInput) (*types.RejectDocumentVersionPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentVersionID, probo.ActionDocumentVersionReject)
+	scope, err := r.authorize(ctx, input.DocumentVersionID, trustready.ActionDocumentVersionReject)
 	if err != nil {
 		return nil, err
 	}
 
 	identity := authn.IdentityFromContext(ctx)
 
-	decision, err := r.probo.DocumentApprovals.Reject(ctx, scope, probo.RejectDocumentVersionRequest{
+	decision, err := r.trustready.DocumentApprovals.Reject(ctx, scope, trustready.RejectDocumentVersionRequest{
 		DocumentVersionID: input.DocumentVersionID,
 		IdentityID:        identity.ID,
 		Comment:           input.Comment,
 	})
 	if err != nil {
-		if errArchived, ok := errors.AsType[*probo.ErrDocumentArchived](err); ok {
+		if errArchived, ok := errors.AsType[*trustready.ErrDocumentArchived](err); ok {
 			return nil, gqlutils.Conflict(ctx, errArchived)
 		}
 
-		if errNotPending, ok := errors.AsType[*probo.ErrDocumentVersionNotPendingApproval](err); ok {
+		if errNotPending, ok := errors.AsType[*trustready.ErrDocumentVersionNotPendingApproval](err); ok {
 			return nil, gqlutils.Invalid(ctx, errNotPending)
 		}
 
-		if errAlready, ok := errors.AsType[*probo.ErrApprovalDecisionAlreadyMade](err); ok {
+		if errAlready, ok := errors.AsType[*trustready.ErrApprovalDecisionAlreadyMade](err); ok {
 			return nil, gqlutils.Conflict(ctx, errAlready)
 		}
 
@@ -1657,7 +1657,7 @@ func (r *mutationResolver) RejectDocumentVersion(ctx context.Context, input type
 
 // ExportDocumentVersionPDF is the resolver for the exportDocumentVersionPDF field.
 func (r *mutationResolver) ExportDocumentVersionPDF(ctx context.Context, input types.ExportDocumentVersionPDFInput) (*types.ExportDocumentVersionPDFPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentVersionID, probo.ActionDocumentVersionExportPDF)
+	scope, err := r.authorize(ctx, input.DocumentVersionID, trustready.ActionDocumentVersionExportPDF)
 	if err != nil {
 		return nil, err
 	}
@@ -1678,13 +1678,13 @@ func (r *mutationResolver) ExportDocumentVersionPDF(ctx context.Context, input t
 		}
 	}
 
-	options := probo.ExportPDFOptions{
+	options := trustready.ExportPDFOptions{
 		WithSignatures: input.WithSignatures,
 		WithWatermark:  input.WithWatermark,
 		WatermarkText:  watermarkText,
 	}
 
-	pdf, err := r.probo.Documents.ExportPDF(ctx, scope, input.DocumentVersionID, options)
+	pdf, err := r.trustready.Documents.ExportPDF(ctx, scope, input.DocumentVersionID, options)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot export document version PDF", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1697,12 +1697,12 @@ func (r *mutationResolver) ExportDocumentVersionPDF(ctx context.Context, input t
 
 // ExportEmployeeDocumentVersionPDF is the resolver for the exportEmployeeDocumentVersionPDF field.
 func (r *mutationResolver) ExportEmployeeDocumentVersionPDF(ctx context.Context, input types.ExportEmployeeDocumentVersionPDFInput) (*types.ExportEmployeeDocumentVersionPDFPayload, error) {
-	scope, err := r.authorize(ctx, input.DocumentVersionID, probo.ActionEmployeeDocumentVersionExportPDF)
+	scope, err := r.authorize(ctx, input.DocumentVersionID, trustready.ActionEmployeeDocumentVersionExportPDF)
 	if err != nil {
 		return nil, err
 	}
 
-	documentVersion, err := r.probo.Documents.GetVersion(ctx, scope, input.DocumentVersionID)
+	documentVersion, err := r.trustready.Documents.GetVersion(ctx, scope, input.DocumentVersionID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get document version", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1715,7 +1715,7 @@ func (r *mutationResolver) ExportEmployeeDocumentVersionPDF(ctx context.Context,
 		coredata.EmployeeFilterModeApproval,
 	)
 
-	_, err = r.probo.Documents.GetWithFilter(ctx, scope, documentVersion.DocumentID, documentFilter)
+	_, err = r.trustready.Documents.GetWithFilter(ctx, scope, documentVersion.DocumentID, documentFilter)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -1726,13 +1726,13 @@ func (r *mutationResolver) ExportEmployeeDocumentVersionPDF(ctx context.Context,
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	options := probo.ExportPDFOptions{
+	options := trustready.ExportPDFOptions{
 		WithSignatures: false,
 		WithWatermark:  true,
 		WatermarkText:  new(pdfutils.TruncateWatermarkText(identity.EmailAddress.String())),
 	}
 
-	pdf, err := r.probo.Documents.ExportPDF(ctx, scope, input.DocumentVersionID, options)
+	pdf, err := r.trustready.Documents.ExportPDF(ctx, scope, input.DocumentVersionID, options)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot export employee document PDF", log.Error(err))
 		return nil, gqlutils.Internal(ctx)

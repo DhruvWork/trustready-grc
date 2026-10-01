@@ -1,6 +1,6 @@
 {
   "name": "trustready-grc",
-  "description": "Probo monorepo containing applications and shared packages",
+  "description": "TrustReady monorepo containing applications and shared packages",
   "engines": {
     "node": "^24.15.0",
     "npm": "^12.0.2"
@@ -14,7 +14,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "eslint . --concurrency auto && npm -w @trustready/n8n-nodes-probo run lint",
+    "lint": "eslint . --concurrency auto && npm -w @trustready/n8n-nodes-trustready run lint",
     "check": "turbo run check",
     "relay": "relay-compiler"
   },

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -427,7 +427,7 @@ func (s *Service) LinkToLinear(
 		return nil, fmt.Errorf("cannot build task URL: %w", err)
 	}
 
-	attachmentID, err := account.client.LinkAttachment(ctx, issue.ID, taskURL, "Probo task")
+	attachmentID, err := account.client.LinkAttachment(ctx, issue.ID, taskURL, "TrustReady task")
 	if err != nil {
 		s.deletePendingLinearLink(ctx, scope, taskID, issue.ID)
 
@@ -609,7 +609,7 @@ func (s *Service) claimLinearLink(
 		Provider:       coredata.ConnectorProviderLinearSync,
 		ExternalID:     linearPublishPendingExternalID(task.ID),
 		Destination:    destination,
-		Origin:         coredata.TaskExternalLinkOriginProbo,
+		Origin:         coredata.TaskExternalLinkOriginTrustReady,
 		Metadata:       json.RawMessage(`{}`),
 		CreatedAt:      now,
 		UpdatedAt:      now,
@@ -734,7 +734,7 @@ func (s *Service) finishLinearLink(
 		ExternalIdentifier: issue.Identifier,
 		ExternalURL:        issue.URL,
 		Destination:        destination,
-		Origin:             coredata.TaskExternalLinkOriginProbo,
+		Origin:             coredata.TaskExternalLinkOriginTrustReady,
 		RemoteUpdatedAt:    &issue.UpdatedAt,
 		Metadata:           metadata,
 		CreatedAt:          now,
@@ -1052,7 +1052,7 @@ func (s *Service) finishLinearPublish(
 		return nil, fmt.Errorf("cannot build task URL: %w", err)
 	}
 
-	attachmentID, err := client.LinkAttachment(ctx, issue.ID, taskURL, "Probo task")
+	attachmentID, err := client.LinkAttachment(ctx, issue.ID, taskURL, "TrustReady task")
 	if err != nil {
 		return nil, fmt.Errorf("cannot link Linear attachment: %w", err)
 	}
@@ -1080,7 +1080,7 @@ func (s *Service) finishLinearPublish(
 		ExternalIdentifier: issue.Identifier,
 		ExternalURL:        issue.URL,
 		Destination:        destination,
-		Origin:             coredata.TaskExternalLinkOriginProbo,
+		Origin:             coredata.TaskExternalLinkOriginTrustReady,
 		RemoteUpdatedAt:    &issue.UpdatedAt,
 		ContentHash:        &hash,
 		Metadata:           metadata,

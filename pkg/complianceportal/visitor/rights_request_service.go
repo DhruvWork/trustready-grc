@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
 	"github.com/DhruvWork/trustready-grc/pkg/webhook"
 	webhooktypes "github.com/DhruvWork/trustready-grc/pkg/webhook/types"
@@ -63,8 +63,8 @@ func (r *CreateRightsRequest) Validate() error {
 		validator.Required(),
 		validator.GID(coredata.CompliancePortalEntityType),
 	)
-	v.Check(r.DataSubject, "data_subject", validator.SafeText(probo.ContentMaxLength))
-	v.Check(r.Details, "details", validator.SafeText(probo.ContentMaxLength))
+	v.Check(r.DataSubject, "data_subject", validator.SafeText(trustready.ContentMaxLength))
+	v.Check(r.Details, "details", validator.SafeText(trustready.ContentMaxLength))
 
 	return v.Error()
 }

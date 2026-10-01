@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,10 +35,10 @@ func TestProbeEnrollmentTrust_NoNetwork(t *testing.T) {
 		want  EnrollmentTrust
 	}{
 		{name: "non-loopback http", input: "http://evil.example", want: TrustInsecure},
-		{name: "http Probo host", input: "http://us.probo.com", want: TrustInsecure},
+		{name: "http TrustReady host", input: "http://us.trustready.io", want: TrustInsecure},
 		{name: "loopback http", input: "http://localhost:3000", want: TrustUnknown},
 		{name: "loopback ipv4 http", input: "http://127.0.0.1:3000", want: TrustUnknown},
-		{name: "https self-hosted", input: "https://probo.example.com", want: TrustUnverified},
+		{name: "https self-hosted", input: "https://trustready.example.com", want: TrustUnverified},
 		{name: "empty", input: "", want: TrustUnknown},
 	}
 

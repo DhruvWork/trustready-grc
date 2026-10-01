@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -125,7 +125,7 @@ func TestAzureGraphResponseError_OmitsBody(t *testing.T) {
 	resp := &http.Response{
 		StatusCode: http.StatusForbidden,
 		Body: io.NopCloser(
-			strings.NewReader(`{"error":{"code":"Authorization_RequestDenied","message":"alice@probo-azure.test"}}`),
+			strings.NewReader(`{"error":{"code":"Authorization_RequestDenied","message":"alice@trustready-azure.test"}}`),
 		),
 	}
 
@@ -136,7 +136,7 @@ func TestAzureGraphResponseError_OmitsBody(t *testing.T) {
 	require.True(t, ok)
 	assert.Equal(t, http.StatusForbidden, apiErr.StatusCode)
 	assert.Equal(t, "Authorization_RequestDenied", apiErr.ErrorCode)
-	assert.NotContains(t, err.Error(), "alice@probo-azure.test")
+	assert.NotContains(t, err.Error(), "alice@trustready-azure.test")
 }
 
 func TestResolveAzurePrincipals_IgnoresGUIDCasing(t *testing.T) {
@@ -154,7 +154,7 @@ func TestResolveAzurePrincipals_IgnoresGUIDCasing(t *testing.T) {
 							Header:     http.Header{"Content-Type": []string{"application/json"}},
 							Body: io.NopCloser(
 								strings.NewReader(
-									`{"value":[{"id":"AAAAAAAA-AAAA-4AAA-8AAA-AAAAAAAAAAAA","displayName":"Alice Chen","mail":"alice@probo-azure.test","accountEnabled":true}]}`,
+									`{"value":[{"id":"AAAAAAAA-AAAA-4AAA-8AAA-AAAAAAAAAAAA","displayName":"Alice Chen","mail":"alice@trustready-azure.test","accountEnabled":true}]}`,
 								),
 							),
 						}, nil
@@ -174,7 +174,7 @@ func TestResolveAzurePrincipals_IgnoresGUIDCasing(t *testing.T) {
 	err := resolveAzurePrincipals(context.Background(), session, identities)
 	require.NoError(t, err)
 	assert.Equal(t, "Alice Chen", identities[0].DisplayName)
-	assert.Equal(t, "alice@probo-azure.test", identities[0].Email)
+	assert.Equal(t, "alice@trustready-azure.test", identities[0].Email)
 	require.NotNil(t, identities[0].AccountEnabled)
 	assert.True(t, *identities[0].AccountEnabled)
 }
@@ -206,10 +206,10 @@ func TestAzureGraphLicenceError(t *testing.T) {
 func TestAzureEmail(t *testing.T) {
 	t.Parallel()
 
-	assert.Equal(t, "alice@probo-azure.test", azureEmail(azurePrincipalUser, "alice@probo-azure.test", "upn@probo-azure.test"))
-	assert.Equal(t, "upn@probo-azure.test", azureEmail(azurePrincipalUser, "", "upn@probo-azure.test"))
-	assert.Equal(t, "eng@probo-azure.test", azureEmail(azurePrincipalGroup, "eng@probo-azure.test", ""))
-	assert.Empty(t, azureEmail(azurePrincipalServicePrincipal, "sp@probo-azure.test", ""))
+	assert.Equal(t, "alice@trustready-azure.test", azureEmail(azurePrincipalUser, "alice@trustready-azure.test", "upn@trustready-azure.test"))
+	assert.Equal(t, "upn@trustready-azure.test", azureEmail(azurePrincipalUser, "", "upn@trustready-azure.test"))
+	assert.Equal(t, "eng@trustready-azure.test", azureEmail(azurePrincipalGroup, "eng@trustready-azure.test", ""))
+	assert.Empty(t, azureEmail(azurePrincipalServicePrincipal, "sp@trustready-azure.test", ""))
 }
 
 func TestGetAzureDirectoryObjectBatch_FollowsGetByIdsNextLink(t *testing.T) {

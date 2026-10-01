@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -197,12 +197,12 @@ func (e *ProbeError) Unwrap() error {
 }
 
 // IsProviderVerdict reports whether err is the provider's answer rather than a
-// failure on Probo's side. Only a rejected credential, a refused setting, a
+// failure on TrustReady's side. Only a rejected credential, a refused setting, a
 // host that answered with a page instead of its API, a transport failure that
 // reached the provider, and a refused token refresh qualify. Everything else a
 // probe can return (settings that will not decode, a request that could not be
 // built, a registry misconfiguration) is ours, so the default is to treat a
-// failure as Probo's and report it in full.
+// failure as TrustReady's and report it in full.
 //
 // Walks the error chain, so a typed nil in it would panic. No caller can build
 // one, and guarding it cost more than it saved.
@@ -284,7 +284,7 @@ func IsProbeOperationRefused(err error) bool {
 }
 
 // ProbeFailureCode reduces a probe failure to a token safe to log. Probe
-// errors wrap text Probo does not control (an OAuth error_description, a
+// errors wrap text TrustReady does not control (an OAuth error_description, a
 // response body, a customer's self-hosted host), so anything unrecognised
 // degrades to its Go type rather than being quoted. Walks the chain on the
 // same terms as IsProviderVerdict.

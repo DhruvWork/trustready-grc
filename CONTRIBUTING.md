@@ -57,8 +57,8 @@ Signed-off-by: John Doe <john.doe@example.org>
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/getprobo/probo.git
-   cd probo
+   git clone https://github.com/getprobo/trustready.git
+   cd trustready
    ```
 
 2. Install Go dependencies:

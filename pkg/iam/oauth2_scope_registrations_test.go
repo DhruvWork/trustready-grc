@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2scope"
 	"github.com/DhruvWork/trustready-grc/pkg/itam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
 	"github.com/DhruvWork/trustready-grc/pkg/task"
 )
@@ -38,7 +38,7 @@ import (
 func allRegisteredOAuth2ScopeRegistries() *oauth2scope.Registry {
 	return oauth2scope.NewRegistry().
 		Register(iam.IAMOAuth2ScopeMappings).
-		Register(probo.OAuth2ScopeMappings).
+		Register(trustready.OAuth2ScopeMappings).
 		Register(accessreview.OAuth2ScopeMappings).
 		Register(agentexecution.OAuth2ScopeMappings).
 		Register(itam.OAuth2ScopeMappings).
@@ -50,11 +50,11 @@ func TestRegisteredOAuth2ScopeRegistries_OrganizationRead(t *testing.T) {
 	t.Parallel()
 
 	reg := allRegisteredOAuth2ScopeRegistries()
-	tokenScopes := coredata.OAuth2Scopes{probo.ScopeV1OrgRead}
+	tokenScopes := coredata.OAuth2Scopes{trustready.ScopeV1OrgRead}
 
-	assert.True(t, reg.Allows(tokenScopes, probo.ActionOrganizationGet))
-	assert.False(t, reg.Allows(tokenScopes, probo.ActionOrganizationUpdate))
-	assert.False(t, reg.Allows(tokenScopes, probo.ActionThirdPartyList))
+	assert.True(t, reg.Allows(tokenScopes, trustready.ActionOrganizationGet))
+	assert.False(t, reg.Allows(tokenScopes, trustready.ActionOrganizationUpdate))
+	assert.False(t, reg.Allows(tokenScopes, trustready.ActionThirdPartyList))
 }
 
 func TestRegisteredOAuth2ScopeRegistries_UnmappedActionDenies(t *testing.T) {
@@ -62,8 +62,8 @@ func TestRegisteredOAuth2ScopeRegistries_UnmappedActionDenies(t *testing.T) {
 
 	reg := allRegisteredOAuth2ScopeRegistries()
 	tokenScopes := coredata.OAuth2Scopes{
-		probo.ScopeV1OrgRead,
-		probo.ScopeV1ThirdPartyRead,
+		trustready.ScopeV1OrgRead,
+		trustready.ScopeV1ThirdPartyRead,
 	}
 
 	assert.False(t, reg.Allows(tokenScopes, "core:unmapped:action"))
@@ -84,13 +84,13 @@ func TestRegisteredOAuth2ScopeRegistries_EvidenceOnControlNotTask(t *testing.T) 
 
 	reg := allRegisteredOAuth2ScopeRegistries()
 
-	assert.False(t, reg.Allows(coredata.OAuth2Scopes{probo.ScopeV1TaskRead}, probo.ActionEvidenceList))
-	assert.False(t, reg.Allows(coredata.OAuth2Scopes{probo.ScopeV1Task}, probo.ActionEvidenceList))
-	assert.False(t, reg.Allows(coredata.OAuth2Scopes{probo.ScopeV1Task}, probo.ActionEvidenceDelete))
+	assert.False(t, reg.Allows(coredata.OAuth2Scopes{trustready.ScopeV1TaskRead}, trustready.ActionEvidenceList))
+	assert.False(t, reg.Allows(coredata.OAuth2Scopes{trustready.ScopeV1Task}, trustready.ActionEvidenceList))
+	assert.False(t, reg.Allows(coredata.OAuth2Scopes{trustready.ScopeV1Task}, trustready.ActionEvidenceDelete))
 
-	assert.True(t, reg.Allows(coredata.OAuth2Scopes{probo.ScopeV1ControlRead}, probo.ActionEvidenceList))
-	assert.False(t, reg.Allows(coredata.OAuth2Scopes{probo.ScopeV1ControlRead}, probo.ActionEvidenceDelete))
-	assert.True(t, reg.Allows(coredata.OAuth2Scopes{probo.ScopeV1Control}, probo.ActionEvidenceList))
-	assert.True(t, reg.Allows(coredata.OAuth2Scopes{probo.ScopeV1Control}, probo.ActionEvidenceDelete))
-	assert.True(t, reg.Allows(coredata.OAuth2Scopes{probo.ScopeV1Control}, probo.ActionMeasureEvidenceUpload))
+	assert.True(t, reg.Allows(coredata.OAuth2Scopes{trustready.ScopeV1ControlRead}, trustready.ActionEvidenceList))
+	assert.False(t, reg.Allows(coredata.OAuth2Scopes{trustready.ScopeV1ControlRead}, trustready.ActionEvidenceDelete))
+	assert.True(t, reg.Allows(coredata.OAuth2Scopes{trustready.ScopeV1Control}, trustready.ActionEvidenceList))
+	assert.True(t, reg.Allows(coredata.OAuth2Scopes{trustready.ScopeV1Control}, trustready.ActionEvidenceDelete))
+	assert.True(t, reg.Allows(coredata.OAuth2Scopes{trustready.ScopeV1Control}, trustready.ActionMeasureEvidenceUpload))
 }

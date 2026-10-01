@@ -1,4 +1,4 @@
--- Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -99,6 +99,6 @@ UPDATE vendors SET category = 'RECRUITING' WHERE name = 'Lever';
 
 UPDATE vendors SET category = 'SALES' WHERE name IN ('Apollo.io', 'Pipedrive', 'folk');
 
-UPDATE vendors SET category = 'SECURITY' WHERE name IN ('Tailscale', 'Probo');
+UPDATE vendors SET category = 'SECURITY' WHERE name IN ('Tailscale', 'TrustReady');
 
 UPDATE vendors SET category = 'VERSION_CONTROL' WHERE name = 'Github';

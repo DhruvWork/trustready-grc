@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ func NewCmdStatus(f *cmdutil.Factory) *cobra.Command {
 			}
 
 			if len(cfg.Hosts) == 0 {
-				_, _ = fmt.Fprintln(f.IOStreams.Out, "You are not logged in to any Probo hosts.")
+				_, _ = fmt.Fprintln(f.IOStreams.Out, "You are not logged in to any TrustReady hosts.")
 				return nil
 			}
 

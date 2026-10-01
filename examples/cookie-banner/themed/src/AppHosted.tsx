@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -64,18 +64,18 @@ export function App() {
           configurePosthogFromBanner(detail.config);
         }
         enableNamedLoggers();
-        themedLogger.debug("[themed] probo-ready", (e as CustomEvent).detail);
-        pushEvent("probo-ready", (e as CustomEvent).detail);
+        themedLogger.debug("[themed] trustready-ready", (e as CustomEvent).detail);
+        pushEvent("trustready-ready", (e as CustomEvent).detail);
       };
       const onConsent = (e: Event): void => {
-        themedLogger.debug("[themed] probo-consent", (e as CustomEvent).detail);
-        pushEvent("probo-consent", (e as CustomEvent).detail);
+        themedLogger.debug("[themed] trustready-consent", (e as CustomEvent).detail);
+        pushEvent("trustready-consent", (e as CustomEvent).detail);
       };
-      el.addEventListener("probo-ready", onReady);
-      el.addEventListener("probo-consent", onConsent);
+      el.addEventListener("trustready-ready", onReady);
+      el.addEventListener("trustready-consent", onConsent);
       return () => {
-        el.removeEventListener("probo-ready", onReady);
-        el.removeEventListener("probo-consent", onConsent);
+        el.removeEventListener("trustready-ready", onReady);
+        el.removeEventListener("trustready-consent", onConsent);
       };
     },
     [pushEvent],
@@ -95,13 +95,13 @@ export function App() {
         <>
           Category banner only. This app never installs the TCF stub or starts
           TCF. Calls <code>registerCookieBanner()</code> and renders{" "}
-          <code>&lt;probo-cookie-banner&gt;</code> with{" "}
+          <code>&lt;trustready-cookie-banner&gt;</code> with{" "}
           <code>gcm-enabled=&quot;{bundledConfig.gcmEnabled ? "true" : "false"}&quot;</code>.
           The banner appears in the bottom-right corner.
         </>
       }
     >
-      <probo-cookie-banner
+      <trustready-cookie-banner
         key={`${bundledConfig.bannerId}:${bundledConfig.baseUrl}:${bundledConfig.gcmEnabled}`}
         ref={attachListeners}
         banner-id={bundledConfig.bannerId}

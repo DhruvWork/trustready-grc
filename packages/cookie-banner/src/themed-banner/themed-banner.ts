@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 
 import { getLayoutRenderer } from "../addons";
 import { registerHeadlessComponents } from "../components";
-import type { ProboCookieBannerRoot } from "../components/cookie-banner-root";
+import type { TrustReadyCookieBannerRoot } from "../components/cookie-banner-root";
 import { resolveLayout } from "../layout";
 import type { BannerConfig, Presentation } from "../types";
 import { scheduleFirstLayerCtaCheck } from "./cta-check";
@@ -55,7 +55,7 @@ export class ProboThemedBanner extends HTMLElement {
     const baseUrl = this.getAttribute("base-url");
 
     if (!bannerId || !baseUrl) {
-      console.warn("[probo] <probo-cookie-banner> requires banner-id and base-url attributes");
+      console.warn("[trustready] <trustready-cookie-banner> requires banner-id and base-url attributes");
       return;
     }
 
@@ -67,13 +67,13 @@ export class ProboThemedBanner extends HTMLElement {
 
     this.shadow.innerHTML = `
       <style>${THEMED_STYLES}</style>
-      <probo-cookie-banner-root banner-id="${esc(bannerId)}" base-url="${esc(baseUrl)}"${langAttr}${gcmAttr}></probo-cookie-banner-root>
+      <trustready-cookie-banner-root banner-id="${esc(bannerId)}" base-url="${esc(baseUrl)}"${langAttr}${gcmAttr}></trustready-cookie-banner-root>
     `;
 
-    const root = this.shadow.querySelector("probo-cookie-banner-root") as ProboCookieBannerRoot;
+    const root = this.shadow.querySelector("trustready-cookie-banner-root") as TrustReadyCookieBannerRoot;
 
     root.addEventListener(
-      "probo-ready",
+      "trustready-ready",
       (e: Event) => {
         const config = (e as CustomEvent).detail.config as BannerConfig;
         this.mount(root, config);
@@ -86,7 +86,7 @@ export class ProboThemedBanner extends HTMLElement {
     this.scrollLock.set(false);
   }
 
-  private mount(root: ProboCookieBannerRoot, config: BannerConfig): void {
+  private mount(root: TrustReadyCookieBannerRoot, config: BannerConfig): void {
     const layout = resolveLayout(config);
     const position = this.getAttribute("position") ?? "bottom-left";
 
@@ -118,8 +118,8 @@ export class ProboThemedBanner extends HTMLElement {
     scheduleFirstLayerCtaCheck(this.shadow);
   }
 
-  private wirePanel(root: ProboCookieBannerRoot): void {
-    root.addEventListener("probo-state", (e: Event) => {
+  private wirePanel(root: TrustReadyCookieBannerRoot): void {
+    root.addEventListener("trustready-state", (e: Event) => {
       const { state } = (e as CustomEvent).detail;
       this.scrollLock.set(state === "panel");
     });
@@ -133,8 +133,8 @@ export class ProboThemedBanner extends HTMLElement {
     this.shadow.addEventListener("click", (e: Event) => {
       const btn = (e.target as Element).closest?.("[data-action=toggle-cookies]") as HTMLElement | null;
       if (!btn) return;
-      const category = btn.closest("probo-category");
-      const cookieList = category?.querySelector("probo-cookie-list") as HTMLElement | null;
+      const category = btn.closest("trustready-category");
+      const cookieList = category?.querySelector("trustready-cookie-list") as HTMLElement | null;
       if (!cookieList) return;
       const open = cookieList.hasAttribute("hidden");
       if (open) {
@@ -152,8 +152,8 @@ export class ProboThemedBanner extends HTMLElement {
     });
   }
 
-  private wirePrivacyChoices(root: ProboCookieBannerRoot): void {
-    root.addEventListener("probo-state", (e: Event) => {
+  private wirePrivacyChoices(root: TrustReadyCookieBannerRoot): void {
+    root.addEventListener("trustready-state", (e: Event) => {
       const { state } = (e as CustomEvent).detail;
       this.scrollLock.set(state === "privacy_choices");
     });

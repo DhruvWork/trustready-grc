@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,8 +36,8 @@ import (
 )
 
 const (
-	gcpTestProviderResource = "projects/123456789012/locations/global/workloadIdentityPools/probo/providers/probo"
-	gcpTestServiceAccount   = "probo-audit@my-project.iam.gserviceaccount.com"
+	gcpTestProviderResource = "projects/123456789012/locations/global/workloadIdentityPools/trustready/providers/trustready"
+	gcpTestServiceAccount   = "trustready-audit@my-project.iam.gserviceaccount.com"
 )
 
 func gcpTestConnector(t *testing.T, settings coredata.GCPConnectorSettings) *coredata.Connector {
@@ -70,7 +70,7 @@ func TestGCPRegistration(t *testing.T) {
 	require.True(t, ok)
 
 	assert.Equal(t, "Google Cloud", reg.DisplayName)
-	assert.Equal(t, "https://www.probo.com/docs/product/access-review/gcp", reg.DocumentationURL)
+	assert.Equal(t, "https://www.trustready.io/docs/product/access-review/gcp", reg.DocumentationURL)
 	assert.True(t, reg.SupportsWorkloadIdentity())
 	assert.False(t, reg.SupportsAPIKey())
 	assert.False(t, reg.IsManagedAPIKey())

@@ -10,24 +10,24 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/accessreview"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/errorx"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // Organization is the resolver for the organization field.
 func (r *accessReviewCampaignResolver) Organization(ctx context.Context, obj *types.AccessReviewCampaign) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -394,7 +394,7 @@ func (r *accessReviewEntryConnectionResolver) TotalCount(ctx context.Context, ob
 
 // Organization is the resolver for the organization field.
 func (r *accessReviewSourceResolver) Organization(ctx context.Context, obj *types.AccessReviewSource) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -465,7 +465,7 @@ func (r *accessReviewSourceResolver) Connector(ctx context.Context, obj *types.A
 		return nil, nil
 	}
 
-	connector, err := r.probo.Connectors.Get(ctx, scope, *connectorID)
+	connector, err := r.trustready.Connectors.Get(ctx, scope, *connectorID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -492,7 +492,7 @@ func (r *accessReviewSourceResolver) ProviderOrganizations(ctx context.Context, 
 	}
 
 	// EMPTY means the provider answered and owns no organization, and the
-	// console renders it as "the organization may not have approved Probo's
+	// console renders it as "the organization may not have approved TrustReady's
 	// access". With no connector, or one whose row is gone, no call was made
 	// at all — reporting that as EMPTY blames the provider for a source-side
 	// problem.
@@ -513,7 +513,7 @@ func (r *accessReviewSourceResolver) ProviderOrganizations(ctx context.Context, 
 		}, nil
 	}
 
-	cnnctr, err := r.probo.Connectors.Get(ctx, scope, *connectorID)
+	cnnctr, err := r.trustready.Connectors.Get(ctx, scope, *connectorID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return &types.ProviderOrganizations{
@@ -533,7 +533,7 @@ func (r *accessReviewSourceResolver) ProviderOrganizations(ctx context.Context, 
 	// A provider with no picker returns an empty list for a reason that is not
 	// a problem: its organization is captured during the OAuth callback, not
 	// chosen by the user. Reporting that as EMPTY would warn a perfectly
-	// healthy source that its organization may not have approved Probo.
+	// healthy source that its organization may not have approved TrustReady.
 	if !accessreview.ProviderSupportsOrganizationPicker(cnnctr.Provider, cnnctr.Protocol) {
 		return &types.ProviderOrganizations{
 			Status: types.ProviderOrganizationsStatusNotApplicable,

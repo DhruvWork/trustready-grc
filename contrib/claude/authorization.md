@@ -2,7 +2,7 @@
 
 Policy-based authorization in `pkg/iam/` using an evaluation model similar to AWS IAM. Explicit deny > explicit allow > implicit deny.
 
-**Policies are Go code, not database rows.** All policy logic is assembled from Go structs at startup (`pkg/probo/policies.go`, `pkg/iam/iam_policies.go`). The database only stores the `authz_role` enum and membership rows — there is no `policies` or `permissions` table. Never create migrations for policy storage.
+**Policies are Go code, not database rows.** All policy logic is assembled from Go structs at startup (`pkg/trustready/policies.go`, `pkg/iam/iam_policies.go`). The database only stores the `authz_role` enum and membership rows — there is no `policies` or `permissions` table. Never create migrations for policy storage.
 
 ## Core concepts
 
@@ -40,7 +40,7 @@ The evaluator processes all statements against a request:
 scope, err := iamService.Authorizer.Authorize(ctx, iam.AuthorizeParams{
 	Principal:          identityID,    // who
 	Resource:           thirdPartyID,      // what
-	Action:             probo.ActionThirdPartyGet,  // which action
+	Action:             trustready.ActionThirdPartyGet,  // which action
 	ResourceAttributes: map[string]string{},    // optional extra attributes
 })
 ```
@@ -62,7 +62,7 @@ multiple resources for the same action:
 ```go
 scope, err := iamService.Authorizer.AuthorizeBatch(ctx, iam.AuthorizeBatchParams{
 	Principal: identityID,
-	Action:    probo.ActionTaskDelete,
+	Action:    trustready.ActionTaskDelete,
 	Resources: taskIDs, // all resources must have same entity type + organization
 })
 ```
@@ -97,7 +97,7 @@ ps := iam.NewPolicySet().
 
 Register during service initialization:
 ```go
-iamService.Authorizer.RegisterPolicySet(ProboPolicySet())
+iamService.Authorizer.RegisterPolicySet(TrustReadyPolicySet())
 ```
 
 ## Conditions (attribute-based access control)
@@ -178,7 +178,7 @@ var (
 
 **GraphQL resolvers** use `AuthorizeFunc` from `pkg/server/api/authz/`:
 ```go
-scope, err := r.authorize(ctx, thirdPartyID, probo.ActionThirdPartyGet)
+scope, err := r.authorize(ctx, thirdPartyID, trustready.ActionThirdPartyGet)
 if err != nil {
 	return nil, err
 }
@@ -186,7 +186,7 @@ if err != nil {
 
 **MCP resolvers** use `Authorize` and return early on error:
 ```go
-scope, err := r.Authorize(ctx, input.ID, probo.ActionThirdPartyGet)
+scope, err := r.Authorize(ctx, input.ID, trustready.ActionThirdPartyGet)
 if err != nil {
 	return nil, types.GetThirdPartyOutput{}, err
 }
@@ -207,7 +207,7 @@ drifts when the resource lookup changes.
 
 ```go
 // GOOD — scope comes from authorize, fed straight to the service
-scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyList)
+scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyList)
 if err != nil {
 	return nil, err
 }
@@ -215,7 +215,7 @@ if err != nil {
 thirdPartyIDs, err := r.cookieBanner.LoadDistinctThirdPartyIDsByCookieBannerID(ctx, scope, obj.ID)
 
 // BAD — authorize discards scope, then we rebuild it from the same GID
-if _, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyList); err != nil {
+if _, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyList); err != nil {
 	return nil, err
 }
 
@@ -234,7 +234,7 @@ discarding it with `_` is correct:
 ```go
 // GOOD — global catalog, downstream is unscoped
 identity := authn.IdentityFromContext(ctx)
-if _, err := r.authorize(ctx, identity.ID, probo.ActionCommonThirdPartyList); err != nil {
+if _, err := r.authorize(ctx, identity.ID, trustready.ActionCommonThirdPartyList); err != nil {
 	return nil, err
 }
 
@@ -248,9 +248,9 @@ and `r.AuthorizeBatch` (MCP) — keep the returned scope and pass it down.
 
 | What | File |
 |------|------|
-| Product action constants (`core:*`) | `pkg/probo/actions.go` |
+| Product action constants (`core:*`) | `pkg/trustready/actions.go` |
 | IAM action constants (`iam:*`) | `pkg/iam/iam_actions.go` |
-| Product role policies (`ProboPolicySet`) | `pkg/probo/policies.go` |
+| Product role policies (`TrustReadyPolicySet`) | `pkg/trustready/policies.go` |
 | Per-service policy sets (e.g. `accessreview.PolicySet`, `agentexecution.PolicySet`) | `pkg/<service>/actions.go`, `pkg/<service>/policies.go` |
 | IAM role policies (`IAMPolicySet`) | `pkg/iam/iam_policies.go` |
 | Authorizer + `AuthorizationAttributer` | `pkg/iam/authorizer.go` |
@@ -263,7 +263,7 @@ and `r.AuthorizeBatch` (MCP) — keep the returned scope and pass it down.
 
 ## Action constants
 
-IAM actions live in `pkg/iam/iam_actions.go`, probo actions in `pkg/probo/actions.go`. Follow the naming pattern:
+IAM actions live in `pkg/iam/iam_actions.go`, trustready actions in `pkg/trustready/actions.go`. Follow the naming pattern:
 
 ```go
 const (
@@ -277,7 +277,7 @@ const (
 
 ## OAuth2 API scopes
 
-OAuth2 scopes for API access are defined as `coredata.OAuth2Scope` constants in each owning package (for example [`pkg/probo/oauth2_scopes.go`](../../pkg/probo/oauth2_scopes.go), [`pkg/iam/oauth2_scopes.go`](../../pkg/iam/oauth2_scopes.go)). [`pkg/coredata/oauth2_scope.go`](../../pkg/coredata/oauth2_scope.go) defines the persistence type. Standard OIDC scopes live in [`pkg/iam/oauth2/scope.go`](../../pkg/iam/oauth2/scope.go). Register scope sets with `Authorizer.RegisterScopes`.
+OAuth2 scopes for API access are defined as `coredata.OAuth2Scope` constants in each owning package (for example [`pkg/trustready/oauth2_scopes.go`](../../pkg/trustready/oauth2_scopes.go), [`pkg/iam/oauth2_scopes.go`](../../pkg/iam/oauth2_scopes.go)). [`pkg/coredata/oauth2_scope.go`](../../pkg/coredata/oauth2_scope.go) defines the persistence type. Standard OIDC scopes live in [`pkg/iam/oauth2/scope.go`](../../pkg/iam/oauth2/scope.go). Register scope sets with `Authorizer.RegisterScopes`.
 
 **Format:**
 
@@ -299,7 +299,7 @@ When you add a new `v1:<namespace>` pair, add labels in the console locale files
 
 E2E MCP tests often authenticate with personal API keys, which skip the OAuth2 scope gate. A green e2e suite does **not** prove OAuth2 clients can call the tool — always update the package's OAuth2 scope mapping when wiring new actions.
 
-**Well-known Probo CLI client:** `iam_oauth2_clients` scopes for `AAAAAAAAAAAASwAAAAAAAAAAcHJiY2xp` must match `CLIClientScopes` in `pkg/cli/config/config.go` (requested by `prb auth login`). When adding API scopes, update the client migration, `CLIClientScopes`, and scope registration together.
+**Well-known TrustReady CLI client:** `iam_oauth2_clients` scopes for `AAAAAAAAAAAASwAAAAAAAAAAcHJiY2xp` must match `CLIClientScopes` in `pkg/cli/config/config.go` (requested by `prb auth login`). When adding API scopes, update the client migration, `CLIClientScopes`, and scope registration together.
 
 ### Personal OAuth2 access tokens
 
@@ -330,12 +330,12 @@ Manual bearer tokens created from the console are stored in `iam_oauth2_access_t
 
 When adding a new entity that needs authorization:
 
-1. **Action constants** — add `core:<entity>:<verb>` constants in `pkg/probo/actions.go` (get, list, create, update, delete)
-2. **Role policies** — wire actions into the appropriate role policies in `pkg/probo/policies.go` (`OwnerPolicy`, `AdminPolicy`, `ViewerPolicy`, etc.) with `organization_id` condition
+1. **Action constants** — add `core:<entity>:<verb>` constants in `pkg/trustready/actions.go` (get, list, create, update, delete)
+2. **Role policies** — wire actions into the appropriate role policies in `pkg/trustready/policies.go` (`OwnerPolicy`, `AdminPolicy`, `ViewerPolicy`, etc.) with `organization_id` condition
 3. **OAuth2 scope mappings** — add every new action to the owning package's OAuth2 scope mapping in `pkg/<service>/oauth2_scopes.go` (`OAuth2ScopeMappings`, or `IAMOAuth2ScopeMappings` in `pkg/iam`). Put list/get on `v1:<namespace>:read` and mutating verbs on `v1:<namespace>`. Reuse an existing namespace when the feature belongs to one (e.g. compliance-page commitments → `v1:compliance-page`). Unmapped actions deny all OAuth2 callers (MCP included) even when role policies allow them.
 4. **`AuthorizationAttributes`** — implement on the `coredata` entity struct, returning at minimum `{"organization_id": ...}` (use the denormalized `OrganizationID` field — see coredata doc)
 5. **Entity type registry** — register in `pkg/coredata/entity_type_reg.go` and `NewEntityFromID` so the authorizer can construct the entity from its GID
-6. **Resolver calls** — add `scope, err := r.authorize(ctx, id, probo.ActionEntityGet)` in GraphQL resolvers and `scope, err := r.Authorize(ctx, id, probo.ActionEntityGet)` in MCP resolvers, then pass `scope` to services
+6. **Resolver calls** — add `scope, err := r.authorize(ctx, id, trustready.ActionEntityGet)` in GraphQL resolvers and `scope, err := r.Authorize(ctx, id, trustready.ActionEntityGet)` in MCP resolvers, then pass `scope` to services
 
 ## Decision logging
 

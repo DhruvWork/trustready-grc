@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,14 +23,14 @@ package slack
 const (
 	SlashCommandName = "/probot"
 
-	bindRequiredText = "I can't help until your Probo account is linked. " +
+	bindRequiredText = "I can't help until your TrustReady account is linked. " +
 		"Run `/probot login` — I'll send you a private link."
 
-	bindSlashAlreadyLinkedText = "Your Probo account is already linked."
-	bindSlashLinkedText        = "Your Probo account is linked."
+	bindSlashAlreadyLinkedText = "Your TrustReady account is already linked."
+	bindSlashLinkedText        = "Your TrustReady account is linked."
 	bindSlashUsageText         = "Usage: `/probot login`"
 	bindSlashUnavailableText   = "Probot is not available in this workspace."
-	bindSlashFallbackText      = "Link your Probo account to use the Probo Slack assistant."
+	bindSlashFallbackText      = "Link your TrustReady account to use the TrustReady Slack assistant."
 	bindSlashFailedText        = "I couldn't create a link right now. Try `/probot login` again."
 
 	interactiveForbiddenText = "You don't have permission to do that."
@@ -43,8 +43,8 @@ func bindRequiredBlocks(bindURL string) []any {
 			"type": "section",
 			"text": map[string]any{
 				"type": "mrkdwn",
-				"text": "Link your *Probo* account before I can help you here. " +
-					"You'll confirm the connection while signed in to Probo.",
+				"text": "Link your *TrustReady* account before I can help you here. " +
+					"You'll confirm the connection while signed in to TrustReady.",
 			},
 		},
 		map[string]any{
@@ -54,7 +54,7 @@ func bindRequiredBlocks(bindURL string) []any {
 					"type": "button",
 					"text": map[string]any{
 						"type": "plain_text",
-						"text": "Link Probo account",
+						"text": "Link TrustReady account",
 					},
 					"url":   bindURL,
 					"style": "primary",

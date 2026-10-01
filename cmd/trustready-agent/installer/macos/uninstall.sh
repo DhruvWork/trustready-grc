@@ -6,23 +6,23 @@
 #
 # Removes:
 #   - agent service, tray LaunchAgent, privileged helper
-#   - binary, Probo Agent.app (and .localized variants)
+#   - binary, TrustReady Agent.app (and .localized variants)
 #   - state/run dirs, logs
-#   - PKG receipt (com.probo.agent)
+#   - PKG receipt (com.trustready.agent)
 #   - stale Launch Services registration for the URL handler
 
 set -u
 
-TRUSTREADY_DIR="/Library/Probo"
+TRUSTREADY_DIR="/Library/TrustReady"
 BINARY="${TRUSTREADY_DIR}/trustready-agent"
 LEGACY_BINARY="/usr/local/bin/trustready-agent"
 STATE_DIR="/var/lib/trustready-agent"
 RUN_DIR="/var/run/trustready-agent"
-DAEMON_PLIST="/Library/LaunchDaemons/com.probo.agent.plist"
-HELPER_LABEL="com.probo.agent.helper"
+DAEMON_PLIST="/Library/LaunchDaemons/com.trustready.agent.plist"
+HELPER_LABEL="com.trustready.agent.helper"
 HELPER_PLIST="/Library/LaunchDaemons/${HELPER_LABEL}.plist"
 HELPER_BINARY="/Library/PrivilegedHelperTools/${HELPER_LABEL}"
-PKG_ID="com.probo.agent"
+PKG_ID="com.trustready.agent"
 LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
 
 log() {
@@ -51,8 +51,8 @@ bootout_system_plist() {
 unregister_apps() {
   local path
   for path in \
-    "/Applications/Probo Agent.app" \
-    "/Applications/Probo Agent.localized/Probo Agent.app"; do
+    "/Applications/TrustReady Agent.app" \
+    "/Applications/TrustReady Agent.localized/TrustReady Agent.app"; do
     if [ -d "${path}" ] && [ -x "${LSREGISTER}" ]; then
       "${LSREGISTER}" -u "${path}" 2>/dev/null || true
       log "Unregistered Launch Services entry for ${path}"
@@ -61,11 +61,11 @@ unregister_apps() {
 }
 
 kill_leftovers() {
-  # Best-effort; deleted-but-running binaries otherwise keep claiming probo://.
+  # Best-effort; deleted-but-running binaries otherwise keep claiming trustready://.
   pkill -x trustready-agent-url-handler 2>/dev/null || true
-  pkill -f '/Library/Probo/trustready-agent tray' 2>/dev/null || true
+  pkill -f '/Library/TrustReady/trustready-agent tray' 2>/dev/null || true
   pkill -f '/usr/local/bin/trustready-agent tray' 2>/dev/null || true
-  pkill -f '/Library/PrivilegedHelperTools/com.probo.agent.helper' 2>/dev/null || true
+  pkill -f '/Library/PrivilegedHelperTools/com.trustready.agent.helper' 2>/dev/null || true
   # Agent daemon may still be running after plist bootout races.
   pkill -x trustready-agent 2>/dev/null || true
 }
@@ -106,9 +106,9 @@ log "Removed LaunchDaemon / helper files (if present)"
 
 unregister_apps
 rm -rf \
-  "/Applications/Probo Agent.app" \
-  "/Applications/Probo Agent.localized"
-log "Removed Probo Agent.app (if present)"
+  "/Applications/TrustReady Agent.app" \
+  "/Applications/TrustReady Agent.localized"
+log "Removed TrustReady Agent.app (if present)"
 
 rm -f "${BINARY}" "${LEGACY_BINARY}"
 rmdir "${TRUSTREADY_DIR}" 2>/dev/null || true

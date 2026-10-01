@@ -11,8 +11,8 @@ var staticAssets embed.FS
 // verifies their presence at startup so a rename or removal fails fast instead
 // of silently producing a 404 in the consumers (e.g. emails).
 const (
-	PoweredByLogo     = "probo-gray-small.png"
-	SenderCompanyLogo = "probo.png"
+	PoweredByLogo     = "trustready-gray-small.png"
+	SenderCompanyLogo = "trustready.png"
 )
 
 // requiredAssets are validated to exist whenever an Assets is constructed.

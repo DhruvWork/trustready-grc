@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -54,13 +54,13 @@ export function PlaceholderPreview({
   return (
     <div
       style={{
-        background: "var(--probo-bg, #ffffff)",
-        color: "var(--probo-text-secondary, #555555)",
-        borderRadius: "var(--probo-radius, 12px)",
-        border: "1px dashed var(--probo-border, #e0e0e0)",
+        background: "var(--trustready-bg, #ffffff)",
+        color: "var(--trustready-text-secondary, #555555)",
+        borderRadius: "var(--trustready-radius, 12px)",
+        border: "1px dashed var(--trustready-border, #e0e0e0)",
         fontFamily:
-          "var(--probo-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)",
-        fontSize: "var(--probo-font-size, 14px)",
+          "var(--trustready-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif)",
+        fontSize: "var(--trustready-font-size, 14px)",
         lineHeight: 1.5,
         maxWidth: 380,
         width: "100%",
@@ -74,7 +74,7 @@ export function PlaceholderPreview({
         boxSizing: "border-box",
       }}
     >
-      <span style={{ color: "var(--probo-text-secondary, #555555)" }}>
+      <span style={{ color: "var(--trustready-text-secondary, #555555)" }}>
         <LockIcon />
       </span>
       <p style={{ margin: 0 }}>
@@ -92,7 +92,7 @@ export function PlaceholderPreview({
         style={{
           background: "none",
           border: "none",
-          color: "var(--probo-accent, #1a1a1a)",
+          color: "var(--trustready-accent, #1a1a1a)",
           textDecoration: "underline",
           cursor: "pointer",
           fontFamily: "inherit",

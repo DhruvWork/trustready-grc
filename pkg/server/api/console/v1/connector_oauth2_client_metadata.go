@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,12 +35,12 @@ import (
 // the client's identity and allowed redirect URIs, so no app pre-registration
 // is needed. Public clients authenticate with PKCE (token_endpoint_auth_method
 // "none") rather than a client secret.
-// Probo brand fields shown to the end user on the provider's consent screen.
-// These describe the Probo product itself (not the per-tenant deployment), so
+// TrustReady brand fields shown to the end user on the provider's consent screen.
+// These describe the TrustReady product itself (not the per-tenant deployment), so
 // they are the canonical brand homepage and logo rather than the baseURL.
 const (
-	proboBrandURI = "https://www.probo.com"
-	proboLogoURI  = "https://www.probo.com/probo-logo-only.svg"
+	trustreadyBrandURI = "https://www.trustready.io"
+	trustreadyLogoURI  = "https://www.trustready.io/trustready-logo-only.svg"
 )
 
 type oauth2ClientMetadata struct {
@@ -56,13 +56,13 @@ type oauth2ClientMetadata struct {
 
 // handleConnectorOAuth2ClientMetadata serves the public, unauthenticated CIMD
 // document. It is intentionally outside the auth middleware group: the OAuth2
-// provider fetches it without any Probo credentials.
+// provider fetches it without any TrustReady credentials.
 func handleConnectorOAuth2ClientMetadata(baseURL *baseurl.BaseURL) http.HandlerFunc {
 	doc := oauth2ClientMetadata{
 		ClientID:                baseURL.WithPath(connector.CIMDMetadataPath).MustString(),
-		ClientName:              "Probo",
-		ClientURI:               proboBrandURI,
-		LogoURI:                 proboLogoURI,
+		ClientName:              "TrustReady",
+		ClientURI:               trustreadyBrandURI,
+		LogoURI:                 trustreadyLogoURI,
 		RedirectURIs:            []string{baseURL.WithPath(connector.CallbackPath).MustString()},
 		TokenEndpointAuthMethod: "none",
 		GrantTypes:              []string{"authorization_code", "refresh_token"},

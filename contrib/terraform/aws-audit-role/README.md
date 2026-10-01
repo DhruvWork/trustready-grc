@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2026 TrustReady <hello@probo.com>.
+Copyright (c) 2026 TrustReady <hello@trustready.io>.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-# `getprobo/audit-role/aws`
+# `trustready/audit-role/aws`
 
-Grants Probo read-only audit access to one AWS account through OIDC web
-identity federation. Probo holds no credential for the account: it presents a
+Grants TrustReady read-only audit access to one AWS account through OIDC web
+identity federation. TrustReady holds no credential for the account: it presents a
 short-lived signed assertion that STS verifies against a public key set, and
 you revoke access by deleting the role.
 
@@ -38,27 +38,27 @@ compares the issuer URL case-sensitively and its last path segment is a
 mixed-case identifier, so paste it rather than retyping it.
 
 ```hcl
-module "probo_audit" {
-  source = "getprobo/audit-role/aws"
+module "trustready_audit" {
+  source = "trustready/audit-role/aws"
 
-  probo_issuer_url = "https://proboidentity.com/e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
-  probo_subject    = "e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
-  role_name        = "ProboAudit"
+  trustready_issuer_url = "https://trustreadyidentity.com/e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
+  trustready_subject    = "e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
+  role_name        = "TrustReadyAudit"
 }
 
-output "probo_role_arn" {
-  value = module.probo_audit.role_arn
+output "trustready_role_arn" {
+  value = module.trustready_audit.role_arn
 }
 ```
 
-Give Probo the `role_arn` output when you create the connector.
+Give TrustReady the `role_arn` output when you create the connector.
 
 ## Verifying an install
 
-Probo probes the install by assuming the role. Isolation is the
+TrustReady probes the install by assuming the role. Isolation is the
 per-organization issuer: a foreign token fails at the provider-match step
 before STS evaluates any trust-policy condition. The `sub` and `aud`
-conditions in this module are IAM hygiene; Probo does not read them back.
+conditions in this module are IAM hygiene; TrustReady does not read them back.
 
 ## Covering a whole organization
 
@@ -66,21 +66,21 @@ This module covers **one account**. Organization-wide rollout is the caller's
 responsibility, because how you reach your member accounts is yours to decide
 and the module cannot guess it.
 
-Probo currently reviews only the connected account. Apply the module in other
+TrustReady currently reviews only the connected account. Apply the module in other
 accounts now if you want those roles ready when org-wide coverage ships.
 
 Use one provider alias per account with a role you already have there:
 
 ```hcl
-module "probo_audit_member" {
+module "trustready_audit_member" {
   for_each = toset(var.member_account_ids)
-  source   = "getprobo/audit-role/aws"
+  source   = "trustready/audit-role/aws"
 
   providers = { aws = aws.member[each.key] }
 
-  probo_issuer_url = var.probo_issuer_url
-  probo_subject    = var.probo_subject
-  role_name        = "ProboAudit"
+  trustready_issuer_url = var.trustready_issuer_url
+  trustready_subject    = var.trustready_subject
+  role_name        = "TrustReadyAudit"
 
   grant_organizations_read = false
 }
@@ -96,14 +96,14 @@ CloudFormation template does — or accept re-applying.
 | Resource | Notes |
 |---|---|
 | `aws_iam_openid_connect_provider` | Skipped when `create_oidc_provider = false`. AWS allows one per issuer URL per account. |
-| `aws_iam_role` | `ProboAudit` by default, `max_session_duration = 3600`. |
+| `aws_iam_role` | `TrustReadyAudit` by default, `max_session_duration = 3600`. |
 | `SecurityAudit`, `job-function/ViewOnlyAccess` | AWS-managed, read-only. |
-| `ProboAuditIdentityRead` | IAM Identity Center reads the two managed policies miss. |
-| `ProboAuditOrganizationsRead` | Only with `grant_organizations_read = true`. |
+| `TrustReadyAuditIdentityRead` | IAM Identity Center reads the two managed policies miss. |
+| `TrustReadyAuditOrganizationsRead` | Only with `grant_organizations_read = true`. |
 
 The trust policy pins both `aud` and `sub` with `StringEquals`. Isolation is
 the per-organization issuer: a foreign token fails at the provider-match step
-before STS evaluates any condition. Those pins are IAM hygiene; Probo does not
+before STS evaluates any condition. Those pins are IAM hygiene; TrustReady does not
 read them back.
 
 ## Inputs and outputs
@@ -114,7 +114,7 @@ are the source of truth.
 
 ## Notes
 
-- **The role must have the same name in every account.** Probo stores one role
+- **The role must have the same name in every account.** TrustReady stores one role
   ARN per connector and reviews only that account today. Use the same name so
   the roles stay ready when org-wide coverage ships.
 - **`thumbprint_list` is deliberately unset**, unlike the CloudFormation

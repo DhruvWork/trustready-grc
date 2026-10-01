@@ -10,7 +10,6 @@ import (
 	"errors"
 	"fmt"
 
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/management"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/mailman"
@@ -19,6 +18,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"go.gearno.de/kit/log"
 )
 
 // Subscribers is the resolver for the subscribers field on MailingList.

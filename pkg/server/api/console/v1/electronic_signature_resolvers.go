@@ -9,14 +9,14 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 )
 
 // Certificate is the resolver for the certificate field.
 func (r *electronicSignatureResolver) Certificate(ctx context.Context, obj *types.ElectronicSignature) (*types.File, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionElectronicSignatureGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionElectronicSignatureGet); err != nil {
 		return nil, err
 	}
 
@@ -29,7 +29,7 @@ func (r *electronicSignatureResolver) Certificate(ctx context.Context, obj *type
 
 // Events is the resolver for the events field.
 func (r *electronicSignatureResolver) Events(ctx context.Context, obj *types.ElectronicSignature) ([]*types.ElectronicSignatureEvent, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionElectronicSignatureGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionElectronicSignatureGet); err != nil {
 		return nil, err
 	}
 

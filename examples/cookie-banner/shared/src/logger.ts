@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ log.setLevel("debug");
 const namedLoggers = new Map<string, log.Logger>();
 
 export function getExampleLogger(suffix: string): log.Logger {
-  const name = `probo:example:${suffix}`;
+  const name = `trustready:example:${suffix}`;
   const existing = namedLoggers.get(name);
   if (existing) {
     return existing;
@@ -46,7 +46,7 @@ export function enableNamedLoggers(): void {
     try {
       localStorage.setItem(`loglevel:${name}`, "DEBUG");
     } catch {
-      // sandboxed frames and quota errors must not abort probo-ready
+      // sandboxed frames and quota errors must not abort trustready-ready
     }
   }
 }

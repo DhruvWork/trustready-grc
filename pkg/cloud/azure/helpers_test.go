@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ import (
 )
 
 const (
-	testIssuerBase          = "https://proboidentity.com"
+	testIssuerBase          = "https://trustreadyidentity.com"
 	testTenantID            = "a1111111-1111-4111-8111-111111111111"
 	testClientID            = "b2222222-2222-4222-8222-222222222222"
 	testSubscriptionID      = "c3333333-3333-4333-8333-333333333333"

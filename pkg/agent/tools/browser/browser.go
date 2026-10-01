@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -59,8 +59,8 @@ func NewBrowser(ctx context.Context, addr string) *Browser {
 }
 
 // SetAllowedDomain restricts navigation to URLs under the given domain and
-// its subdomains. For example, setting "probo.com" allows navigation to
-// probo.com, www.probo.com, and docs.probo.com.
+// its subdomains. For example, setting "trustready.io" allows navigation to
+// trustready.io, www.trustready.io, and docs.trustready.io.
 // This replaces any previously set domains.
 func (b *Browser) SetAllowedDomain(domain string) {
 	domain = strings.ToLower(strings.TrimSpace(domain))

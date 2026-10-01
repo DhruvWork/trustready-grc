@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +49,7 @@ func TestIsWindowsServiceMissing(t *testing.T) {
 		},
 		{
 			name: "running service query",
-			out:  "SERVICE_NAME: ProboAgent\nSTATE: 4 RUNNING",
+			out:  "SERVICE_NAME: TrustReadyAgent\nSTATE: 4 RUNNING",
 			want: false,
 		},
 		{
@@ -79,7 +79,7 @@ func TestWaitUntilWindowsServiceGone_SucceedsAfterMissingQuery(t *testing.T) {
 		func() (string, error) {
 			calls++
 			if calls < 3 {
-				return "SERVICE_NAME: ProboAgent\nSTATE: 3 STOP_PENDING", nil
+				return "SERVICE_NAME: TrustReadyAgent\nSTATE: 3 STOP_PENDING", nil
 			}
 
 			return "[SC] OpenService FAILED 1060:\nThe specified service does not exist as an installed service.",
@@ -98,7 +98,7 @@ func TestWaitUntilWindowsServiceGone_TimesOutWhilePresent(t *testing.T) {
 
 	err := waitUntilWindowsServiceGone(
 		func() (string, error) {
-			return "SERVICE_NAME: ProboAgent\nSTATE: 1 STOPPED", nil
+			return "SERVICE_NAME: TrustReadyAgent\nSTATE: 1 STOPPED", nil
 		},
 		time.Millisecond,
 		func(time.Duration) {},

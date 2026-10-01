@@ -1,24 +1,24 @@
 ---
 name: open-source-compliance
-description: This skill should be used when the user wants to assess, track, or automate open-source compliance work in Probo — vendor reviews, control mapping, evidence collection, risk registers, or policy workflows using Probo MCP tools.
+description: This skill should be used when the user wants to assess, track, or automate open-source compliance work in TrustReady — vendor reviews, control mapping, evidence collection, risk registers, or policy workflows using TrustReady MCP tools.
 ---
 
-# Open-source compliance with Probo
+# Open-source compliance with TrustReady
 
-Use the Probo MCP server bundled with this plugin to read and write GRC data.
+Use the TrustReady MCP server bundled with this plugin to read and write GRC data.
 Do not guess entity IDs or organization scope — discover them with MCP tools
 first.
 
 ## Before you start
 
-1. Confirm a Probo MCP server is connected. The plugin ships two hosted
-   servers, `probo-us` and `probo-eu`; self-hosted instances are configured in
+1. Confirm a TrustReady MCP server is connected. The plugin ships two hosted
+   servers, `trustready-us` and `trustready-eu`; self-hosted instances are configured in
    the agent. If none is connected, ask the user to run `/mcp` or
-   `claude mcp login probo-us` to complete the OAuth 2.0 sign-in.
+   `claude mcp login trustready-us` to complete the OAuth 2.0 sign-in.
 2. Identify the target organization. List organizations if the user did not
    provide one, and when several servers are connected use the one that returns
    the target organization.
-3. Prefer MCP tools over manual API calls. The Probo MCP API mirrors the
+3. Prefer MCP tools over manual API calls. The TrustReady MCP API mirrors the
    platform's GraphQL surface.
 
 ## Common workflows
@@ -38,16 +38,16 @@ first.
 
 ### Evidence and documentation
 
-1. Locate the relevant document or audit in Probo.
+1. Locate the relevant document or audit in TrustReady.
 2. Fetch version history or published versions as needed.
 3. Draft updates; use MCP upload tools when the user asks to attach files.
 
 ## Output expectations
 
-- Cite Probo entity IDs (GIDs) for anything you create or update.
-- Separate facts pulled from Probo from your analysis.
+- Cite TrustReady entity IDs (GIDs) for anything you create or update.
+- Separate facts pulled from TrustReady from your analysis.
 - Flag missing data instead of inventing compliance status.
-- Keep recommendations actionable and mapped to Probo entities where possible.
+- Keep recommendations actionable and mapped to TrustReady entities where possible.
 
 ## References
 

@@ -10,17 +10,17 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // Owner is the resolver for the owner field.
@@ -47,7 +47,7 @@ func (r *assetResolver) Owner(ctx context.Context, obj *types.Asset) (*types.Pro
 
 // ThirdParties is the resolver for the thirdParties field.
 func (r *assetResolver) ThirdParties(ctx context.Context, obj *types.Asset, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ThirdPartyOrderBy) (*types.ThirdPartyConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyList)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func (r *assetResolver) ThirdParties(ctx context.Context, obj *types.Asset, firs
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.ThirdParties.ListForAssetID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.ThirdParties.ListForAssetID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list asset thirdParties", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -77,18 +77,18 @@ func (r *assetResolver) ThirdParties(ctx context.Context, obj *types.Asset, firs
 
 // Organization is the resolver for the organization field.
 func (r *assetResolver) Organization(ctx context.Context, obj *types.Asset) (*types.Organization, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet)
 	if err != nil {
 		return nil, err
 	}
 
-	asset, err := r.probo.Assets.Get(ctx, scope, obj.ID)
+	asset, err := r.trustready.Assets.Get(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot load audit", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	org, err := r.probo.Organizations.Get(ctx, scope, asset.OrganizationID)
+	org, err := r.trustready.Organizations.Get(ctx, scope, asset.OrganizationID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -109,14 +109,14 @@ func (r *assetResolver) Permission(ctx context.Context, obj *types.Asset, action
 
 // TotalCount is the resolver for the totalCount field.
 func (r *assetConnectionResolver) TotalCount(ctx context.Context, obj *types.AssetConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionAssetList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionAssetList)
 	if err != nil {
 		return 0, err
 	}
 
 	switch obj.Resolver.(type) {
 	case *organizationResolver:
-		count, err := r.probo.Assets.CountForOrganizationID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.Assets.CountForOrganizationID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count assets", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -124,7 +124,7 @@ func (r *assetConnectionResolver) TotalCount(ctx context.Context, obj *types.Ass
 
 		return count, nil
 	case *businessFunctionResolver:
-		count, err := r.probo.BusinessFunctions.CountAssets(ctx, scope, obj.ParentID)
+		count, err := r.trustready.BusinessFunctions.CountAssets(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count business function assets", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -160,7 +160,7 @@ func (r *datumResolver) Owner(ctx context.Context, obj *types.Datum) (*types.Pro
 
 // ThirdParties is the resolver for the thirdParties field.
 func (r *datumResolver) ThirdParties(ctx context.Context, obj *types.Datum, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ThirdPartyOrderBy) (*types.ThirdPartyConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyList)
 	if err != nil {
 		return nil, err
 	}
@@ -179,7 +179,7 @@ func (r *datumResolver) ThirdParties(ctx context.Context, obj *types.Datum, firs
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.Data.ListThirdParties(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.Data.ListThirdParties(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list data thirdParties", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -190,7 +190,7 @@ func (r *datumResolver) ThirdParties(ctx context.Context, obj *types.Datum, firs
 
 // Organization is the resolver for the organization field.
 func (r *datumResolver) Organization(ctx context.Context, obj *types.Datum) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -217,14 +217,14 @@ func (r *datumResolver) Permission(ctx context.Context, obj *types.Datum, action
 
 // TotalCount is the resolver for the totalCount field.
 func (r *datumConnectionResolver) TotalCount(ctx context.Context, obj *types.DatumConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionDatumList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionDatumList)
 	if err != nil {
 		return 0, err
 	}
 
 	switch obj.Resolver.(type) {
 	case *organizationResolver:
-		count, err := r.probo.Data.CountForOrganizationID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.Data.CountForOrganizationID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count data", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -240,14 +240,14 @@ func (r *datumConnectionResolver) TotalCount(ctx context.Context, obj *types.Dat
 
 // CreateAsset is the resolver for the createAsset field.
 func (r *mutationResolver) CreateAsset(ctx context.Context, input types.CreateAssetInput) (*types.CreateAssetPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionAssetCreate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionAssetCreate)
 	if err != nil {
 		return nil, err
 	}
 
-	asset, err := r.probo.Assets.Create(
+	asset, err := r.trustready.Assets.Create(
 		ctx, scope,
-		probo.CreateAssetRequest{
+		trustready.CreateAssetRequest{
 			OrganizationID:  input.OrganizationID,
 			Name:            input.Name,
 			Amount:          input.Amount,
@@ -274,14 +274,14 @@ func (r *mutationResolver) CreateAsset(ctx context.Context, input types.CreateAs
 
 // UpdateAsset is the resolver for the updateAsset field.
 func (r *mutationResolver) UpdateAsset(ctx context.Context, input types.UpdateAssetInput) (*types.UpdateAssetPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionAssetUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionAssetUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	asset, err := r.probo.Assets.Update(
+	asset, err := r.trustready.Assets.Update(
 		ctx, scope,
-		probo.UpdateAssetRequest{
+		trustready.UpdateAssetRequest{
 			ID:              input.ID,
 			Name:            input.Name,
 			Amount:          input.Amount,
@@ -308,12 +308,12 @@ func (r *mutationResolver) UpdateAsset(ctx context.Context, input types.UpdateAs
 
 // DeleteAsset is the resolver for the deleteAsset field.
 func (r *mutationResolver) DeleteAsset(ctx context.Context, input types.DeleteAssetInput) (*types.DeleteAssetPayload, error) {
-	scope, err := r.authorize(ctx, input.AssetID, probo.ActionAssetDelete)
+	scope, err := r.authorize(ctx, input.AssetID, trustready.ActionAssetDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.Assets.Delete(ctx, scope, input.AssetID); err != nil {
+	if err := r.trustready.Assets.Delete(ctx, scope, input.AssetID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete asset", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -325,14 +325,14 @@ func (r *mutationResolver) DeleteAsset(ctx context.Context, input types.DeleteAs
 
 // CreateDatum is the resolver for the createDatum field.
 func (r *mutationResolver) CreateDatum(ctx context.Context, input types.CreateDatumInput) (*types.CreateDatumPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionDatumCreate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionDatumCreate)
 	if err != nil {
 		return nil, err
 	}
 
-	data, err := r.probo.Data.Create(
+	data, err := r.trustready.Data.Create(
 		ctx, scope,
-		probo.CreateDatumRequest{
+		trustready.CreateDatumRequest{
 			OrganizationID:     input.OrganizationID,
 			Name:               input.Name,
 			DataClassification: input.DataClassification,
@@ -357,14 +357,14 @@ func (r *mutationResolver) CreateDatum(ctx context.Context, input types.CreateDa
 
 // UpdateDatum is the resolver for the updateDatum field.
 func (r *mutationResolver) UpdateDatum(ctx context.Context, input types.UpdateDatumInput) (*types.UpdateDatumPayload, error) {
-	scope, err := r.authorize(ctx, input.ID, probo.ActionDatumUpdate)
+	scope, err := r.authorize(ctx, input.ID, trustready.ActionDatumUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	datum, err := r.probo.Data.Update(
+	datum, err := r.trustready.Data.Update(
 		ctx, scope,
-		probo.UpdateDatumRequest{
+		trustready.UpdateDatumRequest{
 			ID:                 input.ID,
 			Name:               input.Name,
 			DataClassification: input.DataClassification,
@@ -389,12 +389,12 @@ func (r *mutationResolver) UpdateDatum(ctx context.Context, input types.UpdateDa
 
 // DeleteDatum is the resolver for the deleteDatum field.
 func (r *mutationResolver) DeleteDatum(ctx context.Context, input types.DeleteDatumInput) (*types.DeleteDatumPayload, error) {
-	scope, err := r.authorize(ctx, input.DatumID, probo.ActionDatumDelete)
+	scope, err := r.authorize(ctx, input.DatumID, trustready.ActionDatumDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.Data.Delete(ctx, scope, input.DatumID); err != nil {
+	if err := r.trustready.Data.Delete(ctx, scope, input.DatumID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete datum", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -406,12 +406,12 @@ func (r *mutationResolver) DeleteDatum(ctx context.Context, input types.DeleteDa
 
 // PublishDataList is the resolver for the publishDataList field.
 func (r *mutationResolver) PublishDataList(ctx context.Context, input types.PublishDataListInput) (*types.PublishDataListPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionDatumPublish)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionDatumPublish)
 	if err != nil {
 		return nil, err
 	}
 
-	document, documentVersion, err := r.probo.GeneratedDocuments.PublishDataList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
+	document, documentVersion, err := r.trustready.GeneratedDocuments.PublishDataList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceAlreadyExists) {
 			return nil, gqlutils.Conflict(ctx, err)
@@ -430,12 +430,12 @@ func (r *mutationResolver) PublishDataList(ctx context.Context, input types.Publ
 
 // PublishAssetList is the resolver for the publishAssetList field.
 func (r *mutationResolver) PublishAssetList(ctx context.Context, input types.PublishAssetListInput) (*types.PublishAssetListPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionAssetPublish)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionAssetPublish)
 	if err != nil {
 		return nil, err
 	}
 
-	document, documentVersion, err := r.probo.GeneratedDocuments.PublishAssetList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
+	document, documentVersion, err := r.trustready.GeneratedDocuments.PublishAssetList(ctx, scope, input.OrganizationID, input.ApproverIds, input.Minor)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceAlreadyExists) {
 			return nil, gqlutils.Conflict(ctx, err)

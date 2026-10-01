@@ -9,12 +9,9 @@ import (
 	"context"
 	"errors"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
@@ -22,7 +19,10 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 	"github.com/DhruvWork/trustready-grc/pkg/task"
 	tasksync "github.com/DhruvWork/trustready-grc/pkg/task/sync"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // CreateTask is the resolver for the createTask field.
@@ -292,7 +292,7 @@ func (r *taskResolver) AssignedTo(ctx context.Context, obj *types.Task) (*types.
 
 // Organization is the resolver for the organization field.
 func (r *taskResolver) Organization(ctx context.Context, obj *types.Task) (*types.Organization, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGet); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGet); err != nil {
 		return nil, err
 	}
 
@@ -318,7 +318,7 @@ func (r *taskResolver) Measure(ctx context.Context, obj *types.Task) (*types.Mea
 		return nil, nil
 	}
 
-	if _, err := r.authorize(ctx, obj.Measure.ID, probo.ActionMeasureGet); err != nil {
+	if _, err := r.authorize(ctx, obj.Measure.ID, trustready.ActionMeasureGet); err != nil {
 		return nil, err
 	}
 
@@ -340,7 +340,7 @@ func (r *taskResolver) Measure(ctx context.Context, obj *types.Task) (*types.Mea
 
 // Evidences is the resolver for the evidences field.
 func (r *taskResolver) Evidences(ctx context.Context, obj *types.Task, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.EvidenceOrderBy) (*types.EvidenceConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionEvidenceList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionEvidenceList)
 	if err != nil {
 		return nil, err
 	}
@@ -359,7 +359,7 @@ func (r *taskResolver) Evidences(ctx context.Context, obj *types.Task, first *in
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.Evidences.ListForTaskID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.Evidences.ListForTaskID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list task evidences", log.Error(err))
 		return nil, gqlutils.Internal(ctx)

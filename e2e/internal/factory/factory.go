@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -2205,15 +2205,15 @@ func CreateConnector(c *testutil.Client, attrs ...Attrs) string {
 	input := map[string]any{
 		"organizationId": a.getString("organizationId", c.GetOrganizationID().String()),
 		"provider":       a.getString("provider", "AWS"),
-		"awsRoleArn":     a.getString("awsRoleArn", "arn:aws:iam::123456789012:role/ProboAudit"),
+		"awsRoleArn":     a.getString("awsRoleArn", "arn:aws:iam::123456789012:role/TrustReadyAudit"),
 	}
 
 	if provider := a.getString("provider", "AWS"); provider == "GCP" {
 		input = map[string]any{
 			"organizationId":              a.getString("organizationId", c.GetOrganizationID().String()),
 			"provider":                    "GCP",
-			"gcpWorkloadIdentityProvider": a.getString("gcpWorkloadIdentityProvider", "projects/123456789012/locations/global/workloadIdentityPools/probo-pool/providers/probo"),
-			"gcpServiceAccountEmail":      a.getString("gcpServiceAccountEmail", "probo-audit@example-project.iam.gserviceaccount.com"),
+			"gcpWorkloadIdentityProvider": a.getString("gcpWorkloadIdentityProvider", "projects/123456789012/locations/global/workloadIdentityPools/trustready-pool/providers/trustready"),
+			"gcpServiceAccountEmail":      a.getString("gcpServiceAccountEmail", "trustready-audit@example-project.iam.gserviceaccount.com"),
 		}
 	}
 

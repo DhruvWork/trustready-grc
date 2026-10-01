@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -60,7 +60,7 @@ func TestSupabaseDriverUnknownOrganization(t *testing.T) {
 	rec := newRecorder(t, "testdata/supabase_unknown_organization", "SUPABASE_TOKEN", dropResponseHeaders("Set-Cookie", "X-Gotrue-Id"))
 	client := newVCRClient(rec, bearerAuth(os.Getenv("SUPABASE_TOKEN")))
 
-	_, err := NewSupabaseDriver(client, "probo-missing-org", "https://api.supabase.com/v1").ListAccounts(context.Background())
+	_, err := NewSupabaseDriver(client, "trustready-missing-org", "https://api.supabase.com/v1").ListAccounts(context.Background())
 
 	rejected, ok := errors.AsType[*SettingRejectedError](err)
 	require.Truef(t, ok, "expected a rejected slug, got %v", err)

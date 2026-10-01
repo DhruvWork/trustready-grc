@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ func TestRegistration_ResolveInitialAccount(t *testing.T) {
 
 		c := &coredata.Connector{Provider: coredata.ConnectorProviderAWS}
 		require.NoError(t, c.SetSettings(coredata.AWSConnectorSettings{
-			RoleARN: "arn:aws-us-gov:iam::123456789012:role/ProboAudit",
+			RoleARN: "arn:aws-us-gov:iam::123456789012:role/TrustReadyAudit",
 		}))
 
 		id, name, err := reg.ResolveInitialAccount(c)
@@ -60,7 +60,7 @@ func TestRegistration_ResolveInitialAccount(t *testing.T) {
 
 		c := &coredata.Connector{Provider: coredata.ConnectorProviderGCP}
 		require.NoError(t, c.SetSettings(coredata.GCPConnectorSettings{
-			WorkloadIdentityProvider: "projects/9876543210/locations/global/workloadIdentityPools/probo/providers/probo",
+			WorkloadIdentityProvider: "projects/9876543210/locations/global/workloadIdentityPools/trustready/providers/trustready",
 		}))
 
 		id, name, err := reg.ResolveInitialAccount(c)

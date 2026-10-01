@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +26,10 @@ import "errors"
 
 // ErrPrivilegedHelperRequired is returned when a non-root process asks for
 // elevation on macOS. Browser enrollment must go through the signed
-// Probo Agent.app XPC helper (installed by the PKG); CLI install/uninstall
+// TrustReady Agent.app XPC helper (installed by the PKG); CLI install/uninstall
 // require sudo.
 var ErrPrivilegedHelperRequired = errors.New(
-	"macOS elevation requires the signed Probo Agent.app privileged helper " +
+	"macOS elevation requires the signed TrustReady Agent.app privileged helper " +
 		"(browser enroll via PKG-installed helper) or sudo " +
 		"(CLI: sudo trustready-agent install|uninstall)",
 )

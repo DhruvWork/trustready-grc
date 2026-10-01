@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -74,7 +74,7 @@ const maxPaginationPages = 500
 // number of pagination pages without reaching the end of the result set.
 var ErrPaginationLimitReached = fmt.Errorf("pagination limit of %d pages reached", maxPaginationPages)
 
-// InstallRejectedError marks a connection the provider accepted but Probo
+// InstallRejectedError marks a connection the provider accepted but TrustReady
 // refuses to keep. Message is shown to the user who connected it.
 type InstallRejectedError struct {
 	Message string
@@ -181,7 +181,7 @@ func isDotSegment(segment string) bool {
 
 // Driver defines the interface for fetching accounts from an access or
 // identity source. Each driver implementation corresponds to a specific
-// system (e.g. Google Workspace, AWS IAM, Probo memberships, CSV).
+// system (e.g. Google Workspace, AWS IAM, TrustReady memberships, CSV).
 //
 // All sources in a campaign's scope return "who actually has access" data.
 type Driver interface {

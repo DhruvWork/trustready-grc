@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Probo Inc <hello@probo.com>.
+ * Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -45,26 +45,26 @@ data "azuread_service_principal" "msgraph" {
   client_id = data.azuread_application_published_app_ids.well_known.result.MicrosoftGraph
 }
 
-resource "azuread_application_registration" "probo" {
+resource "azuread_application_registration" "trustready" {
   display_name = var.application_display_name
 }
 
-resource "azuread_application_federated_identity_credential" "probo" {
-  application_id = azuread_application_registration.probo.id
+resource "azuread_application_federated_identity_credential" "trustready" {
+  application_id = azuread_application_registration.trustready.id
   display_name   = var.federated_credential_name
-  issuer         = var.probo_issuer_url
-  subject        = var.probo_subject
+  issuer         = var.trustready_issuer_url
+  subject        = var.trustready_subject
   audiences      = ["api://AzureADTokenExchange"]
 }
 
-resource "azuread_service_principal" "probo" {
-  client_id = azuread_application_registration.probo.client_id
+resource "azuread_service_principal" "trustready" {
+  client_id = azuread_application_registration.trustready.client_id
 }
 
 resource "azurerm_role_assignment" "reader" {
   scope                            = "/subscriptions/${var.subscription_id}"
   role_definition_name             = "Reader"
-  principal_id                     = azuread_service_principal.probo.object_id
+  principal_id                     = azuread_service_principal.trustready.object_id
   skip_service_principal_aad_check = true
 }
 
@@ -72,7 +72,7 @@ resource "azuread_app_role_assignment" "directory_read" {
   count = var.grant_directory_read ? 1 : 0
 
   app_role_id         = data.azuread_service_principal.msgraph[0].app_role_ids["Directory.Read.All"]
-  principal_object_id = azuread_service_principal.probo.object_id
+  principal_object_id = azuread_service_principal.trustready.object_id
   resource_object_id  = data.azuread_service_principal.msgraph[0].object_id
 }
 
@@ -80,6 +80,6 @@ resource "azuread_app_role_assignment" "audit_log_read" {
   count = var.grant_directory_read ? 1 : 0
 
   app_role_id         = data.azuread_service_principal.msgraph[0].app_role_ids["AuditLog.Read.All"]
-  principal_object_id = azuread_service_principal.probo.object_id
+  principal_object_id = azuread_service_principal.trustready.object_id
   resource_object_id  = data.azuread_service_principal.msgraph[0].object_id
 }

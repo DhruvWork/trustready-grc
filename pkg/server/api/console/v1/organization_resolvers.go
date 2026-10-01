@@ -10,7 +10,6 @@ import (
 	"errors"
 	"fmt"
 
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/accessreview"
 	"github.com/DhruvWork/trustready-grc/pkg/agentexecution"
 	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/management"
@@ -19,7 +18,6 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/itam"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 	"github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
@@ -29,17 +27,19 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils/types/cursor"
 	"github.com/DhruvWork/trustready-grc/pkg/task"
 	tasksync "github.com/DhruvWork/trustready-grc/pkg/task/sync"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"go.gearno.de/kit/log"
 )
 
 // UpdateOrganizationContext is the resolver for the updateOrganizationContext field.
 func (r *mutationResolver) UpdateOrganizationContext(ctx context.Context, input types.UpdateOrganizationContextInput) (*types.UpdateOrganizationContextPayload, error) {
-	scope, err := r.authorize(ctx, input.OrganizationID, probo.ActionOrganizationContextUpdate)
+	scope, err := r.authorize(ctx, input.OrganizationID, trustready.ActionOrganizationContextUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	req := probo.UpdateOrganizationContextRequest{
+	req := trustready.UpdateOrganizationContextRequest{
 		OrganizationID: input.OrganizationID,
 		Product:        gqlutils.UnwrapOmittable(input.Product),
 		Architecture:   gqlutils.UnwrapOmittable(input.Architecture),
@@ -48,7 +48,7 @@ func (r *mutationResolver) UpdateOrganizationContext(ctx context.Context, input 
 		Customers:      gqlutils.UnwrapOmittable(input.Customers),
 	}
 
-	organizationContext, err := r.probo.Organizations.UpdateContext(ctx, scope, req)
+	organizationContext, err := r.trustready.Organizations.UpdateContext(ctx, scope, req)
 	if err != nil {
 		if validationErrors, ok := errors.AsType[validator.ValidationErrors](err); ok {
 			return nil, gqlutils.InvalidValidationErrors(ctx, validationErrors)
@@ -66,7 +66,7 @@ func (r *mutationResolver) UpdateOrganizationContext(ctx context.Context, input 
 
 // Logo is the resolver for the logo field.
 func (r *organizationResolver) Logo(ctx context.Context, obj *types.Organization) (*types.File, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGetLogoUrl); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGetLogoUrl); err != nil {
 		return nil, err
 	}
 
@@ -79,7 +79,7 @@ func (r *organizationResolver) Logo(ctx context.Context, obj *types.Organization
 
 // HorizontalLogo is the resolver for the horizontalLogo field.
 func (r *organizationResolver) HorizontalLogo(ctx context.Context, obj *types.Organization) (*types.File, error) {
-	if _, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationGetHorizontalLogoUrl); err != nil {
+	if _, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationGetHorizontalLogoUrl); err != nil {
 		return nil, err
 	}
 
@@ -92,12 +92,12 @@ func (r *organizationResolver) HorizontalLogo(ctx context.Context, obj *types.Or
 
 // Context is the resolver for the context field.
 func (r *organizationResolver) Context(ctx context.Context, obj *types.Organization) (*types.OrganizationContext, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionOrganizationContextGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionOrganizationContextGet)
 	if err != nil {
 		return nil, err
 	}
 
-	orgContext, err := r.probo.Organizations.GetContext(ctx, scope, obj.ID)
+	orgContext, err := r.trustready.Organizations.GetContext(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot load organization context", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -163,12 +163,12 @@ func (r *organizationResolver) Profiles(ctx context.Context, obj *types.Organiza
 
 // MeasureCategories is the resolver for the measureCategories field.
 func (r *organizationResolver) MeasureCategories(ctx context.Context, obj *types.Organization) ([]string, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionMeasureList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionMeasureList)
 	if err != nil {
 		return nil, err
 	}
 
-	categories, err := r.probo.Measures.ListDistinctCategoriesForOrganizationID(ctx, scope, obj.ID)
+	categories, err := r.trustready.Measures.ListDistinctCategoriesForOrganizationID(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list measure categories", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -237,12 +237,12 @@ func (r *organizationResolver) AccessReviewCampaigns(ctx context.Context, obj *t
 
 // AssetListDocument is the resolver for the assetListDocument field.
 func (r *organizationResolver) AssetListDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	assetDocumentID, err := r.probo.GeneratedDocuments.GetAssetListDocumentID(ctx, scope, obj.ID)
+	assetDocumentID, err := r.trustready.GeneratedDocuments.GetAssetListDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		return nil, fmt.Errorf("cannot get asset list document ID: %w", err)
 	}
@@ -251,7 +251,7 @@ func (r *organizationResolver) AssetListDocument(ctx context.Context, obj *types
 		return nil, nil
 	}
 
-	doc, err := r.probo.Documents.Get(ctx, scope, *assetDocumentID)
+	doc, err := r.trustready.Documents.Get(ctx, scope, *assetDocumentID)
 	if err != nil {
 		return nil, fmt.Errorf("cannot get asset list document: %w", err)
 	}
@@ -261,7 +261,7 @@ func (r *organizationResolver) AssetListDocument(ctx context.Context, obj *types
 
 // Assets is the resolver for the assets field.
 func (r *organizationResolver) Assets(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.AssetOrderBy) (*types.AssetConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionAssetList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionAssetList)
 	if err != nil {
 		return nil, err
 	}
@@ -280,7 +280,7 @@ func (r *organizationResolver) Assets(ctx context.Context, obj *types.Organizati
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.Assets.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.Assets.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization assets", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -291,12 +291,12 @@ func (r *organizationResolver) Assets(ctx context.Context, obj *types.Organizati
 
 // DataListDocument is the resolver for the dataListDocument field.
 func (r *organizationResolver) DataListDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	dataDocumentID, err := r.probo.GeneratedDocuments.GetDataListDocumentID(ctx, scope, obj.ID)
+	dataDocumentID, err := r.trustready.GeneratedDocuments.GetDataListDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		return nil, fmt.Errorf("cannot get data export document ID: %w", err)
 	}
@@ -305,7 +305,7 @@ func (r *organizationResolver) DataListDocument(ctx context.Context, obj *types.
 		return nil, nil
 	}
 
-	doc, err := r.probo.Documents.Get(ctx, scope, *dataDocumentID)
+	doc, err := r.trustready.Documents.Get(ctx, scope, *dataDocumentID)
 	if err != nil {
 		return nil, fmt.Errorf("cannot get data export document: %w", err)
 	}
@@ -315,7 +315,7 @@ func (r *organizationResolver) DataListDocument(ctx context.Context, obj *types.
 
 // Data is the resolver for the data field.
 func (r *organizationResolver) Data(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.DatumOrderBy) (*types.DatumConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDatumList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDatumList)
 	if err != nil {
 		return nil, err
 	}
@@ -334,7 +334,7 @@ func (r *organizationResolver) Data(ctx context.Context, obj *types.Organization
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.Data.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.Data.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization data", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -345,7 +345,7 @@ func (r *organizationResolver) Data(ctx context.Context, obj *types.Organization
 
 // Audits is the resolver for the audits field.
 func (r *organizationResolver) Audits(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.AuditOrderBy) (*types.AuditConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionAuditList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionAuditList)
 	if err != nil {
 		return nil, err
 	}
@@ -364,7 +364,7 @@ func (r *organizationResolver) Audits(ctx context.Context, obj *types.Organizati
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.Audits.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.Audits.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization audits", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -375,12 +375,12 @@ func (r *organizationResolver) Audits(ctx context.Context, obj *types.Organizati
 
 // FindingsDocument is the resolver for the findingsDocument field.
 func (r *organizationResolver) FindingsDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	findingDocumentID, err := r.probo.GeneratedDocuments.GetFindingsDocumentID(ctx, scope, obj.ID)
+	findingDocumentID, err := r.trustready.GeneratedDocuments.GetFindingsDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		return nil, fmt.Errorf("cannot get finding list document ID: %w", err)
 	}
@@ -389,7 +389,7 @@ func (r *organizationResolver) FindingsDocument(ctx context.Context, obj *types.
 		return nil, nil
 	}
 
-	doc, err := r.probo.Documents.Get(ctx, scope, *findingDocumentID)
+	doc, err := r.trustready.Documents.Get(ctx, scope, *findingDocumentID)
 	if err != nil {
 		return nil, fmt.Errorf("cannot get finding list document: %w", err)
 	}
@@ -399,7 +399,7 @@ func (r *organizationResolver) FindingsDocument(ctx context.Context, obj *types.
 
 // Findings is the resolver for the findings field.
 func (r *organizationResolver) Findings(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.FindingOrder, filter *types.FindingFilter) (*types.FindingConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionFindingList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionFindingList)
 	if err != nil {
 		return nil, err
 	}
@@ -435,7 +435,7 @@ func (r *organizationResolver) Findings(ctx context.Context, obj *types.Organiza
 
 	findingFilter := coredata.NewFindingFilter(kind, status, priority, ownerID, auditID)
 
-	page, err := r.probo.Findings.ListForOrganizationID(ctx, scope, obj.ID, cursor, findingFilter)
+	page, err := r.trustready.Findings.ListForOrganizationID(ctx, scope, obj.ID, cursor, findingFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization findings", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -495,7 +495,7 @@ func (r *organizationResolver) AuditLogEntries(ctx context.Context, obj *types.O
 
 // SlackConnections is the resolver for the slackConnections field.
 func (r *organizationResolver) SlackConnections(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey) (*types.SlackConnectionConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionSlackConnectionList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionSlackConnectionList)
 	if err != nil {
 		return nil, err
 	}
@@ -510,7 +510,7 @@ func (r *organizationResolver) SlackConnections(ctx context.Context, obj *types.
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.Connectors.ListForOrganizationID(ctx, scope, obj.ID, cursor, filter)
+	page, err := r.trustready.Connectors.ListForOrganizationID(ctx, scope, obj.ID, cursor, filter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization slack connections", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -521,12 +521,12 @@ func (r *organizationResolver) SlackConnections(ctx context.Context, obj *types.
 
 // Connectors is the resolver for the connectors field.
 func (r *organizationResolver) Connectors(ctx context.Context, obj *types.Organization, filter *types.ConnectorFilter) ([]*types.Connector, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionConnectorList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionConnectorList)
 	if err != nil {
 		return nil, err
 	}
 
-	connectors, err := r.probo.Connectors.ListAllForOrganizationID(ctx, scope, obj.ID)
+	connectors, err := r.trustready.Connectors.ListAllForOrganizationID(ctx, scope, obj.ID)
 	if err != nil {
 		panic(fmt.Errorf("cannot list organization connectors: %w", err))
 	}
@@ -672,7 +672,7 @@ func (r *organizationResolver) SlackbotInstallation(ctx context.Context, obj *ty
 		return nil, nil
 	}
 
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionConnectorInitiate)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionConnectorInitiate)
 	if err != nil {
 		if gqlutils.IsForbidden(err) {
 			return nil, nil
@@ -709,7 +709,7 @@ func (r *organizationResolver) SlackbotChannels(ctx context.Context, obj *types.
 		return &types.SlackbotChannelPage{Channels: []*types.SlackbotChannel{}}, nil
 	}
 
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionConnectorInitiate)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionConnectorInitiate)
 	if err != nil {
 		if gqlutils.IsForbidden(err) {
 			return &types.SlackbotChannelPage{Channels: []*types.SlackbotChannel{}}, nil
@@ -759,7 +759,7 @@ func (r *organizationResolver) SlackbotChannels(ctx context.Context, obj *types.
 
 // Controls is the resolver for the controls field.
 func (r *organizationResolver) Controls(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ControlOrderBy, filter *types.ControlFilter) (*types.ControlConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionControlList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionControlList)
 	if err != nil {
 		return nil, err
 	}
@@ -783,7 +783,7 @@ func (r *organizationResolver) Controls(ctx context.Context, obj *types.Organiza
 		controlFilter = coredata.NewControlFilter(filter.Query)
 	}
 
-	page, err := r.probo.Controls.ListForOrganizationID(ctx, scope, obj.ID, cursor, controlFilter)
+	page, err := r.trustready.Controls.ListForOrganizationID(ctx, scope, obj.ID, cursor, controlFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list controls", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -794,7 +794,7 @@ func (r *organizationResolver) Controls(ctx context.Context, obj *types.Organiza
 
 // StatementsOfApplicability is the resolver for the statementsOfApplicability field.
 func (r *organizationResolver) StatementsOfApplicability(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.StatementOfApplicabilityOrderBy) (*types.StatementOfApplicabilityConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionStatementOfApplicabilityList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionStatementOfApplicabilityList)
 	if err != nil {
 		return nil, err
 	}
@@ -813,7 +813,7 @@ func (r *organizationResolver) StatementsOfApplicability(ctx context.Context, ob
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.StatementsOfApplicability.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.StatementsOfApplicability.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization statements_of_applicability", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -824,7 +824,7 @@ func (r *organizationResolver) StatementsOfApplicability(ctx context.Context, ob
 
 // DataProtectionImpactAssessments is the resolver for the dataProtectionImpactAssessments field.
 func (r *organizationResolver) DataProtectionImpactAssessments(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.DataProtectionImpactAssessmentOrderBy) (*types.DataProtectionImpactAssessmentConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDataProtectionImpactAssessmentList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDataProtectionImpactAssessmentList)
 	if err != nil {
 		return nil, err
 	}
@@ -843,7 +843,7 @@ func (r *organizationResolver) DataProtectionImpactAssessments(ctx context.Conte
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.DataProtectionImpactAssessments.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.DataProtectionImpactAssessments.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization data protection impact assessments", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -854,12 +854,12 @@ func (r *organizationResolver) DataProtectionImpactAssessments(ctx context.Conte
 
 // DataProtectionImpactAssessmentsDocument is the resolver for the dataProtectionImpactAssessmentsDocument field.
 func (r *organizationResolver) DataProtectionImpactAssessmentsDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	documentID, err := r.probo.GeneratedDocuments.GetDataProtectionImpactAssessmentsDocumentID(ctx, scope, obj.ID)
+	documentID, err := r.trustready.GeneratedDocuments.GetDataProtectionImpactAssessmentsDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get DPIA list document ID", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -869,7 +869,7 @@ func (r *organizationResolver) DataProtectionImpactAssessmentsDocument(ctx conte
 		return nil, nil
 	}
 
-	document, err := r.probo.Documents.Get(ctx, scope, *documentID)
+	document, err := r.trustready.Documents.Get(ctx, scope, *documentID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -885,7 +885,7 @@ func (r *organizationResolver) DataProtectionImpactAssessmentsDocument(ctx conte
 
 // TransferImpactAssessments is the resolver for the transferImpactAssessments field.
 func (r *organizationResolver) TransferImpactAssessments(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.TransferImpactAssessmentOrderBy) (*types.TransferImpactAssessmentConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionTransferImpactAssessmentList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionTransferImpactAssessmentList)
 	if err != nil {
 		return nil, err
 	}
@@ -904,7 +904,7 @@ func (r *organizationResolver) TransferImpactAssessments(ctx context.Context, ob
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.TransferImpactAssessments.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.TransferImpactAssessments.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization transfer impact assessments", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -915,12 +915,12 @@ func (r *organizationResolver) TransferImpactAssessments(ctx context.Context, ob
 
 // TransferImpactAssessmentsDocument is the resolver for the transferImpactAssessmentsDocument field.
 func (r *organizationResolver) TransferImpactAssessmentsDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	documentID, err := r.probo.GeneratedDocuments.GetTransferImpactAssessmentsDocumentID(ctx, scope, obj.ID)
+	documentID, err := r.trustready.GeneratedDocuments.GetTransferImpactAssessmentsDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get TIA list document ID", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -930,7 +930,7 @@ func (r *organizationResolver) TransferImpactAssessmentsDocument(ctx context.Con
 		return nil, nil
 	}
 
-	document, err := r.probo.Documents.Get(ctx, scope, *documentID)
+	document, err := r.trustready.Documents.Get(ctx, scope, *documentID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -946,7 +946,7 @@ func (r *organizationResolver) TransferImpactAssessmentsDocument(ctx context.Con
 
 // Documents is the resolver for the documents field.
 func (r *organizationResolver) Documents(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.DocumentOrderBy, filter *types.DocumentFilter) (*types.DocumentConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentList)
 	if err != nil {
 		return nil, err
 	}
@@ -975,7 +975,7 @@ func (r *organizationResolver) Documents(ctx context.Context, obj *types.Organiz
 			WithPublished(filter.Published)
 	}
 
-	page, err := r.probo.Documents.ListByOrganizationID(ctx, scope, obj.ID, cursor, documentFilter)
+	page, err := r.trustready.Documents.ListByOrganizationID(ctx, scope, obj.ID, cursor, documentFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization documents", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -986,7 +986,7 @@ func (r *organizationResolver) Documents(ctx context.Context, obj *types.Organiz
 
 // Frameworks is the resolver for the frameworks field.
 func (r *organizationResolver) Frameworks(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.FrameworkOrderBy) (*types.FrameworkConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionFrameworkList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionFrameworkList)
 	if err != nil {
 		return nil, err
 	}
@@ -1005,7 +1005,7 @@ func (r *organizationResolver) Frameworks(ctx context.Context, obj *types.Organi
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.Frameworks.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.Frameworks.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization frameworks", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1016,7 +1016,7 @@ func (r *organizationResolver) Frameworks(ctx context.Context, obj *types.Organi
 
 // Measures is the resolver for the measures field.
 func (r *organizationResolver) Measures(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.MeasureOrderBy, filter *types.MeasureFilter) (*types.MeasureConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionMeasureList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionMeasureList)
 	if err != nil {
 		return nil, err
 	}
@@ -1040,7 +1040,7 @@ func (r *organizationResolver) Measures(ctx context.Context, obj *types.Organiza
 		measureFilter = coredata.NewMeasureFilter(filter.Query, filter.State, filter.Category)
 	}
 
-	page, err := r.probo.Measures.ListForOrganizationID(ctx, scope, obj.ID, cursor, measureFilter)
+	page, err := r.trustready.Measures.ListForOrganizationID(ctx, scope, obj.ID, cursor, measureFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization measures", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1051,12 +1051,12 @@ func (r *organizationResolver) Measures(ctx context.Context, obj *types.Organiza
 
 // ObligationsDocument is the resolver for the obligationsDocument field.
 func (r *organizationResolver) ObligationsDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	obligationDocumentID, err := r.probo.GeneratedDocuments.GetObligationsDocumentID(ctx, scope, obj.ID)
+	obligationDocumentID, err := r.trustready.GeneratedDocuments.GetObligationsDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		return nil, fmt.Errorf("cannot get obligation list document ID: %w", err)
 	}
@@ -1065,7 +1065,7 @@ func (r *organizationResolver) ObligationsDocument(ctx context.Context, obj *typ
 		return nil, nil
 	}
 
-	doc, err := r.probo.Documents.Get(ctx, scope, *obligationDocumentID)
+	doc, err := r.trustready.Documents.Get(ctx, scope, *obligationDocumentID)
 	if err != nil {
 		return nil, fmt.Errorf("cannot get obligation list document: %w", err)
 	}
@@ -1075,7 +1075,7 @@ func (r *organizationResolver) ObligationsDocument(ctx context.Context, obj *typ
 
 // Obligations is the resolver for the obligations field.
 func (r *organizationResolver) Obligations(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ObligationOrderBy) (*types.ObligationConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionObligationList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionObligationList)
 	if err != nil {
 		return nil, err
 	}
@@ -1094,7 +1094,7 @@ func (r *organizationResolver) Obligations(ctx context.Context, obj *types.Organ
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.Obligations.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.Obligations.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization obligations", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1105,12 +1105,12 @@ func (r *organizationResolver) Obligations(ctx context.Context, obj *types.Organ
 
 // BusinessFunctionsDocument is the resolver for the businessFunctionsDocument field.
 func (r *organizationResolver) BusinessFunctionsDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	businessFunctionDocumentID, err := r.probo.GeneratedDocuments.GetBusinessFunctionsDocumentID(ctx, scope, obj.ID)
+	businessFunctionDocumentID, err := r.trustready.GeneratedDocuments.GetBusinessFunctionsDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get business function list document ID", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1120,7 +1120,7 @@ func (r *organizationResolver) BusinessFunctionsDocument(ctx context.Context, ob
 		return nil, nil
 	}
 
-	doc, err := r.probo.Documents.Get(ctx, scope, *businessFunctionDocumentID)
+	doc, err := r.trustready.Documents.Get(ctx, scope, *businessFunctionDocumentID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -1136,7 +1136,7 @@ func (r *organizationResolver) BusinessFunctionsDocument(ctx context.Context, ob
 
 // BusinessFunctions is the resolver for the businessFunctions field.
 func (r *organizationResolver) BusinessFunctions(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.BusinessFunctionOrderBy, filter *types.BusinessFunctionFilter) (*types.BusinessFunctionConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionBusinessFunctionList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionBusinessFunctionList)
 	if err != nil {
 		return nil, err
 	}
@@ -1162,7 +1162,7 @@ func (r *organizationResolver) BusinessFunctions(ctx context.Context, obj *types
 
 	businessFunctionFilter := coredata.NewBusinessFunctionFilter(classification)
 
-	pageResult, err := r.probo.BusinessFunctions.ListForOrganizationID(ctx, scope, obj.ID, cursor, businessFunctionFilter)
+	pageResult, err := r.trustready.BusinessFunctions.ListForOrganizationID(ctx, scope, obj.ID, cursor, businessFunctionFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization business functions", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1173,12 +1173,12 @@ func (r *organizationResolver) BusinessFunctions(ctx context.Context, obj *types
 
 // AiSystemsDocument is the resolver for the aiSystemsDocument field.
 func (r *organizationResolver) AiSystemsDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	aiSystemDocumentID, err := r.probo.GeneratedDocuments.GetAiSystemsDocumentID(ctx, scope, obj.ID)
+	aiSystemDocumentID, err := r.trustready.GeneratedDocuments.GetAiSystemsDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get ai system list document ID", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1188,7 +1188,7 @@ func (r *organizationResolver) AiSystemsDocument(ctx context.Context, obj *types
 		return nil, nil
 	}
 
-	doc, err := r.probo.Documents.Get(ctx, scope, *aiSystemDocumentID)
+	doc, err := r.trustready.Documents.Get(ctx, scope, *aiSystemDocumentID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -1204,7 +1204,7 @@ func (r *organizationResolver) AiSystemsDocument(ctx context.Context, obj *types
 
 // AiSystems is the resolver for the aiSystems field.
 func (r *organizationResolver) AiSystems(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.AiSystemOrderBy, filter *types.AiSystemFilter) (*types.AiSystemConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionAiSystemList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionAiSystemList)
 	if err != nil {
 		return nil, err
 	}
@@ -1235,7 +1235,7 @@ func (r *organizationResolver) AiSystems(ctx context.Context, obj *types.Organiz
 
 	aiSystemFilter := coredata.NewAiSystemFilter(status, riskClassification)
 
-	pageResult, err := r.probo.AiSystems.ListForOrganizationID(ctx, scope, obj.ID, cursor, aiSystemFilter)
+	pageResult, err := r.trustready.AiSystems.ListForOrganizationID(ctx, scope, obj.ID, cursor, aiSystemFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization ai systems", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1246,7 +1246,7 @@ func (r *organizationResolver) AiSystems(ctx context.Context, obj *types.Organiz
 
 // ProcessingActivities is the resolver for the processingActivities field.
 func (r *organizationResolver) ProcessingActivities(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ProcessingActivityOrderBy) (*types.ProcessingActivityConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionProcessingActivityList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionProcessingActivityList)
 	if err != nil {
 		return nil, err
 	}
@@ -1265,7 +1265,7 @@ func (r *organizationResolver) ProcessingActivities(ctx context.Context, obj *ty
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.ProcessingActivities.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.ProcessingActivities.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization processing activities", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1276,12 +1276,12 @@ func (r *organizationResolver) ProcessingActivities(ctx context.Context, obj *ty
 
 // ProcessingActivitiesDocument is the resolver for the processingActivitiesDocument field.
 func (r *organizationResolver) ProcessingActivitiesDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	documentID, err := r.probo.GeneratedDocuments.GetProcessingActivitiesDocumentID(ctx, scope, obj.ID)
+	documentID, err := r.trustready.GeneratedDocuments.GetProcessingActivitiesDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get processing activities document ID", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1291,7 +1291,7 @@ func (r *organizationResolver) ProcessingActivitiesDocument(ctx context.Context,
 		return nil, nil
 	}
 
-	document, err := r.probo.Documents.Get(ctx, scope, *documentID)
+	document, err := r.trustready.Documents.Get(ctx, scope, *documentID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -1307,7 +1307,7 @@ func (r *organizationResolver) ProcessingActivitiesDocument(ctx context.Context,
 
 // RightsRequests is the resolver for the rightsRequests field.
 func (r *organizationResolver) RightsRequests(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.RightsRequestOrderBy) (*types.RightsRequestConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionRightsRequestList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionRightsRequestList)
 	if err != nil {
 		return nil, err
 	}
@@ -1326,7 +1326,7 @@ func (r *organizationResolver) RightsRequests(ctx context.Context, obj *types.Or
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.RightsRequests.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.RightsRequests.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization rights requests", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1337,7 +1337,7 @@ func (r *organizationResolver) RightsRequests(ctx context.Context, obj *types.Or
 
 // Risks is the resolver for the risks field.
 func (r *organizationResolver) Risks(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.RiskOrderBy, filter *types.RiskFilter) (*types.RiskConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionRiskList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionRiskList)
 	if err != nil {
 		return nil, err
 	}
@@ -1361,7 +1361,7 @@ func (r *organizationResolver) Risks(ctx context.Context, obj *types.Organizatio
 		riskFilter = coredata.NewRiskFilter(filter.Query)
 	}
 
-	page, err := r.probo.Risks.ListForOrganizationID(ctx, scope, obj.ID, cursor, riskFilter)
+	page, err := r.trustready.Risks.ListForOrganizationID(ctx, scope, obj.ID, cursor, riskFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization risks", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1372,12 +1372,12 @@ func (r *organizationResolver) Risks(ctx context.Context, obj *types.Organizatio
 
 // RisksDocument is the resolver for the risksDocument field.
 func (r *organizationResolver) RisksDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	documentID, err := r.probo.GeneratedDocuments.GetRisksDocumentID(ctx, scope, obj.ID)
+	documentID, err := r.trustready.GeneratedDocuments.GetRisksDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get risks document ID", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1387,7 +1387,7 @@ func (r *organizationResolver) RisksDocument(ctx context.Context, obj *types.Org
 		return nil, nil
 	}
 
-	document, err := r.probo.Documents.Get(ctx, scope, *documentID)
+	document, err := r.trustready.Documents.Get(ctx, scope, *documentID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -1598,7 +1598,7 @@ func (r *organizationResolver) CompliancePortals(ctx context.Context, obj *types
 
 // CookieBanners is the resolver for the cookieBanners field.
 func (r *organizationResolver) CookieBanners(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.CookieBannerOrderBy) (*types.CookieBannerConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionCookieBannerList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionCookieBannerList)
 	if err != nil {
 		return nil, err
 	}
@@ -1630,7 +1630,7 @@ func (r *organizationResolver) CookieBanners(ctx context.Context, obj *types.Org
 
 // ThirdParties is the resolver for the thirdParties field.
 func (r *organizationResolver) ThirdParties(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.ThirdPartyOrderBy, filter *types.ThirdPartyFilter) (*types.ThirdPartyConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionThirdPartyList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionThirdPartyList)
 	if err != nil {
 		return nil, err
 	}
@@ -1660,7 +1660,7 @@ func (r *organizationResolver) ThirdParties(ctx context.Context, obj *types.Orga
 
 	thirdPartyFilter := coredata.NewThirdPartyFilter(level, query, nil, nil)
 
-	page, err := r.probo.ThirdParties.ListForOrganizationID(ctx, scope, obj.ID, cursor, thirdPartyFilter)
+	page, err := r.trustready.ThirdParties.ListForOrganizationID(ctx, scope, obj.ID, cursor, thirdPartyFilter)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization thirdParties", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1671,12 +1671,12 @@ func (r *organizationResolver) ThirdParties(ctx context.Context, obj *types.Orga
 
 // ThirdPartiesDocument is the resolver for the thirdPartiesDocument field.
 func (r *organizationResolver) ThirdPartiesDocument(ctx context.Context, obj *types.Organization) (*types.Document, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionDocumentGet)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionDocumentGet)
 	if err != nil {
 		return nil, err
 	}
 
-	documentID, err := r.probo.GeneratedDocuments.GetThirdPartiesDocumentID(ctx, scope, obj.ID)
+	documentID, err := r.trustready.GeneratedDocuments.GetThirdPartiesDocumentID(ctx, scope, obj.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot get thirdParties document ID", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1686,7 +1686,7 @@ func (r *organizationResolver) ThirdPartiesDocument(ctx context.Context, obj *ty
 		return nil, nil
 	}
 
-	document, err := r.probo.Documents.Get(ctx, scope, *documentID)
+	document, err := r.trustready.Documents.Get(ctx, scope, *documentID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, nil
@@ -1731,7 +1731,7 @@ func (r *organizationResolver) Devices(ctx context.Context, obj *types.Organizat
 
 // WebhookSubscriptions is the resolver for the webhookSubscriptions field.
 func (r *organizationResolver) WebhookSubscriptions(ctx context.Context, obj *types.Organization, first *int, after *page.CursorKey, last *int, before *page.CursorKey, orderBy *types.WebhookSubscriptionOrderBy) (*types.WebhookSubscriptionConnection, error) {
-	scope, err := r.authorize(ctx, obj.ID, probo.ActionWebhookSubscriptionList)
+	scope, err := r.authorize(ctx, obj.ID, trustready.ActionWebhookSubscriptionList)
 	if err != nil {
 		return nil, err
 	}
@@ -1750,7 +1750,7 @@ func (r *organizationResolver) WebhookSubscriptions(ctx context.Context, obj *ty
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	page, err := r.probo.WebhookSubscriptions.ListForOrganizationID(ctx, scope, obj.ID, cursor)
+	page, err := r.trustready.WebhookSubscriptions.ListForOrganizationID(ctx, scope, obj.ID, cursor)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list organization webhook subscriptions", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
@@ -1813,7 +1813,7 @@ func (r *profileConnectionResolver) TotalCount(ctx context.Context, obj *types.P
 
 		return count, nil
 	case *documentVersionResolver:
-		count, err := r.probo.Documents.CountVersionApprovers(ctx, scope, obj.ParentID)
+		count, err := r.trustready.Documents.CountVersionApprovers(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count document version approvers", log.Error(err))
 			return 0, gqlutils.Internal(ctx)

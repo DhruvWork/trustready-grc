@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ interface DocumentListItemProps {
   documentKey: DocumentListItem_document$key;
 }
 
-// A single Probo document entry: title, its document type, and an access action
+// A single TrustReady document entry: title, its document type, and an access action
 // linking to the viewer when authorized.
 export function DocumentListItem({ documentKey }: DocumentListItemProps) {
   const { t } = useTranslation("documents");

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ func TestWriteConfig(t *testing.T) {
 		Unit: trustreadydconfig.UnitConfig{
 			Metrics: trustreadydconfig.MetricsConfig{Addr: "localhost:9090"},
 		},
-		Probod: trustreadydconfig.Config{
+		TrustReadyd: trustreadydconfig.Config{
 			BaseURL:       "http://localhost:8080",
 			EncryptionKey: "test-key",
 		},
@@ -58,8 +58,8 @@ func TestWriteConfig(t *testing.T) {
 	require.NoError(t, err)
 
 	assert.Equal(t, cfg.Unit.Metrics.Addr, loaded.Unit.Metrics.Addr)
-	assert.Equal(t, cfg.Probod.BaseURL, loaded.Probod.BaseURL)
-	assert.Equal(t, cfg.Probod.EncryptionKey, loaded.Probod.EncryptionKey)
+	assert.Equal(t, cfg.TrustReadyd.BaseURL, loaded.TrustReadyd.BaseURL)
+	assert.Equal(t, cfg.TrustReadyd.EncryptionKey, loaded.TrustReadyd.EncryptionKey)
 }
 
 func TestWriteConfig_CreatesDirectory(t *testing.T) {
@@ -67,7 +67,7 @@ func TestWriteConfig_CreatesDirectory(t *testing.T) {
 	configPath := filepath.Join(tmpDir, "nested", "dir", "trustreadyd.yml")
 
 	cfg := &trustreadydconfig.FullConfig{
-		Probod: trustreadydconfig.Config{BaseURL: "http://localhost:8080"},
+		TrustReadyd: trustreadydconfig.Config{BaseURL: "http://localhost:8080"},
 	}
 
 	err := WriteConfig(cfg, configPath, FormatYAML)
@@ -101,7 +101,7 @@ func TestWriteConfig_OmitsOptionalFields(t *testing.T) {
 			Metrics: trustreadydconfig.MetricsConfig{Addr: "localhost:9090"},
 			Tracing: trustreadydconfig.TracingConfig{Addr: ""},
 		},
-		Probod: trustreadydconfig.Config{
+		TrustReadyd: trustreadydconfig.Config{
 			BaseURL:      "http://localhost:8080",
 			ChromeDPAddr: "",
 			Pg: trustreadydconfig.PgConfig{
@@ -158,7 +158,7 @@ func TestWriteConfig_OmitsEmptyOptionalBlocks(t *testing.T) {
 	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
 	cfg := &trustreadydconfig.FullConfig{
-		Probod: trustreadydconfig.Config{
+		TrustReadyd: trustreadydconfig.Config{
 			BaseURL:       "http://localhost:8080",
 			EncryptionKey: "test-key",
 			Api: trustreadydconfig.APIConfig{
@@ -225,7 +225,7 @@ func TestWriteConfig_OmitsEmptyOptionalBlocks(t *testing.T) {
 
 	llm, ok := trustreadyd["llm"].(map[string]any)
 	require.True(t, ok)
-	assert.NotContains(t, llm, "probo")
+	assert.NotContains(t, llm, "trustready")
 	assert.NotContains(t, llm, "tools")
 }
 
@@ -234,7 +234,7 @@ func TestWriteConfig_OmitsEmptyProxyProtocolAndCorsSlices(t *testing.T) {
 	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
 	cfg := &trustreadydconfig.FullConfig{
-		Probod: trustreadydconfig.Config{
+		TrustReadyd: trustreadydconfig.Config{
 			BaseURL: "http://localhost:8080",
 			Api: trustreadydconfig.APIConfig{
 				Addr: ":8080",
@@ -283,7 +283,7 @@ func TestWriteConfig_OmitsEmptyExtraHeaderFieldsMap(t *testing.T) {
 	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
 	cfg := &trustreadydconfig.FullConfig{
-		Probod: trustreadydconfig.Config{
+		TrustReadyd: trustreadydconfig.Config{
 			BaseURL: "http://localhost:8080",
 			Api: trustreadydconfig.APIConfig{
 				Addr:              ":8080",
@@ -326,7 +326,7 @@ func TestWriteConfig_CompleteConfig(t *testing.T) {
 				MaxQueueSize:  2048,
 			},
 		},
-		Probod: trustreadydconfig.Config{
+		TrustReadyd: trustreadydconfig.Config{
 			BaseURL:       "http://localhost:8080",
 			EncryptionKey: "test-key",
 			ChromeDPAddr:  "localhost:9222",
@@ -375,13 +375,13 @@ func TestWriteConfig_CompleteConfig(t *testing.T) {
 
 	assert.Equal(t, cfg.Unit.Metrics.Addr, loaded.Unit.Metrics.Addr)
 	assert.Equal(t, cfg.Unit.Tracing.MaxBatchSize, loaded.Unit.Tracing.MaxBatchSize)
-	assert.Equal(t, cfg.Probod.Api.Cors.AllowedOrigins, loaded.Probod.Api.Cors.AllowedOrigins)
-	assert.Equal(t, cfg.Probod.Pg.PoolSize, loaded.Probod.Pg.PoolSize)
-	assert.Equal(t, cfg.Probod.Pg.MinPoolSize, loaded.Probod.Pg.MinPoolSize)
-	assert.Equal(t, cfg.Probod.Pg.MaxConnIdleTimeSeconds, loaded.Probod.Pg.MaxConnIdleTimeSeconds)
-	assert.Equal(t, cfg.Probod.Pg.MaxConnLifetimeSeconds, loaded.Probod.Pg.MaxConnLifetimeSeconds)
-	require.Len(t, loaded.Probod.Connectors, 1)
-	assert.Equal(t, "SLACK", loaded.Probod.Connectors[0].Provider)
+	assert.Equal(t, cfg.TrustReadyd.Api.Cors.AllowedOrigins, loaded.TrustReadyd.Api.Cors.AllowedOrigins)
+	assert.Equal(t, cfg.TrustReadyd.Pg.PoolSize, loaded.TrustReadyd.Pg.PoolSize)
+	assert.Equal(t, cfg.TrustReadyd.Pg.MinPoolSize, loaded.TrustReadyd.Pg.MinPoolSize)
+	assert.Equal(t, cfg.TrustReadyd.Pg.MaxConnIdleTimeSeconds, loaded.TrustReadyd.Pg.MaxConnIdleTimeSeconds)
+	assert.Equal(t, cfg.TrustReadyd.Pg.MaxConnLifetimeSeconds, loaded.TrustReadyd.Pg.MaxConnLifetimeSeconds)
+	require.Len(t, loaded.TrustReadyd.Connectors, 1)
+	assert.Equal(t, "SLACK", loaded.TrustReadyd.Connectors[0].Provider)
 }
 
 func TestWriteConfig_JSON(t *testing.T) {
@@ -392,7 +392,7 @@ func TestWriteConfig_JSON(t *testing.T) {
 		Unit: trustreadydconfig.UnitConfig{
 			Metrics: trustreadydconfig.MetricsConfig{Addr: "localhost:9090"},
 		},
-		Probod: trustreadydconfig.Config{
+		TrustReadyd: trustreadydconfig.Config{
 			BaseURL:       "http://localhost:8080",
 			EncryptionKey: "",
 		},
@@ -420,7 +420,7 @@ func TestWriteConfig_JSON(t *testing.T) {
 	require.NoError(t, err)
 
 	assert.Equal(t, cfg.Unit.Metrics.Addr, loaded.Unit.Metrics.Addr)
-	assert.Equal(t, cfg.Probod.BaseURL, loaded.Probod.BaseURL)
+	assert.Equal(t, cfg.TrustReadyd.BaseURL, loaded.TrustReadyd.BaseURL)
 }
 
 func TestWriteConfig_UnsupportedFormat(t *testing.T) {

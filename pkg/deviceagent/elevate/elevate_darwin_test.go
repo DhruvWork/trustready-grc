@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ func TestRunElevatedInstallRequiresPrivilegedHelper(t *testing.T) {
 	t.Parallel()
 
 	err := RunElevatedInstall(
-		"/Library/Probo/trustready-agent",
+		"/Library/TrustReady/trustready-agent",
 		"https://example.com",
 		"token",
 		"/var/lib/trustready-agent",
@@ -43,6 +43,6 @@ func TestRunElevatedInstallRequiresPrivilegedHelper(t *testing.T) {
 func TestRunElevatedUninstallRequiresPrivilegedHelper(t *testing.T) {
 	t.Parallel()
 
-	err := RunElevatedUninstall("/Library/Probo/trustready-agent", "/var/lib/trustready-agent")
+	err := RunElevatedUninstall("/Library/TrustReady/trustready-agent", "/var/lib/trustready-agent")
 	require.ErrorIs(t, err, ErrPrivilegedHelperRequired)
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -55,7 +55,7 @@ import (
 const (
 	// DefaultRepo is the GitHub repository hosting trustready-agent
 	// releases.
-	DefaultRepo = "getprobo/probo"
+	DefaultRepo = "trustready/trustready"
 	// DefaultTagPrefix is the tag prefix used by the agent's release
 	// pipeline. Releases look like `trustready-agent/v0.1.0`.
 	DefaultTagPrefix = "trustready-agent/v"

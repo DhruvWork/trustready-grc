@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -275,7 +275,7 @@ function validateHeaders(label, headers) {
 
     if (CREDENTIAL_HEADERS.has(lowercased)) {
       fail(
-        `${label}: header "${name}" would embed a credential in visible package data — Probo MCP uses OAuth 2.0`,
+        `${label}: header "${name}" would embed a credential in visible package data — TrustReady MCP uses OAuth 2.0`,
       );
     }
   }

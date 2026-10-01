@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -48,7 +48,7 @@ func NewCmdAPI(f *cmdutil.Factory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "api <query>",
 		Short: "Make an authenticated GraphQL request",
-		Long:  "Send a GraphQL query or mutation to the Probo API and print the response.",
+		Long:  "Send a GraphQL query or mutation to the TrustReady API and print the response.",
 		Example: `  # Run a query against the console schema (default)
   prb api 'query { viewer { id email } }'
 

@@ -1,4 +1,4 @@
--- Copyright (c) 2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2026 TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -108,7 +108,7 @@ SET translations = translations || '{"button_opt_out_generic": "拒绝非必要 
 WHERE language = 'zh'
   AND NOT translations ? 'button_opt_out_generic';
 
--- Languages Probo does not ship are added by integrators, so there is no
+-- Languages TrustReady does not ship are added by integrators, so there is no
 -- localized neutral label to seed. Reuse their own reject-all wording rather
 -- than injecting English, which would read worse than the phrase it replaces.
 

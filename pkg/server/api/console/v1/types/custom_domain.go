@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ func convertDNSRecords(d *coredata.CustomDomain, cnameTarget string) []*DNSRecor
 			Name:    d.Domain,
 			Value:   cnameTarget,
 			TTL:     300,
-			Purpose: "Point domain to Probo servers",
+			Purpose: "Point domain to TrustReady servers",
 		},
 	}
 }

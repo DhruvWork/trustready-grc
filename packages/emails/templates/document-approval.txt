@@ -1,4 +1,4 @@
-Probo
+TrustReady
 
 Hi {{.RecipientFullName}},
 
@@ -12,11 +12,11 @@ Please take a moment to review them and approve or reject each one by clicking t
 
 If you have any questions, please contact your security team.
 
-This process is managed securely by Probo, acting as the compliance partner on behalf of {{.OrganizationName}}.
+This process is managed securely by TrustReady, acting as the compliance partner on behalf of {{.OrganizationName}}.
 
 Thank you for your prompt attention to this matter.
 
 Best regards,
 
 {{.SenderCompanyHeadquarterAddress}}
-Powered By Probo
+Powered By TrustReady

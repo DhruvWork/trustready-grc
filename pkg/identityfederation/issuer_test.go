@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ const (
 	// and in the discovery golden file.
 	fixtureOrganizationID = "e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
 
-	saasIssuerBase       = "https://proboidentity.com"
+	saasIssuerBase       = "https://trustreadyidentity.com"
 	selfHostedAppBase    = "http://localhost:8080"
 	selfHostedIssuerBase = "http://localhost:8080/federation"
 )
@@ -218,8 +218,8 @@ func TestIssuer_IssuerURL(t *testing.T) {
 		{
 			name:        "saas dedicated apex",
 			base:        saasIssuerBase,
-			wantIssuer:  "https://proboidentity.com/" + fixtureOrganizationID,
-			wantJWKSURI: "https://proboidentity.com/" + fixtureOrganizationID + "/jwks",
+			wantIssuer:  "https://trustreadyidentity.com/" + fixtureOrganizationID,
+			wantJWKSURI: "https://trustreadyidentity.com/" + fixtureOrganizationID + "/jwks",
 		},
 		{
 			name:        "self hosted under the application base URL",
@@ -272,7 +272,7 @@ func TestIssuer_Token_Claims(t *testing.T) {
 		assert.Contains(t, claims, name)
 	}
 
-	assert.Equal(t, "https://proboidentity.com/"+fixtureOrganizationID, claims["iss"])
+	assert.Equal(t, "https://trustreadyidentity.com/"+fixtureOrganizationID, claims["iss"])
 	assert.Equal(t, fixtureOrganizationID, claims["sub"])
 	assert.Equal(t, "sts.amazonaws.com", claims["aud"])
 	assert.NotEmpty(t, claims["jti"])
@@ -479,13 +479,13 @@ func TestResolveIssuerBaseURL(t *testing.T) {
 		{
 			name:       "derived base tolerates http and a port",
 			configured: "",
-			appBaseURL: "http://probo.internal:9000",
-			want:       "http://probo.internal:9000/federation",
+			appBaseURL: "http://trustready.internal:9000",
+			want:       "http://trustready.internal:9000/federation",
 		},
 		{
 			name:       "explicit saas apex",
 			configured: saasIssuerBase,
-			appBaseURL: "https://app.probo.com",
+			appBaseURL: "https://app.trustready.io",
 			want:       saasIssuerBase,
 		},
 		{
@@ -496,14 +496,14 @@ func TestResolveIssuerBaseURL(t *testing.T) {
 		},
 		{
 			name:       "explicit public base must be https",
-			configured: "http://proboidentity.com",
-			appBaseURL: "https://app.probo.com",
+			configured: "http://trustreadyidentity.com",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "scheme must be https",
 		},
 		{
 			name:       "explicit public base must not carry a port",
-			configured: "https://proboidentity.com:8443",
-			appBaseURL: "https://app.probo.com",
+			configured: "https://trustreadyidentity.com:8443",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "port is not allowed",
 		},
 		{
@@ -511,33 +511,33 @@ func TestResolveIssuerBaseURL(t *testing.T) {
 			// AWS port rule alone would advertise an unreachable issuer.
 			name:       "hostless base is refused",
 			configured: "https://:/federation",
-			appBaseURL: "https://app.probo.com",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "cannot parse identity federation issuer base URL",
 		},
 		{
 			name:       "empty port is refused",
-			configured: "https://proboidentity.com:",
-			appBaseURL: "https://app.probo.com",
+			configured: "https://trustreadyidentity.com:",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "cannot parse identity federation issuer base URL",
 		},
 		{
 			name:       "query string is refused",
-			configured: "https://proboidentity.com?tenant=1",
-			appBaseURL: "https://app.probo.com",
+			configured: "https://trustreadyidentity.com?tenant=1",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "query string is not allowed",
 		},
 		{
 			// A bare "?" leaves RawQuery empty, so only ForceQuery reveals it.
 			// It survives into the minted issuer if it is not refused here.
 			name:       "empty query marker is refused",
-			configured: "https://proboidentity.com?",
-			appBaseURL: "https://app.probo.com",
+			configured: "https://trustreadyidentity.com?",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "query string is not allowed",
 		},
 		{
 			name:       "empty query marker after a path is refused",
-			configured: "https://proboidentity.com/federation?",
-			appBaseURL: "https://app.probo.com",
+			configured: "https://trustreadyidentity.com/federation?",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "query string is not allowed",
 		},
 		{
@@ -545,8 +545,8 @@ func TestResolveIssuerBaseURL(t *testing.T) {
 			// cloud provider, and trustreadyd logs it at startup, so credentials must
 			// never survive into it.
 			name:       "userinfo is refused",
-			configured: "https://user:pass@proboidentity.com", // trufflehog:ignore
-			appBaseURL: "https://app.probo.com",
+			configured: "https://user:pass@trustreadyidentity.com", // trufflehog:ignore
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "userinfo is not allowed",
 		},
 		{
@@ -554,71 +554,71 @@ func TestResolveIssuerBaseURL(t *testing.T) {
 			// the derived issuer carries it too.
 			name:       "userinfo on the derived base is refused",
 			configured: "",
-			appBaseURL: "https://user:pass@app.probo.com", // trufflehog:ignore
+			appBaseURL: "https://user:pass@app.trustready.io", // trufflehog:ignore
 			wantErr:    "userinfo is not allowed",
 		},
 		{
 			// A root path would be served the OAuth2 server's discovery document.
 			name:       "root path on the application host is refused",
-			configured: "https://app.probo.com",
-			appBaseURL: "https://app.probo.com",
+			configured: "https://app.trustready.io",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    `must use the "/federation" path`,
 		},
 		{
 			name:       "bare slash path on the application host is refused",
-			configured: "https://app.probo.com/",
-			appBaseURL: "https://app.probo.com",
+			configured: "https://app.trustready.io/",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    `must use the "/federation" path`,
 		},
 		{
 			// Any other path on that host serves documents nothing answers for.
 			name:       "unserved path on the application host is refused",
-			configured: "https://app.probo.com/oidc",
-			appBaseURL: "https://app.probo.com",
+			configured: "https://app.trustready.io/oidc",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    `must use the "/federation" path`,
 		},
 		{
 			name:       "mis-cased application host is still constrained",
-			configured: "https://APP.probo.com/oidc",
-			appBaseURL: "https://app.probo.com",
+			configured: "https://APP.trustready.io/oidc",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    `must use the "/federation" path`,
 		},
 		{
 			name:       "served path on the application host is allowed",
-			configured: "https://app.probo.com/federation",
-			appBaseURL: "https://app.probo.com",
-			want:       "https://app.probo.com/federation",
+			configured: "https://app.trustready.io/federation",
+			appBaseURL: "https://app.trustready.io",
+			want:       "https://app.trustready.io/federation",
 		},
 		{
 			name:       "served path with a trailing slash is allowed",
-			configured: "https://app.probo.com/federation/",
-			appBaseURL: "https://app.probo.com",
-			want:       "https://app.probo.com/federation/",
+			configured: "https://app.trustready.io/federation/",
+			appBaseURL: "https://app.trustready.io",
+			want:       "https://app.trustready.io/federation/",
 		},
 		{
 			// The route tree sits beneath the application base URL's own path.
 			name:       "application base URL with a path derives beneath it",
 			configured: "",
-			appBaseURL: "https://app.probo.com/probo",
-			want:       "https://app.probo.com/probo/federation",
+			appBaseURL: "https://app.trustready.io/trustready",
+			want:       "https://app.trustready.io/trustready/federation",
 		},
 		{
 			name:       "explicit issuer must match the path under a based application URL",
-			configured: "https://app.probo.com/federation",
-			appBaseURL: "https://app.probo.com/probo",
-			wantErr:    `must use the "/probo/federation" path`,
+			configured: "https://app.trustready.io/federation",
+			appBaseURL: "https://app.trustready.io/trustready",
+			wantErr:    `must use the "/trustready/federation" path`,
 		},
 		{
 			// Another host arrives through an edge rewrite, so its path is free.
 			name:       "a different host may use any path",
-			configured: "https://proboidentity.com/anything",
-			appBaseURL: "https://app.probo.com",
-			want:       "https://proboidentity.com/anything",
+			configured: "https://trustreadyidentity.com/anything",
+			appBaseURL: "https://app.trustready.io",
+			want:       "https://trustreadyidentity.com/anything",
 		},
 		{
 			name:       "per-organization issuer must fit in 255 characters",
-			configured: "https://proboidentity.com/" + strings.Repeat("x", 230),
-			appBaseURL: "https://app.probo.com",
+			configured: "https://trustreadyidentity.com/" + strings.Repeat("x", 230),
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "maximum is 255",
 		},
 		{
@@ -627,8 +627,8 @@ func TestResolveIssuerBaseURL(t *testing.T) {
 			// are 100 UTF-8 bytes, the configured URL is 126 bytes, and the
 			// escaped per-organization issuer serializes to 363 characters.
 			name:       "length is measured on the escaped issuer",
-			configured: "https://proboidentity.com/" + strings.Repeat("é", 50),
-			appBaseURL: "https://app.probo.com",
+			configured: "https://trustreadyidentity.com/" + strings.Repeat("é", 50),
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "maximum is 255",
 		},
 		{
@@ -636,14 +636,14 @@ func TestResolveIssuerBaseURL(t *testing.T) {
 			// to exactly 255 characters and must be accepted. Summing the raw
 			// parts would count the slash twice and reject it at 256.
 			name:       "trailing slash does not consume the budget",
-			configured: "https://proboidentity.com/" + strings.Repeat("x", 192) + "/",
-			appBaseURL: "https://app.probo.com",
-			want:       "https://proboidentity.com/" + strings.Repeat("x", 192) + "/",
+			configured: "https://trustreadyidentity.com/" + strings.Repeat("x", 192) + "/",
+			appBaseURL: "https://app.trustready.io",
+			want:       "https://trustreadyidentity.com/" + strings.Repeat("x", 192) + "/",
 		},
 		{
 			name:       "relative base is refused",
-			configured: "proboidentity.com",
-			appBaseURL: "https://app.probo.com",
+			configured: "trustreadyidentity.com",
+			appBaseURL: "https://app.trustready.io",
 			wantErr:    "cannot parse identity federation issuer base URL",
 		},
 	}
@@ -752,7 +752,7 @@ func TestValidateConfig_NilIssuer(t *testing.T) {
 func TestResolveIssuerBaseURL_SaasIssuerHasHeadroom(t *testing.T) {
 	t.Parallel()
 
-	resolved, err := identityfederation.ResolveIssuerBaseURL(saasIssuerBase, baseurl.MustParse("https://app.probo.com"))
+	resolved, err := identityfederation.ResolveIssuerBaseURL(saasIssuerBase, baseurl.MustParse("https://app.trustready.io"))
 	require.NoError(t, err)
 
 	issuer := testIssuer(t, resolved.String())

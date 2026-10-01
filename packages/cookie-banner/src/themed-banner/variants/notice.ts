@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,17 +33,17 @@ export function renderNotice(config: BannerConfig, position: string): string {
   const dismissDefault = esc(getDismissLabel(config.language));
 
   return `
-    <probo-banner>
+    <trustready-banner>
       ${floatingCard(
         position,
-        { labelledby: "probo-banner-title", describedby: "probo-banner-desc" },
+        { labelledby: "trustready-banner-title", describedby: "trustready-banner-desc" },
         `
-        <p class="title" id="probo-banner-title" data-text="banner_title_notice" data-text-fallback="banner_title"></p>
-        <p class="description" id="probo-banner-desc" data-text="banner_description_notice" data-text-fallback="banner_description"></p>
+        <p class="title" id="trustready-banner-title" data-text="banner_title_notice" data-text-fallback="banner_title"></p>
+        <p class="description" id="trustready-banner-desc" data-text="banner_description_notice" data-text-fallback="banner_description"></p>
         <div class="buttons">
-          <probo-acknowledge-button><button class="btn btn-primary" data-text="button_dismiss">${dismissDefault}</button></probo-acknowledge-button>
+          <trustready-acknowledge-button><button class="btn btn-primary" data-text="button_dismiss">${dismissDefault}</button></trustready-acknowledge-button>
         </div>
         ${BRANDING}`,
       )}
-    </probo-banner>`;
+    </trustready-banner>`;
 }

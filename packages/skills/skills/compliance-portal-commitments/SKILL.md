@@ -1,21 +1,21 @@
 ---
 name: compliance-portal-commitments
 description: >-
-  Create or update the public commitments (commitment groups and their commitments) shown on a Probo
-  compliance portal, grounded strictly in the organization's own published Probo
+  Create or update the public commitments (commitment groups and their commitments) shown on a TrustReady
+  compliance portal, grounded strictly in the organization's own published TrustReady
   policies and written in a factual, understated engineering voice. Use this skill whenever the user
   wants to add, write, draft, edit, rewrite, curate, trim, or publish compliance portal commitments,
-  "security commitments", or a compliance portal security section for a company on Probo; asks what
+  "security commitments", or a compliance portal security section for a company on TrustReady; asks what
   commitments to show for a company doing SOC 2 or ISO 27001; gives an organization name or ID and asks
   to build out its compliance portal commitments; or wants existing commitments reworded to sound less like
   marketing. Always pull the real published policies first, surface only the specific and differentiating
-  controls a skeptical security reviewer would find useful, and create or update them through the Probo
+  controls a skeptical security reviewer would find useful, and create or update them through the TrustReady
   MCP. Never invent controls that are not in the published policies.
 ---
 
-# Probo compliance portal commitments
+# TrustReady compliance portal commitments
 
-A Probo compliance portal can display **commitments**: short, public statements about the security controls a
+A TrustReady compliance portal can display **commitments**: short, public statements about the security controls a
 company actually operates. They live in **commitment groups**. Put all of a company's commitments under a
 **single group titled "Security at <company name>"** (for example "Security at Captain") with a one-line
 description; each commitment is one card in that group. Do not split commitments across multiple groups.
@@ -45,10 +45,10 @@ Work in four stages: **get context → draft → filter → publish**. Do not sk
 ## 1. Get context (read the real policies first)
 
 Commitments must trace to controls the company genuinely has. The source of truth is the organization's
-**published policies** in Probo, not general knowledge about SOC 2 or ISO 27001.
+**published policies** in TrustReady, not general knowledge about SOC 2 or ISO 27001.
 
-1. **Find the Probo MCP and the organization.** This environment may expose more than one Probo MCP
-   server (the plugin ships hosted `probo-us` and `probo-eu`, and self-hosted instances add their own).
+1. **Find the TrustReady MCP and the organization.** This environment may expose more than one TrustReady MCP
+   server (the plugin ships hosted `trustready-us` and `trustready-eu`, and self-hosted instances add their own).
    Call `listOrganizations` on each until you find the one that returns the target company, and use that
    server for every later call. Match the organization the user named and capture its `id`.
 2. **List the published policies.** Call `listDocuments` with `document_types: ["POLICY"]`. Policies with
@@ -127,7 +127,7 @@ Let them adjust. They know which controls they want to lead with.
 
 ## 4. Create or update in the compliance portal
 
-Once the user has agreed on the set, write it through the Probo MCP. The exact tool sequence, the icon
+Once the user has agreed on the set, write it through the TrustReady MCP. The exact tool sequence, the icon
 enum, ordering/rank behavior, and the common pitfalls (read/write scope errors, reusing existing empty
 groups instead of duplicating them, deleting a whole group vs individual commitments) are in
 `references/portal-mechanics.md`. Read it before making any write calls.
@@ -148,5 +148,5 @@ Key habits:
 
 - `references/voice.md` — the tone-of-voice rules and before/after examples. Load this before writing any
   commitment copy.
-- `references/portal-mechanics.md` — the Probo MCP tool sequence, icon enum, and gotchas. Load this before
+- `references/portal-mechanics.md` — the TrustReady MCP tool sequence, icon enum, and gotchas. Load this before
   any create/update/delete call.

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,21 +18,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export { ProboElement } from "./base";
-export type { ProboState, ProboRootElement, ConsentDraft } from "./base";
-export { ProboBanner } from "./banner";
+export { TrustReadyElement } from "./base";
+export type { TrustReadyState, TrustReadyRootElement, ConsentDraft } from "./base";
+export { TrustReadyBanner } from "./banner";
 export {
-  ProboAcceptButton,
-  ProboAcknowledgeButton,
-  ProboCustomizeButton,
-  ProboRejectButton,
+  TrustReadyAcceptButton,
+  TrustReadyAcknowledgeButton,
+  TrustReadyCustomizeButton,
+  TrustReadyRejectButton,
 } from "./buttons";
-export { ProboCategory } from "./category";
-export { ProboCategoryList } from "./category-list";
-export { ProboCategoryToggle } from "./category-toggle";
-export { ProboCookieBannerRoot } from "./cookie-banner-root";
-export { ProboCookie, ProboCookieList } from "./cookie-list";
-export { ProboPreferencePanel, ProboSaveButton } from "./preference-panel";
-export { ProboPrivacyChoices } from "./privacy-choices";
-export { ProboSettingsLink } from "./settings-link";
+export { TrustReadyCategory } from "./category";
+export { TrustReadyCategoryList } from "./category-list";
+export { TrustReadyCategoryToggle } from "./category-toggle";
+export { TrustReadyCookieBannerRoot } from "./cookie-banner-root";
+export { TrustReadyCookie, TrustReadyCookieList } from "./cookie-list";
+export { TrustReadyPreferencePanel, TrustReadySaveButton } from "./preference-panel";
+export { TrustReadyPrivacyChoices } from "./privacy-choices";
+export { TrustReadySettingsLink } from "./settings-link";
 export { registerHeadlessComponents } from "./register";

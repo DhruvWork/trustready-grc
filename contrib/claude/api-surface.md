@@ -41,9 +41,9 @@ Log the original error server-side (with request/trace IDs) so it can be investi
 result, err := s.doSomething(ctx, req)
 if err != nil {
     switch {
-    case errors.Is(err, probo.ErrNotFound):
+    case errors.Is(err, trustready.ErrNotFound):
         return nil, gqlutils.NotFoundf(ctx, "thing %q not found", id)
-    case errors.Is(err, probo.ErrConflict):
+    case errors.Is(err, trustready.ErrConflict):
         return nil, gqlutils.Conflictf(ctx, "thing already exists")
     default:
         logger.ErrorCtx(ctx, "cannot do something", log.Error(err))

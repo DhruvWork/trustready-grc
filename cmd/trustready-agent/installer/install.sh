@@ -4,17 +4,17 @@
 #
 # Downloads the matching GitHub Release binary, verifies its sha256
 # checksum (embedded in this script at release time), installs to
-# /Library/Probo/trustready-agent on Darwin or /usr/local/bin/trustready-agent
+# /Library/TrustReady/trustready-agent on Darwin or /usr/local/bin/trustready-agent
 # on Linux and FreeBSD, then enrolls the device.
 #
 # Usage:
 #
 #   # Interactive — curl install.sh from the target trustready-agent/v* release
-#   curl -fsSL "https://github.com/getprobo/probo/releases/download/trustready-agent/vX.Y.Z/install.sh" | sudo sh
+#   curl -fsSL "https://github.com/getprobo/trustready/releases/download/trustready-agent/vX.Y.Z/install.sh" | sudo sh
 #
 #   # Unattended / MDM
 #   curl -fsSL "…/install.sh" | sudo \
-#     TRUSTREADY_SERVER_URL=https://us.probo.com \
+#     TRUSTREADY_SERVER_URL=https://us.trustready.io \
 #     TRUSTREADY_ENROLLMENT_TOKEN='…' sh
 #
 #   # Mirror the release assets (must match the embedded release tag)
@@ -23,7 +23,7 @@
 #
 #   # Explicit flags
 #   curl -fsSL "…/install.sh" | sudo sh -s -- \
-#     --server https://us.probo.com \
+#     --server https://us.trustready.io \
 #     --enrollment-token '…'
 #
 # Environment variables:
@@ -31,7 +31,7 @@
 #   TRUSTREADY_AGENT_RELEASE_TAG        Override embedded release tag (local dev)
 #   TRUSTREADY_AGENT_SKIP_CHECKSUM_VERIFY  Set to true to skip SHA-256 verification (local dev)
 #   TRUSTREADY_AGENT_STATE_DIR            Agent state directory passed as --dir (default: /var/lib/trustready-agent)
-#   TRUSTREADY_SERVER_URL               Probo server base URL
+#   TRUSTREADY_SERVER_URL               TrustReady server base URL
 #   TRUSTREADY_ENROLLMENT_TOKEN         One-shot enrollment token
 #   TRUSTREADY_NO_AUTO_UPDATE           Set to true to pass --no-auto-update
 #   TRUSTREADY_ALLOW_PRERELEASES        Set to true to pass --allow-prereleases
@@ -44,7 +44,7 @@ set -eu
 (set -o pipefail 2>/dev/null) && set -o pipefail
 
 BINARY_PATH="/usr/local/bin/trustready-agent"
-GITHUB_RELEASES_URL="https://github.com/getprobo/probo/releases/download"
+GITHUB_RELEASES_URL="https://github.com/getprobo/trustready/releases/download"
 
 # Injected at release time by .github/workflows/release-trustready-agent.yaml
 RELEASE_TAG="__TRUSTREADY_AGENT_RELEASE_TAG__"
@@ -91,7 +91,7 @@ Environment variables:
   TRUSTREADY_AGENT_RELEASE_TAG             Override embedded release tag (local dev)
   TRUSTREADY_AGENT_SKIP_CHECKSUM_VERIFY    Set to true to skip SHA-256 verification (local dev)
   TRUSTREADY_AGENT_STATE_DIR               Agent state directory (--dir; default /var/lib/trustready-agent)
-  TRUSTREADY_SERVER_URL                    Probo server base URL
+  TRUSTREADY_SERVER_URL                    TrustReady server base URL
   TRUSTREADY_ENROLLMENT_TOKEN              One-shot enrollment token
   TRUSTREADY_NO_AUTO_UPDATE                Set to true to disable auto-update
   TRUSTREADY_ALLOW_PRERELEASES             Set to true to allow prerelease auto-updates
@@ -150,7 +150,7 @@ detect_platform() {
   archive_name="${archive_dir}.tar.gz"
 
   case "$os" in
-    Darwin) BINARY_PATH="/Library/Probo/trustready-agent" ;;
+    Darwin) BINARY_PATH="/Library/TrustReady/trustready-agent" ;;
     *) BINARY_PATH="/usr/local/bin/trustready-agent" ;;
   esac
 }
@@ -227,16 +227,16 @@ prompt_server_url() {
     die "TRUSTREADY_SERVER_URL is required in non-interactive mode"
   fi
 
-  printf '\nProbo server URL:\n'
-  printf '  1) https://us.probo.com (United States)\n'
-  printf '  2) https://eu.probo.com (European Union)\n'
+  printf '\nTrustReady server URL:\n'
+  printf '  1) https://us.trustready.io (United States)\n'
+  printf '  2) https://eu.trustready.io (European Union)\n'
   printf '  3) Enter a custom URL\n'
   printf 'Choice [1]: '
   read_user choice
 
   case "${choice:-1}" in
-    1 | "") SERVER_URL="https://us.probo.com" ;;
-    2) SERVER_URL="https://eu.probo.com" ;;
+    1 | "") SERVER_URL="https://us.trustready.io" ;;
+    2) SERVER_URL="https://eu.trustready.io" ;;
     3)
       printf 'Server URL: '
       read_user SERVER_URL

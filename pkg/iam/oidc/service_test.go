@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ func newTestService(t *testing.T) *Service {
 
 	return NewService(
 		nil,
-		"https://app.probo.test",
+		"https://app.trustready.test",
 		ProviderConfig{ClientID: "google-client", ClientSecret: "s", Enabled: true},
 		ProviderConfig{ClientID: "microsoft-client", ClientSecret: "s", Enabled: true},
 		log.NewLogger(),
@@ -194,7 +194,7 @@ func TestPortalAuthorizeStateID(t *testing.T) {
 		},
 		{
 			name:        "authorize plus gid client",
-			continueURL: "/api/connect/v1/oauth2/authorize?client_id=gid://probo/oauth2_client/abc&source=compliance-portal&state=" + url.QueryEscape(stateID),
+			continueURL: "/api/connect/v1/oauth2/authorize?client_id=gid://trustready/oauth2_client/abc&source=compliance-portal&state=" + url.QueryEscape(stateID),
 			wantOK:      false,
 		},
 		{

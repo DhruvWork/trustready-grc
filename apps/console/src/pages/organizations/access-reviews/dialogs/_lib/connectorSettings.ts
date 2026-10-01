@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -315,8 +315,8 @@ export function buildConnectorInitiateURL(
 }
 
 // buildConnectorInstallInitiateURL builds the start-install URL for a provider
-// connected by installing Probo's app at the vendor. No continue parameter: the
-// vendor redirects to Probo's own callback, which rebuilds the connections URL
+// connected by installing TrustReady's app at the vendor. No continue parameter: the
+// vendor redirects to TrustReady's own callback, which rebuilds the connections URL
 // server-side.
 export function buildConnectorInstallInitiateURL(
   organizationId: string,
@@ -331,7 +331,7 @@ export function buildConnectorInstallInitiateURL(
 
 // connectProviderInstall navigates the browser to the install ceremony. The
 // customer proves control of the vendor tenant there, so no value is collected
-// in Probo first.
+// in TrustReady first.
 export function connectProviderInstall(
   organizationId: string,
   provider: string,

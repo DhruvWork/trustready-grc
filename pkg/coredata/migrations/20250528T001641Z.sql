@@ -1,4 +1,4 @@
--- Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +62,7 @@ UPDATE vendors SET
     WHEN 'Ramp' THEN 'https://trust.ramp.com/'
     WHEN 'ClickHouse' THEN 'https://clickhouse.com/legal/agreements/subprocessors'
     WHEN 'Tailscale' THEN 'https://tailscale.com/dpa-subprocessors'
-    WHEN 'Probo' THEN 'https://www.probo.com/subprocessors'
+    WHEN 'TrustReady' THEN 'https://www.trustready.io/subprocessors'
     WHEN 'folk' THEN 'https://www.folk.app/privacy-policy#3-list-of-sub-processors'
     WHEN 'Claap' THEN 'https://www.claap.io/legal/privacy-policy#sub-processors'
     WHEN 'Pitch' THEN 'https://pitch.com/dpa#annex-7-2'

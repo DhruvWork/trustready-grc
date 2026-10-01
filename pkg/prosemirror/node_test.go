@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -114,7 +114,7 @@ func TestUnmarshalDocument(t *testing.T) {
 
 			linkAttrs, err := linkNode.Marks[0].LinkAttrs()
 			require.NoError(t, err)
-			assert.Equal(t, "https://probo.com", linkAttrs.Href)
+			assert.Equal(t, "https://trustready.io", linkAttrs.Href)
 			require.NotNil(t, linkAttrs.Target)
 			assert.Equal(t, "_blank", *linkAttrs.Target)
 			require.NotNil(t, linkAttrs.Rel)

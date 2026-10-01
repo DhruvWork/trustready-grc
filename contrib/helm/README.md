@@ -1,15 +1,15 @@
-# Probo Kubernetes Deployment
+# TrustReady Kubernetes Deployment
 
-This directory contains the Helm chart for deploying Probo on Kubernetes with external managed services.
+This directory contains the Helm chart for deploying TrustReady on Kubernetes with external managed services.
 
 ## Quick Links
 
-- [Helm Chart Documentation](charts/probo/README.md)
-- [Values Reference](charts/probo/values.yaml)
+- [Helm Chart Documentation](charts/trustready/README.md)
+- [Values Reference](charts/trustready/values.yaml)
 
 ## Prerequisites
 
-Before deploying Probo, ensure you have:
+Before deploying TrustReady, ensure you have:
 
 1. **Kubernetes Cluster** - Version 1.23+
 2. **Helm** - Version 3.8+
@@ -21,7 +21,7 @@ Before deploying Probo, ensure you have:
 ### From OCI Registry
 
 ```bash
-helm install my-probo oci://artifact.probo.inc/probo/probo --version <chart-version>
+helm install my-trustready oci://artifact.trustready.io/trustready/trustready --version <chart-version>
 ```
 
 Replace `<chart-version>` with a released chart version (e.g. `0.1.0`). The
@@ -29,7 +29,7 @@ chart defaults to the trustreadyd image tag `v<appVersion>` from
 `Chart.yaml`.
 
 Configure secrets and external services with `--set` flags or a values file
-(see [Helm Chart Documentation](charts/probo/README.md)).
+(see [Helm Chart Documentation](charts/trustready/README.md)).
 
 ### From Local Chart
 
@@ -47,19 +47,19 @@ openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 \
 #### Download remote dependencies
 
 ```bash
-helm dependency update ./charts/probo
+helm dependency update ./charts/trustready
 ```
 
 ##### Install using Chart and set values
 
 ```bash
-helm install my-probo ./charts/probo \
-  --set probo.baseUrl="probo.example.com" \
-  --set probo.encryptionKey="$ENCRYPTION_KEY" \
-  --set probo.auth.cookieSecret="$COOKIE_SECRET" \
-  --set probo.auth.passwordPepper="$PASSWORD_PEPPER" \
-  --set probo.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
-  --set-file probo.oauth2.signingKey="./oauth2_signing_key.pem" \
+helm install my-trustready ./charts/trustready \
+  --set trustready.baseUrl="trustready.example.com" \
+  --set trustready.encryptionKey="$ENCRYPTION_KEY" \
+  --set trustready.auth.cookieSecret="$COOKIE_SECRET" \
+  --set trustready.auth.passwordPepper="$PASSWORD_PEPPER" \
+  --set trustready.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
+  --set-file trustready.oauth2.signingKey="./oauth2_signing_key.pem" \
   --set postgresql.enabled=true \
   --set postgresql.auth.postgresUser="trustreadyd" \
   --set postgresql.auth.postgresPassword="your-db-password" \
@@ -74,24 +74,24 @@ helm install my-probo ./charts/probo \
 
 
 ```bash
-helm install my-probo ./charts/probo \
-  --set probo.encryptionKey="$ENCRYPTION_KEY" \
-  --set probo.auth.cookieSecret="$COOKIE_SECRET" \
-  --set probo.auth.passwordPepper="$PASSWORD_PEPPER" \
-  --set probo.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
-  --set-file probo.oauth2.signingKey="./oauth2_signing_key.pem" \
-  --set probo.mailer.smtp.password="smtp-password" \
+helm install my-trustready ./charts/trustready \
+  --set trustready.encryptionKey="$ENCRYPTION_KEY" \
+  --set trustready.auth.cookieSecret="$COOKIE_SECRET" \
+  --set trustready.auth.passwordPepper="$PASSWORD_PEPPER" \
+  --set trustready.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
+  --set-file trustready.oauth2.signingKey="./oauth2_signing_key.pem" \
+  --set trustready.mailer.smtp.password="smtp-password" \
   --set postgresql.enabled=true \
   --set postgresql.auth.postgresPassword="trustreadyd" \
   --set s3.accessKeyId="your-access-key" \
   --set s3.secretAccessKey="your-secret-key" \
-  -f ./charts/probo/values.yaml
+  -f ./charts/trustready/values.yaml
 ```
 
 ### 3. Access
 
 ```bash
-kubectl port-forward svc/probo 8080:8080
+kubectl port-forward svc/trustready 8080:8080
 # Visit http://localhost:8080
 ```
 
@@ -101,7 +101,7 @@ For production deployments, we recommend:
 
 1. **Copy the production template:**
    ```bash
-   cp charts/probo/values.yaml charts/probo/values-k8s-production.yaml
+   cp charts/trustready/values.yaml charts/trustready/values-k8s-production.yaml
    ```
 
 2. **Edit the configuration:**
@@ -114,14 +114,14 @@ For production deployments, we recommend:
 
 3. **Install:**
    ```bash
-   helm install probo ./charts/probo -f ./charts/probo/values-k8s-production.yaml
+   helm install trustready ./charts/trustready -f ./charts/trustready/values-k8s-production.yaml
    ```
 
 ## Architecture
 
 ### What Gets Deployed
 
-- **Probo Application** - Main Go binary serving GraphQL APIs and React frontends
+- **TrustReady Application** - Main Go binary serving GraphQL APIs and React frontends
 - **Chrome Headless** - For PDF generation (optional, can use external service)
 - **LoadBalancer Service** - For external access via TCP on ports 80, 443, and 8080
 - **Ingress** - Alternative to LoadBalancer for HTTP routing (optional)
@@ -143,30 +143,30 @@ The default configuration uses HAProxy Ingress controller which provides both La
 Client
   ↓
 HAProxy Ingress LoadBalancer
-  ├─ Port 80 (TCP Layer 4 passthrough) → probo:80
-  ├─ Port 443 (TCP Layer 4 passthrough) → probo:443
-  └─ HTTP probo.example.com (Layer 7 routing) → probo:8080
+  ├─ Port 80 (TCP Layer 4 passthrough) → trustready:80
+  ├─ Port 443 (TCP Layer 4 passthrough) → trustready:443
+  └─ HTTP trustready.example.com (Layer 7 routing) → trustready:8080
 ```
 
 **How it works:**
 
 1. **HAProxy Ingress Controller** runs in the release namespace with a LoadBalancer service
 2. **TCP ConfigMap** defines Layer 4 TCP passthrough rules:
-   - Port 80 → Probo service port 80
-   - Port 443 → Probo service port 443
+   - Port 80 → TrustReady service port 80
+   - Port 443 → TrustReady service port 443
 3. **HTTP Ingress** defines Layer 7 HTTP routing:
-   - Host `probo.example.com` → Probo service port 8080
+   - Host `trustready.example.com` → TrustReady service port 8080
 
 **Benefits:**
 - Single LoadBalancer for both TCP and HTTP traffic
-- TCP passthrough for ports 80/443 (Probo handles TLS directly)
+- TCP passthrough for ports 80/443 (TrustReady handles TLS directly)
 - HTTP routing for backoffice on port 8080
 - Supports ACME/Let's Encrypt integration
 
 **Port Configuration:**
-- **Port 80** - TCP passthrough to Probo:80 (HTTP service, ACME challenges)
-- **Port 443** - TCP passthrough to Probo:443 (HTTPS service with TLS)
-- **Port 8080** - HTTP routing to Probo:8080 (Backoffice, via host-based routing)
+- **Port 80** - TCP passthrough to TrustReady:80 (HTTP service, ACME challenges)
+- **Port 443** - TCP passthrough to TrustReady:443 (HTTPS service with TLS)
+- **Port 8080** - HTTP routing to TrustReady:8080 (Backoffice, via host-based routing)
 
 ## Configuration
 
@@ -174,17 +174,17 @@ HAProxy Ingress LoadBalancer
 
 All deployments require:
 
-- `probo.encryptionKey` - For data encryption at rest
-- `probo.auth.cookieSecret` - For session management
-- `probo.auth.passwordPepper` - For password hashing
-- `probo.trustAuth.tokenSecret` - For trust center tokens
-- `probo.oauth2.signingKey` - PEM private key used to sign OAuth2 tokens
+- `trustready.encryptionKey` - For data encryption at rest
+- `trustready.auth.cookieSecret` - For session management
+- `trustready.auth.passwordPepper` - For password hashing
+- `trustready.trustAuth.tokenSecret` - For trust center tokens
+- `trustready.oauth2.signingKey` - PEM private key used to sign OAuth2 tokens
 - `postgresql.host` - PostgreSQL server hostname
 - `postgresql.password` - Database password
 - `s3.accessKeyId` - S3 access credentials
 - `s3.secretAccessKey` - S3 secret key
 
-See [values.yaml](charts/probo/values.yaml) for all available options.
+See [values.yaml](charts/trustready/values.yaml) for all available options.
 
 
 ## Cloud Provider Examples
@@ -200,16 +200,16 @@ See [values.yaml](charts/probo/values.yaml) for all available options.
 # - Amazon RDS PostgreSQL instance
 # - S3 bucket created
 
-helm install my-probo ././charts/probo \
-  --set probo.encryptionKey="$ENCRYPTION_KEY" \
-  --set probo.auth.cookieSecret="$COOKIE_SECRET" \
-  --set probo.auth.passwordPepper="$PASSWORD_PEPPER" \
-  --set probo.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
-  --set-file probo.oauth2.signingKey="./oauth2_signing_key.pem" \
+helm install my-trustready ././charts/trustready \
+  --set trustready.encryptionKey="$ENCRYPTION_KEY" \
+  --set trustready.auth.cookieSecret="$COOKIE_SECRET" \
+  --set trustready.auth.passwordPepper="$PASSWORD_PEPPER" \
+  --set trustready.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
+  --set-file trustready.oauth2.signingKey="./oauth2_signing_key.pem" \
   --set postgresql.host="mydb.abc123.us-east-1.rds.amazonaws.com" \
   --set postgresql.password="<rds-password>" \
   --set s3.region="us-east-1" \
-  --set s3.bucket="my-probo-bucket" \
+  --set s3.bucket="my-trustready-bucket" \
   --set s3.accessKeyId="<aws-access-key>" \
   --set s3.secretAccessKey="<aws-secret-key>"
 ```
@@ -226,16 +226,16 @@ helm install my-probo ././charts/probo \
 # - Cloud SQL PostgreSQL instance
 # - Cloud Storage bucket with HMAC keys
 
-helm install my-probo ././charts/probo \
-  --set probo.encryptionKey="$ENCRYPTION_KEY" \
-  --set probo.auth.cookieSecret="$COOKIE_SECRET" \
-  --set probo.auth.passwordPepper="$PASSWORD_PEPPER" \
-  --set probo.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
-  --set-file probo.oauth2.signingKey="./oauth2_signing_key.pem" \
+helm install my-trustready ././charts/trustready \
+  --set trustready.encryptionKey="$ENCRYPTION_KEY" \
+  --set trustready.auth.cookieSecret="$COOKIE_SECRET" \
+  --set trustready.auth.passwordPepper="$PASSWORD_PEPPER" \
+  --set trustready.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
+  --set-file trustready.oauth2.signingKey="./oauth2_signing_key.pem" \
   --set postgresql.host="10.0.0.5" \
   --set postgresql.password="<cloudsql-password>" \
   --set s3.endpoint="https://storage.googleapis.com" \
-  --set s3.bucket="my-probo-bucket" \
+  --set s3.bucket="my-trustready-bucket" \
   --set s3.accessKeyId="<hmac-access-key>" \
   --set s3.secretAccessKey="<hmac-secret>"
 ```
@@ -253,16 +253,16 @@ helm install my-probo ././charts/probo \
 # Prerequisites:
 # - Azure Database for PostgreSQL instance
 # - Prefer AWS S3/GCS/Spaces (Azure Blob via S3 proxy is not officially supported)
-helm install my-probo ././charts/probo \
-  --set probo.encryptionKey="$ENCRYPTION_KEY" \
-  --set probo.auth.cookieSecret="$COOKIE_SECRET" \
-  --set probo.auth.passwordPepper="$PASSWORD_PEPPER" \
-  --set probo.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
-  --set-file probo.oauth2.signingKey="./oauth2_signing_key.pem" \
+helm install my-trustready ././charts/trustready \
+  --set trustready.encryptionKey="$ENCRYPTION_KEY" \
+  --set trustready.auth.cookieSecret="$COOKIE_SECRET" \
+  --set trustready.auth.passwordPepper="$PASSWORD_PEPPER" \
+  --set trustready.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
+  --set-file trustready.oauth2.signingKey="./oauth2_signing_key.pem" \
   --set postgresql.host="mydb.postgres.database.azure.com" \
   --set postgresql.password="<azure-db-password>" \
   --set s3.endpoint="https://<your-storage-account>.blob.core.windows.net" \
-  --set s3.bucket="my-probo-bucket" \
+  --set s3.bucket="my-trustready-bucket" \
   --set s3.accessKeyId="<azure-access-key>" \
   --set s3.secretAccessKey="<azure-secret-key>" \
   --set s3.usePathStyle=true
@@ -283,17 +283,17 @@ helm install my-probo ././charts/probo \
 # - Managed PostgreSQL Database
 # - Spaces bucket
 
-helm install my-probo ././charts/probo \
-  --set probo.encryptionKey="$ENCRYPTION_KEY" \
-  --set probo.auth.cookieSecret="$COOKIE_SECRET" \
-  --set probo.auth.passwordPepper="$PASSWORD_PEPPER" \
-  --set probo.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
-  --set-file probo.oauth2.signingKey="./oauth2_signing_key.pem" \
+helm install my-trustready ././charts/trustready \
+  --set trustready.encryptionKey="$ENCRYPTION_KEY" \
+  --set trustready.auth.cookieSecret="$COOKIE_SECRET" \
+  --set trustready.auth.passwordPepper="$PASSWORD_PEPPER" \
+  --set trustready.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
+  --set-file trustready.oauth2.signingKey="./oauth2_signing_key.pem" \
   --set postgresql.host="db-postgresql-nyc1-12345.ondigitalocean.com" \
   --set postgresql.password="<db-password>" \
   --set s3.region="nyc3" \
   --set s3.endpoint="https://nyc3.digitaloceanspaces.com" \
-  --set s3.bucket="my-probo-bucket" \
+  --set s3.bucket="my-trustready-bucket" \
   --set s3.accessKeyId="<spaces-key>" \
   --set s3.secretAccessKey="<spaces-secret>"
 ```
@@ -306,20 +306,20 @@ Example with AWS Secrets Manager:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: probo-secrets
+  name: trustready-secrets
 spec:
   secretStoreRef:
     name: aws-secrets-manager
     kind: SecretStore
   target:
-    name: probo
+    name: trustready
   data:
     - secretKey: encryption-key
       remoteRef:
-        key: probo/encryption-key
+        key: trustready/encryption-key
     - secretKey: db-password
       remoteRef:
-        key: probo/db-password
+        key: trustready/db-password
 ```
 
 ### Native AWS resolution (trustreadyd-bootstrap)
@@ -332,7 +332,7 @@ values are also supported for non-sensitive config.
 #### Secrets Manager (`awssm://` or `aws://`)
 
 Use the `awssm://<secret-id>` or `aws://<secret-id>` prefix (e.g.
-`TRUSTREADYD_ENCRYPTION_KEY=aws://probo/trustreadyd/encryption_key`). The path
+`TRUSTREADYD_ENCRYPTION_KEY=aws://trustready/trustreadyd/encryption_key`). The path
 after the prefix is the secret name or ARN; the plaintext `SecretString` is
 used directly. Each env var can reference a different secret.
 
@@ -346,13 +346,13 @@ env:
   - name: TRUSTREADYD_BASE_URL
     value: "https://app.example.com"
   - name: TRUSTREADYD_ENCRYPTION_KEY
-    value: "awssm://probo/trustreadyd/encryption_key"
+    value: "awssm://trustready/trustreadyd/encryption_key"
   - name: TRUSTREADYD_AUTH_COOKIE_SECRET
-    value: "awssm://probo/trustreadyd/cookie_secret"
+    value: "awssm://trustready/trustreadyd/cookie_secret"
   - name: TRUSTREADYD_AUTH_PASSWORD_PEPPER
-    value: "awssm://probo/trustreadyd/password_pepper"
+    value: "awssm://trustready/trustreadyd/password_pepper"
   - name: TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY
-    value: "awssm://probo/trustreadyd/oauth2_signing_key"
+    value: "awssm://trustready/trustreadyd/oauth2_signing_key"
 ```
 
 Each secret in AWS Secrets Manager stores a single plaintext value (for
@@ -361,7 +361,7 @@ example a base64 key, password, or PEM).
 #### Parameter Store (`awsps://`)
 
 Use the `awsps://<parameter-name>` prefix (e.g.
-`TRUSTREADYD_ENCRYPTION_KEY=awsps:///probo/trustreadyd/encryption_key`). The path
+`TRUSTREADYD_ENCRYPTION_KEY=awsps:///trustready/trustreadyd/encryption_key`). The path
 after `awsps://` is the SSM parameter name; both `String` and `SecureString`
 values are supported.
 
@@ -375,13 +375,13 @@ env:
   - name: TRUSTREADYD_BASE_URL
     value: "https://app.example.com"
   - name: TRUSTREADYD_ENCRYPTION_KEY
-    value: "awsps:///probo/trustreadyd/encryption_key"
+    value: "awsps:///trustready/trustreadyd/encryption_key"
   - name: TRUSTREADYD_AUTH_COOKIE_SECRET
-    value: "awsps:///probo/trustreadyd/cookie_secret"
+    value: "awsps:///trustready/trustreadyd/cookie_secret"
   - name: TRUSTREADYD_AUTH_PASSWORD_PEPPER
-    value: "awsps:///probo/trustreadyd/password_pepper"
+    value: "awsps:///trustready/trustreadyd/password_pepper"
   - name: TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY
-    value: "awsps:///probo/trustreadyd/oauth2_signing_key"
+    value: "awsps:///trustready/trustreadyd/oauth2_signing_key"
 ```
 
 When `TRUSTREADYD_ENCRYPTION_KEY` is set (including `aws://`, `awssm://`, or
@@ -392,8 +392,8 @@ regenerate the config from all `TRUSTREADYD_*` env vars.
 
 | Key                                                     | Type    | Default                                            | Description                                                                                         |
 |---------------------------------------------------------| ------- |----------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| replicaCount                                            | int     | `1`                                                | Number of Probo application replicas                                                                |
-| image.repository                                        | string  | `"artifact.probo.inc/probo/probo"`                 | Container image repository                                                                          |
+| replicaCount                                            | int     | `1`                                                | Number of TrustReady application replicas                                                                |
+| image.repository                                        | string  | `"artifact.trustready.io/trustready/trustready"`                 | Container image repository                                                                          |
 | image.pullPolicy                                        | string  | `"IfNotPresent"`                                   | Image pull policy                                                                                   |
 | image.tag                                               | string  | `"latest"`                                         | Overrides the image tag whose default is the chart appVersion                                       |
 | imagePullSecrets                                        | list    | `[]`                                               | Image pull secrets for private registries                                                           |
@@ -428,7 +428,7 @@ regenerate the config from all `TRUSTREADYD_*` env vars.
 | ingress.enabled                                         | bool    | `true`                                             | Enable ingress resource                                                                             |
 | ingress.className                                       | string  | `"haproxy"`                                        | Ingress class name                                                                                  |
 | ingress.annotations                                     | object  | `{"kubernetes.io/ingress.class": "haproxy"}`       | Annotations for the ingress resource                                                                |
-| ingress.hosts[0].host                                   | string  | `"probo.example.com"`                              | Ingress hostname                                                                                    |
+| ingress.hosts[0].host                                   | string  | `"trustready.example.com"`                              | Ingress hostname                                                                                    |
 | ingress.hosts[0].paths[0].path                          | string  | `"/"`                                              | Path to match                                                                                       |
 | ingress.hosts[0].paths[0].pathType                      | string  | `"Prefix"`                                         | Path matching type                                                                                  |
 | ingress.tls                                             | list    | `[]`                                               | TLS configuration for ingress                                                                       |
@@ -467,64 +467,64 @@ regenerate the config from all `TRUSTREADYD_*` env vars.
 | metrics.serviceMonitor.scrapeTimeout                    | string  | `"10s"`                                            | Scrape timeout for metrics                                                                          |
 | metrics.serviceMonitor.labels                           | object  | `{}`                                               | Labels for the ServiceMonitor                                                                       |
 | metrics.serviceMonitor.relabelings                      | list    | `[]`                                               | Relabeling configs for the ServiceMonitor                                                           |
-| probo.baseUrl                                           | string  | `"probo.example.com"`                              | Public hostname where Probo will be accessible                                                      |
-| probo.encryptionKey                                     | string  | `""`                                               | **REQUIRED** Base64-encoded encryption key (generate with: openssl rand -base64 32)                 |
-| probo.oauth2.signingKey                                 | string  | `""`                                               | **REQUIRED** PEM private key for OAuth2 signing (set with --set-file)                                |
-| probo.identityFederation.enabled                                | bool    | `false`                                            | Serve the outbound OIDC issuer used to federate into customer cloud accounts                        |
-| probo.identityFederation.issuerBaseUrl                          | string  | `""`                                               | Advertised issuer base; empty serves it at {baseUrl}/federation. Immutable once customers register it |
-| probo.identityFederation.signingKey                             | string  | `""`                                               | **REQUIRED when the identity federation issuer is enabled** PEM private key, separate from oauth2.signingKey             |
-| probo.identityFederation.signingKeyKid                          | string  | `"default"`                                        | Key id published for signingKey                                                                     |
-| probo.identityFederation.previousSigningKey                     | string  | `""`                                               | Retired PEM private key, published in the JWKS but never signing, so tokens minted before a rotation still verify |
-| probo.identityFederation.previousSigningKeyKid                  | string  | `""`                                               | **REQUIRED when previousSigningKey is set** Key id of the retired key; must differ from signingKeyKid |
-| probo.identityFederation.cloudformationTemplateUrl              | string  | `"https://probo-cloudformation-template.s3.us-east-2.amazonaws.com/aws-audit-role.yaml"` | Public S3 HTTPS URL used to build the AWS console quick-create link |
-| probo.identityFederation.terraformModuleSource                  | string  | `"getprobo/audit-role/aws"`                        | Terraform module address copied into the AWS connector install snippet |
-| probo.identityFederation.gcpTerraformModuleSource               | string  | `"getprobo/audit-role/gcp"`                        | Terraform module address copied into the GCP connector install snippet |
-| probo.identityFederation.azureTerraformModuleSource             | string  | `"getprobo/audit-role/azurerm"`                    | Terraform module address copied into the Azure connector install snippet |
-| probo.service.port                                      | int     | `8080`                                             | Probo application service port                                                                      |
-| probo.metrics.port                                      | int     | `8081`                                             | Probo metrics service port                                                                          |
-| probo.tracing.enabled                                   | bool    | `false`                                            | Enable OpenTelemetry tracing                                                                        |
-| probo.tracing.addr                                      | string  | `""`                                               | OTLP gRPC endpoint (e.g., tempo:4317)                                                               |
-| probo.tracing.maxBatchSize                              | int     | `512`                                              | Maximum batch size for trace exports                                                                |
-| probo.tracing.batchTimeout                              | int     | `5`                                                | Batch timeout in seconds                                                                            |
-| probo.tracing.exportTimeout                             | int     | `30`                                               | Export timeout in seconds                                                                           |
-| probo.tracing.maxQueueSize                              | int     | `2048`                                             | Maximum queue size for traces                                                                       |
-| probo.cors.allowedOrigins                               | list    | `["https://probo.example.com", "http://..."]`      | CORS allowed origins                                                                                |
-| probo.extraHeaderFields                                 | object  | `{}`                                               | Extra HTTP headers to add to responses                                                              |
-| probo.auth.disableSignup                                | bool    | `false`                                            | Restrict console access to identities with an organization membership              |
-| probo.auth.invitationTokenValidity                      | int     | `3600`                                             | Invitation token validity in seconds                                                                |
-| probo.auth.cookieName                                   | string  | `"SSID"`                                           | Authentication cookie name                                                                          |
-| probo.auth.cookieDomain                                 | string  | `"probo.example.com"`                              | Authentication cookie domain                                                                        |
-| probo.auth.cookieSecret                                 | string  | `""`                                               | **REQUIRED** Cookie signing secret (at least 32 bytes, generate with: openssl rand -base64 32)      |
-| probo.auth.cookieDuration                               | int     | `24`                                               | Cookie duration in hours                                                                            |
-| probo.auth.passwordPepper                               | string  | `""`                                               | **REQUIRED** Password hashing pepper (at least 32 bytes, generate with: openssl rand -base64 32)    |
-| probo.auth.passwordIterations                           | int     | `1000000`                                          | Password hashing iterations                                                                         |
-| probo.trustAuth.cookieName                              | string  | `"TCT"`                                            | Trust center cookie name                                                                            |
-| probo.trustAuth.cookieDomain                            | string  | `"probo.example.com"`                              | Trust center cookie domain                                                                          |
-| probo.trustAuth.cookieDuration                          | int     | `24`                                               | Trust center cookie duration in hours                                                               |
-| probo.trustAuth.tokenDuration                           | int     | `168`                                              | Trust token duration in hours                                                                       |
-| probo.trustAuth.reportUrlDuration                       | int     | `15`                                               | Report URL duration in minutes                                                                      |
-| probo.trustAuth.tokenSecret                             | string  | `""`                                               | **REQUIRED** Trust token signing secret (at least 32 bytes, generate with: openssl rand -base64 32) |
-| probo.trustAuth.scope                                   | string  | `"trust_center_readonly"`                          | Trust token scope                                                                                   |
-| probo.trustAuth.tokenType                               | string  | `"trust_center_access"`                            | Trust token type                                                                                    |
-| probo.mailer.senderName                                 | string  | `"Probo"`                                          | Email sender name                                                                                   |
-| probo.mailer.senderEmail                                | string  | `"no-reply@notification.getprobo.com"`             | Email sender address                                                                                |
-| probo.mailer.smtp.addr                                  | string  | `"sandbox.smtp.mailtrap.io:2525"`                  | SMTP server address                                                                                 |
-| probo.mailer.smtp.user                                  | string  | `"2d1b1d0e8b3d0b"`                                 | SMTP username                                                                                       |
-| probo.mailer.smtp.password                              | string  | `"25a8eb11e75e8d"`                                 | SMTP password                                                                                       |
-| probo.mailer.smtp.tlsRequired                           | bool    | `true`                                             | Require TLS for SMTP connection                                                                     |
-| probo.openai.apiKey                                     | string  | `""`                                               | OpenAI API key for AI features (optional)                                                           |
-| probo.openai.temperature                                | float   | `0.1`                                              | OpenAI temperature setting                                                                          |
-| probo.openai.modelName                                  | string  | `"gpt-4o"`                                         | OpenAI model name                                                                                   |
-| probo.openai.maxTokens                                  | int     | `4096`                                             | Maximum output tokens for LLM requests                                                              |
-| probo.customDomains.enabled                             | bool    | `false`                                            | Enable custom domains feature                                                                       |
-| probo.customDomains.renewalInterval                     | int     | `3600`                                             | Certificate renewal interval in seconds                                                             |
-| probo.customDomains.provisionInterval                   | int     | `30`                                               | Domain provision interval in seconds                                                                |
-| probo.customDomains.cnameTarget                         | string  | `"probo.example.com"`                              | CNAME target for custom domains                                                                     |
-| probo.customDomains.acme.directory                      | string  | `"https://acme-v02.api.letsencrypt.org/directory"` | ACME directory URL                                                                                  |
-| probo.customDomains.acme.email                          | string  | `"admin@example.com"`                              | ACME registration email                                                                             |
-| probo.customDomains.acme.keyType                        | string  | `"EC256"`                                          | ACME key type                                                                                       |
-| probo.customDomains.acme.insecureTls                    | bool    | `false`                                            | Allow insecure TLS for ACME                                                                         |
-| probo.connectors                                        | list    | `[]`                                               | External OAuth2 connectors configuration                                                            |
+| trustready.baseUrl                                           | string  | `"trustready.example.com"`                              | Public hostname where TrustReady will be accessible                                                      |
+| trustready.encryptionKey                                     | string  | `""`                                               | **REQUIRED** Base64-encoded encryption key (generate with: openssl rand -base64 32)                 |
+| trustready.oauth2.signingKey                                 | string  | `""`                                               | **REQUIRED** PEM private key for OAuth2 signing (set with --set-file)                                |
+| trustready.identityFederation.enabled                                | bool    | `false`                                            | Serve the outbound OIDC issuer used to federate into customer cloud accounts                        |
+| trustready.identityFederation.issuerBaseUrl                          | string  | `""`                                               | Advertised issuer base; empty serves it at {baseUrl}/federation. Immutable once customers register it |
+| trustready.identityFederation.signingKey                             | string  | `""`                                               | **REQUIRED when the identity federation issuer is enabled** PEM private key, separate from oauth2.signingKey             |
+| trustready.identityFederation.signingKeyKid                          | string  | `"default"`                                        | Key id published for signingKey                                                                     |
+| trustready.identityFederation.previousSigningKey                     | string  | `""`                                               | Retired PEM private key, published in the JWKS but never signing, so tokens minted before a rotation still verify |
+| trustready.identityFederation.previousSigningKeyKid                  | string  | `""`                                               | **REQUIRED when previousSigningKey is set** Key id of the retired key; must differ from signingKeyKid |
+| trustready.identityFederation.cloudformationTemplateUrl              | string  | `"https://trustready-cloudformation-template.s3.us-east-2.amazonaws.com/aws-audit-role.yaml"` | Public S3 HTTPS URL used to build the AWS console quick-create link |
+| trustready.identityFederation.terraformModuleSource                  | string  | `"trustready/audit-role/aws"`                        | Terraform module address copied into the AWS connector install snippet |
+| trustready.identityFederation.gcpTerraformModuleSource               | string  | `"trustready/audit-role/gcp"`                        | Terraform module address copied into the GCP connector install snippet |
+| trustready.identityFederation.azureTerraformModuleSource             | string  | `"trustready/audit-role/azurerm"`                    | Terraform module address copied into the Azure connector install snippet |
+| trustready.service.port                                      | int     | `8080`                                             | TrustReady application service port                                                                      |
+| trustready.metrics.port                                      | int     | `8081`                                             | TrustReady metrics service port                                                                          |
+| trustready.tracing.enabled                                   | bool    | `false`                                            | Enable OpenTelemetry tracing                                                                        |
+| trustready.tracing.addr                                      | string  | `""`                                               | OTLP gRPC endpoint (e.g., tempo:4317)                                                               |
+| trustready.tracing.maxBatchSize                              | int     | `512`                                              | Maximum batch size for trace exports                                                                |
+| trustready.tracing.batchTimeout                              | int     | `5`                                                | Batch timeout in seconds                                                                            |
+| trustready.tracing.exportTimeout                             | int     | `30`                                               | Export timeout in seconds                                                                           |
+| trustready.tracing.maxQueueSize                              | int     | `2048`                                             | Maximum queue size for traces                                                                       |
+| trustready.cors.allowedOrigins                               | list    | `["https://trustready.example.com", "http://..."]`      | CORS allowed origins                                                                                |
+| trustready.extraHeaderFields                                 | object  | `{}`                                               | Extra HTTP headers to add to responses                                                              |
+| trustready.auth.disableSignup                                | bool    | `false`                                            | Restrict console access to identities with an organization membership              |
+| trustready.auth.invitationTokenValidity                      | int     | `3600`                                             | Invitation token validity in seconds                                                                |
+| trustready.auth.cookieName                                   | string  | `"SSID"`                                           | Authentication cookie name                                                                          |
+| trustready.auth.cookieDomain                                 | string  | `"trustready.example.com"`                              | Authentication cookie domain                                                                        |
+| trustready.auth.cookieSecret                                 | string  | `""`                                               | **REQUIRED** Cookie signing secret (at least 32 bytes, generate with: openssl rand -base64 32)      |
+| trustready.auth.cookieDuration                               | int     | `24`                                               | Cookie duration in hours                                                                            |
+| trustready.auth.passwordPepper                               | string  | `""`                                               | **REQUIRED** Password hashing pepper (at least 32 bytes, generate with: openssl rand -base64 32)    |
+| trustready.auth.passwordIterations                           | int     | `1000000`                                          | Password hashing iterations                                                                         |
+| trustready.trustAuth.cookieName                              | string  | `"TCT"`                                            | Trust center cookie name                                                                            |
+| trustready.trustAuth.cookieDomain                            | string  | `"trustready.example.com"`                              | Trust center cookie domain                                                                          |
+| trustready.trustAuth.cookieDuration                          | int     | `24`                                               | Trust center cookie duration in hours                                                               |
+| trustready.trustAuth.tokenDuration                           | int     | `168`                                              | Trust token duration in hours                                                                       |
+| trustready.trustAuth.reportUrlDuration                       | int     | `15`                                               | Report URL duration in minutes                                                                      |
+| trustready.trustAuth.tokenSecret                             | string  | `""`                                               | **REQUIRED** Trust token signing secret (at least 32 bytes, generate with: openssl rand -base64 32) |
+| trustready.trustAuth.scope                                   | string  | `"trust_center_readonly"`                          | Trust token scope                                                                                   |
+| trustready.trustAuth.tokenType                               | string  | `"trust_center_access"`                            | Trust token type                                                                                    |
+| trustready.mailer.senderName                                 | string  | `"TrustReady"`                                          | Email sender name                                                                                   |
+| trustready.mailer.senderEmail                                | string  | `"no-reply@notification.trustready.io"`             | Email sender address                                                                                |
+| trustready.mailer.smtp.addr                                  | string  | `"sandbox.smtp.mailtrap.io:2525"`                  | SMTP server address                                                                                 |
+| trustready.mailer.smtp.user                                  | string  | `"2d1b1d0e8b3d0b"`                                 | SMTP username                                                                                       |
+| trustready.mailer.smtp.password                              | string  | `"25a8eb11e75e8d"`                                 | SMTP password                                                                                       |
+| trustready.mailer.smtp.tlsRequired                           | bool    | `true`                                             | Require TLS for SMTP connection                                                                     |
+| trustready.openai.apiKey                                     | string  | `""`                                               | OpenAI API key for AI features (optional)                                                           |
+| trustready.openai.temperature                                | float   | `0.1`                                              | OpenAI temperature setting                                                                          |
+| trustready.openai.modelName                                  | string  | `"gpt-4o"`                                         | OpenAI model name                                                                                   |
+| trustready.openai.maxTokens                                  | int     | `4096`                                             | Maximum output tokens for LLM requests                                                              |
+| trustready.customDomains.enabled                             | bool    | `false`                                            | Enable custom domains feature                                                                       |
+| trustready.customDomains.renewalInterval                     | int     | `3600`                                             | Certificate renewal interval in seconds                                                             |
+| trustready.customDomains.provisionInterval                   | int     | `30`                                               | Domain provision interval in seconds                                                                |
+| trustready.customDomains.cnameTarget                         | string  | `"trustready.example.com"`                              | CNAME target for custom domains                                                                     |
+| trustready.customDomains.acme.directory                      | string  | `"https://acme-v02.api.letsencrypt.org/directory"` | ACME directory URL                                                                                  |
+| trustready.customDomains.acme.email                          | string  | `"admin@example.com"`                              | ACME registration email                                                                             |
+| trustready.customDomains.acme.keyType                        | string  | `"EC256"`                                          | ACME key type                                                                                       |
+| trustready.customDomains.acme.insecureTls                    | bool    | `false`                                            | Allow insecure TLS for ACME                                                                         |
+| trustready.connectors                                        | list    | `[]`                                               | External OAuth2 connectors configuration                                                            |
 | postgresql.enabled                                      | bool    | `true`                                             | Enable included PostgreSQL container for demo purposes using CloudNativePG                          |
 | postgresql.resources.limits.memory                      | string  | `"2Gi"`                                            | PostgreSQL memory limit                                                                             |
 | postgresql.resources.limits.ephemeral-storage           | string  | `"5Gi"`                                            | PostgreSQL ephemeral storage limit                                                                  |

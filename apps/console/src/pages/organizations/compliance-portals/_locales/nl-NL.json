@@ -294,24 +294,24 @@
   },
   "domainsSection": {
     "title": "Domeinen",
-    "description": "Uw compliancepagina is altijd beschikbaar op het standaard probopage.com-subdomein. U kunt deze ook aanbieden op een eigen aangepast domein."
+    "description": "Uw compliancepagina is altijd beschikbaar op het standaard trustreadypage.com-subdomein. U kunt deze ook aanbieden op een eigen aangepast domein."
   },
   "slackSection": {
     "title": "Slack-meldingen",
     "connectionTitle": "Meldingskanaal",
     "notInstalledTitle": "Slack-bot niet geïnstalleerd",
     "description": "Kies waar toegangsverzoeken voor deze compliancepagina naartoe worden gestuurd.",
-    "notInstalled": "Installeer de Probo Slack-app via de organisatie-instellingen voordat u een kanaal kiest.",
+    "notInstalled": "Installeer de TrustReady Slack-app via de organisatie-instellingen voordat u een kanaal kiest.",
     "loginRequired": {
       "title": "Slack-toegang vereist /probot login",
-      "description": "Elke reviewer moet <cmd>/probot login</cmd> in Slack uitvoeren om het Probo-account te koppelen voordat verzoeken via Slack kunnen worden behandeld."
+      "description": "Elke reviewer moet <cmd>/probot login</cmd> in Slack uitvoeren om het TrustReady-account te koppelen voordat verzoeken via Slack kunnen worden behandeld."
     },
     "channel": {
       "label": "Kanaal",
       "placeholder": "Selecteer kanaal",
-      "help": "Nodig @Probo uit in een kanaal voordat u het selecteert.",
+      "help": "Nodig @TrustReady uit in een kanaal voordat u het selecteert.",
       "emptyTitle": "Nog geen Slack-kanaal",
-      "emptyDescription": "Nodig @Probo in Slack uit in een kanaal en open daarna deze lijst opnieuw."
+      "emptyDescription": "Nodig @TrustReady in Slack uit in een kanaal en open daarna deze lijst opnieuw."
     },
     "actions": {
       "clear": "Wissen",
@@ -476,7 +476,7 @@
       "value": "Waarde",
       "ttl": "TTL: {{ttl}}",
       "copy": "Kopiëren",
-      "purposePointToServers": "Wijs het domein naar de Probo-servers"
+      "purposePointToServers": "Wijs het domein naar de TrustReady-servers"
     },
     "messages": {
       "copied": "Gekopieerd",

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -63,7 +63,7 @@ func PersistAssessmentResult(
 				return fmt.Errorf("cannot load third party: %w", err)
 			}
 
-			// Sub third parties store hierarchy-qualified names ("aws (Probo)").
+			// Sub third parties store hierarchy-qualified names ("aws (TrustReady)").
 			// Load the ancestor chain so the vetted third party and any
 			// discovered sub-processors are named consistently with the console.
 			ancestorBaseNames, err := loadAncestorBaseNames(ctx, conn, scope, thirdParty.ID)
@@ -774,7 +774,7 @@ func linkSubThirdParty(
 	}
 
 	// Store and match the child under its hierarchy-qualified name so vetting
-	// agrees with names created from the console (e.g. "aws (Probo)").
+	// agrees with names created from the console (e.g. "aws (TrustReady)").
 	qualifiedName := qualifyThirdPartyName(p.Name, parentNamePath)
 
 	child := &coredata.ThirdParty{}
@@ -832,7 +832,7 @@ func baseThirdPartyName(name string) string {
 }
 
 // qualifyThirdPartyName appends the parent path as a parenthesized suffix, e.g.
-// ("aws", ["Probo", "Acme"]) → "aws (Probo/Acme)". An empty path leaves the
+// ("aws", ["TrustReady", "Acme"]) → "aws (TrustReady/Acme)". An empty path leaves the
 // name unchanged, so top-level third parties are never suffixed.
 func qualifyThirdPartyName(base string, path []string) string {
 	if len(path) == 0 {

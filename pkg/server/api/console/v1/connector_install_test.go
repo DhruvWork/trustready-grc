@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/saferedirect"
 )
 
@@ -70,7 +70,7 @@ func TestInstallAuthorizationFailure(t *testing.T) {
 		denied := iam.NewInsufficientPermissionsError(
 			gid.New(gid.NewTenantID(), coredata.IdentityEntityType),
 			gid.New(gid.NewTenantID(), coredata.OrganizationEntityType),
-			probo.ActionConnectorInitiate,
+			trustready.ActionConnectorInitiate,
 		)
 
 		status, rendered := installAuthorizationFailure(denied)
@@ -84,7 +84,7 @@ func TestInstallAuthorizationFailure(t *testing.T) {
 		denied := iam.NewInsufficientPermissionsError(
 			gid.New(gid.NewTenantID(), coredata.IdentityEntityType),
 			gid.New(gid.NewTenantID(), coredata.OrganizationEntityType),
-			probo.ActionConnectorInitiate,
+			trustready.ActionConnectorInitiate,
 		)
 
 		status, rendered := installAuthorizationFailure(

@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -45,7 +45,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 	"github.com/DhruvWork/trustready-grc/pkg/itam"
 	"github.com/DhruvWork/trustready-grc/pkg/mailman"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/prosemirror"
 	"github.com/DhruvWork/trustready-grc/pkg/resourcealias"
 	"github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
@@ -61,7 +61,7 @@ import (
 const maxDeviceListSize = 100
 
 type Resolver struct {
-	proboSvc              *probo.Service
+	trustreadySvc              *trustready.Service
 	management            *management.Service
 	certManager           *certmanager.Service
 	resourceAlias         *resourcealias.Service

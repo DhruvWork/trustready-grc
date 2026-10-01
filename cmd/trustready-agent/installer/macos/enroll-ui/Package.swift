@@ -2,19 +2,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "probo-agent-url-handler",
+    name: "trustready-agent-url-handler",
     platforms: [
         .macOS(.v11)
     ],
     products: [
-        .library(name: "ProboAgentShared", targets: ["ProboAgentShared"]),
+        .library(name: "TrustReadyAgentShared", targets: ["TrustReadyAgentShared"]),
         .library(name: "HelperClient", targets: ["HelperClient"]),
-        .executable(name: "com.probo.agent.helper", targets: ["com.probo.agent.helper"]),
-        .executable(name: "probo-agent-url-handler", targets: ["probo-agent-url-handler"]),
+        .executable(name: "com.trustready.agent.helper", targets: ["com.trustready.agent.helper"]),
+        .executable(name: "trustready-agent-url-handler", targets: ["trustready-agent-url-handler"]),
     ],
     targets: [
         .target(
-            name: "ProboAgentShared",
+            name: "TrustReadyAgentShared",
             path: "Shared",
             exclude: [
                 "HelperVersion.generated.swift.tmpl",
@@ -26,12 +26,12 @@ let package = Package(
         ),
         .target(
             name: "HelperClient",
-            dependencies: ["ProboAgentShared"],
+            dependencies: ["TrustReadyAgentShared"],
             path: "HelperClient"
         ),
         .executableTarget(
-            name: "com.probo.agent.helper",
-            dependencies: ["ProboAgentShared"],
+            name: "com.trustready.agent.helper",
+            dependencies: ["TrustReadyAgentShared"],
             path: "HelperTool",
             exclude: ["Info.plist.tmpl", "Launchd.plist.tmpl"],
             linkerSettings: [
@@ -39,8 +39,8 @@ let package = Package(
             ]
         ),
         .executableTarget(
-            name: "probo-agent-url-handler",
-            dependencies: ["HelperClient", "ProboAgentShared"],
+            name: "trustready-agent-url-handler",
+            dependencies: ["HelperClient", "TrustReadyAgentShared"],
             path: "URLHandlerSources"
         ),
     ]

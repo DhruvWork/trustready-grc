@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +49,7 @@ func TestSettingRejectedError(t *testing.T) {
 				Code:       "code",
 				Setting:    tc.setting,
 				StatusCode: http.StatusUnprocessableEntity,
-				Message:    "Probo's message.",
+				Message:    "TrustReady's message.",
 			}
 
 			gqlErr, ok := errors.AsType[*gqlerror.Error](settingRejectedError(context.Background(), rejected))
@@ -57,7 +57,7 @@ func TestSettingRejectedError(t *testing.T) {
 			assert.Equal(t, "INVALID", gqlErr.Extensions["code"])
 			assert.Equal(t, tc.field, gqlErr.Extensions["field"])
 			assert.Equal(t, "code", gqlErr.Extensions["cause"])
-			assert.Equal(t, "Probo's message.", gqlErr.Message)
+			assert.Equal(t, "TrustReady's message.", gqlErr.Message)
 		})
 	}
 }

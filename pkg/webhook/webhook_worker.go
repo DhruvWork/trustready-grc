@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -482,12 +482,12 @@ func (h *webhookHandler) doHTTPCall(
 
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Idempotency-Key", deliveryID)
-	req.Header.Set("X-Probo-Webhook-Delivery-Id", deliveryID)
-	req.Header.Set("X-Probo-Webhook-Event", webhookData.EventType.String())
-	req.Header.Set("X-Probo-Webhook-Organization-Id", webhookData.OrganizationID.String())
-	req.Header.Set("X-Probo-Webhook-Timestamp", timestamp)
-	req.Header.Set("X-Probo-Webhook-Signature", signature)
-	req.Header.Set("X-Probo-Webhook-Host", h.host)
+	req.Header.Set("X-TrustReady-Webhook-Delivery-Id", deliveryID)
+	req.Header.Set("X-TrustReady-Webhook-Event", webhookData.EventType.String())
+	req.Header.Set("X-TrustReady-Webhook-Organization-Id", webhookData.OrganizationID.String())
+	req.Header.Set("X-TrustReady-Webhook-Timestamp", timestamp)
+	req.Header.Set("X-TrustReady-Webhook-Signature", signature)
+	req.Header.Set("X-TrustReady-Webhook-Host", h.host)
 
 	resp, err := h.httpClient.Do(req)
 	if err != nil {

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ const (
 	vercelDefaultBaseURL = "https://api.vercel.com"
 )
 
-// VercelUser is the projection of Vercel's /v2/user response that Probo
+// VercelUser is the projection of Vercel's /v2/user response that TrustReady
 // consumes: the personal-account UID (used as a synthetic TeamID) and
 // the human-readable display fields (used by the source-name resolver
 // when a connector targets a personal account rather than a team).

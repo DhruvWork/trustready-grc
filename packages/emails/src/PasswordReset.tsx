@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ export const PasswordReset = () => {
   return (
     <EmailLayout subject="Reset your password">
       <Text style={bodyText}>
-        You have requested a password reset for your Probo account. Click the button below to reset your password:
+        You have requested a password reset for your TrustReady account. Click the button below to reset your password:
       </Text>
 
       <Section style={buttonContainer}>

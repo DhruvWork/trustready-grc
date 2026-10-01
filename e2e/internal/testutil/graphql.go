@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -297,7 +297,7 @@ func complianceportalOAuthMetadataPath() string {
 
 // DoTrust posts a GraphQL query to a compliance page served on the dedicated
 // listener. host is the page's serving domain (a customer custom domain or a
-// managed {slug}.probopage.localhost subdomain).
+// managed {slug}.trustreadypage.localhost subdomain).
 func (c *Client) DoTrust(host string, query string, variables map[string]any) (*GraphQLResponse, error) {
 	reqBody := GraphQLRequest{
 		Query:     query,

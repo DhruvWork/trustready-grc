@@ -1,6 +1,6 @@
 # Security Notes
 
-User-facing notes on security-relevant changes to Probo. For the
+User-facing notes on security-relevant changes to TrustReady. For the
 vulnerability reporting process, see [SECURITY.md](SECURITY.md).
 
 ## Privilege escalation to OWNER via createUser
@@ -25,7 +25,7 @@ fails closed across every membership-creating and membership-updating
 path.
 
 Reported by [Pig-Tail](https://github.com/Pig-Tail).
-([GHSA-cppp-g98f-gfpp](https://github.com/getprobo/probo/security/advisories/GHSA-cppp-g98f-gfpp))
+([GHSA-cppp-g98f-gfpp](https://github.com/getprobo/trustready/security/advisories/GHSA-cppp-g98f-gfpp))
 
 ## Cross-tenant and hidden-item disclosure via Query.node in the Trust Center API
 
@@ -48,7 +48,7 @@ so reads are confined to the page's tenant. Cross-tenant or unknown IDs
 surface as not-found instead of leaking data.
 
 Reported by [Pig-Tail](https://github.com/Pig-Tail).
-([GHSA-w23w-f7v2-625w](https://github.com/getprobo/probo/security/advisories/GHSA-w23w-f7v2-625w))
+([GHSA-w23w-f7v2-625w](https://github.com/getprobo/trustready/security/advisories/GHSA-w23w-f7v2-625w))
 
 ## Broken access control in the public e-signature NDA API
 
@@ -72,7 +72,7 @@ identity, never client input, and are compared against the signature's
 stored `SignerEmail`.
 
 Reported by [Pig-Tail](https://github.com/Pig-Tail).
-([GHSA-22xj-f767-ppw6](https://github.com/getprobo/probo/security/advisories/GHSA-22xj-f767-ppw6))
+([GHSA-22xj-f767-ppw6](https://github.com/getprobo/trustready/security/advisories/GHSA-22xj-f767-ppw6))
 
 ## Cross-tenant IDOR via unvalidated foreign-key references
 
@@ -99,7 +99,7 @@ pattern) now authorize the related object's own ID rather than the
 parent's.
 
 Reported by [Pig-Tail](https://github.com/Pig-Tail).
-([GHSA-c74x-79w6-63jh](https://github.com/getprobo/probo/security/advisories/GHSA-c74x-79w6-63jh))
+([GHSA-c74x-79w6-63jh](https://github.com/getprobo/trustready/security/advisories/GHSA-c74x-79w6-63jh))
 
 ## GraphQL alias-flooding denial of service
 
@@ -118,7 +118,7 @@ limit, and an LRU query cache, with limits configurable per
 environment via `TRUSTREADYD_API_GRAPHQL_*` env vars and Helm values.
 
 Reported by [Muthu-Devarajan](https://github.com/Muthu-Devarajan).
-([GHSA-prh2-g8pv-m7p9](https://github.com/getprobo/probo/security/advisories/GHSA-prh2-g8pv-m7p9))
+([GHSA-prh2-g8pv-m7p9](https://github.com/getprobo/trustready/security/advisories/GHSA-prh2-g8pv-m7p9))
 
 ## Open redirect bypass in saferedirect
 
@@ -136,7 +136,7 @@ which browsers can treat as an external redirect.
 
 Reported by [Fushuling](https://github.com/Fushuling) and
 [RacerZ](https://github.com/RacerZ-fighting).
-([GHSA-x7qq-m748-8p2c](https://github.com/getprobo/probo/security/advisories/GHSA-x7qq-m748-8p2c),
+([GHSA-x7qq-m748-8p2c](https://github.com/getprobo/trustready/security/advisories/GHSA-x7qq-m748-8p2c),
 [CVE-2026-49820](https://www.cve.org/CVERecord?id=CVE-2026-49820))
 
 ## Password changes invalidate existing sessions

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
-// gcpRegistration declares GCP as a workload identity provider: Probo holds no
+// gcpRegistration declares GCP as a workload identity provider: TrustReady holds no
 // GCP credential and mints an assertion the customer's Workload Identity
 // Federation pool exchanges, then impersonates the named service account. It
 // therefore declares no OAuth2, API-key or client-credentials path — there is
@@ -73,7 +73,7 @@ func gcpRegistration() *Registration {
 
 // newGCPSession opens a session on the project the connector names, by
 // exchanging an assertion and impersonating the service account the customer
-// created for Probo there.
+// created for TrustReady there.
 //
 // The organization comes from the connector row, never from its settings: it
 // selects whose assertion is minted, and so whose cloud project the resulting

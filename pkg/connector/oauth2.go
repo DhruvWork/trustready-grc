@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -190,7 +190,7 @@ var (
 	_ Connection     = (*OAuth2Connection)(nil)
 	_ HTTPConnection = (*OAuth2Connection)(nil)
 
-	OAuth2TokenType = "probo/connector/oauth2"
+	OAuth2TokenType = "trustready/connector/oauth2"
 	OAuth2TokenTTL  = 10 * time.Minute
 )
 
@@ -607,7 +607,7 @@ func (c *OAuth2Connector) CompleteWithState(ctx context.Context, r *http.Request
 // will fail validation and must be retried. A dedicated, independently
 // rotated connector-state key (HMAC key set) is a future improvement.
 func DeriveConnectorStateKey(serverSecret string) string {
-	return deriveHMACKey(serverSecret, "probo/connector/oauth2-state-key")
+	return deriveHMACKey(serverSecret, "trustready/connector/oauth2-state-key")
 }
 
 // DeriveInstallStateKey derives the HMAC key signing app-install state tokens
@@ -615,7 +615,7 @@ func DeriveConnectorStateKey(serverSecret string) string {
 // DeriveConnectorStateKey: a state in flight inside the TTL fails validation
 // across a rotation and the customer must retry.
 func DeriveInstallStateKey(serverSecret string) string {
-	return deriveHMACKey(serverSecret, "probo/connector/install-state-key")
+	return deriveHMACKey(serverSecret, "trustready/connector/install-state-key")
 }
 
 func basicAuthHeader(clientID, clientSecret string) string {
@@ -640,7 +640,7 @@ func (c *OAuth2Connector) newFormTokenRequest(ctx context.Context, form url.Valu
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", "Probo Connector")
+	req.Header.Set("User-Agent", "TrustReady Connector")
 
 	return req, nil
 }
@@ -679,7 +679,7 @@ func (c *OAuth2Connector) buildTokenRequest(ctx context.Context, code, redirectU
 
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Accept", "application/json")
-		req.Header.Set("User-Agent", "Probo Connector")
+		req.Header.Set("User-Agent", "TrustReady Connector")
 		req.Header.Set("Authorization", basicAuthHeader(c.ClientID, c.ClientSecret))
 
 		return req, nil
@@ -898,7 +898,7 @@ func (c *OAuth2Connection) clientCredentialsClient(ctx context.Context, opts ...
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; charset=utf-8")
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", "Probo Connector")
+	req.Header.Set("User-Agent", "TrustReady Connector")
 	req.Header.Set("Authorization", basicAuthHeader(c.ClientID, c.ClientSecret))
 
 	httpClient := &http.Client{
@@ -922,7 +922,7 @@ func (c *OAuth2Connection) clientCredentialsClient(ctx context.Context, opts ...
 
 	// RetrieveError is the shape accessreview.IsProviderVerdict recognises: a
 	// refused exchange is the provider's verdict on the customer's credential,
-	// and an untyped error here is charged to Probo instead.
+	// and an untyped error here is charged to TrustReady instead.
 	if resp.StatusCode != http.StatusOK {
 		return nil, &oauth2.RetrieveError{Response: resp, Body: body}
 	}

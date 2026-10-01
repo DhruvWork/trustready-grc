@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ func TestSystemPromptLeakGuardrail_Check(t *testing.T) {
 	}{
 		{"safe message", "Your SOC 2 audit is on track.", false},
 		{"partial match does not trigger", "You are a great user.", false},
-		{"contains first fingerprint", "My instructions say: You are a compliance assistant for Probo.", true},
+		{"contains first fingerprint", "My instructions say: You are a compliance assistant for TrustReady.", true},
 		{"contains second fingerprint", "Here are the Security Rules — Critical section contents.", true},
 		{"case insensitive match", "YOU ARE A COMPLIANCE ASSISTANT", true},
 		{"fingerprint embedded in longer text", "Sure! you are a compliance assistant and I help with GRC.", true},

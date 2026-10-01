@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -344,7 +344,7 @@ func windowsAutoUpdate(ctx context.Context) Result {
 // throws DISP_E_UNKNOWNNAME on domain- and Entra-joined hosts.
 const windowsPasswordPolicyScript = `` +
 	`$d = Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\DeviceLock' -ErrorAction SilentlyContinue; ` +
-	`$dir = Join-Path $env:TEMP ('probo-secpol-' + [guid]::NewGuid().Guid); ` +
+	`$dir = Join-Path $env:TEMP ('trustready-secpol-' + [guid]::NewGuid().Guid); ` +
 	`$sam = ''; ` +
 	`try { ` +
 	`  New-Item -ItemType Directory -Path $dir -Force | Out-Null; ` +

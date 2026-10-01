@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -48,7 +48,7 @@ export function floatingCard(
 // CATEGORY_LIST is the preference-panel category/cookie template used by
 // presentations that expose granular controls (currently opt-in only).
 export const CATEGORY_LIST = `
-  <probo-category-list>
+  <trustready-category-list>
     <template>
       <button class="cookie-toggle" data-action="toggle-cookies" aria-expanded="false" data-aria-text="aria_show_details">
         ${CHEVRON_DOWN}
@@ -58,14 +58,14 @@ export const CATEGORY_LIST = `
           <div class="category-name" data-slot="name"></div>
           <div class="category-description" data-slot="description"></div>
         </div>
-        <probo-category-toggle>
+        <trustready-category-toggle>
           <label class="toggle">
             <input type="checkbox">
             <span class="toggle-track"></span>
           </label>
-        </probo-category-toggle>
+        </trustready-category-toggle>
       </div>
-      <probo-cookie-list hidden>
+      <trustready-cookie-list hidden>
         <template>
           <div class="cookie-item">
             <span class="cookie-name" data-slot="name"></span>
@@ -74,9 +74,9 @@ export const CATEGORY_LIST = `
             <span class="cookie-detail" data-label="label_duration"><span data-slot="duration"></span></span>
           </div>
         </template>
-      </probo-cookie-list>
+      </trustready-cookie-list>
     </template>
-  </probo-category-list>`;
+  </trustready-category-list>`;
 
 // applyTexts fills every [data-text] / [data-aria-text] node in the tree from
 // the config. It is variant-agnostic: link interpolation and category

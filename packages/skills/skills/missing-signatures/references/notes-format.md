@@ -1,6 +1,6 @@
 # Missing signatures notes file
 
-Path: `.probo/missing-signatures/<org-slug>.md`
+Path: `.trustready/missing-signatures/<org-slug>.md`
 
 `<org-slug>` — lowercase organization name with non-alphanumerics replaced by
 hyphens (e.g. `Acme Corp` → `acme-corp`).

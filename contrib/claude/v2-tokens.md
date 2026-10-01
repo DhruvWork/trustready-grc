@@ -1,6 +1,6 @@
 # v2 design tokens
 
-The v2 UI kit is built on a small set of **numbered token scales** sourced from Radix and the "Probo Radix UI" Figma file. Every token family follows the same convention as color — a numbered scale exposed as Tailwind utilities — so the kit speaks one consistent visual language: `bg-sand-3`, `text-4`, `rounded-3`, `shadow-2`.
+The v2 UI kit is built on a small set of **numbered token scales** sourced from Radix and the "TrustReady Radix UI" Figma file. Every token family follows the same convention as color — a numbered scale exposed as Tailwind utilities — so the kit speaks one consistent visual language: `bg-sand-3`, `text-4`, `rounded-3`, `shadow-2`.
 
 Theme entry: [`packages/ui/src/v2/theme.css`](../../packages/ui/src/v2/theme.css), aggregating `theme/colors.css`, `theme/typography.css`, `theme/radius.css`, `theme/shadows.css`, `theme/z-index.css`.
 

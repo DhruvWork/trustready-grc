@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -69,7 +69,7 @@ func TestCSPOrigin(t *testing.T) {
 		},
 		{
 			name:  "strips nested path prefix",
-			input: "https://app.example.com/probo/console",
+			input: "https://app.example.com/trustready/console",
 			want:  "https://app.example.com",
 		},
 		{
@@ -142,7 +142,7 @@ func TestBaseURL_CSPOrigin_RejectsSemicolonHost(t *testing.T) {
 func TestBaseURL_CSPOrigin_DiscardsPath(t *testing.T) {
 	t.Parallel()
 
-	b, err := baseurl.Parse("https://app.example.com/probo")
+	b, err := baseurl.Parse("https://app.example.com/trustready")
 	require.NoError(t, err)
 
 	got, err := b.CSPOrigin()

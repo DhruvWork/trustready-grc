@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -79,7 +79,7 @@ const (
 	// row does not loop forever.
 	defaultEnrichmentMaxAttempts = 3
 
-	enrichmentLogoUserAgent = "Probo-Enricher/1.0"
+	enrichmentLogoUserAgent = "TrustReady-Enricher/1.0"
 
 	// maxEnrichmentErrorLen bounds the per-agent error text persisted in
 	// enrichment metadata so a verbose or hostile agent/tool error cannot

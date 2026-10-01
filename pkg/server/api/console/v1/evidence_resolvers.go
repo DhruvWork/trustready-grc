@@ -9,16 +9,16 @@ import (
 	"context"
 	"errors"
 
-	"github.com/vikstrous/dataloadgen"
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 	"github.com/DhruvWork/trustready-grc/pkg/task"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/vikstrous/dataloadgen"
+	"go.gearno.de/kit/log"
 )
 
 // File is the resolver for the file field.
@@ -27,7 +27,7 @@ func (r *evidenceResolver) File(ctx context.Context, obj *types.Evidence) (*type
 		return nil, nil
 	}
 
-	if _, err := r.authorize(ctx, obj.File.ID, probo.ActionFileGet); err != nil {
+	if _, err := r.authorize(ctx, obj.File.ID, trustready.ActionFileGet); err != nil {
 		return nil, err
 	}
 
@@ -75,7 +75,7 @@ func (r *evidenceResolver) Task(ctx context.Context, obj *types.Evidence) (*type
 
 // Measure is the resolver for the measure field.
 func (r *evidenceResolver) Measure(ctx context.Context, obj *types.Evidence) (*types.Measure, error) {
-	if _, err := r.authorize(ctx, obj.Measure.ID, probo.ActionMeasureGet); err != nil {
+	if _, err := r.authorize(ctx, obj.Measure.ID, trustready.ActionMeasureGet); err != nil {
 		return nil, err
 	}
 
@@ -102,14 +102,14 @@ func (r *evidenceResolver) Permission(ctx context.Context, obj *types.Evidence, 
 
 // TotalCount is the resolver for the totalCount field.
 func (r *evidenceConnectionResolver) TotalCount(ctx context.Context, obj *types.EvidenceConnection) (int, error) {
-	scope, err := r.authorize(ctx, obj.ParentID, probo.ActionEvidenceList)
+	scope, err := r.authorize(ctx, obj.ParentID, trustready.ActionEvidenceList)
 	if err != nil {
 		return 0, err
 	}
 
 	switch obj.Resolver.(type) {
 	case *measureResolver:
-		count, err := r.probo.Evidences.CountForMeasureID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.Evidences.CountForMeasureID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count measure evidence", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -117,7 +117,7 @@ func (r *evidenceConnectionResolver) TotalCount(ctx context.Context, obj *types.
 
 		return count, nil
 	case *taskResolver:
-		count, err := r.probo.Evidences.CountForTaskID(ctx, scope, obj.ParentID)
+		count, err := r.trustready.Evidences.CountForTaskID(ctx, scope, obj.ParentID)
 		if err != nil {
 			r.logger.ErrorCtx(ctx, "cannot count task evidence", log.Error(err))
 			return 0, gqlutils.Internal(ctx)
@@ -133,12 +133,12 @@ func (r *evidenceConnectionResolver) TotalCount(ctx context.Context, obj *types.
 
 // DeleteEvidence is the resolver for the deleteEvidence field.
 func (r *mutationResolver) DeleteEvidence(ctx context.Context, input types.DeleteEvidenceInput) (*types.DeleteEvidencePayload, error) {
-	scope, err := r.authorize(ctx, input.EvidenceID, probo.ActionEvidenceDelete)
+	scope, err := r.authorize(ctx, input.EvidenceID, trustready.ActionEvidenceDelete)
 	if err != nil {
 		return nil, err
 	}
 
-	if err := r.probo.Evidences.Delete(ctx, scope, input.EvidenceID); err != nil {
+	if err := r.trustready.Evidences.Delete(ctx, scope, input.EvidenceID); err != nil {
 		r.logger.ErrorCtx(ctx, "cannot delete evidence", log.Error(err))
 		return nil, gqlutils.Internal(ctx)
 	}
@@ -150,16 +150,16 @@ func (r *mutationResolver) DeleteEvidence(ctx context.Context, input types.Delet
 
 // UploadMeasureEvidence is the resolver for the uploadMeasureEvidence field.
 func (r *mutationResolver) UploadMeasureEvidence(ctx context.Context, input types.UploadMeasureEvidenceInput) (*types.UploadMeasureEvidencePayload, error) {
-	scope, err := r.authorize(ctx, input.MeasureID, probo.ActionMeasureEvidenceUpload)
+	scope, err := r.authorize(ctx, input.MeasureID, trustready.ActionMeasureEvidenceUpload)
 	if err != nil {
 		return nil, err
 	}
 
-	evidence, err := r.probo.Evidences.UploadMeasureEvidence(
+	evidence, err := r.trustready.Evidences.UploadMeasureEvidence(
 		ctx, scope,
-		probo.UploadMeasureEvidenceRequest{
+		trustready.UploadMeasureEvidenceRequest{
 			MeasureID: input.MeasureID,
-			File: probo.FileUpload{
+			File: trustready.FileUpload{
 				Content:     input.File.File,
 				Filename:    input.File.Filename,
 				Size:        input.File.Size,

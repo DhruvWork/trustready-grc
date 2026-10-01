@@ -1,7 +1,7 @@
 {
   "name": "@trustready/skills",
   "version": "0.3.2",
-  "description": "Multi-agent compliance skills for open-source GRC (Claude Code, Codex, OpenCode) powered by Probo MCP",
+  "description": "Multi-agent compliance skills for open-source GRC (Claude Code, Codex, OpenCode) powered by TrustReady MCP",
   "private": false,
   "scripts": {
     "validate": "node scripts/validate.mjs",
@@ -10,7 +10,7 @@
   },
   "author": {
     "name": "TrustReady",
-    "email": "hello@probo.com"
+    "email": "hello@trustready.io"
   },
   "files": [
     ".claude-plugin",
@@ -30,7 +30,7 @@
     "agent-plugins",
     "codex",
     "opencode",
-    "probo",
+    "trustready",
     "compliance",
     "grc",
     "mcp",
@@ -42,13 +42,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/getprobo/probo.git",
+    "url": "git+https://github.com/getprobo/trustready.git",
     "directory": "packages/skills"
   },
   "bugs": {
-    "url": "https://github.com/getprobo/probo/issues"
+    "url": "https://github.com/getprobo/trustready/issues"
   },
-  "homepage": "https://github.com/getprobo/probo/tree/main/packages/skills#readme",
+  "homepage": "https://github.com/getprobo/trustready/tree/main/packages/skills#readme",
   "publishConfig": {
     "access": "public"
   }

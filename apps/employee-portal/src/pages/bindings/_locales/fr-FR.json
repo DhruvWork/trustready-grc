@@ -1,7 +1,7 @@
 {
   "bind": {
-    "title": "Connectez Slack à Probo",
-    "description": "Liez ce compte Slack à votre identité Probo pour que Probot puisse vous aider.",
+    "title": "Connectez Slack à TrustReady",
+    "description": "Liez ce compte Slack à votre identité TrustReady pour que Probot puisse vous aider.",
     "breadcrumb": "Connecter",
     "fields": {
       "tenant": "Espace de travail",
@@ -11,7 +11,7 @@
       "confirm": "Lier le compte Slack"
     },
     "messages": {
-      "linked": "Votre compte Slack est maintenant lié à Probo."
+      "linked": "Votre compte Slack est maintenant lié à TrustReady."
     },
     "missingToken": {
       "title": "Aucun lien de confirmation",

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,10 +19,10 @@
 // SOFTWARE.
 
 // Package gcp vends a one-hour authenticated session on one customer GCP
-// project by exchanging a Probo-minted OIDC token and impersonating the
+// project by exchanging a TrustReady-minted OIDC token and impersonating the
 // customer's audit service account.
 //
-// Probo holds no GCP credential for any customer. It mints a short-lived
+// TrustReady holds no GCP credential for any customer. It mints a short-lived
 // assertion (pkg/identityfederation), exchanges it at STS in the project's
 // universe, and impersonates the customer's service account. The customer
 // revokes by deleting the workload identity binding.

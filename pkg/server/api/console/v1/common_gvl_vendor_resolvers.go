@@ -8,18 +8,18 @@ package console_v1
 import (
 	"context"
 
-	"go.gearno.de/kit/log"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
+	"go.gearno.de/kit/log"
 )
 
 // TotalCount is the resolver for the totalCount field.
 func (r *commonGVLVendorConnectionResolver) TotalCount(ctx context.Context, obj *types.CommonGVLVendorConnection) (int, error) {
 	if obj.ParentID != nil {
-		scope, err := r.authorize(ctx, *obj.ParentID, probo.ActionCookieBannerGet)
+		scope, err := r.authorize(ctx, *obj.ParentID, trustready.ActionCookieBannerGet)
 		if err != nil {
 			return 0, err
 		}
@@ -35,7 +35,7 @@ func (r *commonGVLVendorConnectionResolver) TotalCount(ctx context.Context, obj 
 
 	identity := authn.IdentityFromContext(ctx)
 
-	if _, err := r.authorize(ctx, identity.ID, probo.ActionCommonGVLVendorList); err != nil {
+	if _, err := r.authorize(ctx, identity.ID, trustready.ActionCommonGVLVendorList); err != nil {
 		return 0, err
 	}
 

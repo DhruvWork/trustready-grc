@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/server/httpx"
 	"github.com/DhruvWork/trustready-grc/pkg/server/jsonx"
 )
@@ -43,7 +43,7 @@ const documentCacheMaxAge = 1 * time.Hour
 type handler struct {
 	logger        *log.Logger
 	issuer        *identityfederation.Issuer
-	organizations *probo.OrganizationService
+	organizations *trustready.OrganizationService
 }
 
 // discovery serves the OIDC discovery document of one organization's issuer.

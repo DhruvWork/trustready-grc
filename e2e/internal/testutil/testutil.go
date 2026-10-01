@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -339,7 +339,7 @@ func generateConfig(opts configOptions) (string, error) {
 		"TRUSTREADYD_METRICS_ADDR": metricsAddr,
 		"TRUSTREADYD_TRACING_ADDR": "localhost:14317",
 
-		// Probod base.
+		// TrustReadyd base.
 		"TRUSTREADYD_BASE_URL": baseURL,
 
 		// API.
@@ -382,11 +382,11 @@ func generateConfig(opts configOptions) (string, error) {
 
 		// Trust center. Compliance pages are served exclusively over this
 		// dedicated listener, addressed by Host/SNI. The managed base domain
-		// yields {slug}.probopage.localhost subdomains for pages without a
+		// yields {slug}.trustreadypage.localhost subdomains for pages without a
 		// customer custom domain.
 		"TRUSTREADYD_TRUST_CENTER_HTTP_ADDR":   trustHTTPAddr,
 		"TRUSTREADYD_TRUST_CENTER_HTTPS_ADDR":  trustHTTPSAddr,
-		"TRUSTREADYD_TRUST_CENTER_BASE_DOMAIN": "probopage.localhost",
+		"TRUSTREADYD_TRUST_CENTER_BASE_DOMAIN": "trustreadypage.localhost",
 		"TRUSTREADYD_TRUST_CENTER_TLS_MODE":    "direct",
 
 		// Keep certificate provisioning snappy so trust-center e2e flows do not
@@ -400,8 +400,8 @@ func generateConfig(opts configOptions) (string, error) {
 		"TRUSTREADYD_AWS_ENDPOINT":          "http://127.0.0.1:8333",
 
 		// Mailer.
-		"TRUSTREADYD_MAILER_SENDER_NAME":  "Probo Test",
-		"TRUSTREADYD_MAILER_SENDER_EMAIL": "no-reply@test.getprobo.com",
+		"TRUSTREADYD_MAILER_SENDER_NAME":  "TrustReady Test",
+		"TRUSTREADYD_MAILER_SENDER_EMAIL": "no-reply@test.trustready.io",
 		"TRUSTREADYD_MAILER_INTERVAL":     "1",
 
 		// Drain webhook data promptly so event-persistence assertions do not
@@ -412,9 +412,9 @@ func generateConfig(opts configOptions) (string, error) {
 		"TRUSTREADYD_OPENAI_API_KEY": "thisisnotasecret",
 
 		// Custom domains.
-		"TRUSTREADYD_CUSTOM_DOMAINS_CNAME_TARGET": "custom.test.getprobo.com",
+		"TRUSTREADYD_CUSTOM_DOMAINS_CNAME_TARGET": "custom.test.trustready.io",
 		"TRUSTREADYD_ACME_DIRECTORY":              "https://localhost:9000/acme/acme/directory",
-		"TRUSTREADYD_ACME_EMAIL":                  "admin@test.getprobo.com",
+		"TRUSTREADYD_ACME_EMAIL":                  "admin@test.trustready.io",
 	}
 
 	builder := bootstrap.NewBuilder(bootstrap.NewResolver(func(key string) string {
@@ -430,7 +430,7 @@ func generateConfig(opts configOptions) (string, error) {
 		return "", fmt.Errorf("build config: %w", err)
 	}
 
-	tmpDir, err := os.MkdirTemp("", "probo-e2e-")
+	tmpDir, err := os.MkdirTemp("", "trustready-e2e-")
 	if err != nil {
 		return "", fmt.Errorf("create temp dir: %w", err)
 	}

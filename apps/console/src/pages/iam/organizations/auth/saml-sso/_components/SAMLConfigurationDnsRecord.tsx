@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ export function SAMLConfigurationDnsRecord({
   const { t } = useTranslation();
   const { toast } = useToast();
   const { record, recordField, recordValue, code } = samlConfigurationListItem();
-  const value = `probo-verification=${domainVerificationToken}`;
+  const value = `trustready-verification=${domainVerificationToken}`;
 
   async function copyToClipboard(text: string, description: string) {
     try {

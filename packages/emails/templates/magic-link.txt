@@ -1,4 +1,4 @@
-Probo
+TrustReady
 
 Hi {{.RecipientFullName}},
 

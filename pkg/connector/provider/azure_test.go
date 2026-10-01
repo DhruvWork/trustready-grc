@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -65,7 +65,7 @@ func TestAzureRegistration(t *testing.T) {
 	require.True(t, ok)
 
 	assert.Equal(t, "Microsoft Azure", reg.DisplayName)
-	assert.Equal(t, "https://www.probo.com/docs/product/access-review/azure", reg.DocumentationURL)
+	assert.Equal(t, "https://www.trustready.io/docs/product/access-review/azure", reg.DocumentationURL)
 	assert.True(t, reg.SupportsWorkloadIdentity())
 	assert.False(t, reg.SupportsAPIKey())
 	assert.False(t, reg.IsManagedAPIKey())

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -93,7 +93,7 @@ func newTrayCmd() *cobra.Command {
 		&serverURL,
 		"server",
 		"",
-		"Probo console base URL; skips region picker when set (for local dev)",
+		"TrustReady console base URL; skips region picker when set (for local dev)",
 	)
 
 	return cmd

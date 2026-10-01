@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -50,13 +50,13 @@ func TestSEOFromRequest(t *testing.T) {
 
 	req := requestWithPortalOrigin(
 		t,
-		"https://acme.probopage.localhost/fr/documents",
-		"https://acme.probopage.localhost",
+		"https://acme.trustreadypage.localhost/fr/documents",
+		"https://acme.trustreadypage.localhost",
 	)
 
 	lang, canonical, hreflang := complianceportal_v1.SEOFromRequest(req)
 	assert.Equal(t, "fr", lang)
-	assert.Equal(t, "https://acme.probopage.localhost/fr/documents", canonical)
+	assert.Equal(t, "https://acme.trustreadypage.localhost/fr/documents", canonical)
 	require.NotEmpty(t, hreflang)
 
 	var (
@@ -74,7 +74,7 @@ func TestSEOFromRequest(t *testing.T) {
 		}
 	}
 
-	assert.Equal(t, "https://acme.probopage.localhost/en/documents", enHref)
+	assert.Equal(t, "https://acme.trustreadypage.localhost/en/documents", enHref)
 	assert.Equal(t, enHref, xDefault)
 }
 
@@ -83,12 +83,12 @@ func TestSEOFromRequest_EscapesPathSegments(t *testing.T) {
 
 	req := requestWithPortalOrigin(
 		t,
-		"https://acme.probopage.localhost/en/docs/foo%20bar",
-		"https://acme.probopage.localhost",
+		"https://acme.trustreadypage.localhost/en/docs/foo%20bar",
+		"https://acme.trustreadypage.localhost",
 	)
 
 	_, canonical, _ := complianceportal_v1.SEOFromRequest(req)
-	assert.Equal(t, "https://acme.probopage.localhost/en/docs/foo%20bar", canonical)
+	assert.Equal(t, "https://acme.trustreadypage.localhost/en/docs/foo%20bar", canonical)
 }
 
 func TestSEOFromRequest_MissingOriginOmitsLinks(t *testing.T) {

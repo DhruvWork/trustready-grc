@@ -38,20 +38,20 @@
   "steps": {
     "review": {
       "title": "Review device information",
-      "description": "See what Probo Agent will save."
+      "description": "See what TrustReady Agent will save."
     },
     "download": {
       "title": "Download the agent",
       "description": "Install the desktop agent"
     },
     "enroll": {
-      "title": "Open Probo Agent",
+      "title": "Open TrustReady Agent",
       "description": "Finish registering this device."
     }
   },
   "review": {
     "title": "Review collected data",
-    "description": "Probo collects the following device metadata for inventory and posture reporting.",
+    "description": "TrustReady collects the following device metadata for inventory and posture reporting.",
     "understand": "I understand",
     "thisDevice": {
       "title": "This device",
@@ -69,7 +69,7 @@
       "title": "System details",
       "platform": "Platform",
       "osVersion": "OS version",
-      "agentVersion": "Probo Agent version"
+      "agentVersion": "TrustReady Agent version"
     },
     "activity": {
       "title": "Activity signals",
@@ -79,9 +79,9 @@
     }
   },
   "download": {
-    "title": "Download Probo Agent",
+    "title": "Download TrustReady Agent",
     "description": "Install the app to secure this device and connect it to your organization.",
-    "featured": "Probo Agent for macOS",
+    "featured": "TrustReady Agent for macOS",
     "continue": "Continue",
     "download": "Download",
     "downloadNamed": "Download {{title}}",
@@ -96,8 +96,8 @@
   },
   "enroll": {
     "title": "Continue in the app",
-    "description": "Open Probo Agent to finish registering this device.",
-    "open": "Open Probo Agent",
+    "description": "Open TrustReady Agent to finish registering this device.",
+    "open": "Open TrustReady Agent",
     "preparing": "Preparing…",
     "waiting": "Waiting for the agent's first check-in…",
     "timedOut": "We haven't heard from the agent yet. Make sure the desktop agent is installed and running, then try again.",

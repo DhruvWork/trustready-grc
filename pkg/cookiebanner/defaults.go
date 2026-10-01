@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -743,7 +743,7 @@ var tcfUIStringsByLanguage = map[string]map[string]string{
 		"tcf_label_std_retention":      "Standard retention",
 		"tcf_label_purpose_storage":    "Purpose-specific storage",
 		"tcf_label_device_storage":     "Device storage details",
-		"tcf_storage":                  "Your choices are stored in the probo_consent cookie for {{days}} days.",
+		"tcf_storage":                  "Your choices are stored in the trustready_consent cookie for {{days}} days.",
 	},
 	"fr": {
 		"tcf_disclosure_store":         "Ce site stocke et/ou accède à des informations sur un appareil et traite des données personnelles.",
@@ -781,7 +781,7 @@ var tcfUIStringsByLanguage = map[string]map[string]string{
 		"tcf_label_std_retention":      "Conservation standard",
 		"tcf_label_purpose_storage":    "Stockage spécifique à la finalité",
 		"tcf_label_device_storage":     "Détails du stockage sur l'appareil",
-		"tcf_storage":                  "Vos choix sont stockés dans le cookie probo_consent pendant {{days}} jours.",
+		"tcf_storage":                  "Vos choix sont stockés dans le cookie trustready_consent pendant {{days}} jours.",
 	},
 	"de": {
 		"tcf_disclosure_store":         "Diese Website speichert und/oder greift auf Informationen auf einem Gerät zu und verarbeitet personenbezogene Daten.",
@@ -819,7 +819,7 @@ var tcfUIStringsByLanguage = map[string]map[string]string{
 		"tcf_label_std_retention":      "Standardaufbewahrung",
 		"tcf_label_purpose_storage":    "Zweckbezogene Speicherung",
 		"tcf_label_device_storage":     "Angaben zur Gerätespeicherung",
-		"tcf_storage":                  "Ihre Auswahl wird {{days}} Tage im Cookie probo_consent gespeichert.",
+		"tcf_storage":                  "Ihre Auswahl wird {{days}} Tage im Cookie trustready_consent gespeichert.",
 	},
 	"es": {
 		"tcf_disclosure_store":         "Este sitio almacena y/o accede a información en un dispositivo y trata datos personales.",
@@ -857,7 +857,7 @@ var tcfUIStringsByLanguage = map[string]map[string]string{
 		"tcf_label_std_retention":      "Conservación estándar",
 		"tcf_label_purpose_storage":    "Almacenamiento específico de la finalidad",
 		"tcf_label_device_storage":     "Detalles del almacenamiento en el dispositivo",
-		"tcf_storage":                  "Sus elecciones se almacenan en la cookie probo_consent durante {{days}} días.",
+		"tcf_storage":                  "Sus elecciones se almacenan en la cookie trustready_consent durante {{days}} días.",
 	},
 	"nl": {
 		"tcf_disclosure_store":         "Deze site slaat informatie op een apparaat op en/of opent die, en verwerkt persoonsgegevens.",
@@ -895,7 +895,7 @@ var tcfUIStringsByLanguage = map[string]map[string]string{
 		"tcf_label_std_retention":      "Standaardbewaartermijn",
 		"tcf_label_purpose_storage":    "Doeleinde-specifieke opslag",
 		"tcf_label_device_storage":     "Details apparaatopslag",
-		"tcf_storage":                  "Uw keuzes worden {{days}} dagen bewaard in de cookie probo_consent.",
+		"tcf_storage":                  "Uw keuzes worden {{days}} dagen bewaard in de cookie trustready_consent.",
 	},
 }
 

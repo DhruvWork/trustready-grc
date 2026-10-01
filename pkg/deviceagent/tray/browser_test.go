@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ func TestValidateBrowserURL(t *testing.T) {
 	}{
 		{
 			name:  "accepts https",
-			input: "https://us.probo.com/enroll",
+			input: "https://us.trustready.io/enroll",
 		},
 		{
 			name:  "accepts http",
@@ -47,7 +47,7 @@ func TestValidateBrowserURL(t *testing.T) {
 		},
 		{
 			name:  "accepts uppercase https",
-			input: "HTTPS://eu.probo.com/enroll",
+			input: "HTTPS://eu.trustready.io/enroll",
 		},
 		{
 			name:    "rejects file scheme",
@@ -71,7 +71,7 @@ func TestValidateBrowserURL(t *testing.T) {
 		},
 		{
 			name:    "rejects scheme-less input",
-			input:   "us.probo.com/enroll",
+			input:   "us.trustready.io/enroll",
 			wantErr: `unsupported URL scheme ""`,
 		},
 	}

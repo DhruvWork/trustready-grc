@@ -1,6 +1,6 @@
 # UI system (`@trustready/ui` v2 kit)
 
-Shared React UI for Probo apps lives in the **`@trustready/ui`** workspace package ([`packages/ui`](../../packages/ui)). The **v2 kit** ([`packages/ui/src/v2`](../../packages/ui/src/v2)) is the target system: a flat set of components styled on top of a headless primitive library, consuming the Radix-scale v2 theme. This document describes how to build and style those components.
+Shared React UI for TrustReady apps lives in the **`@trustready/ui`** workspace package ([`packages/ui`](../../packages/ui)). The **v2 kit** ([`packages/ui/src/v2`](../../packages/ui/src/v2)) is the target system: a flat set of components styled on top of a headless primitive library, consuming the Radix-scale v2 theme. This document describes how to build and style those components.
 
 These rules are the **source of truth**. The legacy tree (`Atoms/`, `Molecules/`, `Layouts/`, `clsx`-mixed `className`, imperative `DialogRef`) is non-compliant code to migrate, not precedent.
 
@@ -276,7 +276,7 @@ export function Text(props: TextProps) {
 Icons come from two sources, in this order of preference:
 
 1. **`@phosphor-icons/react`** — the default icon library. Import the specific icon directly: `import { CookieIcon } from "@phosphor-icons/react"`. Prefer phosphor whenever it has the icon you need.
-2. **`@trustready/ui` `Icon*` set** — curated in-house icons. Use these only when phosphor has no suitable equivalent or you need a bespoke Probo-branded icon.
+2. **`@trustready/ui` `Icon*` set** — curated in-house icons. Use these only when phosphor has no suitable equivalent or you need a bespoke TrustReady-branded icon.
 
 **Never use emoji characters (🍪, ✅, ⚠️, …) as icons.** Emojis render inconsistently, don't inherit `currentColor`, and can't be sized like an SVG. If neither source has what you need, add the icon to `@trustready/ui`.
 

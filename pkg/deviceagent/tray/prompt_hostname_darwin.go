@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ func promptSelfHostedHostname() (string, bool) {
 		return "", false
 	}
 
-	const script = `text returned of (display dialog "Enter your Probo hostname:" default answer "" with title "Probo Device Posture Agent")`
+	const script = `text returned of (display dialog "Enter your TrustReady hostname:" default answer "" with title "TrustReady Device Posture Agent")`
 
 	out, err := exec.Command(path, "-e", script).Output()
 	if err != nil {

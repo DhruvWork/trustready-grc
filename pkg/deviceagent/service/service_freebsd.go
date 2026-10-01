@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,28 +30,28 @@ import (
 )
 
 const (
-	rcScriptPath = "/usr/local/etc/rc.d/probo_agent"
+	rcScriptPath = "/usr/local/etc/rc.d/trustready_agent"
 )
 
 // FreeBSD rc.d script template.
 const rcScriptTmpl = `#!/bin/sh
 #
-# PROVIDE: probo_agent
+# PROVIDE: trustready_agent
 # REQUIRE: NETWORKING
 # KEYWORD: shutdown
 
 . /etc/rc.subr
 
-name=probo_agent
-rcvar=probo_agent_enable
-desc="Probo device posture agent"
+name=trustready_agent
+rcvar=trustready_agent_enable
+desc="TrustReady device posture agent"
 pidfile="/var/run/${name}.pid"
 procname="{{.ExePath}}"
 command=/usr/sbin/daemon
 command_args="-r -P ${pidfile} -- \"{{.ExePath}}\" run --dir \"{{.Dir}}\""
 
 load_rc_config $name
-: ${probo_agent_enable:=YES}
+: ${trustready_agent_enable:=YES}
 
 run_rc_command "$1"
 `
@@ -85,20 +85,20 @@ func Install(cfg Config) error {
 		return fmt.Errorf("cannot render rc.d script: %w", err)
 	}
 
-	if out, err := exec.Command("service", "probo_agent", "enable").CombinedOutput(); err != nil {
-		return fmt.Errorf("cannot run service probo_agent enable: %w: %s", err, strings.TrimSpace(string(out)))
+	if out, err := exec.Command("service", "trustready_agent", "enable").CombinedOutput(); err != nil {
+		return fmt.Errorf("cannot run service trustready_agent enable: %w: %s", err, strings.TrimSpace(string(out)))
 	}
 
-	if out, err := exec.Command("service", "probo_agent", "start").CombinedOutput(); err != nil {
-		return fmt.Errorf("cannot run service probo_agent start: %w: %s", err, strings.TrimSpace(string(out)))
+	if out, err := exec.Command("service", "trustready_agent", "start").CombinedOutput(); err != nil {
+		return fmt.Errorf("cannot run service trustready_agent start: %w: %s", err, strings.TrimSpace(string(out)))
 	}
 
 	return nil
 }
 
 func Uninstall(cfg Config) error {
-	_ = exec.Command("service", "probo_agent", "stop").Run()
-	_ = exec.Command("service", "probo_agent", "disable").Run()
+	_ = exec.Command("service", "trustready_agent", "stop").Run()
+	_ = exec.Command("service", "trustready_agent", "disable").Run()
 
 	if err := os.Remove(rcScriptPath); err != nil && !errors.Is(err, os.ErrNotExist) {
 		return fmt.Errorf("cannot remove rc.d script: %w", err)

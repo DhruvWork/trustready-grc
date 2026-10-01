@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
-const awsFixtureRoleARN = "arn:aws:iam::123456789012:role/ProboAudit"
+const awsFixtureRoleARN = "arn:aws:iam::123456789012:role/TrustReadyAudit"
 
 func TestMCP_AWSConnector(t *testing.T) {
 	t.Parallel()
@@ -66,7 +66,7 @@ func TestMCP_AWSConnector(t *testing.T) {
 	assert.Contains(t, setupResult.Setup.CloudFormationQuickCreateURL, url.QueryEscape(coredata.DefaultAWSRoleName))
 
 	// MCP has no lazy field resolution, so the create tool probes the role and
-	// reports the verdict on the connector it returns. A role Probo cannot
+	// reports the verdict on the connector it returns. A role TrustReady cannot
 	// assume is DISCONNECTED, not a tool error, so the payload reaches the
 	// client on the failure path and has to stay free of AWS detail.
 	tr := mc.CallTool("createWorkloadIdentityConnector", map[string]any{

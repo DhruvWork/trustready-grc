@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ export const DocumentApproval = () => {
       </Text>
 
       <Text style={footerText}>
-        This process is managed securely by Probo, acting as the compliance partner on behalf of <strong>{'{{.OrganizationName}}'}</strong>.
+        This process is managed securely by TrustReady, acting as the compliance partner on behalf of <strong>{'{{.OrganizationName}}'}</strong>.
         Thank you for your prompt attention to this matter.
       </Text>
       <Text style={footerText}>

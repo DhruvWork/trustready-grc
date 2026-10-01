@@ -1,6 +1,6 @@
 # React component conventions
 
-This document describes **how to define and shape** React components in Probo frontends (`apps/compliance-portal`, [`packages/ui`](../../packages/ui), and related apps). It complements styling and package layout in [`contrib/claude/ui.md`](ui.md) and data loading in [`contrib/claude/relay.md`](relay.md).
+This document describes **how to define and shape** React components in TrustReady frontends (`apps/compliance-portal`, [`packages/ui`](../../packages/ui), and related apps). It complements styling and package layout in [`contrib/claude/ui.md`](ui.md) and data loading in [`contrib/claude/relay.md`](relay.md).
 
 These rules are the **source of truth**. Where existing code (e.g. `apps/console` or the legacy `@trustready/ui` `Atoms/`/`Molecules/` tree) disagrees, the code is non-compliant and should be migrated — it is not precedent.
 

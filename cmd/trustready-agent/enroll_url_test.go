@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ func TestEnrollURLPreflight(t *testing.T) {
 		"enroll-url",
 		"--preflight",
 		"--dir", t.TempDir(),
-		"probo://enroll?server=http%3A%2F%2Flocalhost%3A3000&token=abc123",
+		"trustready://enroll?server=http%3A%2F%2Flocalhost%3A3000&token=abc123",
 	})
 
 	var stdout bytes.Buffer

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { ProboLogo } from "@trustready/ui/src/v2/ProboLogo/ProboLogo";
+import { TrustReadyLogo } from "@trustready/ui/src/v2/TrustReadyLogo/TrustReadyLogo";
 import { Text } from "@trustready/ui/src/v2/typography/Text";
 import type { ReactNode } from "react";
 
@@ -29,14 +29,14 @@ import { poweredBy } from "./variants";
 export interface PoweredByProps {
   // Localized "Powered by" label. Defaults to the English string.
   label?: ReactNode;
-  // Destination for the Probo logo link.
+  // Destination for the TrustReady logo link.
   href?: string;
 }
 
-// "Powered by Probo" footer: a borderless attribution on the body surface, with
-// a dotted texture fading in from the bottom and the full Probo logo (picto +
+// "Powered by TrustReady" footer: a borderless attribution on the body surface, with
+// a dotted texture fading in from the bottom and the full TrustReady logo (picto +
 // wordmark).
-export function PoweredBy({ label = "Powered by", href = "https://www.probo.com/" }: PoweredByProps) {
+export function PoweredBy({ label = "Powered by", href = "https://www.trustready.io/" }: PoweredByProps) {
   const slots = poweredBy();
 
   return (
@@ -47,8 +47,8 @@ export function PoweredBy({ label = "Powered by", href = "https://www.probo.com/
         <Text size={1} color="neutral">
           {label}
         </Text>
-        <a href={href} target="_blank" rel="noopener noreferrer" aria-label="Probo">
-          <ProboLogo className={slots.logo()} aria-hidden />
+        <a href={href} target="_blank" rel="noopener noreferrer" aria-label="TrustReady">
+          <TrustReadyLogo className={slots.logo()} aria-hidden />
         </a>
       </div>
     </footer>

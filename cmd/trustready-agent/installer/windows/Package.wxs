@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2026 Probo Inc <hello@probo.com>.
+<!-- Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,23 +22,23 @@ SOFTWARE. -->
 	xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui"
 >
 	<!--
-		Builds the per-machine Probo Agent MSI.
+		Builds the per-machine TrustReady Agent MSI.
 
 		Preprocessor variables (passed by build.ps1 via wix -d):
 		  Version      Product version, e.g. 0.3.0  → $(var.Version)
-		  AgentExe     Absolute path to probo-agent.exe → $(var.AgentExe)
-		  GUIAgentExe  Absolute path to probo-agentw.exe → $(var.GUIAgentExe)
+		  AgentExe     Absolute path to trustready-agent.exe → $(var.AgentExe)
+		  GUIAgentExe  Absolute path to trustready-agentw.exe → $(var.GUIAgentExe)
 		  ProductIcon  Absolute path to the generated product ICO → $(var.ProductIcon)
 	-->
 	<Package
-		Name="Probo Agent"
-		Manufacturer="Probo Inc"
+		Name="TrustReady Agent"
+		Manufacturer="TrustReady Inc"
 		Version="$(var.Version)"
 		UpgradeCode="71b7d5c8-733b-4fd7-887e-bdffa6a6c0d8"
 		Scope="perMachine"
 	>
 		<MajorUpgrade
-			DowngradeErrorMessage="A newer version of Probo Agent is already installed."
+			DowngradeErrorMessage="A newer version of TrustReady Agent is already installed."
 		/>
 
 		<!-- Embed payload in the MSI so releases ship a single downloadable
@@ -49,40 +49,40 @@ SOFTWARE. -->
 		<Property Id="ARPPRODUCTICON" Value="ProductIcon" />
 
 		<StandardDirectory Id="ProgramFiles64Folder">
-			<Directory Id="INSTALLFOLDER" Name="Probo" />
+			<Directory Id="INSTALLFOLDER" Name="TrustReady" />
 		</StandardDirectory>
 
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
 			<Component Guid="62994ec7-7696-4513-92ab-0cb41cadfc0a">
 				<File
-					Id="ProboAgentExe"
+					Id="TrustReadyAgentExe"
 					Source="$(var.AgentExe)"
-					Name="probo-agent.exe"
+					Name="trustready-agent.exe"
 					KeyPath="yes"
 				/>
 			</Component>
 
 			<Component Guid="430dc51c-baba-45e9-ac74-5cf9d3109d2e">
 				<File
-					Id="ProboAgentGUIExe"
+					Id="TrustReadyAgentGUIExe"
 					Source="$(var.GUIAgentExe)"
-					Name="probo-agentw.exe"
+					Name="trustready-agentw.exe"
 					KeyPath="yes"
 				/>
 			</Component>
 
 			<Component Guid="6603ee19-ddba-42f1-8961-5cd945374657">
-				<RegistryKey Root="HKLM" Key="Software\Classes\probo">
+				<RegistryKey Root="HKLM" Key="Software\Classes\trustready">
 					<RegistryValue
 						Type="string"
-						Value="URL:Probo Enrollment Protocol"
+						Value="URL:TrustReady Enrollment Protocol"
 						KeyPath="yes"
 					/>
 					<RegistryValue Name="URL Protocol" Type="string" Value="" />
 					<RegistryKey Key="shell\open\command">
 						<RegistryValue
 							Type="string"
-							Value="&quot;[INSTALLFOLDER]probo-agentw.exe&quot; &quot;%1&quot;"
+							Value="&quot;[INSTALLFOLDER]trustready-agentw.exe&quot; &quot;%1&quot;"
 						/>
 					</RegistryKey>
 				</RegistryKey>
@@ -101,7 +101,7 @@ SOFTWARE. -->
 		     machine-wide tray autostart. -->
 		<CustomAction
 			Id="RegisterTray"
-			FileRef="ProboAgentGUIExe"
+			FileRef="TrustReadyAgentGUIExe"
 			ExeCommand="setup-tray"
 			Execute="deferred"
 			Impersonate="no"
@@ -109,7 +109,7 @@ SOFTWARE. -->
 		/>
 		<CustomAction
 			Id="UnregisterTray"
-			FileRef="ProboAgentGUIExe"
+			FileRef="TrustReadyAgentGUIExe"
 			ExeCommand="setup-tray --unregister"
 			Execute="deferred"
 			Impersonate="no"
@@ -121,7 +121,7 @@ SOFTWARE. -->
 			<Custom Action="UnregisterTray" Before="RemoveFiles" Condition="REMOVE=&quot;ALL&quot;" />
 		</InstallExecuteSequence>
 
-		<Feature Id="Main" Title="Probo Agent" Level="1">
+		<Feature Id="Main" Title="TrustReady Agent" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
 
@@ -132,7 +132,7 @@ SOFTWARE. -->
 		<WixVariable Id="WixUILicenseRtf" Value="$(var.LicenseRtf)" />
 		<Property
 			Id="WIXUI_EXITDIALOGOPTIONALTEXT"
-			Value="Enroll this device in your browser, or click the Probo icon in the system tray.&#13;&#10;&#13;&#10;United States: https://us.probo.com/enroll&#13;&#10;European Union: https://eu.probo.com/enroll&#13;&#10;Self-hosted: https://&lt;your-host&gt;/enroll&#13;&#10;&#13;&#10;When enrollment succeeds, the icon shows Connected and the agent starts automatically.&#13;&#10;&#13;&#10;To uninstall, remove Probo Agent in Settings &gt; Apps."
+			Value="Enroll this device in your browser, or click the TrustReady icon in the system tray.&#13;&#10;&#13;&#10;United States: https://us.trustready.io/enroll&#13;&#10;European Union: https://eu.trustready.io/enroll&#13;&#10;Self-hosted: https://&lt;your-host&gt;/enroll&#13;&#10;&#13;&#10;When enrollment succeeds, the icon shows Connected and the agent starts automatically.&#13;&#10;&#13;&#10;To uninstall, remove TrustReady Agent in Settings &gt; Apps."
 		/>
 	</Package>
 </Wix>

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,10 +38,10 @@ func NewCmdBrowse(f *cmdutil.Factory) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:     "browse",
-		Short:   "Open Probo in the browser",
-		Long:    "Open the Probo console in the default web browser.",
+		Short:   "Open TrustReady in the browser",
+		Long:    "Open the TrustReady console in the default web browser.",
 		Aliases: []string{"open"},
-		Example: `  # Open the Probo console in the browser
+		Example: `  # Open the TrustReady console in the browser
   prb browse
 
   # Print the URL without opening the browser

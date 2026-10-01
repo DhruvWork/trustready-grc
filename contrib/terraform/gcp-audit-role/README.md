@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2026 TrustReady <hello@probo.com>.
+Copyright (c) 2026 TrustReady <hello@trustready.io>.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-# `getprobo/audit-role/gcp`
+# `trustready/audit-role/gcp`
 
-Grants Probo read-only audit access to one GCP project through Workload
-Identity Federation. Probo holds no credential for the project: it presents a
+Grants TrustReady read-only audit access to one GCP project through Workload
+Identity Federation. TrustReady holds no credential for the project: it presents a
 short-lived signed assertion that STS verifies against a public key set, and
 you revoke access by deleting the pool or the service account.
 
@@ -42,29 +42,29 @@ The Google provider must target the project you want to connect. Set
 Enable `iam.googleapis.com`, `cloudresourcemanager.googleapis.com`,
 `sts.googleapis.com`, `iamcredentials.googleapis.com`, and
 `logging.googleapis.com` in that project before you apply. Terraform
-uses the first two and Logging to grant the `_Required` view. Probo
+uses the first two and Logging to grant the `_Required` view. TrustReady
 uses STS and IAM Credentials to exchange a token and impersonate the
 service account.
 
 ```hcl
-module "probo_audit" {
-  source = "getprobo/audit-role/gcp"
+module "trustready_audit" {
+  source = "trustready/audit-role/gcp"
 
-  probo_issuer_url     = "https://proboidentity.com/e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
-  probo_subject        = "e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
-  service_account_name = "probo-audit"
+  trustready_issuer_url     = "https://trustreadyidentity.com/e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
+  trustready_subject        = "e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
+  service_account_name = "trustready-audit"
 }
 
-output "probo_workload_identity_provider" {
-  value = module.probo_audit.workload_identity_provider
+output "trustready_workload_identity_provider" {
+  value = module.trustready_audit.workload_identity_provider
 }
 
-output "probo_service_account_email" {
-  value = module.probo_audit.service_account_email
+output "trustready_service_account_email" {
+  value = module.trustready_audit.service_account_email
 }
 ```
 
-Give Probo the `workload_identity_provider` and `service_account_email`
+Give TrustReady the `workload_identity_provider` and `service_account_email`
 outputs when you create the connector.
 
 ## Optional: MFA for human users
@@ -72,39 +72,39 @@ outputs when you create the connector.
 Human identities on the project are Google Workspace or Cloud Identity
 users. Cloud IAM cannot grant Directory reads, so this module does not
 cover MFA. After you apply, a Super Admin can assign a Users-read admin
-role to the `probo-audit` service account in the Google Admin console
+role to the `trustready-audit` service account in the Google Admin console
 (Account > Admin roles > Assign service accounts). See [Assign a Google
 Workspace administrator role to a service
 account](https://developers.google.com/workspace/guides/create-credentials#assign_a_google_workspace_administrator_role_to_a_service_account).
 
-Probo then reads 2-Step Verification enrollment with the same WIF token.
+TrustReady then reads 2-Step Verification enrollment with the same WIF token.
 Skip this step if you do not need MFA on the GCP source; those accounts
 stay MFA unknown.
 
 ## Verifying an install
 
-Probo probes the install by exchanging a token and impersonating the service
+TrustReady probes the install by exchanging a token and impersonating the service
 account. Isolation is the per-organization issuer: a foreign token fails at
 the provider-match step before GCP evaluates the attribute condition. The
-`assertion.sub` condition in this module is IAM hygiene; Probo does not read
+`assertion.sub` condition in this module is IAM hygiene; TrustReady does not read
 it back.
 
 ## What it creates
 
 | Resource | Notes |
 |---|---|
-| `google_iam_workload_identity_pool` | `probo` by default. |
-| `google_iam_workload_identity_pool_provider` | OIDC. Issuer is `probo_issuer_url`. `allowed_audiences` is unset. |
-| `google_service_account` | `probo-audit` by default. |
+| `google_iam_workload_identity_pool` | `trustready` by default. |
+| `google_iam_workload_identity_pool_provider` | OIDC. Issuer is `trustready_issuer_url`. `allowed_audiences` is unset. |
+| `google_service_account` | `trustready-audit` by default. |
 | `roles/iam.securityReviewer` | Project IAM, additive. |
 | `roles/iam.serviceAccountViewer` | Project IAM, additive. |
 | `roles/logging.viewAccessor` | On `_Required`/`_AllLogs` only, additive. Admin Activity and the other `_Required` audit logs; not `_Default` application logs. |
 | `roles/policyanalyzer.activityAnalysisViewer` | Project IAM, additive. |
-| `roles/iam.workloadIdentityUser` | On the service account, for `principal://…/subject/{probo_subject}` only. |
+| `roles/iam.workloadIdentityUser` | On the service account, for `principal://…/subject/{trustready_subject}` only. |
 
 The attribute condition pins `assertion.sub` with CEL `==`. Isolation is the
 per-organization issuer: a foreign token fails at the provider-match step
-before GCP evaluates the condition. That pin is IAM hygiene; Probo does not
+before GCP evaluates the condition. That pin is IAM hygiene; TrustReady does not
 read it back.
 
 ## Inputs and outputs
@@ -116,7 +116,7 @@ output descriptions in [`variables.tf`](variables.tf) and
 ## Notes
 
 - **Do not set `allowed_audiences`.** An empty list tells GCP to accept the
-  default provider URL, with or without the `https:` prefix. Probo mints that
+  default provider URL, with or without the `https:` prefix. TrustReady mints that
   URL as the JWT `aud`.
 - **The subject condition is exact equality.** A `startsWith` wildcard would
   let any subject this issuer can mint impersonate the service account.
@@ -141,4 +141,4 @@ provider "google" {
 
 The service account email this module creates ends in
 `.s3ns.iam.gserviceaccount.com`. Paste that email when you create the
-connector so Probo dials `*.s3nsapis.fr`.
+connector so TrustReady dials `*.s3nsapis.fr`.

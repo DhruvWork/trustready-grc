@@ -9,18 +9,18 @@ import (
 	"context"
 	"errors"
 
-	"go.gearno.de/kit/log"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
 	"github.com/DhruvWork/trustready-grc/pkg/itam"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authz"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
+	"go.gearno.de/kit/log"
 )
 
 // SignableDocuments is the resolver for the signableDocuments field.
@@ -42,7 +42,7 @@ func (r *viewerResolver) SignableDocuments(ctx context.Context, obj *types.Viewe
 
 // SignableDocument is the resolver for the signableDocument field.
 func (r *viewerResolver) SignableDocument(ctx context.Context, obj *types.Viewer, id gid.GID) (*types.EmployeeDocument, error) {
-	scope, err := r.authorize(ctx, id, probo.ActionEmployeeDocumentGet)
+	scope, err := r.authorize(ctx, id, trustready.ActionEmployeeDocumentGet)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (r *viewerResolver) SignableDocument(ctx context.Context, obj *types.Viewer
 
 	documentFilter := coredata.NewDocumentFilter(nil).WithEmployeeIdentityID(&identity.ID, coredata.EmployeeFilterModeSignature)
 
-	document, err := r.probo.Documents.GetWithFilter(ctx, scope, id, documentFilter)
+	document, err := r.trustready.Documents.GetWithFilter(ctx, scope, id, documentFilter)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -91,7 +91,7 @@ func (r *viewerResolver) ApprovableDocuments(ctx context.Context, obj *types.Vie
 
 // ApprovableDocument is the resolver for the approvableDocument field.
 func (r *viewerResolver) ApprovableDocument(ctx context.Context, obj *types.Viewer, id gid.GID) (*types.EmployeeDocument, error) {
-	scope, err := r.authorize(ctx, id, probo.ActionEmployeeDocumentGet)
+	scope, err := r.authorize(ctx, id, trustready.ActionEmployeeDocumentGet)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func (r *viewerResolver) ApprovableDocument(ctx context.Context, obj *types.View
 
 	documentFilter := coredata.NewDocumentFilter(nil).WithEmployeeIdentityID(&identity.ID, coredata.EmployeeFilterModeApproval)
 
-	document, err := r.probo.Documents.GetWithFilter(ctx, scope, id, documentFilter)
+	document, err := r.trustready.Documents.GetWithFilter(ctx, scope, id, documentFilter)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)

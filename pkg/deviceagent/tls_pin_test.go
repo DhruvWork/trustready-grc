@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -60,7 +60,7 @@ func TestVerifySPKIPins(t *testing.T) {
 
 			otherPin := sha256.Sum256(other.RawSubjectPublicKeyInfo)
 			err := verifySPKIPins(chain, [][32]byte{otherPin})
-			require.ErrorIs(t, err, ErrProboCloudPinMismatch)
+			require.ErrorIs(t, err, ErrTrustReadyCloudPinMismatch)
 		},
 	)
 
@@ -69,8 +69,8 @@ func TestVerifySPKIPins(t *testing.T) {
 		func(t *testing.T) {
 			t.Parallel()
 
-			err := verifyProboCloudSPKI(nil, nil)
-			require.ErrorIs(t, err, ErrProboCloudPinMismatch)
+			err := verifyTrustReadyCloudSPKI(nil, nil)
+			require.ErrorIs(t, err, ErrTrustReadyCloudPinMismatch)
 		},
 	)
 }

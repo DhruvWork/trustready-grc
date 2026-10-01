@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ import (
 //
 // GitHub is the only provider with one today: the list of OAuth Apps the
 // signed-in user has authorized. From there a member can request — and an
-// owner can grant — Probo access to an organization that turned on OAuth App
+// owner can grant — TrustReady access to an organization that turned on OAuth App
 // access restrictions. Such an organization never appears in GET /user/orgs,
 // which is the usual reason the listing comes back empty.
 //

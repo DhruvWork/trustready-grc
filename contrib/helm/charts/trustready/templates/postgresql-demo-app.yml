@@ -1,0 +1,84 @@
+{{- if .Values.postgresql.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "trustready.fullname" . }}-postgresql-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "trustready.fullname" . }}-postgresql-demo
+  template:
+    metadata:
+      labels:
+        app: {{ include "trustready.fullname" . }}-postgresql-demo
+    spec:
+      containers:
+        - name: postgres
+          image: "postgres:18.3@sha256:52e6ffd11fddd081ae63880b635b2a61c14008c17fc98cdc7ce5472265516dd0"
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.postgresql.auth.postgresUser }}
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "trustready.fullname" . }}
+                  key: db-password
+            - name: POSTGRES_DB
+              value: {{ .Values.postgresql.auth.database }}
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-init
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
+          resources:
+            {{- toYaml .Values.postgresql.resources | nindent 12 }}
+      volumes:
+        - name: postgres-init
+          configMap:
+            name: {{ include "trustready.fullname" . }}-postgres-init
+            defaultMode: 0755
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-postgresql-demo
+spec:
+  selector:
+    app: {{ include "trustready.fullname" . }}-postgresql-demo
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "trustready.fullname" . }}-postgres-init
+  labels:
+    {{- include "trustready.labels" . | nindent 4 }}
+data:
+  01_trustreadyd.sh: |
+    #!/bin/sh
+
+    set -eu
+
+    psql -v ON_ERROR_STOP=1 -U $POSTGRES_USER <<-EOF
+    ALTER USER trustreadyd WITH SUPERUSER;
+    ALTER USER trustreadyd PASSWORD {{ .Values.postgresql.auth.postgresPassword | squote }};
+    GRANT ALL PRIVILEGES ON DATABASE trustreadyd TO trustreadyd;
+    CREATE DATABASE trustreadyd_test;
+    GRANT ALL PRIVILEGES ON DATABASE trustreadyd_test TO trustreadyd;
+    EOF
+
+    psql -v ON_ERROR_STOP=1 -U $POSTGRES_USER -d trustreadyd <<-EOF
+    ALTER SCHEMA public OWNER TO trustreadyd;
+    GRANT ALL ON SCHEMA public TO trustreadyd;
+    EOF
+
+    psql -v ON_ERROR_STOP=1 -U $POSTGRES_USER -d trustreadyd_test <<-EOF
+    ALTER SCHEMA public OWNER TO trustreadyd;
+    GRANT ALL ON SCHEMA public TO trustreadyd;
+    EOF
+---
+{{- end -}}

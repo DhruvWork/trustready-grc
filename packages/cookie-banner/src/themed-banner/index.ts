@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 import { ProboThemedBanner } from "./themed-banner";
 
 export function registerCookieBanner(): void {
-  if (!customElements.get("probo-cookie-banner")) {
-    customElements.define("probo-cookie-banner", ProboThemedBanner);
+  if (!customElements.get("trustready-cookie-banner")) {
+    customElements.define("trustready-cookie-banner", ProboThemedBanner);
   }
 }

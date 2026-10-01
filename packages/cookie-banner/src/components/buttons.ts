@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,16 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { ProboElement } from "./base";
-import type { ProboRootElement } from "./base";
-import type { ProboCookieBannerRoot } from "./cookie-banner-root";
+import { TrustReadyElement } from "./base";
+import type { TrustReadyRootElement } from "./base";
+import type { TrustReadyCookieBannerRoot } from "./cookie-banner-root";
 import type { LayoutButtons } from "../types";
 
-class ProboActionButton extends ProboElement {
-  protected root: ProboRootElement | null = null;
+class TrustReadyActionButton extends TrustReadyElement {
+  protected root: TrustReadyRootElement | null = null;
 
   connectedCallback(): void {
-    this.root = this.findAncestor<ProboCookieBannerRoot>("probo-cookie-banner-root");
+    this.root = this.findAncestor<TrustReadyCookieBannerRoot>("trustready-cookie-banner-root");
     this.addEventListener("click", this.handleClick);
   }
 
@@ -38,7 +38,7 @@ class ProboActionButton extends ProboElement {
   protected handleClick = (_e: Event): void => {};
 }
 
-class ProboHideableButton extends ProboActionButton {
+class TrustReadyHideableButton extends TrustReadyActionButton {
   protected layoutButton: keyof LayoutButtons = "accept_all";
 
   private onReady = (): void => {
@@ -51,7 +51,7 @@ class ProboHideableButton extends ProboActionButton {
       if (this.root.layout) {
         this.applyVisibility();
       } else {
-        this.root.addEventListener("probo-ready", this.onReady, { once: true });
+        this.root.addEventListener("trustready-ready", this.onReady, { once: true });
       }
     }
   }
@@ -59,7 +59,7 @@ class ProboHideableButton extends ProboActionButton {
   disconnectedCallback(): void {
     super.disconnectedCallback();
     if (this.root) {
-      this.root.removeEventListener("probo-ready", this.onReady);
+      this.root.removeEventListener("trustready-ready", this.onReady);
     }
   }
 
@@ -71,13 +71,13 @@ class ProboHideableButton extends ProboActionButton {
   }
 }
 
-export class ProboAcceptButton extends ProboActionButton {
+export class TrustReadyAcceptButton extends TrustReadyActionButton {
   protected handleClick = (): void => {
     if (!this.root) return;
     this.root.client.acceptAll();
     this.root.setState("hidden");
     this.root.dispatchEvent(
-      new CustomEvent("probo-consent", {
+      new CustomEvent("trustready-consent", {
         bubbles: true,
         composed: true,
         detail: { action: "ACCEPT_ALL" },
@@ -86,13 +86,13 @@ export class ProboAcceptButton extends ProboActionButton {
   };
 }
 
-export class ProboAcknowledgeButton extends ProboActionButton {
+export class TrustReadyAcknowledgeButton extends TrustReadyActionButton {
   protected handleClick = (): void => {
     if (!this.root) return;
     this.root.client.acknowledge();
     this.root.setState("hidden");
     this.root.dispatchEvent(
-      new CustomEvent("probo-consent", {
+      new CustomEvent("trustready-consent", {
         bubbles: true,
         composed: true,
         detail: { action: "ACKNOWLEDGE" },
@@ -101,7 +101,7 @@ export class ProboAcknowledgeButton extends ProboActionButton {
   };
 }
 
-export class ProboRejectButton extends ProboHideableButton {
+export class TrustReadyRejectButton extends TrustReadyHideableButton {
   protected layoutButton = "reject_all" as const;
 
   protected handleClick = (): void => {
@@ -109,7 +109,7 @@ export class ProboRejectButton extends ProboHideableButton {
     this.root.client.rejectAll();
     this.root.setState("hidden");
     this.root.dispatchEvent(
-      new CustomEvent("probo-consent", {
+      new CustomEvent("trustready-consent", {
         bubbles: true,
         composed: true,
         detail: { action: "REJECT_ALL" },
@@ -118,7 +118,7 @@ export class ProboRejectButton extends ProboHideableButton {
   };
 }
 
-export class ProboCustomizeButton extends ProboHideableButton {
+export class TrustReadyCustomizeButton extends TrustReadyHideableButton {
   protected layoutButton = "customize" as const;
 
   protected handleClick = (): void => {

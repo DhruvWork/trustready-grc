@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,38 +18,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { ProboBanner } from "./banner";
+import { TrustReadyBanner } from "./banner";
 import {
-  ProboAcceptButton,
-  ProboAcknowledgeButton,
-  ProboCustomizeButton,
-  ProboRejectButton,
+  TrustReadyAcceptButton,
+  TrustReadyAcknowledgeButton,
+  TrustReadyCustomizeButton,
+  TrustReadyRejectButton,
 } from "./buttons";
-import { ProboCategory } from "./category";
-import { ProboCategoryList } from "./category-list";
-import { ProboCategoryToggle } from "./category-toggle";
-import { ProboCookieBannerRoot } from "./cookie-banner-root";
-import { ProboCookie, ProboCookieList } from "./cookie-list";
-import { ProboPreferencePanel, ProboSaveButton } from "./preference-panel";
-import { ProboPrivacyChoices } from "./privacy-choices";
-import { ProboSettingsLink } from "./settings-link";
+import { TrustReadyCategory } from "./category";
+import { TrustReadyCategoryList } from "./category-list";
+import { TrustReadyCategoryToggle } from "./category-toggle";
+import { TrustReadyCookieBannerRoot } from "./cookie-banner-root";
+import { TrustReadyCookie, TrustReadyCookieList } from "./cookie-list";
+import { TrustReadyPreferencePanel, TrustReadySaveButton } from "./preference-panel";
+import { TrustReadyPrivacyChoices } from "./privacy-choices";
+import { TrustReadySettingsLink } from "./settings-link";
 
 const elements: [string, CustomElementConstructor][] = [
-  ["probo-cookie-banner-root", ProboCookieBannerRoot],
-  ["probo-banner", ProboBanner],
-  ["probo-accept-button", ProboAcceptButton],
-  ["probo-acknowledge-button", ProboAcknowledgeButton],
-  ["probo-reject-button", ProboRejectButton],
-  ["probo-customize-button", ProboCustomizeButton],
-  ["probo-preference-panel", ProboPreferencePanel],
-  ["probo-privacy-choices", ProboPrivacyChoices],
-  ["probo-category-list", ProboCategoryList],
-  ["probo-category", ProboCategory],
-  ["probo-category-toggle", ProboCategoryToggle],
-  ["probo-cookie-list", ProboCookieList],
-  ["probo-cookie", ProboCookie],
-  ["probo-save-button", ProboSaveButton],
-  ["probo-settings-link", ProboSettingsLink],
+  ["trustready-cookie-banner-root", TrustReadyCookieBannerRoot],
+  ["trustready-banner", TrustReadyBanner],
+  ["trustready-accept-button", TrustReadyAcceptButton],
+  ["trustready-acknowledge-button", TrustReadyAcknowledgeButton],
+  ["trustready-reject-button", TrustReadyRejectButton],
+  ["trustready-customize-button", TrustReadyCustomizeButton],
+  ["trustready-preference-panel", TrustReadyPreferencePanel],
+  ["trustready-privacy-choices", TrustReadyPrivacyChoices],
+  ["trustready-category-list", TrustReadyCategoryList],
+  ["trustready-category", TrustReadyCategory],
+  ["trustready-category-toggle", TrustReadyCategoryToggle],
+  ["trustready-cookie-list", TrustReadyCookieList],
+  ["trustready-cookie", TrustReadyCookie],
+  ["trustready-save-button", TrustReadySaveButton],
+  ["trustready-settings-link", TrustReadySettingsLink],
 ];
 
 export function registerHeadlessComponents(): void {

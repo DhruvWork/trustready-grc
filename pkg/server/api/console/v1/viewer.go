@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/page"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
@@ -46,7 +46,7 @@ func (r *viewerResolver) listEmployeeDocuments(
 	filterMode types.EmployeeDocumentFilterMode,
 	listErrorMessage string,
 ) (*types.EmployeeDocumentConnection, error) {
-	scope, err := r.authorize(ctx, organizationID, probo.ActionEmployeeDocumentList)
+	scope, err := r.authorize(ctx, organizationID, trustready.ActionEmployeeDocumentList)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func (r *viewerResolver) listEmployeeDocuments(
 
 	cursor := types.NewCursor(first, after, last, before, pageOrderBy)
 
-	documentsPage, err := r.probo.Documents.ListByOrganizationID(
+	documentsPage, err := r.trustready.Documents.ListByOrganizationID(
 		ctx,
 		scope,
 		organizationID,

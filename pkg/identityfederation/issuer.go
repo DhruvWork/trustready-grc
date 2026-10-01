@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,12 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Package identityfederation makes Probo an OIDC identity provider for outbound cloud
-// federation: it mints short-lived RS256 tokens asserting "Probo, acting for
+// Package identityfederation makes TrustReady an OIDC identity provider for outbound cloud
+// federation: it mints short-lived RS256 tokens asserting "TrustReady, acting for
 // organization X" and publishes the discovery and JWKS documents a cloud
 // provider fetches to verify them.
 //
-// The direction is outbound. Inbound identity (users logging into Probo) lives
+// The direction is outbound. Inbound identity (users logging into TrustReady) lives
 // under pkg/iam. The two never share signing keys or issuer URLs.
 //
 // There is no token endpoint. Tokens are minted in-process and never traverse
@@ -129,7 +129,7 @@ func (i *Issuer) JWKSURI(organizationID gid.GID) (string, error) {
 	return jwksURI, nil
 }
 
-// Token mints a token asserting that Probo acts for the given organization.
+// Token mints a token asserting that TrustReady acts for the given organization.
 //
 // The organization must come from the connector row being serviced, never from
 // user input. The returned token is a bearer credential for the customer's

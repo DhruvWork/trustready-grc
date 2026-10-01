@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -135,7 +135,7 @@ func outboundLinearPriority(
 func applyLinearPriorityToDestination(
 	destination json.RawMessage,
 	linearPriority int,
-	proboPriority coredata.TaskPriority,
+	trustreadyPriority coredata.TaskPriority,
 ) (json.RawMessage, error) {
 	dest, err := parseTaskExternalLinkDestination(destination)
 	if err != nil {
@@ -144,7 +144,7 @@ func applyLinearPriorityToDestination(
 
 	if LinearPriorityIsNone(linearPriority) {
 		dest.PreserveLinearNone = true
-		dest.LinearNoneSnapshot = proboPriority.String()
+		dest.LinearNoneSnapshot = trustreadyPriority.String()
 	} else {
 		dest.PreserveLinearNone = false
 		dest.LinearNoneSnapshot = ""

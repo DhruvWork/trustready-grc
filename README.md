@@ -1,14 +1,14 @@
-# Probo
+# TrustReady
 
-[![License](https://img.shields.io/github/license/getprobo/probo)](LICENSE)
-[![Build](https://img.shields.io/github/actions/workflow/status/getprobo/probo/make.yaml)](https://github.com/getprobo/probo/actions)
+[![License](https://img.shields.io/github/license/trustready/trustready)](LICENSE)
+[![Build](https://img.shields.io/github/actions/workflow/status/trustready/trustready/make.yaml)](https://github.com/getprobo/trustready/actions)
 [![Discord](https://img.shields.io/discord/1326589224811757568?color=7289da&label=Discord&logo=discord&logoColor=ffffff)](https://discord.gg/8qfdJYfvpY)
 
 **Open-source GRC platform for engineers.**
 
-Probo is a self-hostable governance, risk, and compliance (GRC) platform built for engineering and security teams. It covers the full GRC lifecycle: risk identification, control tracking, vendor risk, data privacy, access reviews, audit programs, and document approval workflows. Every entity is accessible through a web console, a CLI, a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) API, and a GraphQL API, so you can automate compliance work from code, scripts, or any LLM agent.
+TrustReady is a self-hostable governance, risk, and compliance (GRC) platform built for engineering and security teams. It covers the full GRC lifecycle: risk identification, control tracking, vendor risk, data privacy, access reviews, audit programs, and document approval workflows. Every entity is accessible through a web console, a CLI, a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) API, and a GraphQL API, so you can automate compliance work from code, scripts, or any LLM agent.
 
-## Why Probo?
+## Why TrustReady?
 
 - **AI-native by design.** 270+ MCP tools expose every entity and operation. Any MCP-compatible LLM agent can read and write your GRC data, draft policies, run risk assessments, and generate evidence packs.
 - **Full GRC coverage.** Risk management, controls, vendor risk, data privacy (DPIA/TIA), access reviews, audit programs.
@@ -61,13 +61,13 @@ Run `prb help` for the full command reference.
 
 ### MCP API
 
-Probo exposes 270+ [MCP](https://modelcontextprotocol.io) tools covering every entity and operation in the platform. Any MCP-compatible LLM agent (Claude, Cursor, Continue, and others) can connect directly and interact with your compliance data.
+TrustReady exposes 270+ [MCP](https://modelcontextprotocol.io) tools covering every entity and operation in the platform. Any MCP-compatible LLM agent (Claude, Cursor, Continue, and others) can connect directly and interact with your compliance data.
 
 The full MCP specification is at [`pkg/server/api/mcp/v1/specification.yaml`](pkg/server/api/mcp/v1/specification.yaml).
 
 ### n8n node
 
-The [`@trustready/n8n-nodes-probo`](packages/n8n-node/) community node brings Probo into n8n workflows for no-code automation of compliance tasks over the GraphQL API.
+The [`@trustready/n8n-nodes-trustready`](packages/n8n-node/) community node brings TrustReady into n8n workflows for no-code automation of compliance tasks over the GraphQL API.
 
 ## Quick Start
 
@@ -85,8 +85,8 @@ The [`@trustready/n8n-nodes-probo`](packages/n8n-node/) community node brings Pr
 
 ```sh
 # 1. Clone with submodules
-git clone --recurse-submodules https://github.com/getprobo/probo.git
-cd probo
+git clone --recurse-submodules https://github.com/getprobo/trustready.git
+cd trustready
 
 # 2. Install dependencies
 go mod download
@@ -123,16 +123,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full development environment walk
 
 Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. All commits require a Developer Certificate of Origin (DCO) sign-off (`git commit -s`). No CLA required.
 
-To report a security vulnerability, email [security@probo.com](mailto:security@probo.com) rather than opening a public issue. See [SECURITY.md](SECURITY.md) for the full disclosure policy.
+To report a security vulnerability, email [security@trustready.io](mailto:security@trustready.io) rather than opening a public issue. See [SECURITY.md](SECURITY.md) for the full disclosure policy.
 
 ## Community
 
 - [Discord](https://discord.gg/8qfdJYfvpY) - Get help, share feedback, and talk to the team
-- [Documentation](https://www.probo.com/docs)
-- [Blog](https://www.probo.com/blog)
-- [Twitter / X](https://twitter.com/getprobo)
-- [LinkedIn](https://www.linkedin.com/company/getprobo)
-- [Website](https://www.probo.com)
+- [Documentation](https://www.trustready.io/docs)
+- [Blog](https://www.trustready.io/blog)
+- [Twitter / X](https://twitter.com/trustready)
+- [LinkedIn](https://www.linkedin.com/company/trustready)
+- [Website](https://www.trustready.io)
 
 ## Thanks
 
@@ -142,4 +142,4 @@ The local stack runs [fakecloud](https://fakecloud.dev) so AWS workload identity
 
 ## License
 
-Probo is [MIT licensed](LICENSE).
+TrustReady is [MIT licensed](LICENSE).

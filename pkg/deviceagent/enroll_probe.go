@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ import (
 type EnrollmentTrust string
 
 const (
-	TrustProboCloud EnrollmentTrust = "probo_cloud"
+	TrustTrustReadyCloud EnrollmentTrust = "trustready_cloud"
 	TrustUnverified EnrollmentTrust = "unverified"
 	TrustInsecure   EnrollmentTrust = "insecure"
 	TrustUnknown    EnrollmentTrust = "unknown"
@@ -41,7 +41,7 @@ const (
 const enrollmentProbeTimeout = 5 * time.Second
 
 // ProbeEnrollmentTrust classifies serverURL for the browser-enrollment
-// confirm dialog. Probo hosts are trusted only when the same pinned
+// confirm dialog. TrustReady hosts are trusted only when the same pinned
 // HTTP client used for API calls can complete a TLS handshake.
 func ProbeEnrollmentTrust(ctx context.Context, serverURL string) EnrollmentTrust {
 	normalized, err := NormalizeServerURL(serverURL)
@@ -62,7 +62,7 @@ func ProbeEnrollmentTrust(ctx context.Context, serverURL string) EnrollmentTrust
 		return TrustInsecure
 	}
 
-	if !IsProboServers(normalized) {
+	if !IsTrustReadyServers(normalized) {
 		return TrustUnverified
 	}
 
@@ -86,7 +86,7 @@ func ProbeEnrollmentTrust(ctx context.Context, serverURL string) EnrollmentTrust
 
 	_ = resp.Body.Close()
 
-	return TrustProboCloud
+	return TrustTrustReadyCloud
 }
 
 func isLoopbackHost(host string) bool {

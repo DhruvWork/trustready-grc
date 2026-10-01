@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,29 +18,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { ProboElement } from "./base";
-import type { ProboRootElement } from "./base";
-import type { ProboCookieBannerRoot } from "./cookie-banner-root";
+import { TrustReadyElement } from "./base";
+import type { TrustReadyRootElement } from "./base";
+import type { TrustReadyCookieBannerRoot } from "./cookie-banner-root";
 
-const REQUIRED_CHILDREN = ["probo-save-button"] as const;
+const REQUIRED_CHILDREN = ["trustready-save-button"] as const;
 
-export class ProboPreferencePanel extends ProboElement {
-  private root: ProboRootElement | null = null;
+export class TrustReadyPreferencePanel extends TrustReadyElement {
+  private root: TrustReadyRootElement | null = null;
   private onStateChange = (e: Event): void => {
     const { state } = (e as CustomEvent).detail;
     this.hidden = state !== "panel";
     if (state === "panel") {
-      (this.root as ProboCookieBannerRoot).resetDraft();
+      (this.root as TrustReadyCookieBannerRoot).resetDraft();
       this.focusFirst();
     }
   };
 
   connectedCallback(): void {
     this.hidden = true;
-    this.root = this.findAncestor<ProboCookieBannerRoot>("probo-cookie-banner-root");
+    this.root = this.findAncestor<TrustReadyCookieBannerRoot>("trustready-cookie-banner-root");
 
     if (this.root) {
-      this.root.addEventListener("probo-state", this.onStateChange);
+      this.root.addEventListener("trustready-state", this.onStateChange);
     }
 
     this.scheduleValidation(() => this.validate());
@@ -48,7 +48,7 @@ export class ProboPreferencePanel extends ProboElement {
 
   disconnectedCallback(): void {
     if (this.root) {
-      this.root.removeEventListener("probo-state", this.onStateChange);
+      this.root.removeEventListener("trustready-state", this.onStateChange);
     }
   }
 
@@ -60,17 +60,17 @@ export class ProboPreferencePanel extends ProboElement {
       }
     }
     if (missing.length > 0) {
-      this.warn(`<probo-preference-panel> is missing required children: ${missing.join(", ")}`);
+      this.warn(`<trustready-preference-panel> is missing required children: ${missing.join(", ")}`);
       this.emitValidation(missing);
     }
   }
 }
 
-export class ProboSaveButton extends ProboElement {
-  private root: ProboRootElement | null = null;
+export class TrustReadySaveButton extends TrustReadyElement {
+  private root: TrustReadyRootElement | null = null;
 
   connectedCallback(): void {
-    this.root = this.findAncestor<ProboCookieBannerRoot>("probo-cookie-banner-root");
+    this.root = this.findAncestor<TrustReadyCookieBannerRoot>("trustready-cookie-banner-root");
     this.addEventListener("click", this.handleClick);
   }
 
@@ -84,7 +84,7 @@ export class ProboSaveButton extends ProboElement {
     this.root.client.customize(draft);
     this.root.setState("hidden");
     this.root.dispatchEvent(
-      new CustomEvent("probo-consent", {
+      new CustomEvent("trustready-consent", {
         bubbles: true,
         composed: true,
         detail: { action: "CUSTOMIZE", consent_data: draft },

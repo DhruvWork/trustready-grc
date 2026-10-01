@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 
 	const (
 		persistedKey = "persisted-device-key"
-		serverURL    = "https://us.probo.com"
+		serverURL    = "https://us.trustready.io"
 	)
 
 	t.Run(
@@ -79,7 +79,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 				context.Background(),
 				dir,
 				client,
-				"https://eu.probo.com",
+				"https://eu.trustready.io",
 				"unused-token",
 			)
 			require.ErrorIs(t, err, ErrServerURLMismatch)
@@ -101,7 +101,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 				context.Background(),
 				dir,
 				client,
-				"https://US.probo.com",
+				"https://US.trustready.io",
 				"unused-token",
 			)
 			require.NoError(t, err)
@@ -144,7 +144,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 				context.Background(),
 				dir,
 				client,
-				"https://eu.probo.com",
+				"https://eu.trustready.io",
 				"unused-token",
 			)
 			require.ErrorIs(t, err, ErrServerURLMismatch)

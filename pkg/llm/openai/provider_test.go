@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -134,7 +134,7 @@ func TestProvider_UsesResponsesEndpoint(t *testing.T) {
 				},
 				{
 					Role:       llm.RoleTool,
-					Parts:      []llm.Part{llm.TextPart{Text: `{"name":"Probo"}`}},
+					Parts:      []llm.Part{llm.TextPart{Text: `{"name":"TrustReady"}`}},
 					ToolCallID: "call_1",
 				},
 			},

@@ -1,4 +1,4 @@
--- Copyright (c) 2026 TrustReady <hello@probo.com>.
+-- Copyright (c) 2026 TrustReady <hello@trustready.io>.
 --
 -- Permission to use, copy, modify, and/or distribute this software for any
 -- purpose with or without fee is hereby granted, provided that the above
@@ -14,7 +14,7 @@
 
 -- Backfill managed default domains for compliance pages created before
 -- default-domain provisioning existed. Hostnames use the managed base domain
--- suffix configured on the database (probo.trust_center_base_domain). Self-
+-- suffix configured on the database (trustready.trust_center_base_domain). Self-
 -- managed installs without that setting are left alone — they do not get a
 -- SaaS default domain invented for them.
 
@@ -25,22 +25,22 @@ WITH pending_pages AS (
         tc.organization_id,
         tc.slug,
         tc.created_at,
-        (tc.slug || '.' || current_setting('probo.trust_center_base_domain', true))::citext AS hostname
+        (tc.slug || '.' || current_setting('trustready.trust_center_base_domain', true))::citext AS hostname
     FROM trust_centers tc
     WHERE tc.default_domain_id IS NULL
-      AND NULLIF(current_setting('probo.trust_center_base_domain', true), '') IS NOT NULL
+      AND NULLIF(current_setting('trustready.trust_center_base_domain', true), '') IS NOT NULL
       -- Skip hostnames that already exist: minting a certificate or custom
       -- domain for them would violate their unique constraints and abort
       -- the whole migration.
       AND NOT EXISTS (
           SELECT 1
           FROM certificates c
-          WHERE c.hostname = (tc.slug || '.' || current_setting('probo.trust_center_base_domain', true))::citext
+          WHERE c.hostname = (tc.slug || '.' || current_setting('trustready.trust_center_base_domain', true))::citext
       )
       AND NOT EXISTS (
           SELECT 1
           FROM custom_domains cd
-          WHERE cd.domain = (tc.slug || '.' || current_setting('probo.trust_center_base_domain', true))::citext
+          WHERE cd.domain = (tc.slug || '.' || current_setting('trustready.trust_center_base_domain', true))::citext
       )
 ),
 minted_certificates AS (

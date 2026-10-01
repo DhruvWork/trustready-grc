@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,13 +40,13 @@ func TestCheckCNAME(t *testing.T) {
 		client := &Client{
 			exchange: func(_ context.Context, msg *dns.Msg, _ string) (*dns.Msg, error) {
 				cname := &dns.CNAME{Hdr: dns.Header{Name: msg.Question[0].Header().Name}}
-				cname.Target = "custom.getprobo.com."
+				cname.Target = "custom.trustready.io."
 
 				return &dns.Msg{Answer: []dns.RR{cname}}, nil
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.NoError(t, err)
 	})
@@ -55,8 +55,8 @@ func TestCheckCNAME(t *testing.T) {
 		t.Parallel()
 
 		chain := map[string]string{
-			"trust.example.com.":             "cname.eu.console.getprobo.com.",
-			"cname.eu.console.getprobo.com.": "custom.getprobo.com.",
+			"trust.example.com.":             "cname.eu.console.trustready.io.",
+			"cname.eu.console.trustready.io.": "custom.trustready.io.",
 		}
 
 		var queried []string
@@ -78,12 +78,12 @@ func TestCheckCNAME(t *testing.T) {
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.NoError(t, err)
 		assert.Equal(
 			t,
-			[]string{"trust.example.com.", "cname.eu.console.getprobo.com."},
+			[]string{"trust.example.com.", "cname.eu.console.trustready.io."},
 			queried,
 		)
 	})
@@ -98,19 +98,19 @@ func TestCheckCNAME(t *testing.T) {
 				queried = append(queried, msg.Question[0].Header().Name)
 
 				first := &dns.CNAME{Hdr: dns.Header{Name: "trust.example.com."}}
-				first.Target = "cname.eu.console.getprobo.com."
+				first.Target = "cname.eu.console.trustready.io."
 
-				second := &dns.CNAME{Hdr: dns.Header{Name: "cname.eu.console.getprobo.com."}}
-				second.Target = "custom.getprobo.com."
+				second := &dns.CNAME{Hdr: dns.Header{Name: "cname.eu.console.trustready.io."}}
+				second.Target = "custom.trustready.io."
 
-				third := &dns.CNAME{Hdr: dns.Header{Name: "custom.getprobo.com."}}
+				third := &dns.CNAME{Hdr: dns.Header{Name: "custom.trustready.io."}}
 				third.Target = "lb.example-cloud.com."
 
 				return &dns.Msg{Answer: []dns.RR{first, second, third}}, nil
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.NoError(t, err)
 		assert.Equal(t, []string{"trust.example.com."}, queried)
@@ -133,7 +133,7 @@ func TestCheckCNAME(t *testing.T) {
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.Error(t, err)
 		assert.Contains(t, err.Error(), `stops at "other.example.net"`)
@@ -158,7 +158,7 @@ func TestCheckCNAME(t *testing.T) {
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.Error(t, err)
 		assert.Contains(t, err.Error(), "loops back")
@@ -181,7 +181,7 @@ func TestCheckCNAME(t *testing.T) {
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.Error(t, err)
 		assert.Contains(t, err.Error(), "does not reach")
@@ -196,7 +196,7 @@ func TestCheckCNAME(t *testing.T) {
 				name := msg.Question[0].Header().Name
 
 				first := &dns.CNAME{Hdr: dns.Header{Name: name}}
-				first.Target = "custom.getprobo.com."
+				first.Target = "custom.trustready.io."
 
 				second := &dns.CNAME{Hdr: dns.Header{Name: name}}
 				second.Target = "other.example.net."
@@ -205,7 +205,7 @@ func TestCheckCNAME(t *testing.T) {
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.Error(t, err)
 		assert.Contains(t, err.Error(), "multiple cname records found")
@@ -216,7 +216,7 @@ func TestCheckCNAME(t *testing.T) {
 
 		chain := map[string]string{
 			"trust.example.com.": "alias.example.net.",
-			"alias.example.net.": "custom.getprobo.com.",
+			"alias.example.net.": "custom.trustready.io.",
 		}
 
 		var deadlines []time.Time
@@ -238,7 +238,7 @@ func TestCheckCNAME(t *testing.T) {
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.NoError(t, err)
 		require.Len(t, deadlines, 2)
@@ -255,13 +255,13 @@ func TestCheckCNAME(t *testing.T) {
 		client := &Client{
 			exchange: func(_ context.Context, _ *dns.Msg, _ string) (*dns.Msg, error) {
 				cname := &dns.CNAME{Hdr: dns.Header{Name: "example.com."}}
-				cname.Target = "custom.getprobo.com."
+				cname.Target = "custom.trustready.io."
 
 				return &dns.Msg{Answer: []dns.RR{cname}}, nil
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.Error(t, err)
 		assert.Contains(t, err.Error(), "cname owner mismatch")
@@ -283,13 +283,13 @@ func TestCheckCNAME(t *testing.T) {
 				}
 
 				cname := &dns.CNAME{Hdr: dns.Header{Name: msg.Question[0].Header().Name}}
-				cname.Target = "custom.getprobo.com."
+				cname.Target = "custom.trustready.io."
 
 				return &dns.Msg{Answer: []dns.RR{cname}}, nil
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.NoError(t, err)
 		assert.Equal(t, []string{"udp", "tcp"}, networks)
@@ -301,7 +301,7 @@ func TestCheckCNAME(t *testing.T) {
 		client := &Client{
 			exchange: func(_ context.Context, _ *dns.Msg, _ string) (*dns.Msg, error) {
 				cname := &dns.CNAME{Hdr: dns.Header{Name: "trust.example.com."}}
-				cname.Target = "custom.getprobo.com."
+				cname.Target = "custom.trustready.io."
 
 				return &dns.Msg{
 					Rcode:     dns.RcodeSuccess,
@@ -311,7 +311,7 @@ func TestCheckCNAME(t *testing.T) {
 			},
 		}
 
-		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.getprobo.com")
+		err := client.CheckCNAME(context.Background(), "trust.example.com", "custom.trustready.io")
 
 		require.Error(t, err)
 		assert.Contains(t, err.Error(), "truncated")
@@ -327,13 +327,13 @@ func TestCheckTXT(t *testing.T) {
 		client := &Client{
 			exchange: func(_ context.Context, _ *dns.Msg, _ string) (*dns.Msg, error) {
 				txt := &dns.TXT{Hdr: dns.Header{Name: "example.com."}}
-				txt.Txt = []string{"probo-verification=token"}
+				txt.Txt = []string{"trustready-verification=token"}
 
 				return &dns.Msg{Answer: []dns.RR{txt}}, nil
 			},
 		}
 
-		err := client.CheckTXT(context.Background(), "mail.example.com", "probo-verification=token")
+		err := client.CheckTXT(context.Background(), "mail.example.com", "trustready-verification=token")
 
 		require.Error(t, err)
 		assert.ErrorIs(t, err, ErrTXTMismatch)
@@ -345,13 +345,13 @@ func TestCheckTXT(t *testing.T) {
 		client := &Client{
 			exchange: func(_ context.Context, _ *dns.Msg, _ string) (*dns.Msg, error) {
 				txt := &dns.TXT{Hdr: dns.Header{Name: "example.com."}}
-				txt.Txt = []string{"probo-verification=token"}
+				txt.Txt = []string{"trustready-verification=token"}
 
 				return &dns.Msg{Answer: []dns.RR{txt}}, nil
 			},
 		}
 
-		err := client.CheckTXT(context.Background(), "example.com", "probo-verification=token")
+		err := client.CheckTXT(context.Background(), "example.com", "trustready-verification=token")
 
 		require.NoError(t, err)
 	})
@@ -367,7 +367,7 @@ func TestCheckTXT(t *testing.T) {
 			},
 		}
 
-		err := client.CheckTXT(context.Background(), "mail.example.com", "probo-verification=token")
+		err := client.CheckTXT(context.Background(), "mail.example.com", "trustready-verification=token")
 
 		require.Error(t, err)
 		assert.ErrorIs(t, err, ErrTXTNotFound)
@@ -389,7 +389,7 @@ func TestCheckTXT(t *testing.T) {
 				}
 
 				txt := &dns.TXT{Hdr: dns.Header{Name: "example.com."}}
-				txt.Txt = []string{"probo-verification=token"}
+				txt.Txt = []string{"trustready-verification=token"}
 
 				return &dns.Msg{
 					Rcode:  dns.RcodeSuccess,
@@ -398,7 +398,7 @@ func TestCheckTXT(t *testing.T) {
 			},
 		}
 
-		err := client.CheckTXT(context.Background(), "example.com", "probo-verification=token")
+		err := client.CheckTXT(context.Background(), "example.com", "trustready-verification=token")
 
 		require.NoError(t, err)
 		assert.Equal(t, []string{"udp", "tcp"}, networks)

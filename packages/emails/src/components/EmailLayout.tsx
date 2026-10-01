@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ import {
 } from 'react-email';
 import * as React from 'react';
 import { Logo } from './Logo';
-import { ProboLogo } from './ProboLogo';
+import { TrustReadyLogo } from './TrustReadyLogo';
 
 interface EmailLayoutProps {
   subject: string;
@@ -67,8 +67,8 @@ export const EmailLayout = ({
             </Text>
             <Text style={footerAddress}>
               <span style={{verticalAlign: "middle"}}>Powered By </span>
-              <Link style={{display: "inline-block", height: "16px", verticalAlign: "middle"}} href="https://www.probo.com">
-                <ProboLogo />
+              <Link style={{display: "inline-block", height: "16px", verticalAlign: "middle"}} href="https://www.trustready.io">
+                <TrustReadyLogo />
               </Link>
             </Text>
           </Section>

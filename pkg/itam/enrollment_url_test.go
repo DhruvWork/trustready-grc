@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,9 +42,9 @@ func TestBuildEnrollmentURLs(t *testing.T) {
 	}{
 		{
 			name:          "strips path from base URL",
-			baseURL:       "https://us.probo.com/console",
+			baseURL:       "https://us.trustready.io/console",
 			token:         "secret-token",
-			wantServerURL: "https://us.probo.com",
+			wantServerURL: "https://us.trustready.io",
 		},
 		{
 			name:          "keeps non-default port",
@@ -59,7 +59,7 @@ func TestBuildEnrollmentURLs(t *testing.T) {
 		},
 		{
 			name:            "empty token",
-			baseURL:         "https://us.probo.com",
+			baseURL:         "https://us.trustready.io",
 			wantErrContains: "enrollment token is required",
 		},
 	}
@@ -90,7 +90,7 @@ func TestBuildEnrollmentURLs(t *testing.T) {
 
 			parsed, err := url.Parse(got.EnrollmentURL)
 			require.NoError(t, err)
-			assert.Equal(t, "probo", parsed.Scheme)
+			assert.Equal(t, "trustready", parsed.Scheme)
 			assert.Equal(t, "enroll", parsed.Host)
 			assert.Equal(t, tt.wantServerURL, parsed.Query().Get("server"))
 			assert.Equal(t, tt.token, parsed.Query().Get("token"))

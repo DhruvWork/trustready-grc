@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -66,7 +66,7 @@ func NewCmdLinkLinear(f *cmdutil.Factory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "link-linear <id>",
 		Short: "Link a task to an existing Linear issue",
-		Long:  "Link a task to an existing Linear issue. This updates the Probo task with the Linear issue.",
+		Long:  "Link a task to an existing Linear issue. This updates the TrustReady task with the Linear issue.",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !flagYes {
@@ -77,7 +77,7 @@ func NewCmdLinkLinear(f *cmdutil.Factory) *cobra.Command {
 				var confirmed bool
 
 				err := huh.NewConfirm().
-					Title("Linking will update the Probo task with the Linear issue. Continue?").
+					Title("Linking will update the TrustReady task with the Linear issue. Continue?").
 					Value(&confirmed).
 					Run()
 				if err != nil {
@@ -142,7 +142,7 @@ func NewCmdLinkLinear(f *cmdutil.Factory) *cobra.Command {
 
 	cmd.Flags().StringVar(&flagTeamID, "team-id", "", "Linear team ID")
 	cmd.Flags().StringVar(&flagIssueID, "issue-id", "", "Linear issue ID")
-	cmd.Flags().BoolVar(&flagYes, "yes", false, "Confirm that linking updates the Probo task")
+	cmd.Flags().BoolVar(&flagYes, "yes", false, "Confirm that linking updates the TrustReady task")
 	_ = cmd.MarkFlagRequired("team-id")
 	_ = cmd.MarkFlagRequired("issue-id")
 

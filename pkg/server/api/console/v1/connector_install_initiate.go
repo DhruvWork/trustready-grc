@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,12 +31,12 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 )
 
 // handleConnectorInstallInitiate sends the customer to the vendor to install
-// Probo's app. It is the authenticated leg: the identity it authorizes here is
+// TrustReady's app. It is the authenticated leg: the identity it authorizes here is
 // signed into the state and re-checked on the callback, which is public.
 func handleConnectorInstallInitiate(
 	logger *log.Logger,
@@ -104,7 +104,7 @@ func handleConnectorInstallInitiate(
 				Principal: identity.ID,
 				Resource:  organizationID,
 				Session:   &session.ID,
-				Action:    probo.ActionConnectorInitiate,
+				Action:    trustready.ActionConnectorInitiate,
 			},
 		); err != nil {
 			status, rendered := installAuthorizationFailure(err)

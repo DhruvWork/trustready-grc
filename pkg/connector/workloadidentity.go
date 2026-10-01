@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ import (
 
 type (
 	// WorkloadIdentityConnection connects to a customer's cloud account by
-	// federated workload identity: Probo mints a short-lived OIDC assertion
+	// federated workload identity: TrustReady mints a short-lived OIDC assertion
 	// (pkg/identityfederation) and the cloud provider's STS exchanges it for
 	// temporary credentials.
 	//
@@ -65,7 +65,7 @@ func (c *WorkloadIdentityConnection) SupportsScopeGrantCheck() bool    { return 
 // SupportsReconnect is false because there is nothing to refresh: the
 // connection stores no credential, and the trust the customer granted lives
 // in their own cloud account. Re-running setup means redeploying their stack,
-// not walking a Probo redirect flow.
+// not walking a TrustReady redirect flow.
 func (c *WorkloadIdentityConnection) SupportsReconnect() bool { return false }
 
 func (c WorkloadIdentityConnection) MarshalJSON() ([]byte, error) {

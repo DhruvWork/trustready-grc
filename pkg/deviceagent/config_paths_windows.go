@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,10 +34,10 @@ func windowsProgramData() string {
 	return programData
 }
 
-// DefaultProgramDataRoot returns %ProgramData%\Probo, the parent of the
+// DefaultProgramDataRoot returns %ProgramData%\TrustReady, the parent of the
 // agent keystore and the public enrollment run directory.
 func DefaultProgramDataRoot() string {
-	return filepath.Join(windowsProgramData(), "Probo")
+	return filepath.Join(windowsProgramData(), "TrustReady")
 }
 
 // DefaultConfigDir returns the directory under which the agent's config

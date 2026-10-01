@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -70,7 +70,7 @@ func TestCompliancePortal_LogoFileDownloadURL(t *testing.T) {
 	}, &activateResult)
 	require.NoError(t, err)
 
-	// Publishing the page provisions a managed {slug}.probopage.localhost
+	// Publishing the page provisions a managed {slug}.trustreadypage.localhost
 	// domain; the effective public URL resolves to it while no customer
 	// custom domain is primary.
 	require.NotEmpty(t, activateResult.UpdateCompliancePortal.CompliancePortal.PublicURL)

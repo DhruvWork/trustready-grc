@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 import type { BannerConfig, BannerLayout, BannerText, Presentation } from "./types";
 
 // Strict, GDPR-safe layout used only as a defensive fallback: a config without a
-// `layout` means the (self-hosted) Probo backend predates trustreadyd v0.246.0, the
+// `layout` means the (self-hosted) TrustReady backend predates trustreadyd v0.246.0, the
 // first release that sends it. We keep the banner functional and compliant
 // rather than crashing, and surface the mismatch so operators know to update.
 const STRICT_LAYOUT: BannerLayout = {
@@ -37,7 +37,7 @@ let warnedLayout = false;
 
 // resolveLayout returns the presentation policy the server sends. The SDK and
 // backend are released together, so `layout` is always present in practice; the
-// only way it can be missing is a self-hosted Probo backend older than
+// only way it can be missing is a self-hosted TrustReady backend older than
 // v0.246.0, which we flag once and treat as strict opt-in.
 export function resolveLayout(config: BannerConfig): BannerLayout {
   if (config.layout) {
@@ -47,7 +47,7 @@ export function resolveLayout(config: BannerConfig): BannerLayout {
   if (!warnedLayout) {
     warnedLayout = true;
     console.error(
-      "[probo] banner config has no `layout`: your self-hosted Probo backend (trustreadyd) is older than this SDK. Update trustreadyd to v0.246.0 or later. Falling back to strict opt-in.",
+      "[trustready] banner config has no `layout`: your self-hosted TrustReady backend (trustreadyd) is older than this SDK. Update trustreadyd to v0.246.0 or later. Falling back to strict opt-in.",
     );
   }
 

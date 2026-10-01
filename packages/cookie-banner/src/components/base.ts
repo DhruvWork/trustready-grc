@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 import type { CookieBannerClient } from "../client";
 import type { BannerConfig, BannerLayout, Regulation } from "../types";
 
-export type ProboState = "loading" | "banner" | "panel" | "privacy_choices" | "hidden";
+export type TrustReadyState = "loading" | "banner" | "panel" | "privacy_choices" | "hidden";
 
 export interface ConsentDraft {
   [category: string]: boolean;
@@ -29,7 +29,7 @@ export interface ConsentDraft {
 
 const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
-export class ProboElement extends HTMLElement {
+export class TrustReadyElement extends HTMLElement {
   protected focusFirst(): void {
     requestAnimationFrame(() => {
       const el = this.querySelector<HTMLElement>(FOCUSABLE);
@@ -53,12 +53,12 @@ export class ProboElement extends HTMLElement {
   }
 
   protected warn(message: string): void {
-    console.warn(`[probo] ${message}`);
+    console.warn(`[trustready] ${message}`);
   }
 
   protected emitValidation(missing: string[]): void {
     this.dispatchEvent(
-      new CustomEvent("probo-validation", {
+      new CustomEvent("trustready-validation", {
         bubbles: true,
         composed: true,
         detail: { missing },
@@ -67,16 +67,16 @@ export class ProboElement extends HTMLElement {
   }
 }
 
-export interface ProboRootElement extends ProboElement {
+export interface TrustReadyRootElement extends TrustReadyElement {
   readonly client: CookieBannerClient;
   readonly bannerConfig: BannerConfig;
-  readonly state: ProboState;
+  readonly state: TrustReadyState;
   readonly consentDraft: ConsentDraft;
   readonly gpcApplied: boolean;
   readonly regulation: Regulation | null;
   readonly consentMode: "OPT_IN" | "OPT_OUT" | null;
   readonly layout: BannerLayout | null;
-  readonly reopenState: ProboState;
-  setState(state: ProboState): void;
+  readonly reopenState: TrustReadyState;
+  setState(state: TrustReadyState): void;
   updateDraft(category: string, value: boolean): void;
 }

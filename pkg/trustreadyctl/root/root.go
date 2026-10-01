@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ import (
 func NewCmdRoot(f *cmdutil.Factory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:           "trustreadyctl <command> [flags]",
-		Short:         "Probo instance management CLI",
+		Short:         "TrustReady instance management CLI",
 		SilenceUsage:  true,
 		SilenceErrors: true,
 	}

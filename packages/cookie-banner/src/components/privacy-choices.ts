@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,17 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { ProboElement } from "./base";
-import type { ProboRootElement } from "./base";
-import type { ProboCookieBannerRoot } from "./cookie-banner-root";
+import { TrustReadyElement } from "./base";
+import type { TrustReadyRootElement } from "./base";
+import type { TrustReadyCookieBannerRoot } from "./cookie-banner-root";
 
-const REQUIRED_CHILDREN = ["probo-reject-button"] as const;
+const REQUIRED_CHILDREN = ["trustready-reject-button"] as const;
 
-// ProboPrivacyChoices is the CCPA Alternative Opt-out Link surface (11 CCR
+// TrustReadyPrivacyChoices is the CCPA Alternative Opt-out Link surface (11 CCR
 // § 7015): sale/sharing opt-out plus a description of the right to limit
 // sensitive personal information. Visible only when state is privacy_choices.
-export class ProboPrivacyChoices extends ProboElement {
-  private root: ProboRootElement | null = null;
+export class TrustReadyPrivacyChoices extends TrustReadyElement {
+  private root: TrustReadyRootElement | null = null;
   private onStateChange = (e: Event): void => {
     const { state } = (e as CustomEvent).detail;
     this.hidden = state !== "privacy_choices";
@@ -39,10 +39,10 @@ export class ProboPrivacyChoices extends ProboElement {
 
   connectedCallback(): void {
     this.hidden = true;
-    this.root = this.findAncestor<ProboCookieBannerRoot>("probo-cookie-banner-root");
+    this.root = this.findAncestor<TrustReadyCookieBannerRoot>("trustready-cookie-banner-root");
 
     if (this.root) {
-      this.root.addEventListener("probo-state", this.onStateChange);
+      this.root.addEventListener("trustready-state", this.onStateChange);
       if (this.root.state === "privacy_choices") {
         this.hidden = false;
         this.focusFirst();
@@ -54,7 +54,7 @@ export class ProboPrivacyChoices extends ProboElement {
 
   disconnectedCallback(): void {
     if (this.root) {
-      this.root.removeEventListener("probo-state", this.onStateChange);
+      this.root.removeEventListener("trustready-state", this.onStateChange);
     }
   }
 
@@ -66,7 +66,7 @@ export class ProboPrivacyChoices extends ProboElement {
       }
     }
     if (missing.length > 0) {
-      this.warn(`<probo-privacy-choices> is missing required children: ${missing.join(", ")}`);
+      this.warn(`<trustready-privacy-choices> is missing required children: ${missing.join(", ")}`);
       this.emitValidation(missing);
     }
   }

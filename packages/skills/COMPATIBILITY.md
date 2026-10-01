@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2026 TrustReady <hello@probo.com>.
+Copyright (c) 2026 TrustReady <hello@trustready.io>.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ SOFTWARE.
 
 `@trustready/skills` is an [Agent Plugins 1.0.0](https://agent-plugins.org/)
 package. The portable core is `plugin.json`, Agent Skills under `skills/`, and
-Probo MCP servers in `mcp.json`. Client-specific manifests carry the same
+TrustReady MCP servers in `mcp.json`. Client-specific manifests carry the same
 components to **Claude Code**, **Codex**, **OpenCode**, and **Cursor** until
 those clients load the portable package directly.
 
@@ -44,14 +44,14 @@ Commands, marketplace catalogs, and the client manifests are outside the v1
 format — Agent Plugins v1 standardizes only skills and MCP servers. Clients
 ignore the extra files.
 
-## Probo MCP servers
+## TrustReady MCP servers
 
 `mcp.json` ships both hosted instances as Streamable HTTP servers:
 
 | Server | Endpoint |
 | --- | --- |
-| `probo-us` | `https://us.probo.com/api/mcp/v1` |
-| `probo-eu` | `https://eu.probo.com/api/mcp/v1` |
+| `trustready-us` | `https://us.trustready.io/api/mcp/v1` |
+| `trustready-eu` | `https://eu.trustready.io/api/mcp/v1` |
 
 Connect the server for your region. Skills that need to discover the region
 call `listOrganizations` on each connected server and keep the one that returns
@@ -70,8 +70,8 @@ in remote MCP URLs (spec §7.2.1), so a self-hosted endpoint cannot ship in the
 package. Add it in the agent:
 
 ```bash
-claude mcp add --transport http probo https://probo.example.com/api/mcp/v1
-codex mcp add --transport http probo https://probo.example.com/api/mcp/v1
+claude mcp add --transport http trustready https://trustready.example.com/api/mcp/v1
+codex mcp add --transport http trustready https://trustready.example.com/api/mcp/v1
 ```
 
 The MCP path is always `<instance-root>/api/mcp/v1`.
@@ -80,9 +80,9 @@ The MCP path is always `<instance-root>/api/mcp/v1`.
 
 | Component | Agent Plugins client | Claude Code | Codex | OpenCode | Cursor |
 | --- | --- | --- | --- | --- | --- |
-| Probo MCP (OAuth) | ✅ `mcp.json` | ✅ `.mcp.json` | ✅ `.codex-plugin` + `.mcp.json` | ✅ Manual MCP config | ✅ IDE MCP settings |
+| TrustReady MCP (OAuth) | ✅ `mcp.json` | ✅ `.mcp.json` | ✅ `.codex-plugin` + `.mcp.json` | ✅ Manual MCP config | ✅ IDE MCP settings |
 | Skills (`SKILL.md`) | ✅ `skills/` | ✅ `skills/` | ✅ `skills/` via `.codex-plugin` | ✅ `.opencode/skills/` or `.claude/skills/` | ✅ Copy/symlink to `.cursor/skills/` |
-| Commands | ❌ Outside v1 | ✅ `commands/` → `/probo:…` | ⚠️ Use skills instead | ⚠️ Native `skill` tool | ❌ Use skill or rules |
+| Commands | ❌ Outside v1 | ✅ `commands/` → `/trustready:…` | ⚠️ Use skills instead | ⚠️ Native `skill` tool | ❌ Use skill or rules |
 | Plugin manifest | `plugin.json` | `.claude-plugin/` | `.codex-plugin/` | Discovery paths (no manifest) | No native manifest |
 | Marketplace catalog | — | `.claude-plugin/marketplace.json` (repo root or package) | `.agents/plugins/marketplace.json` (repo root or package) | — | — |
 
@@ -92,20 +92,20 @@ The MCP path is always `<instance-root>/api/mcp/v1`.
 `.claude-plugin/marketplace.json`):
 
 ```bash
-claude plugin marketplace add getprobo/probo
+claude plugin marketplace add trustready/trustready
 # or, from a local clone:
 claude plugin marketplace add .
-claude plugin install probo@probo
-claude mcp login probo-us   # or /mcp in session
-/probo:access-review Q3 GitHub review
+claude plugin install trustready@trustready
+claude mcp login trustready-us   # or /mcp in session
+/trustready:access-review Q3 GitHub review
 ```
 
 **From the package directory** (catalog resolves `@trustready/skills` from npm):
 
 ```bash
 claude plugin marketplace add ./packages/skills/.claude-plugin
-claude plugin install probo@probo
-claude mcp login probo-us
+claude plugin install trustready@trustready
+claude mcp login trustready-us
 ```
 
 Or install the plugin directory directly:
@@ -120,11 +120,11 @@ claude --plugin-dir ./packages/skills
 `.agents/plugins/marketplace.json`):
 
 ```bash
-codex plugin marketplace add getprobo/probo
+codex plugin marketplace add trustready/trustready
 # or, from a local clone:
 codex plugin marketplace add .
-codex plugin install probo@probo
-codex mcp login probo-us
+codex plugin install trustready@trustready
+codex mcp login trustready-us
 ```
 
 **From the package directory** (catalog at
@@ -132,15 +132,15 @@ codex mcp login probo-us
 
 ```bash
 codex plugin marketplace add ./packages/skills
-codex plugin install probo@probo
-codex mcp login probo-us
+codex plugin install trustready@trustready
+codex mcp login trustready-us
 ```
 
 Or install the plugin directory directly:
 
 ```bash
 codex plugin install ./packages/skills
-codex mcp login probo-us
+codex mcp login trustready-us
 ```
 
 Skills load from `./skills/` via `.codex-plugin/plugin.json`. The repo-root
@@ -164,14 +164,14 @@ ln -s ../../packages/skills/skills/open-source-compliance .opencode/skills/open-
 [`opencode-claude-code-bridge`](https://www.npmjs.com/package/opencode-claude-code-bridge)
 to import Claude plugins and MCP configs into OpenCode.
 
-Configure a Probo MCP server in `opencode.json` or global OpenCode MCP
+Configure a TrustReady MCP server in `opencode.json` or global OpenCode MCP
 settings, then authenticate. Invoke via the native `skill` tool
 (`access-review`).
 
 ### Cursor
 
-1. Add a Probo MCP server in Cursor settings (HTTP URL:
-   `https://us.probo.com/api/mcp/v1` or `https://eu.probo.com/api/mcp/v1`,
+1. Add a TrustReady MCP server in Cursor settings (HTTP URL:
+   `https://us.trustready.io/api/mcp/v1` or `https://eu.trustready.io/api/mcp/v1`,
    OAuth).
 2. Copy or symlink skills into `.cursor/skills/`:
 
@@ -212,7 +212,7 @@ directory is discovered, regardless of which agent loads it.
   .agents/plugins/marketplace.json   # Codex marketplace (package-local)
 ```
 
-Repo root (monorepo / `getprobo/probo` Git installs):
+Repo root (monorepo / `trustready/trustready` Git installs):
 
 ```
 .claude-plugin/marketplace.json      # Claude marketplace → packages/skills

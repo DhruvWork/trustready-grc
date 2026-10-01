@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -172,7 +172,7 @@ func requireAccessMailpitMessageEventually(
 		require.FailNow(t, "mailpit compliance portal access email not found")
 	}
 
-	assert.Contains(t, detail.Text, "probopage.localhost")
+	assert.Contains(t, detail.Text, "trustreadypage.localhost")
 
 	return detail
 }

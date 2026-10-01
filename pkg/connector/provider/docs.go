@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
 
 package provider
 
-// accessReviewDocsBaseURL is the public probo.com docs root for access-review
+// accessReviewDocsBaseURL is the public trustready.io docs root for access-review
 // connectors; each documented provider's page lives at this base + its slug.
-const accessReviewDocsBaseURL = "https://www.probo.com/docs/product/access-review/"
+const accessReviewDocsBaseURL = "https://www.trustready.io/docs/product/access-review/"
 
 // accessReviewDocsURL builds the public documentation URL for an access-review
 // connector from its page slug (e.g. "anthropic"). The slug is passed explicitly

@@ -1,4 +1,4 @@
-# Release Helm chart (`probo`)
+# Release Helm chart (`trustready`)
 
 After confirming commits below, follow the
 [common steps](./README.md#3-common-steps-every-track).
@@ -6,11 +6,11 @@ After confirming commits below, follow the
 ## Track facts
 
 - **Tag pattern**: `helm/v*`
-- **Version source**: `contrib/helm/charts/probo/Chart.yaml` (`version` field)
-- **Version bump**: Edit `version` in `contrib/helm/charts/probo/Chart.yaml`
-- **Changelog**: `contrib/helm/charts/probo/CHANGELOG.md`
-- **Files to stage**: `contrib/helm/charts/probo/Chart.yaml`,
-  `contrib/helm/charts/probo/CHANGELOG.md`
+- **Version source**: `contrib/helm/charts/trustready/Chart.yaml` (`version` field)
+- **Version bump**: Edit `version` in `contrib/helm/charts/trustready/Chart.yaml`
+- **Changelog**: `contrib/helm/charts/trustready/CHANGELOG.md`
+- **Files to stage**: `contrib/helm/charts/trustready/Chart.yaml`,
+  `contrib/helm/charts/trustready/CHANGELOG.md`
 - **Workflow**: `.github/workflows/release-helm.yaml`
 - **Path filter**: `contrib/helm`
 
@@ -31,4 +31,4 @@ the default trustreadyd application version the chart deploys (image tag
 to a newer trustreadyd release.
 
 CI packages the chart and pushes it to
-`oci://artifact.probo.inc/probo/probo`, then publishes a GitHub Release.
+`oci://artifact.trustready.io/trustready/trustready`, then publishes a GitHub Release.

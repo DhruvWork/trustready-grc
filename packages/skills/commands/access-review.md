@@ -1,5 +1,5 @@
 ---
-description: Run a semi-automated access review on a Probo campaign (Claude Code slash command).
+description: Run a semi-automated access review on a TrustReady campaign (Claude Code slash command).
 argument-hint: [campaign name or id]
 disable-model-invocation: true
 ---

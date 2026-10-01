@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -49,9 +49,9 @@ func TestRewriteContinueURLLocale(t *testing.T) {
 		},
 		{
 			name:        "rewrites absolute url path",
-			continueURL: "https://acme.probopage.localhost/es/documents?subscribe=true",
+			continueURL: "https://acme.trustreadypage.localhost/es/documents?subscribe=true",
 			locale:      "fr",
-			want:        "https://acme.probopage.localhost/fr/documents?subscribe=true",
+			want:        "https://acme.trustreadypage.localhost/fr/documents?subscribe=true",
 		},
 		{
 			name:        "prepends locale on unprefixed path",

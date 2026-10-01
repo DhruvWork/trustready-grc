@@ -1,5 +1,5 @@
 import Foundation
-import ProboAgentShared
+import TrustReadyAgentShared
 
 public enum HelperClientError: LocalizedError {
     case helperNotInstalled
@@ -10,7 +10,7 @@ public enum HelperClientError: LocalizedError {
         switch self {
         case .helperNotInstalled:
             return """
-                Privileged helper is not installed. Reinstall the Probo Agent \
+                Privileged helper is not installed. Reinstall the TrustReady Agent \
                 package, then try enrollment again.
                 """
         case .connectionFailed(let message):
@@ -83,7 +83,7 @@ final public class HelperClient {
     public func install(
         serverURL: String,
         enrollmentToken: String,
-        configDir: String = ProboAgentHelperConstants.defaultConfigDir
+        configDir: String = TrustReadyAgentHelperConstants.defaultConfigDir
     ) throws {
         operationLock.lock()
         defer { operationLock.unlock() }
@@ -102,7 +102,7 @@ final public class HelperClient {
                 }
             }
 
-            // Headroom over probo-agent install's 60s deadline plus local
+            // Headroom over trustready-agent install's 60s deadline plus local
             // service/tray setup so we report the command's real outcome.
             try completion.wait(
                 timeout: 120,
@@ -122,15 +122,15 @@ final public class HelperClient {
         let installedVersion = try installedHelperVersion()
         if installedVersion == nil {
             throw HelperClientError.connectionFailed(
-                "helper is installed but not responding; reinstall the Probo Agent package"
+                "helper is installed but not responding; reinstall the TrustReady Agent package"
             )
         }
 
-        if installedVersion != ProboAgentHelperConstants.helperVersion {
+        if installedVersion != TrustReadyAgentHelperConstants.helperVersion {
             NSLog(
-                "probo-agent helper client: version mismatch (installed=%@ expected=%@)",
+                "trustready-agent helper client: version mismatch (installed=%@ expected=%@)",
                 installedVersion ?? "nil",
-                ProboAgentHelperConstants.helperVersion
+                TrustReadyAgentHelperConstants.helperVersion
             )
         }
 
@@ -139,7 +139,7 @@ final public class HelperClient {
 
     private func isHelperInstalled() -> Bool {
         FileManager.default.fileExists(
-            atPath: "/Library/PrivilegedHelperTools/\(ProboAgentHelperConstants.helperLabel)"
+            atPath: "/Library/PrivilegedHelperTools/\(TrustReadyAgentHelperConstants.helperLabel)"
         )
     }
 
@@ -184,13 +184,13 @@ final public class HelperClient {
     /// invalidates it. Callers must finish waiting for replies inside `body`
     /// so the connection outlives the reply.
     private func withRemoteProxy<T>(
-        _ body: (ProboAgentHelperProtocol, XPCCallCompletion) throws -> T
+        _ body: (TrustReadyAgentHelperProtocol, XPCCallCompletion) throws -> T
     ) throws -> T {
         let connection = NSXPCConnection(
-            machServiceName: ProboAgentHelperConstants.machServiceName,
+            machServiceName: TrustReadyAgentHelperConstants.machServiceName,
             options: .privileged
         )
-        connection.remoteObjectInterface = NSXPCInterface(with: ProboAgentHelperProtocol.self)
+        connection.remoteObjectInterface = NSXPCInterface(with: TrustReadyAgentHelperProtocol.self)
         connection.resume()
         defer { connection.invalidate() }
 
@@ -198,13 +198,13 @@ final public class HelperClient {
         guard
             let proxy = connection.remoteObjectProxyWithErrorHandler({ error in
                 NSLog(
-                    "probo-agent helper XPC error: %@",
+                    "trustready-agent helper XPC error: %@",
                     error.localizedDescription
                 )
                 completion.fail(
                     HelperClientError.connectionFailed(error.localizedDescription)
                 )
-            }) as? ProboAgentHelperProtocol
+            }) as? TrustReadyAgentHelperProtocol
         else {
             throw HelperClientError.connectionFailed("cannot create remote proxy")
         }

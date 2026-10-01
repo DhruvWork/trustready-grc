@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -61,37 +61,37 @@ const PLACEHOLDER_STYLES = `
   flex-direction: column;
   gap: 12px;
   padding: 24px;
-  background: var(--probo-bg, #ffffff);
-  color: var(--probo-text-secondary, #555555);
-  border: 1px dashed var(--probo-border, #e0e0e0);
-  border-radius: var(--probo-radius, 12px);
-  font-family: var(--probo-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
-  font-size: var(--probo-font-size, 14px);
+  background: var(--trustready-bg, #ffffff);
+  color: var(--trustready-text-secondary, #555555);
+  border: 1px dashed var(--trustready-border, #e0e0e0);
+  border-radius: var(--trustready-radius, 12px);
+  font-family: var(--trustready-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
+  font-size: var(--trustready-font-size, 14px);
   line-height: 1.5;
   text-align: center;
   box-sizing: border-box;
   min-height: 120px;
 }
-[${ATTR_PLACEHOLDER}] .probo-ph-icon {
-  color: var(--probo-text-secondary, #555555);
+[${ATTR_PLACEHOLDER}] .trustready-ph-icon {
+  color: var(--trustready-text-secondary, #555555);
 }
-[${ATTR_PLACEHOLDER}] .probo-ph-text {
+[${ATTR_PLACEHOLDER}] .trustready-ph-text {
   margin: 0;
 }
-[${ATTR_PLACEHOLDER}] .probo-ph-text strong {
+[${ATTR_PLACEHOLDER}] .trustready-ph-text strong {
   font-weight: 600;
 }
-[${ATTR_PLACEHOLDER}] .probo-ph-link {
+[${ATTR_PLACEHOLDER}] .trustready-ph-link {
   background: none;
   border: none;
-  color: var(--probo-accent, #1a1a1a);
+  color: var(--trustready-accent, #1a1a1a);
   text-decoration: underline;
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
   padding: 0;
 }
-[${ATTR_PLACEHOLDER}] .probo-ph-link:hover {
+[${ATTR_PLACEHOLDER}] .trustready-ph-link:hover {
   opacity: 0.8;
 }
 `;
@@ -103,7 +103,7 @@ function injectPlaceholderStyles(): void {
   stylesInjected = true;
 
   const style = document.createElement("style");
-  style.id = "probo-placeholder-styles";
+  style.id = "trustready-placeholder-styles";
   style.textContent = PLACEHOLDER_STYLES;
   document.head.appendChild(style);
 }
@@ -191,13 +191,13 @@ function createPlaceholder(
   const phButton = texts?.placeholder_button ?? "Manage cookie preferences";
 
   placeholder.innerHTML = [
-    `<span class="probo-ph-icon">${LOCK_ICON}</span>`,
-    `<p class="probo-ph-text">${phText}</p>`,
-    `<button type="button" class="probo-ph-link">${escapeHtml(phButton)}</button>`,
+    `<span class="trustready-ph-icon">${LOCK_ICON}</span>`,
+    `<p class="trustready-ph-text">${phText}</p>`,
+    `<button type="button" class="trustready-ph-link">${escapeHtml(phButton)}</button>`,
   ].join("");
 
-  placeholder.querySelector(".probo-ph-link")!.addEventListener("click", () => {
-    document.dispatchEvent(new CustomEvent("probo-open-preferences"));
+  placeholder.querySelector(".trustready-ph-link")!.addEventListener("click", () => {
+    document.dispatchEvent(new CustomEvent("trustready-open-preferences"));
   });
 
   el.setAttribute(ATTR_HIDDEN, "");

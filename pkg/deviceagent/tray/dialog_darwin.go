@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,8 +34,8 @@ func showAbout(version string) {
 	}
 
 	script := fmt.Sprintf(
-		`display alert "Probo Device Posture Agent" message %q buttons {"OK"} default button "OK"`,
-		fmt.Sprintf("Version %s\n\nReports device posture to your Probo workspace.", version),
+		`display alert "TrustReady Device Posture Agent" message %q buttons {"OK"} default button "OK"`,
+		fmt.Sprintf("Version %s\n\nReports device posture to your TrustReady workspace.", version),
 	)
 	_ = exec.Command(path, "-e", script).Run()
 }
@@ -47,7 +47,7 @@ func showEnrollmentError(message string) {
 	}
 
 	script := fmt.Sprintf(
-		`display alert "Probo Device Posture Agent" message %q buttons {"OK"} default button "OK"`,
+		`display alert "TrustReady Device Posture Agent" message %q buttons {"OK"} default button "OK"`,
 		message,
 	)
 	_ = exec.Command(path, "-e", script).Run()

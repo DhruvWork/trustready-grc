@@ -11,7 +11,7 @@ interactions:
         headers:
             Accept:
                 - application/json
-        url: https://api.supabase.com/v1/organizations/probo-missing-org/members
+        url: https://api.supabase.com/v1/organizations/trustready-missing-org/members
         method: GET
       response:
         proto: HTTP/2.0

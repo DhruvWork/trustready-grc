@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -366,14 +366,14 @@ func TestFilterFirstPartyDomains(t *testing.T) {
 	}{
 		{
 			name:       "removes site domain from proxy",
-			domains:    []string{"probo.com", "posthog.com"},
-			siteOrigin: "https://app.probo.com",
+			domains:    []string{"trustready.io", "posthog.com"},
+			siteOrigin: "https://app.trustready.io",
 			want:       []string{"posthog.com"},
 		},
 		{
 			name:       "keeps all third-party domains",
 			domains:    []string{"stripe.com", "google.com"},
-			siteOrigin: "https://app.probo.com",
+			siteOrigin: "https://app.trustready.io",
 			want:       []string{"stripe.com", "google.com"},
 		},
 		{
@@ -384,33 +384,33 @@ func TestFilterFirstPartyDomains(t *testing.T) {
 		},
 		{
 			name:       "all domains are first party",
-			domains:    []string{"probo.com"},
-			siteOrigin: "https://t.probo.com",
+			domains:    []string{"trustready.io"},
+			siteOrigin: "https://t.trustready.io",
 			want:       []string{},
 		},
 		{
 			name:       "empty domains list",
 			domains:    []string{},
-			siteOrigin: "https://probo.com",
+			siteOrigin: "https://trustready.io",
 			want:       []string{},
 		},
 		{
 			name:       "nil domains list",
 			domains:    nil,
-			siteOrigin: "https://probo.com",
+			siteOrigin: "https://trustready.io",
 			want:       []string{},
 		},
 		{
 			name:       "invalid site origin preserves all",
-			domains:    []string{"probo.com", "stripe.com"},
+			domains:    []string{"trustready.io", "stripe.com"},
 			siteOrigin: "not-a-url",
-			want:       []string{"probo.com", "stripe.com"},
+			want:       []string{"trustready.io", "stripe.com"},
 		},
 		{
 			name:       "empty site origin preserves all",
-			domains:    []string{"probo.com", "stripe.com"},
+			domains:    []string{"trustready.io", "stripe.com"},
 			siteOrigin: "",
-			want:       []string{"probo.com", "stripe.com"},
+			want:       []string{"trustready.io", "stripe.com"},
 		},
 		{
 			name:       "co.uk site origin",

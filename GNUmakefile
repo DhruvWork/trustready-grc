@@ -82,16 +82,16 @@ E2E_CONFIG ?= $(CURDIR)/e2e/console/testdata/config.yaml
 E2E_COVER_DIR ?= $(CURDIR)/coverage/e2e
 E2E_BINARY ?=
 E2E_COVERAGE_BINARY ?= $(CURDIR)/bin/trustreadyd-coverage
-E2E_CORE_COVER_PKGS ?= github.com/DhruvWork/trustready-grc/pkg/coredata,github.com/DhruvWork/trustready-grc/pkg/probo,github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/mcp/v1,github.com/DhruvWork/trustready-grc/pkg/accessreview,github.com/DhruvWork/trustready-grc/pkg/agentexecution,github.com/DhruvWork/trustready-grc/pkg/complianceportal/management,github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor,github.com/DhruvWork/trustready-grc/pkg/cookiebanner,github.com/DhruvWork/trustready-grc/pkg/riskmanagement,github.com/DhruvWork/trustready-grc/pkg/thirdparty,github.com/DhruvWork/trustready-grc/pkg/webhook
+E2E_CORE_COVER_PKGS ?= github.com/DhruvWork/trustready-grc/pkg/coredata,github.com/DhruvWork/trustready-grc/pkg/trustready,github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/mcp/v1,github.com/DhruvWork/trustready-grc/pkg/accessreview,github.com/DhruvWork/trustready-grc/pkg/agentexecution,github.com/DhruvWork/trustready-grc/pkg/complianceportal/management,github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor,github.com/DhruvWork/trustready-grc/pkg/cookiebanner,github.com/DhruvWork/trustready-grc/pkg/riskmanagement,github.com/DhruvWork/trustready-grc/pkg/thirdparty,github.com/DhruvWork/trustready-grc/pkg/webhook
 
-DOCKER_REGISTRY=	artifact.probo.inc
+DOCKER_REGISTRY=	artifact.trustready.io
 DOCKER_PROXY=		$(DOCKER_REGISTRY)/dockerhub
 DOCKER_BASE_DIGEST=	sha256:c4a8d5503dfb2a3eb8ab5f807da5bc69a85730fb49b5cfca2330194ebcc41c7b
 DOCKER_BASE_IMAGE=	ubuntu:24.04@$(DOCKER_BASE_DIGEST)
 # Harbor proxy resolves digest refs as library/<name>@sha256:..., not library/<name>:tag@sha256:...
 DOCKER_PROXY_BASE_IMAGE=	$(DOCKER_PROXY)/library/ubuntu@$(DOCKER_BASE_DIGEST)
-DOCKER_IMAGE_NAME=	$(DOCKER_REGISTRY)/probo/probo
-HELM_CHART_OCI=		oci://$(DOCKER_REGISTRY)/probo
+DOCKER_IMAGE_NAME=	$(DOCKER_REGISTRY)/trustready/trustready
+HELM_CHART_OCI=		oci://$(DOCKER_REGISTRY)/trustready
 DOCKER_TAG_NAME?=	latest
 
 GENERATED= pkg/server/api/connect/v1/schema/schema.go \
@@ -319,7 +319,7 @@ cfg/dev.yaml: bin/trustreadyd-bootstrap $(CFG_DEV_OAUTH2_KEY) $(CFG_DEV_IDENTITY
 	TRUSTREADYD_PG_DATABASE=trustreadyd; \
 	TRUSTREADYD_TRUST_CENTER_HTTP_ADDR=:10080; \
 	TRUSTREADYD_TRUST_CENTER_HTTPS_ADDR=:443; \
-	TRUSTREADYD_TRUST_CENTER_BASE_DOMAIN=probopage.localhost; \
+	TRUSTREADYD_TRUST_CENTER_BASE_DOMAIN=trustreadypage.localhost; \
 	TRUSTREADYD_TRUST_CENTER_TLS_MODE=direct; \
 	TRUSTREADYD_AWS_REGION=us-east-1; \
 	TRUSTREADYD_AWS_BUCKET=trustreadyd; \
@@ -327,14 +327,14 @@ cfg/dev.yaml: bin/trustreadyd-bootstrap $(CFG_DEV_OAUTH2_KEY) $(CFG_DEV_IDENTITY
 	TRUSTREADYD_AWS_SECRET_ACCESS_KEY=thisisnotasecret; \
 	TRUSTREADYD_AWS_ENDPOINT=http://127.0.0.1:8333; \
 	TRUSTREADYD_SMTP_ADDR=localhost:1025; \
-	TRUSTREADYD_MAILER_SENDER_EMAIL=no-reply@notification.getprobo.com; \
-	TRUSTREADYD_MAILER_SENDER_NAME=Probo; \
+	TRUSTREADYD_MAILER_SENDER_EMAIL=no-reply@notification.trustready.io; \
+	TRUSTREADYD_MAILER_SENDER_NAME=TrustReady; \
 	TRUSTREADYD_OPENAI_API_KEY=thisisnotasecret; \
 	TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_PROVIDER=openai; \
 	TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_MODEL_NAME=gpt-4o; \
 	TRUSTREADYD_CHROME_DP_ADDR=localhost:9222; \
 	TRUSTREADYD_ACME_DIRECTORY=https://localhost:9000/acme/acme/directory; \
-	TRUSTREADYD_ACME_EMAIL=admin@probo.com; \
+	TRUSTREADYD_ACME_EMAIL=admin@trustready.io; \
 	TRUSTREADYD_ACME_KEY_TYPE=EC256; \
 	TRUSTREADYD_ACME_ACCOUNT_KEY="$$($(CAT) $(CFG_DEV_ACME_ACCOUNT_KEY))"; \
 	TRUSTREADYD_ACME_ROOT_CA="$$($(CAT) compose/step-ca/certs/root_ca.crt)"; \
@@ -352,7 +352,7 @@ sbom-docker: docker-build
 .PHONY: sbom
 sbom:
 	$(SYFT) dir:. -o cyclonedx-json \
-		--source-name "probo" \
+		--source-name "trustready" \
 		--source-version "$(TRUSTREADYD_VERSION)" \
 		> sbom.json
 
@@ -526,7 +526,7 @@ clean: ## Clean the project (node_modules and build artifacts)
 	$(RM) -rf sbom-docker.json sbom.json
 	$(RM) -rf coverage.out coverage.html coverage-e2e.out coverage-e2e.txt coverage-e2e.html coverage-e2e-core.out coverage-e2e-core.txt coverage-e2e-core.html coverage-e2e-packages.txt coverage-combined.out coverage-combined.html
 	$(RM) -rf coverage/
-	$(RM) -rf compose/keycloak/certs/cert.pem compose/keycloak/certs/private-key.pem compose/keycloak/probo-realm.json
+	$(RM) -rf compose/keycloak/certs/cert.pem compose/keycloak/certs/private-key.pem compose/keycloak/trustready-realm.json
 	$(RM) -f pkg/server/api/connect/v1/schema/schema.go pkg/server/api/connect/v1/types/types.go
 	$(RM) -f pkg/server/api/console/v1/schema/schema.go pkg/server/api/console/v1/types/types.go
 	$(RM) -f pkg/server/api/complianceportal/v1/schema/schema.go pkg/server/api/complianceportal/v1/types/types.go
@@ -536,7 +536,7 @@ clean: ## Clean the project (node_modules and build artifacts)
 	find apps -type d -name __generated__ -exec $(RM) -rf {} +
 
 .PHONY: stack-up
-stack-up: compose/step-ca/certs/root_ca.crt compose/keycloak/probo-realm.json ## Start the docker stack as a deamon
+stack-up: compose/step-ca/certs/root_ca.crt compose/keycloak/trustready-realm.json ## Start the docker stack as a deamon
 	$(DOCKER_COMPOSE) up -d
 
 .PHONY: stack-down
@@ -571,7 +571,7 @@ compose/keycloak/certs/cert.pem:
 	$(MKDIR) ./compose/keycloak/certs
 	$(OPENSSL) req -x509 -newkey rsa:2048 -keyout compose/keycloak/certs/private-key.pem -out compose/keycloak/certs/cert.pem -days 3650 -nodes -subj "/CN=keycloak-saml-signing"
 
-compose/keycloak/probo-realm.json: compose/keycloak/probo-realm.json.tmpl compose/keycloak/certs/cert.pem
+compose/keycloak/trustready-realm.json: compose/keycloak/trustready-realm.json.tmpl compose/keycloak/certs/cert.pem
 	$(SED) \
 	-e "s|CERTIFICATE_PLACEHOLDER|$$(awk 'NR==1 {printf "%s", $$0; next} {printf "\\\\n%s", $$0}' compose/keycloak/certs/cert.pem)|g" \
 	-e "s|PRIVATE_KEY_PLACEHOLDER|$$(awk 'NR==1 {printf "%s", $$0; next} {printf "\\\\n%s", $$0}' compose/keycloak/certs/private-key.pem)|g" \

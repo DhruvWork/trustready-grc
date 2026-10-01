@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -178,7 +178,7 @@ describe("renderTCFLayout", () => {
     expect(html).toContain("Use precise geolocation data");
     expect(html).toContain("1 partner");
     expect(html).toContain("View partners");
-    const firstLayer = html!.split("<probo-preference-panel")[0];
+    const firstLayer = html!.split("<trustready-preference-panel")[0];
     expect(firstLayer).toContain("unique identifiers and browsing data");
     expect(firstLayer).toContain('data-text="tcf_disclosure_data"');
     expect(firstLayer).toContain("service-specific");
@@ -194,7 +194,7 @@ describe("renderTCFLayout", () => {
     expect(firstLayer).not.toContain('<p class="description" data-text="tcf_disclosure_store">');
     expect(firstLayer).not.toContain("How often an ad was shown can be measured.");
     expect(html).toContain("Test Vendor");
-    expect(html).toContain("probo_consent cookie for 180 days");
+    expect(html).toContain("trustready_consent cookie for 180 days");
     expect(html).toContain("Advertising");
     expect(html).toContain('data-text="tcf_section_purposes"');
     expect(html).toContain('data-text="tcf_section_other_purposes"');
@@ -208,7 +208,7 @@ describe("renderTCFLayout", () => {
     expect(html).toContain('data-text="tcf_disclosure_store"');
     expect(html).toContain('data-text="tcf_panel_description"');
     expect(html).not.toContain('data-text="panel_description"');
-    const panel = html!.split("<probo-preference-panel")[1];
+    const panel = html!.split("<trustready-preference-panel")[1];
     expect(panel).toContain("unique identifiers and browsing data");
     expect(panel).toContain("service-specific");
     expect(panel).toContain('data-text="tcf_disclosure_data"');
@@ -225,12 +225,12 @@ describe("renderTCFLayout", () => {
     expect(html).toContain('href="https://example.com/li"');
     expect(html).toContain("Privacy policy");
     expect(html).not.toContain("Privacy policy: https://example.com/privacy");
-    expect(html).not.toContain("probo-category-list");
+    expect(html).not.toContain("trustready-category-list");
   });
 
   it("lists each vendor's purposes, legal bases, and other GVL declarations", () => {
     const html = renderTCFLayout(bannerConfig(), "bottom-left");
-    const partners = html!.split('id="probo-tcf-vendors"')[1]?.split('data-text="tcf_section_storage"')[0] ?? "";
+    const partners = html!.split('id="trustready-tcf-vendors"')[1]?.split('data-text="tcf_section_storage"')[0] ?? "";
     expect(partners).toContain('class="tcf-vendor-details"');
     expect(partners).toContain('data-text="tcf_label_consent"');
     expect(partners).toContain("Store and/or access information on a device");
@@ -276,7 +276,7 @@ describe("renderTCFLayout", () => {
       "bottom-left",
     );
 
-    const [firstLayer, panel] = html!.split("<probo-preference-panel");
+    const [firstLayer, panel] = html!.split("<trustready-preference-panel");
     expect(firstLayer).not.toContain('data-text="tcf_disclosure_object"');
     expect(firstLayer).not.toContain("object to that processing");
     expect(panel).not.toContain("unique identifiers and browsing data");
@@ -305,7 +305,7 @@ describe("renderTCFLayout", () => {
       "bottom-left",
     );
 
-    const partners = html!.split('id="probo-tcf-vendors"')[1] ?? "";
+    const partners = html!.split('id="trustready-tcf-vendors"')[1] ?? "";
     expect(partners).not.toContain('data-tcf="vendor-consent"');
     expect(partners).toContain('data-tcf="vendor-li"');
   });
@@ -336,8 +336,8 @@ describe("renderTCFLayout", () => {
       "bottom-left",
     );
 
-    const panel = html!.split("<probo-preference-panel")[1];
-    const firstLayer = html!.split("<probo-preference-panel")[0];
+    const panel = html!.split("<trustready-preference-panel")[1];
+    const firstLayer = html!.split("<trustready-preference-panel")[0];
     expect(firstLayer).not.toContain("seeking consent");
     expect(firstLayer).not.toContain("relying on legitimate interest");
     expect(panel).toContain("2 partners seeking consent");
@@ -365,10 +365,10 @@ describe("renderTCFLayout", () => {
     expect(html).not.toContain('data-text="tcf_section_more"');
     expect(html).not.toContain("<details");
     expect(html).not.toContain("tcf-row-disclosure");
-    expect(html).toContain('id="probo-tcf-vendors"');
+    expect(html).toContain('id="trustready-tcf-vendors"');
     expect(html.indexOf('data-text="tcf_section_purposes"')).toBeLessThan(html.indexOf("Advertising"));
-    expect(html.indexOf('data-tcf="special-feature"')).toBeLessThan(html.indexOf('id="probo-tcf-vendors"'));
-    expect(html.indexOf('id="probo-tcf-vendors"')).toBeLessThan(
+    expect(html.indexOf('data-tcf="special-feature"')).toBeLessThan(html.indexOf('id="trustready-tcf-vendors"'));
+    expect(html.indexOf('id="trustready-tcf-vendors"')).toBeLessThan(
       html.indexOf('data-text="tcf_section_special_purposes"'),
     );
   });

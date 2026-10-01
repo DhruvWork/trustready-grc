@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -363,7 +363,7 @@ func TestSafeRedirect_DynamicAllowedHost(t *testing.T) {
 	t.Parallel()
 
 	trustedDomains := map[string]bool{
-		"app.getprobo.com":   true,
+		"app.trustready.io":   true,
 		"trust.company.com":  true,
 		"compliance.acme.io": true,
 	}
@@ -380,9 +380,9 @@ func TestSafeRedirect_DynamicAllowedHost(t *testing.T) {
 	}{
 		{
 			name:        "primary host passes",
-			redirectURL: "https://app.getprobo.com/trust/my-slug",
+			redirectURL: "https://app.trustready.io/trust/my-slug",
 			fallbackURL: "/",
-			expectedURL: "https://app.getprobo.com/trust/my-slug",
+			expectedURL: "https://app.trustready.io/trust/my-slug",
 		},
 		{
 			name:        "trusted custom domain passes",

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -89,7 +89,7 @@ func TestTaskLinearSync_UpdateEnqueuesOutboundAndInboundDoesNotLoop(t *testing.T
 	assert.Equal(t, "LINEAR_SYNC", linkResult.Node.ExternalLink.Provider)
 	assert.Equal(t, "ENG-1", linkResult.Node.ExternalLink.Identifier)
 	assert.Equal(t, "https://linear.app/eng/issue/ENG-1", linkResult.Node.ExternalLink.URL)
-	assert.Equal(t, "PROBO", linkResult.Node.ExternalLink.Origin)
+	assert.Equal(t, "TRUSTREADY", linkResult.Node.ExternalLink.Origin)
 
 	const updateQuery = `
 		mutation UpdateTask($input: UpdateTaskInput!) {
@@ -311,7 +311,7 @@ func TestTaskLinearSync_UnlinkedCreateIsIgnored(t *testing.T) {
 	assert.Equal(t, 0, countTaskExternalLinksByExternalID(t, externalID))
 }
 
-func TestTaskLinearSync_CommentRemoveDeletesProboComment(t *testing.T) {
+func TestTaskLinearSync_CommentRemoveDeletesTrustReadyComment(t *testing.T) {
 	t.Parallel()
 
 	owner := testutil.NewClient(t, testutil.RoleOwner)
@@ -486,8 +486,8 @@ func seedTaskLinearLink(t *testing.T, owner *testutil.Client, taskID, externalID
 			remote_updated_at, metadata, created_at, updated_at
 		) VALUES (
 			$1, $2, $3, $4, 'LINEAR_SYNC',
-			$5, 'ENG-1', 'https://linear.app/eng/issue/ENG-1', $6, 'PROBO',
-			$7, '{"app_actor_id":"probo-app"}', $8, $8
+			$5, 'ENG-1', 'https://linear.app/eng/issue/ENG-1', $6, 'TRUSTREADY',
+			$7, '{"app_actor_id":"trustready-app"}', $8, $8
 		)
 	`, parsedTaskID, tenantID, orgID, connectorID, externalID, destination, now.Add(-time.Hour), now)
 	require.NoError(t, err)

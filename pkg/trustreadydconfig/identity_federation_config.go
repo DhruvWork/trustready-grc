@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ type (
 	IdentityFederationConfig struct {
 		Enabled bool `json:"enabled"`
 		// IssuerBaseURL is the base of the advertised issuer, for example
-		// https://proboidentity.com. It defaults to {base-url}/federation, so
+		// https://trustreadyidentity.com. It defaults to {base-url}/federation, so
 		// a self-hosted deployment needs no second domain.
 		//
 		// This value becomes immutable the moment a customer registers it with

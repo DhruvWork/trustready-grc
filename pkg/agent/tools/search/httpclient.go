@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ type userAgentTransport struct {
 
 func (t *userAgentTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 	r2 := r.Clone(r.Context())
-	r2.Header.Set("User-Agent", "Probo-Agent/1.0")
+	r2.Header.Set("User-Agent", "TrustReady-Agent/1.0")
 
 	return t.next.RoundTrip(r2)
 }

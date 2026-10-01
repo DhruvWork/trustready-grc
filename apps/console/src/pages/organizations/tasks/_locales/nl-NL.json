@@ -84,7 +84,7 @@
       "linked": "Taak gekoppeld aan Linear.",
       "confirmLink": {
         "title": "Linear-issue koppelen",
-        "description": "Dit werkt de Probo-taak bij met de Linear-issue."
+        "description": "Dit werkt de TrustReady-taak bij met de Linear-issue."
       },
       "unlinked": "Linear-issue ontkoppeld.",
       "errors": {

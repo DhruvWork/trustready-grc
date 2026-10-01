@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -91,7 +91,7 @@ type Endpoints struct {
 	APIBase string
 
 	// Install is the vendor page a customer is sent to in order to install
-	// Probo's marketplace app, written as a %s TEMPLATE for this deployment's
+	// TrustReady's marketplace app, written as a %s TEMPLATE for this deployment's
 	// app id (Crisp's plugin id). That makes it the ONE endpoint field that is
 	// not a parseable URL as written — url.Parse rejects a bare %s with
 	// `invalid URL escape` — so anything reading it, tests included, must
@@ -118,7 +118,7 @@ type Registration struct {
 	// Identity.
 	Provider    coredata.ConnectorProvider
 	DisplayName string
-	// DocumentationURL is the public probo.com docs page for connecting this
+	// DocumentationURL is the public trustready.io docs page for connecting this
 	// provider as an access source. Empty for providers with no doc page yet;
 	// surfaced (nullable) on ConnectorProviderInfo so the console renders a link.
 	DocumentationURL string
@@ -139,7 +139,7 @@ type Registration struct {
 	OAuth2 *OAuth2Config
 
 	// APIKey is the API-key connect path, covering both a customer-pasted key
-	// and a Probo-held one. Nil for a provider with no API-key path.
+	// and a TrustReady-held one. Nil for a provider with no API-key path.
 	APIKey *APIKeyConfig
 
 	// ClientCredentials is the OAuth2 client-credentials connect path. Nil for
@@ -150,9 +150,9 @@ type Registration struct {
 	// workload identity. Nil for every provider that uses a stored credential.
 	WorkloadIdentity *WorkloadIdentityConfig
 
-	// Install is the app-install connect path: Probo redirects the customer to
-	// the vendor, the customer installs Probo's marketplace app there, and the
-	// vendor redirects the browser back with a proof Probo verifies
+	// Install is the app-install connect path: TrustReady redirects the customer to
+	// the vendor, the customer installs TrustReady's marketplace app there, and the
+	// vendor redirects the browser back with a proof TrustReady verifies
 	// server-side before binding the result to an organization. Non-nil for
 	// exactly those providers that offer one — Register enforces the agreement
 	// with Endpoints.Install, exactly as it does for OAuth2 and Endpoints.Auth.
@@ -160,7 +160,7 @@ type Registration struct {
 	// Orthogonal to the credential blocks: this says how a connector is
 	// ACQUIRED, not how its credential is held. Crisp pairs Install with
 	// APIKey.Managed, because what the ceremony yields is a vendor tenant id
-	// bound to Probo's own plugin token — the customer never holds a
+	// bound to TrustReady's own plugin token — the customer never holds a
 	// credential at all.
 	Install *InstallConfig
 
@@ -277,12 +277,12 @@ type APIKeyConfig struct {
 
 	// ExtraSettings declares the per-provider settings fields the console's
 	// API-key connect dialog renders and submits, in render order. It covers a
-	// Managed provider too (Crisp): the customer supplies the settings, Probo
+	// Managed provider too (Crisp): the customer supplies the settings, TrustReady
 	// supplies the key.
 	ExtraSettings []ExtraSetting
 
-	// Managed is non-nil for a provider whose key Probo supplies from bootstrap
-	// config (a single, Probo-held credential shared across all connections)
+	// Managed is non-nil for a provider whose key TrustReady supplies from bootstrap
+	// config (a single, TrustReady-held credential shared across all connections)
 	// rather than one the customer pastes per connection. The connection then
 	// carries only ExtraSettings (e.g. a Crisp Website ID); the
 	// create-connector resolver injects the key registered via
@@ -350,11 +350,11 @@ func apiKeyPrefix(prefix, example string) *KeyFormat {
 	}
 }
 
-// ManagedAPIKey is the Probo-held variant of the API-key path. Nesting it under
+// ManagedAPIKey is the TrustReady-held variant of the API-key path. Nesting it under
 // APIKeyConfig.Managed is what makes RequiresResourceID unreachable for a
 // customer-supplied key, a pairing Register used to police at startup.
 type ManagedAPIKey struct {
-	// RequiresResourceID marks a provider that also needs a Probo-supplied
+	// RequiresResourceID marks a provider that also needs a TrustReady-supplied
 	// resource ID (Crisp's plugin ID, registered via
 	// (*Registry).SetManagedResourceID) before a connection can succeed. Such a
 	// provider stays out of the driver catalog until BOTH the key and the
@@ -384,7 +384,7 @@ var ErrInstallVerificationTransient = errors.New("install verification temporari
 
 // InstallConfig is the app-install connect path of a provider.
 type InstallConfig struct {
-	// StateParam names the callback parameter the vendor echoes Probo's signed
+	// StateParam names the callback parameter the vendor echoes TrustReady's signed
 	// state back in (Crisp: "payload", echoed byte-identical). The handler must
 	// find the state before it can trust anything else, so this one parameter
 	// name cannot live inside Verify.
@@ -404,7 +404,7 @@ type InstallConfig struct {
 	SettingsResourceKey string
 
 	// Verify proves the browser really came from the vendor's own dashboard,
-	// using Probo's app credential (already on c) and appID — this deployment's
+	// using TrustReady's app credential (already on c) and appID — this deployment's
 	// app id at the vendor. It receives the whole callback query rather than
 	// named parameters because vendors disagree on the shape of the proof:
 	// Crisp names one token, others sign the entire query.
@@ -428,7 +428,7 @@ type InstallConfig struct {
 	// and burning is what holds a forgery to one attempt.
 	//
 	// RETRYABLE (release, wrapped in ErrInstallVerificationTransient): 429, any
-	// 5xx, any transport failure, AND a 401/403 on Probo's own app credential.
+	// 5xx, any transport failure, AND a 401/403 on TrustReady's own app credential.
 	// That last one looks like a hard failure but is not the customer's to fix
 	// — a token mid-rotation or a half-propagated deploy is something an
 	// operator can correct inside the ten-minute window, and it can never be
@@ -516,7 +516,7 @@ type OAuth2Config struct {
 	BuildTokenURLForSite func(site string) (string, error)
 }
 
-// WorkloadIdentityConfig is the connect path of a provider Probo reaches by
+// WorkloadIdentityConfig is the connect path of a provider TrustReady reaches by
 // minting a short-lived OIDC assertion (pkg/identityfederation) that the
 // customer's cloud STS exchanges for temporary credentials.
 //
@@ -593,7 +593,7 @@ func (r *Registration) SupportsWorkloadIdentity() bool {
 
 // SupportsAPIKey reports whether the CUSTOMER supplies this provider's API key,
 // which is what decides whether the console renders a key field. It is false for
-// a managed provider, whose key Probo injects — so the old pairing this replaces
+// a managed provider, whose key TrustReady injects — so the old pairing this replaces
 // (a managed key alongside a customer-supplied one) is now unrepresentable:
 // both answers come from the same field, in opposite directions.
 func (r *Registration) SupportsAPIKey() bool {
@@ -607,7 +607,7 @@ func (r *Registration) SupportsClientCredentials() bool {
 }
 
 // SupportsInstall reports whether this provider is connected by installing
-// Probo's app at the vendor.
+// TrustReady's app at the vendor.
 func (r *Registration) SupportsInstall() bool {
 	return r.Install != nil
 }
@@ -620,7 +620,7 @@ func (r *Registration) SupportsOrganizationInstall() bool {
 	return r.WorkloadIdentity != nil && r.WorkloadIdentity.DiscoverAccounts != nil
 }
 
-// IsManagedAPIKey reports whether Probo, rather than the customer, supplies this
+// IsManagedAPIKey reports whether TrustReady, rather than the customer, supplies this
 // provider's API key.
 func (r *Registration) IsManagedAPIKey() bool {
 	return r.APIKey != nil && r.APIKey.Managed != nil

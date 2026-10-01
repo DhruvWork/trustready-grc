@@ -12,11 +12,11 @@ bump the version, write a changelog entry, commit, tag, push.
 | `trustreadyd-bootstrap`      | `trustreadyd-bootstrap/v*`          | [trustreadyd-bootstrap.md](./trustreadyd-bootstrap.md) |
 | `trustreadyctl`              | `trustreadyctl/v*`                  | [trustreadyctl.md](./trustreadyctl.md)     |
 | `trustready-agent`           | `trustready-agent/v*` (or `…-rc.N`) | [trustready-agent.md](./trustready-agent.md) ([Windows signing setup](./trustready-agent-windows-signing.md); [RC](./trustready-agent.md#rc-release)) |
-| `@trustready/n8n-nodes-probo` | `@trustready/n8n-nodes-probo/v*`   | [n8n-nodes-probo.md](./n8n-nodes-probo.md) |
+| `@trustready/n8n-nodes-trustready` | `@trustready/n8n-nodes-trustready/v*`   | [n8n-nodes-trustready.md](./n8n-nodes-trustready.md) |
 | `@trustready/cookie-banner`  | `@trustready/cookie-banner/v*`      | [cookie-banner.md](./cookie-banner.md) |
 | `@trustready/cookie-banner-tcf` | `@trustready/cookie-banner-tcf/v*` | [cookie-banner-tcf.md](./cookie-banner-tcf.md) |
 | `@trustready/skills`         | `@trustready/skills/v*`             | [skills.md](./skills.md)           |
-| Helm chart (`probo`)    | `helm/v*`                      | [helm.md](./helm.md)                   |
+| Helm chart (`trustready`)    | `helm/v*`                      | [helm.md](./helm.md)                   |
 | CloudFormation (`aws-audit-role`) | `cloudformation-aws-audit-role/v*` | [cloudformation-aws-audit-role.md](./cloudformation-aws-audit-role.md) |
 | Terraform (`aws-audit-role`) | `terraform-aws-audit-role/v*` | [terraform-aws-audit-role.md](./terraform-aws-audit-role.md) |
 | Terraform (`gcp-audit-role`) | `terraform-gcp-audit-role/v*` | [terraform-gcp-audit-role.md](./terraform-gcp-audit-role.md) |
@@ -78,8 +78,8 @@ git log $(git describe --tags --abbrev=0 --match='trustreadyctl/v*')..HEAD --one
 git log $(git describe --tags --abbrev=0 --match='trustready-agent/v*')..HEAD --oneline \
   -- cmd/trustready-agent pkg/deviceagent
 
-# @trustready/n8n-nodes-probo
-git log $(git describe --tags --abbrev=0 --match='@trustready/n8n-nodes-probo/v*')..HEAD --oneline \
+# @trustready/n8n-nodes-trustready
+git log $(git describe --tags --abbrev=0 --match='@trustready/n8n-nodes-trustready/v*')..HEAD --oneline \
   -- packages/n8n-node
 
 # @trustready/cookie-banner

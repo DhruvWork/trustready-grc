@@ -1,6 +1,6 @@
 # App arborescence (folder and file layout)
 
-Conventions for organising pages, routes, and supporting files in Probo frontend apps (`apps/compliance-portal`, `apps/console`). The guiding principle is **one arborescence**: the route hierarchy is expressed once, through the `pages/` folder tree, and everything related to a route lives next to it.
+Conventions for organising pages, routes, and supporting files in TrustReady frontend apps (`apps/compliance-portal`, `apps/console`). The guiding principle is **one arborescence**: the route hierarchy is expressed once, through the `pages/` folder tree, and everything related to a route lives next to it.
 
 These rules are the **source of truth**. Where existing code disagrees (e.g. `apps/console` still keeps some route definitions in a separate `src/routes/` folder), the code is non-compliant and should be migrated — it is not precedent.
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -59,7 +59,7 @@ const (
 type Client struct {
 	T               testing.TB
 	httpClient      *http.Client
-	proboHTTPClient *http.Client
+	trustreadyHTTPClient *http.Client
 	trustClient     *http.Client
 	trustHost       string
 	baseURL         string
@@ -119,7 +119,7 @@ func NewClientInOrg(t testing.TB, role TestRole, ownerClient *Client) *Client {
 
 func (c *Client) setupTestUser() {
 	uniqueID := generateUniqueID()
-	email := fmt.Sprintf("test-%s@e2e.probo.test", uniqueID)
+	email := fmt.Sprintf("test-%s@e2e.trustready.test", uniqueID)
 	password := "TestPassword123!"
 	fullName := fmt.Sprintf("Test User %s", uniqueID)
 
@@ -147,7 +147,7 @@ func (c *Client) setupTestUser() {
 
 func (c *Client) SetupTestUserInOrg(ownerClient *Client) {
 	uniqueID := generateUniqueID()
-	email := fmt.Sprintf("test-%s@e2e.probo.test", uniqueID)
+	email := fmt.Sprintf("test-%s@e2e.trustready.test", uniqueID)
 	password := "TestPassword123!"
 	fullName := fmt.Sprintf("Test User %s", uniqueID)
 
@@ -690,7 +690,7 @@ func SelfProvisionCompliancePortalVisitor(t testing.TB, trustHost string) *Clien
 	jar, err := cookiejar.New(nil)
 	require.NoError(t, err, "cannot create cookie jar")
 
-	email := fmt.Sprintf("visitor-%s@e2e.probo.test", generateUniqueID())
+	email := fmt.Sprintf("visitor-%s@e2e.trustready.test", generateUniqueID())
 
 	visitor := &Client{
 		T:              t,
@@ -703,7 +703,7 @@ func SelfProvisionCompliancePortalVisitor(t testing.TB, trustHost string) *Clien
 			Timeout: 30 * time.Second,
 		},
 		trustClient: trustHTTPClientWithJar(trustHost, jar),
-		proboHTTPClient: &http.Client{
+		trustreadyHTTPClient: &http.Client{
 			Jar:     jar,
 			Timeout: 30 * time.Second,
 		},
@@ -727,7 +727,7 @@ func (c *Client) connectViaCIMD(email string) {
 	authorizeURL := c.redirectLocation(c.trustClient, initiateURL)
 	require.NotEmpty(c.T, authorizeURL, "oauth initiate must redirect to authorize")
 
-	loginURL := c.redirectLocation(c.proboHTTPClient, authorizeURL)
+	loginURL := c.redirectLocation(c.trustreadyHTTPClient, authorizeURL)
 	require.Contains(c.T, loginURL, "/auth/login", "unauthenticated authorize must redirect to login")
 	require.Contains(c.T, loginURL, "continue=", "login redirect must preserve continue URL")
 
@@ -738,7 +738,7 @@ func (c *Client) connectViaCIMD(email string) {
 	c.postConnectMagicLink(email, continueURL)
 
 	token := c.pollForLinkToken(fmt.Sprintf("to:%s", email))
-	verifyResp := c.postConnectMagicLinkVerify(c.proboHTTPClient, token)
+	verifyResp := c.postConnectMagicLinkVerify(c.trustreadyHTTPClient, token)
 	require.Equal(
 		c.T,
 		http.StatusFound,
@@ -751,7 +751,7 @@ func (c *Client) connectViaCIMD(email string) {
 	)
 	require.Contains(c.T, resumeAuthorizeURL, "/api/connect/v1/oauth2/authorize")
 
-	authorizeResp := c.redirectHTTPResponse(c.proboHTTPClient, resumeAuthorizeURL)
+	authorizeResp := c.redirectHTTPResponse(c.trustreadyHTTPClient, resumeAuthorizeURL)
 	require.False(
 		c.T,
 		IsConsentRedirect(authorizeResp),
@@ -790,7 +790,7 @@ func (c *Client) postConnectMagicLink(email, continueURL string) {
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
-	httpClient := c.proboHTTPClient
+	httpClient := c.trustreadyHTTPClient
 	if httpClient == nil {
 		httpClient = c.httpClient
 	}

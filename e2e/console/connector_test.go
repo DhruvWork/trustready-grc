@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -168,22 +168,22 @@ func TestAccessReviewDrivers(t *testing.T) {
 	assert.Equal(t, []string{"baseUrl"}, apiKeySettingKeys["LANGFUSE"])
 	assert.Empty(t, clientCredentialsSettingKeys["LANGFUSE"])
 
-	// A documented provider exposes its probo.com docs URL; an undocumented one
+	// A documented provider exposes its trustready.io docs URL; an undocumented one
 	// exposes null. See pkg/connector/provider/docs.go.
 	require.Contains(t, docURLByProvider, "ANTHROPIC")
 
 	if url := docURLByProvider["ANTHROPIC"]; assert.NotNil(t, url) {
-		assert.Equal(t, "https://www.probo.com/docs/product/access-review/anthropic", *url)
+		assert.Equal(t, "https://www.trustready.io/docs/product/access-review/anthropic", *url)
 	}
 
 	// A slug that is not the lowercased enum is the case worth pinning: Cal.com
 	// publishes at /calcom, so deriving the URL from CAL_COM would 404.
 	if url := docURLByProvider["CAL_COM"]; assert.NotNil(t, url) {
-		assert.Equal(t, "https://www.probo.com/docs/product/access-review/calcom", *url)
+		assert.Equal(t, "https://www.trustready.io/docs/product/access-review/calcom", *url)
 	}
 
 	if url := docURLByProvider["AWS"]; assert.NotNil(t, url) {
-		assert.Equal(t, "https://www.probo.com/docs/product/access-review/aws", *url)
+		assert.Equal(t, "https://www.trustready.io/docs/product/access-review/aws", *url)
 	}
 
 	// Sentry carries the null case: it is an API-key provider, so the catalog
@@ -277,7 +277,7 @@ func TestCreateAPIKeyConnector(t *testing.T) {
 	require.NotNil(t, connector.DocumentationURL)
 	assert.Equal(
 		t,
-		"https://www.probo.com/docs/product/access-review/brex",
+		"https://www.trustready.io/docs/product/access-review/brex",
 		*connector.DocumentationURL,
 	)
 }

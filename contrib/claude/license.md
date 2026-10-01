@@ -5,7 +5,7 @@ Every source file must start with the MIT license header. Use the **current year
 ## Go, TypeScript, JavaScript (`.go`, `.ts`, `.tsx`, `.js`, `.jsx`)
 
 ```
-// Copyright (c) <YEAR> TrustReady <hello@probo.com>.
+// Copyright (c) <YEAR> TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ Every source file must start with the MIT license header. Use the **current year
 ## CSS (`.css`)
 
 ```
-/* Copyright (c) <YEAR> TrustReady <hello@probo.com>.
+/* Copyright (c) <YEAR> TrustReady <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -54,7 +54,7 @@ Every source file must start with the MIT license header. Use the **current year
 ## SQL (`.sql`)
 
 ```
--- Copyright (c) <YEAR> TrustReady <hello@probo.com>.
+-- Copyright (c) <YEAR> TrustReady <hello@trustready.io>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -78,7 +78,7 @@ Every source file must start with the MIT license header. Use the **current year
 ## GraphQL (`.graphql`)
 
 ```
-# Copyright (c) <YEAR> TrustReady <hello@probo.com>.
+# Copyright (c) <YEAR> TrustReady <hello@trustready.io>.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal

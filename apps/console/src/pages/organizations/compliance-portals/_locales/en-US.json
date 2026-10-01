@@ -511,24 +511,24 @@
   },
   "domainsSection": {
     "title": "Domains",
-    "description": "Your compliance portal is always available on its default probopage.com subdomain. You can also serve it on one custom domain of your own."
+    "description": "Your compliance portal is always available on its default trustreadypage.com subdomain. You can also serve it on one custom domain of your own."
   },
   "slackSection": {
     "title": "Slack notifications",
     "connectionTitle": "Notification channel",
     "notInstalledTitle": "Slack bot not installed",
     "description": "Choose where access requests for this compliance portal are sent.",
-    "notInstalled": "Install the Probo Slack app from organization settings before choosing a channel.",
+    "notInstalled": "Install the TrustReady Slack app from organization settings before choosing a channel.",
     "loginRequired": {
       "title": "Slack access requires /probot login",
-      "description": "Reviewers must run <cmd>/probot login</cmd> in Slack to link their Probo account before they can act on access requests."
+      "description": "Reviewers must run <cmd>/probot login</cmd> in Slack to link their TrustReady account before they can act on access requests."
     },
     "channel": {
       "label": "Channel",
       "placeholder": "Select channel",
-      "help": "Invite @Probo to a channel before selecting it.",
+      "help": "Invite @TrustReady to a channel before selecting it.",
       "emptyTitle": "No Slack channel yet",
-      "emptyDescription": "In Slack, invite @Probo to a channel, then open this list again."
+      "emptyDescription": "In Slack, invite @TrustReady to a channel, then open this list again."
     },
     "actions": {
       "clear": "Clear",
@@ -855,7 +855,7 @@
       "value": "Value",
       "ttl": "TTL: {{ttl}}",
       "copy": "Copy",
-      "purposePointToServers": "Point domain to Probo servers"
+      "purposePointToServers": "Point domain to TrustReady servers"
     },
     "messages": {
       "copied": "Copied",

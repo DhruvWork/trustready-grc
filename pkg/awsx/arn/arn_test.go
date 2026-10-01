@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -63,8 +63,8 @@ func TestIAM(t *testing.T) {
 
 	assert.Equal(
 		t,
-		"arn:aws:iam::123456789012:role/ProboAudit",
-		arn.IAM(arn.Partition, "123456789012", "role/ProboAudit"),
+		"arn:aws:iam::123456789012:role/TrustReadyAudit",
+		arn.IAM(arn.Partition, "123456789012", "role/TrustReadyAudit"),
 	)
 }
 
@@ -73,13 +73,13 @@ func TestRoleARN(t *testing.T) {
 
 	assert.Equal(
 		t,
-		"arn:aws:iam::123456789012:role/ProboAudit",
-		arn.RoleARN(arn.Partition, "123456789012", "ProboAudit"),
+		"arn:aws:iam::123456789012:role/TrustReadyAudit",
+		arn.RoleARN(arn.Partition, "123456789012", "TrustReadyAudit"),
 	)
 	assert.Equal(
 		t,
-		"arn:aws-us-gov:iam::123456789012:role/ProboAudit",
-		arn.RoleARN("aws-us-gov", "123456789012", "ProboAudit"),
+		"arn:aws-us-gov:iam::123456789012:role/TrustReadyAudit",
+		arn.RoleARN("aws-us-gov", "123456789012", "TrustReadyAudit"),
 	)
 }
 
@@ -96,18 +96,18 @@ func TestParseRole(t *testing.T) {
 		}{
 			{
 				name: "commercial",
-				raw:  "arn:aws:iam::123456789012:role/ProboAudit",
-				want: arn.Role{Partition: arn.Partition, AccountID: "123456789012", Name: "ProboAudit"},
+				raw:  "arn:aws:iam::123456789012:role/TrustReadyAudit",
+				want: arn.Role{Partition: arn.Partition, AccountID: "123456789012", Name: "TrustReadyAudit"},
 			},
 			{
 				name: "govcloud",
-				raw:  "arn:aws-us-gov:iam::123456789012:role/ProboAudit",
-				want: arn.Role{Partition: arn.PartitionGov, AccountID: "123456789012", Name: "ProboAudit"},
+				raw:  "arn:aws-us-gov:iam::123456789012:role/TrustReadyAudit",
+				want: arn.Role{Partition: arn.PartitionGov, AccountID: "123456789012", Name: "TrustReadyAudit"},
 			},
 			{
 				name: "china",
-				raw:  "arn:aws-cn:iam::123456789012:role/ProboAudit",
-				want: arn.Role{Partition: arn.PartitionChina, AccountID: "123456789012", Name: "ProboAudit"},
+				raw:  "arn:aws-cn:iam::123456789012:role/TrustReadyAudit",
+				want: arn.Role{Partition: arn.PartitionChina, AccountID: "123456789012", Name: "TrustReadyAudit"},
 			},
 			{
 				name: "path",
@@ -116,8 +116,8 @@ func TestParseRole(t *testing.T) {
 			},
 			{
 				name: "trims space",
-				raw:  "  arn:aws:iam::123456789012:role/ProboAudit  ",
-				want: arn.Role{Partition: arn.Partition, AccountID: "123456789012", Name: "ProboAudit"},
+				raw:  "  arn:aws:iam::123456789012:role/TrustReadyAudit  ",
+				want: arn.Role{Partition: arn.Partition, AccountID: "123456789012", Name: "TrustReadyAudit"},
 			},
 		}
 
@@ -143,8 +143,8 @@ func TestParseRole(t *testing.T) {
 			{name: "not an arn", raw: "not-an-arn"},
 			{name: "user", raw: "arn:aws:iam::123456789012:user/alice"},
 			{name: "s3", raw: "arn:aws:s3:::bucket/key"},
-			{name: "region set", raw: "arn:aws:iam:us-east-1:123456789012:role/ProboAudit"},
-			{name: "short account", raw: "arn:aws:iam::123:role/ProboAudit"},
+			{name: "region set", raw: "arn:aws:iam:us-east-1:123456789012:role/TrustReadyAudit"},
+			{name: "short account", raw: "arn:aws:iam::123:role/TrustReadyAudit"},
 			{name: "empty name", raw: "arn:aws:iam::123456789012:role/"},
 			{name: "invalid name", raw: "arn:aws:iam::123456789012:role/not a role"},
 		}
@@ -166,7 +166,7 @@ func TestParseRole(t *testing.T) {
 	t.Run("refuses an unsupported partition without echoing it", func(t *testing.T) {
 		t.Parallel()
 
-		raw := "arn:aws-iso:iam::123456789012:role/ProboAudit"
+		raw := "arn:aws-iso:iam::123456789012:role/TrustReadyAudit"
 
 		_, err := arn.ParseRole(raw)
 		require.ErrorIs(t, err, arn.ErrUnsupportedPartition)

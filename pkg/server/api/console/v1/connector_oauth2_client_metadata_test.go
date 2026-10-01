@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ import (
 func TestHandleConnectorOAuth2ClientMetadata(t *testing.T) {
 	t.Parallel()
 
-	base, err := baseurl.Parse("https://probo.example.com")
+	base, err := baseurl.Parse("https://trustready.example.com")
 	require.NoError(t, err)
 
 	rec := httptest.NewRecorder()
@@ -68,13 +68,13 @@ func TestHandleConnectorOAuth2ClientMetadata(t *testing.T) {
 
 	// Functional fields are deployment-derived (must match where the OAuth
 	// flow actually runs)...
-	assert.Equal(t, "https://probo.example.com/api/console/v1/connectors/oauth-client-metadata", doc.ClientID)
-	assert.Equal(t, []string{"https://probo.example.com/api/console/v1/connectors/complete"}, doc.RedirectURIs)
+	assert.Equal(t, "https://trustready.example.com/api/console/v1/connectors/oauth-client-metadata", doc.ClientID)
+	assert.Equal(t, []string{"https://trustready.example.com/api/console/v1/connectors/complete"}, doc.RedirectURIs)
 	// ...while the brand fields shown on the consent screen are the canonical
-	// Probo product identity, NOT the per-tenant deployment URL.
-	assert.Equal(t, "Probo", doc.ClientName)
-	assert.Equal(t, "https://www.probo.com", doc.ClientURI)
-	assert.Equal(t, "https://www.probo.com/probo-logo-only.svg", doc.LogoURI)
+	// TrustReady product identity, NOT the per-tenant deployment URL.
+	assert.Equal(t, "TrustReady", doc.ClientName)
+	assert.Equal(t, "https://www.trustready.io", doc.ClientURI)
+	assert.Equal(t, "https://www.trustready.io/trustready-logo-only.svg", doc.LogoURI)
 	assert.Equal(t, "none", doc.TokenEndpointAuthMethod, "public client must advertise token_endpoint_auth_method none")
 	assert.Contains(t, doc.GrantTypes, "authorization_code")
 	assert.Contains(t, doc.GrantTypes, "refresh_token")

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 	"github.com/DhruvWork/trustready-grc/pkg/itam"
 	"github.com/DhruvWork/trustready-grc/pkg/mailman"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 	"github.com/DhruvWork/trustready-grc/pkg/probot/identitybinding"
 	"github.com/DhruvWork/trustready-grc/pkg/resourcealias"
@@ -56,7 +56,7 @@ import (
 
 func NewGraphQLHandler(
 	iamSvc *iam.Service,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	resourceAliasSvc *resourcealias.Service,
 	esignSvc *esign.Service,
 	managementSvc *management.Service,
@@ -89,7 +89,7 @@ func NewGraphQLHandler(
 		Resolvers: &Resolver{
 			authorize:               dataloader.NewAuthorizeFunc(logger),
 			batchAuthorize:          authz.NewBatchAuthorizeFunc(iamSvc, logger),
-			probo:                   proboSvc,
+			trustready:                   trustreadySvc,
 			resourceAlias:           resourceAliasSvc,
 			iam:                     iamSvc,
 			esign:                   esignSvc,

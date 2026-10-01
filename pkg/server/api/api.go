@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +49,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 	"github.com/DhruvWork/trustready-grc/pkg/itam"
 	"github.com/DhruvWork/trustready-grc/pkg/mailman"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/probot"
 	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 	"github.com/DhruvWork/trustready-grc/pkg/probot/identitybinding"
@@ -78,7 +78,7 @@ type (
 	Config struct {
 		BaseURL                 *baseurl.BaseURL
 		AllowedOrigins          []string
-		Probo                   *probo.Service
+		TrustReady                   *trustready.Service
 		ResourceAlias           *resourcealias.Service
 		File                    *filemanager.Service
 		IAM                     *iam.Service
@@ -143,7 +143,7 @@ type (
 )
 
 var (
-	ErrMissingProboService   = errors.New("server configuration requires a valid probo.Service instance")
+	ErrMissingTrustReadyService   = errors.New("server configuration requires a valid trustready.Service instance")
 	ErrMissingIAMService     = errors.New("server configuration requires a valid iam.Service instance")
 	ErrMissingSlackService   = errors.New("server configuration requires a valid slack.Service instance")
 	ErrMissingITAMService    = errors.New("server configuration requires a valid itam.Service instance")
@@ -176,8 +176,8 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 }
 
 func NewServer(cfg Config) (*Server, error) {
-	if cfg.Probo == nil {
-		return nil, ErrMissingProboService
+	if cfg.TrustReady == nil {
+		return nil, ErrMissingTrustReadyService
 	}
 
 	if cfg.IAM == nil {
@@ -266,7 +266,7 @@ func NewServer(cfg Config) (*Server, error) {
 		csrf: csrf,
 		consoleHandler: console_v1.NewMux(
 			cfg.Logger.Named("console.v1"),
-			cfg.Probo,
+			cfg.TrustReady,
 			cfg.ResourceAlias,
 			cfg.IAM,
 			cfg.ESign,
@@ -306,7 +306,7 @@ func NewServer(cfg Config) (*Server, error) {
 		filesHandler: files_v1.NewMux(
 			cfg.Logger.Named("files.v1"),
 			cfg.File,
-			cfg.Probo,
+			cfg.TrustReady,
 			cfg.IAM,
 			cfg.Cookie,
 			cfg.TokenSecret,
@@ -314,7 +314,7 @@ func NewServer(cfg Config) (*Server, error) {
 		),
 		mcpHandler: mcp_v1.NewMux(
 			cfg.Logger.Named("mcp.v1"),
-			cfg.Probo,
+			cfg.TrustReady,
 			cfg.Management,
 			cfg.CertManager,
 			cfg.ResourceAlias,

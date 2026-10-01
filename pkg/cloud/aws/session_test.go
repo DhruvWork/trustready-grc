@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,8 +38,8 @@ import (
 )
 
 const (
-	testIssuerBase = "https://proboidentity.com"
-	testRoleARN    = "arn:aws:iam::123456789012:role/ProboAudit"
+	testIssuerBase = "https://trustreadyidentity.com"
+	testRoleARN    = "arn:aws:iam::123456789012:role/TrustReadyAudit"
 )
 
 func testIssuer(t *testing.T) *identityfederation.Issuer {
@@ -83,13 +83,13 @@ func TestNewSession(t *testing.T) {
 		},
 		{
 			name:      "govcloud",
-			roleARN:   "arn:aws-us-gov:iam::123456789012:role/ProboAudit",
+			roleARN:   "arn:aws-us-gov:iam::123456789012:role/TrustReadyAudit",
 			region:    cloudaws.DefaultGovRegion,
 			partition: cloudaws.GovPartition,
 		},
 		{
 			name:      "china",
-			roleARN:   "arn:aws-cn:iam::123456789012:role/ProboAudit",
+			roleARN:   "arn:aws-cn:iam::123456789012:role/TrustReadyAudit",
 			region:    cloudaws.DefaultChinaRegion,
 			partition: cloudaws.ChinaPartition,
 		},
@@ -139,12 +139,12 @@ func TestNewSession_Validation(t *testing.T) {
 	}{
 		{
 			name:        "malformed role ARN",
-			roleARN:     "ProboAudit",
+			roleARN:     "TrustReadyAudit",
 			wantMessage: "cannot parse role ARN",
 		},
 		{
 			name:        "role ARN without an account",
-			roleARN:     "arn:aws:iam:::role/ProboAudit",
+			roleARN:     "arn:aws:iam:::role/TrustReadyAudit",
 			wantMessage: "carries no account ID",
 		},
 	}
@@ -173,28 +173,28 @@ func TestMemberRoleARN(t *testing.T) {
 	}{
 		{
 			name:           "commercial partition from management role",
-			managementARN:  "arn:aws:iam::111111111111:role/ProboAudit",
+			managementARN:  "arn:aws:iam::111111111111:role/TrustReadyAudit",
 			accountID:      "222222222222",
 			memberRoleName: "",
-			want:           "arn:aws:iam::222222222222:role/ProboAudit",
+			want:           "arn:aws:iam::222222222222:role/TrustReadyAudit",
 		},
 		{
 			name:           "gov partition never becomes literal aws",
-			managementARN:  "arn:aws-us-gov:iam::111111111111:role/ProboAudit",
+			managementARN:  "arn:aws-us-gov:iam::111111111111:role/TrustReadyAudit",
 			accountID:      "222222222222",
 			memberRoleName: "CustomAudit",
 			want:           "arn:aws-us-gov:iam::222222222222:role/CustomAudit",
 		},
 		{
 			name:           "trims a padded member role name",
-			managementARN:  "arn:aws:iam::111111111111:role/ProboAudit",
+			managementARN:  "arn:aws:iam::111111111111:role/TrustReadyAudit",
 			accountID:      "222222222222",
 			memberRoleName: "  CustomAudit  ",
 			want:           "arn:aws:iam::222222222222:role/CustomAudit",
 		},
 		{
 			name:            "malformed management role ARN",
-			managementARN:   "ProboAudit",
+			managementARN:   "TrustReadyAudit",
 			accountID:       "222222222222",
 			wantErrContains: "cannot parse management role ARN",
 		},

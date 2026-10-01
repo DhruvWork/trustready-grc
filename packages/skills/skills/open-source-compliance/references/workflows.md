@@ -1,24 +1,24 @@
 # Open-source compliance workflows
 
-This plugin wraps Probo's MCP API. Probo is a self-hostable GRC platform; its
+This plugin wraps TrustReady's MCP API. TrustReady is a self-hostable GRC platform; its
 MCP server exposes tools for third parties, controls, obligations, risks,
 documents, audits, access reviews, and more.
 
 ## Servers
 
-The plugin ships the two hosted Probo instances. A self-hosted instance is
+The plugin ships the two hosted TrustReady instances. A self-hosted instance is
 added in the agent's own MCP configuration.
 
 | Server | Endpoint |
 | --- | --- |
-| `probo-us` | `https://us.probo.com/api/mcp/v1` |
-| `probo-eu` | `https://eu.probo.com/api/mcp/v1` |
+| `trustready-us` | `https://us.trustready.io/api/mcp/v1` |
+| `trustready-eu` | `https://eu.trustready.io/api/mcp/v1` |
 | self-hosted | `<instance-root>/api/mcp/v1` |
 
 ## Authentication
 
-Probo MCP uses OAuth 2.0. Users sign in once per server via `/mcp` or
-`claude mcp login probo-us`; the agent stores and refreshes tokens
+TrustReady MCP uses OAuth 2.0. Users sign in once per server via `/mcp` or
+`claude mcp login trustready-us`; the agent stores and refreshes tokens
 automatically. Do not ask the user for API keys or bearer tokens for MCP
 access.
 
@@ -31,7 +31,7 @@ OAuth discovery (on the instance root, not the MCP path):
 
 When unsure which MCP tool to use:
 
-1. Search available Probo MCP tools by entity name (third party, control, risk,
+1. Search available TrustReady MCP tools by entity name (third party, control, risk,
    document, etc.).
 2. Read the tool schema before calling it.
 3. Paginate list operations; default page sizes may truncate results.
@@ -50,4 +50,4 @@ Future skills in this plugin may cover:
 - SOC 2 / ISO 27001 control mapping helpers
 - Vendor questionnaire ingestion
 - Access review preparation
-- Policy drafting with Probo document workflows
+- Policy drafting with TrustReady document workflows

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ import (
 
 // buildThirdPartyVetter wires the third-party vetting agent. Unset
 // third-party-vetter fields inherit from the default agent config
-// (AGENT_DEFAULT_*), same as evidence-describer and probo.
+// (AGENT_DEFAULT_*), same as evidence-describer and trustready.
 func (impl *Implm) buildThirdPartyVetter(
 	l *log.Logger,
 	tp trace.TracerProvider,

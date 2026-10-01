@@ -1,5 +1,5 @@
 {
-  "name": "@trustready/n8n-nodes-probo",
+  "name": "@trustready/n8n-nodes-trustready",
   "version": "0.239.0",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "author": {
     "name": "TrustReady",
-    "email": "hello@probo.com"
+    "email": "hello@trustready.io"
   },
   "files": [
     "dist"
@@ -22,19 +22,19 @@
     "n8nNodesApiVersion": 1,
     "strict": true,
     "credentials": [
-      "dist/credentials/ProboApi.credentials.js"
+      "dist/credentials/TrustReadyApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Probo/Probo.node.js",
+      "dist/nodes/TrustReady/TrustReady.node.js",
       "dist/nodes/ProboTrigger/ProboTrigger.node.js"
     ]
   },
   "license": "MIT",
-  "description": "n8n nodes for integrating with the Probo compliance platform API",
+  "description": "n8n nodes for integrating with the TrustReady compliance platform API",
   "keywords": [
     "n8n",
     "n8n-nodes",
-    "probo",
+    "trustready",
     "compliance",
     "soc2",
     "automation",
@@ -42,13 +42,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/getprobo/probo.git",
+    "url": "git+https://github.com/getprobo/trustready.git",
     "directory": "packages/n8n-node"
   },
   "bugs": {
-    "url": "https://github.com/getprobo/probo/issues"
+    "url": "https://github.com/getprobo/trustready/issues"
   },
-  "homepage": "https://github.com/getprobo/probo#README",
+  "homepage": "https://github.com/getprobo/trustready#README",
   "publishConfig": {
     "access": "public"
   },

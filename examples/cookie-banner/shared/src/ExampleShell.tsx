@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +49,7 @@ export function ExampleShell({ title, description, children }: ExampleShellProps
           <h1 style={{ margin: "0 0 4px" }}>{title}</h1>
           <p style={{ color: "#666", margin: 0 }}>{description}</p>
         </div>
-        <probo-settings-link
+        <trustready-settings-link
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -64,7 +64,7 @@ export function ExampleShell({ title, description, children }: ExampleShellProps
           }}
         >
           Cookie settings
-        </probo-settings-link>
+        </trustready-settings-link>
       </header>
 
       {children}

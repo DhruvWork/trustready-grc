@@ -1,6 +1,6 @@
 # Access review MCP tools
 
-All tools are on a Probo MCP server (`probo-us`, `probo-eu`, or a self-hosted
+All tools are on a TrustReady MCP server (`trustready-us`, `trustready-eu`, or a self-hosted
 server configured in the agent). Read each tool schema before calling.
 
 ## Organization scope

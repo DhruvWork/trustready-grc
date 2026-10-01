@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -673,7 +673,7 @@ func TestOVHcloudDriverPopulatedAccount(t *testing.T) {
 	assert.Nil(t, dave.Active)
 	assert.Nil(t, dave.IsAdmin)
 
-	// A federated subject that is not an email is still an identity, but Probo
+	// A federated subject that is not an email is still an identity, but TrustReady
 	// must not invent an email address for it.
 	erin := byID["CORP\\erin"]
 	assert.Empty(t, erin.Email)

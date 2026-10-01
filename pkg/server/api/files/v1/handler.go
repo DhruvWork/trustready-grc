@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/filemanager"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"github.com/DhruvWork/trustready-grc/pkg/iam"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/securecookie"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 	"github.com/DhruvWork/trustready-grc/pkg/server/jsonx"
@@ -46,7 +46,7 @@ const presignedURLExpiry = 1 * time.Hour
 type Handler struct {
 	logger  *log.Logger
 	fileSvc *filemanager.Service
-	probo   *probo.Service
+	trustready   *trustready.Service
 	iamSvc  *iam.Service
 	assets  *brand.Assets
 	baseURL *baseurl.BaseURL
@@ -55,7 +55,7 @@ type Handler struct {
 func NewMux(
 	logger *log.Logger,
 	fileSvc *filemanager.Service,
-	proboSvc *probo.Service,
+	trustreadySvc *trustready.Service,
 	iamSvc *iam.Service,
 	cookieConfig securecookie.Config,
 	tokenSecret string,
@@ -64,7 +64,7 @@ func NewMux(
 	h := &Handler{
 		logger:  logger,
 		fileSvc: fileSvc,
-		probo:   proboSvc,
+		trustready:   trustreadySvc,
 		iamSvc:  iamSvc,
 		assets:  brand.NewAssets(),
 		baseURL: baseURL,
@@ -142,7 +142,7 @@ func (h *Handler) handleGetFile(w http.ResponseWriter, r *http.Request) {
 	params := iam.AuthorizeParams{
 		Principal:          identity.ID,
 		Resource:           fileID,
-		Action:             probo.ActionFileGet,
+		Action:             trustready.ActionFileGet,
 		ResourceAttributes: make(map[string]string),
 	}
 	if session != nil {
@@ -168,7 +168,7 @@ func (h *Handler) handleGetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	f, err := h.probo.Files.Get(ctx, scope, fileID)
+	f, err := h.trustready.Files.Get(ctx, scope, fileID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			jsonx.RenderNotFound(w, fmt.Errorf("file not found"))

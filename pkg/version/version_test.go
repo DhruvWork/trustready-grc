@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -54,16 +54,16 @@ func TestUserAgent(t *testing.T) {
 			name:      "ACME client user agent",
 			component: "acme-client",
 			checks: []string{
-				"Probo/",
+				"TrustReady/",
 				"acme-client",
 				"Go/go",
 			},
 		},
 		{
-			name:      "Probod user agent",
+			name:      "TrustReadyd user agent",
 			component: "trustreadyd",
 			checks: []string{
-				"Probo/",
+				"TrustReady/",
 				"trustreadyd",
 				"Go/go",
 			},
@@ -72,7 +72,7 @@ func TestUserAgent(t *testing.T) {
 			name:      "Custom component",
 			component: "test-component",
 			checks: []string{
-				"Probo/",
+				"TrustReady/",
 				"test-component",
 				"Go/go",
 			},
@@ -89,8 +89,8 @@ func TestUserAgent(t *testing.T) {
 			}
 
 			// Check format structure
-			// Should be like: Probo/version (component; ...) Go/version
-			assert.True(t, strings.HasPrefix(ua, "Probo/"), "User agent should start with Probo/")
+			// Should be like: TrustReady/version (component; ...) Go/version
+			assert.True(t, strings.HasPrefix(ua, "TrustReady/"), "User agent should start with TrustReady/")
 			assert.Contains(t, ua, "(", "User agent should have opening parenthesis")
 			assert.Contains(t, ua, ")", "User agent should have closing parenthesis")
 		})

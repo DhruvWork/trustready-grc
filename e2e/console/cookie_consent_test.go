@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -286,7 +286,7 @@ func TestCookieConsent_PublicAPIAndConsole(t *testing.T) {
 		assert.Equal(t, visitorA, node.VisitorID)
 		assert.Equal(t, cookieBannerE2ESDKVersion, node.SdkVersion)
 		require.NotNil(t, node.UserAgent)
-		assert.Contains(t, *node.UserAgent, "Probo-CookieBanner-E2E")
+		assert.Contains(t, *node.UserAgent, "TrustReady-CookieBanner-E2E")
 		assert.Equal(t, fixture.Version, node.CookieBannerVersion.Version)
 		assert.NotEmpty(t, node.CreatedAt)
 	}

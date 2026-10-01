@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
-// azureRegistration declares Azure as a workload identity provider: Probo
+// azureRegistration declares Azure as a workload identity provider: TrustReady
 // holds no Azure credential and mints an assertion the customer's Entra
 // federated identity credential exchanges. It therefore declares no OAuth2,
 // API-key or client-credentials path — there is no credential for a customer

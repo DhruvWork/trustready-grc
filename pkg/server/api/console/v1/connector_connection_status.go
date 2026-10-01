@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ import (
 // scopes against the current registration.
 //
 // Obtaining a credential may succeed even when it is expired or invalid (no
-// refresh token available, a dead API key, a role Probo can no longer assume),
+// refresh token available, a dead API key, a role TrustReady can no longer assume),
 // so the probe is what makes the answer trustworthy. coredata.ErrResourceNotFound
 // is propagated; every caller decides for itself what a missing connector means.
 func (r *Resolver) connectorConnectionStatus(
@@ -62,7 +62,7 @@ func (r *Resolver) connectorConnectionStatus(
 				status = types.ConnectorConnectionStatusNotAuthorized
 			}
 
-			// Not Probo's failure, so not in the error budget. The status is
+			// Not TrustReady's failure, so not in the error budget. The status is
 			// logged rather than spelled into the message, which would then
 			// have to agree with what is returned below.
 			r.logger.WarnCtx(

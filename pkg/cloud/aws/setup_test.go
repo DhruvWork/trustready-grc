@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,10 +37,10 @@ const setupOrganizationID = "e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"
 func TestBuildConnectorSetup(t *testing.T) {
 	t.Parallel()
 
-	issuer := "https://proboidentity.com/" + setupOrganizationID
+	issuer := "https://trustreadyidentity.com/" + setupOrganizationID
 	subject := setupOrganizationID
 
-	t.Run("fills every Probo-derived value and preserves issuer casing", func(t *testing.T) {
+	t.Run("fills every TrustReady-derived value and preserves issuer casing", func(t *testing.T) {
 		t.Parallel()
 
 		setup, err := cloudaws.BuildConnectorSetup(
@@ -59,7 +59,7 @@ func TestBuildConnectorSetup(t *testing.T) {
 		assert.Equal(t, coredata.DefaultAWSRoleName, setup.SuggestedRoleName)
 		assert.Contains(t, setup.TerraformSnippet, issuer)
 		assert.Contains(t, setup.TerraformSnippet, subject)
-		assert.Contains(t, setup.TerraformSnippet, "probo_issuer_url")
+		assert.Contains(t, setup.TerraformSnippet, "trustready_issuer_url")
 		assert.Contains(t, setup.TerraformSnippet, "role_name")
 		assert.Contains(t, setup.TerraformSnippet, strconv.Quote(coredata.DefaultAWSRoleName))
 		assert.Contains(t, setup.TerraformSnippet, cloudaws.DefaultTerraformModuleSource)
@@ -104,9 +104,9 @@ func TestNewConnectorSettings(t *testing.T) {
 			name    string
 			roleARN string
 		}{
-			{name: "commercial", roleARN: "arn:aws:iam::123456789012:role/ProboAudit"},
-			{name: "govcloud", roleARN: "arn:aws-us-gov:iam::123456789012:role/ProboAudit"},
-			{name: "china", roleARN: "arn:aws-cn:iam::123456789012:role/ProboAudit"},
+			{name: "commercial", roleARN: "arn:aws:iam::123456789012:role/TrustReadyAudit"},
+			{name: "govcloud", roleARN: "arn:aws-us-gov:iam::123456789012:role/TrustReadyAudit"},
+			{name: "china", roleARN: "arn:aws-cn:iam::123456789012:role/TrustReadyAudit"},
 			{name: "path", roleARN: "arn:aws:iam::123456789012:role/team/CustomAudit"},
 		}
 
@@ -124,7 +124,7 @@ func TestNewConnectorSettings(t *testing.T) {
 	t.Run("trims space and keeps the given arn", func(t *testing.T) {
 		t.Parallel()
 
-		roleARN := "arn:aws:iam::123456789012:role/ProboAudit"
+		roleARN := "arn:aws:iam::123456789012:role/TrustReadyAudit"
 
 		settings, err := cloudaws.NewConnectorSettings("  " + roleARN + "  ")
 		require.NoError(t, err)
@@ -146,7 +146,7 @@ func TestNewConnectorSettings(t *testing.T) {
 	t.Run("refuses an unsupported partition without echoing it", func(t *testing.T) {
 		t.Parallel()
 
-		raw := "arn:aws-iso:iam::123456789012:role/ProboAudit"
+		raw := "arn:aws-iso:iam::123456789012:role/TrustReadyAudit"
 
 		_, err := cloudaws.NewConnectorSettings(raw)
 		require.Error(t, err)

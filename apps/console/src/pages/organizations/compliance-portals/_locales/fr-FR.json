@@ -511,24 +511,24 @@
   },
   "domainsSection": {
     "title": "Domaines",
-    "description": "Votre portail de conformité est toujours disponible sur son sous-domaine probopage.com par défaut. Vous pouvez également la publier sur un domaine personnalisé."
+    "description": "Votre portail de conformité est toujours disponible sur son sous-domaine trustreadypage.com par défaut. Vous pouvez également la publier sur un domaine personnalisé."
   },
   "slackSection": {
     "title": "Notifications Slack",
     "connectionTitle": "Canal de notification",
     "notInstalledTitle": "Bot Slack non installé",
     "description": "Choisissez où envoyer les demandes d’accès à ce portail de conformité.",
-    "notInstalled": "Installez l’application Slack Probo depuis les paramètres de l’organisation avant de choisir un canal.",
+    "notInstalled": "Installez l’application Slack TrustReady depuis les paramètres de l’organisation avant de choisir un canal.",
     "loginRequired": {
       "title": "L’accès Slack nécessite /probot login",
-      "description": "Chaque relecteur doit exécuter <cmd>/probot login</cmd> dans Slack pour lier son compte Probo avant de pouvoir traiter les demandes d’accès."
+      "description": "Chaque relecteur doit exécuter <cmd>/probot login</cmd> dans Slack pour lier son compte TrustReady avant de pouvoir traiter les demandes d’accès."
     },
     "channel": {
       "label": "Canal",
       "placeholder": "Sélectionner un canal",
-      "help": "Invitez @Probo dans un canal avant de le sélectionner.",
+      "help": "Invitez @TrustReady dans un canal avant de le sélectionner.",
       "emptyTitle": "Aucun canal Slack pour le moment",
-      "emptyDescription": "Dans Slack, invitez @Probo dans un canal, puis rouvrez cette liste."
+      "emptyDescription": "Dans Slack, invitez @TrustReady dans un canal, puis rouvrez cette liste."
     },
     "actions": {
       "clear": "Effacer",
@@ -855,7 +855,7 @@
       "value": "Valeur",
       "ttl": "TTL : {{ttl}}",
       "copy": "Copier",
-      "purposePointToServers": "Pointer le domaine vers les serveurs Probo"
+      "purposePointToServers": "Pointer le domaine vers les serveurs TrustReady"
     },
     "messages": {
       "copied": "Copié",

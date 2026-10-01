@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ import (
 	"context"
 
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
@@ -55,7 +55,7 @@ func commonGVLVendorFilter(
 		return nil, gqlutils.Invalidf(ctx, "cookieBannerId is required when filtering by membership")
 	}
 
-	if _, err := r.authorize(ctx, *filter.CookieBannerID, probo.ActionCookieBannerGet); err != nil {
+	if _, err := r.authorize(ctx, *filter.CookieBannerID, trustready.ActionCookieBannerGet); err != nil {
 		return nil, err
 	}
 

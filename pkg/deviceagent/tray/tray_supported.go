@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -128,8 +128,8 @@ func onReady(opts Options, done <-chan struct{}) {
 	enrollMenu := setupEnrollmentMenu(opts, done)
 
 	aboutItem := systray.AddMenuItem(
-		"About Probo Device Posture Agent…",
-		"Probo device posture agent",
+		"About TrustReady Device Posture Agent…",
+		"TrustReady device posture agent",
 	)
 
 	updateMenu := func() {
@@ -139,7 +139,7 @@ func onReady(opts Options, done <-chan struct{}) {
 			connectedItem.Hide()
 			enrollmentRequiredItem.Hide()
 			statusUnavailableItem.Show()
-			systray.SetTooltip("Probo Device Posture Agent — Status unavailable")
+			systray.SetTooltip("TrustReady Device Posture Agent — Status unavailable")
 
 			return
 		}
@@ -150,12 +150,12 @@ func onReady(opts Options, done <-chan struct{}) {
 			enrollMenu.hide()
 			enrollmentRequiredItem.Hide()
 			connectedItem.Show()
-			systray.SetTooltip("Probo Device Posture Agent — Connected")
+			systray.SetTooltip("TrustReady Device Posture Agent — Connected")
 		} else {
 			enrollMenu.show()
 			connectedItem.Hide()
 			enrollmentRequiredItem.Show()
-			systray.SetTooltip("Probo Device Posture Agent — Enrollment required")
+			systray.SetTooltip("TrustReady Device Posture Agent — Enrollment required")
 		}
 	}
 
@@ -202,7 +202,7 @@ func setupEnrollmentMenu(opts Options, done <-chan struct{}) enrollmentMenu {
 	enrollRoot := systray.AddMenuItem("Enroll via…", enrollTooltip)
 
 	usItem := enrollRoot.AddSubMenuItem(
-		"United States (us.probo.com)",
+		"United States (us.trustready.io)",
 		"Open US console enrollment",
 	)
 	bindMenuClick(usItem, done, func() {
@@ -210,7 +210,7 @@ func setupEnrollmentMenu(opts Options, done <-chan struct{}) enrollmentMenu {
 	})
 
 	euItem := enrollRoot.AddSubMenuItem(
-		"European Union (eu.probo.com)",
+		"European Union (eu.trustready.io)",
 		"Open EU console enrollment",
 	)
 	bindMenuClick(euItem, done, func() {
@@ -219,7 +219,7 @@ func setupEnrollmentMenu(opts Options, done <-chan struct{}) enrollmentMenu {
 
 	selfHostedItem := enrollRoot.AddSubMenuItem(
 		"Self hosted…",
-		"Enter your Probo hostname",
+		"Enter your TrustReady hostname",
 	)
 	bindMenuClick(selfHostedItem, done, openSelfHostedEnroll)
 

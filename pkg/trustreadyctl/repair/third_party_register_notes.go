@@ -1,4 +1,4 @@
-// Copyright (c) 2026 TrustReady <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@trustready.io>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ import (
 	"go.gearno.de/kit/pg"
 	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
-	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/trustready"
 	"github.com/DhruvWork/trustready-grc/pkg/trustreadyctl/cmdutil"
 )
 
@@ -242,7 +242,7 @@ func previewThirdPartyRegisterNotesRewrite(
 				return fmt.Errorf("cannot load document version %s: %w", versionID, err)
 			}
 
-			_, rewritten, err := probo.RewriteThirdPartyRegisterNotesContent(dv.Content)
+			_, rewritten, err := trustready.RewriteThirdPartyRegisterNotesContent(dv.Content)
 			if err != nil {
 				return fmt.Errorf("cannot rewrite document version %s: %w", versionID, err)
 			}
@@ -271,7 +271,7 @@ func rewriteThirdPartyRegisterNotesVersion(
 				return fmt.Errorf("cannot load document version %s: %w", versionID, err)
 			}
 
-			rewritten, didRewrite, err := probo.RewriteThirdPartyRegisterNotesContent(dv.Content)
+			rewritten, didRewrite, err := trustready.RewriteThirdPartyRegisterNotesContent(dv.Content)
 			if err != nil {
 				return fmt.Errorf("cannot rewrite document version %s: %w", versionID, err)
 			}

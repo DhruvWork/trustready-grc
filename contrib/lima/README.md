@@ -19,11 +19,11 @@ brew install lima jq
 # Check status and get the VM IP
 ./contrib/lima/sandbox.sh status
 
-# Build the backend binary (probo-stack starts automatically on boot)
+# Build the backend binary (trustready-stack starts automatically on boot)
 ./contrib/lima/sandbox.sh exec -- make build
 
 # Start trustreadyd, the console, and the compliance-portal dev servers
-./contrib/lima/sandbox.sh exec -- sudo systemctl start trustreadyd probo-console probo-compliance-portal
+./contrib/lima/sandbox.sh exec -- sudo systemctl start trustreadyd trustready-console trustready-compliance-portal
 
 # Access services from your host browser using the VM IP
 # e.g. http://192.168.105.2:5173 (console)
@@ -43,15 +43,15 @@ brew install lima jq
 | `./contrib/lima/sandbox.sh ssh` | Interactive shell at `/workspace` |
 | `./contrib/lima/sandbox.sh exec -- CMD` | Run a command in the VM |
 | `./contrib/lima/sandbox.sh status` | Show VM state, IP, and service URLs |
-| `./contrib/lima/sandbox.sh list` | List all `probo-*` VMs |
+| `./contrib/lima/sandbox.sh list` | List all `trustready-*` VMs |
 
 ## Architecture
 
 ```
 Host (macOS)
-├── worktree: ~/Developer/probo/delhi      → VM "probo-delhi"      (192.168.105.x)
-├── worktree: ~/Developer/probo/feature-a  → VM "probo-feature-a"  (192.168.105.y)
-└── worktree: ~/Developer/probo/feature-b  → VM "probo-feature-b"  (192.168.105.z)
+├── worktree: ~/Developer/trustready/delhi      → VM "trustready-delhi"      (192.168.105.x)
+├── worktree: ~/Developer/trustready/feature-a  → VM "trustready-feature-a"  (192.168.105.y)
+└── worktree: ~/Developer/trustready/feature-b  → VM "trustready-feature-b"  (192.168.105.z)
 ```
 
 Each VM:

@@ -13,7 +13,7 @@ Every entity ID in the system is a 24-byte tenant-scoped GID, serialized as base
 
 ## Creating a GID
 
-GIDs are created in the **service layer** (e.g. `pkg/probo/*_service.go`), not in coredata `Insert` methods. The entity type constant comes from `pkg/coredata/entity_type_reg.go`:
+GIDs are created in the **service layer** (e.g. `pkg/trustready/*_service.go`), not in coredata `Insert` methods. The entity type constant comes from `pkg/coredata/entity_type_reg.go`:
 
 ```go
 assetID := gid.New(s.svc.scope.GetTenantID(), coredata.AssetEntityType)

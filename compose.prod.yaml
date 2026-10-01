@@ -1,6 +1,6 @@
 services:
-  probo:
-    image: "artifact.probo.inc/probo/probo:latest"
+  trustready:
+    image: "artifact.trustready.io/trustready/trustready:latest"
     environment:
       # Required secrets (use secure values in production)
       TRUSTREADYD_ENCRYPTION_KEY: ${TRUSTREADYD_ENCRYPTION_KEY}
@@ -29,14 +29,14 @@ services:
       TRUSTREADYD_AWS_USE_PATH_STYLE: "true"
 
       # Observability - Metrics & Tracing
-      TRUSTREADYD_METRICS_ADDR: "probo:8081"
+      TRUSTREADYD_METRICS_ADDR: "trustready:8081"
       TRUSTREADYD_TRACING_ADDR: ""
 
       # Email notifications
       TRUSTREADYD_SMTP_ADDR: "your.smtp.server:587"
       TRUSTREADYD_SMTP_TLS_REQUIRED: "false"
-      TRUSTREADYD_MAILER_SENDER_NAME: "Probo"
-      TRUSTREADYD_MAILER_SENDER_EMAIL: "no-reply@notification.getprobo.com"
+      TRUSTREADYD_MAILER_SENDER_NAME: "TrustReady"
+      TRUSTREADYD_MAILER_SENDER_EMAIL: "no-reply@notification.trustready.io"
 
       # Chrome for PDF generation
       TRUSTREADYD_CHROME_DP_ADDR: "chrome:9222"
@@ -45,7 +45,7 @@ services:
       - "8081:8081"
       - "8443:8443"
     volumes:
-      - "probo-data:/data"
+      - "trustready-data:/data"
     depends_on:
       postgres:
         condition: service_healthy
@@ -112,6 +112,6 @@ services:
 
 
 volumes:
-  probo-data:
+  trustready-data:
   postgres-data:
   seaweedfs-data:

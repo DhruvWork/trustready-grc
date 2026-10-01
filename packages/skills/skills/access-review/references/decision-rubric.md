@@ -1,6 +1,6 @@
 # Semi-auto decision rubric
 
-Classify each `PENDING` entry before writing to Probo.
+Classify each `PENDING` entry before writing to TrustReady.
 
 ## Auto — record without asking
 
@@ -41,7 +41,7 @@ Present the suggested decision; wait for explicit user confirmation.
 ## Flagging before decision
 
 Do not auto-flag unless the user asks. When reviewing ambiguous entries, you
-may **suggest** `flagAccessReviewEntry` if Probo shows `NONE` but signals are
+may **suggest** `flagAccessReviewEntry` if TrustReady shows `NONE` but signals are
 obvious (e.g. admin + 180d no login → suggest `DORMANT`).
 
 ## Decision notes

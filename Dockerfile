@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.source="https://github.com/DhruvWork/trustready-g
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.vendor="TrustReady"
 
-RUN useradd -m probo && \
+RUN useradd -m trustready && \
     apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y ca-certificates libcap2-bin && \
@@ -22,8 +22,8 @@ RUN chmod +x /usr/local/bin/trustreadyd && \
     chmod +x /usr/local/bin/entrypoint.sh && \
     setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/trustreadyd && \
     mkdir -p /etc/trustreadyd && \
-    chown probo:probo /etc/trustreadyd
+    chown trustready:trustready /etc/trustreadyd
 
-USER probo
+USER trustready
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

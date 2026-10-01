@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Probo Inc <hello@probo.com>.
+ * Copyright (c) 2026 TrustReady Inc <hello@trustready.io>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,17 +23,17 @@
 output "tenant_id" {
   value       = data.azuread_client_config.current.tenant_id
   description = <<-EOT
-    Directory (tenant) ID. Paste this into the Probo connector as the
+    Directory (tenant) ID. Paste this into the TrustReady connector as the
     tenant ID.
   EOT
 }
 
 output "client_id" {
-  value       = azuread_application_registration.probo.client_id
-  description = "Application (client) ID of the Entra application Probo federates with."
+  value       = azuread_application_registration.trustready.client_id
+  description = "Application (client) ID of the Entra application TrustReady federates with."
 }
 
 output "subscription_id" {
   value       = var.subscription_id
-  description = "Subscription ID that Probo reviews."
+  description = "Subscription ID that TrustReady reviews."
 }

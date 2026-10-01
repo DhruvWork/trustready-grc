@@ -1,6 +1,6 @@
 # Client state management
 
-Probo frontends have several places state can live. Choosing the wrong one is the most common source of avoidable complexity: data drilled through props, local state that should have been in the URL, or a global store holding what is really server data. This guide is a **decision order** — start at the top and stop at the first option that fits.
+TrustReady frontends have several places state can live. Choosing the wrong one is the most common source of avoidable complexity: data drilled through props, local state that should have been in the URL, or a global store holding what is really server data. This guide is a **decision order** — start at the top and stop at the first option that fits.
 
 ## Related guides
 
