@@ -22,11 +22,11 @@ package evidence
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/evidence/delete"
-	"go.probo.inc/probo/pkg/cmd/evidence/list"
-	"go.probo.inc/probo/pkg/cmd/evidence/upload"
-	"go.probo.inc/probo/pkg/cmd/evidence/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/evidence/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/evidence/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/evidence/upload"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/evidence/view"
 )
 
 func NewCmdEvidence(f *cmdutil.Factory) *cobra.Command {

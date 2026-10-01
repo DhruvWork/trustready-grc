@@ -28,17 +28,17 @@ import (
 	"net/http"
 
 	"github.com/vikstrous/dataloadgen"
-	"go.probo.inc/probo/pkg/complianceportal/management"
-	"go.probo.inc/probo/pkg/cookiebanner"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/iam/policy"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/riskmanagement"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/task"
-	"go.probo.inc/probo/pkg/thirdparty"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/management"
+	"github.com/DhruvWork/trustready-grc/pkg/cookiebanner"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/task"
+	"github.com/DhruvWork/trustready-grc/pkg/thirdparty"
 )
 
 type (

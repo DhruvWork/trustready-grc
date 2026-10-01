@@ -25,7 +25,7 @@ import (
 	"strings"
 
 	"go.gearno.de/kit/httpserver"
-	slackchannel "go.probo.inc/probo/pkg/probot/channel/slack"
+	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 )
 
 func SlackCommandHandler(slackbot *slackchannel.Service) http.HandlerFunc {

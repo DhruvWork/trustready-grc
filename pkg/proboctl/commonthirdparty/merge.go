@@ -29,11 +29,11 @@ import (
 
 	"github.com/spf13/cobra"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
-	seed "go.probo.inc/probo/pkg/proboctl/seed/common-third-parties"
-	"go.probo.inc/probo/pkg/thirdparty"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
+	seed "github.com/DhruvWork/trustready-grc/pkg/proboctl/seed/common-third-parties"
+	"github.com/DhruvWork/trustready-grc/pkg/thirdparty"
 )
 
 func newCmdMerge(f *cmdutil.Factory) *cobra.Command {

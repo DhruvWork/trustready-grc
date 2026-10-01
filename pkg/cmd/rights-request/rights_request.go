@@ -22,12 +22,12 @@ package rightsrequest
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/rights-request/create"
-	"go.probo.inc/probo/pkg/cmd/rights-request/delete"
-	"go.probo.inc/probo/pkg/cmd/rights-request/list"
-	"go.probo.inc/probo/pkg/cmd/rights-request/update"
-	"go.probo.inc/probo/pkg/cmd/rights-request/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/rights-request/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/rights-request/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/rights-request/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/rights-request/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/rights-request/view"
 )
 
 func NewCmdRightsRequest(f *cmdutil.Factory) *cobra.Command {

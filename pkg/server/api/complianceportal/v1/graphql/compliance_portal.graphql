@@ -1,5 +1,5 @@
 type CompliancePortalCapabilities
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.CompliancePortalCapabilities") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCapabilities") {
   rightsRequests: Boolean!
 }
 
@@ -100,32 +100,32 @@ type CompliancePortal implements Node {
 }
 
 enum DocumentType
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.DocumentType") {
-  OTHER @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeOther")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentType") {
+  OTHER @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeOther")
   GOVERNANCE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeGovernance")
-  POLICY @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypePolicy")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeGovernance")
+  POLICY @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypePolicy")
   PROCEDURE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeProcedure")
-  PLAN @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypePlan")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeProcedure")
+  PLAN @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypePlan")
   REGISTER
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeRegister")
-  RECORD @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeRecord")
-  REPORT @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeReport")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeRegister")
+  RECORD @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeRecord")
+  REPORT @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeReport")
   TEMPLATE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeTemplate")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeTemplate")
   STATEMENT_OF_APPLICABILITY
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.DocumentTypeStatementOfApplicability"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeStatementOfApplicability"
     )
 }
 
 enum CompliancePortalVisibility
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.CompliancePortalVisibility") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalVisibility") {
   RESTRICTED
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalVisibilityRestricted")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalVisibilityRestricted")
   PUBLIC
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalVisibilityPublic")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalVisibilityPublic")
 }
 
 input CompliancePortalVisibilityFilter {
@@ -190,7 +190,7 @@ type ComplianceFramework implements Node {
 
 type ComplianceFrameworkConnection
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/complianceportal/v1/types.ComplianceFrameworkConnection"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1/types.ComplianceFrameworkConnection"
   ) {
   edges: [ComplianceFrameworkEdge!]!
   pageInfo: PageInfo!
@@ -202,73 +202,73 @@ type ComplianceFrameworkEdge {
 }
 
 enum SubprocessorCategory
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategory") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategory") {
   ANALYTICS
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryAnalytics")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryAnalytics")
   CLOUD_MONITORING
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryCloudMonitoring"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryCloudMonitoring"
     )
   CLOUD_PROVIDER
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryCloudProvider"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryCloudProvider"
     )
   COLLABORATION
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryCollaboration"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryCollaboration"
     )
   CUSTOMER_SUPPORT
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryCustomerSupport"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryCustomerSupport"
     )
   DATA_STORAGE_AND_PROCESSING
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryDataStorageAndProcessing"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryDataStorageAndProcessing"
     )
   DOCUMENT_MANAGEMENT
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryDocumentManagement"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryDocumentManagement"
     )
   EMPLOYEE_MANAGEMENT
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryEmployeeManagement"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryEmployeeManagement"
     )
   ENGINEERING
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryEngineering")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryEngineering")
   FINANCE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryFinance")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryFinance")
   IDENTITY_PROVIDER
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryIdentityProvider"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryIdentityProvider"
     )
-  IT @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryIT")
+  IT @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryIT")
   MARKETING
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryMarketing")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryMarketing")
   OFFICE_OPERATIONS
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryOfficeOperations"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryOfficeOperations"
     )
-  OTHER @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryOther")
+  OTHER @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryOther")
   PASSWORD_MANAGEMENT
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryPasswordManagement"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryPasswordManagement"
     )
   PRODUCT_AND_DESIGN
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryProductAndDesign"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryProductAndDesign"
     )
   PROFESSIONAL_SERVICES
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryProfessionalServices"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryProfessionalServices"
     )
   RECRUITING
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryRecruiting")
-  SALES @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategorySales")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryRecruiting")
+  SALES @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategorySales")
   SECURITY
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategorySecurity")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategorySecurity")
   VERSION_CONTROL
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryVersionControl"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryVersionControl"
     )
 }
 
@@ -290,7 +290,7 @@ input SubprocessorFilter {
 
 type SubprocessorConnection
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/complianceportal/v1/types.SubprocessorConnection"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1/types.SubprocessorConnection"
   ) {
   edges: [SubprocessorEdge!]!
   pageInfo: PageInfo!
@@ -321,47 +321,47 @@ type CompliancePortalReferenceEdge {
 }
 
 enum CompliancePortalCommitmentIcon
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIcon") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIcon") {
   LOCK_KEY
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconLockKey")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconLockKey")
   EYE_SLASH
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconEyeSlash")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconEyeSlash")
   FINGERPRINT
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconFingerprint")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconFingerprint")
   SHIELD_WARNING
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconShieldWarning")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconShieldWarning")
   SHIELD_CHECK
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconShieldCheck")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconShieldCheck")
   SIREN
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconSiren")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconSiren")
   KEY
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconKey")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconKey")
   LOCK
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconLock")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconLock")
   CLOUD
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconCloud")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconCloud")
   DATABASE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconDatabase")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconDatabase")
   GLOBE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconGlobe")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconGlobe")
   EYE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconEye")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconEye")
   USERS
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconUsers")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconUsers")
   CERTIFICATE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconCertificate")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconCertificate")
   GAVEL
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconGavel")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconGavel")
   HEARTBEAT
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconHeartbeat")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconHeartbeat")
   BELL
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconBell")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconBell")
   BUG
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconBug")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconBug")
   CODE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconCode")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconCode")
   SERVER
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIconServer")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIconServer")
 }
 
 type CompliancePortalCommitmentGroup implements Node {
@@ -451,23 +451,23 @@ type CompliancePortalAccess implements Node {
 
 enum DocumentAccessStatus
   @goModel(
-    model: "go.probo.inc/probo/pkg/coredata.CompliancePortalDocumentAccessStatus"
+    model: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalDocumentAccessStatus"
   ) {
   REQUESTED
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.CompliancePortalDocumentAccessStatusRequested"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalDocumentAccessStatusRequested"
     )
   GRANTED
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.CompliancePortalDocumentAccessStatusGranted"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalDocumentAccessStatusGranted"
     )
   REJECTED
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.CompliancePortalDocumentAccessStatusRejected"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalDocumentAccessStatusRejected"
     )
   REVOKED
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.CompliancePortalDocumentAccessStatusRevoked"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalDocumentAccessStatusRevoked"
     )
 }
 

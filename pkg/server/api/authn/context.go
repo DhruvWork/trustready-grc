@@ -23,7 +23,7 @@ package authn
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type (

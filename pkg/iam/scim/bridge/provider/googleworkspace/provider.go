@@ -29,8 +29,8 @@ import (
 	"net/http"
 	"strings"
 
-	scimclient "go.probo.inc/probo/pkg/iam/scim/bridge/client"
-	"go.probo.inc/probo/pkg/iam/scim/bridge/provider"
+	scimclient "github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/client"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/provider"
 	admin "google.golang.org/api/admin/directory/v1"
 	"google.golang.org/api/option"
 )

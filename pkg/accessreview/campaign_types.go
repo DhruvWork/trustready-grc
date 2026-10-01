@@ -21,9 +21,9 @@
 package accessreview
 
 import (
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 const campaignNameMaxLength = 255

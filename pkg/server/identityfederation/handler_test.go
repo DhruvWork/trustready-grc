@@ -34,11 +34,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/crypto/jose"
-	"go.probo.inc/probo/pkg/gid"
-	idfed "go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/jose"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	idfed "github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 const (

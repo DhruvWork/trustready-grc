@@ -30,11 +30,11 @@ import (
 	"github.com/vektah/gqlparser/v2/gqlerror"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/securecookie"
-	"go.probo.inc/probo/pkg/server/api/clientip"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/securecookie"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/clientip"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 func NewSessionMiddleware(svc *iam.Service, cookieConfig securecookie.Config) func(next http.Handler) http.Handler {

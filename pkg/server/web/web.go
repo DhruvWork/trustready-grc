@@ -23,8 +23,8 @@ package web
 import (
 	"net/http"
 
-	"go.probo.inc/probo/apps/console"
-	"go.probo.inc/probo/pkg/server/statichandler"
+	"github.com/DhruvWork/trustready-grc/apps/console"
+	"github.com/DhruvWork/trustready-grc/pkg/server/statichandler"
 )
 
 type Server struct {

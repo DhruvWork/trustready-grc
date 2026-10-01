@@ -33,7 +33,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	"gopkg.in/dnaeon/go-vcr.v4/pkg/cassette"
 )
 

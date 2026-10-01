@@ -20,7 +20,7 @@
 
 package types
 
-import "go.probo.inc/probo/pkg/riskmanagement"
+import "github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
 
 func NewMatrixSize(rows, cols int) *riskmanagement.MatrixSize {
 	return &riskmanagement.MatrixSize{

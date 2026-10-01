@@ -27,10 +27,10 @@ import (
 	"net/url"
 	"slices"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam/oauth2"
-	"go.probo.inc/probo/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
 func requireGID(values url.Values, param string) (gid.GID, error) {

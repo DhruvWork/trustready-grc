@@ -27,8 +27,8 @@ import (
 	"strings"
 
 	"go.gearno.de/kit/log"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
-	"go.probo.inc/probo/pkg/coredata"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 const (

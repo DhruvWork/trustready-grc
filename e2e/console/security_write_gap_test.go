@@ -27,11 +27,11 @@ import (
 
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/e2e/internal/factory"
-	"go.probo.inc/probo/e2e/internal/testutil"
-	"go.probo.inc/probo/internal/test"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/factory"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/internal/test"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 // TestSecurity_WriteGap_PublishRiskListApproverIDs covers a write-gap found

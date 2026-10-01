@@ -24,9 +24,9 @@ import (
 	"fmt"
 	"testing"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
 )
 
 func TestAuthorizeRelatedErrors_Error(t *testing.T) {

@@ -25,8 +25,8 @@ package main
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/deviceagent"
-	"go.probo.inc/probo/pkg/deviceagent/win32"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/win32"
 	"golang.org/x/sys/windows"
 )
 

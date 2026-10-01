@@ -22,13 +22,13 @@ package obligation
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/obligation/create"
-	"go.probo.inc/probo/pkg/cmd/obligation/delete"
-	"go.probo.inc/probo/pkg/cmd/obligation/list"
-	"go.probo.inc/probo/pkg/cmd/obligation/publish"
-	"go.probo.inc/probo/pkg/cmd/obligation/update"
-	"go.probo.inc/probo/pkg/cmd/obligation/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/obligation/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/obligation/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/obligation/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/obligation/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/obligation/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/obligation/view"
 )
 
 func NewCmdObligation(f *cmdutil.Factory) *cobra.Command {

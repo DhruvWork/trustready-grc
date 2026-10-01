@@ -25,7 +25,7 @@ import (
 
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	slackchannel "go.probo.inc/probo/pkg/probot/channel/slack"
+	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 )
 
 func SlackHandler(

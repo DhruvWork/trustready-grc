@@ -36,7 +36,7 @@ import (
 	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
 )
 
 const (

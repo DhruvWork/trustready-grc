@@ -23,8 +23,8 @@ package employeeportal
 import (
 	"net/http"
 
-	employeeportalstatics "go.probo.inc/probo/apps/employee-portal"
-	"go.probo.inc/probo/pkg/server/statichandler"
+	employeeportalstatics "github.com/DhruvWork/trustready-grc/apps/employee-portal"
+	"github.com/DhruvWork/trustready-grc/pkg/server/statichandler"
 )
 
 const PathPrefix = "/employee-portal"

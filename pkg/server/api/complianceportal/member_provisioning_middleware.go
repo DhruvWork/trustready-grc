@@ -27,9 +27,9 @@ import (
 	"github.com/vektah/gqlparser/v2/gqlerror"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/complianceportal/visitor"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 func NewMemberProvisioningMiddleware(visitorSvc *visitor.Service, logger *log.Logger) func(next http.Handler) http.Handler {

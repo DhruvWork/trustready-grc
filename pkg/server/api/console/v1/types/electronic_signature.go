@@ -21,7 +21,7 @@
 package types
 
 import (
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func NewElectronicSignature(es *coredata.ElectronicSignature) *ElectronicSignature {

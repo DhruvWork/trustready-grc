@@ -29,7 +29,7 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 func TestWithMCPServers_SkipsNilEntries(t *testing.T) {

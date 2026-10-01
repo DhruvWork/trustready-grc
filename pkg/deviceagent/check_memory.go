@@ -27,7 +27,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"go.probo.inc/probo/pkg/deviceagent/checks"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/checks"
 )
 
 const checkMemoryFileName = "check-memory.json"

@@ -27,9 +27,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"go.probo.inc/probo/pkg/connector/provider"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/connector/provider"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 )
 
 // Langfuse and 1Password are the two providers whose declared settings failed

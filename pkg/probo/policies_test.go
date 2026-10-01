@@ -24,9 +24,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam/policy"
-	"go.probo.inc/probo/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
 )
 
 func TestAuditorPolicy_ProcessingActivityPageReadAccess(t *testing.T) {

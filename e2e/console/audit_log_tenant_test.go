@@ -25,8 +25,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/e2e/internal/factory"
-	"go.probo.inc/probo/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/factory"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
 )
 
 func TestAuditLog_TenantIsolation(t *testing.T) {

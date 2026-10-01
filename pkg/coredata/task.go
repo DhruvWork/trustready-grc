@@ -30,10 +30,10 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam/policy"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/timespan"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/timespan"
 )
 
 type (

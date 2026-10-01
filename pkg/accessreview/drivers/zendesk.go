@@ -29,7 +29,7 @@ import (
 	"strconv"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // ZendeskDriver lists a Zendesk account's staff (agents and admins) via GET

@@ -27,10 +27,10 @@ import (
 	"fmt"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/crypto/jose"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/jose"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
 type (

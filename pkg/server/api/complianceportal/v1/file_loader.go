@@ -25,10 +25,10 @@ import (
 	"errors"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/server/api/complianceportal/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 func (r *Resolver) loadPublicFile(ctx context.Context, fileID gid.GID) (*types.File, error) {

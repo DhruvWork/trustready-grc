@@ -25,10 +25,10 @@ import (
 	"errors"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/probot"
-	slackchannel "go.probo.inc/probo/pkg/probot/channel/slack"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/probot"
+	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 )
 
 func applySlackbotNotificationChannel(

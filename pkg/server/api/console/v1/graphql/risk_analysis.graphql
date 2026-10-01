@@ -22,117 +22,117 @@
 
 enum RiskAnalysisOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.RiskAnalysisOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisOrderFieldCreatedAt"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisOrderFieldName"
         )
 }
 
 enum RiskAnalysisDiagramOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.RiskAnalysisDiagramOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisDiagramOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisDiagramOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisDiagramOrderFieldCreatedAt"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisDiagramOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisDiagramOrderFieldName"
         )
 }
 
 enum RiskAnalysisNodeType
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.RiskAnalysisNodeType"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisNodeType"
     ) {
     ENTITY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisNodeTypeEntity"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisNodeTypeEntity"
         )
     ASSET
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisNodeTypeAsset"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisNodeTypeAsset"
         )
     DATA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisNodeTypeData"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisNodeTypeData"
         )
 }
 
 enum RiskAnalysisNodeOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.RiskAnalysisNodeOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisNodeOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisNodeOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisNodeOrderFieldCreatedAt"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisNodeOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisNodeOrderFieldName"
         )
 }
 
 enum RiskAnalysisBoundaryOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.RiskAnalysisBoundaryOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisBoundaryOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisBoundaryOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisBoundaryOrderFieldCreatedAt"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisBoundaryOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisBoundaryOrderFieldName"
         )
 }
 
 enum RiskAnalysisProcessOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.RiskAnalysisProcessOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisProcessOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisProcessOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisProcessOrderFieldCreatedAt"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisProcessOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisProcessOrderFieldName"
         )
 }
 
 enum RiskAnalysisThreatOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.RiskAnalysisThreatOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisThreatOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisThreatOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisThreatOrderFieldCreatedAt"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisThreatOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisThreatOrderFieldName"
         )
 }
 
 enum RiskAnalysisScenarioOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.RiskAnalysisScenarioOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisScenarioOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisScenarioOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisScenarioOrderFieldCreatedAt"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskAnalysisScenarioOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisScenarioOrderFieldName"
         )
 }
 
@@ -140,7 +140,7 @@ enum RiskAnalysisScenarioOrderField
 
 input RiskAnalysisOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisOrderBy"
     ) {
     direction: OrderDirection!
     field: RiskAnalysisOrderField!
@@ -148,7 +148,7 @@ input RiskAnalysisOrder
 
 input RiskAnalysisDiagramOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisDiagramOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisDiagramOrderBy"
     ) {
     direction: OrderDirection!
     field: RiskAnalysisDiagramOrderField!
@@ -156,7 +156,7 @@ input RiskAnalysisDiagramOrder
 
 input RiskAnalysisNodeOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisNodeOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisNodeOrderBy"
     ) {
     direction: OrderDirection!
     field: RiskAnalysisNodeOrderField!
@@ -164,7 +164,7 @@ input RiskAnalysisNodeOrder
 
 input RiskAnalysisBoundaryOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisBoundaryOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisBoundaryOrderBy"
     ) {
     direction: OrderDirection!
     field: RiskAnalysisBoundaryOrderField!
@@ -172,7 +172,7 @@ input RiskAnalysisBoundaryOrder
 
 input RiskAnalysisProcessOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisProcessOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisProcessOrderBy"
     ) {
     direction: OrderDirection!
     field: RiskAnalysisProcessOrderField!
@@ -180,7 +180,7 @@ input RiskAnalysisProcessOrder
 
 input RiskAnalysisThreatOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisThreatOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisThreatOrderBy"
     ) {
     direction: OrderDirection!
     field: RiskAnalysisThreatOrderField!
@@ -188,7 +188,7 @@ input RiskAnalysisThreatOrder
 
 input RiskAnalysisScenarioOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisScenarioOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisScenarioOrderBy"
     ) {
     direction: OrderDirection!
     field: RiskAnalysisScenarioOrderField!
@@ -198,7 +198,7 @@ input RiskAnalysisScenarioOrder
 
 type RiskAnalysisMatrixCell
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.RiskAnalysisMatrixCell"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisMatrixCell"
     ) {
     type: TreatmentPlanScoreType!
     likelihood: Int!
@@ -371,7 +371,7 @@ type RiskAnalysisScenario implements Node {
 
 type RiskAnalysisConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisConnection"
     ) {
     totalCount: Int @goField(forceResolver: true)
     edges: [RiskAnalysisConnectionEdge!]!
@@ -385,7 +385,7 @@ type RiskAnalysisConnectionEdge {
 
 type RiskAnalysisDiagramConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisDiagramConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisDiagramConnection"
     ) {
     totalCount: Int @goField(forceResolver: true)
     edges: [RiskAnalysisDiagramConnectionEdge!]!
@@ -399,7 +399,7 @@ type RiskAnalysisDiagramConnectionEdge {
 
 type RiskAnalysisNodeConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisNodeConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisNodeConnection"
     ) {
     totalCount: Int @goField(forceResolver: true)
     edges: [RiskAnalysisNodeConnectionEdge!]!
@@ -413,7 +413,7 @@ type RiskAnalysisNodeConnectionEdge {
 
 type RiskAnalysisBoundaryConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisBoundaryConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisBoundaryConnection"
     ) {
     totalCount: Int @goField(forceResolver: true)
     edges: [RiskAnalysisBoundaryConnectionEdge!]!
@@ -427,7 +427,7 @@ type RiskAnalysisBoundaryConnectionEdge {
 
 type RiskAnalysisProcessConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisProcessConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisProcessConnection"
     ) {
     totalCount: Int @goField(forceResolver: true)
     edges: [RiskAnalysisProcessConnectionEdge!]!
@@ -441,7 +441,7 @@ type RiskAnalysisProcessConnectionEdge {
 
 type RiskAnalysisThreatConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisThreatConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisThreatConnection"
     ) {
     totalCount: Int @goField(forceResolver: true)
     edges: [RiskAnalysisThreatConnectionEdge!]!
@@ -455,7 +455,7 @@ type RiskAnalysisThreatConnectionEdge {
 
 type RiskAnalysisScenarioConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskAnalysisScenarioConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskAnalysisScenarioConnection"
     ) {
     totalCount: Int @goField(forceResolver: true)
     edges: [RiskAnalysisScenarioConnectionEdge!]!

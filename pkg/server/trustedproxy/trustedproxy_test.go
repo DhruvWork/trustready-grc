@@ -27,7 +27,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/server/trustedproxy"
+	"github.com/DhruvWork/trustready-grc/pkg/server/trustedproxy"
 )
 
 func runMiddleware(t *testing.T, trusted []string, remoteAddr string, headers map[string]string) *http.Request {

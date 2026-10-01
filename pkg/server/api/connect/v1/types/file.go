@@ -21,8 +21,8 @@
 package types
 
 import (
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/filemanager"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/filemanager"
 )
 
 func NewFile(r *coredata.File, files *filemanager.Service) *File {

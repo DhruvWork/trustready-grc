@@ -26,11 +26,11 @@ import (
 
 	"github.com/spf13/cobra"
 	"go.gearno.de/kit/pg"
-	clicmdutil "go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
+	clicmdutil "github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
 )
 
 func newCmdList(f *cmdutil.Factory) *cobra.Command {

@@ -24,7 +24,7 @@ import (
 	"context"
 	"sync"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 var _ Session = (*memorySession)(nil)

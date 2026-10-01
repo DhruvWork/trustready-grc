@@ -1,72 +1,72 @@
 enum AiSystemStatus
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.AiSystemStatus") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemStatus") {
     ACTIVE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AiSystemStatusActive")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemStatusActive")
     IN_DEVELOPMENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemStatusInDevelopment"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemStatusInDevelopment"
         )
     DECOMMISSIONED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemStatusDecommissioned"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemStatusDecommissioned"
         )
 }
 
 enum AiSystemRiskClassification
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AiSystemRiskClassification"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemRiskClassification"
     ) {
     HIGH_RISK
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemRiskClassificationHighRisk"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemRiskClassificationHighRisk"
         )
     LIMITED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemRiskClassificationLimited"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemRiskClassificationLimited"
         )
     MINIMAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemRiskClassificationMinimal"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemRiskClassificationMinimal"
         )
     GPAI
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemRiskClassificationGPAI"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemRiskClassificationGPAI"
         )
 }
 
 enum AiSystemCompanyRole
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.AiSystemCompanyRole") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemCompanyRole") {
     PROVIDER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemCompanyRoleProvider"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemCompanyRoleProvider"
         )
     DEPLOYER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemCompanyRoleDeployer"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemCompanyRoleDeployer"
         )
     USER
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AiSystemCompanyRoleUser")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemCompanyRoleUser")
     DEVELOPER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemCompanyRoleDeveloper"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemCompanyRoleDeveloper"
         )
 }
 
 enum AiSystemOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.AiSystemOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AiSystemOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemOrderFieldCreatedAt"
         )
     NAME
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AiSystemOrderFieldName")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemOrderFieldName")
     STATUS
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AiSystemOrderFieldStatus")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemOrderFieldStatus")
 }
 
 input AiSystemOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AiSystemOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AiSystemOrderBy"
     ) {
     direction: OrderDirection!
     field: AiSystemOrderField!
@@ -105,7 +105,7 @@ type AiSystem implements Node {
 
 type AiSystemConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AiSystemConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AiSystemConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [AiSystemEdge!]!

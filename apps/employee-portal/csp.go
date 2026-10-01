@@ -27,7 +27,7 @@ import (
 	"strings"
 	"text/template"
 
-	"go.probo.inc/probo/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
 )
 
 //go:embed content-security-policy.txt.tmpl

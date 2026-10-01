@@ -22,12 +22,12 @@ package framework
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/framework/create"
-	"go.probo.inc/probo/pkg/cmd/framework/delete"
-	"go.probo.inc/probo/pkg/cmd/framework/list"
-	"go.probo.inc/probo/pkg/cmd/framework/update"
-	"go.probo.inc/probo/pkg/cmd/framework/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/framework/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/framework/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/framework/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/framework/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/framework/view"
 )
 
 func NewCmdFramework(f *cmdutil.Factory) *cobra.Command {

@@ -29,12 +29,12 @@ import (
 
 	"go.gearno.de/crypto/uuid"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/esign"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/html2pdf"
-	"go.probo.inc/probo/pkg/mail"
-	"go.probo.inc/probo/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/esign"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/html2pdf"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
 )
 
 const DocumentApprovalConsentText = "By clicking \"Approve\", I consent to approve this document electronically and agree that my electronic signature has the same legal validity as a handwritten signature."

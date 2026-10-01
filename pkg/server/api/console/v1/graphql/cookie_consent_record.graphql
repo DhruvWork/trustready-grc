@@ -19,210 +19,210 @@
 # SOFTWARE.
 
 enum CookieConsentAction
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.CookieConsentAction") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.CookieConsentAction") {
     ACCEPT_ALL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CookieConsentActionAcceptAll"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CookieConsentActionAcceptAll"
         )
     REJECT_ALL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CookieConsentActionRejectAll"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CookieConsentActionRejectAll"
         )
     CUSTOMIZE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CookieConsentActionCustomize"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CookieConsentActionCustomize"
         )
     GPC
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CookieConsentActionGPC"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CookieConsentActionGPC"
         )
     ACKNOWLEDGE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CookieConsentActionAcknowledge"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CookieConsentActionAcknowledge"
         )
 }
 
 enum Regulation
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.Regulation") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.Regulation") {
     NONE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationNone"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationNone"
         )
     GDPR
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationGDPR"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationGDPR"
         )
     UK_GDPR
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationUKGDPR"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationUKGDPR"
         )
     FADP
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationFADP"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationFADP"
         )
     CCPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationCCPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationCCPA"
         )
     VCDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationVCDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationVCDPA"
         )
     CPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationCPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationCPA"
         )
     CTDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationCTDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationCTDPA"
         )
     UCPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationUCPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationUCPA"
         )
     TDPSA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationTDPSA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationTDPSA"
         )
     OCPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationOCPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationOCPA"
         )
     MTCDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationMTCDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationMTCDPA"
         )
     FDBR
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationFDBR"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationFDBR"
         )
     IA_ICDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationIAICDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationIAICDPA"
         )
     DE_DPDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationDEPDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationDEPDPA"
         )
     NHPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationNHPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationNHPA"
         )
     NE_NDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationNENDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationNENDPA"
         )
     NJDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationNJDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationNJDPA"
         )
     TIPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationTIPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationTIPA"
         )
     MNDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationMNDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationMNDPA"
         )
     MODPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationMODPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationMODPA"
         )
     IN_ICDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationINCDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationINCDPA"
         )
     KCDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationKCDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationKCDPA"
         )
     RIDTPPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationRIDTPPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationRIDTPPA"
         )
     PIPEDA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationPIPEDA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationPIPEDA"
         )
     PIPA_AB
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationPIPAAB"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationPIPAAB"
         )
     PIPA_BC
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationPIPABC"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationPIPABC"
         )
     PIPA_CA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationPIPACA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationPIPACA"
         )
     LAW_25
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationLaw25"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationLaw25"
         )
     LGPD
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationLGPD"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationLGPD"
         )
     LFPDPPP
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationLFPDPPP"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationLFPDPPP"
         )
     POPIA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationPOPIA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationPOPIA"
         )
     PDPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationPDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationPDPA"
         )
     PIPL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationPIPL"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationPIPL"
         )
     PIPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationPIPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationPIPA"
         )
     APPI
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationAPPI"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationAPPI"
         )
     DPDP
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationDPDP"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationDPDP"
         )
     PDPL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationPDPL"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationPDPL"
         )
 }
 
 enum RegulationSource
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.RegulationSource") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationSource") {
     DETECTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationSourceDetected"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationSourceDetected"
         )
     DEFAULT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RegulationSourceDefault"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationSourceDefault"
         )
 }
 
 enum CookieConsentRecordOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.CookieConsentRecordOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.CookieConsentRecordOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CookieConsentRecordOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CookieConsentRecordOrderFieldCreatedAt"
         )
 }
 
 input CookieConsentRecordOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.CookieConsentRecordOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.CookieConsentRecordOrderBy"
     ) {
     direction: OrderDirection!
     field: CookieConsentRecordOrderField!
@@ -254,7 +254,7 @@ type CookieConsentRecord implements Node {
 
 type CookieConsentRecordConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.CookieConsentRecordConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.CookieConsentRecordConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [CookieConsentRecordEdge!]!

@@ -26,7 +26,7 @@ import (
 	"fmt"
 	"sync"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 // Restore continues a previously suspended or approval-interrupted agent run

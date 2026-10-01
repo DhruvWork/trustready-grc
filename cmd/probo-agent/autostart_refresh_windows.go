@@ -22,7 +22,7 @@
 
 package main
 
-import "go.probo.inc/probo/pkg/deviceagent/tray"
+import "github.com/DhruvWork/trustready-grc/pkg/deviceagent/tray"
 
 // NOTE: Remove with refreshTrayRegistration after all supported installs
 // register probo-agentw.exe.

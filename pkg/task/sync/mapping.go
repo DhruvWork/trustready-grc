@@ -28,10 +28,10 @@ import (
 	"strings"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/prosemirror"
-	"go.probo.inc/probo/pkg/task/sync/linear"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/prosemirror"
+	"github.com/DhruvWork/trustready-grc/pkg/task/sync/linear"
 )
 
 const (

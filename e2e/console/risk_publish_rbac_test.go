@@ -23,8 +23,8 @@ package console_test
 import (
 	"testing"
 
-	"go.probo.inc/probo/e2e/internal/factory"
-	"go.probo.inc/probo/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/factory"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
 )
 
 func TestRisk_PublishRiskList_RBAC(t *testing.T) {

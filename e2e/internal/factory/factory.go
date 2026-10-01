@@ -35,8 +35,8 @@ import (
 	"github.com/brianvoe/gofakeit/v7"
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/e2e/internal/testutil"
-	"go.probo.inc/probo/internal/test"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/internal/test"
 )
 
 func SafeName(prefix string) string {

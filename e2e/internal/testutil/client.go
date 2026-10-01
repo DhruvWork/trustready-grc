@@ -33,8 +33,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 func generateUniqueID() string {

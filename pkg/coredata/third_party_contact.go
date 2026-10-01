@@ -29,10 +29,10 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam/policy"
-	"go.probo.inc/probo/pkg/mail"
-	"go.probo.inc/probo/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
 )
 
 type (

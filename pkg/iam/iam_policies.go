@@ -20,7 +20,7 @@
 
 package iam
 
-import "go.probo.inc/probo/pkg/iam/policy"
+import "github.com/DhruvWork/trustready-grc/pkg/iam/policy"
 
 // IAM Policies
 //

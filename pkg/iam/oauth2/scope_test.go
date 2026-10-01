@@ -24,8 +24,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
 )
 
 func TestIsIdentityOnlyScopes(t *testing.T) {

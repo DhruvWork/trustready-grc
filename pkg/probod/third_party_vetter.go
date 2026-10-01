@@ -24,8 +24,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"go.gearno.de/kit/log"
 	"go.opentelemetry.io/otel/trace"
-	"go.probo.inc/probo/pkg/thirdparty"
-	"go.probo.inc/probo/pkg/vetting"
+	"github.com/DhruvWork/trustready-grc/pkg/thirdparty"
+	"github.com/DhruvWork/trustready-grc/pkg/vetting"
 )
 
 // buildThirdPartyVetter wires the third-party vetting agent. Unset

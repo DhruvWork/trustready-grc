@@ -21,10 +21,10 @@
 package console_v1
 
 import (
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/connector/provider"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/connector/provider"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 )
 
 // connectorProviderSettingInfos projects one connect path's settings list onto

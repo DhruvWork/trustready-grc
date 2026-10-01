@@ -30,7 +30,7 @@ import (
 	"strings"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // HubSpotDriver fetches account users from HubSpot via OAuth2-authenticated

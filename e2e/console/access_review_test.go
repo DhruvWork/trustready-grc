@@ -26,8 +26,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/e2e/internal/factory"
-	"go.probo.inc/probo/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/factory"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
 )
 
 const testCsvData = "email,full_name,role,job_title,is_admin,active,mfa_status,auth_method,last_login,account_created_at,external_id\njane@example.com,Jane Smith,admin,CTO,true,true,ENABLED,SSO,2026-01-15T00:00:00Z,2024-06-01T00:00:00Z,ext-jane"

@@ -29,8 +29,8 @@ import (
 	"fmt"
 	"os"
 
-	"go.probo.inc/probo/pkg/deviceagent"
-	"go.probo.inc/probo/pkg/deviceagent/service"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/service"
 )
 
 func migratePrivilegedDaemon(exe, dir string) error {

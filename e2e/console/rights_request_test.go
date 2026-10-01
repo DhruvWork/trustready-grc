@@ -26,7 +26,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
 )
 
 func TestRightsRequest_Create(t *testing.T) {

@@ -27,7 +27,7 @@ import (
 	"strings"
 
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"go.probo.inc/probo/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
 )
 
 // CSPFileStorageOrigin returns the http(s) origin the browser follows after a

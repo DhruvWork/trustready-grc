@@ -22,16 +22,16 @@ package scenario
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/scenario/create"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/scenario/delete"
-	linkrisk "go.probo.inc/probo/pkg/cmd/risk-analysis/scenario/link-risk"
-	linkthreat "go.probo.inc/probo/pkg/cmd/risk-analysis/scenario/link-threat"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/scenario/list"
-	unlinkrisk "go.probo.inc/probo/pkg/cmd/risk-analysis/scenario/unlink-risk"
-	unlinkthreat "go.probo.inc/probo/pkg/cmd/risk-analysis/scenario/unlink-threat"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/scenario/update"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/scenario/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/scenario/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/scenario/delete"
+	linkrisk "github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/scenario/link-risk"
+	linkthreat "github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/scenario/link-threat"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/scenario/list"
+	unlinkrisk "github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/scenario/unlink-risk"
+	unlinkthreat "github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/scenario/unlink-threat"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/scenario/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/scenario/view"
 )
 
 func NewCmdScenario(f *cmdutil.Factory) *cobra.Command {

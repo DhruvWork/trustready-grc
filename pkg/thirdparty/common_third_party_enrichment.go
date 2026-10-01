@@ -25,7 +25,7 @@ import (
 	"strings"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // Provenance sources and per-field statuses recorded in the enrichment

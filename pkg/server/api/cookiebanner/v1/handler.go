@@ -32,14 +32,14 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/cookiebanner"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/geoloc"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/server/api/clientip"
-	"go.probo.inc/probo/pkg/server/jsonx"
-	"go.probo.inc/probo/pkg/uri"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/cookiebanner"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/geoloc"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/clientip"
+	"github.com/DhruvWork/trustready-grc/pkg/server/jsonx"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 type Handler struct {

@@ -22,7 +22,7 @@
 
 package tray
 
-import "go.probo.inc/probo/pkg/deviceagent/checks"
+import "github.com/DhruvWork/trustready-grc/pkg/deviceagent/checks"
 
 func osascriptPath() (string, bool) {
 	candidates := checks.CommandCandidates("osascript")

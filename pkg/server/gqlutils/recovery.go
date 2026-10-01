@@ -28,8 +28,8 @@ import (
 	"github.com/vektah/gqlparser/v2/gqlerror"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 func RecoverFunc(ctx context.Context, err any) error {

@@ -31,16 +31,16 @@ import (
 
 	"go.gearno.de/crypto/uuid"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/packages/emails"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/filevalidation"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/imageutil"
-	"go.probo.inc/probo/pkg/mail"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/securetoken"
-	"go.probo.inc/probo/pkg/statelesstoken"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/packages/emails"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/filevalidation"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/imageutil"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/securetoken"
+	"github.com/DhruvWork/trustready-grc/pkg/statelesstoken"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 type (

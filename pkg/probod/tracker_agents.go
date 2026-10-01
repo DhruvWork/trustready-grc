@@ -27,7 +27,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"go.gearno.de/kit/log"
 	"go.opentelemetry.io/otel/trace"
-	"go.probo.inc/probo/pkg/cookiebanner"
+	"github.com/DhruvWork/trustready-grc/pkg/cookiebanner"
 )
 
 // buildTrackerAgents wires the tracker agents from the probod config,

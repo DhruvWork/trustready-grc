@@ -22,9 +22,9 @@ package context
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/context/get"
-	"go.probo.inc/probo/pkg/cmd/context/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/context/get"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/context/update"
 )
 
 func NewCmdContext(f *cmdutil.Factory) *cobra.Command {

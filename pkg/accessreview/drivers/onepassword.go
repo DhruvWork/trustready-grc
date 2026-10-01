@@ -29,7 +29,7 @@ import (
 	"strconv"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // OnePasswordDriver fetches user accounts from a 1Password SCIM bridge.

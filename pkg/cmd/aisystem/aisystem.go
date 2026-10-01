@@ -22,13 +22,13 @@ package aisystem
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/aisystem/create"
-	"go.probo.inc/probo/pkg/cmd/aisystem/delete"
-	"go.probo.inc/probo/pkg/cmd/aisystem/list"
-	"go.probo.inc/probo/pkg/cmd/aisystem/publish"
-	"go.probo.inc/probo/pkg/cmd/aisystem/update"
-	"go.probo.inc/probo/pkg/cmd/aisystem/view"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/aisystem/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/aisystem/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/aisystem/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/aisystem/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/aisystem/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/aisystem/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdAiSystem(f *cmdutil.Factory) *cobra.Command {

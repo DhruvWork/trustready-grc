@@ -23,7 +23,7 @@ package types
 import (
 	"time"
 
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 func NewPeriod(start, end *time.Time) *Period {

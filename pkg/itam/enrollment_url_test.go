@@ -26,8 +26,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/itam"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/itam"
 )
 
 func TestBuildEnrollmentURLs(t *testing.T) {

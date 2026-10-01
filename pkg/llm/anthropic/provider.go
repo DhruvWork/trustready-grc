@@ -35,7 +35,7 @@ import (
 	"github.com/anthropics/anthropic-sdk-go/option"
 	"github.com/anthropics/anthropic-sdk-go/packages/param"
 	"github.com/anthropics/anthropic-sdk-go/packages/ssestream"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 type (

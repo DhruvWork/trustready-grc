@@ -1,41 +1,41 @@
-enum TaskState @goModel(model: "go.probo.inc/probo/pkg/coredata.TaskState") {
-    BACKLOG @goEnum(value: "go.probo.inc/probo/pkg/coredata.TaskStateBacklog")
-    TODO @goEnum(value: "go.probo.inc/probo/pkg/coredata.TaskStateTodo")
-    IN_PROGRESS @goEnum(value: "go.probo.inc/probo/pkg/coredata.TaskStateInProgress")
-    DONE @goEnum(value: "go.probo.inc/probo/pkg/coredata.TaskStateDone")
-    CANCELED @goEnum(value: "go.probo.inc/probo/pkg/coredata.TaskStateCanceled")
-    DUPLICATE @goEnum(value: "go.probo.inc/probo/pkg/coredata.TaskStateDuplicate")
+enum TaskState @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskState") {
+    BACKLOG @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskStateBacklog")
+    TODO @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskStateTodo")
+    IN_PROGRESS @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskStateInProgress")
+    DONE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskStateDone")
+    CANCELED @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskStateCanceled")
+    DUPLICATE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskStateDuplicate")
 }
 
 enum TaskPriority
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.TaskPriority") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskPriority") {
     URGENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskPriorityUrgent"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskPriorityUrgent"
         )
     HIGH
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskPriorityHigh"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskPriorityHigh"
         )
     MEDIUM
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskPriorityMedium"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskPriorityMedium"
         )
     LOW
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskPriorityLow"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskPriorityLow"
         )
 }
 
 enum TaskOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.TaskOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskOrderField") {
     PRIORITY_RANK
     CREATED_AT
 }
 
 input TaskOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.TaskOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TaskOrderBy"
     ) {
     direction: OrderDirection!
     field: TaskOrderField!
@@ -95,12 +95,12 @@ type Task implements Node {
 }
 
 enum TaskExternalLinkOrigin
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.TaskExternalLinkOrigin") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskExternalLinkOrigin") {
     PROBO
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.TaskExternalLinkOriginProbo")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskExternalLinkOriginProbo")
     LINEAR
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskExternalLinkOriginLinear"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskExternalLinkOriginLinear"
         )
 }
 
@@ -155,7 +155,7 @@ type LinearIssueConnection {
 
 type TaskConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.TaskConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TaskConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [TaskEdge!]!

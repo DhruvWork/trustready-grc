@@ -32,12 +32,12 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/agentexecution"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/llm"
-	"go.probo.inc/probo/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agentexecution"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
 )
 
 func testLogger() *log.Logger {

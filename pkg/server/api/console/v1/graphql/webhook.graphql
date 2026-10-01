@@ -1,112 +1,112 @@
 enum WebhookEventType
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.WebhookEventType") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventType") {
     THIRD_PARTY_CREATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeThirdPartyCreated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeThirdPartyCreated")
     THIRD_PARTY_UPDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeThirdPartyUpdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeThirdPartyUpdated")
     THIRD_PARTY_DELETED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeThirdPartyDeleted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeThirdPartyDeleted")
     USER_CREATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeUserCreated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeUserCreated")
     USER_UPDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeUserUpdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeUserUpdated")
     USER_DELETED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeUserDeleted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeUserDeleted")
     OBLIGATION_CREATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeObligationCreated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeObligationCreated")
     OBLIGATION_UPDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeObligationUpdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeObligationUpdated")
     OBLIGATION_DELETED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeObligationDeleted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeObligationDeleted")
     RIGHT_REQUEST_CREATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeRightRequestCreated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeRightRequestCreated")
     RIGHT_REQUEST_UPDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeRightRequestUpdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeRightRequestUpdated")
     RIGHT_REQUEST_DELETED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeRightRequestDeleted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeRightRequestDeleted")
     DOCUMENT_CREATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentCreated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentCreated")
     DOCUMENT_UPDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentUpdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentUpdated")
     DOCUMENT_ARCHIVED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentArchived")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentArchived")
     DOCUMENT_UNARCHIVED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentUnarchived")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentUnarchived")
     DOCUMENT_DELETED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentDeleted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentDeleted")
     DOCUMENT_VERSION_CREATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionCreated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionCreated")
     DOCUMENT_VERSION_UPDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionUpdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionUpdated")
     DOCUMENT_VERSION_PUBLISHED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionPublished")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionPublished")
     DOCUMENT_VERSION_REJECTED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionRejected")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionRejected")
     DOCUMENT_VERSION_DELETED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionDeleted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionDeleted")
     DOCUMENT_VERSION_SIGNATURE_REQUESTED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionSignatureRequested")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionSignatureRequested")
     DOCUMENT_VERSION_SIGNATURE_SIGNED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionSignatureSigned")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionSignatureSigned")
     DOCUMENT_VERSION_SIGNATURE_CANCELLED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionSignatureCancelled")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionSignatureCancelled")
     DOCUMENT_VERSION_APPROVAL_QUORUM_REQUESTED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumRequested")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumRequested")
     DOCUMENT_VERSION_APPROVAL_QUORUM_UPDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumUpdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumUpdated")
     DOCUMENT_VERSION_APPROVAL_QUORUM_APPROVED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumApproved")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumApproved")
     DOCUMENT_VERSION_APPROVAL_QUORUM_REJECTED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumRejected")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumRejected")
     DOCUMENT_VERSION_APPROVAL_QUORUM_VOIDED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumVoided")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeDocumentVersionApprovalQuorumVoided")
     TASK_CREATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeTaskCreated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeTaskCreated")
     TASK_UPDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeTaskUpdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeTaskUpdated")
     TASK_DELETED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeTaskDeleted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeTaskDeleted")
     TASK_COMMENT_CREATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeTaskCommentCreated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeTaskCommentCreated")
     TASK_COMMENT_UPDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeTaskCommentUpdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeTaskCommentUpdated")
     TASK_COMMENT_DELETED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventTypeTaskCommentDeleted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventTypeTaskCommentDeleted")
 }
 
 enum WebhookEventStatus
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.WebhookEventStatus") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventStatus") {
     PENDING
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventStatusPending")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventStatusPending")
     SUCCEEDED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventStatusSucceeded")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventStatusSucceeded")
     FAILED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.WebhookEventStatusFailed")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventStatusFailed")
 }
 
 enum WebhookSubscriptionOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.WebhookSubscriptionOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookSubscriptionOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.WebhookSubscriptionOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookSubscriptionOrderFieldCreatedAt"
         )
 }
 
 enum WebhookEventOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.WebhookEventOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.WebhookEventOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventOrderFieldCreatedAt"
         )
 }
 
 input WebhookSubscriptionOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.WebhookSubscriptionOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.WebhookSubscriptionOrderBy"
     ) {
     direction: OrderDirection!
     field: WebhookSubscriptionOrderField!
@@ -114,7 +114,7 @@ input WebhookSubscriptionOrder
 
 input WebhookEventOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.WebhookEventOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.WebhookEventOrderBy"
     ) {
     field: WebhookEventOrderField!
     direction: OrderDirection!
@@ -156,7 +156,7 @@ type WebhookEvent implements Node {
 
 type WebhookSubscriptionConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.WebhookSubscriptionConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.WebhookSubscriptionConnection"
     ) {
     edges: [WebhookSubscriptionEdge!]!
     pageInfo: PageInfo!
@@ -170,7 +170,7 @@ type WebhookSubscriptionEdge {
 
 type WebhookEventConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.WebhookEventConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.WebhookEventConnection"
     ) {
     edges: [WebhookEventEdge!]!
     pageInfo: PageInfo!

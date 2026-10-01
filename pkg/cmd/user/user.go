@@ -22,11 +22,11 @@ package user
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/user/deactivate"
-	"go.probo.inc/probo/pkg/cmd/user/list"
-	"go.probo.inc/probo/pkg/cmd/user/remove"
-	"go.probo.inc/probo/pkg/cmd/user/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/user/deactivate"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/user/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/user/remove"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/user/view"
 )
 
 func NewCmdUser(f *cmdutil.Factory) *cobra.Command {

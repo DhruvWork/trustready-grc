@@ -25,7 +25,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/dnsclient"
+	"github.com/DhruvWork/trustready-grc/pkg/dnsclient"
 )
 
 func TestEqualNames(t *testing.T) {

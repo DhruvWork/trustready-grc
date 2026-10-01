@@ -32,7 +32,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/imageutil"
+	"github.com/DhruvWork/trustready-grc/pkg/imageutil"
 )
 
 func pngBytes(t *testing.T, width, height int) []byte {

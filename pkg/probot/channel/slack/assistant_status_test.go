@@ -28,7 +28,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 type recordingStatusSetter struct {

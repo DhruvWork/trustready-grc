@@ -29,7 +29,7 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 // ProbotIdentityBinding maps an external-provider actor to an identity.

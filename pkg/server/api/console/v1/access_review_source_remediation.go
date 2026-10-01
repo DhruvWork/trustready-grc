@@ -25,8 +25,8 @@ import (
 	"net/url"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // emptyOrganizationsRemediationURL returns the provider page where the user

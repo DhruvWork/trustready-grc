@@ -25,8 +25,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam/oauth2scope"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2scope"
 )
 
 func TestRegistry_Allows(t *testing.T) {

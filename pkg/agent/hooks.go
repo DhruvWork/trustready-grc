@@ -23,7 +23,7 @@ package agent
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 // RunHooks receives callbacks on lifecycle events for the entire agent run.

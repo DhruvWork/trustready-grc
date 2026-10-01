@@ -26,9 +26,9 @@ import (
 	"fmt"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/esign"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/esign"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 func (s *Service) AcceptPortalNDASignature(

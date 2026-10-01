@@ -85,7 +85,7 @@ components:
   schemas:
     GID:
       type: string
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/gid.GID
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/gid.GID
 ```
 
 ## Resolver signature

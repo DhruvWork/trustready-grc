@@ -34,7 +34,7 @@ import (
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 	"github.com/pdfcpu/pdfcpu/pkg/pdfcpu/model"
 	"go.gearno.de/kit/httpclient"
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 type (

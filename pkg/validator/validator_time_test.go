@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"go.probo.inc/probo/pkg/timespan"
+	"github.com/DhruvWork/trustready-grc/pkg/timespan"
 )
 
 func TestAfter(t *testing.T) {

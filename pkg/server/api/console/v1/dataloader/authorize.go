@@ -25,11 +25,11 @@ import (
 	"errors"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/server/api/authz"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authz"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // NewAuthorizeFunc returns an authz.AuthorizeFunc that batches authorize

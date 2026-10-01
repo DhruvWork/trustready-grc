@@ -30,8 +30,8 @@ import (
 	"sync"
 	"time"
 
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
-	"go.probo.inc/probo/pkg/coredata"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 	cloudlogging "google.golang.org/api/logging/v2"
 	policyanalyzer "google.golang.org/api/policyanalyzer/v1"
 )

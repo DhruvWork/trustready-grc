@@ -27,7 +27,7 @@ import (
 
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armsubscriptions/v2"
 	"go.gearno.de/kit/log"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
 )
 
 // azureNameResolver names the connected subscription for the source-name

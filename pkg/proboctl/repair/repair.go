@@ -22,7 +22,7 @@ package repair
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
 )
 
 func NewCmdRepair(f *cmdutil.Factory) *cobra.Command {

@@ -1,144 +1,144 @@
-enum AuditState @goModel(model: "go.probo.inc/probo/pkg/coredata.AuditState") {
+enum AuditState @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditState") {
     TO_BOOK
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AuditStateToBook")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditStateToBook")
     AUDIT_BOOKED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AuditStateAuditBooked")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditStateAuditBooked")
     NOT_STARTED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AuditStateNotStarted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditStateNotStarted")
     IN_PROGRESS
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AuditStateInProgress")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditStateInProgress")
     COMPLETED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AuditStateCompleted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditStateCompleted")
     REJECTED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AuditStateRejected")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditStateRejected")
     OUTDATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AuditStateOutdated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditStateOutdated")
 }
 
 enum FindingKind
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.FindingKind") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingKind") {
     MINOR_NONCONFORMITY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingKindMinorNonconformity"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingKindMinorNonconformity"
         )
     MAJOR_NONCONFORMITY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingKindMajorNonconformity"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingKindMajorNonconformity"
         )
     OBSERVATION
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingKindObservation"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingKindObservation"
         )
     EXCEPTION
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingKindException"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingKindException"
         )
 }
 
 enum FindingStatus
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.FindingStatus") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingStatus") {
     OPEN
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingStatusOpen"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingStatusOpen"
         )
     IN_PROGRESS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingStatusInProgress"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingStatusInProgress"
         )
     CLOSED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingStatusClosed"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingStatusClosed"
         )
     RISK_ACCEPTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingStatusRiskAccepted"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingStatusRiskAccepted"
         )
     MITIGATED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingStatusMitigated"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingStatusMitigated"
         )
     FALSE_POSITIVE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingStatusFalsePositive"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingStatusFalsePositive"
         )
 }
 
 enum FindingPriority
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.FindingPriority") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingPriority") {
     LOW
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingPriorityLow"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingPriorityLow"
         )
     MEDIUM
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingPriorityMedium"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingPriorityMedium"
         )
     HIGH
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingPriorityHigh"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingPriorityHigh"
         )
 }
 
 enum AuditOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.AuditOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AuditOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditOrderFieldCreatedAt"
         )
     VALID_FROM
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AuditOrderFieldValidFrom"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditOrderFieldValidFrom"
         )
     VALID_UNTIL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AuditOrderFieldValidUntil"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditOrderFieldValidUntil"
         )
     AUDIT_START_DATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AuditOrderFieldAuditStartDate"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditOrderFieldAuditStartDate"
         )
     AUDIT_END_DATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AuditOrderFieldAuditEndDate"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditOrderFieldAuditEndDate"
         )
-    STATE @goEnum(value: "go.probo.inc/probo/pkg/coredata.AuditOrderFieldState")
+    STATE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditOrderFieldState")
 }
 
 enum FindingOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.FindingOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingOrderFieldCreatedAt"
         )
     REFERENCE_ID
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingOrderFieldReferenceId"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingOrderFieldReferenceId"
         )
     IDENTIFIED_ON
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingOrderFieldIdentifiedOn"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingOrderFieldIdentifiedOn"
         )
     DUE_DATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingOrderFieldDueDate"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingOrderFieldDueDate"
         )
     STATUS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingOrderFieldStatus"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingOrderFieldStatus"
         )
     PRIORITY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingOrderFieldPriority"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingOrderFieldPriority"
         )
     KIND
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FindingOrderFieldKind"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FindingOrderFieldKind"
         )
 }
 
 input AuditOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AuditOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AuditOrderBy"
     ) {
     direction: OrderDirection!
     field: AuditOrderField!
@@ -228,7 +228,7 @@ type Finding implements Node {
 
 type AuditConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AuditConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AuditConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [AuditEdge!]!
@@ -237,7 +237,7 @@ type AuditConnection
 
 type AuditEdge
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AuditEdge"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AuditEdge"
     ) {
     cursor: CursorKey!
     referenceId: String
@@ -246,7 +246,7 @@ type AuditEdge
 
 type FindingConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.FindingConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.FindingConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [FindingEdge!]!
@@ -255,7 +255,7 @@ type FindingConnection
 
 type FindingEdge
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.FindingEdge"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.FindingEdge"
     ) {
     cursor: CursorKey!
     node: Finding!

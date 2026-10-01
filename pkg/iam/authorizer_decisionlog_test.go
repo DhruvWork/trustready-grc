@@ -31,12 +31,12 @@ import (
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
 
-	"go.probo.inc/probo/internal/test"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/iam/oauth2scope"
-	"go.probo.inc/probo/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/internal/test"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2scope"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
 )
 
 func TestAuthorizer_DecisionLogging(t *testing.T) {

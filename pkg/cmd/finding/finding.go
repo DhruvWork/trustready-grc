@@ -22,13 +22,13 @@ package finding
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/finding/create"
-	"go.probo.inc/probo/pkg/cmd/finding/delete"
-	"go.probo.inc/probo/pkg/cmd/finding/list"
-	"go.probo.inc/probo/pkg/cmd/finding/publish"
-	"go.probo.inc/probo/pkg/cmd/finding/update"
-	"go.probo.inc/probo/pkg/cmd/finding/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/finding/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/finding/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/finding/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/finding/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/finding/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/finding/view"
 )
 
 func NewCmdFinding(f *cmdutil.Factory) *cobra.Command {

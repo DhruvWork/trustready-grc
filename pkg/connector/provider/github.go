@@ -27,9 +27,9 @@ import (
 	"strconv"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func githubRegistration() *Registration {

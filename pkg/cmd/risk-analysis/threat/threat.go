@@ -22,12 +22,12 @@ package threat
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/threat/create"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/threat/delete"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/threat/list"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/threat/update"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/threat/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/threat/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/threat/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/threat/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/threat/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/threat/view"
 )
 
 func NewCmdThreat(f *cmdutil.Factory) *cobra.Command {

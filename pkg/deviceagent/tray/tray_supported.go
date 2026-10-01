@@ -31,7 +31,7 @@ import (
 	"time"
 
 	"fyne.io/systray"
-	"go.probo.inc/probo/pkg/deviceagent"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent"
 )
 
 func Run(opts Options) error {

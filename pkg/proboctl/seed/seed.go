@@ -22,9 +22,9 @@ package seed
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
-	commonthirdparties "go.probo.inc/probo/pkg/proboctl/seed/common-third-parties"
-	commontrackerpatterns "go.probo.inc/probo/pkg/proboctl/seed/common-tracker-patterns"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
+	commonthirdparties "github.com/DhruvWork/trustready-grc/pkg/proboctl/seed/common-third-parties"
+	commontrackerpatterns "github.com/DhruvWork/trustready-grc/pkg/proboctl/seed/common-tracker-patterns"
 )
 
 func NewCmdSeed(f *cmdutil.Factory) *cobra.Command {

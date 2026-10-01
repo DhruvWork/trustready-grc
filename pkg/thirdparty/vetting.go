@@ -28,11 +28,11 @@ import (
 	"unicode/utf8"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/validator"
-	"go.probo.inc/probo/pkg/vetting"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/vetting"
 )
 
 const (

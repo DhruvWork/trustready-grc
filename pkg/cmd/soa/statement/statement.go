@@ -22,11 +22,11 @@ package statement
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/soa/statement/add"
-	"go.probo.inc/probo/pkg/cmd/soa/statement/list"
-	"go.probo.inc/probo/pkg/cmd/soa/statement/remove"
-	"go.probo.inc/probo/pkg/cmd/soa/statement/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/statement/add"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/statement/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/statement/remove"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/statement/update"
 )
 
 func NewCmdStatement(f *cmdutil.Factory) *cobra.Command {

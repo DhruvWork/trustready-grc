@@ -22,14 +22,14 @@ package soa
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/soa/create"
-	"go.probo.inc/probo/pkg/cmd/soa/delete"
-	"go.probo.inc/probo/pkg/cmd/soa/list"
-	"go.probo.inc/probo/pkg/cmd/soa/publish"
-	"go.probo.inc/probo/pkg/cmd/soa/statement"
-	"go.probo.inc/probo/pkg/cmd/soa/update"
-	"go.probo.inc/probo/pkg/cmd/soa/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/statement"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/soa/view"
 )
 
 func NewCmdSoa(f *cmdutil.Factory) *cobra.Command {

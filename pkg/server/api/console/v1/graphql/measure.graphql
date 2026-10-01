@@ -1,39 +1,39 @@
 enum MeasureState
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.MeasureState") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureState") {
     NOT_STARTED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.MeasureStateNotStarted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureStateNotStarted")
     IN_PROGRESS
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.MeasureStateInProgress")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureStateInProgress")
     NOT_APPLICABLE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MeasureStateNotApplicable"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureStateNotApplicable"
         )
     IMPLEMENTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MeasureStateImplemented"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureStateImplemented"
         )
     UNKNOWN
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MeasureStateUnknown"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureStateUnknown"
         )
     NOT_IMPLEMENTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MeasureStateNotImplemented"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureStateNotImplemented"
         )
 }
 
 enum MeasureOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.MeasureOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MeasureOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureOrderFieldCreatedAt"
         )
-    NAME @goEnum(value: "go.probo.inc/probo/pkg/coredata.MeasureOrderFieldName")
+    NAME @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureOrderFieldName")
 }
 
 input MeasureOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.MeasureOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.MeasureOrderBy"
     ) {
     direction: OrderDirection!
     field: MeasureOrderField!
@@ -123,7 +123,7 @@ type Measure implements Node {
 
 type MeasureConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.MeasureConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.MeasureConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [MeasureEdge!]!

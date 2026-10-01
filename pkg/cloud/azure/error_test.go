@@ -31,7 +31,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
 	"github.com/stretchr/testify/assert"
 	"go.gearno.de/kit/log"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
 )
 
 func TestSafeLogFields_OmitsResponseBody(t *testing.T) {

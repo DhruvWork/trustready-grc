@@ -29,11 +29,11 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/internal/test"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/crypto/cipher"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/probot/identitybinding"
+	"github.com/DhruvWork/trustready-grc/internal/test"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/cipher"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/probot/identitybinding"
 )
 
 func TestService_HandleSlashCommand(t *testing.T) {

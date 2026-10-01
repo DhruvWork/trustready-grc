@@ -37,10 +37,10 @@ import (
 	"time"
 
 	"go.gearno.de/crypto/uuid"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/crypto/jose"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/jose"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 const (

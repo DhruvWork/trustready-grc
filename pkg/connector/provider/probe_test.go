@@ -34,9 +34,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // probeRoundTripFunc lets a test capture the probe request and return a

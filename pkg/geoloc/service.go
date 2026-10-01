@@ -26,7 +26,7 @@ import (
 	"net"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type Service struct {

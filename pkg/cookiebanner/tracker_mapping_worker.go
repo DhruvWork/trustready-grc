@@ -30,14 +30,14 @@ import (
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
 	"go.gearno.de/kit/worker"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/agent/tools/browser"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/llm"
-	"go.probo.inc/probo/pkg/stringsx"
-	"go.probo.inc/probo/pkg/thirdparty"
-	"go.probo.inc/probo/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/tools/browser"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/stringsx"
+	"github.com/DhruvWork/trustready-grc/pkg/thirdparty"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
 // defaultMappingStaleAfter is the idle window after which a claimed

@@ -31,12 +31,12 @@ import (
 
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 const (

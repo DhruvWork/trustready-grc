@@ -26,9 +26,9 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/cookiebanner"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/server/jsonx"
+	"github.com/DhruvWork/trustready-grc/pkg/cookiebanner"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/server/jsonx"
 )
 
 func newCORSMiddleware(logger *log.Logger, cookieBannerSvc *cookiebanner.Service) func(http.Handler) http.Handler {

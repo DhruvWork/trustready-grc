@@ -26,8 +26,8 @@ import (
 	"slices"
 
 	"go.gearno.de/kit/log"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
-	"go.probo.inc/probo/pkg/coredata"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 const (

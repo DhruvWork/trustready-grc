@@ -26,9 +26,9 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/docgen"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/prosemirror"
+	"github.com/DhruvWork/trustready-grc/pkg/docgen"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/prosemirror"
 )
 
 // hostileText exercises the template escaping every generated document relies

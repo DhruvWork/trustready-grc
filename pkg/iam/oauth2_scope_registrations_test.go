@@ -24,15 +24,15 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/accessreview"
-	"go.probo.inc/probo/pkg/agentexecution"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/iam/oauth2scope"
-	"go.probo.inc/probo/pkg/itam"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/riskmanagement"
-	"go.probo.inc/probo/pkg/task"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview"
+	"github.com/DhruvWork/trustready-grc/pkg/agentexecution"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2scope"
+	"github.com/DhruvWork/trustready-grc/pkg/itam"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
+	"github.com/DhruvWork/trustready-grc/pkg/task"
 )
 
 func allRegisteredOAuth2ScopeRegistries() *oauth2scope.Registry {

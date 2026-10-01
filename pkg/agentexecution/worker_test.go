@@ -37,11 +37,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/internal/test"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/agentexecution"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/internal/test"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agentexecution"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 type cancellationObservedTool struct {

@@ -29,7 +29,7 @@ import (
 	"net/url"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // ErrCrispPluginNotSubscribed is returned by GetCrispSubscription when Crisp

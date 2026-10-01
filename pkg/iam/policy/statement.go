@@ -23,7 +23,7 @@ package policy
 import (
 	"strings"
 
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 // Effect represents whether a statement allows or denies access.

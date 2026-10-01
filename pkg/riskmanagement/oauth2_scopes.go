@@ -20,7 +20,7 @@
 
 package riskmanagement
 
-import "go.probo.inc/probo/pkg/coredata"
+import "github.com/DhruvWork/trustready-grc/pkg/coredata"
 
 // Risk analyses and treatment plans share the existing v1:risk OAuth2
 // namespace. Do not introduce a new scope pair.

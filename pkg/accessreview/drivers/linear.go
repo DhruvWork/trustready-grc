@@ -29,7 +29,7 @@ import (
 	"strings"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // LinearDriver fetches workspace users from Linear via OAuth2-authenticated

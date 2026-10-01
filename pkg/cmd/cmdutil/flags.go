@@ -26,7 +26,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 const (

@@ -24,8 +24,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
 )
 
 // oauth2ClientMetadata is the OAuth2 Client ID Metadata Document (CIMD)

@@ -32,7 +32,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
 )
 
 func azureDirectorySession(transport http.RoundTripper) *cloudazure.Session {

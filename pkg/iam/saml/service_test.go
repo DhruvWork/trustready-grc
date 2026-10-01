@@ -26,7 +26,7 @@ import (
 	"time"
 
 	"github.com/crewjam/saml"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func TestValidateAssertionRejectsEmptySAMLSubject(t *testing.T) {

@@ -28,7 +28,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/vektah/gqlparser/v2/gqlerror"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 func AlreadyAuthenticated(ctx context.Context, err error) *gqlerror.Error {

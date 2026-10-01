@@ -22,12 +22,12 @@ package process
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/process/create"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/process/delete"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/process/list"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/process/update"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/process/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/process/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/process/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/process/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/process/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/process/view"
 )
 
 func NewCmdProcess(f *cmdutil.Factory) *cobra.Command {

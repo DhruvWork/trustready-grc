@@ -24,7 +24,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/netx"
+	"github.com/DhruvWork/trustready-grc/pkg/netx"
 )
 
 func TestIsLoopback(t *testing.T) {

@@ -25,8 +25,8 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
 )
 
 type (

@@ -23,8 +23,8 @@ package types
 import (
 	"testing"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 func newTestCampaignSource(tenantID gid.TenantID, sourceID *gid.GID, name string) *coredata.AccessReviewCampaignSource {

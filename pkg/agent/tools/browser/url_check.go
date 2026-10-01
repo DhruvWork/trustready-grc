@@ -21,7 +21,7 @@
 package browser
 
 import (
-	"go.probo.inc/probo/pkg/agent/tools/internal/netcheck"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/tools/internal/netcheck"
 )
 
 // validatePublicURL checks that a URL uses an http(s) scheme and that its

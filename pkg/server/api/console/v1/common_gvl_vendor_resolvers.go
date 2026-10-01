@@ -9,11 +9,11 @@ import (
 	"context"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/console/v1/schema"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // TotalCount is the resolver for the totalCount field.

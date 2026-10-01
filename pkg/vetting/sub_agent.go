@@ -23,8 +23,8 @@ package vetting
 import (
 	"fmt"
 
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 // subAgentSpec describes a vetting sub-agent. The generic builder

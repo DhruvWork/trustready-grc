@@ -22,9 +22,9 @@ package event
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/scim/event/export"
-	"go.probo.inc/probo/pkg/cmd/scim/event/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/scim/event/export"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/scim/event/list"
 )
 
 func NewCmdEvent(f *cmdutil.Factory) *cobra.Command {

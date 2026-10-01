@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"strings"
 
-	"go.probo.inc/probo/pkg/bot"
+	"github.com/DhruvWork/trustready-grc/pkg/bot"
 )
 
 const (

@@ -24,8 +24,8 @@ import (
 	"fmt"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/cmd/iostreams"
-	"go.probo.inc/probo/pkg/proboctl/pgconn"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/iostreams"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/pgconn"
 )
 
 type Factory struct {

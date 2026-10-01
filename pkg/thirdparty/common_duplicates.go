@@ -26,9 +26,9 @@ import (
 	"sort"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/slug"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/slug"
 )
 
 // Duplicate-pair scores, and the threshold that decides which are reported.

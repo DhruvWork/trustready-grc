@@ -15,7 +15,7 @@
 package complianceportal
 
 import (
-	"go.probo.inc/probo/pkg/complianceportal/visitor"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor"
 )
 
 const (

@@ -26,9 +26,9 @@ import (
 
 	"github.com/spf13/cobra"
 	"go.gearno.de/x/ref"
-	"go.probo.inc/probo/pkg/cli/api"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/device/shared"
+	"github.com/DhruvWork/trustready-grc/pkg/cli/api"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/device/shared"
 )
 
 const (

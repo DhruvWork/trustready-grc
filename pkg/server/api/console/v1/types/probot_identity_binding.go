@@ -23,8 +23,8 @@ package types
 import (
 	"time"
 
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/probot/identitybinding"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/probot/identitybinding"
 )
 
 type (

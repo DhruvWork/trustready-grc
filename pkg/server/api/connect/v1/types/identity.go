@@ -20,7 +20,7 @@
 
 package types
 
-import "go.probo.inc/probo/pkg/coredata"
+import "github.com/DhruvWork/trustready-grc/pkg/coredata"
 
 func NewIdentity(identity *coredata.Identity) *Identity {
 	obj := &Identity{

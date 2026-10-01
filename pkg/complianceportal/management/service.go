@@ -23,11 +23,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/bot"
-	"go.probo.inc/probo/pkg/certmanager"
-	"go.probo.inc/probo/pkg/esign"
-	"go.probo.inc/probo/pkg/filemanager"
-	"go.probo.inc/probo/pkg/filevalidation"
+	"github.com/DhruvWork/trustready-grc/pkg/bot"
+	"github.com/DhruvWork/trustready-grc/pkg/certmanager"
+	"github.com/DhruvWork/trustready-grc/pkg/esign"
+	"github.com/DhruvWork/trustready-grc/pkg/filemanager"
+	"github.com/DhruvWork/trustready-grc/pkg/filevalidation"
 )
 
 const (

@@ -31,9 +31,9 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/e2e/internal/testutil"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 const (

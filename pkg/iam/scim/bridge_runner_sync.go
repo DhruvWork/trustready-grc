@@ -29,13 +29,13 @@ import (
 	"go.gearno.de/kit/httpclient"
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam/scim/bridge"
-	scimclient "go.probo.inc/probo/pkg/iam/scim/bridge/client"
-	"go.probo.inc/probo/pkg/iam/scim/bridge/provider"
-	"go.probo.inc/probo/pkg/iam/scim/bridge/provider/googleworkspace"
-	"go.probo.inc/probo/pkg/iam/scim/bridge/provider/microsoft365"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge"
+	scimclient "github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/client"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/provider"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/provider/googleworkspace"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/provider/microsoft365"
 )
 
 func (r *BridgeRunner) executeSync(

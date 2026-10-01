@@ -30,17 +30,17 @@ import (
 
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/bearertoken"
-	"go.probo.inc/probo/pkg/complianceportal/visitor"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/iam/oauth2"
-	"go.probo.inc/probo/pkg/securecookie"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/types"
-	"go.probo.inc/probo/pkg/server/httpx"
-	"go.probo.inc/probo/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/bearertoken"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/securecookie"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/httpx"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
 type OAuth2Handler struct {

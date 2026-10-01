@@ -27,7 +27,7 @@ import (
 	"os"
 
 	"github.com/tc-hib/winres"
-	"go.probo.inc/probo/pkg/deviceagent/tray"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/tray"
 )
 
 func main() {

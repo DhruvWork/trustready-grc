@@ -25,7 +25,7 @@ import (
 	"errors"
 	"strings"
 
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 const (

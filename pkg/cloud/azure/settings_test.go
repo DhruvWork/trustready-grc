@@ -25,7 +25,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
 )
 
 func TestNewConnectorSettings(t *testing.T) {

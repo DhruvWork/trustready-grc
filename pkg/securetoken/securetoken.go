@@ -30,7 +30,7 @@ import (
 	"net/http"
 	"strings"
 
-	"go.probo.inc/probo/pkg/bearertoken"
+	"github.com/DhruvWork/trustready-grc/pkg/bearertoken"
 )
 
 var (

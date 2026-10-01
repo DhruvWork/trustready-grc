@@ -21,7 +21,7 @@
 package riskmanagement
 
 import (
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type (

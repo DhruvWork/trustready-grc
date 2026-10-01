@@ -27,7 +27,7 @@ import (
 	"slices"
 	"strings"
 
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 var (

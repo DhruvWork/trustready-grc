@@ -23,7 +23,7 @@ package oauth2
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type contextKey struct{ name string }

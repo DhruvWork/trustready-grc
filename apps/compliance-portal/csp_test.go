@@ -26,7 +26,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	complianceportalstatics "go.probo.inc/probo/apps/compliance-portal"
+	complianceportalstatics "github.com/DhruvWork/trustready-grc/apps/compliance-portal"
 )
 
 func TestContentSecurityPolicy_SubstitutesOrigins(t *testing.T) {

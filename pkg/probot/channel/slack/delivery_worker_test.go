@@ -32,8 +32,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 func TestDeliveryService_DuplicateOperationKeyReturnsOriginal(t *testing.T) {

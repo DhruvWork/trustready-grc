@@ -43,7 +43,7 @@ var (
 		return chromedp.Evaluate(`document.readyState === 'complete'`, &ready).Do(ctx)
 	}
 
-	tracerName = "go.probo.inc/probo/pkg/html2pdf"
+	tracerName = "github.com/DhruvWork/trustready-grc/pkg/html2pdf"
 )
 
 type (

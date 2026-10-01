@@ -26,7 +26,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/errorx"
+	"github.com/DhruvWork/trustready-grc/pkg/errorx"
 )
 
 func TestAnyOf(t *testing.T) {

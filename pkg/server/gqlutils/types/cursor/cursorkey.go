@@ -26,7 +26,7 @@ import (
 	"strconv"
 
 	"github.com/99designs/gqlgen/graphql"
-	"go.probo.inc/probo/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
 )
 
 type CursorKeyScalar = page.CursorKey

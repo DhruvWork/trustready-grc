@@ -20,7 +20,7 @@
 
 package tasksync
 
-import "go.probo.inc/probo/pkg/gid"
+import "github.com/DhruvWork/trustready-grc/pkg/gid"
 
 type SyncAction string
 

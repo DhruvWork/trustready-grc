@@ -23,8 +23,8 @@ package complianceportal
 import (
 	"net/http"
 
-	"go.probo.inc/probo/pkg/complianceportal/visitor"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type Handler struct {

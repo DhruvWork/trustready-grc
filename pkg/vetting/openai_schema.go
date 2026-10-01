@@ -27,8 +27,8 @@ import (
 	"slices"
 	"strings"
 
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 type strictFunctionTool[P any] struct {

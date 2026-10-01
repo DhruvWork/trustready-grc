@@ -1,56 +1,56 @@
-enum AssetType @goModel(model: "go.probo.inc/probo/pkg/coredata.AssetType") {
-    PHYSICAL @goEnum(value: "go.probo.inc/probo/pkg/coredata.AssetTypePhysical")
-    VIRTUAL @goEnum(value: "go.probo.inc/probo/pkg/coredata.AssetTypeVirtual")
+enum AssetType @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AssetType") {
+    PHYSICAL @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AssetTypePhysical")
+    VIRTUAL @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AssetTypeVirtual")
 }
 
 enum AssetOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.AssetOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AssetOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AssetOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AssetOrderFieldCreatedAt"
         )
     AMOUNT
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AssetOrderFieldAmount")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AssetOrderFieldAmount")
     NAME
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AssetOrderFieldName")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AssetOrderFieldName")
 }
 
 enum DatumOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DatumOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DatumOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DatumOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DatumOrderFieldCreatedAt"
         )
-    NAME @goEnum(value: "go.probo.inc/probo/pkg/coredata.DatumOrderFieldName")
+    NAME @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DatumOrderFieldName")
     DATA_CLASSIFICATION
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DatumOrderFieldDataClassification"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DatumOrderFieldDataClassification"
         )
 }
 
 enum DataClassification
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DataClassification") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataClassification") {
     PUBLIC
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DataClassificationPublic"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataClassificationPublic"
         )
     INTERNAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DataClassificationInternal"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataClassificationInternal"
         )
     CONFIDENTIAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DataClassificationConfidential"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataClassificationConfidential"
         )
     SECRET
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DataClassificationSecret"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataClassificationSecret"
         )
 }
 
 input AssetOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AssetOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AssetOrderBy"
     ) {
     direction: OrderDirection!
     field: AssetOrderField!
@@ -58,7 +58,7 @@ input AssetOrder
 
 input DatumOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DatumOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DatumOrderBy"
     ) {
     direction: OrderDirection!
     field: DatumOrderField!
@@ -87,7 +87,7 @@ type Asset implements Node {
 
 type Datum implements Node
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.Datum"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.Datum"
     ) {
     id: ID!
     name: String!
@@ -109,7 +109,7 @@ type Datum implements Node
 
 type AssetConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AssetConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AssetConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [AssetEdge!]!
@@ -123,7 +123,7 @@ type AssetEdge {
 
 type DatumConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DatumConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DatumConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [DatumEdge!]!

@@ -1,4 +1,4 @@
-module go.probo.inc/probo
+module github.com/DhruvWork/trustready-grc
 
 go 1.27.1
 

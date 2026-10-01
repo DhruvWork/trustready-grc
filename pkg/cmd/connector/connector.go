@@ -22,12 +22,12 @@ package connector
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/connector/connect"
-	"go.probo.inc/probo/pkg/cmd/connector/discover"
-	enableaccounts "go.probo.inc/probo/pkg/cmd/connector/enable-accounts"
-	"go.probo.inc/probo/pkg/cmd/connector/list"
-	"go.probo.inc/probo/pkg/cmd/connector/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/connector/connect"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/connector/discover"
+	enableaccounts "github.com/DhruvWork/trustready-grc/pkg/cmd/connector/enable-accounts"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/connector/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/connector/view"
 )
 
 func NewCmdConnector(f *cmdutil.Factory) *cobra.Command {

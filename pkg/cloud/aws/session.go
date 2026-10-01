@@ -37,12 +37,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"go.gearno.de/kit/httpclient"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/cloud"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/identityfederation"
-	"go.probo.inc/probo/pkg/netx"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/cloud"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/netx"
 )
 
 const (

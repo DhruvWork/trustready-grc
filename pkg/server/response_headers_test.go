@@ -27,7 +27,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/server"
+	"github.com/DhruvWork/trustready-grc/pkg/server"
 )
 
 func TestNewSecurityHeadersMiddleware_SetsCSPAndCompanions(t *testing.T) {

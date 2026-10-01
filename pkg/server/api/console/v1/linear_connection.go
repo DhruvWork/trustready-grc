@@ -21,8 +21,8 @@
 package console_v1
 
 import (
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
-	tasksync "go.probo.inc/probo/pkg/task/sync"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	tasksync "github.com/DhruvWork/trustready-grc/pkg/task/sync"
 )
 
 func linearIssueNode(issue tasksync.LinearIssue) (*types.LinearIssue, error) {

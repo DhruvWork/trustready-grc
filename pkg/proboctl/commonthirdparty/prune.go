@@ -28,10 +28,10 @@ import (
 
 	"github.com/spf13/cobra"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
-	seed "go.probo.inc/probo/pkg/proboctl/seed/common-third-parties"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
+	seed "github.com/DhruvWork/trustready-grc/pkg/proboctl/seed/common-third-parties"
 )
 
 // defaultPruneMinAge keeps entries that may still be in flight. An entry is

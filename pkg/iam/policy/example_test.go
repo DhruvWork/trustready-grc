@@ -23,7 +23,7 @@ package policy_test
 import (
 	"fmt"
 
-	"go.probo.inc/probo/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
 )
 
 func Example_definingPolicies() {

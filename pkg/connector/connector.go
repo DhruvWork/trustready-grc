@@ -26,7 +26,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 type (

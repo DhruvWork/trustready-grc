@@ -22,13 +22,13 @@ package scim
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/scim/bridge"
-	"go.probo.inc/probo/pkg/cmd/scim/create"
-	"go.probo.inc/probo/pkg/cmd/scim/delete"
-	"go.probo.inc/probo/pkg/cmd/scim/event"
-	regeneratetoken "go.probo.inc/probo/pkg/cmd/scim/regenerate-token"
-	"go.probo.inc/probo/pkg/cmd/scim/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/scim/bridge"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/scim/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/scim/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/scim/event"
+	regeneratetoken "github.com/DhruvWork/trustready-grc/pkg/cmd/scim/regenerate-token"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/scim/view"
 )
 
 func NewCmdScim(f *cmdutil.Factory) *cobra.Command {

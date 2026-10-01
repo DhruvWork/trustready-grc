@@ -22,9 +22,9 @@ package activity
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/task/activity/list"
-	"go.probo.inc/probo/pkg/cmd/task/activity/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/activity/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/activity/view"
 )
 
 func NewCmdActivity(f *cmdutil.Factory) *cobra.Command {

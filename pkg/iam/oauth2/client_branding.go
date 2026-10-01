@@ -18,7 +18,7 @@ import (
 	"context"
 	"errors"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type ClientBranding struct {

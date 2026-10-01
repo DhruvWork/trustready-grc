@@ -26,8 +26,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/agent/guardrail"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/guardrail"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 func assistantMessage(text string) llm.Message {

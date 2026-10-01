@@ -25,8 +25,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 func TestValidateGitHubAppReconnectConnector_CrossOrganizationIsNotFound(t *testing.T) {

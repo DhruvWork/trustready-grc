@@ -26,7 +26,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/agent/guardrail"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/guardrail"
 )
 
 func TestSystemPromptLeakGuardrail_Check(t *testing.T) {

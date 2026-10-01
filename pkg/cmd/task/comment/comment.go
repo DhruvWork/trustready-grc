@@ -22,12 +22,12 @@ package comment
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/task/comment/create"
-	"go.probo.inc/probo/pkg/cmd/task/comment/delete"
-	"go.probo.inc/probo/pkg/cmd/task/comment/list"
-	"go.probo.inc/probo/pkg/cmd/task/comment/update"
-	"go.probo.inc/probo/pkg/cmd/task/comment/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/comment/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/comment/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/comment/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/comment/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/comment/view"
 )
 
 func NewCmdComment(f *cmdutil.Factory) *cobra.Command {

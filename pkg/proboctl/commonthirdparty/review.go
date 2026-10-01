@@ -27,8 +27,8 @@ import (
 
 	"github.com/spf13/cobra"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
 )
 
 func newCmdReview(f *cmdutil.Factory) *cobra.Command {

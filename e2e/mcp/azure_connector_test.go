@@ -27,9 +27,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/e2e/internal/testutil"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
-	"go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 const (

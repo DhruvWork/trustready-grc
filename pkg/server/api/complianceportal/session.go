@@ -17,9 +17,9 @@ package complianceportal
 import (
 	"net/http"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/securecookie"
-	"go.probo.inc/probo/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/securecookie"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 )
 
 func TrustedRequestHost(r *http.Request) (string, bool) {

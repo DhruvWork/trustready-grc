@@ -22,9 +22,9 @@ package file
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/file/delete"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/file/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/file/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/file/list"
 )
 
 func NewCmdFile(f *cmdutil.Factory) *cobra.Command {

@@ -22,9 +22,9 @@ package thirdparty
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/third-party/delete"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/third-party/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/third-party/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/third-party/update"
 )
 
 func NewCmdThirdParty(f *cmdutil.Factory) *cobra.Command {

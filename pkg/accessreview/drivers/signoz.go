@@ -31,7 +31,7 @@ import (
 	"strings"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // SigNozDriver fetches organization members and service accounts from the

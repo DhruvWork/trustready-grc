@@ -22,13 +22,13 @@ package businessfunction
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/businessfunction/create"
-	"go.probo.inc/probo/pkg/cmd/businessfunction/delete"
-	"go.probo.inc/probo/pkg/cmd/businessfunction/list"
-	"go.probo.inc/probo/pkg/cmd/businessfunction/publish"
-	"go.probo.inc/probo/pkg/cmd/businessfunction/update"
-	"go.probo.inc/probo/pkg/cmd/businessfunction/view"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/businessfunction/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/businessfunction/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/businessfunction/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/businessfunction/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/businessfunction/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/businessfunction/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdBusinessFunction(f *cmdutil.Factory) *cobra.Command {

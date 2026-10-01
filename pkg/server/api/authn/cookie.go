@@ -24,8 +24,8 @@ import (
 	"net/http"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/securecookie"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/securecookie"
 )
 
 type Cookie struct {

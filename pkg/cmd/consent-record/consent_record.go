@@ -22,9 +22,9 @@ package consentrecord
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/consent-record/list"
-	"go.probo.inc/probo/pkg/cmd/consent-record/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/consent-record/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/consent-record/view"
 )
 
 func NewCmdConsentRecord(f *cmdutil.Factory) *cobra.Command {

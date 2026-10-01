@@ -26,12 +26,12 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/bot"
-	portal "go.probo.inc/probo/pkg/complianceportal"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	messaging "go.probo.inc/probo/pkg/probot"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/bot"
+	portal "github.com/DhruvWork/trustready-grc/pkg/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	messaging "github.com/DhruvWork/trustready-grc/pkg/probot"
 )
 
 type (

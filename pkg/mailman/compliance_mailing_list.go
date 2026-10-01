@@ -27,11 +27,11 @@ import (
 	"path/filepath"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/packages/emails"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/packages/emails"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
 )
 
 func (s *Service) SubscriptionConfirmationEmailConfig(

@@ -32,7 +32,7 @@ import (
 	"strings"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
 )
 
 const (

@@ -1,44 +1,44 @@
 enum DataProtectionImpactAssessmentResidualRisk
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DataProtectionImpactAssessmentResidualRisk"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataProtectionImpactAssessmentResidualRisk"
     ) {
     LOW
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DataProtectionImpactAssessmentResidualRiskLow"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataProtectionImpactAssessmentResidualRiskLow"
         )
     MEDIUM
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DataProtectionImpactAssessmentResidualRiskMedium"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataProtectionImpactAssessmentResidualRiskMedium"
         )
     HIGH
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DataProtectionImpactAssessmentResidualRiskHigh"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataProtectionImpactAssessmentResidualRiskHigh"
         )
 }
 
 enum DataProtectionImpactAssessmentOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DataProtectionImpactAssessmentOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataProtectionImpactAssessmentOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DataProtectionImpactAssessmentOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataProtectionImpactAssessmentOrderFieldCreatedAt"
         )
 }
 
 enum TransferImpactAssessmentOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.TransferImpactAssessmentOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TransferImpactAssessmentOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TransferImpactAssessmentOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TransferImpactAssessmentOrderFieldCreatedAt"
         )
 }
 
 input DataProtectionImpactAssessmentOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DataProtectionImpactAssessmentOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DataProtectionImpactAssessmentOrderBy"
     ) {
     direction: OrderDirection!
     field: DataProtectionImpactAssessmentOrderField!
@@ -46,7 +46,7 @@ input DataProtectionImpactAssessmentOrder
 
 input TransferImpactAssessmentOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.TransferImpactAssessmentOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TransferImpactAssessmentOrderBy"
     ) {
     direction: OrderDirection!
     field: TransferImpactAssessmentOrderField!
@@ -84,7 +84,7 @@ type TransferImpactAssessment implements Node {
 
 type DataProtectionImpactAssessmentConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DataProtectionImpactAssessmentConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DataProtectionImpactAssessmentConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [DataProtectionImpactAssessmentEdge!]!
@@ -98,7 +98,7 @@ type DataProtectionImpactAssessmentEdge {
 
 type TransferImpactAssessmentConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.TransferImpactAssessmentConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TransferImpactAssessmentConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [TransferImpactAssessmentEdge!]!

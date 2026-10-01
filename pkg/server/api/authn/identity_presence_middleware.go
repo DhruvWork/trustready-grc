@@ -26,9 +26,9 @@ import (
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/vektah/gqlparser/v2/gqlerror"
 	"go.gearno.de/kit/httpserver"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/bearertoken"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/bearertoken"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 func NewIdentityPresenceMiddleware(baseURL *baseurl.BaseURL) func(next http.Handler) http.Handler {

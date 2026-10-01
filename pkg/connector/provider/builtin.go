@@ -23,8 +23,8 @@ package provider
 import (
 	"fmt"
 
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // NewBuiltinRegistry returns a *Registry populated with every connector

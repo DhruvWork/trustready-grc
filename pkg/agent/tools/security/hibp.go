@@ -30,7 +30,7 @@ import (
 	"time"
 
 	"go.gearno.de/kit/httpclient"
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 type (

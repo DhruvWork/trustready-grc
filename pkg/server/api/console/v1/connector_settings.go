@@ -30,12 +30,12 @@ import (
 	"strings"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/connector/provider"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/connector/provider"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // These helpers live outside connector_resolvers.go because that file is

@@ -26,7 +26,7 @@ import (
 	"io"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 const (

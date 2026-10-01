@@ -24,8 +24,8 @@ import (
 	"net/http"
 
 	"go.gearno.de/x/ref"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/server/api/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal"
 )
 
 // SEOFromRequest derives html lang, a self-referencing canonical URL, and

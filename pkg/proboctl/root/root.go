@@ -24,13 +24,13 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
-	"go.probo.inc/probo/pkg/proboctl/commonthirdparty"
-	"go.probo.inc/probo/pkg/proboctl/commontrackerpattern"
-	proboctlcookiebanner "go.probo.inc/probo/pkg/proboctl/cookiebanner"
-	"go.probo.inc/probo/pkg/proboctl/repair"
-	"go.probo.inc/probo/pkg/proboctl/seed"
-	"go.probo.inc/probo/pkg/proboctl/version"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/commonthirdparty"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/commontrackerpattern"
+	proboctlcookiebanner "github.com/DhruvWork/trustready-grc/pkg/proboctl/cookiebanner"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/repair"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/seed"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/version"
 )
 
 func NewCmdRoot(f *cmdutil.Factory) *cobra.Command {

@@ -30,11 +30,11 @@ import (
 
 	"go.gearno.de/crypto/uuid"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/filemanager"
-	"go.probo.inc/probo/pkg/filevalidation"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/filemanager"
+	"github.com/DhruvWork/trustready-grc/pkg/filevalidation"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 type (

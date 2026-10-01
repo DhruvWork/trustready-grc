@@ -24,7 +24,7 @@ import (
 	awss3 "github.com/aws/aws-sdk-go-v2/service/s3"
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
 )
 
 type Service struct {

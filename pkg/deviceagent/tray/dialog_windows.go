@@ -25,7 +25,7 @@ package tray
 import (
 	"fmt"
 
-	"go.probo.inc/probo/pkg/deviceagent/win32"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/win32"
 	"golang.org/x/sys/windows"
 )
 

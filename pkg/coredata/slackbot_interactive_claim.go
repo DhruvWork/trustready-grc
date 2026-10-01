@@ -27,8 +27,8 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/crypto/hash"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/hash"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 type SlackbotInteractiveClaim struct {

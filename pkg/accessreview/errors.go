@@ -32,10 +32,10 @@ import (
 	"golang.org/x/oauth2"
 	"google.golang.org/api/googleapi"
 
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/connector/provider"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/connector/provider"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 var (

@@ -33,8 +33,8 @@ import (
 	"strconv"
 	"strings"
 
-	scimclient "go.probo.inc/probo/pkg/iam/scim/bridge/client"
-	"go.probo.inc/probo/pkg/iam/scim/bridge/provider"
+	scimclient "github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/client"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/provider"
 )
 
 // graphBaseURL is the Microsoft Graph v1.0 endpoint. The bridge uses raw

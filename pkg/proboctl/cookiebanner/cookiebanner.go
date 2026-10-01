@@ -22,7 +22,7 @@ package cookiebanner
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
 )
 
 // NewCmdCookieBanner groups operator commands acting on a tenant's cookie

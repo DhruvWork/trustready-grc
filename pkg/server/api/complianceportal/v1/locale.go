@@ -25,7 +25,7 @@ import (
 	"slices"
 	"strings"
 
-	"go.probo.inc/probo/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
 )
 
 const defaultCompliancePortalLocale = "en"

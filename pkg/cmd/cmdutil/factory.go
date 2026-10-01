@@ -21,9 +21,9 @@
 package cmdutil
 
 import (
-	"go.probo.inc/probo/pkg/cli/api"
-	"go.probo.inc/probo/pkg/cli/config"
-	"go.probo.inc/probo/pkg/cmd/iostreams"
+	"github.com/DhruvWork/trustready-grc/pkg/cli/api"
+	"github.com/DhruvWork/trustready-grc/pkg/cli/config"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/iostreams"
 )
 
 type Factory struct {

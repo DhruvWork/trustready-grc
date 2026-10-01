@@ -27,9 +27,9 @@ import (
 
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/agent/tools/search"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/tools/search"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 //go:embed prompts/tracker_enrichment.txt.tmpl

@@ -28,7 +28,7 @@ import (
 	"net/http"
 	"time"
 
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 type (

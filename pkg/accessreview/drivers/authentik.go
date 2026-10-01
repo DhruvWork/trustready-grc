@@ -31,7 +31,7 @@ import (
 	"strconv"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // AuthentikDriver lists the users of a self-hosted authentik instance.

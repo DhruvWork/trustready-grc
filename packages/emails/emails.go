@@ -29,8 +29,8 @@ import (
 	texttemplate "text/template"
 	"time"
 
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/brand"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/brand"
 )
 
 //go:embed dist

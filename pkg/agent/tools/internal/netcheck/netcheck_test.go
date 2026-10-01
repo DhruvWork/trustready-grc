@@ -26,7 +26,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/agent/tools/internal/netcheck"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/tools/internal/netcheck"
 )
 
 func TestIsPublicIP(t *testing.T) {

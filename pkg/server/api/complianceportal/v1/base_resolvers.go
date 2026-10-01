@@ -11,16 +11,16 @@ import (
 	"strings"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/complianceportal/visitor"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/mailman"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/complianceportal"
-	"go.probo.inc/probo/pkg/server/api/complianceportal/v1/schema"
-	"go.probo.inc/probo/pkg/server/api/complianceportal/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/mailman"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // Viewer is the resolver for the viewer field.

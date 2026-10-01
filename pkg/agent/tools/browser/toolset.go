@@ -21,7 +21,7 @@
 package browser
 
 import (
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 // ReadOnlyToolset provides browser tools that only read page content.

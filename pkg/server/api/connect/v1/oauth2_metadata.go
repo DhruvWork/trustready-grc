@@ -15,10 +15,10 @@
 package connect_v1
 
 import (
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam/oauth2"
-	"go.probo.inc/probo/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
 const (

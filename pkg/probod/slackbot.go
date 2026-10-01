@@ -27,12 +27,12 @@ import (
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
 	"go.opentelemetry.io/otel/trace"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/connector/provider"
-	"go.probo.inc/probo/pkg/crypto/cipher"
-	"go.probo.inc/probo/pkg/probot"
-	slackchannel "go.probo.inc/probo/pkg/probot/channel/slack"
-	"go.probo.inc/probo/pkg/probot/identitybinding"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/connector/provider"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/cipher"
+	"github.com/DhruvWork/trustready-grc/pkg/probot"
+	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
+	"github.com/DhruvWork/trustready-grc/pkg/probot/identitybinding"
 )
 
 func (impl *Implm) buildSlackbot(

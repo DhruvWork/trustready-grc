@@ -25,8 +25,8 @@ import (
 	"time"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
 )
 
 const effectError = "error"

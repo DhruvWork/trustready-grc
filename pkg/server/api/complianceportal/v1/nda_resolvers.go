@@ -11,14 +11,14 @@ import (
 	"time"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/esign"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/clientip"
-	"go.probo.inc/probo/pkg/server/api/complianceportal"
-	"go.probo.inc/probo/pkg/server/api/complianceportal/v1/schema"
-	"go.probo.inc/probo/pkg/server/api/complianceportal/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/esign"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/clientip"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // AcceptElectronicSignature is the resolver for the acceptElectronicSignature field.

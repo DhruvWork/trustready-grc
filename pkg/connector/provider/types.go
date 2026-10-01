@@ -29,10 +29,10 @@ import (
 
 	"go.gearno.de/kit/log"
 
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/cloud"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/cloud"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 // Endpoints groups every host-bearing URL a provider owns, so a deployment

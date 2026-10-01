@@ -24,7 +24,7 @@ import (
 	"context"
 
 	"github.com/chromedp/chromedp"
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 type (

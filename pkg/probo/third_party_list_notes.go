@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"strings"
 
-	"go.probo.inc/probo/pkg/prosemirror"
+	"github.com/DhruvWork/trustready-grc/pkg/prosemirror"
 )
 
 const thirdPartyRegisterNotesHeadingDemote = 3

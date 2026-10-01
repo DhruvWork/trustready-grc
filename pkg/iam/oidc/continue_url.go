@@ -25,8 +25,8 @@ import (
 	"net/url"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	iamoauth2 "go.probo.inc/probo/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	iamoauth2 "github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
 )
 
 const (

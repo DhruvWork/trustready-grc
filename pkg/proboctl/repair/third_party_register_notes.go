@@ -28,10 +28,10 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/spf13/cobra"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
 )
 
 func newCmdThirdPartyRegisterNotes(f *cmdutil.Factory) *cobra.Command {

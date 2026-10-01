@@ -29,7 +29,7 @@ import (
 	iamtypes "github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/awsx/arn"
+	"github.com/DhruvWork/trustready-grc/pkg/awsx/arn"
 )
 
 func TestParseCredentialReport_ReadsColumnsByHeaderName(t *testing.T) {

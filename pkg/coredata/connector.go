@@ -31,11 +31,11 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/crypto/cipher"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam/policy"
-	"go.probo.inc/probo/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/cipher"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
 )
 
 // jsonRawMessageOrNull is a json.RawMessage that scans NULL as an empty

@@ -25,7 +25,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/rfc5988"
+	"github.com/DhruvWork/trustready-grc/pkg/rfc5988"
 )
 
 func TestParse(t *testing.T) {

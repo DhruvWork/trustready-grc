@@ -27,7 +27,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // BitbucketDriver fetches workspace members from the Bitbucket Cloud

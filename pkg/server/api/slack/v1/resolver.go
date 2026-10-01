@@ -23,8 +23,8 @@ package slack_v1
 import (
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/log"
-	slackchannel "go.probo.inc/probo/pkg/probot/channel/slack"
-	"go.probo.inc/probo/pkg/slack"
+	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
+	"github.com/DhruvWork/trustready-grc/pkg/slack"
 )
 
 func NewMux(

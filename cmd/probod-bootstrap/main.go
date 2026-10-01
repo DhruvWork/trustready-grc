@@ -26,7 +26,7 @@ import (
 	"fmt"
 	"os"
 
-	"go.probo.inc/probo/pkg/bootstrap"
+	"github.com/DhruvWork/trustready-grc/pkg/bootstrap"
 )
 
 var (

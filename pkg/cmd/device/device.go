@@ -22,13 +22,13 @@ package device
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/device/create"
-	"go.probo.inc/probo/pkg/cmd/device/delete"
-	"go.probo.inc/probo/pkg/cmd/device/list"
-	"go.probo.inc/probo/pkg/cmd/device/revoke"
-	setowner "go.probo.inc/probo/pkg/cmd/device/set-owner"
-	"go.probo.inc/probo/pkg/cmd/device/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/device/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/device/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/device/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/device/revoke"
+	setowner "github.com/DhruvWork/trustready-grc/pkg/cmd/device/set-owner"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/device/view"
 )
 
 func NewCmdDevice(f *cmdutil.Factory) *cobra.Command {

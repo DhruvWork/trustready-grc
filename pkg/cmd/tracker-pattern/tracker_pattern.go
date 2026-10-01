@@ -22,13 +22,13 @@ package trackerpattern
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/tracker-pattern/create"
-	"go.probo.inc/probo/pkg/cmd/tracker-pattern/delete"
-	"go.probo.inc/probo/pkg/cmd/tracker-pattern/list"
-	"go.probo.inc/probo/pkg/cmd/tracker-pattern/move"
-	"go.probo.inc/probo/pkg/cmd/tracker-pattern/update"
-	"go.probo.inc/probo/pkg/cmd/tracker-pattern/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-pattern/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-pattern/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-pattern/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-pattern/move"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-pattern/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-pattern/view"
 )
 
 func NewCmdTrackerPattern(f *cmdutil.Factory) *cobra.Command {

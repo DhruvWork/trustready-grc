@@ -30,8 +30,8 @@ import (
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
 	"go.gearno.de/kit/worker"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/task/sync/linear"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/task/sync/linear"
 )
 
 const webhookHeartbeatInterval = 30 * time.Second

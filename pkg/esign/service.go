@@ -32,12 +32,12 @@ import (
 	"go.gearno.de/kit/httpclient"
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/filemanager"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/html2pdf"
-	"go.probo.inc/probo/pkg/mail"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/filemanager"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/html2pdf"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 	"golang.org/x/sync/errgroup"
 )
 

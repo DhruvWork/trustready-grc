@@ -27,10 +27,10 @@ import (
 
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/mail"
-	"go.probo.inc/probo/pkg/task/sync/linear"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/task/sync/linear"
 )
 
 func inboundAssigneeEmail(data *linear.IssueWebhookData) (string, bool) {

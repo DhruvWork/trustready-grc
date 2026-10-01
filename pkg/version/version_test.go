@@ -26,7 +26,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/version"
+	"github.com/DhruvWork/trustready-grc/pkg/version"
 )
 
 func TestGetBuildInfo(t *testing.T) {

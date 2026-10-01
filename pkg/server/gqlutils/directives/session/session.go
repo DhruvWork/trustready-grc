@@ -24,8 +24,8 @@ import (
 	"context"
 
 	"github.com/99designs/gqlgen/graphql"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // Directive enforces that the request carries a real session. It is meant to

@@ -30,7 +30,7 @@ package mailactions
 
 import (
 	"github.com/go-chi/chi/v5"
-	"go.probo.inc/probo/pkg/mailman"
+	"github.com/DhruvWork/trustready-grc/pkg/mailman"
 )
 
 func NewMux(mailmanSvc *mailman.Service, tokenSecret string) *chi.Mux {

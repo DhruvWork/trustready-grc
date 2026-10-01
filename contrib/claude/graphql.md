@@ -37,7 +37,7 @@ Junction / catalog link rows (e.g. `CompliancePortalDocument`) are first-class e
 ```graphql
 type ThirdPartyConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ThirdPartyConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ThirdPartyConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [ThirdPartyEdge!]!
@@ -58,11 +58,11 @@ Map GraphQL enums to existing Go types using `@goModel` on the enum and `@goEnum
 
 ```graphql
 enum ThirdPartyOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ThirdPartyOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyOrderField") {
     CREATED_AT
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyOrderFieldCreatedAt")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyOrderFieldCreatedAt")
     NAME
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyOrderFieldName")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyOrderFieldName")
 }
 ```
 
@@ -91,9 +91,9 @@ type PageInfo {
 }
 
 enum OrderDirection
-    @goModel(model: "go.probo.inc/probo/pkg/page.OrderDirection") {
-    ASC @goEnum(value: "go.probo.inc/probo/pkg/page.OrderDirectionAsc")
-    DESC @goEnum(value: "go.probo.inc/probo/pkg/page.OrderDirectionDesc")
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/page.OrderDirection") {
+    ASC @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/page.OrderDirectionAsc")
+    DESC @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/page.OrderDirectionDesc")
 }
 ```
 

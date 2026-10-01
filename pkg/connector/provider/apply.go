@@ -25,8 +25,8 @@ import (
 	"maps"
 
 	"go.gearno.de/kit/httpclient"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // ApplyOAuth2Defaults sets the redirect URI on c and applies static

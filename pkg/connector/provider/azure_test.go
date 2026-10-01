@@ -28,11 +28,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/cloud"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
-	"go.probo.inc/probo/pkg/connector/provider"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/cloud"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
+	"github.com/DhruvWork/trustready-grc/pkg/connector/provider"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 const (

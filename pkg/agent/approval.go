@@ -27,7 +27,7 @@ import (
 	"fmt"
 	"maps"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 // ErrApprovalDecisionsMismatch is returned by MergeApprovalDecisions when

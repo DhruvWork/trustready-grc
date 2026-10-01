@@ -23,7 +23,7 @@ package validator_test
 import (
 	"testing"
 
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 func TestDoublePointerValidation(t *testing.T) {

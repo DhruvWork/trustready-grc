@@ -27,7 +27,7 @@ import (
 	"io"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // CSVDriver supports both identity and access use cases from uploaded CSV

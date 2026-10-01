@@ -23,10 +23,10 @@ package types
 import (
 	"encoding/json"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/webhook"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/webhook"
 )
 
 func NewWebhookSubscription(w *coredata.WebhookSubscription) *WebhookSubscription {

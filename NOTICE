@@ -1,0 +1,16 @@
+TrustReady GRC
+==============
+
+This product is a modified fork of Probo.
+
+Original project: Probo (https://github.com/getprobo/probo)
+Copyright (c) Probo Inc.
+Licensed under the MIT License. The original license text is retained in LICENSE.
+
+Modifications copyright (c) 2026 TrustReady.
+Fork: https://github.com/DhruvWork/trustready-grc
+
+Modifications include: rebranding of product identity (names, marks, links, and
+user-facing copy) from Probo to TrustReady, changed package/module identifiers,
+self-hosting registry references, and integration with the TrustReady security
+scanner. No warranty is provided by the original authors for these modifications.

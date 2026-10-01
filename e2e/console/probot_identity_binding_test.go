@@ -27,13 +27,13 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/e2e/internal/factory"
-	"go.probo.inc/probo/e2e/internal/testutil"
-	"go.probo.inc/probo/internal/test"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/gid"
-	slackchannel "go.probo.inc/probo/pkg/probot/channel/slack"
-	"go.probo.inc/probo/pkg/probot/identitybinding"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/factory"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/internal/test"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
+	"github.com/DhruvWork/trustready-grc/pkg/probot/identitybinding"
 )
 
 func newProbotBindToken(

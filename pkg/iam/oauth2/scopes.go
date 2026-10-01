@@ -23,7 +23,7 @@ package oauth2
 import (
 	"slices"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func authorizationServerScopes(registeredScopes []coredata.OAuth2Scope) []coredata.OAuth2Scope {

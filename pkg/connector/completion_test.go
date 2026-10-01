@@ -28,9 +28,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/statelesstoken"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/statelesstoken"
 )
 
 func mintGitHubAppStateToken(t *testing.T) string {

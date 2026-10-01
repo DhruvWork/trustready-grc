@@ -27,7 +27,7 @@ import (
 	"os"
 	"time"
 
-	"go.probo.inc/probo/pkg/deviceagent"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent"
 	"golang.org/x/sys/windows/svc"
 )
 

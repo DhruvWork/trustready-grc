@@ -19,16 +19,16 @@
 # SOFTWARE.
 
 enum TaskCommentOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.TaskCommentOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskCommentOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskCommentOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskCommentOrderFieldCreatedAt"
         )
 }
 
 input TaskCommentOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.TaskCommentOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TaskCommentOrderBy"
     ) {
     direction: OrderDirection!
     field: TaskCommentOrderField!
@@ -46,7 +46,7 @@ type TaskComment implements Node {
 
 type TaskCommentConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.TaskCommentConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TaskCommentConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [TaskCommentEdge!]!

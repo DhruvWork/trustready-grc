@@ -32,7 +32,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/crypto/jose"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/jose"
 )
 
 func testRSAKey(t *testing.T) *rsa.PrivateKey {

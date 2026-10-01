@@ -20,14 +20,14 @@ import (
 
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/complianceportal/visitor"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/iam/oauth2"
-	"go.probo.inc/probo/pkg/saferedirect"
-	"go.probo.inc/probo/pkg/securecookie"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/saferedirect"
+	"github.com/DhruvWork/trustready-grc/pkg/securecookie"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal"
 )
 
 var (

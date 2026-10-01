@@ -25,7 +25,7 @@ import (
 	"slices"
 	"strings"
 
-	"go.probo.inc/probo/pkg/prosemirror"
+	"github.com/DhruvWork/trustready-grc/pkg/prosemirror"
 )
 
 // ProseMirrorDocumentContent requires non-empty string values to be valid

@@ -48,22 +48,22 @@ type Connector implements Node {
 }
 
 enum ConnectorProvider
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.ConnectorProvider") {
-  SLACK @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderSlack")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProvider") {
+  SLACK @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderSlack")
   GOOGLE_WORKSPACE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderGoogleWorkspace")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderGoogleWorkspace")
   MICROSOFT_365
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderMicrosoft365")
-  BREX @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderBrex")
-  TALLY @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderTally")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderMicrosoft365")
+  BREX @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderBrex")
+  TALLY @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderTally")
   CLOUDFLARE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderCloudflare")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderCloudflare")
 }
 
 enum SCIMBridgeType
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.SCIMBridgeType") {
-  GOOGLE_WORKSPACE @goEnum(value: "go.probo.inc/probo/pkg/coredata.SCIMBridgeTypeGoogleWorkspace")
-  MICROSOFT_365 @goEnum(value: "go.probo.inc/probo/pkg/coredata.SCIMBridgeTypeMicrosoft365")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeType") {
+  GOOGLE_WORKSPACE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeTypeGoogleWorkspace")
+  MICROSOFT_365 @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeTypeMicrosoft365")
 }
 
 type SCIMBridgeTypeInfo {
@@ -72,12 +72,12 @@ type SCIMBridgeTypeInfo {
 }
 
 enum SCIMBridgeState
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.SCIMBridgeState") {
-  PENDING @goEnum(value: "go.probo.inc/probo/pkg/coredata.SCIMBridgeStatePending")
-  SYNCING @goEnum(value: "go.probo.inc/probo/pkg/coredata.SCIMBridgeStateSyncing")
-  ACTIVE @goEnum(value: "go.probo.inc/probo/pkg/coredata.SCIMBridgeStateActive")
-  FAILED @goEnum(value: "go.probo.inc/probo/pkg/coredata.SCIMBridgeStateFailed")
-  DISABLED @goEnum(value: "go.probo.inc/probo/pkg/coredata.SCIMBridgeStateDisabled")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeState") {
+  PENDING @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeStatePending")
+  SYNCING @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeStateSyncing")
+  ACTIVE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeStateActive")
+  FAILED @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeStateFailed")
+  DISABLED @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeStateDisabled")
 }
 
 type SCIMEvent implements Node {
@@ -98,16 +98,16 @@ type SCIMEvent implements Node {
 }
 
 enum SCIMEventOrderField
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.SCIMEventOrderField") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMEventOrderField") {
   CREATED_AT
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.SCIMEventOrderFieldCreatedAt"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMEventOrderFieldCreatedAt"
     )
 }
 
 input SCIMEventOrder
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.SCIMEventOrderBy"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.SCIMEventOrderBy"
   ) {
   direction: OrderDirection!
   field: SCIMEventOrderField!
@@ -115,7 +115,7 @@ input SCIMEventOrder
 
 type SCIMEventConnection
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.SCIMEventConnection"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.SCIMEventConnection"
   ) {
   edges: [SCIMEventEdge!]!
   pageInfo: PageInfo!

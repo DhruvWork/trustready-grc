@@ -1,219 +1,219 @@
 enum DocumentVersionStatus
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DocumentVersionStatus") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionStatus") {
     DRAFT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionStatusDraft"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionStatusDraft"
         )
     PENDING_APPROVAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionStatusPendingApproval"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionStatusPendingApproval"
         )
     PUBLISHED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionStatusPublished"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionStatusPublished"
         )
 }
 
 enum DocumentStatus
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DocumentStatus") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentStatus") {
     ACTIVE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentStatusActive")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentStatusActive")
     ARCHIVED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentStatusArchived")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentStatusArchived")
 }
 
 enum DocumentType
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DocumentType") {
-    OTHER @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeOther")
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentType") {
+    OTHER @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeOther")
     GOVERNANCE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeGovernance")
-    POLICY @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypePolicy")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeGovernance")
+    POLICY @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypePolicy")
     PROCEDURE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeProcedure")
-    PLAN @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypePlan")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeProcedure")
+    PLAN @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypePlan")
     REGISTER
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeRegister")
-    RECORD @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeRecord")
-    REPORT @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeReport")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeRegister")
+    RECORD @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeRecord")
+    REPORT @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeReport")
     TEMPLATE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DocumentTypeTemplate")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeTemplate")
     STATEMENT_OF_APPLICABILITY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentTypeStatementOfApplicability"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentTypeStatementOfApplicability"
         )
 }
 
 enum DocumentVersionOrientation
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DocumentVersionOrientation"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionOrientation"
     ) {
     PORTRAIT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionOrientationPortrait"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionOrientationPortrait"
         )
     LANDSCAPE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionOrientationLandscape"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionOrientationLandscape"
         )
 }
 
 enum DocumentWriteMode
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DocumentWriteMode") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentWriteMode") {
     AUTHORED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentWriteModeAuthored"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentWriteModeAuthored"
         )
     GENERATED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentWriteModeGenerated"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentWriteModeGenerated"
         )
 }
 
 enum DocumentClassification
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DocumentClassification") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentClassification") {
     PUBLIC
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentClassificationPublic"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentClassificationPublic"
         )
     INTERNAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentClassificationInternal"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentClassificationInternal"
         )
     CONFIDENTIAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentClassificationConfidential"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentClassificationConfidential"
         )
     SECRET
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentClassificationSecret"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentClassificationSecret"
         )
 }
 
 enum DocumentOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DocumentOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentOrderField") {
     TITLE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentOrderFieldTitle"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentOrderFieldTitle"
         )
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentOrderFieldCreatedAt"
         )
     UPDATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentOrderFieldUpdatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentOrderFieldUpdatedAt"
         )
     DOCUMENT_TYPE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentOrderFieldDocumentType"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentOrderFieldDocumentType"
         )
 }
 
 enum DocumentVersionOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DocumentVersionOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionOrderFieldCreatedAt"
         )
 }
 
 enum DocumentVersionSignatureState
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DocumentVersionSignatureState"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionSignatureState"
     ) {
     REQUESTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionSignatureStateRequested"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionSignatureStateRequested"
         )
     SIGNED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionSignatureStateSigned"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionSignatureStateSigned"
         )
 }
 
 enum DocumentVersionSignatureOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DocumentVersionSignatureOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionSignatureOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionSignatureOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionSignatureOrderFieldCreatedAt"
         )
     SIGNED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionSignatureOrderFieldSignedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionSignatureOrderFieldSignedAt"
         )
 }
 
 enum DocumentVersionApprovalDecisionState
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalDecisionState"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalDecisionState"
     ) {
     PENDING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalDecisionStatePending"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalDecisionStatePending"
         )
     APPROVED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalDecisionStateApproved"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalDecisionStateApproved"
         )
     REJECTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalDecisionStateRejected"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalDecisionStateRejected"
         )
     VOIDED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalDecisionStateVoided"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalDecisionStateVoided"
         )
 }
 
 enum DocumentVersionApprovalDecisionOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalDecisionOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalDecisionOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalDecisionOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalDecisionOrderFieldCreatedAt"
         )
 }
 
 enum DocumentVersionApprovalQuorumStatus
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalQuorumStatus"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalQuorumStatus"
     ) {
     PENDING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalQuorumStatusPending"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalQuorumStatusPending"
         )
     APPROVED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalQuorumStatusApproved"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalQuorumStatusApproved"
         )
     REJECTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalQuorumStatusRejected"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalQuorumStatusRejected"
         )
     VOIDED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalQuorumStatusVoided"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalQuorumStatusVoided"
         )
 }
 
 enum DocumentVersionApprovalQuorumOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalQuorumOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalQuorumOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalQuorumOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalQuorumOrderFieldCreatedAt"
         )
 }
 
 input DocumentOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DocumentOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DocumentOrderBy"
     ) {
     direction: OrderDirection!
     field: DocumentOrderField!
@@ -221,7 +221,7 @@ input DocumentOrder
 
 input DocumentVersionOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DocumentVersionOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DocumentVersionOrderBy"
     ) {
     direction: OrderDirection!
     field: DocumentVersionOrderField!
@@ -238,7 +238,7 @@ input DocumentFilter {
 
 input EmployeeDocumentFilter
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EmployeeDocumentFilter"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EmployeeDocumentFilter"
     ) {
     signed: Boolean
     approvalStates: [DocumentVersionApprovalDecisionState!]
@@ -408,7 +408,7 @@ type DocumentVersionApprovalQuorum implements Node {
 
 type EmployeeDocument
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EmployeeDocument"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EmployeeDocument"
     ) {
     id: ID!
     title: String!
@@ -429,7 +429,7 @@ type EmployeeDocument
 
 type EmployeeDocumentVersion
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EmployeeDocumentVersion"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EmployeeDocumentVersion"
     ) {
     id: ID!
     major: Int!
@@ -447,7 +447,7 @@ type EmployeeDocumentVersion
 
 type DocumentConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DocumentConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DocumentConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [DocumentEdge!]!
@@ -461,7 +461,7 @@ type DocumentEdge {
 
 type DocumentVersionConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DocumentVersionConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DocumentVersionConnection"
     ) {
     edges: [DocumentVersionEdge!]!
     pageInfo: PageInfo!
@@ -475,7 +475,7 @@ type DocumentVersionEdge {
 
 type DocumentVersionSignatureConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DocumentVersionSignatureConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DocumentVersionSignatureConnection"
     ) {
     edges: [DocumentVersionSignatureEdge!]!
     pageInfo: PageInfo!
@@ -489,7 +489,7 @@ type DocumentVersionSignatureEdge {
 
 type DocumentVersionApprovalQuorumConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DocumentVersionApprovalQuorumConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DocumentVersionApprovalQuorumConnection"
     ) {
     edges: [DocumentVersionApprovalQuorumEdge!]!
     pageInfo: PageInfo!
@@ -503,7 +503,7 @@ type DocumentVersionApprovalQuorumEdge {
 
 type DocumentVersionApprovalDecisionConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DocumentVersionApprovalDecisionConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DocumentVersionApprovalDecisionConnection"
     ) {
     edges: [DocumentVersionApprovalDecisionEdge!]!
     pageInfo: PageInfo!
@@ -517,7 +517,7 @@ type DocumentVersionApprovalDecisionEdge {
 
 type EmployeeDocumentConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EmployeeDocumentConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EmployeeDocumentConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [EmployeeDocumentEdge!]!
@@ -526,7 +526,7 @@ type EmployeeDocumentConnection
 
 type EmployeeDocumentEdge
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EmployeeDocumentEdge"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EmployeeDocumentEdge"
     ) {
     cursor: CursorKey!
     node: EmployeeDocument!
@@ -534,7 +534,7 @@ type EmployeeDocumentEdge
 
 type EmployeeDocumentVersionConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EmployeeDocumentVersionConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EmployeeDocumentVersionConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [EmployeeDocumentVersionEdge!]!
@@ -543,7 +543,7 @@ type EmployeeDocumentVersionConnection
 
 type EmployeeDocumentVersionEdge
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EmployeeDocumentVersionEdge"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EmployeeDocumentVersionEdge"
     ) {
     cursor: CursorKey!
     node: EmployeeDocumentVersion!

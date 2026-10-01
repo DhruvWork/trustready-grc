@@ -29,7 +29,7 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/timespan"
+	"github.com/DhruvWork/trustready-grc/pkg/timespan"
 )
 
 func TestParseAndString(t *testing.T) {

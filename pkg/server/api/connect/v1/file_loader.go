@@ -26,10 +26,10 @@ import (
 
 	"github.com/vikstrous/dataloadgen"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/dataloader"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/dataloader"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 func (r *Resolver) loadFile(ctx context.Context, fileID gid.GID) (*types.File, error) {

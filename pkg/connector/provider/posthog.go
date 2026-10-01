@@ -26,8 +26,8 @@ import (
 	"net/http"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // posthogRegistration is PostHog — Cloud (US + EU) and self-hosted, under one

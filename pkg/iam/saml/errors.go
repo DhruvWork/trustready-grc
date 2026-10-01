@@ -23,8 +23,8 @@ package saml
 import (
 	"fmt"
 
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
 )
 
 type ErrSAMLConfigurationNotFound struct{ ConfigID gid.GID }

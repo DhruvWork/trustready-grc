@@ -38,7 +38,7 @@ import (
 	"github.com/openai/openai-go/packages/ssestream"
 	"github.com/openai/openai-go/responses"
 	"github.com/openai/openai-go/shared"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 const (

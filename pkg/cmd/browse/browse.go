@@ -27,7 +27,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdBrowse(f *cmdutil.Factory) *cobra.Command {

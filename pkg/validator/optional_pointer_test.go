@@ -23,7 +23,7 @@ package validator
 import (
 	"testing"
 
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 // CustomStringType simulates coredata.AssetType

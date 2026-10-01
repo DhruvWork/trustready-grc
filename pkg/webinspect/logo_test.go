@@ -27,7 +27,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/webinspect"
+	"github.com/DhruvWork/trustready-grc/pkg/webinspect"
 )
 
 func parseTestHTML(t *testing.T, rawURL string, body string) *webinspect.PageInfo {

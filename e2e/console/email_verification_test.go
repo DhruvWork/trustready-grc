@@ -25,8 +25,8 @@ import (
 	"testing"
 	"time"
 
-	"go.probo.inc/probo/e2e/internal/journey"
-	"go.probo.inc/probo/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/journey"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
 )
 
 const (

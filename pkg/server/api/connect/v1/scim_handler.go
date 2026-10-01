@@ -38,12 +38,12 @@ import (
 	scimfilter "github.com/scim2/filter-parser/v2"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/bearertoken"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
-	scimservice "go.probo.inc/probo/pkg/iam/scim"
-	"go.probo.inc/probo/pkg/server/api/clientip"
+	"github.com/DhruvWork/trustready-grc/pkg/bearertoken"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	scimservice "github.com/DhruvWork/trustready-grc/pkg/iam/scim"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/clientip"
 )
 
 type (

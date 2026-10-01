@@ -26,12 +26,12 @@ import (
 
 	"go.gearno.de/kit/log"
 	"go.gearno.de/x/ref"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 func newAWSConnectorSetup(setup cloudaws.ConnectorSetup) *types.AWSConnectorSetup {

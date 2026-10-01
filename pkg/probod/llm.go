@@ -27,9 +27,9 @@ import (
 	"go.gearno.de/kit/httpclient"
 	"go.gearno.de/kit/log"
 	"go.opentelemetry.io/otel/trace"
-	"go.probo.inc/probo/pkg/llm"
-	llmanthropic "go.probo.inc/probo/pkg/llm/anthropic"
-	llmopenai "go.probo.inc/probo/pkg/llm/openai"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
+	llmanthropic "github.com/DhruvWork/trustready-grc/pkg/llm/anthropic"
+	llmopenai "github.com/DhruvWork/trustready-grc/pkg/llm/openai"
 )
 
 // buildLLMClient creates an LLM client for the given provider config.

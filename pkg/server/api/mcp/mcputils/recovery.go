@@ -28,9 +28,9 @@ import (
 
 	"go.gearno.de/kit/log"
 	mcpgenmcp "go.probo.inc/mcpgen/mcp"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 // NewRecoverFunc returns a RecoverFunc for the generated MCP server that

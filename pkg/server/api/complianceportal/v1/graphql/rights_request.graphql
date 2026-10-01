@@ -1,32 +1,32 @@
 enum RightsRequestType
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.RightsRequestType") {
-  ACCESS @goEnum(value: "go.probo.inc/probo/pkg/coredata.RightsRequestTypeAccess")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestType") {
+  ACCESS @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestTypeAccess")
   DELETION
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.RightsRequestTypeDeletion")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestTypeDeletion")
   RECTIFICATION
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.RightsRequestTypeRectification"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestTypeRectification"
     )
   PORTABILITY
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.RightsRequestTypePortability"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestTypePortability"
     )
   OBJECTION
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.RightsRequestTypeObjection")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestTypeObjection")
   COMPLAINT
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.RightsRequestTypeComplaint")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestTypeComplaint")
 }
 
 enum RightsRequestState
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.RightsRequestState") {
-  TODO @goEnum(value: "go.probo.inc/probo/pkg/coredata.RightsRequestStateTodo")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestState") {
+  TODO @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestStateTodo")
   IN_PROGRESS
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.RightsRequestStateInProgress"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestStateInProgress"
     )
-  DONE @goEnum(value: "go.probo.inc/probo/pkg/coredata.RightsRequestStateDone")
+  DONE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestStateDone")
   REJECTED
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.RightsRequestStateRejected")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestStateRejected")
 }
 
 type RightsRequest implements Node {

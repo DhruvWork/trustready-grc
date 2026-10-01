@@ -20,7 +20,7 @@
 
 package task
 
-import "go.probo.inc/probo/pkg/coredata"
+import "github.com/DhruvWork/trustready-grc/pkg/coredata"
 
 const (
 	scopeV1TaskRead coredata.OAuth2Scope = "v1:task:read"

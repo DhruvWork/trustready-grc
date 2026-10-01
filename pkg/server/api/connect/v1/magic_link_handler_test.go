@@ -26,9 +26,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/securecookie"
-	connect_v1 "go.probo.inc/probo/pkg/server/api/connect/v1"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/securecookie"
+	connect_v1 "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1"
 )
 
 func newTestMagicLinkHandler(t *testing.T) *connect_v1.MagicLinkHandler {

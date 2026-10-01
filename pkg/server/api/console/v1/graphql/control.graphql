@@ -1,72 +1,72 @@
 enum ControlMaturityLevel
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ControlMaturityLevel") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevel") {
     NONE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ControlMaturityLevelNone"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevelNone"
         )
     INITIAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ControlMaturityLevelInitial"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevelInitial"
         )
     MANAGED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ControlMaturityLevelManaged"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevelManaged"
         )
     DEFINED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ControlMaturityLevelDefined"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevelDefined"
         )
     QUANTITATIVELY_MANAGED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ControlMaturityLevelQuantitativelyManaged"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevelQuantitativelyManaged"
         )
     OPTIMIZING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ControlMaturityLevelOptimizing"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevelOptimizing"
         )
 }
 
 enum ControlOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ControlOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ControlOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlOrderFieldCreatedAt"
         )
     SECTION_TITLE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ControlOrderFieldSectionTitle"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ControlOrderFieldSectionTitle"
         )
 }
 
 enum ApplicabilityStatementOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ApplicabilityStatementOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ApplicabilityStatementOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ApplicabilityStatementOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ApplicabilityStatementOrderFieldCreatedAt"
         )
     CONTROL_SECTION_TITLE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ApplicabilityStatementOrderFieldControlSectionTitle"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ApplicabilityStatementOrderFieldControlSectionTitle"
         )
 }
 
 enum StatementOfApplicabilityOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.StatementOfApplicabilityOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.StatementOfApplicabilityOrderField"
     ) {
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.StatementOfApplicabilityOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.StatementOfApplicabilityOrderFieldName"
         )
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.StatementOfApplicabilityOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.StatementOfApplicabilityOrderFieldCreatedAt"
         )
 }
 
 input ControlOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ControlOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ControlOrderBy"
     ) {
     direction: OrderDirection!
     field: ControlOrderField!
@@ -74,7 +74,7 @@ input ControlOrder
 
 input ApplicabilityStatementOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ApplicabilityStatementOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ApplicabilityStatementOrderBy"
     ) {
     direction: OrderDirection!
     field: ApplicabilityStatementOrderField!
@@ -82,7 +82,7 @@ input ApplicabilityStatementOrder
 
 input StatementOfApplicabilityOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.StatementOfApplicabilityOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.StatementOfApplicabilityOrderBy"
     ) {
     direction: OrderDirection!
     field: StatementOfApplicabilityOrderField!
@@ -149,7 +149,7 @@ type Control implements Node {
 
 type ControlConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ControlConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ControlConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [ControlEdge!]!
@@ -182,7 +182,7 @@ type StatementOfApplicability implements Node {
 
 type ApplicabilityStatementConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ApplicabilityStatementConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ApplicabilityStatementConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [ApplicabilityStatementEdge!]!
@@ -208,7 +208,7 @@ type ApplicabilityStatement implements Node {
 
 type StatementOfApplicabilityConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.StatementOfApplicabilityConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.StatementOfApplicabilityConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [StatementOfApplicabilityEdge!]!

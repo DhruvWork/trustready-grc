@@ -26,7 +26,7 @@ import (
 	"strconv"
 
 	"github.com/99designs/gqlgen/graphql"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type OAuth2ScopeScalar = coredata.OAuth2Scope

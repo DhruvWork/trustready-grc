@@ -22,19 +22,19 @@ package task
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/task/activity"
-	"go.probo.inc/probo/pkg/cmd/task/comment"
-	"go.probo.inc/probo/pkg/cmd/task/create"
-	"go.probo.inc/probo/pkg/cmd/task/delete"
-	linklinear "go.probo.inc/probo/pkg/cmd/task/link-linear"
-	"go.probo.inc/probo/pkg/cmd/task/list"
-	listlinearissues "go.probo.inc/probo/pkg/cmd/task/list-linear-issues"
-	listlinearteams "go.probo.inc/probo/pkg/cmd/task/list-linear-teams"
-	publishlinear "go.probo.inc/probo/pkg/cmd/task/publish-linear"
-	unlinkexternal "go.probo.inc/probo/pkg/cmd/task/unlink-external"
-	"go.probo.inc/probo/pkg/cmd/task/update"
-	"go.probo.inc/probo/pkg/cmd/task/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/activity"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/comment"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/delete"
+	linklinear "github.com/DhruvWork/trustready-grc/pkg/cmd/task/link-linear"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/list"
+	listlinearissues "github.com/DhruvWork/trustready-grc/pkg/cmd/task/list-linear-issues"
+	listlinearteams "github.com/DhruvWork/trustready-grc/pkg/cmd/task/list-linear-teams"
+	publishlinear "github.com/DhruvWork/trustready-grc/pkg/cmd/task/publish-linear"
+	unlinkexternal "github.com/DhruvWork/trustready-grc/pkg/cmd/task/unlink-external"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/task/view"
 )
 
 func NewCmdTask(f *cmdutil.Factory) *cobra.Command {

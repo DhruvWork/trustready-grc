@@ -26,7 +26,7 @@ import (
 	"fmt"
 	"strings"
 
-	"go.probo.inc/probo/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
 )
 
 type ConnectorConfig struct {

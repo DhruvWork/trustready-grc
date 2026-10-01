@@ -1,25 +1,25 @@
 enum EvidenceState
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.EvidenceState") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.EvidenceState") {
     FULFILLED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.EvidenceStateFulfilled")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.EvidenceStateFulfilled")
     REQUESTED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.EvidenceStateRequested")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.EvidenceStateRequested")
 }
 
 enum EvidenceType
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.EvidenceType") {
-    FILE @goEnum(value: "go.probo.inc/probo/pkg/coredata.EvidenceTypeFile")
-    LINK @goEnum(value: "go.probo.inc/probo/pkg/coredata.EvidenceTypeLink")
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.EvidenceType") {
+    FILE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.EvidenceTypeFile")
+    LINK @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.EvidenceTypeLink")
 }
 
 enum EvidenceOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.EvidenceOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.EvidenceOrderField") {
     CREATED_AT
 }
 
 input EvidenceOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EvidenceOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EvidenceOrderBy"
     ) {
     direction: OrderDirection!
     field: EvidenceOrderField!
@@ -45,7 +45,7 @@ type Evidence implements Node {
 
 type EvidenceConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EvidenceConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EvidenceConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [EvidenceEdge!]!

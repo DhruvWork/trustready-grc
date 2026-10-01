@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"time"
 
-	"go.probo.inc/probo/pkg/timespan"
+	"github.com/DhruvWork/trustready-grc/pkg/timespan"
 )
 
 // After validates that a time is after the specified reference time.

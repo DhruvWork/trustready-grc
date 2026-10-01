@@ -24,7 +24,7 @@ import (
 	"strings"
 	"testing"
 
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 func TestURL(t *testing.T) {

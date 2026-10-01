@@ -29,7 +29,7 @@ import (
 	"sort"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // railwayMembersQuery fetches the authenticated account and the members of all

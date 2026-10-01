@@ -24,11 +24,11 @@ import (
 	"context"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/cloud"
-	"go.probo.inc/probo/pkg/connector/provider"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/cloud"
+	"github.com/DhruvWork/trustready-grc/pkg/connector/provider"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 // OpenSession opens authenticated access to a workload identity connector.

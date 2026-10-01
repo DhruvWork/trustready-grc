@@ -28,7 +28,7 @@ import (
 	"strings"
 
 	"go.gearno.de/kit/httpserver"
-	"go.probo.inc/probo/pkg/server/httpx"
+	"github.com/DhruvWork/trustready-grc/pkg/server/httpx"
 )
 
 const (

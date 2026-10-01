@@ -27,8 +27,8 @@ import (
 
 	"go.gearno.de/kit/log"
 	"go.gearno.de/x/ref"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/server/api/mcp/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/mcp/v1/types"
 )
 
 func (r *Resolver) workloadIdentitySettings(

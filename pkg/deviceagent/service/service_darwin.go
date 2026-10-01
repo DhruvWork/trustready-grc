@@ -32,7 +32,7 @@ import (
 	"syscall"
 	"text/template"
 
-	"go.probo.inc/probo/pkg/deviceagent"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent"
 )
 
 const (

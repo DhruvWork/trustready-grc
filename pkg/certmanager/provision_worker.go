@@ -28,10 +28,10 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/crypto/cipher"
-	"go.probo.inc/probo/pkg/dnsclient"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/cipher"
+	"github.com/DhruvWork/trustready-grc/pkg/dnsclient"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 	"golang.org/x/crypto/acme"
 )
 
@@ -52,7 +52,7 @@ const (
 	// worker claim and process the same row concurrently.
 	provisioningPollLease = processTickTimeout + 30*time.Second
 
-	tracerName = "go.probo.inc/probo/pkg/certmanager"
+	tracerName = "github.com/DhruvWork/trustready-grc/pkg/certmanager"
 )
 
 type (

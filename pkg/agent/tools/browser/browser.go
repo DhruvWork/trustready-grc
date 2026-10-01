@@ -29,8 +29,8 @@ import (
 	"time"
 
 	"github.com/chromedp/chromedp"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/agent/tools/internal/netcheck"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/tools/internal/netcheck"
 )
 
 const (

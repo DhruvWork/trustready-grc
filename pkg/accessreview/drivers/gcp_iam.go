@@ -27,7 +27,7 @@ import (
 	"slices"
 	"strings"
 
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
 	cloudresourcemanager "google.golang.org/api/cloudresourcemanager/v1"
 	iam "google.golang.org/api/iam/v1"
 )

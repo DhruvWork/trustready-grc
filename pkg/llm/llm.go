@@ -30,7 +30,7 @@ import (
 	"go.opentelemetry.io/otel/trace"
 )
 
-var tracerName = "go.probo.inc/probo/pkg/llm"
+var tracerName = "github.com/DhruvWork/trustready-grc/pkg/llm"
 
 type (
 	Option func(*Client)

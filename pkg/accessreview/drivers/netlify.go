@@ -28,8 +28,8 @@ import (
 	"net/url"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/rfc5988"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/rfc5988"
 )
 
 // NetlifyDriver fetches account members from the Netlify REST API

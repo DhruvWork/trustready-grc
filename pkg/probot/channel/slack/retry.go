@@ -24,7 +24,7 @@ import (
 	"errors"
 	"time"
 
-	"go.probo.inc/probo/pkg/probot"
+	"github.com/DhruvWork/trustready-grc/pkg/probot"
 )
 
 func slackAPIRetryDelay(attempt int, base, max time.Duration, err error) time.Duration {

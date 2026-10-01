@@ -20,7 +20,7 @@
 
 package types
 
-import "go.probo.inc/probo/pkg/page"
+import "github.com/DhruvWork/trustready-grc/pkg/page"
 
 type (
 	OrderBy[T page.OrderField] struct {

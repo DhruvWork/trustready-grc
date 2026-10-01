@@ -23,13 +23,13 @@ package complianceportal
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/bot"
-	portal "go.probo.inc/probo/pkg/complianceportal"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/mail"
-	messaging "go.probo.inc/probo/pkg/probot"
+	"github.com/DhruvWork/trustready-grc/pkg/bot"
+	portal "github.com/DhruvWork/trustready-grc/pkg/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
+	messaging "github.com/DhruvWork/trustready-grc/pkg/probot"
 )
 
 const capabilityName = portal.AccessCapability

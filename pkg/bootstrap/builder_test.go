@@ -29,13 +29,13 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/crypto/keys"
-	"go.probo.inc/probo/pkg/crypto/pem"
-	"go.probo.inc/probo/pkg/probodconfig"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/keys"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/pem"
+	"github.com/DhruvWork/trustready-grc/pkg/probodconfig"
 )
 
 // The configuration decodes key material as it is read, so a test that reaches

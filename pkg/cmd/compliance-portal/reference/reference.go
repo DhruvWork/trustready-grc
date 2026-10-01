@@ -22,10 +22,10 @@ package reference
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/reference/create"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/reference/delete"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/reference/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/reference/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/reference/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/reference/list"
 )
 
 func NewCmdReference(f *cmdutil.Factory) *cobra.Command {

@@ -38,8 +38,8 @@ import (
 	"strings"
 	"sync"
 
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // Registry holds the per-provider *Registration set used by the rest

@@ -28,7 +28,7 @@ import (
 	"net/url"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // LangfuseDriver lists the members of a single Langfuse organization via the

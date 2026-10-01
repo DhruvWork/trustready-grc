@@ -18,14 +18,14 @@ package complianceportal_v1
 
 import (
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/complianceportal/visitor"
-	"go.probo.inc/probo/pkg/esign"
-	"go.probo.inc/probo/pkg/filemanager"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/mailman"
-	"go.probo.inc/probo/pkg/resourcealias"
-	"go.probo.inc/probo/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor"
+	"github.com/DhruvWork/trustready-grc/pkg/esign"
+	"github.com/DhruvWork/trustready-grc/pkg/filemanager"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/mailman"
+	"github.com/DhruvWork/trustready-grc/pkg/resourcealias"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 )
 
 type (

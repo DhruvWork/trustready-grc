@@ -27,9 +27,9 @@ import (
 	"time"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/packages/emails"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/packages/emails"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 func (s *Service) GetPortal(

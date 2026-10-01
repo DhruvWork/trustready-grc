@@ -28,7 +28,7 @@ import (
 	"net/http"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // mondayUsersListQuery paginates Monday.com users by `page` (1-indexed).

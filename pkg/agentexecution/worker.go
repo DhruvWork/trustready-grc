@@ -29,8 +29,8 @@ import (
 	"go.gearno.de/kit/pg"
 	"go.gearno.de/kit/worker"
 	"go.opentelemetry.io/otel/trace"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type (

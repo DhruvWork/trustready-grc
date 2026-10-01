@@ -25,8 +25,8 @@ import (
 	"fmt"
 	"net/url"
 
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
-	"go.probo.inc/probo/pkg/coredata"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type (

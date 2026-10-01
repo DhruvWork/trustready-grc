@@ -26,8 +26,8 @@ import (
 	"fmt"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 var ErrCannotMergeIntoSelf = errors.New("cannot merge a common third party into itself")

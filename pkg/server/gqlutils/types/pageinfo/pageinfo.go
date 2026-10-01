@@ -21,7 +21,7 @@
 package pageinfo
 
 import (
-	"go.probo.inc/probo/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
 )
 
 type PageInfo struct {

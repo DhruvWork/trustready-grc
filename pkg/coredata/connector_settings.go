@@ -24,7 +24,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
 )
 
 const (

@@ -150,9 +150,9 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/probo"
-	complianceportal_v1 "go.probo.inc/probo/pkg/server/api/complianceportal/v1"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	complianceportal_v1 "github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1"
 )
 ```
 

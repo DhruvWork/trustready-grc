@@ -27,8 +27,8 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cli/api"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cli/api"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 const uploadMutation = `

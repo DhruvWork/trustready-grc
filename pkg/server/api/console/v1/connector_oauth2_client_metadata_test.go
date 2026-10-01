@@ -28,7 +28,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
 )
 
 // TestHandleConnectorOAuth2ClientMetadata verifies the public CIMD document:

@@ -29,12 +29,12 @@ import (
 
 	"github.com/spf13/cobra"
 	"go.gearno.de/kit/pg"
-	clicmdutil "go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
-	seed "go.probo.inc/probo/pkg/proboctl/seed/common-third-parties"
-	"go.probo.inc/probo/pkg/thirdparty"
+	clicmdutil "github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
+	seed "github.com/DhruvWork/trustready-grc/pkg/proboctl/seed/common-third-parties"
+	"github.com/DhruvWork/trustready-grc/pkg/thirdparty"
 )
 
 // duplicateEntryJSON is one catalog row in the JSON report.

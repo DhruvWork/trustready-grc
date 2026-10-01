@@ -1,197 +1,197 @@
 enum ThirdPartyVettingStatus
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ThirdPartyVettingStatus") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyVettingStatus") {
     PENDING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyVettingStatusPending"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyVettingStatusPending"
         )
     PROCESSING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyVettingStatusProcessing"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyVettingStatusProcessing"
         )
     COMPLETED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyVettingStatusCompleted"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyVettingStatusCompleted"
         )
     FAILED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyVettingStatusFailed"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyVettingStatusFailed"
         )
 }
 
 enum ThirdPartyCategory
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategory") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategory") {
     ANALYTICS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryAnalytics"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryAnalytics"
         )
     CLOUD_MONITORING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryCloudMonitoring"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryCloudMonitoring"
         )
     CLOUD_PROVIDER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryCloudProvider"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryCloudProvider"
         )
     COLLABORATION
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryCollaboration"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryCollaboration"
         )
     CUSTOMER_SUPPORT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryCustomerSupport"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryCustomerSupport"
         )
     DATA_STORAGE_AND_PROCESSING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryDataStorageAndProcessing"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryDataStorageAndProcessing"
         )
     DOCUMENT_MANAGEMENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryDocumentManagement"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryDocumentManagement"
         )
     EMPLOYEE_MANAGEMENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryEmployeeManagement"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryEmployeeManagement"
         )
     ENGINEERING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryEngineering"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryEngineering"
         )
     FINANCE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryFinance")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryFinance")
     IDENTITY_PROVIDER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryIdentityProvider"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryIdentityProvider"
         )
-    IT @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryIT")
+    IT @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryIT")
     MARKETING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryMarketing"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryMarketing"
         )
     OFFICE_OPERATIONS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryOfficeOperations"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryOfficeOperations"
         )
-    OTHER @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryOther")
+    OTHER @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryOther")
     PASSWORD_MANAGEMENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryPasswordManagement"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryPasswordManagement"
         )
     PRODUCT_AND_DESIGN
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryProductAndDesign"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryProductAndDesign"
         )
     PROFESSIONAL_SERVICES
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryProfessionalServices"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryProfessionalServices"
         )
     RECRUITING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryRecruiting"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryRecruiting"
         )
-    SALES @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategorySales")
+    SALES @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategorySales")
     SECURITY
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategorySecurity")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategorySecurity")
     VERSION_CONTROL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyCategoryVersionControl"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyCategoryVersionControl"
         )
 }
 
 enum DataSensitivity
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DataSensitivity") {
-    NONE @goEnum(value: "go.probo.inc/probo/pkg/coredata.DataSensitivityNone")
-    LOW @goEnum(value: "go.probo.inc/probo/pkg/coredata.DataSensitivityLow")
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataSensitivity") {
+    NONE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataSensitivityNone")
+    LOW @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataSensitivityLow")
     MEDIUM
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DataSensitivityMedium")
-    HIGH @goEnum(value: "go.probo.inc/probo/pkg/coredata.DataSensitivityHigh")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataSensitivityMedium")
+    HIGH @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataSensitivityHigh")
     CRITICAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DataSensitivityCritical"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DataSensitivityCritical"
         )
 }
 
 enum BusinessImpact
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.BusinessImpact") {
-    LOW @goEnum(value: "go.probo.inc/probo/pkg/coredata.BusinessImpactLow")
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessImpact") {
+    LOW @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessImpactLow")
     MEDIUM
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.BusinessImpactMedium")
-    HIGH @goEnum(value: "go.probo.inc/probo/pkg/coredata.BusinessImpactHigh")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessImpactMedium")
+    HIGH @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessImpactHigh")
     CRITICAL
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.BusinessImpactCritical")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessImpactCritical")
 }
 
 enum ThirdPartyOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ThirdPartyOrderField") {
-    NAME @goEnum(value: "go.probo.inc/probo/pkg/coredata.ThirdPartyOrderFieldName")
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyOrderField") {
+    NAME @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyOrderFieldName")
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyOrderFieldCreatedAt"
         )
     UPDATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyOrderFieldUpdatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyOrderFieldUpdatedAt"
         )
 }
 
 enum ThirdPartyComplianceReportOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ThirdPartyComplianceReportOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyComplianceReportOrderField"
     ) {
     REPORT_DATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyComplianceReportOrderFieldReportDate"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyComplianceReportOrderFieldReportDate"
         )
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyComplianceReportOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyComplianceReportOrderFieldCreatedAt"
         )
 }
 
 enum ThirdPartyContactOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ThirdPartyContactOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyContactOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyContactOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyContactOrderFieldCreatedAt"
         )
     FULL_NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyContactOrderFieldFullName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyContactOrderFieldFullName"
         )
     EMAIL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyContactOrderFieldEmail"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyContactOrderFieldEmail"
         )
 }
 
 enum ThirdPartyServiceOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ThirdPartyServiceOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyServiceOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyServiceOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyServiceOrderFieldCreatedAt"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyServiceOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyServiceOrderFieldName"
         )
 }
 
 enum ThirdPartyRiskAssessmentOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ThirdPartyRiskAssessmentOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyRiskAssessmentOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyRiskAssessmentOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyRiskAssessmentOrderFieldCreatedAt"
         )
     EXPIRES_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ThirdPartyRiskAssessmentOrderFieldExpiresAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyRiskAssessmentOrderFieldExpiresAt"
         )
 }
 
 input ThirdPartyOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ThirdPartyOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ThirdPartyOrderBy"
     ) {
     direction: OrderDirection!
     field: ThirdPartyOrderField!
@@ -204,7 +204,7 @@ input ThirdPartyFilter {
 
 input ThirdPartyComplianceReportOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ThirdPartyComplianceReportOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ThirdPartyComplianceReportOrderBy"
     ) {
     direction: OrderDirection!
     field: ThirdPartyComplianceReportOrderField!
@@ -212,7 +212,7 @@ input ThirdPartyComplianceReportOrder
 
 input ThirdPartyContactOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ThirdPartyContactOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ThirdPartyContactOrderBy"
     ) {
     direction: OrderDirection!
     field: ThirdPartyContactOrderField!
@@ -220,7 +220,7 @@ input ThirdPartyContactOrder
 
 input ThirdPartyServiceOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ThirdPartyServiceOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ThirdPartyServiceOrderBy"
     ) {
     direction: OrderDirection!
     field: ThirdPartyServiceOrderField!
@@ -399,7 +399,7 @@ type ThirdPartyRiskAssessment implements Node {
 
 type ThirdPartyConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ThirdPartyConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ThirdPartyConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [ThirdPartyEdge!]!

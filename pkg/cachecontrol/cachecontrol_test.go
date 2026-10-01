@@ -27,7 +27,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/cachecontrol"
+	"github.com/DhruvWork/trustready-grc/pkg/cachecontrol"
 )
 
 func TestParseRequestDirective(t *testing.T) {

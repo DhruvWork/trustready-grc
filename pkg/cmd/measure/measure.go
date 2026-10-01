@@ -22,16 +22,16 @@ package measure
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/measure/create"
-	"go.probo.inc/probo/pkg/cmd/measure/delete"
-	linkthirdparty "go.probo.inc/probo/pkg/cmd/measure/link-third-party"
-	linktreatmentplan "go.probo.inc/probo/pkg/cmd/measure/link-treatment-plan"
-	"go.probo.inc/probo/pkg/cmd/measure/list"
-	unlinkthirdparty "go.probo.inc/probo/pkg/cmd/measure/unlink-third-party"
-	unlinktreatmentplan "go.probo.inc/probo/pkg/cmd/measure/unlink-treatment-plan"
-	"go.probo.inc/probo/pkg/cmd/measure/update"
-	"go.probo.inc/probo/pkg/cmd/measure/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/measure/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/measure/delete"
+	linkthirdparty "github.com/DhruvWork/trustready-grc/pkg/cmd/measure/link-third-party"
+	linktreatmentplan "github.com/DhruvWork/trustready-grc/pkg/cmd/measure/link-treatment-plan"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/measure/list"
+	unlinkthirdparty "github.com/DhruvWork/trustready-grc/pkg/cmd/measure/unlink-third-party"
+	unlinktreatmentplan "github.com/DhruvWork/trustready-grc/pkg/cmd/measure/unlink-treatment-plan"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/measure/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/measure/view"
 )
 
 func NewCmdMeasure(f *cmdutil.Factory) *cobra.Command {

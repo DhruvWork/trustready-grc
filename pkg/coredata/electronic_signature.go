@@ -31,9 +31,9 @@ import (
 	"github.com/jackc/pgx/v5"
 	"go.gearno.de/kit/pg"
 	"go.gearno.de/x/ref"
-	"go.probo.inc/probo/pkg/crypto/hash"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/hash"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
 )
 
 type ElectronicSignature struct {

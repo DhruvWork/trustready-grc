@@ -26,7 +26,7 @@ import (
 	"strconv"
 
 	"github.com/99designs/gqlgen/graphql"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 type GIDScalar = gid.GID

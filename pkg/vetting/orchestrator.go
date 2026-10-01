@@ -26,11 +26,11 @@ import (
 	"strings"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/agent/tools/browser"
-	"go.probo.inc/probo/pkg/agent/tools/search"
-	"go.probo.inc/probo/pkg/agent/tools/security"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/tools/browser"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/tools/search"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/tools/security"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 var (

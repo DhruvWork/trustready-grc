@@ -24,9 +24,9 @@ import (
 	"fmt"
 	"os"
 
-	"go.probo.inc/probo/pkg/cmd/iostreams"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
-	"go.probo.inc/probo/pkg/proboctl/root"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/iostreams"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/root"
 )
 
 var version string = "unknown"

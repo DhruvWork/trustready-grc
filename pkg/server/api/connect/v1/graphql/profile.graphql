@@ -29,43 +29,43 @@ type Profile implements Node {
 }
 
 enum ProfileState
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.ProfileState") {
-  PENDING @goEnum(value: "go.probo.inc/probo/pkg/coredata.ProfileStatePending")
-  ACTIVE @goEnum(value: "go.probo.inc/probo/pkg/coredata.ProfileStateActive")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileState") {
+  PENDING @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileStatePending")
+  ACTIVE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileStateActive")
   DEACTIVATED
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ProfileStateDeactivated")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileStateDeactivated")
 }
 
 enum ProfileSource
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.ProfileSource") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileSource") {
   MANUAL
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ProfileSourceManual")
-  SAML @goEnum(value: "go.probo.inc/probo/pkg/coredata.ProfileSourceSAML")
-  SCIM @goEnum(value: "go.probo.inc/probo/pkg/coredata.ProfileSourceSCIM")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileSourceManual")
+  SAML @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileSourceSAML")
+  SCIM @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileSourceSCIM")
 }
 
 enum ProfileOrderField
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderField") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderField") {
   FULL_NAME
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldFullName"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldFullName"
     )
   CREATED_AT
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldCreatedAt"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldCreatedAt"
     )
   EMAIL_ADDRESS
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldEmailAddress"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldEmailAddress"
     )
-  KIND @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldKind")
+  KIND @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldKind")
   ORGANIZATION_NAME
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldOrganizationName"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldOrganizationName"
     )
   STATE
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldState"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldState"
     )
 }
 
@@ -79,7 +79,7 @@ input ProfileFilter {
 
 input ProfileOrder
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.ProfileOrderBy"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.ProfileOrderBy"
   ) {
   direction: OrderDirection!
   field: ProfileOrderField!
@@ -87,7 +87,7 @@ input ProfileOrder
 
 type ProfileConnection
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.ProfileConnection"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.ProfileConnection"
   ) {
   totalCount: Int @goField(forceResolver: true)
   edges: [ProfileEdge!]!

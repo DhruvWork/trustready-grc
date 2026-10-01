@@ -29,11 +29,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
 	"github.com/aws/smithy-go"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/cloud"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/cloud"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 // awsRegistration declares AWS as a workload identity provider: Probo holds no

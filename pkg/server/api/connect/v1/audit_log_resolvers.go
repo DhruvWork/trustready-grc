@@ -10,12 +10,12 @@ import (
 	"errors"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/schema"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // Organization is the resolver for the organization field.

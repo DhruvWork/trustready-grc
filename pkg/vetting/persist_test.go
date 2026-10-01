@@ -25,7 +25,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func TestBuildRiskAssessmentNotesFromResult_FiltersDocument(t *testing.T) {

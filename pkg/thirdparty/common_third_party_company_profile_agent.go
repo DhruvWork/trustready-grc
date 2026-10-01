@@ -26,9 +26,9 @@ import (
 	"strings"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/agent/tools/search"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent/tools/search"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 //go:embed prompts/common_third_party_company_profile.txt.tmpl

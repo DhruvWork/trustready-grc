@@ -22,12 +22,12 @@ package treatmentplan
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/treatment-plan/create"
-	"go.probo.inc/probo/pkg/cmd/treatment-plan/delete"
-	"go.probo.inc/probo/pkg/cmd/treatment-plan/list"
-	"go.probo.inc/probo/pkg/cmd/treatment-plan/update"
-	"go.probo.inc/probo/pkg/cmd/treatment-plan/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/treatment-plan/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/treatment-plan/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/treatment-plan/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/treatment-plan/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/treatment-plan/view"
 )
 
 func NewCmdTreatmentPlan(f *cmdutil.Factory) *cobra.Command {

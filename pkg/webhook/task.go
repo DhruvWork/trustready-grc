@@ -25,8 +25,8 @@ import (
 	"fmt"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	webhooktypes "go.probo.inc/probo/pkg/webhook/types"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	webhooktypes "github.com/DhruvWork/trustready-grc/pkg/webhook/types"
 )
 
 func InsertTaskUpdated(

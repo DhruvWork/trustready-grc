@@ -26,7 +26,7 @@ import (
 	"strings"
 
 	"github.com/chromedp/chromedp"
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 // waitForPage returns chromedp actions that wait for the page to fully load,

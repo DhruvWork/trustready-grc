@@ -1,34 +1,34 @@
 enum AuditLogActorType
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AuditLogActorType"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditLogActorType"
     ) {
     USER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AuditLogActorTypeUser"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditLogActorTypeUser"
         )
     API_KEY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AuditLogActorTypeAPIKey"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditLogActorTypeAPIKey"
         )
     SYSTEM
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AuditLogActorTypeSystem"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditLogActorTypeSystem"
         )
 }
 
 enum AuditLogEntryOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AuditLogEntryOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditLogEntryOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AuditLogEntryOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AuditLogEntryOrderFieldCreatedAt"
         )
 }
 
 input AuditLogEntryOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AuditLogEntryOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AuditLogEntryOrderBy"
     ) {
     field: AuditLogEntryOrderField!
     direction: OrderDirection!
@@ -57,7 +57,7 @@ type AuditLogEntry implements Node {
 
 type AuditLogEntryConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AuditLogEntryConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AuditLogEntryConnection"
     ) {
     edges: [AuditLogEntryEdge!]!
     pageInfo: PageInfo!

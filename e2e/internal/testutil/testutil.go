@@ -34,7 +34,7 @@ import (
 	"time"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/bootstrap"
+	"github.com/DhruvWork/trustready-grc/pkg/bootstrap"
 )
 
 var (

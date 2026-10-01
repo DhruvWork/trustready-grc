@@ -23,7 +23,7 @@ package complianceportal
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type ctxKey struct{ name string }

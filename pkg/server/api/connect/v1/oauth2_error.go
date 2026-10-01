@@ -27,9 +27,9 @@ import (
 
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/iam/oauth2"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/types"
-	"go.probo.inc/probo/pkg/server/httpx"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/httpx"
 )
 
 func (h *OAuth2Handler) handleAuthorizeError(w http.ResponseWriter, r *http.Request, err error, redirectURI, state string) {

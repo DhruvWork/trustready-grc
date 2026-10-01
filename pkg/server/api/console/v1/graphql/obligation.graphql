@@ -1,51 +1,51 @@
 enum ObligationStatus
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ObligationStatus") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationStatus") {
     NON_COMPLIANT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ObligationStatusNonCompliant"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationStatusNonCompliant"
         )
     PARTIALLY_COMPLIANT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ObligationStatusPartiallyCompliant"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationStatusPartiallyCompliant"
         )
     COMPLIANT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ObligationStatusCompliant"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationStatusCompliant"
         )
 }
 
 enum ObligationType
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ObligationType") {
-    LEGAL @goEnum(value: "go.probo.inc/probo/pkg/coredata.ObligationTypeLegal")
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationType") {
+    LEGAL @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationTypeLegal")
     CONTRACTUAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ObligationTypeContractual"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationTypeContractual"
         )
 }
 
 enum ObligationOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ObligationOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ObligationOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationOrderFieldCreatedAt"
         )
     LAST_REVIEW_DATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ObligationOrderFieldLastReviewDate"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationOrderFieldLastReviewDate"
         )
     DUE_DATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ObligationOrderFieldDueDate"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationOrderFieldDueDate"
         )
     STATUS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ObligationOrderFieldStatus"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationOrderFieldStatus"
         )
 }
 
 input ObligationOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ObligationOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ObligationOrderBy"
     ) {
     direction: OrderDirection!
     field: ObligationOrderField!
@@ -72,7 +72,7 @@ type Obligation implements Node {
 
 type ObligationConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ObligationConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ObligationConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [ObligationEdge!]!

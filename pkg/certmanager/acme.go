@@ -36,9 +36,9 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"go.gearno.de/kit/httpclient"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/crypto/keys"
-	"go.probo.inc/probo/pkg/crypto/pem"
-	"go.probo.inc/probo/pkg/version"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/keys"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/pem"
+	"github.com/DhruvWork/trustready-grc/pkg/version"
 	"golang.org/x/crypto/acme"
 )
 

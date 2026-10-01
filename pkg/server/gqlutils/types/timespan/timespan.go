@@ -27,7 +27,7 @@ import (
 	"strconv"
 
 	"github.com/99designs/gqlgen/graphql"
-	"go.probo.inc/probo/pkg/timespan"
+	"github.com/DhruvWork/trustready-grc/pkg/timespan"
 )
 
 type TimeSpanScalar = timespan.TimeSpan

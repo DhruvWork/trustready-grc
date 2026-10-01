@@ -26,7 +26,7 @@ import (
 	"strings"
 	"unicode"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 type (

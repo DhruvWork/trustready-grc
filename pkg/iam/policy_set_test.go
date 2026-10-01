@@ -25,7 +25,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
 )
 
 func TestPolicySet_AddAndMerge(t *testing.T) {

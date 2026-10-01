@@ -27,8 +27,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/deviceagent"
-	"go.probo.inc/probo/pkg/deviceagent/tray"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/tray"
 )
 
 func registerPlatformCommands(root *cobra.Command) {

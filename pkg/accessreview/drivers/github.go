@@ -33,8 +33,8 @@ import (
 	"time"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/rfc5988"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/rfc5988"
 )
 
 // GitHub REST path segments joined onto the driver's base URL. They are

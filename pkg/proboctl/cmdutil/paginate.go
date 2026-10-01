@@ -26,7 +26,7 @@ import (
 	"io"
 
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
 )
 
 // defaultPageSize is the forward page size used when neither --first nor

@@ -28,7 +28,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"go.probo.inc/probo/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
 )
 
 func TestFetchFailureMessage(t *testing.T) {

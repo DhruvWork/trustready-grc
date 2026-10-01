@@ -20,7 +20,7 @@
 
 package iam
 
-import "go.probo.inc/probo/pkg/coredata"
+import "github.com/DhruvWork/trustready-grc/pkg/coredata"
 
 const (
 	ScopeV1IAMRead coredata.OAuth2Scope = "v1:iam:read"

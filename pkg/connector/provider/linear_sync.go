@@ -21,7 +21,7 @@
 package provider
 
 import (
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func linearSyncRegistration() *Registration {

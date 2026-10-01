@@ -20,11 +20,11 @@ import (
 	"go.gearno.de/kit/httpclient"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/complianceportal/visitor"
-	"go.probo.inc/probo/pkg/iam/oauth2"
-	"go.probo.inc/probo/pkg/saferedirect"
-	"go.probo.inc/probo/pkg/server/api/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/saferedirect"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal"
 )
 
 type OAuthInitiateHandler struct {

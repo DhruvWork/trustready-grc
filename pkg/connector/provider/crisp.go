@@ -30,8 +30,8 @@ import (
 
 	"github.com/google/uuid"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func crispRegistration() *Registration {

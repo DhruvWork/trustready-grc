@@ -1,55 +1,55 @@
 enum RiskTreatment
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.RiskTreatment") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskTreatment") {
     MITIGATED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.RiskTreatmentMitigated")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskTreatmentMitigated")
     ACCEPTED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.RiskTreatmentAccepted")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskTreatmentAccepted")
     AVOIDED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.RiskTreatmentAvoided")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskTreatmentAvoided")
     TRANSFERRED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskTreatmentTransferred"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskTreatmentTransferred"
         )
 }
 
 enum RiskOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.RiskOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderFieldCreatedAt"
         )
     UPDATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskOrderFieldUpdatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderFieldUpdatedAt"
         )
-    NAME @goEnum(value: "go.probo.inc/probo/pkg/coredata.RiskOrderFieldName")
+    NAME @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderFieldName")
     REFERENCE_ID
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskOrderFieldReferenceID"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderFieldReferenceID"
         )
     CATEGORY
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.RiskOrderFieldCategory")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderFieldCategory")
     TREATMENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskOrderFieldTreatment"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderFieldTreatment"
         )
     INHERENT_RISK_SCORE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskOrderFieldInherentRiskScore"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderFieldInherentRiskScore"
         )
     RESIDUAL_RISK_SCORE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskOrderFieldResidualRiskScore"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderFieldResidualRiskScore"
         )
     OWNER_FULL_NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.RiskOrderFieldOwnerFullName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderFieldOwnerFullName"
         )
 }
 
 input RiskOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskOrderBy"
     ) {
     direction: OrderDirection!
     field: RiskOrderField!
@@ -139,7 +139,7 @@ type Risk implements Node {
 
 type RiskConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.RiskConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.RiskConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [RiskEdge!]!

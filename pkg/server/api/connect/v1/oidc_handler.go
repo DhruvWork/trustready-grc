@@ -29,13 +29,13 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/iam/oidc"
-	"go.probo.inc/probo/pkg/saferedirect"
-	"go.probo.inc/probo/pkg/securecookie"
-	"go.probo.inc/probo/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oidc"
+	"github.com/DhruvWork/trustready-grc/pkg/saferedirect"
+	"github.com/DhruvWork/trustready-grc/pkg/securecookie"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 )
 
 type OIDCHandler struct {

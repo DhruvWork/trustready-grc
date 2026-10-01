@@ -28,13 +28,13 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/cloud"
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/crypto/jose"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/cloud"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/jose"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 const testIssuerBase = "https://proboidentity.com"

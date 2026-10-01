@@ -32,8 +32,8 @@ import (
 
 	"github.com/digitorus/timestamp"
 	"go.gearno.de/x/ref"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/html2pdf"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/html2pdf"
 )
 
 type (

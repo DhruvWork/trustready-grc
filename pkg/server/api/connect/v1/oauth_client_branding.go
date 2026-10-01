@@ -17,8 +17,8 @@ package connect_v1
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/iam/oauth2"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types"
 )
 
 func oauthClientBranding(

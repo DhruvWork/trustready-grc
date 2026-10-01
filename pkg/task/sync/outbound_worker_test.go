@@ -26,7 +26,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func TestOutboundRetryDelay(t *testing.T) {

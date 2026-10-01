@@ -1,14 +1,14 @@
 enum FrameworkOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.FrameworkOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.FrameworkOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.FrameworkOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.FrameworkOrderFieldCreatedAt"
         )
 }
 
 input FrameworkOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.FrameworkOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.FrameworkOrderBy"
     ) {
     direction: OrderDirection!
     field: FrameworkOrderField!
@@ -40,7 +40,7 @@ type Framework implements Node {
 
 type FrameworkConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.FrameworkConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.FrameworkConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [FrameworkEdge!]!

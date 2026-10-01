@@ -26,7 +26,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/deviceagent"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent"
 )
 
 func TestEnrollURLPreflight(t *testing.T) {

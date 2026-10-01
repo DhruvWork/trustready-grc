@@ -24,7 +24,7 @@ import (
 	"os"
 	"testing"
 
-	internaltest "go.probo.inc/probo/internal/test"
+	internaltest "github.com/DhruvWork/trustready-grc/internal/test"
 )
 
 func TestMain(m *testing.M) {

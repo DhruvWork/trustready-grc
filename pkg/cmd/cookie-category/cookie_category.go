@@ -22,13 +22,13 @@ package cookiecategory
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/cookie-category/create"
-	"go.probo.inc/probo/pkg/cmd/cookie-category/delete"
-	"go.probo.inc/probo/pkg/cmd/cookie-category/list"
-	"go.probo.inc/probo/pkg/cmd/cookie-category/reorder"
-	"go.probo.inc/probo/pkg/cmd/cookie-category/update"
-	"go.probo.inc/probo/pkg/cmd/cookie-category/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cookie-category/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cookie-category/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cookie-category/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cookie-category/reorder"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cookie-category/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cookie-category/view"
 )
 
 func NewCmdCookieCategory(f *cmdutil.Factory) *cobra.Command {

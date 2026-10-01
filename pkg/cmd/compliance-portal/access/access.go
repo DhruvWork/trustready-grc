@@ -22,10 +22,10 @@ package access
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/access/activate"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/access/create"
-	"go.probo.inc/probo/pkg/cmd/compliance-portal/access/deactivate"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/access/activate"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/access/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/compliance-portal/access/deactivate"
 )
 
 func NewCmdAccess(f *cmdutil.Factory) *cobra.Command {

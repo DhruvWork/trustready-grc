@@ -24,7 +24,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/prosemirror"
+	"github.com/DhruvWork/trustready-grc/pkg/prosemirror"
 )
 
 // ProseMirrorPlainText wraps plaintext as a ProseMirror document (one

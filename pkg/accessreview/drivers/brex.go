@@ -28,7 +28,7 @@ import (
 	"net/url"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // BrexDriver fetches users from Brex via OAuth2-authenticated REST API

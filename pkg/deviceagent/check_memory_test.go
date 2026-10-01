@@ -28,7 +28,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/deviceagent/checks"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/checks"
 )
 
 func TestLoadCheckMemory_MissingFile(t *testing.T) {

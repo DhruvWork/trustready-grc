@@ -34,13 +34,13 @@ extend type Mutation {
 }
 
 enum SessionOrderField
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.SessionOrderField") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.SessionOrderField") {
   CREATED_AT
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.SessionOrderFieldCreatedAt")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SessionOrderFieldCreatedAt")
   EXPIRED_AT
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.SessionOrderFieldExpiredAt")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SessionOrderFieldExpiredAt")
   UPDATED_AT
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.SessionOrderFieldUpdatedAt")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SessionOrderFieldUpdatedAt")
 }
 
 input SessionOrder {
@@ -64,7 +64,7 @@ type Session implements Node {
 
 type SessionConnection
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.SessionConnection"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.SessionConnection"
   ) {
   edges: [SessionEdge!]!
   pageInfo: PageInfo!

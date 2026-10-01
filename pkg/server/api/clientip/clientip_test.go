@@ -25,7 +25,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/server/api/clientip"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/clientip"
 )
 
 func TestExtract(t *testing.T) {

@@ -1,175 +1,175 @@
 enum ConnectorProvider
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ConnectorProvider") {
-    SLACK @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderSlack")
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProvider") {
+    SLACK @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderSlack")
     GOOGLE_WORKSPACE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderGoogleWorkspace"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderGoogleWorkspace"
         )
-    LINEAR @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderLinear")
+    LINEAR @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderLinear")
     LINEAR_SYNC
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderLinearSync")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderLinearSync")
     ONE_PASSWORD
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderOnePassword"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderOnePassword"
         )
     HUBSPOT
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderHubSpot")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderHubSpot")
     DOCUSIGN
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderDocuSign")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderDocuSign")
     GRAFANA
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderGrafana")
-    NOTION @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderNotion")
-    BREX @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderBrex")
-    TALLY @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderTally")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderGrafana")
+    NOTION @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderNotion")
+    BREX @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderBrex")
+    TALLY @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderTally")
     CLOUDFLARE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderCloudflare")
-    OPENAI @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderOpenAI")
-    POSTHOG @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderPostHog")
-    SENTRY @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderSentry")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderCloudflare")
+    OPENAI @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderOpenAI")
+    POSTHOG @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderPostHog")
+    SENTRY @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderSentry")
     SIGNOZ
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderSigNoz")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderSigNoz")
     SUPABASE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderSupabase")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderSupabase")
     BETTER_STACK
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderBetterStack"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderBetterStack"
         )
-    GITHUB @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderGitHub")
+    GITHUB @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderGitHub")
     INTERCOM
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderIntercom")
-    RESEND @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderResend")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderIntercom")
+    RESEND @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderResend")
     SENDGRID
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderSendGrid")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderSendGrid")
     MICROSOFT_365
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderMicrosoft365"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderMicrosoft365"
         )
-    GITLAB @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderGitLab")
+    GITLAB @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderGitLab")
     BITBUCKET
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderBitbucket")
-    HEROKU @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderHeroku")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderBitbucket")
+    HEROKU @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderHeroku")
     PAGERDUTY
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderPagerDuty")
-    ASANA @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderAsana")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderPagerDuty")
+    ASANA @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderAsana")
     NETLIFY
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderNetlify")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderNetlify")
     CLICKUP
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderClickUp")
-    CLERK @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderClerk")
-    VERCEL @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderVercel")
-    MONDAY @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderMonday")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderClickUp")
+    CLERK @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderClerk")
+    VERCEL @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderVercel")
+    MONDAY @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderMonday")
     METABASE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderMetabase")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderMetabase")
     MONGODB_ATLAS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderMongoDBAtlas"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderMongoDBAtlas"
         )
     TAILSCALE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderTailscale")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderTailscale")
     ANTHROPIC
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderAnthropic"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderAnthropic"
         )
-    CURSOR @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderCursor")
-    DATADOG @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderDatadog")
-    OKTA @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderOkta")
-    ZENDESK @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderZendesk")
-    QOVERY @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderQovery")
-    RENDER @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderRender")
-    NEON @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderNeon")
+    CURSOR @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderCursor")
+    DATADOG @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderDatadog")
+    OKTA @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderOkta")
+    ZENDESK @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderZendesk")
+    QOVERY @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderQovery")
+    RENDER @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderRender")
+    NEON @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderNeon")
     MERCURY
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderMercury")
-    APOLLO @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderApollo")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderMercury")
+    APOLLO @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderApollo")
     DEEPGRAM
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderDeepgram")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderDeepgram")
     CLICKHOUSE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderClickHouse"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderClickHouse"
         )
     LANGFUSE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderLangfuse")
-    PYLON @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderPylon")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderLangfuse")
+    PYLON @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderPylon")
     OPENROUTER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderOpenRouter"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderOpenRouter"
         )
     INCIDENT_IO
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderIncidentIO"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderIncidentIO"
         )
-    BREVO @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderBrevo")
+    BREVO @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderBrevo")
     SCALEWAY
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderScaleway")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderScaleway")
     YOUSIGN
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderYousign")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderYousign")
     RAILWAY
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderRailway")
-    CRISP @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderCrisp")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderRailway")
+    CRISP @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderCrisp")
     DOTFILE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderDotfile")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderDotfile")
     SEGMENT
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderSegment")
-    SQUARE @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderSquare")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderSegment")
+    SQUARE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderSquare")
     GOOGLE_ANALYTICS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderGoogleAnalytics"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderGoogleAnalytics"
         )
     UPCLOUD
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderUpCloud")
-    NUKI @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderNuki")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderUpCloud")
+    NUKI @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderNuki")
     AUTHENTIK
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderAuthentik"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderAuthentik"
         )
-    CAL_COM @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderCalCom")
+    CAL_COM @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderCalCom")
     CALENDLY
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderCalendly")
-    AWS @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderAWS")
-    GCP @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderGCP")
-    ELEVENLABS @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderElevenLabs")
-    NEW_RELIC @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderNewRelic")
-    RETOOL @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderRetool")
-    TWINGATE @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderTwingate")
-    ATTIO @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderAttio")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderCalendly")
+    AWS @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderAWS")
+    GCP @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderGCP")
+    ELEVENLABS @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderElevenLabs")
+    NEW_RELIC @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderNewRelic")
+    RETOOL @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderRetool")
+    TWINGATE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderTwingate")
+    ATTIO @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderAttio")
     AZURE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderAzure")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderAzure")
     OVHCLOUD
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.ConnectorProviderOVHcloud")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProviderOVHcloud")
 }
 
 enum AzureEnvironment
-    @goModel(model: "go.probo.inc/probo/pkg/cloud/azure.Environment") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/cloud/azure.Environment") {
     AZURE_PUBLIC
-        @goEnum(value: "go.probo.inc/probo/pkg/cloud/azure.EnvironmentPublic")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/cloud/azure.EnvironmentPublic")
     AZURE_GOVERNMENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/cloud/azure.EnvironmentGovernment"
+            value: "github.com/DhruvWork/trustready-grc/pkg/cloud/azure.EnvironmentGovernment"
         )
     AZURE_GOVERNMENT_DOD
         @goEnum(
-            value: "go.probo.inc/probo/pkg/cloud/azure.EnvironmentGovernmentDoD"
+            value: "github.com/DhruvWork/trustready-grc/pkg/cloud/azure.EnvironmentGovernmentDoD"
         )
     AZURE_CHINA
-        @goEnum(value: "go.probo.inc/probo/pkg/cloud/azure.EnvironmentChina")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/cloud/azure.EnvironmentChina")
 }
 
 enum ConnectorProtocol
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ConnectorProtocol") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProtocol") {
     OAUTH2
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProtocolOAuth2"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProtocolOAuth2"
         )
     API_KEY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProtocolAPIKey"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProtocolAPIKey"
         )
     GITHUB_APP
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProtocolGitHubApp"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProtocolGitHubApp"
         )
     WORKLOAD_IDENTITY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorProtocolWorkloadIdentity"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProtocolWorkloadIdentity"
         )
 }
 
@@ -409,21 +409,21 @@ type DiscoveredConnectorAccount {
 
 enum ConnectorAccountOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ConnectorAccountOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorAccountOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorAccountOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorAccountOrderFieldCreatedAt"
         )
     EXTERNAL_ACCOUNT_ID
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ConnectorAccountOrderFieldExternalAccountID"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorAccountOrderFieldExternalAccountID"
         )
 }
 
 input ConnectorAccountOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ConnectorAccountOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ConnectorAccountOrderBy"
     ) {
     field: ConnectorAccountOrderField!
     direction: OrderDirection!
@@ -431,7 +431,7 @@ input ConnectorAccountOrder
 
 type ConnectorAccountConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ConnectorAccountConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ConnectorAccountConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [ConnectorAccountEdge!]!

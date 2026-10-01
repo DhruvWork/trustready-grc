@@ -35,8 +35,8 @@ import (
 	iamtypes "github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/awsx/arn"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
+	"github.com/DhruvWork/trustready-grc/pkg/awsx/arn"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
 )
 
 const (

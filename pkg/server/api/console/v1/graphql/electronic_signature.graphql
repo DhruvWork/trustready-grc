@@ -1,124 +1,124 @@
 enum ElectronicSignatureStatus
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureStatus"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureStatus"
     ) {
     PENDING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureStatusPending"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureStatusPending"
         )
     ACCEPTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureStatusAccepted"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureStatusAccepted"
         )
     PROCESSING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureStatusProcessing"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureStatusProcessing"
         )
     COMPLETED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureStatusCompleted"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureStatusCompleted"
         )
     FAILED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureStatusFailed"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureStatusFailed"
         )
 }
 
 enum ElectronicSignatureDocumentType
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentType"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentType"
     ) {
     NDA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentTypeNDA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentTypeNDA"
         )
     DPA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentTypeDPA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentTypeDPA"
         )
     MSA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentTypeMSA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentTypeMSA"
         )
     SOW
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentTypeSOW"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentTypeSOW"
         )
     SLA
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentTypeSLA"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentTypeSLA"
         )
     TOS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentTypeTOS"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentTypeTOS"
         )
     PRIVACY_POLICY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentTypePrivacyPolicy"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentTypePrivacyPolicy"
         )
     OTHER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentTypeOther"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentTypeOther"
         )
     STATEMENT_OF_APPLICABILITY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureDocumentTypeStatementOfApplicability"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureDocumentTypeStatementOfApplicability"
         )
 }
 
 enum ElectronicSignatureEventType
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventType"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventType"
     ) {
     DOCUMENT_VIEWED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventTypeDocumentViewed"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventTypeDocumentViewed"
         )
     CONSENT_GIVEN
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventTypeConsentGiven"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventTypeConsentGiven"
         )
     FULL_NAME_TYPED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventTypeFullNameTyped"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventTypeFullNameTyped"
         )
     SIGNATURE_ACCEPTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventTypeSignatureAccepted"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventTypeSignatureAccepted"
         )
     SIGNATURE_COMPLETED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventTypeSignatureCompleted"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventTypeSignatureCompleted"
         )
     SEAL_COMPUTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventTypeSealComputed"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventTypeSealComputed"
         )
     TIMESTAMP_REQUESTED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventTypeTimestampRequested"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventTypeTimestampRequested"
         )
     CERTIFICATE_GENERATED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventTypeCertificateGenerated"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventTypeCertificateGenerated"
         )
     PROCESSING_ERROR
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventTypeProcessingError"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventTypeProcessingError"
         )
 }
 
 enum ElectronicSignatureEventSource
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventSource"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventSource"
     ) {
     CLIENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventSourceClient"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventSourceClient"
         )
     SERVER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ElectronicSignatureEventSourceServer"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ElectronicSignatureEventSourceServer"
         )
 }
 

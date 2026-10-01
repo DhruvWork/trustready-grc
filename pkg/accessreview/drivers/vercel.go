@@ -29,8 +29,8 @@ import (
 	"strconv"
 	"strings"
 
-	"go.probo.inc/probo/pkg/connector"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/connector"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // Vercel path elements joined onto the driver's base URL. The members

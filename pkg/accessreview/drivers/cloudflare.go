@@ -28,7 +28,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // CloudflareDriver fetches account members from the Cloudflare API for a

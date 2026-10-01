@@ -26,21 +26,21 @@ type SAMLAttributeMappings {
 }
 
 enum SAMLEnforcementPolicy
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.SAMLEnforcementPolicy") {
-  OFF @goEnum(value: "go.probo.inc/probo/pkg/coredata.SAMLEnforcementPolicyOff")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.SAMLEnforcementPolicy") {
+  OFF @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SAMLEnforcementPolicyOff")
   OPTIONAL
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.SAMLEnforcementPolicyOptional"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SAMLEnforcementPolicyOptional"
     )
   REQUIRED
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.SAMLEnforcementPolicyRequired"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.SAMLEnforcementPolicyRequired"
     )
 }
 
 type SAMLConfigurationConnection
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.SAMLConfigurationConnection"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.SAMLConfigurationConnection"
   ) {
   edges: [SAMLConfigurationEdge!]!
   pageInfo: PageInfo!

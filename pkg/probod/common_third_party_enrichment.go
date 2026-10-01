@@ -27,8 +27,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"go.gearno.de/kit/log"
 	"go.opentelemetry.io/otel/trace"
-	"go.probo.inc/probo/pkg/filemanager"
-	"go.probo.inc/probo/pkg/thirdparty"
+	"github.com/DhruvWork/trustready-grc/pkg/filemanager"
+	"github.com/DhruvWork/trustready-grc/pkg/thirdparty"
 )
 
 // buildCommonThirdPartyEnrichmentConfig wires the common-third-party

@@ -26,13 +26,13 @@ import (
 	"slices"
 	"strings"
 
-	"go.probo.inc/probo/pkg/bot"
-	portal "go.probo.inc/probo/pkg/complianceportal"
-	"go.probo.inc/probo/pkg/complianceportal/management"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
-	messaging "go.probo.inc/probo/pkg/probot"
+	"github.com/DhruvWork/trustready-grc/pkg/bot"
+	portal "github.com/DhruvWork/trustready-grc/pkg/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/management"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	messaging "github.com/DhruvWork/trustready-grc/pkg/probot"
 )
 
 type actionSelection struct {

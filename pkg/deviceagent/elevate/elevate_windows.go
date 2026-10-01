@@ -28,7 +28,7 @@ import (
 	"strings"
 	"syscall"
 
-	"go.probo.inc/probo/pkg/deviceagent/checks"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/checks"
 	"golang.org/x/sys/windows"
 )
 

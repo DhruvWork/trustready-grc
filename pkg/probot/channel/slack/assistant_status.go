@@ -25,7 +25,7 @@ import (
 	"errors"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 const assistantWorkingStatus = "is working on your request..."

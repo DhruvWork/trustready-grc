@@ -34,8 +34,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"go.probo.inc/probo/pkg/awsconfig"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/awsconfig"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type FileObject struct {

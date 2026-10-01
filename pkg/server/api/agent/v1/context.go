@@ -23,7 +23,7 @@ package agent_v1
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func contextWithDevice(ctx context.Context, device *coredata.Device) context.Context {

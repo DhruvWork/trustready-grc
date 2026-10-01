@@ -29,7 +29,7 @@ import (
 	"strconv"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // DatadogDriver lists Datadog org members via GET /api/v2/users. The API

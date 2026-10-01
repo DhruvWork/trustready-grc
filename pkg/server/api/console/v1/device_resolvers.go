@@ -11,16 +11,16 @@ import (
 
 	"github.com/vikstrous/dataloadgen"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/itam"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/authz"
-	"go.probo.inc/probo/pkg/server/api/console/v1/dataloader"
-	"go.probo.inc/probo/pkg/server/api/console/v1/schema"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/itam"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authz"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // Owner is the resolver for the owner field.

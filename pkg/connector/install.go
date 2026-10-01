@@ -25,8 +25,8 @@ import (
 	"time"
 
 	"go.gearno.de/crypto/uuid"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/statelesstoken"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/statelesstoken"
 )
 
 const (

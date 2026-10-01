@@ -24,7 +24,7 @@ import (
 	"context"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 type (

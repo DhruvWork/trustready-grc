@@ -24,7 +24,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 // OutputType describes a structured output schema that the agent should

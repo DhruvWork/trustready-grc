@@ -33,7 +33,7 @@ import (
 	"time"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // Microsoft365Driver fetches user accounts from a Microsoft 365 / Microsoft

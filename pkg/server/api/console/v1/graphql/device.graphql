@@ -19,67 +19,67 @@
 # SOFTWARE.
 
 enum DevicePlatform
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DevicePlatform") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePlatform") {
     DARWIN
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePlatformDarwin")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePlatformDarwin")
     LINUX
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePlatformLinux")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePlatformLinux")
     FREEBSD
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePlatformFreeBSD")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePlatformFreeBSD")
     WINDOWS
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePlatformWindows")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePlatformWindows")
 }
 
 enum DeviceState
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DeviceState") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceState") {
     PENDING
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DeviceStatePending")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceStatePending")
     ACTIVE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DeviceStateActive")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceStateActive")
     REVOKED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DeviceStateRevoked")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceStateRevoked")
 }
 
 enum DevicePostureVersion
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DevicePostureVersion"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureVersion"
     ) {
-    V1 @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePostureVersionV1")
+    V1 @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureVersionV1")
 }
 
 enum DevicePostureStatus
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DevicePostureStatus"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureStatus"
     ) {
     PASS
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePostureStatusPass")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureStatusPass")
     FAIL
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePostureStatusFail")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureStatusFail")
     UNKNOWN
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePostureStatusUnknown")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureStatusUnknown")
     NOT_APPLICABLE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DevicePostureStatusNotApplicable"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureStatusNotApplicable"
         )
 }
 
 enum DeviceOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DeviceOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceOrderField") {
     CREATED_AT
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DeviceOrderFieldCreatedAt")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceOrderFieldCreatedAt")
     UPDATED_AT
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DeviceOrderFieldUpdatedAt")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceOrderFieldUpdatedAt")
     HOSTNAME
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DeviceOrderFieldHostname")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceOrderFieldHostname")
     LAST_SEEN_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DeviceOrderFieldLastSeenAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceOrderFieldLastSeenAt"
         )
 }
 
 input DeviceOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DeviceOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DeviceOrderBy"
     ) {
     direction: OrderDirection!
     field: DeviceOrderField!
@@ -113,41 +113,41 @@ type Device implements Node {
 
 enum DevicePostureValueKind
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKind"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKind"
     ) {
-    ON @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKindOn")
+    ON @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKindOn")
     OFF
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKindOff")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKindOff")
     IMMEDIATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKindImmediate"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKindImmediate"
         )
     SECONDS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKindSeconds"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKindSeconds"
         )
     MIN_PASSWORD_LENGTH
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKindMinPasswordLength"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKindMinPasswordLength"
         )
     CONFIGURED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKindConfigured"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKindConfigured"
         )
     NONE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKindNone"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKindNone"
         )
     TEXT
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKindText")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKindText")
     UNKNOWN
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DevicePostureValueKindUnknown"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKindUnknown"
         )
 }
 
 type DevicePostureValue
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.DevicePostureValue") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValue") {
     kind: DevicePostureValueKind!
     text: String!
     number: Int
@@ -166,17 +166,17 @@ type DevicePosture implements Node {
 
 enum DevicePostureReportOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.DevicePostureReportOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureReportOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.DevicePostureReportOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureReportOrderFieldCreatedAt"
         )
 }
 
 input DevicePostureReportOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DevicePostureReportOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DevicePostureReportOrderBy"
     ) {
     direction: OrderDirection!
     field: DevicePostureReportOrderField!
@@ -190,7 +190,7 @@ type DevicePostureReport {
 
 type DevicePostureReportConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DevicePostureReportConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DevicePostureReportConnection"
     ) {
     edges: [DevicePostureReportEdge!]!
     pageInfo: PageInfo!
@@ -204,7 +204,7 @@ type DevicePostureReportEdge {
 
 type DeviceConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.DeviceConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.DeviceConnection"
     ) {
     edges: [DeviceEdge!]!
     pageInfo: PageInfo!
@@ -218,7 +218,7 @@ type DeviceEdge {
 
 type EmployeeDeviceConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EmployeeDeviceConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EmployeeDeviceConnection"
     ) {
     edges: [EmployeeDeviceEdge!]!
     pageInfo: PageInfo!
@@ -226,7 +226,7 @@ type EmployeeDeviceConnection
 
 type EmployeeDeviceEdge
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.EmployeeDeviceEdge"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.EmployeeDeviceEdge"
     ) {
     cursor: CursorKey!
     node: Device!

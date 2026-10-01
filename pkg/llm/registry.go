@@ -20,7 +20,7 @@
 
 package llm
 
-//go:generate go run go.probo.inc/probo/internal/cmd/genmodels
+//go:generate go run github.com/DhruvWork/trustready-grc/internal/cmd/genmodels
 
 import (
 	"regexp"

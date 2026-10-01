@@ -29,9 +29,9 @@ import (
 	"go.gearno.de/kit/log"
 	"go.gearno.de/kit/pg"
 	"go.opentelemetry.io/otel/trace"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/dnsclient"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/dnsclient"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 type (
@@ -65,7 +65,7 @@ func NewSAMLDomainVerifier(
 		interval:  interval,
 		dnsClient: dnsclient.NewClient(resolverAddr),
 		logger:    logger.Named("saml-domain-verifier"),
-		tracer:    tp.Tracer("go.probo.inc/probo/pkg/iam/saml_domain_verifier"),
+		tracer:    tp.Tracer("github.com/DhruvWork/trustready-grc/pkg/iam/saml_domain_verifier"),
 	}
 }
 

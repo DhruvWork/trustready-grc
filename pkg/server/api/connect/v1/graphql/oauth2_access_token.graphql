@@ -9,7 +9,7 @@ type OAuth2AccessToken implements Node {
 
 type OAuth2AccessTokenConnection
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.OAuth2AccessTokenConnection"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.OAuth2AccessTokenConnection"
   ) {
   edges: [OAuth2AccessTokenEdge!]!
   pageInfo: PageInfo!
@@ -37,7 +37,7 @@ extend type Mutation {
 
 input CreateOAuth2AccessTokenInput
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.CreateOAuth2AccessTokenInput"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.CreateOAuth2AccessTokenInput"
   ) {
   name: String!
   expiresAt: Datetime!

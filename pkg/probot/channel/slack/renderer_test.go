@@ -26,8 +26,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/bot"
-	"go.probo.inc/probo/pkg/probot/channel/slack"
+	"github.com/DhruvWork/trustready-grc/pkg/bot"
+	"github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
 )
 
 func blockAt(t *testing.T, blocks []any, index int) map[string]any {

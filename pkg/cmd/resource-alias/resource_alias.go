@@ -22,9 +22,9 @@ package resourcealias
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/resource-alias/remove"
-	"go.probo.inc/probo/pkg/cmd/resource-alias/set"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/resource-alias/remove"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/resource-alias/set"
 )
 
 func NewCmdResourceAlias(f *cmdutil.Factory) *cobra.Command {

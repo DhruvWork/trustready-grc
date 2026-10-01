@@ -23,7 +23,7 @@ package scim
 import (
 	"fmt"
 
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 type ErrSCIMConfigurationNotFound struct {

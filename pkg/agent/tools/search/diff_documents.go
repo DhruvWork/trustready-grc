@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"strings"
 
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 type (

@@ -18,10 +18,10 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/coredata"
-	connect_v1 "go.probo.inc/probo/pkg/server/api/connect/v1"
-	"go.probo.inc/probo/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	connect_v1 "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
 func TestOAuth2ServerMetadata(t *testing.T) {

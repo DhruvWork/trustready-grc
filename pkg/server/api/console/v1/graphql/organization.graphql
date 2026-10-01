@@ -8,29 +8,29 @@ type OrganizationContext {
 }
 
 enum ProfileState
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.ProfileState") {
-  PENDING @goEnum(value: "go.probo.inc/probo/pkg/coredata.ProfileStatePending")
-  ACTIVE @goEnum(value: "go.probo.inc/probo/pkg/coredata.ProfileStateActive")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileState") {
+  PENDING @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileStatePending")
+  ACTIVE @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileStateActive")
   DEACTIVATED
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.ProfileStateDeactivated")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileStateDeactivated")
 }
 
 enum MembershipRole
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.MembershipRole") {
-  OWNER @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleOwner")
-  ADMIN @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleAdmin")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRole") {
+  OWNER @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleOwner")
+  ADMIN @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleAdmin")
   EMPLOYEE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleEmployee")
-  VIEWER @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleViewer")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleEmployee")
+  VIEWER @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleViewer")
   AUDITOR
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleAuditor")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleAuditor")
   COMPLIANCE_PORTAL_MANAGER
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MembershipRoleCompliancePortalManager"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleCompliancePortalManager"
     )
   COMPLIANCE_PORTAL_ACCESS_MANAGER
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MembershipRoleCompliancePortalAccessManager"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleCompliancePortalAccessManager"
     )
 }
 
@@ -51,25 +51,25 @@ type Profile implements Node {
 }
 
 enum ProfileOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderField") {
     FULL_NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldFullName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldFullName"
         )
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldCreatedAt"
         )
     EMAIL_ADDRESS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldEmailAddress"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldEmailAddress"
         )
-    KIND @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipProfileOrderFieldKind")
+    KIND @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderFieldKind")
 }
 
 input ProfileOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ProfileOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ProfileOrderBy"
     ) {
     direction: OrderDirection!
     field: ProfileOrderField!
@@ -85,7 +85,7 @@ input ProfileFilter {
 
 type ProfileConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ProfileConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ProfileConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [ProfileEdge!]!

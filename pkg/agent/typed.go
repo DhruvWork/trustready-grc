@@ -27,7 +27,7 @@ import (
 	"reflect"
 	"strings"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 type TypedResult[T any] struct {

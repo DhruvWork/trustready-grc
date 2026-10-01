@@ -28,9 +28,9 @@ import (
 	"strings"
 	"sync"
 
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/bot"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/bot"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 var (

@@ -10,14 +10,14 @@ import (
 	"errors"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/schema"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
-	"go.probo.inc/probo/pkg/server/gqlutils/types/cursor"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils/types/cursor"
 )
 
 // Permission is the resolver for the permission field.

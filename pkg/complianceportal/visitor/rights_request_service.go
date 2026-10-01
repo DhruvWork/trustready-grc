@@ -26,13 +26,13 @@ import (
 	"time"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/validator"
-	"go.probo.inc/probo/pkg/webhook"
-	webhooktypes "go.probo.inc/probo/pkg/webhook/types"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/webhook"
+	webhooktypes "github.com/DhruvWork/trustready-grc/pkg/webhook/types"
 )
 
 // RightsRequestDeadlineDays is the number of days a portal-submitted data

@@ -35,9 +35,9 @@ import (
 	ssotypes "github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	"github.com/aws/smithy-go"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/awsx/arn"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/awsx/arn"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 const (

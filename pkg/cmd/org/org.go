@@ -22,8 +22,8 @@ package org
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/org/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/org/list"
 )
 
 func NewCmdOrg(f *cmdutil.Factory) *cobra.Command {

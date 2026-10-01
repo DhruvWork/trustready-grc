@@ -28,8 +28,8 @@ import (
 	"strconv"
 
 	"github.com/99designs/gqlgen/graphql"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 type AuthenticationRequirement string

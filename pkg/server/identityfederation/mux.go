@@ -35,8 +35,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/identityfederation"
-	"go.probo.inc/probo/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
 )
 
 // NewMux returns the identity federation route tree. It is mounted with the /federation

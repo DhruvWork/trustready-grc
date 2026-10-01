@@ -35,14 +35,14 @@ import (
 
 	"github.com/spf13/cobra"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/deviceagent"
-	"go.probo.inc/probo/pkg/deviceagent/elevate"
-	"go.probo.inc/probo/pkg/deviceagent/service"
-	"go.probo.inc/probo/pkg/deviceagent/tray"
-	"go.probo.inc/probo/pkg/deviceagent/update"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/elevate"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/service"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/tray"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/update"
 
 	// Side-effect import: registers per-OS posture checks.
-	_ "go.probo.inc/probo/pkg/deviceagent/checks"
+	_ "github.com/DhruvWork/trustready-grc/pkg/deviceagent/checks"
 )
 
 var version = "dev"

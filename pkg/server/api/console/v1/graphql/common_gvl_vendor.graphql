@@ -20,21 +20,21 @@
 
 enum CommonGVLVendorOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.CommonGVLVendorOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.CommonGVLVendorOrderField"
     ) {
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CommonGVLVendorOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CommonGVLVendorOrderFieldName"
         )
     IAB_VENDOR_ID
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CommonGVLVendorOrderFieldIABVendorID"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CommonGVLVendorOrderFieldIABVendorID"
         )
 }
 
 input CommonGVLVendorOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.CommonGVLVendorOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.CommonGVLVendorOrderBy"
     ) {
     direction: OrderDirection!
     field: CommonGVLVendorOrderField!
@@ -42,21 +42,21 @@ input CommonGVLVendorOrder
 
 enum CommonGVLVendorMembership
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.CommonGVLVendorMembership"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.CommonGVLVendorMembership"
     ) {
     ON_BANNER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CommonGVLVendorMembershipOnBanner"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CommonGVLVendorMembershipOnBanner"
         )
     NOT_ON_BANNER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.CommonGVLVendorMembershipNotOnBanner"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.CommonGVLVendorMembershipNotOnBanner"
         )
 }
 
 input CommonGVLVendorFilter
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.CommonGVLVendorFilter"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.CommonGVLVendorFilter"
     ) {
     query: String
     cookieBannerId: ID
@@ -80,7 +80,7 @@ type CommonGVLVendor {
 
 type CommonGVLVendorConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.CommonGVLVendorConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.CommonGVLVendorConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [CommonGVLVendorEdge!]!

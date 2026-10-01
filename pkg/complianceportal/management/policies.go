@@ -15,8 +15,8 @@
 package management
 
 import (
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/iam/policy"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/policy"
 )
 
 var organizationCondition = policy.Equals("principal.organization_id", "resource.organization_id")

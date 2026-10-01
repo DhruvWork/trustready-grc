@@ -22,13 +22,13 @@ package processingactivity
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/processing-activity/create"
-	"go.probo.inc/probo/pkg/cmd/processing-activity/delete"
-	"go.probo.inc/probo/pkg/cmd/processing-activity/list"
-	"go.probo.inc/probo/pkg/cmd/processing-activity/publish"
-	"go.probo.inc/probo/pkg/cmd/processing-activity/update"
-	"go.probo.inc/probo/pkg/cmd/processing-activity/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/processing-activity/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/processing-activity/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/processing-activity/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/processing-activity/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/processing-activity/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/processing-activity/view"
 )
 
 func NewCmdProcessingActivity(f *cmdutil.Factory) *cobra.Command {

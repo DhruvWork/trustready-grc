@@ -37,9 +37,9 @@ import (
 	"time"
 
 	"go.gearno.de/kit/httpclient"
-	"go.probo.inc/probo/pkg/cloud"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/cloud"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 	"golang.org/x/oauth2"
 	"google.golang.org/api/iamcredentials/v1"
 	"google.golang.org/api/option"

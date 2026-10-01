@@ -22,7 +22,7 @@ package cookiebanner
 
 import "maps"
 
-import "go.probo.inc/probo/pkg/coredata"
+import "github.com/DhruvWork/trustready-grc/pkg/coredata"
 
 var SupportedLanguages = []string{"en", "de", "es", "fr", "id", "it", "ja", "ko", "nl", "pl", "pt", "tr", "uk", "zh"}
 

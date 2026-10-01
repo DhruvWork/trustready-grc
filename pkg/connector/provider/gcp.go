@@ -32,11 +32,11 @@ import (
 	"strings"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/cloud"
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/cloud"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 // gcpRegistration declares GCP as a workload identity provider: Probo holds no

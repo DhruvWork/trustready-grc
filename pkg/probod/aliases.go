@@ -20,7 +20,7 @@
 
 package probod
 
-import "go.probo.inc/probo/pkg/probodconfig"
+import "github.com/DhruvWork/trustready-grc/pkg/probodconfig"
 
 type (
 	FullConfig                         = probodconfig.FullConfig

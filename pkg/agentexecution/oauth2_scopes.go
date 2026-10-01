@@ -20,7 +20,7 @@
 
 package agentexecution
 
-import "go.probo.inc/probo/pkg/coredata"
+import "github.com/DhruvWork/trustready-grc/pkg/coredata"
 
 const (
 	ScopeV1AgentRead coredata.OAuth2Scope = "v1:agent:read"

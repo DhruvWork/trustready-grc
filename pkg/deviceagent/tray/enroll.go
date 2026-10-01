@@ -25,7 +25,7 @@ package tray
 import (
 	"fmt"
 
-	"go.probo.inc/probo/pkg/deviceagent"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent"
 )
 
 func openConsoleEnroll(serverURL string) {

@@ -25,7 +25,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/awsx/arn"
+	"github.com/DhruvWork/trustready-grc/pkg/awsx/arn"
 )
 
 func TestIAM(t *testing.T) {

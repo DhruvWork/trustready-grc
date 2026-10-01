@@ -24,7 +24,7 @@ import (
 	"encoding"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
 )
 
 type AuditLogEntryOrderField string

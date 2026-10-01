@@ -32,7 +32,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/crypto/jose"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/jose"
 )
 
 // keyRingTestKeys generates the distinct RSA keys the key ring tests share. Key

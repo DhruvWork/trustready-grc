@@ -8,9 +8,9 @@ package console_v1
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/server/api/console/v1/schema"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 )
 
 // Logo is the resolver for the logo field.

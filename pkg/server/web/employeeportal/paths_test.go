@@ -27,7 +27,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/server/web/employeeportal"
+	"github.com/DhruvWork/trustready-grc/pkg/server/web/employeeportal"
 )
 
 func TestOrganizationPath(t *testing.T) {

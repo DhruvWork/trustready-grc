@@ -27,9 +27,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/identityfederation"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 const setupOrganizationID = "e5IaD7ibAAEAAAAAAZZ9aR_Oq_Npymhg"

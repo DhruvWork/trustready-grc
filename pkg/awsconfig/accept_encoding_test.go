@@ -34,7 +34,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/awsconfig"
+	"github.com/DhruvWork/trustready-grc/pkg/awsconfig"
 )
 
 var signedHeadersRe = regexp.MustCompile(`SignedHeaders=([^,]+)`)

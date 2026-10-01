@@ -31,11 +31,11 @@ import (
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 const (
-	tracerName = "go.probo.inc/probo/pkg/agent"
+	tracerName = "github.com/DhruvWork/trustready-grc/pkg/agent"
 
 	// synthesisNudge is the static user message appended after tool
 	// exploration completes, asking the model to produce the final

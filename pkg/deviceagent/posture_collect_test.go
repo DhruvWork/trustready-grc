@@ -30,9 +30,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/deviceagent/checks"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/checks"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 // stubCheck runs an arbitrary function so a test can end the run mid-set.

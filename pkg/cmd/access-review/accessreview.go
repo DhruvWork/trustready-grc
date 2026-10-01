@@ -22,10 +22,10 @@ package accessreview
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign"
-	"go.probo.inc/probo/pkg/cmd/access-review/entry"
-	"go.probo.inc/probo/pkg/cmd/access-review/source"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/entry"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/source"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdAccessReview(f *cmdutil.Factory) *cobra.Command {

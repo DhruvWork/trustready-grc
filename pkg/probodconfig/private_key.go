@@ -27,7 +27,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/crypto/pem"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/pem"
 )
 
 type (

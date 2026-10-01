@@ -26,7 +26,7 @@ import (
 	"time"
 
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // claimEventID records a completed immediate event side effect, currently the

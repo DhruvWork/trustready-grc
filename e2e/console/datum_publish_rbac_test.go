@@ -23,7 +23,7 @@ package console_test
 import (
 	"testing"
 
-	"go.probo.inc/probo/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
 )
 
 func TestDatum_PublishDataList_RBAC(t *testing.T) {

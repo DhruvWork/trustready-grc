@@ -24,9 +24,9 @@ import (
 	"fmt"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/prosemirror"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/prosemirror"
 )
 
 func proseMirrorJSONToMarkdown(pmJSON string) (string, error) {

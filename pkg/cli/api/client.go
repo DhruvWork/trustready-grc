@@ -31,7 +31,7 @@ import (
 	"strings"
 	"time"
 
-	"go.probo.inc/probo/pkg/version"
+	"github.com/DhruvWork/trustready-grc/pkg/version"
 )
 
 type (

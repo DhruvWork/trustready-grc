@@ -18,63 +18,63 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-enum TaskActivityType @goModel(model: "go.probo.inc/probo/pkg/coredata.TaskActivityType") {
+enum TaskActivityType @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityType") {
     CREATED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityTypeCreated"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityTypeCreated"
         )
     UPDATED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityTypeUpdated"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityTypeUpdated"
         )
 }
 
-enum TaskActivityField @goModel(model: "go.probo.inc/probo/pkg/coredata.TaskActivityField") {
+enum TaskActivityField @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityField") {
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityFieldName"
         )
     DESCRIPTION
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityFieldDescription"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityFieldDescription"
         )
     STATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityFieldState"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityFieldState"
         )
     PRIORITY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityFieldPriority"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityFieldPriority"
         )
     ASSIGNED_TO
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityFieldAssignedTo"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityFieldAssignedTo"
         )
     MEASURE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityFieldMeasure"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityFieldMeasure"
         )
     DEADLINE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityFieldDeadline"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityFieldDeadline"
         )
     TIME_ESTIMATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityFieldTimeEstimate"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityFieldTimeEstimate"
         )
 }
 
 enum TaskActivityOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.TaskActivityOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.TaskActivityOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityOrderFieldCreatedAt"
         )
 }
 
 input TaskActivityOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.TaskActivityOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TaskActivityOrderBy"
     ) {
     direction: OrderDirection!
     field: TaskActivityOrderField!
@@ -93,7 +93,7 @@ type TaskActivity implements Node {
 
 type TaskActivityConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.TaskActivityConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TaskActivityConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [TaskActivityEdge!]!

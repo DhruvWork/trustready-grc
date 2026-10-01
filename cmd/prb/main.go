@@ -24,10 +24,10 @@ import (
 	"fmt"
 	"os"
 
-	"go.probo.inc/probo/pkg/cli/config"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/iostreams"
-	"go.probo.inc/probo/pkg/cmd/root"
+	"github.com/DhruvWork/trustready-grc/pkg/cli/config"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/iostreams"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/root"
 )
 
 var (

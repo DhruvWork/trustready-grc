@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"testing"
 
-	"go.probo.inc/probo/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
 )
 
 const (

@@ -1,19 +1,19 @@
 enum MembershipRole
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.MembershipRole") {
-  OWNER @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleOwner")
-  ADMIN @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleAdmin")
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRole") {
+  OWNER @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleOwner")
+  ADMIN @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleAdmin")
   EMPLOYEE
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleEmployee")
-  VIEWER @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleViewer")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleEmployee")
+  VIEWER @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleViewer")
   AUDITOR
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.MembershipRoleAuditor")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleAuditor")
   COMPLIANCE_PORTAL_MANAGER
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MembershipRoleCompliancePortalManager"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleCompliancePortalManager"
     )
   COMPLIANCE_PORTAL_ACCESS_MANAGER
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MembershipRoleCompliancePortalAccessManager"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRoleCompliancePortalAccessManager"
     )
 }
 

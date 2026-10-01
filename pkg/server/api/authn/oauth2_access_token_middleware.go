@@ -26,9 +26,9 @@ import (
 
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/bearertoken"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/iam/oauth2"
+	"github.com/DhruvWork/trustready-grc/pkg/bearertoken"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/iam/oauth2"
 )
 
 func NewOAuth2AccessTokenMiddleware(svc *iam.Service) func(next http.Handler) http.Handler {

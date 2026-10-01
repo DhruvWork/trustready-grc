@@ -22,13 +22,13 @@ package trackerresource
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/tracker-resource/create"
-	"go.probo.inc/probo/pkg/cmd/tracker-resource/delete"
-	"go.probo.inc/probo/pkg/cmd/tracker-resource/list"
-	"go.probo.inc/probo/pkg/cmd/tracker-resource/move"
-	"go.probo.inc/probo/pkg/cmd/tracker-resource/update"
-	"go.probo.inc/probo/pkg/cmd/tracker-resource/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-resource/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-resource/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-resource/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-resource/move"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-resource/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tracker-resource/view"
 )
 
 func NewCmdTrackerResource(f *cmdutil.Factory) *cobra.Command {

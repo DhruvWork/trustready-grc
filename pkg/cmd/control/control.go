@@ -22,12 +22,12 @@ package control
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/control/create"
-	"go.probo.inc/probo/pkg/cmd/control/delete"
-	"go.probo.inc/probo/pkg/cmd/control/list"
-	"go.probo.inc/probo/pkg/cmd/control/update"
-	"go.probo.inc/probo/pkg/cmd/control/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/control/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/control/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/control/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/control/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/control/view"
 )
 
 func NewCmdControl(f *cmdutil.Factory) *cobra.Command {

@@ -29,7 +29,7 @@ import (
 	"sort"
 	"strings"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 const brevoInvitedUsersPath = "/organization/invited/users"

@@ -21,7 +21,7 @@
 package iam
 
 import (
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 func PasswordValidator() validator.ValidatorFunc {

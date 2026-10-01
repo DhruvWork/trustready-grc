@@ -1,138 +1,138 @@
 enum ProcessingActivitySpecialOrCriminalDatum
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ProcessingActivitySpecialOrCriminalDatum"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivitySpecialOrCriminalDatum"
     ) {
     YES
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivitySpecialOrCriminalDatumYes"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivitySpecialOrCriminalDatumYes"
         )
     NO
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivitySpecialOrCriminalDatumNo"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivitySpecialOrCriminalDatumNo"
         )
     POSSIBLE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivitySpecialOrCriminalDatumPossible"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivitySpecialOrCriminalDatumPossible"
         )
 }
 
 enum ProcessingActivityLawfulBasis
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ProcessingActivityLawfulBasis"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityLawfulBasis"
     ) {
     LEGITIMATE_INTEREST
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityLawfulBasisLegitimateInterest"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityLawfulBasisLegitimateInterest"
         )
     CONSENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityLawfulBasisConsent"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityLawfulBasisConsent"
         )
     CONTRACTUAL_NECESSITY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityLawfulBasisContractualNecessity"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityLawfulBasisContractualNecessity"
         )
     LEGAL_OBLIGATION
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityLawfulBasisLegalObligation"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityLawfulBasisLegalObligation"
         )
     VITAL_INTERESTS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityLawfulBasisVitalInterests"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityLawfulBasisVitalInterests"
         )
     PUBLIC_TASK
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityLawfulBasisPublicTask"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityLawfulBasisPublicTask"
         )
 }
 
 enum ProcessingActivityTransferSafeguard
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferSafeguard"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferSafeguard"
     ) {
     STANDARD_CONTRACTUAL_CLAUSES
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferSafeguardStandardContractualClauses"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferSafeguardStandardContractualClauses"
         )
     BINDING_CORPORATE_RULES
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferSafeguardBindingCorporateRules"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferSafeguardBindingCorporateRules"
         )
     ADEQUACY_DECISION
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferSafeguardAdequacyDecision"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferSafeguardAdequacyDecision"
         )
     DEROGATIONS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferSafeguardDerogations"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferSafeguardDerogations"
         )
     CODES_OF_CONDUCT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferSafeguardCodesOfConduct"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferSafeguardCodesOfConduct"
         )
     CERTIFICATION_MECHANISMS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferSafeguardCertificationMechanisms"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferSafeguardCertificationMechanisms"
         )
 }
 
 enum ProcessingActivityDataProtectionImpactAssessment
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ProcessingActivityDataProtectionImpactAssessment"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityDataProtectionImpactAssessment"
     ) {
     NEEDED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityDataProtectionImpactAssessmentNeeded"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityDataProtectionImpactAssessmentNeeded"
         )
     NOT_NEEDED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityDataProtectionImpactAssessmentNotNeeded"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityDataProtectionImpactAssessmentNotNeeded"
         )
 }
 
 enum ProcessingActivityTransferImpactAssessment
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferImpactAssessment"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferImpactAssessment"
     ) {
     NEEDED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferImpactAssessmentNeeded"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferImpactAssessmentNeeded"
         )
     NOT_NEEDED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferImpactAssessmentNotNeeded"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferImpactAssessmentNotNeeded"
         )
 }
 
 enum ProcessingActivityRole
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.ProcessingActivityRole") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityRole") {
     CONTROLLER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityRoleController"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityRoleController"
         )
     PROCESSOR
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityRoleProcessor"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityRoleProcessor"
         )
 }
 
 enum ProcessingActivityOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.ProcessingActivityOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityOrderFieldCreatedAt"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.ProcessingActivityOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityOrderFieldName"
         )
 }
 
 input ProcessingActivityOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ProcessingActivityOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ProcessingActivityOrderBy"
     ) {
     direction: OrderDirection!
     field: ProcessingActivityOrderField!
@@ -179,7 +179,7 @@ type ProcessingActivity implements Node {
 
 type ProcessingActivityConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.ProcessingActivityConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ProcessingActivityConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [ProcessingActivityEdge!]!

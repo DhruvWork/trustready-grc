@@ -25,7 +25,7 @@ package provider
 import (
 	"context"
 
-	scimclient "go.probo.inc/probo/pkg/iam/scim/bridge/client"
+	scimclient "github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/client"
 )
 
 type Provider interface {

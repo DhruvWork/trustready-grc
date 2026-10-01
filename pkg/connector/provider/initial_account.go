@@ -23,7 +23,7 @@ package provider
 import (
 	"fmt"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // ResolveInitialAccount returns the account present from the start, before any

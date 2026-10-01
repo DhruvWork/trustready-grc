@@ -24,7 +24,7 @@ import (
 	"encoding/json"
 	"strings"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 const extractSubprocessorsToolName = "extract_subprocessors"

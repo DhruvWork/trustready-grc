@@ -25,7 +25,7 @@ import (
 	"crypto/subtle"
 	"encoding/base64"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func ValidateCodeChallenge(verifier, challenge string, method coredata.OAuth2CodeChallengeMethod) bool {

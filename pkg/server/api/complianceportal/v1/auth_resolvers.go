@@ -10,11 +10,11 @@ import (
 	"errors"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/complianceportal/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 // UpdateFullName is the resolver for the updateFullName field.

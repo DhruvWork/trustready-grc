@@ -24,8 +24,8 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cli/config"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cli/config"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdConfigList(f *cmdutil.Factory) *cobra.Command {

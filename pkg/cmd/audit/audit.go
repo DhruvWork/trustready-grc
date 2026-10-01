@@ -22,12 +22,12 @@ package audit
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/audit/create"
-	"go.probo.inc/probo/pkg/cmd/audit/delete"
-	"go.probo.inc/probo/pkg/cmd/audit/list"
-	"go.probo.inc/probo/pkg/cmd/audit/update"
-	"go.probo.inc/probo/pkg/cmd/audit/view"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/audit/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/audit/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/audit/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/audit/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/audit/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdAudit(f *cmdutil.Factory) *cobra.Command {

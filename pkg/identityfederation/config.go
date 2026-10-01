@@ -26,8 +26,8 @@ import (
 	"net/url"
 	"strings"
 
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 const (

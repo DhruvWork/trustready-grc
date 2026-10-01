@@ -25,7 +25,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 const DefaultMaxToolDepth = 16

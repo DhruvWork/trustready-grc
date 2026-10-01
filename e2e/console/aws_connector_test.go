@@ -28,10 +28,10 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/e2e/internal/testutil"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 const (

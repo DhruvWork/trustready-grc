@@ -26,7 +26,7 @@ import (
 	"strings"
 
 	"go.gearno.de/kit/log"
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
 	cloudresourcemanager "google.golang.org/api/cloudresourcemanager/v1"
 )
 

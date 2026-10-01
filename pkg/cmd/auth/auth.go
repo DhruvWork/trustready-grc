@@ -22,10 +22,10 @@ package auth
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/auth/login"
-	"go.probo.inc/probo/pkg/cmd/auth/logout"
-	"go.probo.inc/probo/pkg/cmd/auth/status"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/auth/login"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/auth/logout"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/auth/status"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdAuth(f *cmdutil.Factory) *cobra.Command {

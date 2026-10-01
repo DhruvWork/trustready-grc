@@ -22,13 +22,13 @@ package datum
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/datum/create"
-	"go.probo.inc/probo/pkg/cmd/datum/delete"
-	"go.probo.inc/probo/pkg/cmd/datum/list"
-	"go.probo.inc/probo/pkg/cmd/datum/publish"
-	"go.probo.inc/probo/pkg/cmd/datum/update"
-	"go.probo.inc/probo/pkg/cmd/datum/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/datum/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/datum/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/datum/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/datum/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/datum/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/datum/view"
 )
 
 func NewCmdDatum(f *cmdutil.Factory) *cobra.Command {

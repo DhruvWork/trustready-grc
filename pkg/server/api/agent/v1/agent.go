@@ -34,12 +34,12 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/bearertoken"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/itam"
-	"go.probo.inc/probo/pkg/server/api/agent/v1/types"
-	"go.probo.inc/probo/pkg/server/jsonx"
+	"github.com/DhruvWork/trustready-grc/pkg/bearertoken"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/itam"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/agent/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/jsonx"
 )
 
 type Handler struct {

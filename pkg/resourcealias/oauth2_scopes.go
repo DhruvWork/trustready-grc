@@ -20,7 +20,7 @@
 
 package resourcealias
 
-import "go.probo.inc/probo/pkg/coredata"
+import "github.com/DhruvWork/trustready-grc/pkg/coredata"
 
 const (
 	ScopeV1ResourceAliasRead coredata.OAuth2Scope = "v1:resource-alias:read"

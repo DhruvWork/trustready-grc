@@ -22,11 +22,11 @@ package entry
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/access-review/entry/decide"
-	"go.probo.inc/probo/pkg/cmd/access-review/entry/decideall"
-	"go.probo.inc/probo/pkg/cmd/access-review/entry/list"
-	"go.probo.inc/probo/pkg/cmd/access-review/entry/setflag"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/entry/decide"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/entry/decideall"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/entry/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/entry/setflag"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdEntry(f *cmdutil.Factory) *cobra.Command {

@@ -17,15 +17,15 @@ type MailingListUpdateEdge {
 
 enum MailingListSubscriberStatus
   @goModel(
-    model: "go.probo.inc/probo/pkg/coredata.MailingListSubscriberStatus"
+    model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListSubscriberStatus"
   ) {
   PENDING
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MailingListSubscriberStatusPending"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListSubscriberStatusPending"
     )
   CONFIRMED
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.MailingListSubscriberStatusConfirmed"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListSubscriberStatusConfirmed"
     )
 }
 

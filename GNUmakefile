@@ -82,7 +82,7 @@ E2E_CONFIG ?= $(CURDIR)/e2e/console/testdata/config.yaml
 E2E_COVER_DIR ?= $(CURDIR)/coverage/e2e
 E2E_BINARY ?=
 E2E_COVERAGE_BINARY ?= $(CURDIR)/bin/probod-coverage
-E2E_CORE_COVER_PKGS ?= go.probo.inc/probo/pkg/coredata,go.probo.inc/probo/pkg/probo,go.probo.inc/probo/pkg/server/api/console/v1,go.probo.inc/probo/pkg/server/api/connect/v1,go.probo.inc/probo/pkg/server/api/complianceportal/v1,go.probo.inc/probo/pkg/server/api/mcp/v1,go.probo.inc/probo/pkg/accessreview,go.probo.inc/probo/pkg/agentexecution,go.probo.inc/probo/pkg/complianceportal/management,go.probo.inc/probo/pkg/complianceportal/visitor,go.probo.inc/probo/pkg/cookiebanner,go.probo.inc/probo/pkg/riskmanagement,go.probo.inc/probo/pkg/thirdparty,go.probo.inc/probo/pkg/webhook
+E2E_CORE_COVER_PKGS ?= github.com/DhruvWork/trustready-grc/pkg/coredata,github.com/DhruvWork/trustready-grc/pkg/probo,github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/mcp/v1,github.com/DhruvWork/trustready-grc/pkg/accessreview,github.com/DhruvWork/trustready-grc/pkg/agentexecution,github.com/DhruvWork/trustready-grc/pkg/complianceportal/management,github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor,github.com/DhruvWork/trustready-grc/pkg/cookiebanner,github.com/DhruvWork/trustready-grc/pkg/riskmanagement,github.com/DhruvWork/trustready-grc/pkg/thirdparty,github.com/DhruvWork/trustready-grc/pkg/webhook
 
 DOCKER_REGISTRY=	artifact.probo.inc
 DOCKER_PROXY=		$(DOCKER_REGISTRY)/dockerhub

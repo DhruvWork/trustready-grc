@@ -28,10 +28,10 @@ import (
 
 	"github.com/spf13/cobra"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
-	"go.probo.inc/probo/pkg/slug"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/slug"
 )
 
 func newCmdRename(f *cmdutil.Factory) *cobra.Command {

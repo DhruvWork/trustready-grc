@@ -26,7 +26,7 @@ import (
 
 	scimerrors "github.com/elimity-com/scim/errors"
 	scimfilter "github.com/scim2/filter-parser/v2"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func ParseUserFilter(expr scimfilter.Expression) (*coredata.MembershipProfileFilter, error) {

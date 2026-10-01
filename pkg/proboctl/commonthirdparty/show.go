@@ -32,9 +32,9 @@ import (
 	"github.com/charmbracelet/lipgloss"
 	"github.com/spf13/cobra"
 	"go.gearno.de/kit/pg"
-	clicmdutil "go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/proboctl/cmdutil"
+	clicmdutil "github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/proboctl/cmdutil"
 )
 
 // enrichmentMetadataView mirrors the subset of the enrichment payload

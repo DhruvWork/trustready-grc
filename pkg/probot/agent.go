@@ -22,8 +22,8 @@ package probot
 
 import (
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/agent"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 const instructions = `You are Probot, Probo's operational assistant.

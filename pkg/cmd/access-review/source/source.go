@@ -22,15 +22,15 @@ package source
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/access-review/source/create"
-	"go.probo.inc/probo/pkg/cmd/access-review/source/delete"
-	"go.probo.inc/probo/pkg/cmd/access-review/source/list"
-	setupaws "go.probo.inc/probo/pkg/cmd/access-review/source/setup-aws"
-	setupazure "go.probo.inc/probo/pkg/cmd/access-review/source/setup-azure"
-	setupgcp "go.probo.inc/probo/pkg/cmd/access-review/source/setup-gcp"
-	"go.probo.inc/probo/pkg/cmd/access-review/source/update"
-	"go.probo.inc/probo/pkg/cmd/access-review/source/view"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/source/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/source/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/source/list"
+	setupaws "github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/source/setup-aws"
+	setupazure "github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/source/setup-azure"
+	setupgcp "github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/source/setup-gcp"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/source/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/source/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdSource(f *cmdutil.Factory) *cobra.Command {

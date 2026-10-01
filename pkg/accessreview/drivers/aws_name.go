@@ -28,7 +28,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/account"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 	"go.gearno.de/kit/log"
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
 )
 
 // awsNameResolver names the connected account for the source-name worker.

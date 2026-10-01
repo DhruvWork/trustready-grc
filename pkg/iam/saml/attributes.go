@@ -25,8 +25,8 @@ import (
 	"strings"
 
 	"github.com/crewjam/saml"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
 )
 
 func extractUserAttributes(assertion *saml.Assertion, config *coredata.SAMLConfiguration) (mail.Addr, string, *coredata.MembershipRole, error) {

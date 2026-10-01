@@ -23,7 +23,7 @@ package cookiebanner
 import (
 	"time"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 // TrackerMappingAgentConfig configures the tracker-mapping agent

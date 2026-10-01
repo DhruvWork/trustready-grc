@@ -8,19 +8,19 @@ components:
     EmailAddress:
       type: string
       format: string
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/mail.Addr
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/mail.Addr
 
     TimeSpan:
       type: string
       description: An ISO-8601 duration
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/timespan.TimeSpan
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/timespan.TimeSpan
 
     OrderDirection:
       type: string
       enum:
         - ASC
         - DESC
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/page.OrderDirection
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/page.OrderDirection
 
     ThirdPartyOrderField:
       type: string
@@ -28,7 +28,7 @@ components:
         - CREATED_AT
         - UPDATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ThirdPartyOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyOrderField
 
     ThirdPartyContactOrderField:
       type: string
@@ -36,7 +36,7 @@ components:
         - CREATED_AT
         - FULL_NAME
         - EMAIL
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ThirdPartyContactOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyContactOrderField
 
     ThirdPartyContactOrderBy:
       type: object
@@ -56,7 +56,7 @@ components:
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ThirdPartyServiceOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyServiceOrderField
 
     ThirdPartyServiceOrderBy:
       type: object
@@ -76,7 +76,7 @@ components:
       enum:
         - CREATED_AT
         - EXPIRES_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ThirdPartyRiskAssessmentOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ThirdPartyRiskAssessmentOrderField
 
     ThirdPartyRiskAssessmentOrderBy:
       type: object
@@ -99,7 +99,7 @@ components:
         - MEDIUM
         - HIGH
         - CRITICAL
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DataSensitivity
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DataSensitivity
 
     BusinessImpact:
       type: string
@@ -108,7 +108,7 @@ components:
         - MEDIUM
         - HIGH
         - CRITICAL
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.BusinessImpact
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessImpact
 
     ThirdPartyOrderBy:
       type: object
@@ -169,7 +169,7 @@ components:
         - FULL_NAME
         - EMAIL_ADDRESS
         - KIND
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.MembershipProfileOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipProfileOrderField
 
     MembershipRole:
       type: string
@@ -181,7 +181,7 @@ components:
         - AUDITOR
         - COMPLIANCE_PORTAL_MANAGER
         - COMPLIANCE_PORTAL_ACCESS_MANAGER
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.MembershipRole
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.MembershipRole
 
     ProfileState:
       type: string
@@ -189,7 +189,7 @@ components:
         - PENDING
         - ACTIVE
         - DEACTIVATED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ProfileState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileState
 
     ProfileKind:
       type: string
@@ -204,7 +204,7 @@ components:
         - MANUAL
         - SCIM
         - SAML
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ProfileSource
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ProfileSource
 
     Regulation:
       type: string
@@ -247,14 +247,14 @@ components:
         - APPI
         - DPDP
         - PDPL
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.Regulation
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.Regulation
 
     RegulationSource:
       type: string
       enum:
         - DETECTED
         - DEFAULT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RegulationSource
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RegulationSource
 
     CountryCode:
       type: string
@@ -509,7 +509,7 @@ components:
         - ZA
         - ZM
         - ZW
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CountryCode
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CountryCode
 
     Profile:
       type: object
@@ -624,12 +624,12 @@ components:
     GID:
       type: string
       format: string
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/gid.GID
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/gid.GID
 
     CursorKey:
       type: string
       format: string
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/page.CursorKey
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/page.CursorKey
 
     Period:
       type: object
@@ -1846,7 +1846,7 @@ components:
         - INHERENT_RISK_SCORE
         - RESIDUAL_RISK_SCORE
         - OWNER_FULL_NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskOrderField
 
     RiskOrderBy:
       type: object
@@ -1868,7 +1868,7 @@ components:
         - ACCEPTED
         - AVOIDED
         - TRANSFERRED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskTreatment
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskTreatment
 
     Risk:
       type: object
@@ -2142,7 +2142,7 @@ components:
         - CATEGORY
         - INHERENT_RISK_SCORE
         - RESIDUAL_RISK_SCORE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TreatmentPlanOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TreatmentPlanOrderField
 
     TreatmentPlanOrderBy:
       type: object
@@ -2161,7 +2161,7 @@ components:
         - INHERENT
         - NET
         - RESIDUAL
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TreatmentPlanScoreType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TreatmentPlanScoreType
 
     TreatmentPlanFilter:
       type: object
@@ -2483,14 +2483,14 @@ components:
         - IMPLEMENTED
         - UNKNOWN
         - NOT_IMPLEMENTED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.MeasureState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureState
 
     MeasureOrderField:
       type: string
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.MeasureOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.MeasureOrderField
 
     MeasureOrderBy:
       type: object
@@ -2778,7 +2778,7 @@ components:
           enum:
             - REQUESTED
             - FULFILLED
-          go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.EvidenceState
+          go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.EvidenceState
         reference_id:
           type: string
           description: Reference ID
@@ -2787,7 +2787,7 @@ components:
           enum:
             - FILE
             - LINK
-          go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.EvidenceType
+          go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.EvidenceType
         url:
           type: string
           description: URL
@@ -2951,7 +2951,7 @@ components:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.FrameworkOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.FrameworkOrderField
 
     FrameworkOrderBy:
       type: object
@@ -3117,14 +3117,14 @@ components:
       enum:
         - PHYSICAL
         - VIRTUAL
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AssetType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AssetType
 
     AssetOrderField:
       type: string
       enum:
         - CREATED_AT
         - AMOUNT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AssetOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AssetOrderField
 
     AssetOrderBy:
       type: object
@@ -3337,7 +3337,7 @@ components:
         - PENDING
         - ACTIVE
         - REVOKED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DeviceState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceState
 
     DevicePlatform:
       type: string
@@ -3346,14 +3346,14 @@ components:
         - LINUX
         - FREEBSD
         - WINDOWS
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DevicePlatform
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePlatform
 
     DevicePostureVersion:
       type: string
       description: Server schema version that produced this posture row (v1, v2, ...).
       enum:
         - v1
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DevicePostureVersion
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureVersion
 
     DevicePostureStatus:
       type: string
@@ -3363,7 +3363,7 @@ components:
         - FAIL
         - UNKNOWN
         - NOT_APPLICABLE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DevicePostureStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureStatus
 
     DevicePostureValueKind:
       type: string
@@ -3378,7 +3378,7 @@ components:
         - NONE
         - TEXT
         - UNKNOWN
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DevicePostureValueKind
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DevicePostureValueKind
 
     DeviceOrderField:
       type: string
@@ -3387,7 +3387,7 @@ components:
         - UPDATED_AT
         - HOSTNAME
         - LAST_SEEN_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DeviceOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DeviceOrderField
 
     DeviceOrderBy:
       type: object
@@ -3697,7 +3697,7 @@ components:
         - INTERNAL
         - CONFIDENTIAL
         - SECRET
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DataClassification
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DataClassification
 
     DatumOrderField:
       type: string
@@ -3705,7 +3705,7 @@ components:
         - CREATED_AT
         - NAME
         - DATA_CLASSIFICATION
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DatumOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DatumOrderField
 
     DatumOrderBy:
       type: object
@@ -3895,7 +3895,7 @@ components:
         - MAJOR_NONCONFORMITY
         - OBSERVATION
         - EXCEPTION
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.FindingKind
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.FindingKind
 
     FindingStatus:
       type: string
@@ -3906,7 +3906,7 @@ components:
         - RISK_ACCEPTED
         - MITIGATED
         - FALSE_POSITIVE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.FindingStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.FindingStatus
 
     FindingPriority:
       type: string
@@ -3914,7 +3914,7 @@ components:
         - LOW
         - MEDIUM
         - HIGH
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.FindingPriority
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.FindingPriority
 
     FindingOrderField:
       type: string
@@ -3926,7 +3926,7 @@ components:
         - STATUS
         - PRIORITY
         - KIND
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.FindingOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.FindingOrderField
 
     FindingOrderBy:
       type: object
@@ -4350,14 +4350,14 @@ components:
         - NON_COMPLIANT
         - PARTIALLY_COMPLIANT
         - COMPLIANT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ObligationStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationStatus
 
     ObligationType:
       type: string
       enum:
         - LEGAL
         - CONTRACTUAL
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ObligationType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationType
 
     ObligationOrderField:
       type: string
@@ -4366,7 +4366,7 @@ components:
         - LAST_REVIEW_DATE
         - DUE_DATE
         - STATUS
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ObligationOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ObligationOrderField
 
     ObligationOrderBy:
       type: object
@@ -4652,7 +4652,7 @@ components:
         - IMPORTANT
         - SECONDARY
         - STANDARD
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.BusinessFunctionClassification
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionClassification
 
     BusinessFunctionOrderField:
       type: string
@@ -4664,7 +4664,7 @@ components:
         - MTD_MINUTES
         - RTO_MINUTES
         - RPO_MINUTES
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.BusinessFunctionOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionOrderField
 
     BusinessFunctionOrderBy:
       type: object
@@ -4934,7 +4934,7 @@ components:
         - ACTIVE
         - IN_DEVELOPMENT
         - DECOMMISSIONED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AiSystemStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemStatus
 
     AiSystemRiskClassification:
       type: string
@@ -4943,7 +4943,7 @@ components:
         - LIMITED
         - MINIMAL
         - GPAI
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AiSystemRiskClassification
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemRiskClassification
 
     AiSystemCompanyRole:
       type: string
@@ -4952,7 +4952,7 @@ components:
         - DEPLOYER
         - USER
         - DEVELOPER
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AiSystemCompanyRole
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemCompanyRole
 
     AiSystemOrderField:
       type: string
@@ -4960,7 +4960,7 @@ components:
         - CREATED_AT
         - NAME
         - STATUS
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AiSystemOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AiSystemOrderField
 
     AiSystemOrderBy:
       type: object
@@ -5333,7 +5333,7 @@ components:
       enum:
         - CONTROLLER
         - PROCESSOR
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ProcessingActivityRole
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityRole
 
     ProcessingActivityLawfulBasis:
       type: string
@@ -5344,7 +5344,7 @@ components:
         - LEGAL_OBLIGATION
         - VITAL_INTERESTS
         - PUBLIC_TASK
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ProcessingActivityLawfulBasis
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityLawfulBasis
 
     ProcessingActivitySpecialOrCriminalDatum:
       type: string
@@ -5352,7 +5352,7 @@ components:
         - YES
         - NO
         - POSSIBLE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ProcessingActivitySpecialOrCriminalDatum
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivitySpecialOrCriminalDatum
 
     ProcessingActivityTransferSafeguard:
       type: string
@@ -5363,28 +5363,28 @@ components:
         - DEROGATIONS
         - CODES_OF_CONDUCT
         - CERTIFICATION_MECHANISMS
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferSafeguard
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferSafeguard
 
     ProcessingActivityDataProtectionImpactAssessmentNeeded:
       type: string
       enum:
         - NEEDED
         - NOT_NEEDED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ProcessingActivityDataProtectionImpactAssessment
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityDataProtectionImpactAssessment
 
     ProcessingActivityTransferImpactAssessmentNeeded:
       type: string
       enum:
         - NEEDED
         - NOT_NEEDED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ProcessingActivityTransferImpactAssessment
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityTransferImpactAssessment
 
     ProcessingActivityOrderField:
       type: string
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ProcessingActivityOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ProcessingActivityOrderField
 
     ProcessingActivityOrderBy:
       type: object
@@ -5753,13 +5753,13 @@ components:
         - LOW
         - MEDIUM
         - HIGH
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DataProtectionImpactAssessmentResidualRisk
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DataProtectionImpactAssessmentResidualRisk
 
     DataProtectionImpactAssessmentOrderField:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DataProtectionImpactAssessmentOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DataProtectionImpactAssessmentOrderField
 
     DataProtectionImpactAssessmentOrderBy:
       type: object
@@ -5934,7 +5934,7 @@ components:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TransferImpactAssessmentOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TransferImpactAssessmentOrderField
 
     TransferImpactAssessmentOrderBy:
       type: object
@@ -6115,7 +6115,7 @@ components:
         - COMPLETED
         - REJECTED
         - OUTDATED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AuditState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AuditState
 
     CompliancePortalVisibility:
       type: string
@@ -6123,14 +6123,14 @@ components:
         - NONE
         - RESTRICTED
         - PUBLIC
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalVisibility
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalVisibility
 
     CompliancePortalLinkedVisibility:
       type: string
       enum:
         - RESTRICTED
         - PUBLIC
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalVisibility
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalVisibility
 
     CompliancePortalCatalogDocument:
       type: object
@@ -6185,7 +6185,7 @@ components:
         - AUDIT_START_DATE
         - AUDIT_END_DATE
         - STATE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AuditOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AuditOrderField
 
     AuditOrderBy:
       type: object
@@ -6440,7 +6440,7 @@ components:
       enum:
         - CREATED_AT
         - SECTION_TITLE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ControlOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ControlOrderField
 
     ControlOrderBy:
       type: object
@@ -6495,7 +6495,7 @@ components:
           type: string
           enum: [NONE, INITIAL, MANAGED, DEFINED, QUANTITATIVELY_MANAGED, OPTIMIZING]
           description: CMMI 0-5 maturity level of the control
-          go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ControlMaturityLevel
+          go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevel
         not_implemented_justification:
           type:
             - string
@@ -6599,7 +6599,7 @@ components:
           type: string
           enum: [NONE, INITIAL, MANAGED, DEFINED, QUANTITATIVELY_MANAGED, OPTIMIZING]
           description: CMMI 0-5 maturity level of the control
-          go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ControlMaturityLevel
+          go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevel
         not_implemented_justification:
           type:
             - string
@@ -6639,7 +6639,7 @@ components:
           type: string
           enum: [NONE, INITIAL, MANAGED, DEFINED, QUANTITATIVELY_MANAGED, OPTIMIZING]
           description: CMMI 0-5 maturity level of the control
-          go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ControlMaturityLevel
+          go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ControlMaturityLevel
         not_implemented_justification:
           type: ["string", "null"]
           description: Justification for non-implementation
@@ -6930,14 +6930,14 @@ components:
         - DONE
         - CANCELED
         - DUPLICATE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TaskState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TaskState
 
     TaskOrderField:
       type: string
       enum:
         - PRIORITY_RANK
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TaskOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TaskOrderField
 
     TaskOrderBy:
       type: object
@@ -6959,7 +6959,7 @@ components:
         - HIGH
         - MEDIUM
         - LOW
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TaskPriority
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TaskPriority
 
     Task:
       type: object
@@ -7048,7 +7048,7 @@ components:
       enum:
         - PROBO
         - LINEAR
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TaskExternalLinkOrigin
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TaskExternalLinkOrigin
 
     TaskExternalLink:
       type: object
@@ -7516,7 +7516,7 @@ components:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TaskCommentOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TaskCommentOrderField
 
     TaskCommentOrderBy:
       type: object
@@ -7688,7 +7688,7 @@ components:
       enum:
         - CREATED
         - UPDATED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TaskActivityType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityType
 
     TaskActivityField:
       type: string
@@ -7701,13 +7701,13 @@ components:
         - MEASURE
         - DEADLINE
         - TIME_ESTIMATE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TaskActivityField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityField
 
     TaskActivityOrderField:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.TaskActivityOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.TaskActivityOrderField
 
     TaskActivityOrderBy:
       type: object
@@ -7840,7 +7840,7 @@ components:
         - REPORT
         - TEMPLATE
         - STATEMENT_OF_APPLICABILITY
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentType
 
     DocumentClassification:
       type: string
@@ -7849,7 +7849,7 @@ components:
         - INTERNAL
         - CONFIDENTIAL
         - SECRET
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentClassification
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentClassification
 
     DocumentVersionStatus:
       type: string
@@ -7857,7 +7857,7 @@ components:
         - DRAFT
         - PENDING_APPROVAL
         - PUBLISHED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentVersionStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionStatus
 
     DocumentVersionApprovalQuorumStatus:
       type: string
@@ -7866,13 +7866,13 @@ components:
         - APPROVED
         - REJECTED
         - VOIDED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalQuorumStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalQuorumStatus
 
     DocumentVersionApprovalQuorumOrderField:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalQuorumOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalQuorumOrderField
 
     DocumentVersionApprovalDecisionState:
       type: string
@@ -7881,34 +7881,34 @@ components:
         - APPROVED
         - REJECTED
         - VOIDED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalDecisionState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalDecisionState
 
     DocumentVersionApprovalDecisionOrderField:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentVersionApprovalDecisionOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionApprovalDecisionOrderField
 
     DocumentStatus:
       type: string
       enum:
         - ACTIVE
         - ARCHIVED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentStatus
 
     DocumentWriteMode:
       type: string
       enum:
         - AUTHORED
         - GENERATED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentWriteMode
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentWriteMode
 
     DocumentVersionSignatureState:
       type: string
       enum:
         - REQUESTED
         - SIGNED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentVersionSignatureState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionSignatureState
 
     DocumentOrderField:
       type: string
@@ -7917,7 +7917,7 @@ components:
         - UPDATED_AT
         - TITLE
         - DOCUMENT_TYPE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentOrderField
 
     DocumentOrderBy:
       type: object
@@ -7936,7 +7936,7 @@ components:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentVersionOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionOrderField
 
     DocumentVersionOrderBy:
       type: object
@@ -7956,7 +7956,7 @@ components:
       enum:
         - CREATED_AT
         - SIGNED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DocumentVersionSignatureOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DocumentVersionSignatureOrderField
 
     DocumentVersionSignatureOrderBy:
       type: object
@@ -8822,7 +8822,7 @@ components:
         - "task-comment:created"
         - "task-comment:updated"
         - "task-comment:deleted"
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.WebhookEventType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventType
 
     WebhookEventStatus:
       type: string
@@ -8830,13 +8830,13 @@ components:
         - PENDING
         - SUCCEEDED
         - FAILED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.WebhookEventStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventStatus
 
     WebhookSubscriptionOrderField:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.WebhookSubscriptionOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookSubscriptionOrderField
 
     WebhookSubscriptionOrderBy:
       type: object
@@ -8855,7 +8855,7 @@ components:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.WebhookEventOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.WebhookEventOrderField
 
     WebhookEventOrderBy:
       type: object
@@ -9098,7 +9098,7 @@ components:
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.StatementOfApplicabilityOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.StatementOfApplicabilityOrderField
 
     StatementOfApplicabilityOrderBy:
       type: object
@@ -9660,7 +9660,7 @@ components:
       enum:
         - CREATED_AT
         - CONTROL_SECTION_TITLE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ApplicabilityStatementOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ApplicabilityStatementOrderField
 
     ApplicabilityStatementOrderBy:
       type: object
@@ -9845,7 +9845,7 @@ components:
         - PENDING_ACTIONS
         - COMPLETED
         - CANCELLED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AccessReviewCampaignStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignStatus
 
     AccessReviewEntryDecision:
       type: string
@@ -9855,7 +9855,7 @@ components:
         - REVOKE
         - DEFER
         - ESCALATE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AccessReviewEntryDecision
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryDecision
 
     AccessReviewEntryFlag:
       type: string
@@ -9875,7 +9875,7 @@ components:
         - NO_BUSINESS_JUSTIFICATION
         - OUT_OF_DEPARTMENT
         - SHARED_ACCOUNT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlag
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlag
 
     AccessReviewEntryAuthMethod:
       type: string
@@ -9887,14 +9887,14 @@ components:
         - SSH
         - SERVICE_ACCOUNT
         - UNKNOWN
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AccessReviewEntryAuthMethod
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAuthMethod
 
     AccessReviewEntryAccountType:
       type: string
       enum:
         - USER
         - SERVICE_ACCOUNT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AccessReviewEntryAccountType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAccountType
 
     MFAStatus:
       type: string
@@ -9902,13 +9902,13 @@ components:
         - ENABLED
         - DISABLED
         - UNKNOWN
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.MFAStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.MFAStatus
 
     AccessReviewCampaignOrderField:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AccessReviewCampaignOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignOrderField
 
     AccessReviewCampaignOrderBy:
       type: object
@@ -9927,7 +9927,7 @@ components:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AccessReviewEntryOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryOrderField
 
     AccessReviewEntryOrderBy:
       type: object
@@ -10338,7 +10338,7 @@ components:
 
     AccessReviewSourceOrderField:
       type: string
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AccessReviewSourceOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewSourceOrderField
       enum:
         - CREATED_AT
 
@@ -10651,7 +10651,7 @@ components:
         - AZURE_GOVERNMENT
         - AZURE_GOVERNMENT_DOD
         - AZURE_CHINA
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/cloud/azure.Environment
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/cloud/azure.Environment
       description: Azure cloud environment. Defaults to AZURE_PUBLIC. GCC uses AZURE_PUBLIC; only GCC High and DoD use Government.
 
     AzureConnectorSetup:
@@ -10702,7 +10702,7 @@ components:
         - AWS
         - GCP
         - AZURE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ConnectorProvider
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ConnectorProvider
       description: Connector provider that supports workload identity
 
     CreateWorkloadIdentityConnectorMCPInput:
@@ -11220,7 +11220,7 @@ components:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AuditLogEntryOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AuditLogEntryOrderField
 
     AuditLogEntryOrderBy:
       type: object
@@ -11363,7 +11363,7 @@ components:
         actor_type:
           type: string
           enum: [USER, API_KEY, SYSTEM]
-          go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.AuditLogActorType
+          go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.AuditLogActorType
           description: Type of actor
         action:
           type: string
@@ -11392,7 +11392,7 @@ components:
         - PORTABILITY
         - OBJECTION
         - COMPLAINT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RightsRequestType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestType
 
     RightsRequestState:
       type: string
@@ -11401,7 +11401,7 @@ components:
         - IN_PROGRESS
         - DONE
         - REJECTED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RightsRequestState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestState
 
     RightsRequestOrderField:
       type: string
@@ -11410,7 +11410,7 @@ components:
         - DEADLINE
         - STATE
         - TYPE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RightsRequestOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RightsRequestOrderField
 
     RightsRequestOrderBy:
       type: object
@@ -11628,7 +11628,7 @@ components:
       enum:
         - INDEXABLE
         - NOT_INDEXABLE
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.SearchEngineIndexing
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.SearchEngineIndexing
 
     SSLStatus:
       type: string
@@ -11639,7 +11639,7 @@ components:
         - RENEWING
         - EXPIRED
         - FAILED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CertificateStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CertificateStatus
 
     CompliancePortalReferenceOrderField:
       type: string
@@ -11648,7 +11648,7 @@ components:
         - NAME
         - CREATED_AT
         - UPDATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalReferenceOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalReferenceOrderField
 
     CompliancePortalReferenceOrderBy:
       type: object
@@ -11667,7 +11667,7 @@ components:
         - NAME
         - CREATED_AT
         - UPDATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalFileOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalFileOrderField
 
     CompliancePortalFileOrderBy:
       type: object
@@ -11685,7 +11685,7 @@ components:
       enum:
         - CREATED_AT
         - RANK
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ComplianceCustomLinkOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ComplianceCustomLinkOrderField
 
     ComplianceCustomLinkOrderBy:
       type: object
@@ -11947,7 +11947,7 @@ components:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalOrderField
 
     CompliancePortalOrderBy:
       type: object
@@ -12089,7 +12089,7 @@ components:
       enum:
         - ACTIVE
         - DEACTIVATED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalAccessState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalAccessState
 
     CompliancePortalAccess:
       type: object
@@ -12586,7 +12586,7 @@ components:
         - BUG
         - CODE
         - SERVER
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentIcon
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentIcon
 
     CompliancePortalCommitmentGroupOrderField:
       type: string
@@ -12594,7 +12594,7 @@ components:
         - RANK
         - CREATED_AT
         - UPDATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentGroupOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentGroupOrderField
 
     CompliancePortalCommitmentGroupOrderBy:
       type: object
@@ -12613,7 +12613,7 @@ components:
         - RANK
         - CREATED_AT
         - UPDATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalCommitmentOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CompliancePortalCommitmentOrderField
 
     CompliancePortalCommitmentOrderBy:
       type: object
@@ -13271,7 +13271,7 @@ components:
       enum:
         - ON_BANNER
         - NOT_ON_BANNER
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CommonGVLVendorMembership
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CommonGVLVendorMembership
 
     CommonGVLVendor:
       type: object
@@ -13981,7 +13981,7 @@ components:
         - NORMAL
         - NECESSARY
         - UNCATEGORISED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CookieCategoryKind
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CookieCategoryKind
 
     ListCookieCategoriesInput:
       type: object
@@ -14545,7 +14545,7 @@ components:
       enum:
         - GOOGLE_WORKSPACE
         - MICROSOFT_365
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.SCIMBridgeType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeType
 
     SCIMBridgeState:
       type: string
@@ -14555,13 +14555,13 @@ components:
         - SYNCING
         - FAILED
         - DISABLED
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.SCIMBridgeState
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMBridgeState
 
     SCIMEventOrderField:
       type: string
       enum:
         - CREATED_AT
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.SCIMEventOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.SCIMEventOrderField
 
     SCIMEventOrderBy:
       type: object
@@ -14902,14 +14902,14 @@ components:
         - ENTITY
         - ASSET
         - DATA
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskAnalysisNodeType
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisNodeType
 
     RiskAnalysisOrderField:
       type: string
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskAnalysisOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisOrderField
 
     RiskAnalysisOrderBy:
       type: object
@@ -14927,7 +14927,7 @@ components:
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskAnalysisDiagramOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisDiagramOrderField
 
     RiskAnalysisDiagramOrderBy:
       type: object
@@ -14945,7 +14945,7 @@ components:
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskAnalysisNodeOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisNodeOrderField
 
     RiskAnalysisNodeOrderBy:
       type: object
@@ -14963,7 +14963,7 @@ components:
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskAnalysisBoundaryOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisBoundaryOrderField
 
     RiskAnalysisBoundaryOrderBy:
       type: object
@@ -14981,7 +14981,7 @@ components:
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskAnalysisProcessOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisProcessOrderField
 
     RiskAnalysisProcessOrderBy:
       type: object
@@ -14999,7 +14999,7 @@ components:
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskAnalysisThreatOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisThreatOrderField
 
     RiskAnalysisThreatOrderBy:
       type: object
@@ -15017,7 +15017,7 @@ components:
       enum:
         - CREATED_AT
         - NAME
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.RiskAnalysisScenarioOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.RiskAnalysisScenarioOrderField
 
     RiskAnalysisScenarioOrderBy:
       type: object
@@ -16200,12 +16200,12 @@ components:
     MailingListSubscriberStatus:
       type: string
       enum: [PENDING, CONFIRMED]
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.MailingListSubscriberStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListSubscriberStatus
 
     MailingListSubscriberOrderField:
       type: string
       enum: [CREATED_AT]
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.MailingListSubscriberOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListSubscriberOrderField
 
     MailingListSubscriberOrderBy:
       type: object
@@ -16242,12 +16242,12 @@ components:
     MailingListUpdateStatus:
       type: string
       enum: [DRAFT, ENQUEUED, PROCESSING, SENT]
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.MailingListUpdateStatus
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListUpdateStatus
 
     MailingListUpdateOrderField:
       type: string
       enum: [CREATED_AT, UPDATED_AT]
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.MailingListUpdateOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListUpdateOrderField
 
     MailingListUpdateOrderBy:
       type: object
@@ -16465,7 +16465,7 @@ components:
     DetectedTrackerOrderField:
       type: string
       enum: [INITIATOR_URL, LAST_DETECTED_AT]
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.DetectedTrackerOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.DetectedTrackerOrderField
 
     DetectedTrackerOrderBy:
       type: object
@@ -16494,7 +16494,7 @@ components:
           type: string
           enum: [SCRIPT, PRE_EXISTING, HTTP, EXTENSION]
           nullable: true
-          go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CookieSource
+          go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.CookieSource
         last_detected_at:
           type: string
           format: date-time
@@ -16530,12 +16530,12 @@ components:
     CompliancePortalFrameworkVisibility:
       type: string
       enum: [NONE, PUBLIC]
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ComplianceFrameworkVisibility
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ComplianceFrameworkVisibility
 
     CompliancePortalFrameworkOrderField:
       type: string
       enum: [CREATED_AT, RANK]
-      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.ComplianceFrameworkOrderField
+      go.probo.inc/mcpgen/type: github.com/DhruvWork/trustready-grc/pkg/coredata.ComplianceFrameworkOrderField
 
     CompliancePortalFrameworkOrderBy:
       type: object

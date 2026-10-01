@@ -24,7 +24,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/stringsx"
+	"github.com/DhruvWork/trustready-grc/pkg/stringsx"
 )
 
 func TestNormalizeAlnum(t *testing.T) {

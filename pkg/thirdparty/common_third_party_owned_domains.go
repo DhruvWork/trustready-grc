@@ -24,8 +24,8 @@ import (
 	"slices"
 	"strings"
 
-	"go.probo.inc/probo/pkg/stringsx"
-	"go.probo.inc/probo/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/stringsx"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
 // minLabelOverlap is the shortest label length allowed for a substring

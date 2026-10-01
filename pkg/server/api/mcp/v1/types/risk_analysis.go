@@ -23,8 +23,8 @@ package types
 import (
 	"fmt"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
 )
 
 func NewRiskAnalysis(ra *coredata.RiskAnalysis) *RiskAnalysis {

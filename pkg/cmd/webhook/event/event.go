@@ -22,8 +22,8 @@ package event
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/webhook/event/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/webhook/event/list"
 )
 
 func NewCmdEvent(f *cmdutil.Factory) *cobra.Command {

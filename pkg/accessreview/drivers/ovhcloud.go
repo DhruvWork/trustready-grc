@@ -33,7 +33,7 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // maxOVHcloudCollection bounds every per-item fan-out: OVHcloud lists

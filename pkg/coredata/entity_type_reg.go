@@ -20,7 +20,7 @@
 
 package coredata
 
-import "go.probo.inc/probo/pkg/gid"
+import "github.com/DhruvWork/trustready-grc/pkg/gid"
 
 type ctxKey struct{ name string }
 

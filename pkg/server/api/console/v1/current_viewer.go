@@ -23,8 +23,8 @@ package console_v1
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 )
 
 func currentViewer(ctx context.Context) *types.Viewer {

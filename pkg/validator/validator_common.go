@@ -24,7 +24,7 @@ import (
 	"reflect"
 	"strings"
 
-	"go.probo.inc/probo/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
 )
 
 // Required validates that a field has a value.

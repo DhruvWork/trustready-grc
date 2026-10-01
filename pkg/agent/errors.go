@@ -24,7 +24,7 @@ import (
 	"errors"
 	"fmt"
 
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 // ErrSuspendForCheckpoint is the cancel cause to use when the caller

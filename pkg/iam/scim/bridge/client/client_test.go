@@ -26,7 +26,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	scimclient "go.probo.inc/probo/pkg/iam/scim/bridge/client"
+	scimclient "github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/client"
 )
 
 func TestUser_UnmarshalJSON(t *testing.T) {

@@ -23,7 +23,7 @@ package validator
 import (
 	"testing"
 
-	"go.probo.inc/probo/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
 )
 
 func TestValidator_Validate(t *testing.T) {

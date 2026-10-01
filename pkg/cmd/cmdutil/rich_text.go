@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"strings"
 
-	"go.probo.inc/probo/pkg/prosemirror"
+	"github.com/DhruvWork/trustready-grc/pkg/prosemirror"
 )
 
 // FormatRichText renders stored ProseMirror JSON as markdown for human CLI

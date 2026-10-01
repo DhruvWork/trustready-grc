@@ -33,9 +33,9 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/cloud"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	pkgcloud "go.probo.inc/probo/pkg/cloud"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
-	"go.probo.inc/probo/pkg/identityfederation"
+	pkgcloud "github.com/DhruvWork/trustready-grc/pkg/cloud"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 type roundTripFunc func(*http.Request) (*http.Response, error)

@@ -20,7 +20,7 @@
 
 type CommonThirdParty
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.CommonThirdParty"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.CommonThirdParty"
     ) {
     id: ID!
     name: String!

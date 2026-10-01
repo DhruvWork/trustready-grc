@@ -28,10 +28,10 @@ import (
 	"time"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/deviceagent/checks"
-	"go.probo.inc/probo/pkg/deviceagent/update"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/checks"
+	"github.com/DhruvWork/trustready-grc/pkg/deviceagent/update"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 const (

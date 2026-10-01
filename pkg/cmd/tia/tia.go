@@ -22,13 +22,13 @@ package tia
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/tia/create"
-	"go.probo.inc/probo/pkg/cmd/tia/delete"
-	"go.probo.inc/probo/pkg/cmd/tia/list"
-	"go.probo.inc/probo/pkg/cmd/tia/publish"
-	"go.probo.inc/probo/pkg/cmd/tia/update"
-	"go.probo.inc/probo/pkg/cmd/tia/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tia/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tia/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tia/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tia/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tia/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/tia/view"
 )
 
 func NewCmdTIA(f *cmdutil.Factory) *cobra.Command {

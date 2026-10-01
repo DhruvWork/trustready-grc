@@ -25,7 +25,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/awsconfig"
+	"github.com/DhruvWork/trustready-grc/pkg/awsconfig"
 )
 
 func TestCSPFileStorageOrigin(t *testing.T) {

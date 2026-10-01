@@ -32,9 +32,9 @@ import (
 
 	"github.com/charmbracelet/huh"
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cli/config"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/version"
+	"github.com/DhruvWork/trustready-grc/pkg/cli/config"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/version"
 )
 
 type oidcDiscovery struct {

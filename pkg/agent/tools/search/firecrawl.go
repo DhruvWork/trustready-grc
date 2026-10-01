@@ -29,7 +29,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 const firecrawlBaseURL = "https://api.firecrawl.dev/v2"

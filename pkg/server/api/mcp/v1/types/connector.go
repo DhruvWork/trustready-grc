@@ -21,11 +21,11 @@
 package types
 
 import (
-	cloudaws "go.probo.inc/probo/pkg/cloud/aws"
-	cloudazure "go.probo.inc/probo/pkg/cloud/azure"
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
-	"go.probo.inc/probo/pkg/connector/provider"
-	"go.probo.inc/probo/pkg/coredata"
+	cloudaws "github.com/DhruvWork/trustready-grc/pkg/cloud/aws"
+	cloudazure "github.com/DhruvWork/trustready-grc/pkg/cloud/azure"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
+	"github.com/DhruvWork/trustready-grc/pkg/connector/provider"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func NewConnector(c *coredata.Connector, status ConnectorConnectionStatus) *Connector {

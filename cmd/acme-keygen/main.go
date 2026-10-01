@@ -26,8 +26,8 @@ import (
 	"fmt"
 	"os"
 
-	"go.probo.inc/probo/pkg/crypto/keys"
-	"go.probo.inc/probo/pkg/crypto/pem"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/keys"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/pem"
 	"golang.org/x/crypto/acme"
 )
 

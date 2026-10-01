@@ -22,12 +22,12 @@ package node
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/node/create"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/node/delete"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/node/list"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/node/update"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/node/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/node/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/node/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/node/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/node/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/node/view"
 )
 
 func NewCmdNode(f *cmdutil.Factory) *cobra.Command {

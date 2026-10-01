@@ -23,9 +23,9 @@ package console_v1
 import (
 	"context"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
 )
 
 func (r *accessReviewSourceResolver) sourceConnectorID(

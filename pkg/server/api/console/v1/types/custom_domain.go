@@ -21,7 +21,7 @@
 package types
 
 import (
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func NewCustomDomain(d *coredata.CustomDomain, cnameTarget string) *CustomDomain {

@@ -22,13 +22,13 @@ package asset
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/asset/create"
-	"go.probo.inc/probo/pkg/cmd/asset/delete"
-	"go.probo.inc/probo/pkg/cmd/asset/list"
-	"go.probo.inc/probo/pkg/cmd/asset/publish"
-	"go.probo.inc/probo/pkg/cmd/asset/update"
-	"go.probo.inc/probo/pkg/cmd/asset/view"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/asset/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/asset/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/asset/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/asset/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/asset/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/asset/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdAsset(f *cmdutil.Factory) *cobra.Command {

@@ -11,26 +11,26 @@ type Invitation implements Node {
 }
 
 enum InvitationStatus
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.InvitationStatus") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.InvitationStatus") {
   PENDING
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.InvitationStatusPending")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.InvitationStatusPending")
   ACCEPTED
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.InvitationStatusAccepted")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.InvitationStatusAccepted")
   EXPIRED
-    @goEnum(value: "go.probo.inc/probo/pkg/coredata.InvitationStatusExpired")
+    @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.InvitationStatusExpired")
 }
 
 enum InvitationOrderField
-  @goModel(model: "go.probo.inc/probo/pkg/coredata.InvitationOrderField") {
+  @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.InvitationOrderField") {
   CREATED_AT
     @goEnum(
-      value: "go.probo.inc/probo/pkg/coredata.InvitationOrderFieldCreatedAt"
+      value: "github.com/DhruvWork/trustready-grc/pkg/coredata.InvitationOrderFieldCreatedAt"
     )
 }
 
 input InvitationOrder
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.InvitationOrderBy"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.InvitationOrderBy"
   ) {
   direction: OrderDirection!
   field: InvitationOrderField!
@@ -38,7 +38,7 @@ input InvitationOrder
 
 type InvitationConnection
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.InvitationConnection"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.InvitationConnection"
   ) {
   edges: [InvitationEdge!]!
   pageInfo: PageInfo!

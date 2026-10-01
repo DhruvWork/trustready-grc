@@ -29,7 +29,7 @@ import (
 	"net/url"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 type TallyDriver struct {

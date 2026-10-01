@@ -25,7 +25,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/task/sync/linear"
+	"github.com/DhruvWork/trustready-grc/pkg/task/sync/linear"
 )
 
 func TestInboundAssigneeEmail(t *testing.T) {

@@ -27,8 +27,8 @@ import (
 	"io/fs"
 	"net/http"
 
-	complianceportalstatics "go.probo.inc/probo/apps/compliance-portal"
-	"go.probo.inc/probo/pkg/server/statichandler"
+	complianceportalstatics "github.com/DhruvWork/trustready-grc/apps/compliance-portal"
+	"github.com/DhruvWork/trustready-grc/pkg/server/statichandler"
 )
 
 type (

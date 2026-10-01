@@ -18,7 +18,7 @@ type PersonalAPIKey implements Node {
 
 type PersonalAPIKeyConnection
   @goModel(
-    model: "go.probo.inc/probo/pkg/server/api/connect/v1/types.PersonalAPIKeyConnection"
+    model: "github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/types.PersonalAPIKeyConnection"
   ) {
   edges: [PersonalAPIKeyEdge!]!
   pageInfo: PageInfo!

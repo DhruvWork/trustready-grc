@@ -22,13 +22,13 @@ package webhook
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/webhook/create"
-	"go.probo.inc/probo/pkg/cmd/webhook/delete"
-	"go.probo.inc/probo/pkg/cmd/webhook/event"
-	"go.probo.inc/probo/pkg/cmd/webhook/list"
-	"go.probo.inc/probo/pkg/cmd/webhook/update"
-	"go.probo.inc/probo/pkg/cmd/webhook/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/webhook/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/webhook/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/webhook/event"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/webhook/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/webhook/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/webhook/view"
 )
 
 func NewCmdWebhook(f *cmdutil.Factory) *cobra.Command {

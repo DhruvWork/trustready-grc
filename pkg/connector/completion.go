@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"go.probo.inc/probo/pkg/statelesstoken"
+	"github.com/DhruvWork/trustready-grc/pkg/statelesstoken"
 )
 
 const CompletionMetadataGitHubOrganization = "github_organization"

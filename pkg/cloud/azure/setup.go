@@ -25,8 +25,8 @@ import (
 	"strconv"
 	"strings"
 
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
 )
 
 const (

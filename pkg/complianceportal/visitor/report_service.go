@@ -28,10 +28,10 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/mail"
-	"go.probo.inc/probo/pkg/pdfutils"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/pdfutils"
 )
 
 func (s *Service) GetReport(

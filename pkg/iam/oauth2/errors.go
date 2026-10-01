@@ -23,8 +23,8 @@ package oauth2
 import (
 	"errors"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 // OAuth2Error represents an OAuth2 protocol error with an associated

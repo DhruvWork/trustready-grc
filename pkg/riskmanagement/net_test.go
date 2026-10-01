@@ -24,8 +24,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/riskmanagement"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/riskmanagement"
 )
 
 func TestNetScores(t *testing.T) {

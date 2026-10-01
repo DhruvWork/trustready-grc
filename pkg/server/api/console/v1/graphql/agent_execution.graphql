@@ -1,30 +1,30 @@
 enum AgentExecutionStatus
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.AgentExecutionStatus") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AgentExecutionStatus") {
     IDLE
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AgentExecutionStatusIdle")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AgentExecutionStatusIdle")
     RUNNING
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AgentExecutionStatusRunning")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AgentExecutionStatusRunning")
     SUSPENDED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AgentExecutionStatusSuspended")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AgentExecutionStatusSuspended")
     AWAITING_APPROVAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AgentExecutionStatusAwaitingApproval"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AgentExecutionStatusAwaitingApproval"
         )
     FAILED
-        @goEnum(value: "go.probo.inc/probo/pkg/coredata.AgentExecutionStatusFailed")
+        @goEnum(value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AgentExecutionStatusFailed")
 }
 
 enum AgentExecutionOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.AgentExecutionOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AgentExecutionOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AgentExecutionOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AgentExecutionOrderFieldCreatedAt"
         )
 }
 
 input AgentExecutionOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AgentExecutionOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AgentExecutionOrderBy"
     ) {
     direction: OrderDirection!
     field: AgentExecutionOrderField!
@@ -45,7 +45,7 @@ type AgentExecution implements Node {
 
 type AgentExecutionConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AgentExecutionConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AgentExecutionConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [AgentExecutionEdge!]!

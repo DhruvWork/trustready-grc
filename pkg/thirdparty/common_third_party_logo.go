@@ -32,9 +32,9 @@ import (
 
 	"go.gearno.de/crypto/uuid"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/webinspect"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/webinspect"
 )
 
 // maxLogoSize caps a downloaded logo image. Logos are small; the cap

@@ -22,12 +22,12 @@ package boundary
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/boundary/create"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/boundary/delete"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/boundary/list"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/boundary/update"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/boundary/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/boundary/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/boundary/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/boundary/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/boundary/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/boundary/view"
 )
 
 func NewCmdBoundary(f *cmdutil.Factory) *cobra.Command {

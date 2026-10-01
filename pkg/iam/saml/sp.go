@@ -25,7 +25,7 @@ import (
 	"fmt"
 
 	"github.com/crewjam/saml"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func (s *Service) serviceProvider(

@@ -28,12 +28,12 @@ import (
 	"github.com/go-chi/chi/v5"
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/identityfederation"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/server/httpx"
-	"go.probo.inc/probo/pkg/server/jsonx"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/identityfederation"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/server/httpx"
+	"github.com/DhruvWork/trustready-grc/pkg/server/jsonx"
 )
 
 // documentCacheMaxAge lets the CDN and the cloud provider absorb the traffic, so

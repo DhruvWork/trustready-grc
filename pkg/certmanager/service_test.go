@@ -21,8 +21,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/certmanager"
-	"go.probo.inc/probo/pkg/crypto/cipher"
+	"github.com/DhruvWork/trustready-grc/pkg/certmanager"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/cipher"
 )
 
 func TestServiceRun_ACMEDisabled(t *testing.T) {

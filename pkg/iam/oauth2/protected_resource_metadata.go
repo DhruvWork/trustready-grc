@@ -21,8 +21,8 @@
 package oauth2
 
 import (
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
 // ProtectedResourceMetadata represents the RFC 9728 protected resource metadata

@@ -44,7 +44,7 @@ type (
 
 const (
 	DefaultRegion      = "us-east-2"
-	DefaultSessionName = "go.probo.inc/probo"
+	DefaultSessionName = "github.com/DhruvWork/trustready-grc"
 )
 
 func NewConfig(logger *log.Logger, httpClient *http.Client, opts Options) (aws.Config, error) {

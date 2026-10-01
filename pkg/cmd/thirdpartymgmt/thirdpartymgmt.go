@@ -22,14 +22,14 @@ package thirdpartymgmt
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/thirdpartymgmt/create"
-	"go.probo.inc/probo/pkg/cmd/thirdpartymgmt/delete"
-	"go.probo.inc/probo/pkg/cmd/thirdpartymgmt/list"
-	"go.probo.inc/probo/pkg/cmd/thirdpartymgmt/publish"
-	"go.probo.inc/probo/pkg/cmd/thirdpartymgmt/update"
-	"go.probo.inc/probo/pkg/cmd/thirdpartymgmt/vet"
-	"go.probo.inc/probo/pkg/cmd/thirdpartymgmt/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/thirdpartymgmt/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/thirdpartymgmt/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/thirdpartymgmt/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/thirdpartymgmt/publish"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/thirdpartymgmt/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/thirdpartymgmt/vet"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/thirdpartymgmt/view"
 )
 
 func NewCmdThirdParty(f *cmdutil.Factory) *cobra.Command {

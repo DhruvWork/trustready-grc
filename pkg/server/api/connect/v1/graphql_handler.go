@@ -24,16 +24,16 @@ import (
 	"net/http"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/filemanager"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/securecookie"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/authz"
-	"go.probo.inc/probo/pkg/server/api/connect/v1/schema"
-	"go.probo.inc/probo/pkg/server/gqlutils"
-	"go.probo.inc/probo/pkg/server/gqlutils/directives/authentication"
-	"go.probo.inc/probo/pkg/server/gqlutils/directives/session"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/filemanager"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/securecookie"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authz"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils/directives/authentication"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils/directives/session"
 )
 
 func NewGraphQLHandler(

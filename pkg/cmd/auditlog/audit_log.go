@@ -22,10 +22,10 @@ package auditlog
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/auditlog/export"
-	"go.probo.inc/probo/pkg/cmd/auditlog/list"
-	"go.probo.inc/probo/pkg/cmd/auditlog/view"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/auditlog/export"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/auditlog/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/auditlog/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdAuditLog(f *cmdutil.Factory) *cobra.Command {

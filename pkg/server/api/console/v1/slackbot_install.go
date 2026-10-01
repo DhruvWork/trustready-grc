@@ -27,13 +27,13 @@ import (
 
 	"go.gearno.de/kit/httpserver"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/baseurl"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/iam"
-	"go.probo.inc/probo/pkg/probo"
-	slackchannel "go.probo.inc/probo/pkg/probot/channel/slack"
-	"go.probo.inc/probo/pkg/saferedirect"
-	"go.probo.inc/probo/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/iam"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
+	"github.com/DhruvWork/trustready-grc/pkg/saferedirect"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
 )
 
 func handleSlackbotInstallInitiate(

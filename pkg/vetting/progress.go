@@ -24,7 +24,7 @@ import (
 	"context"
 	"math/rand/v2"
 
-	"go.probo.inc/probo/pkg/agent"
+	"github.com/DhruvWork/trustready-grc/pkg/agent"
 )
 
 var (

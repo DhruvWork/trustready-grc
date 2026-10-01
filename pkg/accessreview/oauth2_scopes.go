@@ -20,7 +20,7 @@
 
 package accessreview
 
-import "go.probo.inc/probo/pkg/coredata"
+import "github.com/DhruvWork/trustready-grc/pkg/coredata"
 
 const (
 	ScopeV1AccessReviewRead coredata.OAuth2Scope = "v1:access-review:read"

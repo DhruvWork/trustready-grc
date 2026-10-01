@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"go.probo.inc/probo/pkg/baseurl"
+	"github.com/DhruvWork/trustready-grc/pkg/baseurl"
 )
 
 // EnrollmentURLs holds the public API origin and probo:// deep link issued

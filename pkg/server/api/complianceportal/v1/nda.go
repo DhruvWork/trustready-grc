@@ -25,11 +25,11 @@ import (
 	"errors"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/complianceportal"
-	"go.probo.inc/probo/pkg/server/gqlutils"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 // mapNDASigningValidationError maps esign full-name validation failures to

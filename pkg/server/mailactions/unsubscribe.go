@@ -26,7 +26,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"go.probo.inc/probo/pkg/mailman"
+	"github.com/DhruvWork/trustready-grc/pkg/mailman"
 )
 
 func unsubscribeGetHandler() http.HandlerFunc {

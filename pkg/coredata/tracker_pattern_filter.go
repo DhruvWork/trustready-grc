@@ -22,7 +22,7 @@ package coredata
 
 import (
 	"github.com/jackc/pgx/v5"
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 type TrackerPatternFilter struct {

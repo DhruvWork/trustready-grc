@@ -1,36 +1,36 @@
 enum MailingListSubscriberStatus
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.MailingListSubscriberStatus"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListSubscriberStatus"
     ) {
     PENDING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MailingListSubscriberStatusPending"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListSubscriberStatusPending"
         )
     CONFIRMED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MailingListSubscriberStatusConfirmed"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListSubscriberStatusConfirmed"
         )
 }
 
 enum MailingListUpdateStatus
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.MailingListUpdateStatus"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListUpdateStatus"
     ) {
     DRAFT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MailingListUpdateStatusDraft"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListUpdateStatusDraft"
         )
     ENQUEUED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MailingListUpdateStatusEnqueued"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListUpdateStatusEnqueued"
         )
     PROCESSING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MailingListUpdateStatusProcessing"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListUpdateStatusProcessing"
         )
     SENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MailingListUpdateStatusSent"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MailingListUpdateStatusSent"
         )
 }
 
@@ -64,7 +64,7 @@ type MailingListSubscriber implements Node {
 
 type MailingListSubscriberConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.MailingListSubscriberConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.MailingListSubscriberConnection"
     ) {
     edges: [MailingListSubscriberEdge!]!
     pageInfo: PageInfo!
@@ -87,7 +87,7 @@ type MailingListUpdate implements Node {
 
 type MailingListUpdateConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.MailingListUpdateConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.MailingListUpdateConnection"
     ) {
     edges: [MailingListUpdateEdge!]!
     pageInfo: PageInfo!

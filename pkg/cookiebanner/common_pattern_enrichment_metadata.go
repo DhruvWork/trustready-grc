@@ -24,7 +24,7 @@ import (
 	"strings"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // Per-field outcomes recorded in the common tracker pattern enrichment

@@ -22,13 +22,13 @@ package diagram
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/diagram/create"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/diagram/delete"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/diagram/list"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/diagram/mermaid"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/diagram/update"
-	"go.probo.inc/probo/pkg/cmd/risk-analysis/diagram/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/diagram/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/diagram/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/diagram/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/diagram/mermaid"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/diagram/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/risk-analysis/diagram/view"
 )
 
 func NewCmdDiagram(f *cmdutil.Factory) *cobra.Command {

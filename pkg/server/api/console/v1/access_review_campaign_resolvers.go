@@ -12,17 +12,17 @@ import (
 
 	"github.com/vikstrous/dataloadgen"
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/accessreview"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/errorx"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/server/api/authn"
-	"go.probo.inc/probo/pkg/server/api/console/v1/dataloader"
-	"go.probo.inc/probo/pkg/server/api/console/v1/schema"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/errorx"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/authn"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/dataloader"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // Organization is the resolver for the organization field.

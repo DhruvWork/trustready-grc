@@ -9,11 +9,11 @@ import (
 	"context"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/probo"
-	"go.probo.inc/probo/pkg/probot"
-	slackchannel "go.probo.inc/probo/pkg/probot/channel/slack"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/probo"
+	"github.com/DhruvWork/trustready-grc/pkg/probot"
+	slackchannel "github.com/DhruvWork/trustready-grc/pkg/probot/channel/slack"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
 )
 
 // SetSlackbotNotificationChannel is the resolver for the setSlackbotNotificationChannel field.

@@ -24,7 +24,7 @@ import (
 	"regexp"
 	"strings"
 
-	"go.probo.inc/probo/pkg/crypto/rand"
+	"github.com/DhruvWork/trustready-grc/pkg/crypto/rand"
 )
 
 var (

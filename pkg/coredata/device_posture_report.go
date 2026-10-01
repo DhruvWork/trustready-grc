@@ -28,8 +28,8 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"go.gearno.de/kit/pg"
-	"go.probo.inc/probo/pkg/gid"
-	"go.probo.inc/probo/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
 )
 
 type (

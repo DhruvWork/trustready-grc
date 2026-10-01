@@ -29,8 +29,8 @@ import (
 	"strings"
 	"time"
 
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/rfc5988"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/rfc5988"
 )
 
 // OktaDriver lists the users of a single Okta org. The org is identified by

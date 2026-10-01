@@ -22,10 +22,10 @@ package config
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
-	configget "go.probo.inc/probo/pkg/cmd/config/get"
-	configlist "go.probo.inc/probo/pkg/cmd/config/list"
-	configset "go.probo.inc/probo/pkg/cmd/config/set"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
+	configget "github.com/DhruvWork/trustready-grc/pkg/cmd/config/get"
+	configlist "github.com/DhruvWork/trustready-grc/pkg/cmd/config/list"
+	configset "github.com/DhruvWork/trustready-grc/pkg/cmd/config/set"
 )
 
 func NewCmdConfig(f *cmdutil.Factory) *cobra.Command {

@@ -27,8 +27,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/e2e/internal/testutil"
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
 )
 
 const (

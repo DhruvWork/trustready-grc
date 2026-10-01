@@ -20,7 +20,7 @@
 
 package agent
 
-import "go.probo.inc/probo/pkg/llm"
+import "github.com/DhruvWork/trustready-grc/pkg/llm"
 
 type (
 	Result struct {

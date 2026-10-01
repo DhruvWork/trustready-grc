@@ -27,8 +27,8 @@ import (
 	"regexp"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/accessreview/drivers"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/accessreview/drivers"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 // qoveryKeyPattern covers both organization token classes, which ride the

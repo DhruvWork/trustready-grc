@@ -23,7 +23,7 @@ import (
 	"net/url"
 	"strings"
 
-	"go.probo.inc/probo/pkg/uri"
+	"github.com/DhruvWork/trustready-grc/pkg/uri"
 )
 
 const (

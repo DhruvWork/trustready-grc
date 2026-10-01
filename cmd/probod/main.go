@@ -28,7 +28,7 @@ import (
 	"time"
 
 	"go.gearno.de/kit/unit"
-	"go.probo.inc/probo/pkg/probod"
+	"github.com/DhruvWork/trustready-grc/pkg/probod"
 )
 
 var (

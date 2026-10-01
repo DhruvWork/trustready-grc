@@ -23,7 +23,7 @@ package journey
 import (
 	"fmt"
 
-	"go.probo.inc/probo/e2e/internal/testutil"
+	"github.com/DhruvWork/trustready-grc/e2e/internal/testutil"
 )
 
 // Actor is a named participant with a real authenticated or unauthenticated

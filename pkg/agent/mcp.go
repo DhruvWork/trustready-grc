@@ -28,7 +28,7 @@ import (
 	"sync"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
-	"go.probo.inc/probo/pkg/llm"
+	"github.com/DhruvWork/trustready-grc/pkg/llm"
 )
 
 type (

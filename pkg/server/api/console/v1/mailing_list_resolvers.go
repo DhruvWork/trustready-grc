@@ -11,14 +11,14 @@ import (
 	"fmt"
 
 	"go.gearno.de/kit/log"
-	"go.probo.inc/probo/pkg/complianceportal/management"
-	"go.probo.inc/probo/pkg/coredata"
-	"go.probo.inc/probo/pkg/mailman"
-	"go.probo.inc/probo/pkg/page"
-	"go.probo.inc/probo/pkg/server/api/console/v1/schema"
-	"go.probo.inc/probo/pkg/server/api/console/v1/types"
-	"go.probo.inc/probo/pkg/server/gqlutils"
-	"go.probo.inc/probo/pkg/validator"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/management"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/mailman"
+	"github.com/DhruvWork/trustready-grc/pkg/page"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/schema"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types"
+	"github.com/DhruvWork/trustready-grc/pkg/server/gqlutils"
+	"github.com/DhruvWork/trustready-grc/pkg/validator"
 )
 
 // Subscribers is the resolver for the subscribers field on MailingList.

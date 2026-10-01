@@ -1,233 +1,233 @@
 enum AccessReviewCampaignStatus
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignStatus"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignStatus"
     ) {
     DRAFT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignStatusDraft"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignStatusDraft"
         )
     IN_PROGRESS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignStatusInProgress"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignStatusInProgress"
         )
     PENDING_ACTIONS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignStatusPendingActions"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignStatusPendingActions"
         )
     COMPLETED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignStatusCompleted"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignStatusCompleted"
         )
     CANCELLED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignStatusCancelled"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignStatusCancelled"
         )
 }
 
 enum AccessReviewCampaignSourceFetchStatus
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignSourceFetchStatus"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignSourceFetchStatus"
     ) {
     QUEUED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignSourceFetchStatusQueued"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignSourceFetchStatusQueued"
         )
     FETCHING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignSourceFetchStatusFetching"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignSourceFetchStatusFetching"
         )
     SUCCESS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignSourceFetchStatusSuccess"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignSourceFetchStatusSuccess"
         )
     FAILED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignSourceFetchStatusFailed"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignSourceFetchStatusFailed"
         )
 }
 
 enum AccessReviewEntryFlag
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlag") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlag") {
     NONE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagNone"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagNone"
         )
     ORPHANED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagOrphaned"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagOrphaned"
         )
     INACTIVE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagInactive"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagInactive"
         )
     EXCESSIVE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagExcessive"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagExcessive"
         )
     ROLE_MISMATCH
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagRoleMismatch"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagRoleMismatch"
         )
     NEW
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagNew"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagNew"
         )
     DORMANT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagDormant"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagDormant"
         )
     TERMINATED_USER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagTerminatedUser"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagTerminatedUser"
         )
     CONTRACTOR_EXPIRED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagContractorExpired"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagContractorExpired"
         )
     SOD_CONFLICT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagSoDConflict"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagSoDConflict"
         )
     PRIVILEGED_ACCESS
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagPrivilegedAccess"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagPrivilegedAccess"
         )
     ROLE_CREEP
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagRoleCreep"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagRoleCreep"
         )
     NO_BUSINESS_JUSTIFICATION
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagNoBusinessJustification"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagNoBusinessJustification"
         )
     OUT_OF_DEPARTMENT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagOutOfDepartment"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagOutOfDepartment"
         )
     SHARED_ACCOUNT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFlagSharedAccount"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFlagSharedAccount"
         )
 }
 
 enum AccessReviewEntryDecision
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryDecision"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryDecision"
     ) {
     PENDING
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryDecisionPending"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryDecisionPending"
         )
     APPROVED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryDecisionApproved"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryDecisionApproved"
         )
     REVOKE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryDecisionRevoke"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryDecisionRevoke"
         )
     DEFER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryDecisionDefer"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryDecisionDefer"
         )
     ESCALATE
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryDecisionEscalate"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryDecisionEscalate"
         )
 }
 
 enum MfaStatus
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.MFAStatus") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.MFAStatus") {
     ENABLED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MFAStatusEnabled"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MFAStatusEnabled"
         )
     DISABLED
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MFAStatusDisabled"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MFAStatusDisabled"
         )
     UNKNOWN
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.MFAStatusUnknown"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.MFAStatusUnknown"
         )
 }
 
 enum AccessReviewEntryAuthMethod
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAuthMethod"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAuthMethod"
     ) {
     SSO
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAuthMethodSSO"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAuthMethodSSO"
         )
     PASSWORD
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAuthMethodPassword"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAuthMethodPassword"
         )
     API_KEY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAuthMethodAPIKey"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAuthMethodAPIKey"
         )
     OAUTH2
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAuthMethodOAuth2"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAuthMethodOAuth2"
         )
     SSH
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAuthMethodSSH"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAuthMethodSSH"
         )
     SERVICE_ACCOUNT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAuthMethodServiceAccount"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAuthMethodServiceAccount"
         )
     UNKNOWN
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAuthMethodUnknown"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAuthMethodUnknown"
         )
 }
 
 enum AccessReviewEntryAccountType
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAccountType"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAccountType"
     ) {
     USER
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAccountTypeUser"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAccountTypeUser"
         )
     SERVICE_ACCOUNT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryAccountTypeServiceAccount"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryAccountTypeServiceAccount"
         )
 }
 
 enum AccessReviewSourceOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewSourceOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewSourceOrderField"
     ) {
     CREATED_AT
 }
 
 enum AccessReviewCampaignOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignOrderField"
     ) {
     CREATED_AT
 }
 
 enum AccessReviewEntryOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryOrderField"
     ) {
     CREATED_AT
 }
 
 enum AccessReviewCampaignSourceFetchAttemptOrderField
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignSourceFetchAttemptOrderField"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignSourceFetchAttemptOrderField"
     ) {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.AccessReviewCampaignSourceFetchAttemptOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewCampaignSourceFetchAttemptOrderFieldCreatedAt"
         )
 }
 
@@ -265,7 +265,7 @@ input AccessReviewEntryOrder {
 
 input AccessReviewEntryFilter
     @goModel(
-        model: "go.probo.inc/probo/pkg/coredata.AccessReviewEntryFilter"
+        model: "github.com/DhruvWork/trustready-grc/pkg/coredata.AccessReviewEntryFilter"
     ) {
     decision: AccessReviewEntryDecision
     flag: AccessReviewEntryFlag
@@ -460,7 +460,7 @@ type AccessReviewEntryDecisionHistoryEntry {
 
 type AccessReviewSourceConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AccessReviewSourceConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AccessReviewSourceConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [AccessReviewSourceEdge!]!
@@ -474,7 +474,7 @@ type AccessReviewSourceEdge {
 
 type AccessReviewCampaignConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AccessReviewCampaignConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AccessReviewCampaignConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [AccessReviewCampaignEdge!]!
@@ -488,7 +488,7 @@ type AccessReviewCampaignEdge {
 
 type AccessReviewEntryConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AccessReviewEntryConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AccessReviewEntryConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [AccessReviewEntryEdge!]!
@@ -502,7 +502,7 @@ type AccessReviewEntryEdge {
 
 type AccessReviewCampaignSourceFetchAttemptConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.AccessReviewCampaignSourceFetchAttemptConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.AccessReviewCampaignSourceFetchAttemptConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [AccessReviewCampaignSourceFetchAttemptEdge!]!

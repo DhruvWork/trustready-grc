@@ -26,7 +26,7 @@ import (
 	"strconv"
 
 	"github.com/99designs/gqlgen/graphql"
-	"go.probo.inc/probo/pkg/mail"
+	"github.com/DhruvWork/trustready-grc/pkg/mail"
 )
 
 type AddrScalar = mail.Addr

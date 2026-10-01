@@ -24,7 +24,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	cloudgcp "go.probo.inc/probo/pkg/cloud/gcp"
+	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
 )
 
 func TestProjectIDFromServiceAccountEmail(t *testing.T) {

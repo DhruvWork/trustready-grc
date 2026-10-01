@@ -19,8 +19,8 @@ import (
 	"net/http"
 
 	"go.gearno.de/kit/httpserver"
-	"go.probo.inc/probo/pkg/complianceportal/visitor"
-	"go.probo.inc/probo/pkg/server/api/complianceportal"
+	"github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal"
 )
 
 type oauthClientMetadataHandler struct {

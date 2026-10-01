@@ -26,7 +26,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"go.probo.inc/probo/pkg/probodconfig"
+	"github.com/DhruvWork/trustready-grc/pkg/probodconfig"
 	"sigs.k8s.io/yaml"
 )
 

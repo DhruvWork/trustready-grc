@@ -26,8 +26,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/server/api/complianceportal"
-	complianceportal_v1 "go.probo.inc/probo/pkg/server/api/complianceportal/v1"
+	"github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal"
+	complianceportal_v1 "github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1"
 )
 
 func requestWithPortalOrigin(t *testing.T, rawURL, origin string) *http.Request {

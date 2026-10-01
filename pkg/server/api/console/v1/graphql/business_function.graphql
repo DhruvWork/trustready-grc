@@ -1,58 +1,58 @@
 enum BusinessFunctionClassification
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.BusinessFunctionClassification") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionClassification") {
     CRITICAL
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionClassificationCritical"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionClassificationCritical"
         )
     IMPORTANT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionClassificationImportant"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionClassificationImportant"
         )
     SECONDARY
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionClassificationSecondary"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionClassificationSecondary"
         )
     STANDARD
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionClassificationStandard"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionClassificationStandard"
         )
 }
 
 enum BusinessFunctionOrderField
-    @goModel(model: "go.probo.inc/probo/pkg/coredata.BusinessFunctionOrderField") {
+    @goModel(model: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionOrderField") {
     CREATED_AT
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionOrderFieldCreatedAt"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionOrderFieldCreatedAt"
         )
     REFERENCE_ID
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionOrderFieldReferenceID"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionOrderFieldReferenceID"
         )
     NAME
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionOrderFieldName"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionOrderFieldName"
         )
     CLASSIFICATION
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionOrderFieldClassification"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionOrderFieldClassification"
         )
     MTD_MINUTES
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionOrderFieldMTDMinutes"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionOrderFieldMTDMinutes"
         )
     RTO_MINUTES
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionOrderFieldRTOMinutes"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionOrderFieldRTOMinutes"
         )
     RPO_MINUTES
         @goEnum(
-            value: "go.probo.inc/probo/pkg/coredata.BusinessFunctionOrderFieldRPOMinutes"
+            value: "github.com/DhruvWork/trustready-grc/pkg/coredata.BusinessFunctionOrderFieldRPOMinutes"
         )
 }
 
 input BusinessFunctionOrder
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.BusinessFunctionOrderBy"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.BusinessFunctionOrderBy"
     ) {
     direction: OrderDirection!
     field: BusinessFunctionOrderField!
@@ -96,7 +96,7 @@ type BusinessFunction implements Node {
 
 type BusinessFunctionConnection
     @goModel(
-        model: "go.probo.inc/probo/pkg/server/api/console/v1/types.BusinessFunctionConnection"
+        model: "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.BusinessFunctionConnection"
     ) {
     totalCount: Int! @goField(forceResolver: true)
     edges: [BusinessFunctionEdge!]!

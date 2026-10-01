@@ -22,17 +22,17 @@ package campaign
 
 import (
 	"github.com/spf13/cobra"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/addsource"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/cancel"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/close"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/create"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/delete"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/list"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/removesource"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/start"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/update"
-	"go.probo.inc/probo/pkg/cmd/access-review/campaign/view"
-	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/addsource"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/cancel"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/close"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/create"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/delete"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/list"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/removesource"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/start"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/update"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/access-review/campaign/view"
+	"github.com/DhruvWork/trustready-grc/pkg/cmd/cmdutil"
 )
 
 func NewCmdCampaign(f *cmdutil.Factory) *cobra.Command {

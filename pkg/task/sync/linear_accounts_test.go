@@ -24,7 +24,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"go.probo.inc/probo/pkg/task/sync/linear"
+	"github.com/DhruvWork/trustready-grc/pkg/task/sync/linear"
 )
 
 func TestLinearTeamExists(t *testing.T) {

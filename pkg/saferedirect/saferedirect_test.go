@@ -26,7 +26,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"go.probo.inc/probo/pkg/saferedirect"
+	"github.com/DhruvWork/trustready-grc/pkg/saferedirect"
 )
 
 func TestSafeRedirect_Validate(t *testing.T) {

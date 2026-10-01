@@ -20,7 +20,7 @@
 
 package policy
 
-import "go.probo.inc/probo/pkg/gid"
+import "github.com/DhruvWork/trustready-grc/pkg/gid"
 
 // Decision represents the result of a policy evaluation.
 type Decision string

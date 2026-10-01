@@ -23,7 +23,7 @@ package policy
 import (
 	"testing"
 
-	"go.probo.inc/probo/pkg/gid"
+	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
 func TestResourcePattern_MatchesResource(t *testing.T) {

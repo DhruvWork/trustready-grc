@@ -24,7 +24,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"go.probo.inc/probo/pkg/coredata"
+	"github.com/DhruvWork/trustready-grc/pkg/coredata"
 )
 
 func TestResolveRegulation(t *testing.T) {

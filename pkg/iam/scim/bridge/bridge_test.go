@@ -29,8 +29,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	scimbridge "go.probo.inc/probo/pkg/iam/scim/bridge"
-	scimclient "go.probo.inc/probo/pkg/iam/scim/bridge/client"
+	scimbridge "github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge"
+	scimclient "github.com/DhruvWork/trustready-grc/pkg/iam/scim/bridge/client"
 )
 
 type mockProvider struct {
