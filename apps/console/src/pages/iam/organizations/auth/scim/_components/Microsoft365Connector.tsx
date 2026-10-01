@@ -41,6 +41,7 @@ import type { Microsoft365ConnectorDeleteMutation } from "#/__generated__/iam/Mi
 import type { Microsoft365ConnectorFragment$key } from "#/__generated__/iam/Microsoft365ConnectorFragment.graphql";
 import type { Microsoft365ConnectorUpdateSCIMBridgeMutation } from "#/__generated__/iam/Microsoft365ConnectorUpdateSCIMBridgeMutation.graphql";
 import { useOrganizationId } from "#/hooks/useOrganizationId";
+import { ConnectorNameField, useConnectorName } from "#/pages/organizations/settings/integrations/_components/ConnectorNameField";
 
 import { ReactivateSCIMBridgeButton } from "./ReactivateSCIMBridgeButton";
 
@@ -121,6 +122,7 @@ export function Microsoft365Connector(props: {
   const dialogRef = useDialogRef();
   const excludedUserNamesDialogRef = useDialogRef();
 
+  const connectorName = useConnectorName();
   const [newUser, setNewUser] = useState("");
 
   const [deleteSCIMConfiguration, isDeleting]
@@ -134,10 +136,14 @@ export function Microsoft365Connector(props: {
     );
 
   const handleConnect = () => {
+    if (connectorName.rejectIfEmpty()) {
+      return;
+    }
     const baseUrl = import.meta.env.VITE_API_URL || window.location.origin;
     const url = new URL("/api/console/v1/connectors/initiate", baseUrl);
     url.searchParams.append("organization_id", organizationId);
     url.searchParams.append("provider", "MICROSOFT_365");
+    url.searchParams.append("name", connectorName.trimmed);
     for (const scope of oauth2Scopes) {
       url.searchParams.append("scope", scope);
     }
@@ -234,19 +240,27 @@ export function Microsoft365Connector(props: {
 
   if (!connector) {
     return (
-      <Card padded className="flex items-center gap-3">
-        <div className="w-10 h-10 flex items-center justify-center bg-subtle rounded">
-          <Microsoft className="w-6 h-6" />
+      <Card padded className="flex flex-col gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 flex items-center justify-center bg-subtle rounded">
+            <Microsoft className="w-6 h-6" />
+          </div>
+          <div className="mr-auto">
+            <h3 className="font-medium">{t("microsoft365Connector.name")}</h3>
+            <p className="text-sm text-txt-secondary">
+              {t("microsoft365Connector.connectDescription")}
+            </p>
+          </div>
+          <Button variant="secondary" onClick={handleConnect}>
+            {t("microsoft365Connector.actions.connect")}
+          </Button>
         </div>
-        <div className="mr-auto">
-          <h3 className="font-medium">{t("microsoft365Connector.name")}</h3>
-          <p className="text-sm text-txt-secondary">
-            {t("microsoft365Connector.connectDescription")}
-          </p>
-        </div>
-        <Button variant="secondary" onClick={handleConnect}>
-          {t("microsoft365Connector.actions.connect")}
-        </Button>
+        <ConnectorNameField
+          name={connectorName.name}
+          error={connectorName.error}
+          onChange={connectorName.onChange}
+          onEmpty={connectorName.rejectIfEmpty}
+        />
       </Card>
     );
   }

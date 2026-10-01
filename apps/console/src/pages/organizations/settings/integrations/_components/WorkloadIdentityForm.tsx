@@ -44,13 +44,13 @@ import type {
 } from "#/__generated__/core/WorkloadIdentityFormCreateMutation.graphql";
 import type { WorkloadIdentityFormDeleteMutation } from "#/__generated__/core/WorkloadIdentityFormDeleteMutation.graphql";
 import { useMutation } from "#/lib/relay/useMutation";
+
 import {
   isAWSRoleARN,
   isAzureGUID,
   isGCPServiceAccountEmail,
   isGCPWorkloadIdentityProvider,
 } from "../_lib/connectorSettings";
-
 import {
   collectStoredAccountIds,
   labelDiscoveredAccounts,
@@ -58,6 +58,7 @@ import {
 import { connectorDetailsPath } from "../_lib/integrationPath";
 
 import { ConnectFormFooter } from "./ConnectFormFooter";
+import { ConnectorNameField, useConnectorName } from "./ConnectorNameField";
 
 const azureEnvironments = [
   "AZURE_PUBLIC",
@@ -369,17 +370,19 @@ function AwsWorkloadIdentityForm({
   const { t } = useTranslation("organizations/settings/integrations");
   const copyValue = useCopyValue();
   const [roleArn, setRoleArn] = useState("");
+  const connectorName = useConnectorName();
   const { finish, isCreating } = useFinishWorkloadIdentity(organizationId);
   const roleArnValid = isAWSRoleARN(roleArn);
   const pageKey = "marketplacePage.workloadIdentity";
 
   const onSubmit = () => {
-    if (!roleArnValid) {
+    if (connectorName.rejectIfEmpty() || !roleArnValid) {
       return;
     }
     void finish(
       {
         organizationId,
+        name: connectorName.trimmed,
         provider: "AWS",
         awsRoleArn: roleArn.trim(),
       },
@@ -394,6 +397,12 @@ function AwsWorkloadIdentityForm({
 
   return (
     <form className="flex flex-col gap-4" onSubmit={(event) => { event.preventDefault(); void onSubmit(); }}>
+      <ConnectorNameField
+        name={connectorName.name}
+        error={connectorName.error}
+        onChange={connectorName.onChange}
+        onEmpty={connectorName.rejectIfEmpty}
+      />
       <Field
         label={t("marketplacePage.workloadIdentity.fields.roleArn")}
         required
@@ -419,6 +428,7 @@ function GcpWorkloadIdentityForm({
 }) {
   const { t } = useTranslation("organizations/settings/integrations");
   const copyValue = useCopyValue();
+  const connectorName = useConnectorName();
   const [providerResource, setProviderResource] = useState("");
   const [serviceAccountEmail, setServiceAccountEmail] = useState("");
   const { finish, isCreating } = useFinishWorkloadIdentity(organizationId);
@@ -427,12 +437,13 @@ function GcpWorkloadIdentityForm({
   const pageKey = "marketplacePage.workloadIdentity";
 
   const onSubmit = () => {
-    if (!providerValid || !emailValid) {
+    if (connectorName.rejectIfEmpty() || !providerValid || !emailValid) {
       return;
     }
     void finish(
       {
         organizationId,
+        name: connectorName.trimmed,
         provider: "GCP",
         gcpWorkloadIdentityProvider: providerResource.trim(),
         gcpServiceAccountEmail: serviceAccountEmail.trim(),
@@ -448,6 +459,12 @@ function GcpWorkloadIdentityForm({
 
   return (
     <form className="flex flex-col gap-4" onSubmit={(event) => { event.preventDefault(); void onSubmit(); }}>
+      <ConnectorNameField
+        name={connectorName.name}
+        error={connectorName.error}
+        onChange={connectorName.onChange}
+        onEmpty={connectorName.rejectIfEmpty}
+      />
       <Field
         label={t("marketplacePage.workloadIdentity.fields.workloadIdentityProvider")}
         required
@@ -485,6 +502,7 @@ function AzureWorkloadIdentityForm({
 }) {
   const { t } = useTranslation("organizations/settings/integrations");
   const copyValue = useCopyValue();
+  const connectorName = useConnectorName();
   const [tenantId, setTenantId] = useState("");
   const [clientId, setClientId] = useState("");
   const [subscriptionId, setSubscriptionId] = useState("");
@@ -497,12 +515,13 @@ function AzureWorkloadIdentityForm({
   const pageKey = "marketplacePage.workloadIdentity";
 
   const onSubmit = () => {
-    if (!formValid) {
+    if (connectorName.rejectIfEmpty() || !formValid) {
       return;
     }
     void finish(
       {
         organizationId,
+        name: connectorName.trimmed,
         provider: "AZURE",
         azureTenantId: tenantId.trim(),
         azureClientId: clientId.trim(),
@@ -520,6 +539,12 @@ function AzureWorkloadIdentityForm({
 
   return (
     <form className="flex flex-col gap-4" onSubmit={(event) => { event.preventDefault(); void onSubmit(); }}>
+      <ConnectorNameField
+        name={connectorName.name}
+        error={connectorName.error}
+        onChange={connectorName.onChange}
+        onEmpty={connectorName.rejectIfEmpty}
+      />
       <Field
         label={t("marketplacePage.workloadIdentity.fields.tenantId")}
         required

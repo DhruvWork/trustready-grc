@@ -377,6 +377,7 @@ func finishConnectorCompletion(
 	} else {
 		createReq := probo.CreateConnectorRequest{
 			OrganizationID: organizationID,
+			Name:           completion.Name,
 			Provider:       connectorProvider,
 			Protocol:       coredata.ConnectorProtocol(connection.Type()),
 			Connection:     connection,

@@ -41,6 +41,7 @@ import type { GoogleWorkspaceConnectorDeleteMutation } from "#/__generated__/iam
 import type { GoogleWorkspaceConnectorFragment$key } from "#/__generated__/iam/GoogleWorkspaceConnectorFragment.graphql";
 import type { GoogleWorkspaceConnectorUpdateSCIMBridgeMutation } from "#/__generated__/iam/GoogleWorkspaceConnectorUpdateSCIMBridgeMutation.graphql";
 import { useOrganizationId } from "#/hooks/useOrganizationId";
+import { ConnectorNameField, useConnectorName } from "#/pages/organizations/settings/integrations/_components/ConnectorNameField";
 
 import { ReactivateSCIMBridgeButton } from "./ReactivateSCIMBridgeButton";
 
@@ -121,6 +122,7 @@ export function GoogleWorkspaceConnector(props: {
   const dialogRef = useDialogRef();
   const excludedUserNamesDialogRef = useDialogRef();
 
+  const connectorName = useConnectorName();
   const [newUser, setNewUser] = useState("");
 
   const [deleteSCIMConfiguration, isDeleting]
@@ -134,10 +136,14 @@ export function GoogleWorkspaceConnector(props: {
     );
 
   const handleConnect = () => {
+    if (connectorName.rejectIfEmpty()) {
+      return;
+    }
     const baseUrl = import.meta.env.VITE_API_URL || window.location.origin;
     const url = new URL("/api/console/v1/connectors/initiate", baseUrl);
     url.searchParams.append("organization_id", organizationId);
     url.searchParams.append("provider", "GOOGLE_WORKSPACE");
+    url.searchParams.append("name", connectorName.trimmed);
     for (const scope of oauth2Scopes) {
       url.searchParams.append("scope", scope);
     }
@@ -235,19 +241,27 @@ export function GoogleWorkspaceConnector(props: {
   // Not connected state
   if (!connector) {
     return (
-      <Card padded className="flex items-center gap-3">
-        <div className="w-10 h-10 flex items-center justify-center bg-subtle rounded">
-          <Google className="w-6 h-6" />
+      <Card padded className="flex flex-col gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 flex items-center justify-center bg-subtle rounded">
+            <Google className="w-6 h-6" />
+          </div>
+          <div className="mr-auto">
+            <h3 className="font-medium">{t("googleWorkspaceConnector.name")}</h3>
+            <p className="text-sm text-txt-secondary">
+              {t("googleWorkspaceConnector.connectDescription")}
+            </p>
+          </div>
+          <Button variant="secondary" onClick={handleConnect}>
+            {t("googleWorkspaceConnector.actions.connect")}
+          </Button>
         </div>
-        <div className="mr-auto">
-          <h3 className="font-medium">{t("googleWorkspaceConnector.name")}</h3>
-          <p className="text-sm text-txt-secondary">
-            {t("googleWorkspaceConnector.connectDescription")}
-          </p>
-        </div>
-        <Button variant="secondary" onClick={handleConnect}>
-          {t("googleWorkspaceConnector.actions.connect")}
-        </Button>
+        <ConnectorNameField
+          name={connectorName.name}
+          error={connectorName.error}
+          onChange={connectorName.onChange}
+          onEmpty={connectorName.rejectIfEmpty}
+        />
       </Card>
     );
   }

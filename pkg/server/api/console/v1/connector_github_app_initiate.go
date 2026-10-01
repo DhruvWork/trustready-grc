@@ -84,9 +84,16 @@ func handleConnectorGitHubAppInitiate(
 			return
 		}
 
-		opts := connector.InitiateOptions{}
+		reconnecting := r.URL.Query().Get("connector_id") != ""
+		name, err := initiateConnectorName(r, reconnecting)
+		if err != nil {
+			httpserver.RenderError(w, http.StatusBadRequest, err)
+			return
+		}
 
-		if r.URL.Query().Get("connector_id") != "" {
+		opts := connector.InitiateOptions{Name: name}
+
+		if reconnecting {
 			existing, err := loadExistingGitHubAppConnector(
 				r,
 				proboSvc,
