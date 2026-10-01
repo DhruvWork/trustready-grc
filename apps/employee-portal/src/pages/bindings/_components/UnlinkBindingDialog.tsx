@@ -35,11 +35,11 @@ import type { UnlinkBindingDialogMutation } from "#/__generated__/core/UnlinkBin
 import { useMutation } from "#/lib/relay/useMutation";
 
 const unlinkBindingDialogMutation = graphql`
-  mutation UnlinkBindingDialogMutation($input: DeleteProbotIdentityBindingInput!) {
-    deleteProbotIdentityBinding(input: $input) {
-      probotIdentityBindingId
+  mutation UnlinkBindingDialogMutation($input: DeleteTrustReadytIdentityBindingInput!) {
+    deleteTrustReadytIdentityBinding(input: $input) {
+      trustreadytIdentityBindingId
       viewer {
-        probotIdentityBindings {
+        trustreadytIdentityBindings {
           id
           ...BindingListItem_binding
         }

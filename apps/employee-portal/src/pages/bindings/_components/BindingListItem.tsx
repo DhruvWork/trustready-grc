@@ -34,7 +34,7 @@ import { UnlinkBindingDialog } from "./UnlinkBindingDialog";
 import { bindingListItem } from "./variants";
 
 const bindingListItemFragment = graphql`
-  fragment BindingListItem_binding on ProbotIdentityBinding @throwOnFieldError {
+  fragment BindingListItem_binding on TrustReadytIdentityBinding @throwOnFieldError {
     id
     provider
     externalTenantId

@@ -32,10 +32,10 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
-// ProbotIdentityBinding maps an external-provider actor to an identity.
+// TrustReadytIdentityBinding maps an external-provider actor to an identity.
 // The table is unscoped because lookup happens before tenant resolution.
 type (
-	ProbotIdentityBinding struct {
+	TrustReadytIdentityBinding struct {
 		ID                 gid.GID   `db:"id"`
 		Provider           string    `db:"provider"`
 		ExternalTenantID   string    `db:"external_tenant_id"`
@@ -47,10 +47,10 @@ type (
 		UpdatedAt          time.Time `db:"updated_at"`
 	}
 
-	ProbotIdentityBindings []*ProbotIdentityBinding
+	TrustReadytIdentityBindings []*TrustReadytIdentityBinding
 )
 
-const probotIdentityBindingColumns = `
+const trustreadytIdentityBindingColumns = `
     id,
     provider,
     external_tenant_id,
@@ -62,14 +62,14 @@ const probotIdentityBindingColumns = `
     updated_at
 `
 
-func (b *ProbotIdentityBinding) LoadByExternalSubject(
+func (b *TrustReadytIdentityBinding) LoadByExternalSubject(
 	ctx context.Context,
 	conn pg.Querier,
 	provider, externalTenantID, externalUserID string,
 ) error {
 	q := `
 SELECT
-` + probotIdentityBindingColumns + `
+` + trustreadytIdentityBindingColumns + `
 FROM
     probot_identity_bindings
 WHERE
@@ -86,7 +86,7 @@ LIMIT 1;
 	})
 }
 
-func (b *ProbotIdentityBinding) LoadByIdentityAndExternalTenant(
+func (b *TrustReadytIdentityBinding) LoadByIdentityAndExternalTenant(
 	ctx context.Context,
 	conn pg.Querier,
 	identityID gid.GID,
@@ -94,7 +94,7 @@ func (b *ProbotIdentityBinding) LoadByIdentityAndExternalTenant(
 ) error {
 	q := `
 SELECT
-` + probotIdentityBindingColumns + `
+` + trustreadytIdentityBindingColumns + `
 FROM
     probot_identity_bindings
 WHERE
@@ -111,7 +111,7 @@ LIMIT 1;
 	})
 }
 
-func (b *ProbotIdentityBindings) LoadByIdentityID(
+func (b *TrustReadytIdentityBindings) LoadByIdentityID(
 	ctx context.Context,
 	conn pg.Querier,
 	identityID gid.GID,
@@ -119,7 +119,7 @@ func (b *ProbotIdentityBindings) LoadByIdentityID(
 ) error {
 	q := `
 SELECT
-` + probotIdentityBindingColumns + `
+` + trustreadytIdentityBindingColumns + `
 FROM
     probot_identity_bindings
 WHERE
@@ -144,7 +144,7 @@ LIMIT @limit;
 
 	bindings, err := pgx.CollectRows(
 		rows,
-		pgx.RowToAddrOfStructByName[ProbotIdentityBinding],
+		pgx.RowToAddrOfStructByName[TrustReadytIdentityBinding],
 	)
 	if err != nil {
 		return fmt.Errorf("cannot collect probot identity bindings: %w", err)
@@ -155,14 +155,14 @@ LIMIT @limit;
 	return nil
 }
 
-func (b *ProbotIdentityBinding) LoadByID(
+func (b *TrustReadytIdentityBinding) LoadByID(
 	ctx context.Context,
 	conn pg.Querier,
 	bindingID gid.GID,
 ) error {
 	q := `
 SELECT
-` + probotIdentityBindingColumns + `
+` + trustreadytIdentityBindingColumns + `
 FROM
     probot_identity_bindings
 WHERE
@@ -173,7 +173,7 @@ LIMIT 1;
 	return b.loadOne(ctx, conn, q, pgx.StrictNamedArgs{"id": bindingID})
 }
 
-func (b *ProbotIdentityBinding) loadOne(
+func (b *TrustReadytIdentityBinding) loadOne(
 	ctx context.Context,
 	conn pg.Querier,
 	q string,
@@ -186,7 +186,7 @@ func (b *ProbotIdentityBinding) loadOne(
 
 	binding, err := pgx.CollectExactlyOneRow(
 		rows,
-		pgx.RowToStructByName[ProbotIdentityBinding],
+		pgx.RowToStructByName[TrustReadytIdentityBinding],
 	)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -201,10 +201,10 @@ func (b *ProbotIdentityBinding) loadOne(
 	return nil
 }
 
-func (b *ProbotIdentityBinding) Insert(ctx context.Context, conn pg.Querier) error {
+func (b *TrustReadytIdentityBinding) Insert(ctx context.Context, conn pg.Querier) error {
 	q := `
 INSERT INTO probot_identity_bindings (
-` + probotIdentityBindingColumns + `
+` + trustreadytIdentityBindingColumns + `
 ) VALUES (
     @id,
     @provider,
@@ -245,7 +245,7 @@ INSERT INTO probot_identity_bindings (
 	return nil
 }
 
-func (b *ProbotIdentityBinding) Delete(ctx context.Context, conn pg.Querier) error {
+func (b *TrustReadytIdentityBinding) Delete(ctx context.Context, conn pg.Querier) error {
 	_, err := conn.Exec(
 		ctx,
 		`DELETE FROM probot_identity_bindings WHERE id = @id;`,
@@ -258,7 +258,7 @@ func (b *ProbotIdentityBinding) Delete(ctx context.Context, conn pg.Querier) err
 	return nil
 }
 
-func DeleteProbotIdentityBindingsByProviderAndExternalTenant(
+func DeleteTrustReadytIdentityBindingsByProviderAndExternalTenant(
 	ctx context.Context,
 	conn pg.Querier,
 	provider string,

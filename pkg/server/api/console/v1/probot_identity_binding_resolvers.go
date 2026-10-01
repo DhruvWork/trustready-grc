@@ -17,9 +17,9 @@ import (
 	"go.gearno.de/kit/log"
 )
 
-// ConfirmProbotIdentityBinding is the resolver for the confirmProbotIdentityBinding field.
-func (r *mutationResolver) ConfirmProbotIdentityBinding(ctx context.Context, input types.ConfirmProbotIdentityBindingInput) (*types.ConfirmProbotIdentityBindingPayload, error) {
-	if r.probotIdentityBindings == nil {
+// ConfirmTrustReadytIdentityBinding is the resolver for the confirmTrustReadytIdentityBinding field.
+func (r *mutationResolver) ConfirmTrustReadytIdentityBinding(ctx context.Context, input types.ConfirmTrustReadytIdentityBindingInput) (*types.ConfirmTrustReadytIdentityBindingPayload, error) {
+	if r.trustreadytIdentityBindings == nil {
 		return nil, gqlutils.Internal(ctx)
 	}
 
@@ -28,7 +28,7 @@ func (r *mutationResolver) ConfirmProbotIdentityBinding(ctx context.Context, inp
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	binding, err := r.probotIdentityBindings.Confirm(
+	binding, err := r.trustreadytIdentityBindings.Confirm(
 		ctx,
 		identity.ID,
 		input.Token,
@@ -52,15 +52,15 @@ func (r *mutationResolver) ConfirmProbotIdentityBinding(ctx context.Context, inp
 		}
 	}
 
-	return &types.ConfirmProbotIdentityBindingPayload{
-		ProbotIdentityBinding: types.NewProbotIdentityBinding(binding),
+	return &types.ConfirmTrustReadytIdentityBindingPayload{
+		TrustReadytIdentityBinding: types.NewTrustReadytIdentityBinding(binding),
 		Viewer:                currentViewer(ctx),
 	}, nil
 }
 
-// DeleteProbotIdentityBinding is the resolver for the deleteProbotIdentityBinding field.
-func (r *mutationResolver) DeleteProbotIdentityBinding(ctx context.Context, input types.DeleteProbotIdentityBindingInput) (*types.DeleteProbotIdentityBindingPayload, error) {
-	if r.probotIdentityBindings == nil {
+// DeleteTrustReadytIdentityBinding is the resolver for the deleteTrustReadytIdentityBinding field.
+func (r *mutationResolver) DeleteTrustReadytIdentityBinding(ctx context.Context, input types.DeleteTrustReadytIdentityBindingInput) (*types.DeleteTrustReadytIdentityBindingPayload, error) {
+	if r.trustreadytIdentityBindings == nil {
 		return nil, gqlutils.Internal(ctx)
 	}
 
@@ -69,7 +69,7 @@ func (r *mutationResolver) DeleteProbotIdentityBinding(ctx context.Context, inpu
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	err := r.probotIdentityBindings.Delete(ctx, identity.ID, input.ID)
+	err := r.trustreadytIdentityBindings.Delete(ctx, identity.ID, input.ID)
 	if err != nil {
 		if errors.Is(err, coredata.ErrResourceNotFound) {
 			return nil, gqlutils.NotFound(ctx, err)
@@ -84,8 +84,8 @@ func (r *mutationResolver) DeleteProbotIdentityBinding(ctx context.Context, inpu
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	return &types.DeleteProbotIdentityBindingPayload{
-		ProbotIdentityBindingID: input.ID,
+	return &types.DeleteTrustReadytIdentityBindingPayload{
+		TrustReadytIdentityBindingID: input.ID,
 		Viewer:                  currentViewer(ctx),
 	}, nil
 }

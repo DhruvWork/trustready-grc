@@ -71,10 +71,10 @@ async function deleteSubscription(this: IHookFunctions, subscriptionId: string):
 	return true;
 }
 
-export class ProboTrigger implements INodeType {
+export class TrustReadyTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'TrustReady Trigger',
-		name: 'proboTrigger',
+		name: 'trustreadyTrigger',
 		icon: { light: 'file:../../icons/trustready-light.svg', dark: 'file:../../icons/trustready.svg' },
 		group: ['trigger'],
 		version: 1,

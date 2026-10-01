@@ -37,6 +37,6 @@ type Viewer {
     # Own-device read for self-enrollment status polling before org assumption.
     enrolledDevice(id: ID!): Device @goField(forceResolver: true)
 
-    probotIdentityBindings: [ProbotIdentityBinding!]!
+    trustreadytIdentityBindings: [TrustReadytIdentityBinding!]!
         @goField(forceResolver: true)
 }

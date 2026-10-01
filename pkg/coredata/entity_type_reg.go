@@ -145,7 +145,7 @@ const (
 	CompliancePortalDocumentEntityType               uint16 = 113
 	BusinessFunctionEntityType                       uint16 = 114
 	AiSystemEntityType                               uint16 = 115
-	ProbotIdentityBindingEntityType                  uint16 = 116
+	TrustReadytIdentityBindingEntityType                  uint16 = 116
 	SlackbotInstallationEntityType                   uint16 = 117
 	BotDeliveryDestinationEntityType                 uint16 = 118
 	SlackbotMessageEntityType                        uint16 = 119
@@ -384,8 +384,8 @@ func NewEntityFromID(id gid.GID) (any, bool) {
 		return &BusinessFunction{ID: id}, true
 	case AiSystemEntityType:
 		return &AiSystem{ID: id}, true
-	case ProbotIdentityBindingEntityType:
-		return &ProbotIdentityBinding{ID: id}, true
+	case TrustReadytIdentityBindingEntityType:
+		return &TrustReadytIdentityBinding{ID: id}, true
 	case SlackbotInstallationEntityType:
 		return &SlackbotInstallation{ID: id}, true
 	case BotDeliveryDestinationEntityType:

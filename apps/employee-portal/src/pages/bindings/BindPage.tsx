@@ -32,7 +32,7 @@ import { useConfirmIdentityBinding } from "./_lib/useConfirmIdentityBinding";
 
 export const bindPageQuery = graphql`
   query BindPageQuery($token: String!) @throwOnFieldError {
-    preview: probotIdentityBindPreview(token: $token) {
+    preview: trustreadytIdentityBindPreview(token: $token) {
       externalTenantId
       externalUserId
       externalTenantName

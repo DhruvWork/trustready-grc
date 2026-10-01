@@ -26,10 +26,10 @@ import { useMutation } from "#/lib/relay/useMutation";
 
 const confirmIdentityBindingMutation = graphql`
   mutation useConfirmIdentityBindingMutation(
-    $input: ConfirmProbotIdentityBindingInput!
+    $input: ConfirmTrustReadytIdentityBindingInput!
   ) {
-    confirmProbotIdentityBinding(input: $input) {
-      probotIdentityBinding {
+    confirmTrustReadytIdentityBinding(input: $input) {
+      trustreadytIdentityBinding {
         id
       }
     }

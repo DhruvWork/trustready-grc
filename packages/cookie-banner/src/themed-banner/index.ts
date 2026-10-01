@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { ProboThemedBanner } from "./themed-banner";
+import { TrustReadyThemedBanner } from "./themed-banner";
 
 export function registerCookieBanner(): void {
   if (!customElements.get("trustready-cookie-banner")) {
-    customElements.define("trustready-cookie-banner", ProboThemedBanner);
+    customElements.define("trustready-cookie-banner", TrustReadyThemedBanner);
   }
 }

@@ -274,7 +274,7 @@ func (h *interactiveCommandHandler) dispatch(
 	attributes := make(map[string]any, len(delivered.Message.Attributes))
 	maps.Copy(attributes, delivered.Message.Attributes)
 
-	probotAction := probot.Action{
+	trustreadytAction := probot.Action{
 		ID:               action.ActionID,
 		Value:            action.Value,
 		SelectedValue:    action.SelectedOption.Value,
@@ -289,7 +289,7 @@ func (h *interactiveCommandHandler) dispatch(
 		},
 	}
 
-	probotAction, err = h.capabilities.NormalizeActionAlias(probotAction)
+	trustreadytAction, err = h.capabilities.NormalizeActionAlias(trustreadytAction)
 	if err != nil {
 		h.replyInteractiveFailure(ctx, payload.ResponseURL, interactiveFailedText)
 
@@ -298,7 +298,7 @@ func (h *interactiveCommandHandler) dispatch(
 		)
 	}
 
-	_, err = h.capabilities.HandleAction(ctx, probotAction)
+	_, err = h.capabilities.HandleAction(ctx, trustreadytAction)
 	if err != nil {
 		if errors.Is(err, probot.ErrCapabilityForbidden) ||
 			errors.Is(err, probot.ErrCapabilityInvalidInput) ||

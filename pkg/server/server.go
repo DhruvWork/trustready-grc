@@ -88,9 +88,9 @@ type Config struct {
 	ComplianceMessages      api.ComplianceMessages
 	Slackbot                *slackchannel.Service
 	SlackInteractiveInbox   *slackchannel.InteractiveCommandInbox
-	ProbotIdentityBindings  *identitybinding.Service
+	TrustReadytIdentityBindings  *identitybinding.Service
 	SlackbotInstallations   *slackchannel.InstallationService
-	ProbotCapabilities      *probot.CapabilityRegistry
+	TrustReadytCapabilities      *probot.CapabilityRegistry
 	Mailman                 *mailman.Service
 	CookieBanner            *cookiebanner.Service
 	Geoloc                  *geoloc.Service
@@ -154,9 +154,9 @@ func NewServer(cfg Config) (*Server, error) {
 		ComplianceMessages:       cfg.ComplianceMessages,
 		Slackbot:                 cfg.Slackbot,
 		SlackInteractiveInbox:    cfg.SlackInteractiveInbox,
-		ProbotIdentityBindings:   cfg.ProbotIdentityBindings,
+		TrustReadytIdentityBindings:   cfg.TrustReadytIdentityBindings,
 		SlackbotInstallations:    cfg.SlackbotInstallations,
-		ProbotCapabilities:       cfg.ProbotCapabilities,
+		TrustReadytCapabilities:       cfg.TrustReadytCapabilities,
 		Mailman:                  cfg.Mailman,
 		CookieBanner:             cfg.CookieBanner,
 		Geoloc:                   cfg.Geoloc,

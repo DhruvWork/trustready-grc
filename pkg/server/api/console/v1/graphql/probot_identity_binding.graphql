@@ -19,15 +19,15 @@
 # SOFTWARE.
 
 extend type Mutation {
-    confirmProbotIdentityBinding(
-        input: ConfirmProbotIdentityBindingInput!
-    ): ConfirmProbotIdentityBindingPayload!
-    deleteProbotIdentityBinding(
-        input: DeleteProbotIdentityBindingInput!
-    ): DeleteProbotIdentityBindingPayload!
+    confirmTrustReadytIdentityBinding(
+        input: ConfirmTrustReadytIdentityBindingInput!
+    ): ConfirmTrustReadytIdentityBindingPayload!
+    deleteTrustReadytIdentityBinding(
+        input: DeleteTrustReadytIdentityBindingInput!
+    ): DeleteTrustReadytIdentityBindingPayload!
 }
 
-type ProbotIdentityBinding {
+type TrustReadytIdentityBinding {
     id: ID!
     provider: String!
     externalTenantId: String!
@@ -38,7 +38,7 @@ type ProbotIdentityBinding {
     updatedAt: Datetime!
 }
 
-type ProbotIdentityBindPreview {
+type TrustReadytIdentityBindPreview {
     provider: String!
     externalTenantId: String!
     externalUserId: String!
@@ -46,20 +46,20 @@ type ProbotIdentityBindPreview {
     externalUserName: String!
 }
 
-input ConfirmProbotIdentityBindingInput {
+input ConfirmTrustReadytIdentityBindingInput {
     token: String!
 }
 
-type ConfirmProbotIdentityBindingPayload {
-    probotIdentityBinding: ProbotIdentityBinding!
+type ConfirmTrustReadytIdentityBindingPayload {
+    trustreadytIdentityBinding: TrustReadytIdentityBinding!
     viewer: Viewer!
 }
 
-input DeleteProbotIdentityBindingInput {
+input DeleteTrustReadytIdentityBindingInput {
     id: ID!
 }
 
-type DeleteProbotIdentityBindingPayload {
-    probotIdentityBindingId: ID!
+type DeleteTrustReadytIdentityBindingPayload {
+    trustreadytIdentityBindingId: ID!
     viewer: Viewer!
 }

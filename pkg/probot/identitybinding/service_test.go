@@ -347,7 +347,7 @@ func TestServiceBindURLPurgesRetainedExpiredChallenges(t *testing.T) {
 	now := time.Now().UTC()
 	service.now = func() time.Time { return now }
 	staleToken := "stale-binding-challenge"
-	stale := &coredata.ProbotIdentityBindingChallenge{
+	stale := &coredata.TrustReadytIdentityBindingChallenge{
 		HashedToken:    hash.SHA256String(staleToken),
 		Provider:       "email",
 		ExternalUserID: "stale@example.com",

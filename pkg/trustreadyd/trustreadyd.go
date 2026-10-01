@@ -892,7 +892,7 @@ func (impl *Implm) Run(
 		return fmt.Errorf("cannot build file storage CSP origin: %w", err)
 	}
 
-	probotIdentityBindings := identitybinding.NewService(pgClient, baseURL)
+	trustreadytIdentityBindings := identitybinding.NewService(pgClient, baseURL)
 	slackbotInstallations := impl.buildSlackbotInstallationService(
 		pgClient,
 		encryptionKey,
@@ -904,7 +904,7 @@ func (impl *Implm) Run(
 		encryptionKey,
 		l.Named("slackbot.bind-prompts"),
 	)
-	probotIdentityBindings.SetBindingConfirmedHandler(slackBindPrompts)
+	trustreadytIdentityBindings.SetBindingConfirmedHandler(slackBindPrompts)
 
 	slackbotNotifications := slackchannel.NewNotificationService(pgClient)
 	slackInteractiveInbox := slackchannel.NewInteractiveCommandInbox(
@@ -912,7 +912,7 @@ func (impl *Implm) Run(
 		encryptionKey,
 	)
 	complianceRenderer := portal.NewRenderer(baseURL.String())
-	probotCapabilities := probot.NewCapabilityRegistry()
+	trustreadytCapabilities := probot.NewCapabilityRegistry()
 
 	slackMessages := slackchannel.NewMessageService(
 		pgClient,
@@ -928,7 +928,7 @@ func (impl *Implm) Run(
 		slackMessages,
 		baseURL.String(),
 	)
-	if err := probotCapabilities.Register(
+	if err := trustreadytCapabilities.Register(
 		compliancecapability.NewCapability(
 			complianceMessages,
 			visitorService,
@@ -938,9 +938,9 @@ func (impl *Implm) Run(
 		return fmt.Errorf("cannot register compliance Probot capability: %w", err)
 	}
 
-	slackbot, probotAgent, err := impl.buildSlackbot(
+	slackbot, trustreadytAgent, err := impl.buildSlackbot(
 		pgClient,
-		probotIdentityBindings,
+		trustreadytIdentityBindings,
 		slackbotInstallations,
 		slackBindPrompts,
 		l,
@@ -951,21 +951,21 @@ func (impl *Implm) Run(
 		return fmt.Errorf("cannot build slackbot: %w", err)
 	}
 
-	probotProfiles := probot.NewAgentProfileRegistry()
-	probotAdapters := probot.NewExecutionAdapterRegistry()
+	trustreadytProfiles := probot.NewAgentProfileRegistry()
+	trustreadytAdapters := probot.NewExecutionAdapterRegistry()
 
-	if probotAgent != nil {
-		if err := probotProfiles.Register("probot", probotAgent); err != nil {
+	if trustreadytAgent != nil {
+		if err := trustreadytProfiles.Register("probot", trustreadytAgent); err != nil {
 			return fmt.Errorf("cannot register Probot agent profile: %w", err)
 		}
 
-		if err := probotAdapters.Register(
+		if err := trustreadytAdapters.Register(
 			slackchannel.NewExecutionAdapter(
 				pgClient,
 				slackbotInstallations,
-				probotIdentityBindings,
-				probotProfiles,
-				probotCapabilities,
+				trustreadytIdentityBindings,
+				trustreadytProfiles,
+				trustreadytCapabilities,
 				slackchannel.NewDeliveryService(pgClient),
 				l.Named("slackbot.execution"),
 			),
@@ -1000,9 +1000,9 @@ func (impl *Implm) Run(
 			ComplianceMessages:      complianceMessages,
 			Slackbot:                slackbot,
 			SlackInteractiveInbox:   slackInteractiveInbox,
-			ProbotIdentityBindings:  probotIdentityBindings,
+			TrustReadytIdentityBindings:  trustreadytIdentityBindings,
 			SlackbotInstallations:   slackbotInstallations,
-			ProbotCapabilities:      probotCapabilities,
+			TrustReadytCapabilities:      trustreadytCapabilities,
 			ConnectorRegistry:       defaultConnectorRegistry,
 			ProviderRegistry:        providerRegistry,
 			BaseURL:                 baseURL,
@@ -1125,7 +1125,7 @@ func (impl *Implm) Run(
 
 	botMessageWorker := probot.NewMessageWorker(
 		pgClient,
-		probotCapabilities,
+		trustreadytCapabilities,
 		slackMessages,
 		l.Named("probot-message-worker"),
 		worker.WithInterval(time.Second),
@@ -1145,10 +1145,10 @@ func (impl *Implm) Run(
 
 	agentExecutionWorker := agentexecution.NewWorker(
 		pgClient,
-		probotProfiles,
+		trustreadytProfiles,
 		l.Named("agent-execution-worker"),
 		agentexecution.WithWorkerInterval(time.Second),
-		agentexecution.WithExecutionPreparer(probotAdapters),
+		agentexecution.WithExecutionPreparer(trustreadytAdapters),
 		agentexecution.WithWorkerRegisterer(r),
 		agentexecution.WithWorkerTracerProvider(tp),
 	)
@@ -1235,9 +1235,9 @@ func (impl *Implm) Run(
 			pgClient,
 			encryptionKey,
 			slackbotInstallations,
-			probotIdentityBindings,
+			trustreadytIdentityBindings,
 			slackMessages,
-			probotCapabilities,
+			trustreadytCapabilities,
 			l.Named("slackbot-interactive-command-worker"),
 			worker.WithInterval(time.Second),
 			worker.WithMaxConcurrency(4),
@@ -1258,19 +1258,19 @@ func (impl *Implm) Run(
 		)
 	}
 
-	probotRetentionWorker := probot.NewRetentionWorker(
+	trustreadytRetentionWorker := probot.NewRetentionWorker(
 		pgClient,
 		l.Named("probot-reliability-retention-worker"),
 		worker.WithRegisterer(r),
 		worker.WithTracerProvider(tp),
 	)
-	probotRetentionWorkerCtx, stopProbotRetentionWorker := context.WithCancel(
+	trustreadytRetentionWorkerCtx, stopTrustReadytRetentionWorker := context.WithCancel(
 		context.WithoutCancel(ctx),
 	)
 
 	wg.Go(
 		func() {
-			if err := probotRetentionWorker.Run(probotRetentionWorkerCtx); err != nil {
+			if err := trustreadytRetentionWorker.Run(trustreadytRetentionWorkerCtx); err != nil {
 				cancel(fmt.Errorf("probot reliability retention worker crashed: %w", err))
 			}
 		},
@@ -1705,7 +1705,7 @@ func (impl *Implm) Run(
 	stopSlackbotNotificationWorker()
 	stopSlackInteractiveCommandWorker()
 	stopSlackDeliveryWorker()
-	stopProbotRetentionWorker()
+	stopTrustReadytRetentionWorker()
 
 	wg.Wait()
 

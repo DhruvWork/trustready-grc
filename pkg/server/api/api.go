@@ -93,9 +93,9 @@ type (
 		ComplianceMessages      ComplianceMessages
 		Slackbot                *slackchannel.Service
 		SlackInteractiveInbox   *slackchannel.InteractiveCommandInbox
-		ProbotIdentityBindings  *identitybinding.Service
+		TrustReadytIdentityBindings  *identitybinding.Service
 		SlackbotInstallations   *slackchannel.InstallationService
-		ProbotCapabilities      *probot.CapabilityRegistry
+		TrustReadytCapabilities      *probot.CapabilityRegistry
 		Mailman                 *mailman.Service
 		CookieBanner            *cookiebanner.Service
 		Geoloc                  *geoloc.Service
@@ -286,7 +286,7 @@ func NewServer(cfg Config) (*Server, error) {
 			cfg.CustomDomainCname,
 			cfg.ThirdParty,
 			cfg.RiskManagement,
-			cfg.ProbotIdentityBindings,
+			cfg.TrustReadytIdentityBindings,
 			cfg.SlackbotInstallations,
 			cfg.BotDeliveryDestinations,
 			cfg.ComplianceMessages,

@@ -932,9 +932,9 @@ func (r *queryResolver) AzureConnectorSetup(ctx context.Context, organizationID 
 	return newAzureConnectorSetup(setup), nil
 }
 
-// ProbotIdentityBindPreview is the resolver for the probotIdentityBindPreview field.
-func (r *queryResolver) ProbotIdentityBindPreview(ctx context.Context, token string) (*types.ProbotIdentityBindPreview, error) {
-	if r.probotIdentityBindings == nil {
+// TrustReadytIdentityBindPreview is the resolver for the trustreadytIdentityBindPreview field.
+func (r *queryResolver) TrustReadytIdentityBindPreview(ctx context.Context, token string) (*types.TrustReadytIdentityBindPreview, error) {
+	if r.trustreadytIdentityBindings == nil {
 		return nil, gqlutils.Internal(ctx)
 	}
 
@@ -942,7 +942,7 @@ func (r *queryResolver) ProbotIdentityBindPreview(ctx context.Context, token str
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	preview, err := r.probotIdentityBindings.Preview(ctx, token)
+	preview, err := r.trustreadytIdentityBindings.Preview(ctx, token)
 	if err != nil {
 		switch {
 		case errors.Is(err, identitybinding.ErrChallengeAlreadyUsed),
@@ -960,7 +960,7 @@ func (r *queryResolver) ProbotIdentityBindPreview(ctx context.Context, token str
 		}
 	}
 
-	return types.NewProbotIdentityBindPreview(*preview), nil
+	return types.NewTrustReadytIdentityBindPreview(*preview), nil
 }
 
 // Mutation returns schema.MutationResolver implementation.

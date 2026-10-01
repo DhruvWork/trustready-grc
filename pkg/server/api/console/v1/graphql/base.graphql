@@ -64,7 +64,7 @@ type Query {
         @goField(forceResolver: true)
     azureConnectorSetup(organizationId: ID!): AzureConnectorSetup!
         @goField(forceResolver: true)
-    probotIdentityBindPreview(token: String!): ProbotIdentityBindPreview!
+    trustreadytIdentityBindPreview(token: String!): TrustReadytIdentityBindPreview!
         @goField(forceResolver: true)
 }
 

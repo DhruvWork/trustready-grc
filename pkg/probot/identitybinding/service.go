@@ -63,7 +63,7 @@ type (
 		ExternalUserName   string
 	}
 
-	Binding = coredata.ProbotIdentityBinding
+	Binding = coredata.TrustReadytIdentityBinding
 
 	Gate interface {
 		Lookup(ctx context.Context, subject Subject) (*Binding, error)
@@ -166,7 +166,7 @@ func (s *Service) BindURL(
 
 	token := base64.RawURLEncoding.EncodeToString(tokenBytes)
 	now := s.now()
-	challenge := coredata.ProbotIdentityBindingChallenge{
+	challenge := coredata.TrustReadytIdentityBindingChallenge{
 		HashedToken:        hash.SHA256String(token),
 		Provider:           subject.Provider,
 		ExternalTenantID:   subject.ExternalTenantID,
@@ -178,7 +178,7 @@ func (s *Service) BindURL(
 	}
 
 	err := s.pg.WithTx(ctx, func(ctx context.Context, tx pg.Tx) error {
-		if err := coredata.DeleteExpiredProbotIdentityBindingChallenges(
+		if err := coredata.DeleteExpiredTrustReadytIdentityBindingChallenges(
 			ctx,
 			tx,
 			now.Add(-challengeRetention),
@@ -216,7 +216,7 @@ func (s *Service) ListByIdentity(
 	ctx context.Context,
 	identityID gid.GID,
 ) ([]*Binding, error) {
-	var bindings coredata.ProbotIdentityBindings
+	var bindings coredata.TrustReadytIdentityBindings
 
 	err := s.pg.WithConn(ctx, func(ctx context.Context, conn pg.Querier) error {
 		return bindings.LoadByIdentityID(
@@ -237,7 +237,7 @@ func (s *Service) Preview(
 	ctx context.Context,
 	token string,
 ) (*Subject, error) {
-	challenge := &coredata.ProbotIdentityBindingChallenge{}
+	challenge := &coredata.TrustReadytIdentityBindingChallenge{}
 
 	err := s.pg.WithConn(ctx, func(ctx context.Context, conn pg.Querier) error {
 		return challenge.LoadByHashedToken(
@@ -279,7 +279,7 @@ func (s *Service) Confirm(
 	var binding Binding
 
 	err := s.pg.WithTx(ctx, func(ctx context.Context, tx pg.Tx) error {
-		challenge := &coredata.ProbotIdentityBindingChallenge{}
+		challenge := &coredata.TrustReadytIdentityBindingChallenge{}
 		if err := challenge.LoadByHashedTokenForUpdate(
 			ctx,
 			tx,
@@ -341,7 +341,7 @@ func (s *Service) Confirm(
 		binding = Binding{
 			ID: gid.New(
 				gid.NilTenant,
-				coredata.ProbotIdentityBindingEntityType,
+				coredata.TrustReadytIdentityBindingEntityType,
 			),
 			Provider:           challenge.Provider,
 			ExternalTenantID:   challenge.ExternalTenantID,
@@ -390,14 +390,14 @@ func (s *Service) Confirm(
 func (s *Service) finishConfirmedChallenge(
 	ctx context.Context,
 	tx pg.Tx,
-	challenge *coredata.ProbotIdentityBindingChallenge,
+	challenge *coredata.TrustReadytIdentityBindingChallenge,
 	identityID gid.GID,
 ) error {
 	if err := challenge.MarkConfirmed(ctx, tx, identityID, s.now()); err != nil {
 		return fmt.Errorf("cannot mark identity binding challenge confirmed: %w", err)
 	}
 
-	return coredata.DeleteUnconfirmedProbotIdentityBindingChallengesBySubject(
+	return coredata.DeleteUnconfirmedTrustReadytIdentityBindingChallengesBySubject(
 		ctx,
 		tx,
 		challenge.Provider,
@@ -445,7 +445,7 @@ func DeleteByExternalTenant(
 		return ErrInvalidSubject
 	}
 
-	if err := coredata.DeleteProbotIdentityBindingsByProviderAndExternalTenant(
+	if err := coredata.DeleteTrustReadytIdentityBindingsByProviderAndExternalTenant(
 		ctx,
 		conn,
 		provider,
@@ -454,7 +454,7 @@ func DeleteByExternalTenant(
 		return fmt.Errorf("cannot delete identity bindings: %w", err)
 	}
 
-	if err := coredata.DeleteProbotIdentityBindingChallengesByProviderAndExternalTenant(
+	if err := coredata.DeleteTrustReadytIdentityBindingChallengesByProviderAndExternalTenant(
 		ctx,
 		conn,
 		provider,

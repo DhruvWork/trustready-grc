@@ -32,10 +32,10 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/gid"
 )
 
-// ProbotIdentityBindingChallenge is an opaque bind token. The table is
+// TrustReadytIdentityBindingChallenge is an opaque bind token. The table is
 // unscoped because confirmation happens while the user is signed in, before
 // the external workspace is mapped to a tenant.
-type ProbotIdentityBindingChallenge struct {
+type TrustReadytIdentityBindingChallenge struct {
 	HashedToken        []byte     `db:"hashed_token"`
 	Provider           string     `db:"provider"`
 	ExternalTenantID   string     `db:"external_tenant_id"`
@@ -48,7 +48,7 @@ type ProbotIdentityBindingChallenge struct {
 	CreatedAt          time.Time  `db:"created_at"`
 }
 
-func (c *ProbotIdentityBindingChallenge) Insert(
+func (c *TrustReadytIdentityBindingChallenge) Insert(
 	ctx context.Context,
 	conn pg.Querier,
 ) error {
@@ -103,7 +103,7 @@ INSERT INTO probot_identity_binding_challenges (
 	return nil
 }
 
-func (c *ProbotIdentityBindingChallenge) LoadByHashedToken(
+func (c *TrustReadytIdentityBindingChallenge) LoadByHashedToken(
 	ctx context.Context,
 	conn pg.Querier,
 	hashedToken []byte,
@@ -111,7 +111,7 @@ func (c *ProbotIdentityBindingChallenge) LoadByHashedToken(
 	return c.loadByHashedToken(ctx, conn, hashedToken, false)
 }
 
-func (c *ProbotIdentityBindingChallenge) LoadByHashedTokenForUpdate(
+func (c *TrustReadytIdentityBindingChallenge) LoadByHashedTokenForUpdate(
 	ctx context.Context,
 	conn pg.Querier,
 	hashedToken []byte,
@@ -119,7 +119,7 @@ func (c *ProbotIdentityBindingChallenge) LoadByHashedTokenForUpdate(
 	return c.loadByHashedToken(ctx, conn, hashedToken, true)
 }
 
-func (c *ProbotIdentityBindingChallenge) loadByHashedToken(
+func (c *TrustReadytIdentityBindingChallenge) loadByHashedToken(
 	ctx context.Context,
 	conn pg.Querier,
 	hashedToken []byte,
@@ -161,7 +161,7 @@ LIMIT 1
 
 	challenge, err := pgx.CollectExactlyOneRow(
 		rows,
-		pgx.RowToStructByName[ProbotIdentityBindingChallenge],
+		pgx.RowToStructByName[TrustReadytIdentityBindingChallenge],
 	)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -176,7 +176,7 @@ LIMIT 1
 	return nil
 }
 
-func (c *ProbotIdentityBindingChallenge) MarkConfirmed(
+func (c *TrustReadytIdentityBindingChallenge) MarkConfirmed(
 	ctx context.Context,
 	conn pg.Querier,
 	identityID gid.GID,
@@ -212,7 +212,7 @@ WHERE
 	return nil
 }
 
-func DeleteExpiredProbotIdentityBindingChallenges(
+func DeleteExpiredTrustReadytIdentityBindingChallenges(
 	ctx context.Context,
 	conn pg.Querier,
 	expiredBefore time.Time,
@@ -232,7 +232,7 @@ WHERE expires_at < @expired_before;
 	return nil
 }
 
-func DeleteProbotIdentityBindingChallengesByProviderAndExternalTenant(
+func DeleteTrustReadytIdentityBindingChallengesByProviderAndExternalTenant(
 	ctx context.Context,
 	conn pg.Querier,
 	provider string,
@@ -257,7 +257,7 @@ WHERE provider = @provider
 	return nil
 }
 
-func DeleteUnconfirmedProbotIdentityBindingChallengesBySubject(
+func DeleteUnconfirmedTrustReadytIdentityBindingChallengesBySubject(
 	ctx context.Context,
 	conn pg.Querier,
 	provider string,

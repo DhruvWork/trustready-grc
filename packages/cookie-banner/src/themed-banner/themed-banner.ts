@@ -30,11 +30,11 @@ import { renderNotice } from "./variants/notice";
 import { renderOptIn } from "./variants/optin";
 import { renderOptOut } from "./variants/optout";
 
-// ProboThemedBanner is a thin dispatcher: it owns the shadow root and the data
+// TrustReadyThemedBanner is a thin dispatcher: it owns the shadow root and the data
 // root, then mounts markup once the config is known. A registered layout
 // addon runs first; otherwise the built-in opt-in / opt-out / notice renderer
 // matching the visitor's presentation is used.
-export class ProboThemedBanner extends HTMLElement {
+export class TrustReadyThemedBanner extends HTMLElement {
   private shadow: ShadowRoot;
   private scrollLock: ScrollLock;
 

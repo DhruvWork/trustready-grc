@@ -35,7 +35,7 @@ import { bindingsList } from "./variants";
 
 const bindingsListViewerFragment = graphql`
   fragment BindingsList_viewer on Viewer @throwOnFieldError {
-    probotIdentityBindings {
+    trustreadytIdentityBindings {
       id
       ...BindingListItem_binding
     }
@@ -51,7 +51,7 @@ export function BindingsList({ viewerKey }: BindingsListProps) {
   const { t: tApp } = useTranslation();
   const slots = bindingsList();
   const viewer = useFragment(bindingsListViewerFragment, viewerKey);
-  const bindings = viewer.probotIdentityBindings;
+  const bindings = viewer.trustreadytIdentityBindings;
 
   return (
     <>

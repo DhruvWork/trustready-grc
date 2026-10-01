@@ -36,7 +36,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/probot/identitybinding"
 )
 
-func newProbotBindToken(
+func newTrustReadytBindToken(
 	t *testing.T,
 	subject identitybinding.Subject,
 	organizationID gid.GID,
@@ -54,7 +54,7 @@ func newProbotBindToken(
 	return parsed.Query().Get("token")
 }
 
-func TestProbotIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
+func TestTrustReadytIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
 	t.Parallel()
 
 	owner := testutil.NewClient(t, testutil.RoleOwner)
@@ -62,7 +62,7 @@ func TestProbotIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
 
 	externalTenantID := "T-e2e-" + factory.SafeName("team")
 	externalUserID := "U-e2e-" + factory.SafeName("user")
-	token := newProbotBindToken(t, identitybinding.Subject{
+	token := newTrustReadytBindToken(t, identitybinding.Subject{
 		Provider:           slackchannel.ProviderName,
 		ExternalTenantID:   externalTenantID,
 		ExternalUserID:     externalUserID,
@@ -72,7 +72,7 @@ func TestProbotIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
 
 	const previewQuery = `
 		query($token: String!) {
-			probotIdentityBindPreview(token: $token) {
+			trustreadytIdentityBindPreview(token: $token) {
 				provider
 				externalTenantId
 				externalUserId
@@ -83,13 +83,13 @@ func TestProbotIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
 	`
 
 	var previewResult struct {
-		ProbotIdentityBindPreview struct {
+		TrustReadytIdentityBindPreview struct {
 			Provider           string `json:"provider"`
 			ExternalTenantID   string `json:"externalTenantId"`
 			ExternalUserID     string `json:"externalUserId"`
 			ExternalTenantName string `json:"externalTenantName"`
 			ExternalUserName   string `json:"externalUserName"`
-		} `json:"probotIdentityBindPreview"`
+		} `json:"trustreadytIdentityBindPreview"`
 	}
 
 	err := owner.Execute(
@@ -101,40 +101,40 @@ func TestProbotIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
 	assert.Equal(
 		t,
 		slackchannel.ProviderName,
-		previewResult.ProbotIdentityBindPreview.Provider,
+		previewResult.TrustReadytIdentityBindPreview.Provider,
 	)
 	assert.Equal(
 		t,
 		externalTenantID,
-		previewResult.ProbotIdentityBindPreview.ExternalTenantID,
+		previewResult.TrustReadytIdentityBindPreview.ExternalTenantID,
 	)
 	assert.Equal(
 		t,
 		externalUserID,
-		previewResult.ProbotIdentityBindPreview.ExternalUserID,
+		previewResult.TrustReadytIdentityBindPreview.ExternalUserID,
 	)
 	assert.Equal(
 		t,
 		"acme-workspace",
-		previewResult.ProbotIdentityBindPreview.ExternalTenantName,
+		previewResult.TrustReadytIdentityBindPreview.ExternalTenantName,
 	)
 	assert.Equal(
 		t,
 		"ada",
-		previewResult.ProbotIdentityBindPreview.ExternalUserName,
+		previewResult.TrustReadytIdentityBindPreview.ExternalUserName,
 	)
 
 	const confirmMutation = `
-		mutation($input: ConfirmProbotIdentityBindingInput!) {
-			confirmProbotIdentityBinding(input: $input) {
-				probotIdentityBinding {
+		mutation($input: ConfirmTrustReadytIdentityBindingInput!) {
+			confirmTrustReadytIdentityBinding(input: $input) {
+				trustreadytIdentityBinding {
 					id
 					provider
 					externalTenantId
 					externalUserId
 				}
 				viewer {
-					probotIdentityBindings {
+					trustreadytIdentityBindings {
 						id
 						provider
 						externalTenantId
@@ -146,22 +146,22 @@ func TestProbotIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
 	`
 
 	var confirmResult struct {
-		ConfirmProbotIdentityBinding struct {
-			ProbotIdentityBinding struct {
+		ConfirmTrustReadytIdentityBinding struct {
+			TrustReadytIdentityBinding struct {
 				ID               string `json:"id"`
 				Provider         string `json:"provider"`
 				ExternalTenantID string `json:"externalTenantId"`
 				ExternalUserID   string `json:"externalUserId"`
-			} `json:"probotIdentityBinding"`
+			} `json:"trustreadytIdentityBinding"`
 			Viewer struct {
-				ProbotIdentityBindings []struct {
+				TrustReadytIdentityBindings []struct {
 					ID               string `json:"id"`
 					Provider         string `json:"provider"`
 					ExternalTenantID string `json:"externalTenantId"`
 					ExternalUserID   string `json:"externalUserId"`
-				} `json:"probotIdentityBindings"`
+				} `json:"trustreadytIdentityBindings"`
 			} `json:"viewer"`
-		} `json:"confirmProbotIdentityBinding"`
+		} `json:"confirmTrustReadytIdentityBinding"`
 	}
 
 	err = owner.Execute(
@@ -173,34 +173,34 @@ func TestProbotIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
 	assert.Equal(
 		t,
 		externalTenantID,
-		confirmResult.ConfirmProbotIdentityBinding.ProbotIdentityBinding.ExternalTenantID,
+		confirmResult.ConfirmTrustReadytIdentityBinding.TrustReadytIdentityBinding.ExternalTenantID,
 	)
 	assert.Equal(
 		t,
 		externalUserID,
-		confirmResult.ConfirmProbotIdentityBinding.ProbotIdentityBinding.ExternalUserID,
+		confirmResult.ConfirmTrustReadytIdentityBinding.TrustReadytIdentityBinding.ExternalUserID,
 	)
 	assert.NotEmpty(
 		t,
-		confirmResult.ConfirmProbotIdentityBinding.ProbotIdentityBinding.ID,
+		confirmResult.ConfirmTrustReadytIdentityBinding.TrustReadytIdentityBinding.ID,
 	)
 	require.Len(
 		t,
-		confirmResult.ConfirmProbotIdentityBinding.Viewer.ProbotIdentityBindings,
+		confirmResult.ConfirmTrustReadytIdentityBinding.Viewer.TrustReadytIdentityBindings,
 		1,
 	)
 	assert.Equal(
 		t,
-		confirmResult.ConfirmProbotIdentityBinding.ProbotIdentityBinding.ID,
-		confirmResult.ConfirmProbotIdentityBinding.Viewer.ProbotIdentityBindings[0].ID,
+		confirmResult.ConfirmTrustReadytIdentityBinding.TrustReadytIdentityBinding.ID,
+		confirmResult.ConfirmTrustReadytIdentityBinding.Viewer.TrustReadytIdentityBindings[0].ID,
 	)
 
 	const deleteMutation = `
-		mutation($input: DeleteProbotIdentityBindingInput!) {
-			deleteProbotIdentityBinding(input: $input) {
-				probotIdentityBindingId
+		mutation($input: DeleteTrustReadytIdentityBindingInput!) {
+			deleteTrustReadytIdentityBinding(input: $input) {
+				trustreadytIdentityBindingId
 				viewer {
-					probotIdentityBindings {
+					trustreadytIdentityBindings {
 						id
 					}
 				}
@@ -209,21 +209,21 @@ func TestProbotIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
 	`
 
 	var deleteResult struct {
-		DeleteProbotIdentityBinding struct {
-			ProbotIdentityBindingID string `json:"probotIdentityBindingId"`
+		DeleteTrustReadytIdentityBinding struct {
+			TrustReadytIdentityBindingID string `json:"trustreadytIdentityBindingId"`
 			Viewer                  struct {
-				ProbotIdentityBindings []struct {
+				TrustReadytIdentityBindings []struct {
 					ID string `json:"id"`
-				} `json:"probotIdentityBindings"`
+				} `json:"trustreadytIdentityBindings"`
 			} `json:"viewer"`
-		} `json:"deleteProbotIdentityBinding"`
+		} `json:"deleteTrustReadytIdentityBinding"`
 	}
 
 	err = owner.Execute(
 		deleteMutation,
 		map[string]any{
 			"input": map[string]any{
-				"id": confirmResult.ConfirmProbotIdentityBinding.ProbotIdentityBinding.ID,
+				"id": confirmResult.ConfirmTrustReadytIdentityBinding.TrustReadytIdentityBinding.ID,
 			},
 		},
 		&deleteResult,
@@ -231,10 +231,10 @@ func TestProbotIdentityBinding_ConfirmWhileLoggedIn(t *testing.T) {
 	require.NoError(t, err)
 	assert.Equal(
 		t,
-		confirmResult.ConfirmProbotIdentityBinding.ProbotIdentityBinding.ID,
-		deleteResult.DeleteProbotIdentityBinding.ProbotIdentityBindingID,
+		confirmResult.ConfirmTrustReadytIdentityBinding.TrustReadytIdentityBinding.ID,
+		deleteResult.DeleteTrustReadytIdentityBinding.TrustReadytIdentityBindingID,
 	)
-	assert.Empty(t, deleteResult.DeleteProbotIdentityBinding.Viewer.ProbotIdentityBindings)
+	assert.Empty(t, deleteResult.DeleteTrustReadytIdentityBinding.Viewer.TrustReadytIdentityBindings)
 
 	err = owner.Execute(
 		previewQuery,

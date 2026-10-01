@@ -41,9 +41,9 @@ models:
   EmailAddr:
     model:
       - "github.com/DhruvWork/trustready-grc/pkg/server/gqlutils/types/mail.AddrScalar"
-  ProbotIdentityBinding:
+  TrustReadytIdentityBinding:
     model:
-      - "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ProbotIdentityBinding"
-  ProbotIdentityBindPreview:
+      - "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TrustReadytIdentityBinding"
+  TrustReadytIdentityBindPreview:
     model:
-      - "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.ProbotIdentityBindPreview"
+      - "github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1/types.TrustReadytIdentityBindPreview"

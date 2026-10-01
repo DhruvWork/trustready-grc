@@ -102,7 +102,7 @@ type (
 		awsConnectorInstall     cloudaws.ConnectorInstallConfig
 		gcpConnectorInstall     cloudgcp.ConnectorInstallConfig
 		azureConnectorInstall   cloudazure.ConnectorInstallConfig
-		probotIdentityBindings  *identitybinding.Service
+		trustreadytIdentityBindings  *identitybinding.Service
 		slackbotInstallations   *slackchannel.InstallationService
 		botDeliveryDestinations BotDeliveryDestinations
 		complianceMessages      ComplianceMessages
@@ -131,7 +131,7 @@ func NewMux(
 	customDomainCname string,
 	thirdPartySvc *thirdparty.Service,
 	riskManagementSvc *riskmanagement.Service,
-	probotIdentityBindings *identitybinding.Service,
+	trustreadytIdentityBindings *identitybinding.Service,
 	slackbotInstallations *slackchannel.InstallationService,
 	botDeliveryDestinations BotDeliveryDestinations,
 	complianceMessages ComplianceMessages,
@@ -169,7 +169,7 @@ func NewMux(
 		graphqlLimits,
 		itamSvc,
 		taskSvc,
-		probotIdentityBindings,
+		trustreadytIdentityBindings,
 		slackbotInstallations,
 		botDeliveryDestinations,
 		complianceMessages,

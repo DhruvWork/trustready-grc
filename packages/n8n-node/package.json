@@ -26,7 +26,7 @@
     ],
     "nodes": [
       "dist/nodes/TrustReady/TrustReady.node.js",
-      "dist/nodes/ProboTrigger/ProboTrigger.node.js"
+      "dist/nodes/TrustReadyTrigger/TrustReadyTrigger.node.js"
     ]
   },
   "license": "MIT",

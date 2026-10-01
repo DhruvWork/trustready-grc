@@ -127,7 +127,7 @@ type (
 )
 
 var (
-	proboThirdParty = struct {
+	trustreadyThirdParty = struct {
 		Name                 string
 		Description          string
 		LegalName            string
@@ -767,15 +767,15 @@ func (s *OrganizationService) CreateOrganization(
 			trustreadyData := &coredata.ThirdParty{
 				ID:                     gid.New(scope.GetTenantID(), coredata.ThirdPartyEntityType),
 				OrganizationID:         organization.ID,
-				Name:                   proboThirdParty.Name,
-				Description:            &proboThirdParty.Description,
+				Name:                   trustreadyThirdParty.Name,
+				Description:            &trustreadyThirdParty.Description,
 				Category:               coredata.ThirdPartyCategorySecurity,
-				HeadquarterAddress:     &proboThirdParty.HeadquarterAddress,
-				LegalName:              &proboThirdParty.LegalName,
-				WebsiteURL:             &proboThirdParty.WebsiteURL,
-				PrivacyPolicyURL:       &proboThirdParty.PrivacyPolicyURL,
-				TermsOfServiceURL:      &proboThirdParty.TermsOfServiceURL,
-				SubprocessorsListURL:   &proboThirdParty.SubprocessorsListURL,
+				HeadquarterAddress:     &trustreadyThirdParty.HeadquarterAddress,
+				LegalName:              &trustreadyThirdParty.LegalName,
+				WebsiteURL:             &trustreadyThirdParty.WebsiteURL,
+				PrivacyPolicyURL:       &trustreadyThirdParty.PrivacyPolicyURL,
+				TermsOfServiceURL:      &trustreadyThirdParty.TermsOfServiceURL,
+				SubprocessorsListURL:   &trustreadyThirdParty.SubprocessorsListURL,
 				ShowOnCompliancePortal: false,
 				Level:                  1,
 				CreatedAt:              now,

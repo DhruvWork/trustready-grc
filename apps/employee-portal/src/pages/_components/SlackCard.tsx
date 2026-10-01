@@ -37,7 +37,7 @@ import { dashboardCard, deviceCard } from "./variants";
 
 const slackCardViewerFragment = graphql`
   fragment SlackCard_viewer on Viewer @throwOnFieldError {
-    probotIdentityBindings {
+    trustreadytIdentityBindings {
       __typename
     }
   }
@@ -72,7 +72,7 @@ export function SlackCard({ viewerKey, organizationKey }: SlackCardProps) {
     return null;
   }
 
-  const linked = viewer.probotIdentityBindings.length > 0;
+  const linked = viewer.trustreadytIdentityBindings.length > 0;
 
   return (
     <Card variant="soft" padding="none" size={3} className={slots.frame()}>

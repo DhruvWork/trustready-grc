@@ -28,7 +28,7 @@ import (
 )
 
 type (
-	ProbotIdentityBinding struct {
+	TrustReadytIdentityBinding struct {
 		ID                 gid.GID   `json:"id"`
 		Provider           string    `json:"provider"`
 		ExternalTenantID   string    `json:"externalTenantId"`
@@ -39,7 +39,7 @@ type (
 		UpdatedAt          time.Time `json:"updatedAt"`
 	}
 
-	ProbotIdentityBindPreview struct {
+	TrustReadytIdentityBindPreview struct {
 		Provider           string `json:"provider"`
 		ExternalTenantID   string `json:"externalTenantId"`
 		ExternalUserID     string `json:"externalUserId"`
@@ -48,10 +48,10 @@ type (
 	}
 )
 
-func NewProbotIdentityBinding(
+func NewTrustReadytIdentityBinding(
 	binding *identitybinding.Binding,
-) *ProbotIdentityBinding {
-	return &ProbotIdentityBinding{
+) *TrustReadytIdentityBinding {
+	return &TrustReadytIdentityBinding{
 		ID:                 binding.ID,
 		Provider:           binding.Provider,
 		ExternalTenantID:   binding.ExternalTenantID,
@@ -63,25 +63,25 @@ func NewProbotIdentityBinding(
 	}
 }
 
-func NewProbotIdentityBindings(
+func NewTrustReadytIdentityBindings(
 	bindings []*identitybinding.Binding,
-) []*ProbotIdentityBinding {
-	result := make([]*ProbotIdentityBinding, len(bindings))
+) []*TrustReadytIdentityBinding {
+	result := make([]*TrustReadytIdentityBinding, len(bindings))
 	for i, binding := range bindings {
-		result[i] = NewProbotIdentityBinding(binding)
+		result[i] = NewTrustReadytIdentityBinding(binding)
 	}
 
 	return result
 }
 
-func (b ProbotIdentityBinding) GetID() gid.GID {
+func (b TrustReadytIdentityBinding) GetID() gid.GID {
 	return b.ID
 }
 
-func NewProbotIdentityBindPreview(
+func NewTrustReadytIdentityBindPreview(
 	subject identitybinding.Subject,
-) *ProbotIdentityBindPreview {
-	return &ProbotIdentityBindPreview{
+) *TrustReadytIdentityBindPreview {
+	return &TrustReadytIdentityBindPreview{
 		Provider:           subject.Provider,
 		ExternalTenantID:   subject.ExternalTenantID,
 		ExternalUserID:     subject.ExternalUserID,

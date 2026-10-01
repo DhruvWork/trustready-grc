@@ -199,10 +199,10 @@ func (r *viewerResolver) EnrolledDevice(ctx context.Context, obj *types.Viewer, 
 	return types.NewDevice(device), nil
 }
 
-// ProbotIdentityBindings is the resolver for the probotIdentityBindings field.
-func (r *viewerResolver) ProbotIdentityBindings(ctx context.Context, obj *types.Viewer) ([]*types.ProbotIdentityBinding, error) {
-	if r.probotIdentityBindings == nil {
-		return []*types.ProbotIdentityBinding{}, nil
+// TrustReadytIdentityBindings is the resolver for the trustreadytIdentityBindings field.
+func (r *viewerResolver) TrustReadytIdentityBindings(ctx context.Context, obj *types.Viewer) ([]*types.TrustReadytIdentityBinding, error) {
+	if r.trustreadytIdentityBindings == nil {
+		return []*types.TrustReadytIdentityBinding{}, nil
 	}
 
 	identity := authn.IdentityFromContext(ctx)
@@ -210,14 +210,14 @@ func (r *viewerResolver) ProbotIdentityBindings(ctx context.Context, obj *types.
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	bindings, err := r.probotIdentityBindings.ListByIdentity(ctx, identity.ID)
+	bindings, err := r.trustreadytIdentityBindings.ListByIdentity(ctx, identity.ID)
 	if err != nil {
 		r.logger.ErrorCtx(ctx, "cannot list Probot identity bindings", log.Error(err))
 
 		return nil, gqlutils.Internal(ctx)
 	}
 
-	return types.NewProbotIdentityBindings(bindings), nil
+	return types.NewTrustReadytIdentityBindings(bindings), nil
 }
 
 // Viewer returns schema.ViewerResolver implementation.
