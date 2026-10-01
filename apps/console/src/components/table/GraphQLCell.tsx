@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { useStateWithRef } from "@probo/hooks";
-import { EditableCell, selectCell, SelectValue, Spinner } from "@probo/ui";
-import { useEditableCellRef } from "@probo/ui/src/Molecules/Table/EditableCell";
-import { useEditableRowContext } from "@probo/ui/src/Molecules/Table/EditableRow";
-import { getKey } from "@probo/ui/src/Molecules/Table/utils";
+import { useStateWithRef } from "@trustready/hooks";
+import { EditableCell, selectCell, SelectValue, Spinner } from "@trustready/ui";
+import { useEditableCellRef } from "@trustready/ui/src/Molecules/Table/EditableCell";
+import { useEditableRowContext } from "@trustready/ui/src/Molecules/Table/EditableRow";
+import { getKey } from "@trustready/ui/src/Molecules/Table/utils";
 import { Command } from "cmdk";
 import { type ReactNode, Suspense } from "react";
 import { useTranslation } from "react-i18next";

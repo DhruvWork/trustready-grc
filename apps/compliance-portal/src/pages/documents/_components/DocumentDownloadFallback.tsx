@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import { DownloadSimpleIcon, FileIcon } from "@phosphor-icons/react";
-import { Button } from "@probo/ui/src/v2/Button/Button";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
 import { useTranslation } from "react-i18next";
 
 import { EmptyState } from "#/components/EmptyState/EmptyState";

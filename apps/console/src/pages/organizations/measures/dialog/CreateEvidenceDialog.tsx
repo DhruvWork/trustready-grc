@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ import {
   acceptPresentation,
   acceptSpreadsheet,
   acceptText,
-} from "@probo/helpers";
+} from "@trustready/helpers";
 import {
   Breadcrumb,
   Button,
@@ -38,7 +38,7 @@ import {
   Spinner,
   TabItem,
   Tabs,
-} from "@probo/ui";
+} from "@trustready/ui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useRelayEnvironment } from "react-relay";

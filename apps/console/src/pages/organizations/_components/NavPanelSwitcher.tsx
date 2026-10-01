@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,10 +19,10 @@
 // SOFTWARE.
 
 import { CaretDownIcon } from "@phosphor-icons/react";
-import { Dropdown } from "@probo/ui/src/v2/Dropdown/Dropdown";
-import { DropdownPopup } from "@probo/ui/src/v2/Dropdown/DropdownPopup";
-import { DropdownTrigger } from "@probo/ui/src/v2/Dropdown/DropdownTrigger";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Dropdown } from "@trustready/ui/src/v2/Dropdown/Dropdown";
+import { DropdownPopup } from "@trustready/ui/src/v2/Dropdown/DropdownPopup";
+import { DropdownTrigger } from "@trustready/ui/src/v2/Dropdown/DropdownTrigger";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import type { ReactNode } from "react";
 import { tv } from "tailwind-variants/lite";
 

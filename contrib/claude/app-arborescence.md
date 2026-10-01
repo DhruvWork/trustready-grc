@@ -8,7 +8,7 @@ These rules are the **source of truth**. Where existing code disagrees (e.g. `ap
 
 | Topic                                                                            | Guide                                                       |
 | -------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| `@probo/ui`, Tailwind, `tailwind-variants`, folders, skeletons, compound modules | [`contrib/claude/ui.md`](ui.md)                             |
+| `@trustready/ui`, Tailwind, `tailwind-variants`, folders, skeletons, compound modules | [`contrib/claude/ui.md`](ui.md)                             |
 | React component shape, props, file/export conventions, naming/suffixes           | [`contrib/claude/react-components.md`](react-components.md) |
 | Relay queries, fragments, loaders, `queryRef`                                    | [`contrib/claude/relay.md`](relay.md)                       |
 | Error boundaries at any level, error/fallback props                              | [`contrib/claude/error-handling.md`](error-handling.md)     |
@@ -63,7 +63,7 @@ Each page folder may contain a subset of these files. Names use PascalCase match
 
 | File                 | Role                                                                                                                                                                                                           |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `routes.ts`          | Route definitions for this folder. Exports an array spread into the parent route tree. Uses `lazy()` from `@probo/react-lazy` to point at loaders / pages. A new console page must also be registered in the shell nav ([`routing.md`](routing.md#register-every-new-console-page-in-the-nav)). |
+| `routes.ts`          | Route definitions for this folder. Exports an array spread into the parent route tree. Uses `lazy()` from `@trustready/react-lazy` to point at loaders / pages. A new console page must also be registered in the shell nav ([`routing.md`](routing.md#register-every-new-console-page-in-the-nav)). |
 | `MyLayout.tsx`       | A **layout route** component that renders shared chrome (`Breadcrumb`, `PageHeader`, `Tabs`, …) and an `<Outlet />`. Named with the **`Layout` suffix** — never `Page` — to make its role obvious at a glance. |
 | `MyLayoutLoader.tsx` | Loader for a layout that needs data (same pattern as `MyPageLoader`).                                                                                                                                          |
 | `MyPageLoader.tsx`   | Bundle entry point imported by `lazy()` in the route. **Default export.** loads data via Relay, renders a skeleton while loading, then mounts the page with `queryRef`. Only needed when the page reads data.  |
@@ -148,8 +148,8 @@ Contains route objects for the current folder's feature, exported as a named arr
 
 ```ts
 // pages/organizations/third-parties/routes.ts
-import { lazy } from "@probo/react-lazy";
-import type { AppRoute } from "@probo/routes";
+import { lazy } from "@trustready/react-lazy";
+import type { AppRoute } from "@trustready/routes";
 
 import { ThirdPartiesPageSkeleton } from "./ThirdPartiesPageSkeleton";
 
@@ -322,7 +322,7 @@ Sub-components that are used **only** by a single page live in a `_components/` 
 | ------------------------------------------ | ---------------------------------------------------------------------------------- |
 | Used by one page only                      | `pages/organizations/third-parties/_components/`                                         |
 | Used by multiple pages in the same feature | Nearest common ancestor's `_components/` (e.g. `pages/organizations/_components/`) |
-| Reusable UI primitive                      | `@probo/ui` package                                                                |
+| Reusable UI primitive                      | `@trustready/ui` package                                                                |
 
 ### Do / don't: component placement
 
@@ -361,7 +361,7 @@ pages/organizations/third-parties/
 
 App code imports every module by its **explicit path** (`#/lib/relay/useMutation`, `#/lib/http/endpoint`). Do **not** add `index.ts` re-export barrels inside an app's `src/` to shorten import paths.
 
-`index.ts` barrels are reserved for **package public entrypoints** (`packages/*`), where they define a real published API surface (`@probo/ui`, `@probo/relay`, …). An app has no published surface, so a barrel hides nothing — it only adds an indirection hop and invites Vite/tree-shaking and circular-import problems.
+`index.ts` barrels are reserved for **package public entrypoints** (`packages/*`), where they define a real published API surface (`@trustready/ui`, `@trustready/relay`, …). An app has no published surface, so a barrel hides nothing — it only adds an indirection hop and invites Vite/tree-shaking and circular-import problems.
 
 ```text
 // Bad — barrel inside the app just to shorten a path

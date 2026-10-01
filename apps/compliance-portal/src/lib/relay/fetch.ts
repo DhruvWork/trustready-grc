@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -18,7 +18,7 @@ import {
   InternalServerError,
   NDASignatureRequiredError,
   UnAuthenticatedError,
-} from "@probo/relay";
+} from "@trustready/relay";
 import { type GraphQLError } from "graphql";
 import { type FetchFunction, type GraphQLResponse } from "relay-runtime";
 

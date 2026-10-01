@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,17 +19,17 @@
 // SOFTWARE.
 
 import { TrashIcon } from "@phosphor-icons/react";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { Dialog } from "@probo/ui/src/v2/Dialog/Dialog";
-import { DialogBody } from "@probo/ui/src/v2/Dialog/DialogBody";
-import { DialogClose } from "@probo/ui/src/v2/Dialog/DialogClose";
-import { DialogDescription } from "@probo/ui/src/v2/Dialog/DialogDescription";
-import { DialogFooter } from "@probo/ui/src/v2/Dialog/DialogFooter";
-import { DialogHeader } from "@probo/ui/src/v2/Dialog/DialogHeader";
-import { DialogPopup } from "@probo/ui/src/v2/Dialog/DialogPopup";
-import { DialogTitle } from "@probo/ui/src/v2/Dialog/DialogTitle";
-import { DialogTrigger } from "@probo/ui/src/v2/Dialog/DialogTrigger";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { Dialog } from "@trustready/ui/src/v2/Dialog/Dialog";
+import { DialogBody } from "@trustready/ui/src/v2/Dialog/DialogBody";
+import { DialogClose } from "@trustready/ui/src/v2/Dialog/DialogClose";
+import { DialogDescription } from "@trustready/ui/src/v2/Dialog/DialogDescription";
+import { DialogFooter } from "@trustready/ui/src/v2/Dialog/DialogFooter";
+import { DialogHeader } from "@trustready/ui/src/v2/Dialog/DialogHeader";
+import { DialogPopup } from "@trustready/ui/src/v2/Dialog/DialogPopup";
+import { DialogTitle } from "@trustready/ui/src/v2/Dialog/DialogTitle";
+import { DialogTrigger } from "@trustready/ui/src/v2/Dialog/DialogTrigger";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useFragment } from "react-relay";

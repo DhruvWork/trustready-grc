@@ -59,7 +59,7 @@ version — use auto-update (zip/tar) or uninstall first.
 
 Production auto-update ignores GitHub prereleases. Test-fleet hosts
 set `allow_prereleases: true` in `config.json` (or install with
-`--allow-prereleases` / `PROBO_ALLOW_PRERELEASES=true`) and restart
+`--allow-prereleases` / `TRUSTREADY_ALLOW_PRERELEASES=true`) and restart
 the service.
 
 ## Build
@@ -133,8 +133,8 @@ build. CLI enrollment without the app uses `sudo probo-agent install`.
 
 ```shell
 # Local signed pkg (example)
-export CODESIGN_IDENTITY="Developer ID Application: Probo Inc (TEAMID)"
-export INSTALLER_IDENTITY="Developer ID Installer: Probo Inc (TEAMID)"
+export CODESIGN_IDENTITY="Developer ID Application: TrustReady (TEAMID)"
+export INSTALLER_IDENTITY="Developer ID Installer: TrustReady (TEAMID)"
 export APPLE_TEAM_ID="TEAMID"
 
 GOOS=darwin GOARCH=arm64 CGO_ENABLED=1 go build -o dist/probo-agent_arm64 ./cmd/probo-agent
@@ -180,8 +180,8 @@ the probo GitHub repository (or org) before tagging a release:
 | `APPLE_CERTIFICATE` | Base64-encoded `.p12` (Developer ID) |
 | `APPLE_CERTIFICATE_PASSWORD` | `.p12` password |
 | `KEYCHAIN_PASSWORD` | Ephemeral CI keychain password |
-| `CODESIGN_IDENTITY` | e.g. `Developer ID Application: Probo Inc (TEAMID)` |
-| `INSTALLER_IDENTITY` | e.g. `Developer ID Installer: Probo Inc (TEAMID)` |
+| `CODESIGN_IDENTITY` | e.g. `Developer ID Application: TrustReady (TEAMID)` |
+| `INSTALLER_IDENTITY` | e.g. `Developer ID Installer: TrustReady (TEAMID)` |
 | `APPLE_ID` | Apple ID email for `notarytool store-credentials` |
 | `APPLE_ID_PASSWORD` | App-specific password (stored into a keychain profile; not passed to `submit`) |
 | `APPLE_TEAM_ID` | 10-character Team ID |
@@ -293,11 +293,11 @@ curl -fsSL "https://github.com/getprobo/probo/releases/download/probo-agent/vX.Y
 
 # Unattended / MDM
 curl -fsSL "…/install.sh" | sudo \
-  PROBO_SERVER_URL=https://us.probo.com \
-  PROBO_ENROLLMENT_TOKEN='…' sh
+  TRUSTREADY_SERVER_URL=https://us.probo.com \
+  TRUSTREADY_ENROLLMENT_TOKEN='…' sh
 
-# Mirror release assets (PROBO_AGENT_RELEASE_BASE must end with the embedded tag)
-PROBO_AGENT_RELEASE_BASE="https://mirror.example/probo-agent/vX.Y.Z" \
+# Mirror release assets (TRUSTREADY_AGENT_RELEASE_BASE must end with the embedded tag)
+TRUSTREADY_AGENT_RELEASE_BASE="https://mirror.example/probo-agent/vX.Y.Z" \
   curl -fsSL "…/install.sh" | sudo sh
 ```
 
@@ -310,20 +310,20 @@ bundle verification via the agent auto-update path.
 The script installs the binary to `/Library/Probo/probo-agent` on macOS, or
 `/usr/local/bin/probo-agent` on Linux and FreeBSD, then runs `probo-agent
 install` to enroll and start the OS service. Agent state defaults to
-`/var/lib/probo-agent` (override with `--dir` or `PROBO_AGENT_STATE_DIR`).
+`/var/lib/probo-agent` (override with `--dir` or `TRUSTREADY_AGENT_STATE_DIR`).
 
 Environment variables:
 
 | Variable | Purpose |
 |----------|---------|
-| `PROBO_AGENT_RELEASE_BASE` | Override release download base URL (must match embedded tag) |
-| `PROBO_AGENT_RELEASE_TAG` | Override embedded release tag (local dev) |
-| `PROBO_AGENT_SKIP_CHECKSUM_VERIFY` | Skip SHA-256 verification (local dev only) |
-| `PROBO_AGENT_STATE_DIR` | Agent state directory (`--dir`; default `/var/lib/probo-agent`) |
-| `PROBO_SERVER_URL` | Probo server base URL (skip interactive prompt) |
-| `PROBO_ENROLLMENT_TOKEN` | One-shot enrollment token (skip interactive prompt) |
-| `PROBO_NO_AUTO_UPDATE` | Set to `true` to pass `--no-auto-update` |
-| `PROBO_ALLOW_PRERELEASES` | Set to `true` to pass `--allow-prereleases` |
+| `TRUSTREADY_AGENT_RELEASE_BASE` | Override release download base URL (must match embedded tag) |
+| `TRUSTREADY_AGENT_RELEASE_TAG` | Override embedded release tag (local dev) |
+| `TRUSTREADY_AGENT_SKIP_CHECKSUM_VERIFY` | Skip SHA-256 verification (local dev only) |
+| `TRUSTREADY_AGENT_STATE_DIR` | Agent state directory (`--dir`; default `/var/lib/probo-agent`) |
+| `TRUSTREADY_SERVER_URL` | Probo server base URL (skip interactive prompt) |
+| `TRUSTREADY_ENROLLMENT_TOKEN` | One-shot enrollment token (skip interactive prompt) |
+| `TRUSTREADY_NO_AUTO_UPDATE` | Set to `true` to pass `--no-auto-update` |
+| `TRUSTREADY_ALLOW_PRERELEASES` | Set to `true` to pass `--allow-prereleases` |
 
 Never pass the enrollment token in the curl URL.
 
@@ -352,7 +352,7 @@ Binary-only path via `installer/install.sh` (any Unix). State under
 
 ```shell
 make -C cmd/probo-agent install-cli \
-  PROBO_SERVER_URL=https://us.probo.com \
-  PROBO_ENROLLMENT_TOKEN='…'
+  TRUSTREADY_SERVER_URL=https://us.probo.com \
+  TRUSTREADY_ENROLLMENT_TOKEN='…'
 make -C cmd/probo-agent run
 ```

@@ -1,14 +1,14 @@
-# Release `@probo/cookie-banner-tcf`
+# Release `@trustready/cookie-banner-tcf`
 
 After confirming commits below, follow the
 [common steps](./README.md#3-common-steps-every-track).
 
 ## Track facts
 
-- **Tag pattern**: `@probo/cookie-banner-tcf/v*`
+- **Tag pattern**: `@trustready/cookie-banner-tcf/v*`
 - **Version source**: `packages/cookie-banner-tcf/package.json`
-- **Version bump**: `npm --workspace @probo/cookie-banner-tcf version <X.Y.Z> --no-git-tag-version`
-- **Build**: `npm --workspace @probo/cookie-banner run build && npm --workspace @probo/cookie-banner-tcf run build`
+- **Version bump**: `npm --workspace @trustready/cookie-banner-tcf version <X.Y.Z> --no-git-tag-version`
+- **Build**: `npm --workspace @trustready/cookie-banner run build && npm --workspace @trustready/cookie-banner-tcf run build`
 - **Changelog**: `packages/cookie-banner-tcf/CHANGELOG.md`
 - **Files to stage**: `packages/cookie-banner-tcf/package.json`,
   `packages/cookie-banner-tcf/CHANGELOG.md`, `package-lock.json`
@@ -18,7 +18,7 @@ After confirming commits below, follow the
 ## Detect commits
 
 ```shell
-git log $(git describe --tags --abbrev=0 --match='@probo/cookie-banner-tcf/v*')..HEAD --oneline \
+git log $(git describe --tags --abbrev=0 --match='@trustready/cookie-banner-tcf/v*')..HEAD --oneline \
   -- packages/cookie-banner-tcf packages/cookie-banner
 ```
 
@@ -28,7 +28,7 @@ If empty or non-user-facing only, do not release this track.
 
 `packages/cookie-banner-tcf/build.mjs` reads `version` from `package.json`
 and exposes it as the `__SDK_VERSION__` define. The TCF IIFE bundles
-`@probo/cookie-banner`, so that package must be built first (`turbo` already
+`@trustready/cookie-banner`, so that package must be built first (`turbo` already
 depends on `^build`). Banner-only changes still require a TCF release
 because the IIFE bundles that package. Run the TCF build after the version
 bump.

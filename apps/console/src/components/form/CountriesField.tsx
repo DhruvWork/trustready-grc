@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { countries, type CountryCode, getCountryName } from "@probo/helpers";
-import { Badge, IconCrossLargeX, Input } from "@probo/ui";
+import { countries, type CountryCode, getCountryName } from "@trustready/helpers";
+import { Badge, IconCrossLargeX, Input } from "@trustready/ui";
 import { clsx } from "clsx";
 import { useEffect, useState } from "react";
 import {

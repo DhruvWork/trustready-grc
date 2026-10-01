@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,13 +19,13 @@
 // SOFTWARE.
 
 import { PlusIcon } from "@phosphor-icons/react";
-import { ButtonLink } from "@probo/ui/src/v2/Button/ButtonLink";
-import { Pagination } from "@probo/ui/src/v2/Pagination/Pagination";
-import { Table } from "@probo/ui/src/v2/Table/Table";
-import { TableBody } from "@probo/ui/src/v2/Table/TableBody";
-import { TableColumnHeaderCell } from "@probo/ui/src/v2/Table/TableColumnHeaderCell";
-import { TableHeader } from "@probo/ui/src/v2/Table/TableHeader";
-import { TableRow } from "@probo/ui/src/v2/Table/TableRow";
+import { ButtonLink } from "@trustready/ui/src/v2/Button/ButtonLink";
+import { Pagination } from "@trustready/ui/src/v2/Pagination/Pagination";
+import { Table } from "@trustready/ui/src/v2/Table/Table";
+import { TableBody } from "@trustready/ui/src/v2/Table/TableBody";
+import { TableColumnHeaderCell } from "@trustready/ui/src/v2/Table/TableColumnHeaderCell";
+import { TableHeader } from "@trustready/ui/src/v2/Table/TableHeader";
+import { TableRow } from "@trustready/ui/src/v2/Table/TableRow";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment, useRefetchableFragment } from "react-relay";

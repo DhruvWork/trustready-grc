@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import posthog from "posthog-js";
-import { registerCookieBanner, type BannerConfig } from "@probo/cookie-banner";
-import { startTCF } from "@probo/cookie-banner-tcf";
+import { registerCookieBanner, type BannerConfig } from "@trustready/cookie-banner";
+import { startTCF } from "@trustready/cookie-banner-tcf";
 import {
   ConfigForm,
   DebugPanel,
@@ -32,7 +32,7 @@ import {
   isValidBannerApiBaseUrl,
   useConfig,
   useEventLog,
-} from "@probo/example-cookie-banner-shared";
+} from "@trustready/example-cookie-banner-shared";
 import {
   configurePosthogFromBanner,
   getPosthogStatus,
@@ -40,7 +40,7 @@ import {
   PosthogPanel,
   subscribePosthogStatus,
   type PosthogStatus,
-} from "@probo/example-cookie-banner-shared/posthog";
+} from "@trustready/example-cookie-banner-shared/posthog";
 
 const themedLogger = getExampleLogger("themed-tcf");
 
@@ -102,7 +102,7 @@ export function App() {
 
   return (
     <ExampleShell
-      title="@probo/cookie-banner — themed TCF"
+      title="@trustready/cookie-banner — themed TCF"
       description={
         <>
           IAB TCF first-layer path. Use this app with the IAB CMP validator.

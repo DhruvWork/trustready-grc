@@ -1,4 +1,4 @@
--- Copyright (c) 2026 Probo Inc <hello@probo.com>.
+-- Copyright (c) 2026 TrustReady <hello@probo.com>.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 -- SOFTWARE.
 
 -- Clear stale tracker initiator attribution that wrongly pointed at the
--- @probo/cookie-banner SDK bundle. A pre-fix SDK bug walked its own bundle
+-- @trustready/cookie-banner SDK bundle. A pre-fix SDK bug walked its own bundle
 -- frame when computing the initiator, so cookies/storage written by third
 -- parties (or by malware / browser extensions) were attributed to
 -- cookie-banner.iife.js. The SDK now excludes its own bundle, but the report
@@ -31,6 +31,6 @@ UPDATE detected_trackers
 SET initiator_url    = NULL,
     initiator_domain = NULL,
     updated_at       = now()
-WHERE initiator_url LIKE '%@probo/cookie-banner%'
+WHERE initiator_url LIKE '%@trustready/cookie-banner%'
    OR initiator_url LIKE '%cookie-banner.iife.js'
    OR initiator_url LIKE '%cookie-banner.mjs';

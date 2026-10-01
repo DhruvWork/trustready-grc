@@ -54,14 +54,14 @@ PRB_VERSION=             $(shell cat cmd/prb/VERSION)
 PROBOD_VERSION=          $(shell cat cmd/probod/VERSION)
 PROBOD_BOOTSTRAP_VERSION=$(shell cat cmd/probod-bootstrap/VERSION)
 PROBOCTL_VERSION=        $(shell cat cmd/proboctl/VERSION)
-PROBO_AGENT_VERSION=     $(shell cat cmd/probo-agent/VERSION)
+TRUSTREADY_AGENT_VERSION=     $(shell cat cmd/probo-agent/VERSION)
 
 PRB_LDFLAGS=             -ldflags "-X 'main.version=$(PRB_VERSION)'"
 PROBOD_LDFLAGS=          -ldflags "-X 'main.version=$(PROBOD_VERSION)' -X 'main.env=prod'"
 PROBOD_BOOTSTRAP_LDFLAGS=-ldflags "-X 'main.version=$(PROBOD_BOOTSTRAP_VERSION)'"
 PROBOCTL_LDFLAGS=        -ldflags "-X 'main.version=$(PROBOCTL_VERSION)'"
-PROBO_AGENT_LDFLAGS=     -ldflags "-X 'main.version=$(PROBO_AGENT_VERSION)'"
-PROBO_AGENT_GUI_LDFLAGS= -ldflags "-H windowsgui -X 'main.version=$(PROBO_AGENT_VERSION)'"
+TRUSTREADY_AGENT_LDFLAGS=     -ldflags "-X 'main.version=$(TRUSTREADY_AGENT_VERSION)'"
+TRUSTREADY_AGENT_GUI_LDFLAGS= -ldflags "-H windowsgui -X 'main.version=$(TRUSTREADY_AGENT_VERSION)'"
 
 GCFLAGS=	-gcflags="-e"
 
@@ -106,7 +106,7 @@ GENERATED= pkg/server/api/connect/v1/schema/schema.go \
 EMBEDDED= apps/console/dist/index.html \
 	apps/compliance-portal/dist/index.html \
 	apps/employee-portal/dist/index.html \
-	@probo/emails
+	@trustready/emails
 
 PROBOD_BIN_EXTRA_DEPS=
 PROBOD_BIN=	bin/probod
@@ -121,26 +121,26 @@ PROBOD_BOOTSTRAP_SRC=	cmd/probod-bootstrap/main.go
 PROBOCTL_BIN=	bin/proboctl
 PROBOCTL_SRC=	cmd/proboctl/main.go
 
-PROBO_AGENT_BIN=	bin/probo-agent
-PROBO_AGENT_SRC=	./cmd/probo-agent
+TRUSTREADY_AGENT_BIN=	bin/probo-agent
+TRUSTREADY_AGENT_SRC=	./cmd/probo-agent
 # Menu bar / tray enrollment is macOS and Windows; only macOS needs CGO.
-PROBO_AGENT_TARGET_OS=	$(if $(GOOS),$(GOOS),$(shell $(GO) env GOOS))
-PROBO_AGENT_BINS=	$(PROBO_AGENT_BIN)
-PROBO_AGENT_CGO=	0
-ifeq ($(PROBO_AGENT_TARGET_OS),darwin)
-PROBO_AGENT_CGO=	1
+TRUSTREADY_AGENT_TARGET_OS=	$(if $(GOOS),$(GOOS),$(shell $(GO) env GOOS))
+TRUSTREADY_AGENT_BINS=	$(TRUSTREADY_AGENT_BIN)
+TRUSTREADY_AGENT_CGO=	0
+ifeq ($(TRUSTREADY_AGENT_TARGET_OS),darwin)
+TRUSTREADY_AGENT_CGO=	1
 endif
-ifeq ($(PROBO_AGENT_TARGET_OS),windows)
-PROBO_AGENT_GUI_BIN=	bin/probo-agentw
-PROBO_AGENT_BINS+=	$(PROBO_AGENT_GUI_BIN)
+ifeq ($(TRUSTREADY_AGENT_TARGET_OS),windows)
+TRUSTREADY_AGENT_GUI_BIN=	bin/probo-agentw
+TRUSTREADY_AGENT_BINS+=	$(TRUSTREADY_AGENT_GUI_BIN)
 endif
 
 ifdef WITH_APPS
 GENERATED += relay
 EMBEDDED += \
-	@probo/console \
-	@probo/compliance-portal \
-	@probo/employee-portal
+	@trustready/console \
+	@trustready/compliance-portal \
+	@trustready/employee-portal
 endif
 
 .PHONY: all
@@ -234,8 +234,8 @@ test-e2e: $(PROBOD_BIN) ## Run console e2e tests
 .PHONY: test-e2e-run
 test-e2e-run: CGO_ENABLED=1
 test-e2e-run:
-	PROBO_E2E_BINARY=$(or $(E2E_BINARY),$(CURDIR)/$(PROBOD_BIN)) \
-	PROBO_E2E_CONFIG=$(E2E_CONFIG) \
+	TRUSTREADY_E2E_BINARY=$(or $(E2E_BINARY),$(CURDIR)/$(PROBOD_BIN)) \
+	TRUSTREADY_E2E_CONFIG=$(E2E_CONFIG) \
 	GOTESTSUM_FORMAT=testname $(GO_BASE) tool gotestsum -- $(E2E_TEST_FLAGS) -count=1 ./e2e/internal/... ./e2e/console/...
 
 .PHONY: bin/probod-coverage
@@ -251,9 +251,9 @@ test-e2e-coverage: bin/probod-coverage ## Run e2e tests with coverage
 test-e2e-coverage-run: CGO_ENABLED=1
 test-e2e-coverage-run:
 	@$(RM) -rf $(E2E_COVER_DIR) && $(MKDIR) -p $(E2E_COVER_DIR)
-	PROBO_E2E_BINARY=$(or $(E2E_BINARY),$(E2E_COVERAGE_BINARY)) \
-	PROBO_E2E_COVERDIR=$(E2E_COVER_DIR) \
-	PROBO_E2E_CONFIG=$(E2E_CONFIG) \
+	TRUSTREADY_E2E_BINARY=$(or $(E2E_BINARY),$(E2E_COVERAGE_BINARY)) \
+	TRUSTREADY_E2E_COVERDIR=$(E2E_COVER_DIR) \
+	TRUSTREADY_E2E_CONFIG=$(E2E_CONFIG) \
 	GOTESTSUM_FORMAT=testname $(GO_BASE) tool gotestsum -- $(E2E_TEST_FLAGS) -p=1 -count=1 ./e2e/internal/... ./e2e/console/... ./e2e/mcp/...
 	$(GO) tool covdata textfmt -i=$(E2E_COVER_DIR) -o=coverage-e2e.out
 	$(GO) tool covdata textfmt -i=$(E2E_COVER_DIR) -pkg=$(E2E_CORE_COVER_PKGS) -o=coverage-e2e-core.out
@@ -272,7 +272,7 @@ coverage-combined: coverage-report test-e2e-coverage ## Generate combined covera
 	$(GO) tool cover -html=coverage-combined.out -o=coverage-combined.html
 
 .PHONY: build
-build: $(PROBOD_BIN) bin/prb bin/probod-bootstrap bin/proboctl $(PROBO_AGENT_BINS)
+build: $(PROBOD_BIN) bin/prb bin/probod-bootstrap bin/proboctl $(TRUSTREADY_AGENT_BINS)
 
 CFG_DEV_OAUTH2_KEY       = cfg/.dev-oauth2-signing-key.pem
 CFG_DEV_IDENTITY_FEDERATION_KEY   = cfg/.dev-identity-federation-signing-key.pem
@@ -395,20 +395,20 @@ $(PROBOD_BOOTSTRAP_BIN):
 bin/proboctl:
 	$(GO_BUILD) $(PROBOCTL_LDFLAGS) -o $(PROBOCTL_BIN) $(PROBOCTL_SRC)
 
-.PHONY: $(PROBO_AGENT_BIN)
-$(PROBO_AGENT_BIN): CGO_ENABLED=$(PROBO_AGENT_CGO)
-$(PROBO_AGENT_BIN):
-	$(GO_BUILD) $(PROBO_AGENT_LDFLAGS) -o $(PROBO_AGENT_BIN) $(PROBO_AGENT_SRC)
+.PHONY: $(TRUSTREADY_AGENT_BIN)
+$(TRUSTREADY_AGENT_BIN): CGO_ENABLED=$(TRUSTREADY_AGENT_CGO)
+$(TRUSTREADY_AGENT_BIN):
+	$(GO_BUILD) $(TRUSTREADY_AGENT_LDFLAGS) -o $(TRUSTREADY_AGENT_BIN) $(TRUSTREADY_AGENT_SRC)
 
-ifneq ($(PROBO_AGENT_GUI_BIN),)
-.PHONY: $(PROBO_AGENT_GUI_BIN)
-$(PROBO_AGENT_GUI_BIN): CGO_ENABLED=0
-$(PROBO_AGENT_GUI_BIN):
-	$(GO_BUILD) $(PROBO_AGENT_GUI_LDFLAGS) -o $(PROBO_AGENT_GUI_BIN) $(PROBO_AGENT_SRC)
+ifneq ($(TRUSTREADY_AGENT_GUI_BIN),)
+.PHONY: $(TRUSTREADY_AGENT_GUI_BIN)
+$(TRUSTREADY_AGENT_GUI_BIN): CGO_ENABLED=0
+$(TRUSTREADY_AGENT_GUI_BIN):
+	$(GO_BUILD) $(TRUSTREADY_AGENT_GUI_LDFLAGS) -o $(TRUSTREADY_AGENT_GUI_BIN) $(TRUSTREADY_AGENT_SRC)
 endif
 
-.PHONY: @probo/emails
-@probo/emails:
+.PHONY: @trustready/emails
+@trustready/emails:
 	$(NPM) --workspace $@ run build
 
 RELAY_SCHEMAS = \
@@ -435,21 +435,21 @@ pkg/server/api/console/v1/schema.graphql: pkg/server/api/console/v1/graphql $(CO
 pkg/server/api/complianceportal/v1/schema.graphql: pkg/server/api/complianceportal/v1/graphql $(COMPLIANCEPORTAL_GQL)
 	$(MERGE_GRAPHQL) $@ pkg/server/api/complianceportal/v1/graphql
 
-.PHONY: @probo/console
-@probo/console: NODE_ENV=production
-@probo/console: relay
+.PHONY: @trustready/console
+@trustready/console: NODE_ENV=production
+@trustready/console: relay
 	$(NPM) --workspace $@ run check
 	$(NPM) --workspace $@ run build
 
-.PHONY: @probo/compliance-portal
-@probo/compliance-portal: NODE_ENV=production
-@probo/compliance-portal: relay
+.PHONY: @trustready/compliance-portal
+@trustready/compliance-portal: NODE_ENV=production
+@trustready/compliance-portal: relay
 	$(NPM) --workspace $@ run check
 	$(NPM) --workspace $@ run build
 
-.PHONY: @probo/employee-portal
-@probo/employee-portal: NODE_ENV=production
-@probo/employee-portal: relay
+.PHONY: @trustready/employee-portal
+@trustready/employee-portal: NODE_ENV=production
+@trustready/employee-portal: relay
 	$(NPM) --workspace $@ run check
 	$(NPM) --workspace $@ run build
 

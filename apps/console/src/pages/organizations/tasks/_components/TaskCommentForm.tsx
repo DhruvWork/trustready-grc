@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,9 +19,9 @@
 // SOFTWARE.
 
 import { Form } from "@base-ui/react/form";
-import { RichEditor } from "@probo/ui";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { Field } from "@probo/ui/src/v2/form/Field";
+import { RichEditor } from "@trustready/ui";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { Field } from "@trustready/ui/src/v2/form/Field";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 

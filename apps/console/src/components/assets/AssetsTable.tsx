@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 import {
   getAssetTypeVariant,
   promisifyMutation,
-} from "@probo/helpers";
+} from "@trustready/helpers";
 import {
   ActionDropdown,
   Badge,
@@ -31,7 +31,7 @@ import {
   SelectCell,
   TextCell,
   useConfirm,
-} from "@probo/ui";
+} from "@trustready/ui";
 import { useTranslation } from "react-i18next";
 import { useMutation } from "react-relay";
 import type { usePaginationFragmentHookType } from "react-relay/relay-hooks/usePaginationFragment";

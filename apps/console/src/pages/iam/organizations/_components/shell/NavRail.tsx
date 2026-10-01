@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import { LifebuoyIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
-import { useDisplayMode } from "@probo/ui/src/v2/displayMode/useDisplayMode";
+import { useDisplayMode } from "@trustready/ui/src/v2/displayMode/useDisplayMode";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment } from "react-relay";

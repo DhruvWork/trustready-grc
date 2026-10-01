@@ -1,8 +1,8 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 // Use of this source code is governed by the MIT license
 // that can be found in the LICENSE file.
 
-import { hasMarkdown, parseMarkdown } from "@probo/prosemirror";
+import { hasMarkdown, parseMarkdown } from "@trustready/prosemirror";
 import { Extension } from "@tiptap/core";
 import { Fragment, Slice } from "@tiptap/pm/model";
 import { Plugin, PluginKey } from "@tiptap/pm/state";

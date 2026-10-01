@@ -1,5 +1,5 @@
 {
-  "name": "@probo/example-cookie-banner-themed",
+  "name": "@trustready/example-cookie-banner-themed",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build"
   },
   "dependencies": {
-    "@probo/cookie-banner": "*",
-    "@probo/example-cookie-banner-shared": "*",
+    "@trustready/cookie-banner": "*",
+    "@trustready/example-cookie-banner-shared": "*",
     "posthog-js": "^1.422.5",
     "react": "^19.2.7",
     "react-dom": "^19.2.8"

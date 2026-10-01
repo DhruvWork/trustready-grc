@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -97,8 +97,8 @@ func (b *lockedBuffer) Bytes() []byte {
 func StartIsolatedEnv(t testing.TB, opts IsolatedEnvOptions) *IsolatedEnv {
 	t.Helper()
 
-	binaryPath := os.Getenv("PROBO_E2E_BINARY")
-	require.NotEmpty(t, binaryPath, "PROBO_E2E_BINARY is required")
+	binaryPath := os.Getenv("TRUSTREADY_E2E_BINARY")
+	require.NotEmpty(t, binaryPath, "TRUSTREADY_E2E_BINARY is required")
 
 	// Serialize allocate → config → release → start so parallel isolated envs
 	// cannot steal each other's briefly-freed ports.

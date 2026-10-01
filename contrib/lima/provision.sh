@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+# Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 # SPDX-License-Identifier: MIT
 
 set -euo pipefail
@@ -229,7 +229,7 @@ After=probo-node-modules.service probod.service
 Type=simple
 User=${LIMA_USER}
 WorkingDirectory=/workspace
-ExecStart=/usr/bin/npm --workspace @probo/console run dev -- --host 0.0.0.0
+ExecStart=/usr/bin/npm --workspace @trustready/console run dev -- --host 0.0.0.0
 Restart=on-failure
 RestartSec=3s
 
@@ -247,7 +247,7 @@ After=probo-node-modules.service probod.service
 Type=simple
 User=${LIMA_USER}
 WorkingDirectory=/workspace
-ExecStart=/usr/bin/npm --workspace @probo/compliance-portal run dev -- --host 0.0.0.0
+ExecStart=/usr/bin/npm --workspace @trustready/compliance-portal run dev -- --host 0.0.0.0
 Restart=on-failure
 RestartSec=3s
 
@@ -265,7 +265,7 @@ After=probo-node-modules.service probod.service
 Type=simple
 User=${LIMA_USER}
 WorkingDirectory=/workspace
-ExecStart=/usr/bin/npm --workspace @probo/employee-portal run dev -- --host 0.0.0.0
+ExecStart=/usr/bin/npm --workspace @trustready/employee-portal run dev -- --host 0.0.0.0
 Restart=on-failure
 RestartSec=3s
 

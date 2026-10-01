@@ -12,10 +12,10 @@ bump the version, write a changelog entry, commit, tag, push.
 | `probod-bootstrap`      | `probod-bootstrap/v*`          | [probod-bootstrap.md](./probod-bootstrap.md) |
 | `proboctl`              | `proboctl/v*`                  | [proboctl.md](./proboctl.md)     |
 | `probo-agent`           | `probo-agent/v*` (or `…-rc.N`) | [probo-agent.md](./probo-agent.md) ([Windows signing setup](./probo-agent-windows-signing.md); [RC](./probo-agent.md#rc-release)) |
-| `@probo/n8n-nodes-probo` | `@probo/n8n-nodes-probo/v*`   | [n8n-nodes-probo.md](./n8n-nodes-probo.md) |
-| `@probo/cookie-banner`  | `@probo/cookie-banner/v*`      | [cookie-banner.md](./cookie-banner.md) |
-| `@probo/cookie-banner-tcf` | `@probo/cookie-banner-tcf/v*` | [cookie-banner-tcf.md](./cookie-banner-tcf.md) |
-| `@probo/skills`         | `@probo/skills/v*`             | [skills.md](./skills.md)           |
+| `@trustready/n8n-nodes-probo` | `@trustready/n8n-nodes-probo/v*`   | [n8n-nodes-probo.md](./n8n-nodes-probo.md) |
+| `@trustready/cookie-banner`  | `@trustready/cookie-banner/v*`      | [cookie-banner.md](./cookie-banner.md) |
+| `@trustready/cookie-banner-tcf` | `@trustready/cookie-banner-tcf/v*` | [cookie-banner-tcf.md](./cookie-banner-tcf.md) |
+| `@trustready/skills`         | `@trustready/skills/v*`             | [skills.md](./skills.md)           |
 | Helm chart (`probo`)    | `helm/v*`                      | [helm.md](./helm.md)                   |
 | CloudFormation (`aws-audit-role`) | `cloudformation-aws-audit-role/v*` | [cloudformation-aws-audit-role.md](./cloudformation-aws-audit-role.md) |
 | Terraform (`aws-audit-role`) | `terraform-aws-audit-role/v*` | [terraform-aws-audit-role.md](./terraform-aws-audit-role.md) |
@@ -78,20 +78,20 @@ git log $(git describe --tags --abbrev=0 --match='proboctl/v*')..HEAD --oneline 
 git log $(git describe --tags --abbrev=0 --match='probo-agent/v*')..HEAD --oneline \
   -- cmd/probo-agent pkg/deviceagent
 
-# @probo/n8n-nodes-probo
-git log $(git describe --tags --abbrev=0 --match='@probo/n8n-nodes-probo/v*')..HEAD --oneline \
+# @trustready/n8n-nodes-probo
+git log $(git describe --tags --abbrev=0 --match='@trustready/n8n-nodes-probo/v*')..HEAD --oneline \
   -- packages/n8n-node
 
-# @probo/cookie-banner
-git log $(git describe --tags --abbrev=0 --match='@probo/cookie-banner/v*')..HEAD --oneline \
+# @trustready/cookie-banner
+git log $(git describe --tags --abbrev=0 --match='@trustready/cookie-banner/v*')..HEAD --oneline \
   -- packages/cookie-banner
 
-# @probo/cookie-banner-tcf
-git log $(git describe --tags --abbrev=0 --match='@probo/cookie-banner-tcf/v*')..HEAD --oneline \
+# @trustready/cookie-banner-tcf
+git log $(git describe --tags --abbrev=0 --match='@trustready/cookie-banner-tcf/v*')..HEAD --oneline \
   -- packages/cookie-banner-tcf
 
-# @probo/skills
-git log $(git describe --tags --abbrev=0 --match='@probo/skills/v*')..HEAD --oneline \
+# @trustready/skills
+git log $(git describe --tags --abbrev=0 --match='@trustready/skills/v*')..HEAD --oneline \
   -- packages/skills
 
 # helm chart

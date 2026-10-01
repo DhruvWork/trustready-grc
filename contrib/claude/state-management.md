@@ -63,7 +63,7 @@ useFilterStore();   // global singleton for a local concern
 // Good — lift to the nearest common parent (state + context if the tree is deep)
 ```
 
-`zustand` is available (it's a `@probo/ui` dependency) — use it deliberately for app-wide ephemeral state, not as a shortcut around prop-passing or the URL.
+`zustand` is available (it's a `@trustready/ui` dependency) — use it deliberately for app-wide ephemeral state, not as a shortcut around prop-passing or the URL.
 
 ## Filtering a list
 

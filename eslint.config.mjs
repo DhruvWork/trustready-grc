@@ -1,4 +1,4 @@
-import { configs } from "@probo/eslint-config";
+import { configs } from "@trustready/eslint-config";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 // Workspaces that are linted by this root config. Each gets the shared rule
@@ -52,7 +52,7 @@ export default defineConfig([
   },
   {
     // compliance-portal and employee-portal mutate through the awaitable
-    // useMutation bound in #/lib/relay/useMutation (over @probo/relay's
+    // useMutation bound in #/lib/relay/useMutation (over @trustready/relay's
     // createUseMutation), never react-relay's useMutation directly. Scoped
     // to these apps: console still uses react-relay's useMutation.
     files: ["apps/compliance-portal/**", "apps/employee-portal/**"],

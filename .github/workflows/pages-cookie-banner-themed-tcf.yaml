@@ -61,9 +61,9 @@ jobs:
           cache: "npm"
       - run: "npm install -g npm@^12.0.2"
       - run: "npm ci"
-      - run: "npm --workspace @probo/cookie-banner run build"
-      - run: "npm --workspace @probo/cookie-banner-tcf run build"
-      - run: "npm --workspace @probo/example-cookie-banner-themed-tcf run build"
+      - run: "npm --workspace @trustready/cookie-banner run build"
+      - run: "npm --workspace @trustready/cookie-banner-tcf run build"
+      - run: "npm --workspace @trustready/example-cookie-banner-themed-tcf run build"
         env:
           PUBLIC_COOKIE_BANNER_ID: "${{ secrets.PUBLIC_COOKIE_BANNER_ID }}"
           PUBLIC_COOKIE_BANNER_API_BASE_URL: "${{ secrets.PUBLIC_COOKIE_BANNER_API_BASE_URL }}"

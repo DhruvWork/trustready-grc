@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -242,7 +242,7 @@ func normalizeHost(host string) string {
 }
 
 func (c *Config) DefaultHost() (string, *HostConfig, error) {
-	if host := os.Getenv("PROBO_HOST"); host != "" {
+	if host := os.Getenv("TRUSTREADY_HOST"); host != "" {
 		host = normalizeHost(host)
 
 		hc := &HostConfig{}
@@ -250,7 +250,7 @@ func (c *Config) DefaultHost() (string, *HostConfig, error) {
 			*hc = *saved
 		}
 
-		if token := os.Getenv("PROBO_TOKEN"); token != "" {
+		if token := os.Getenv("TRUSTREADY_TOKEN"); token != "" {
 			hc.Token = token
 		}
 
@@ -259,9 +259,9 @@ func (c *Config) DefaultHost() (string, *HostConfig, error) {
 
 	hosts := slices.Sorted(maps.Keys(c.Hosts))
 
-	if token := os.Getenv("PROBO_TOKEN"); token != "" {
+	if token := os.Getenv("TRUSTREADY_TOKEN"); token != "" {
 		if len(hosts) == 0 {
-			return "", nil, fmt.Errorf("PROBO_TOKEN is set but no host configured; run 'prb auth login' first")
+			return "", nil, fmt.Errorf("TRUSTREADY_TOKEN is set but no host configured; run 'prb auth login' first")
 		}
 
 		host := hosts[0]

@@ -1,11 +1,11 @@
 {
-  "name": "probo",
+  "name": "trustready-grc",
   "interface": {
     "displayName": "Probo"
   },
   "plugins": [
     {
-      "name": "probo",
+      "name": "trustready-grc",
       "description": "Open-source compliance workflows powered by Probo MCP",
       "source": {
         "source": "local",

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,14 +19,14 @@
 // SOFTWARE.
 
 import { CaretDownIcon, MagnifyingGlassIcon, PlusIcon } from "@phosphor-icons/react";
-import { Avatar } from "@probo/ui/src/v2/Avatar/Avatar";
-import { Dropdown } from "@probo/ui/src/v2/Dropdown/Dropdown";
-import { DropdownItem } from "@probo/ui/src/v2/Dropdown/DropdownItem";
-import { DropdownPopup } from "@probo/ui/src/v2/Dropdown/DropdownPopup";
-import { DropdownSeparator } from "@probo/ui/src/v2/Dropdown/DropdownSeparator";
-import { DropdownTrigger } from "@probo/ui/src/v2/Dropdown/DropdownTrigger";
-import { TextField } from "@probo/ui/src/v2/form/TextField";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Avatar } from "@trustready/ui/src/v2/Avatar/Avatar";
+import { Dropdown } from "@trustready/ui/src/v2/Dropdown/Dropdown";
+import { DropdownItem } from "@trustready/ui/src/v2/Dropdown/DropdownItem";
+import { DropdownPopup } from "@trustready/ui/src/v2/Dropdown/DropdownPopup";
+import { DropdownSeparator } from "@trustready/ui/src/v2/Dropdown/DropdownSeparator";
+import { DropdownTrigger } from "@trustready/ui/src/v2/Dropdown/DropdownTrigger";
+import { TextField } from "@trustready/ui/src/v2/form/TextField";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { Suspense, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment, useQueryLoader } from "react-relay";

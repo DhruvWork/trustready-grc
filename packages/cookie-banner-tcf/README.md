@@ -1,10 +1,10 @@
-# @probo/cookie-banner-tcf
+# @trustready/cookie-banner-tcf
 
 IAB Transparency and Consent Framework (TCF 2.3) addon for
-[`@probo/cookie-banner`](../cookie-banner). It owns the `__tcfapi` stub,
+[`@trustready/cookie-banner`](../cookie-banner). It owns the `__tcfapi` stub,
 `CmpApi`, TC-string encoder, and the TCF first and second layers.
 
-`@probo/cookie-banner` stays IAB-free. Install both packages, or load this
+`@trustready/cookie-banner` stays IAB-free. Install both packages, or load this
 package's IIFE, which bundles the host banner plus the IAB libraries.
 
 This capability is hidden (SQL-flip only). When the flag is on, the console
@@ -106,7 +106,7 @@ If CSP blocks inline scripts, either:
 })();
 </script>
 <script
-  src="https://cdn.jsdelivr.net/npm/@probo/cookie-banner-tcf/dist/cookie-banner-tcf.iife.js"
+  src="https://cdn.jsdelivr.net/npm/@trustready/cookie-banner-tcf/dist/cookie-banner-tcf.iife.js"
   data-banner-id="YOUR_BANNER_ID"
   data-base-url="https://your-probo-instance.com/api/cookie-banner/v1/"
   data-position="bottom-left"
@@ -118,12 +118,12 @@ If CSP blocks inline scripts, either:
 ## ES module
 
 ```bash
-npm install @probo/cookie-banner @probo/cookie-banner-tcf
+npm install @trustready/cookie-banner @trustready/cookie-banner-tcf
 ```
 
 ```js
-import { registerCookieBanner } from "@probo/cookie-banner";
-import { installTCFStub, startTCF } from "@probo/cookie-banner-tcf";
+import { registerCookieBanner } from "@trustready/cookie-banner";
+import { installTCFStub, startTCF } from "@trustready/cookie-banner-tcf";
 
 installTCFStub();
 startTCF();

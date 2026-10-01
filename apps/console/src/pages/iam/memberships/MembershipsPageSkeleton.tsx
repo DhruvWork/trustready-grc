@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { TextFieldSkeleton } from "@probo/ui/src/v2/form/TextFieldSkeleton";
-import { ListSkeleton } from "@probo/ui/src/v2/List/ListSkeleton";
-import { HeadingSkeleton } from "@probo/ui/src/v2/typography/HeadingSkeleton";
+import { TextFieldSkeleton } from "@trustready/ui/src/v2/form/TextFieldSkeleton";
+import { ListSkeleton } from "@trustready/ui/src/v2/List/ListSkeleton";
+import { HeadingSkeleton } from "@trustready/ui/src/v2/typography/HeadingSkeleton";
 
 export function MembershipsPageSkeleton() {
   return (

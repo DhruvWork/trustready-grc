@@ -1,13 +1,13 @@
 {
-  "name": "probo",
+  "name": "trustready-grc",
   "description": "Probo Claude Code plugins",
   "owner": {
-    "name": "Probo Inc",
+    "name": "TrustReady",
     "email": "hello@probo.com"
   },
   "plugins": [
     {
-      "name": "probo",
+      "name": "trustready-grc",
       "description": "Open-source compliance workflows powered by Probo MCP",
       "source": "./packages/skills",
       "homepage": "https://github.com/getprobo/probo/tree/main/packages/skills",

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { dateTimeFormat } from "@probo/i18n";
-import { Badge, Button, IconCircleCheck, IconClock } from "@probo/ui";
+import { dateTimeFormat } from "@trustready/i18n";
+import { Badge, Button, IconCircleCheck, IconClock } from "@trustready/ui";
 import { useTranslation } from "react-i18next";
 import { useFragment } from "react-relay";
 import { type DataID, graphql } from "relay-runtime";

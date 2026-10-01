@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,16 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Combobox } from "@probo/ui/src/v2/Combobox/Combobox";
-import { ComboboxEmpty } from "@probo/ui/src/v2/Combobox/ComboboxEmpty";
-import { ComboboxInput } from "@probo/ui/src/v2/Combobox/ComboboxInput";
-import { ComboboxInputGroup } from "@probo/ui/src/v2/Combobox/ComboboxInputGroup";
-import { ComboboxItem } from "@probo/ui/src/v2/Combobox/ComboboxItem";
-import { ComboboxList } from "@probo/ui/src/v2/Combobox/ComboboxList";
-import { Dialog } from "@probo/ui/src/v2/Dialog/Dialog";
-import { DialogBody } from "@probo/ui/src/v2/Dialog/DialogBody";
-import { DialogPopup } from "@probo/ui/src/v2/Dialog/DialogPopup";
-import { DialogTitle } from "@probo/ui/src/v2/Dialog/DialogTitle";
+import { Combobox } from "@trustready/ui/src/v2/Combobox/Combobox";
+import { ComboboxEmpty } from "@trustready/ui/src/v2/Combobox/ComboboxEmpty";
+import { ComboboxInput } from "@trustready/ui/src/v2/Combobox/ComboboxInput";
+import { ComboboxInputGroup } from "@trustready/ui/src/v2/Combobox/ComboboxInputGroup";
+import { ComboboxItem } from "@trustready/ui/src/v2/Combobox/ComboboxItem";
+import { ComboboxList } from "@trustready/ui/src/v2/Combobox/ComboboxList";
+import { Dialog } from "@trustready/ui/src/v2/Dialog/Dialog";
+import { DialogBody } from "@trustready/ui/src/v2/Dialog/DialogBody";
+import { DialogPopup } from "@trustready/ui/src/v2/Dialog/DialogPopup";
+import { DialogTitle } from "@trustready/ui/src/v2/Dialog/DialogTitle";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment } from "react-relay";

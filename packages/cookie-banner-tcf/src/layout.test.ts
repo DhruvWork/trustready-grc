@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,10 +18,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import type { BannerConfig, TCFGVL } from "@probo/cookie-banner";
+import type { BannerConfig, TCFGVL } from "@trustready/cookie-banner";
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("@probo/cookie-banner", () => ({
+vi.mock("@trustready/cookie-banner", () => ({
   BRANDING: "BRANDING",
   CLOSE_ICON: "CLOSE",
   esc: (s: string) => s.replace(/</g, "&lt;"),

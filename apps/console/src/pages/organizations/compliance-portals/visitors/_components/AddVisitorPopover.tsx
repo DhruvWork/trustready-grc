@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,10 +19,10 @@
 // SOFTWARE.
 
 import { PlusIcon, UserIcon } from "@phosphor-icons/react";
-import { TextField } from "@probo/ui/src/v2/form/TextField";
-import { Popover } from "@probo/ui/src/v2/Popover/Popover";
-import { PopoverPopup } from "@probo/ui/src/v2/Popover/PopoverPopup";
-import { PopoverTrigger } from "@probo/ui/src/v2/Popover/PopoverTrigger";
+import { TextField } from "@trustready/ui/src/v2/form/TextField";
+import { Popover } from "@trustready/ui/src/v2/Popover/Popover";
+import { PopoverPopup } from "@trustready/ui/src/v2/Popover/PopoverPopup";
+import { PopoverTrigger } from "@trustready/ui/src/v2/Popover/PopoverTrigger";
 import { type ReactElement, useCallback, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useQueryLoader } from "react-relay";

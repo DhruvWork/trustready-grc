@@ -37,7 +37,7 @@ src/lib/relay/useMutation.ts
 
 ## Mutation hooks
 
-All mutations go through the shared **`useMutation`** primitive. Its mechanics live in `@probo/relay` as the `createUseMutation(useNotifier)` factory, and each app binds it once in `src/lib/relay/useMutation.ts`. It wraps Relay's `useMutation` to:
+All mutations go through the shared **`useMutation`** primitive. Its mechanics live in `@trustready/relay` as the `createUseMutation(useNotifier)` factory, and each app binds it once in `src/lib/relay/useMutation.ts`. It wraps Relay's `useMutation` to:
 
 1. Return an **awaitable** commit that resolves with the mutation **response** (so callers can `await` and continue only on success).
 2. **Preserve every `UseMutationConfig` option** (`variables`, `connections`, `updater`, `optimisticResponse`, `onCompleted`, `onError`, …) by spreading the caller's config.
@@ -57,13 +57,13 @@ import { useMutation } from "#/lib/relay/useMutation";
 
 ### The primitive: shared factory + app binding
 
-The factory lives in `@probo/relay` and stays free of UI/i18n dependencies — it delegates rendering to an injected `MutationNotifier` (`createUseMutation` source: [`packages/relay/src/useMutation.ts`](../../packages/relay/src/useMutation.ts)). The app binds it once to its own toast + i18n + `formatError` stack:
+The factory lives in `@trustready/relay` and stays free of UI/i18n dependencies — it delegates rendering to an injected `MutationNotifier` (`createUseMutation` source: [`packages/relay/src/useMutation.ts`](../../packages/relay/src/useMutation.ts)). The app binds it once to its own toast + i18n + `formatError` stack:
 
 ```ts
 // src/lib/relay/useMutation.ts — the only place feedback is wired
 import { Toast } from "@base-ui/react/toast";
-import { formatError, type GraphQLError } from "@probo/helpers";
-import { createUseMutation, type MutationNotifier } from "@probo/relay";
+import { formatError, type GraphQLError } from "@trustready/helpers";
+import { createUseMutation, type MutationNotifier } from "@trustready/relay";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -86,7 +86,7 @@ function useMutationNotifier(): MutationNotifier {
   );
 }
 
-export type { MutationFeedback } from "@probo/relay";
+export type { MutationFeedback } from "@trustready/relay";
 
 export const useMutation = createUseMutation(useMutationNotifier);
 ```

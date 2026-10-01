@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { documentClassifications, documentTypes, documentWriteModes } from "@probo/helpers";
-import { useList } from "@probo/hooks";
-import { Button, Card, Checkbox, IconArchive, IconArrowDown, IconCrossLargeX, IconMagnifyingGlass, IconSignature, IconTrashCan, IconUpload, Input, Option, Select, Tbody, Th, Thead, Tr } from "@probo/ui";
+import { documentClassifications, documentTypes, documentWriteModes } from "@trustready/helpers";
+import { useList } from "@trustready/hooks";
+import { Button, Card, Checkbox, IconArchive, IconArrowDown, IconCrossLargeX, IconMagnifyingGlass, IconSignature, IconTrashCan, IconUpload, Input, Option, Select, Tbody, Th, Thead, Tr } from "@trustready/ui";
 import { type ComponentProps, use, useEffect, useRef, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { usePaginationFragment } from "react-relay";

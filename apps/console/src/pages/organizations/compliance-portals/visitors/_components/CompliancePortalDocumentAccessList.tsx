@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,14 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import type { CompliancePortalDocumentAccessStatus } from "@probo/coredata";
-import type { CompliancePortalDocumentAccessInfo } from "@probo/helpers";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { List } from "@probo/ui/src/v2/List/List";
-import { ListItem } from "@probo/ui/src/v2/List/ListItem";
-import { ListItemContent } from "@probo/ui/src/v2/List/ListItemContent";
-import { Heading } from "@probo/ui/src/v2/typography/Heading";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import type { CompliancePortalDocumentAccessStatus } from "@trustready/coredata";
+import type { CompliancePortalDocumentAccessInfo } from "@trustready/helpers";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { List } from "@trustready/ui/src/v2/List/List";
+import { ListItem } from "@trustready/ui/src/v2/List/ListItem";
+import { ListItemContent } from "@trustready/ui/src/v2/List/ListItemContent";
+import { Heading } from "@trustready/ui/src/v2/typography/Heading";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, usePaginationFragment } from "react-relay";

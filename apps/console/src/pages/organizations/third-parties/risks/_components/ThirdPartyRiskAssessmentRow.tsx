@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,14 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { dateFormat, relativeDateFormat } from "@probo/i18n";
+import { dateFormat, relativeDateFormat } from "@trustready/i18n";
 import {
   Badge,
   Markdown,
   RiskBadge,
   Td,
   Tr,
-} from "@probo/ui";
+} from "@trustready/ui";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment } from "react-relay";

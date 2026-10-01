@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 
 import {
   formatError,
-} from "@probo/helpers";
-import { usePageTitle } from "@probo/hooks";
+} from "@trustready/helpers";
+import { usePageTitle } from "@trustready/hooks";
 import {
   ActionDropdown,
   Button,
@@ -46,8 +46,8 @@ import {
   useConfirm,
   useDialogRef,
   useToast,
-} from "@probo/ui";
-import { MeasureBadge } from "@probo/ui/src/Molecules/Badge/MeasureBadge";
+} from "@trustready/ui";
+import { MeasureBadge } from "@trustready/ui/src/Molecules/Badge/MeasureBadge";
 import { type ChangeEventHandler, useEffect, useRef, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import {

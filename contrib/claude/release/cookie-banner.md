@@ -1,14 +1,14 @@
-# Release `@probo/cookie-banner`
+# Release `@trustready/cookie-banner`
 
 After confirming commits below, follow the
 [common steps](./README.md#3-common-steps-every-track).
 
 ## Track facts
 
-- **Tag pattern**: `@probo/cookie-banner/v*`
+- **Tag pattern**: `@trustready/cookie-banner/v*`
 - **Version source**: `packages/cookie-banner/package.json`
-- **Version bump**: `npm --workspace @probo/cookie-banner version <X.Y.Z> --no-git-tag-version`
-- **Build**: `npm --workspace @probo/cookie-banner run build`
+- **Version bump**: `npm --workspace @trustready/cookie-banner version <X.Y.Z> --no-git-tag-version`
+- **Build**: `npm --workspace @trustready/cookie-banner run build`
 - **Changelog**: `packages/cookie-banner/CHANGELOG.md`
 - **Files to stage**: `packages/cookie-banner/package.json`,
   `packages/cookie-banner/CHANGELOG.md`, `package-lock.json`
@@ -18,7 +18,7 @@ After confirming commits below, follow the
 ## Detect commits
 
 ```shell
-git log $(git describe --tags --abbrev=0 --match='@probo/cookie-banner/v*')..HEAD --oneline \
+git log $(git describe --tags --abbrev=0 --match='@trustready/cookie-banner/v*')..HEAD --oneline \
   -- packages/cookie-banner
 ```
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -63,7 +63,7 @@ func main() {
 }
 
 func isNonInteractiveEnv() bool {
-	if v := os.Getenv("PROBO_NO_INTERACTIVE"); v == "1" || v == "true" {
+	if v := os.Getenv("TRUSTREADY_NO_INTERACTIVE"); v == "1" || v == "true" {
 		return true
 	}
 

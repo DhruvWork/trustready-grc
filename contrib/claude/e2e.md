@@ -123,7 +123,7 @@ instead of onboarding a new user for each assertion.
 
 Failed journeys write a redacted `manifest.json` and human-readable
 `failure.txt`. By default they are placed under
-`${TMPDIR}/probo-e2e-artifacts`; set `PROBO_E2E_ARTIFACT_DIR` to control the
+`${TMPDIR}/probo-e2e-artifacts`; set `TRUSTREADY_E2E_ARTIFACT_DIR` to control the
 location. CI uploads this directory with the JUnit results. Artifact metadata
 must never contain passwords, tokens, cookies, authorization headers, or other
 secrets.

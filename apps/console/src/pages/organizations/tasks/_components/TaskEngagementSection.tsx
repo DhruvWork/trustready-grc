@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Tabs } from "@probo/ui/src/v2/Tabs/Tabs";
-import { TabsIndicator } from "@probo/ui/src/v2/Tabs/TabsIndicator";
-import { TabsList } from "@probo/ui/src/v2/Tabs/TabsList";
-import { TabsPanel } from "@probo/ui/src/v2/Tabs/TabsPanel";
-import { TabsTab } from "@probo/ui/src/v2/Tabs/TabsTab";
+import { Tabs } from "@trustready/ui/src/v2/Tabs/Tabs";
+import { TabsIndicator } from "@trustready/ui/src/v2/Tabs/TabsIndicator";
+import { TabsList } from "@trustready/ui/src/v2/Tabs/TabsList";
+import { TabsPanel } from "@trustready/ui/src/v2/Tabs/TabsPanel";
+import { TabsTab } from "@trustready/ui/src/v2/Tabs/TabsTab";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment } from "react-relay";

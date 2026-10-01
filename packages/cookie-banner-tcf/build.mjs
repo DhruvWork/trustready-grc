@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ await Promise.all([
     entryPoints: ["src/index.ts"],
     outfile: "dist/cookie-banner-tcf.mjs",
     format: "esm",
-    external: ["@probo/cookie-banner"],
+    external: ["@trustready/cookie-banner"],
   }),
   esbuild.build({
     ...shared,

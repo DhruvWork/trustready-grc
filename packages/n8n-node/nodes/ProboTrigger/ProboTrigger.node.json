@@ -1,5 +1,5 @@
 {
-  "node": "@probo/n8n-nodes-probo.proboTrigger",
+  "node": "@trustready/n8n-nodes-probo.proboTrigger",
   "nodeVersion": "1.0",
   "codexVersion": "1.0",
   "categories": ["Development", "Utility"],

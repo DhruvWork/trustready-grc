@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Switch } from "@probo/ui/src/v2/Switch/Switch";
-import { Tooltip } from "@probo/ui/src/v2/Tooltip/Tooltip";
-import { TooltipPopup } from "@probo/ui/src/v2/Tooltip/TooltipPopup";
-import { TooltipTrigger } from "@probo/ui/src/v2/Tooltip/TooltipTrigger";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Switch } from "@trustready/ui/src/v2/Switch/Switch";
+import { Tooltip } from "@trustready/ui/src/v2/Tooltip/Tooltip";
+import { TooltipPopup } from "@trustready/ui/src/v2/Tooltip/TooltipPopup";
+import { TooltipTrigger } from "@trustready/ui/src/v2/Tooltip/TooltipTrigger";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import type { ReactNode } from "react";
 
 import { TonedCard } from "#/components/TonedCard/TonedCard";

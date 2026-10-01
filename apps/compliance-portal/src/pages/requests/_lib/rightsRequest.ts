@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import {
   TrashIcon,
   WarningCircleIcon,
 } from "@phosphor-icons/react";
-import type { RightsRequestState, RightsRequestType } from "@probo/helpers";
+import type { RightsRequestState, RightsRequestType } from "@trustready/helpers";
 import { createElement, type ReactNode } from "react";
 
 type BadgeColor = "neutral" | "gold" | "red" | "green" | "amber" | "sky";

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,12 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { getAssignableRoles, getMembershipRole, getMembershipRoles, type Role } from "@probo/helpers";
-import { Select } from "@probo/ui/src/v2/Select/Select";
-import { SelectItem } from "@probo/ui/src/v2/Select/SelectItem";
-import { SelectPopup } from "@probo/ui/src/v2/Select/SelectPopup";
-import { SelectTrigger } from "@probo/ui/src/v2/Select/SelectTrigger";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { getAssignableRoles, getMembershipRole, getMembershipRoles, type Role } from "@trustready/helpers";
+import { Select } from "@trustready/ui/src/v2/Select/Select";
+import { SelectItem } from "@trustready/ui/src/v2/Select/SelectItem";
+import { SelectPopup } from "@trustready/ui/src/v2/Select/SelectPopup";
+import { SelectTrigger } from "@trustready/ui/src/v2/Select/SelectTrigger";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { use } from "react";
 import { useTranslation } from "react-i18next";
 import { useFragment } from "react-relay";

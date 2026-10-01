@@ -1,5 +1,5 @@
 {
-  "name": "@probo/n8n-nodes-probo",
+  "name": "@trustready/n8n-nodes-probo",
   "version": "0.239.0",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "prepublishOnly": "npm run build && npm run lint"
   },
   "author": {
-    "name": "Probo Inc",
+    "name": "TrustReady",
     "email": "hello@probo.com"
   },
   "files": [

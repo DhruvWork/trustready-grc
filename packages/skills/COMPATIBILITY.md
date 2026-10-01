@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2026 Probo Inc <hello@probo.com>.
+Copyright (c) 2026 TrustReady <hello@probo.com>.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@ SOFTWARE.
 
 # Multi-agent compatibility
 
-`@probo/skills` is an [Agent Plugins 1.0.0](https://agent-plugins.org/)
+`@trustready/skills` is an [Agent Plugins 1.0.0](https://agent-plugins.org/)
 package. The portable core is `plugin.json`, Agent Skills under `skills/`, and
 Probo MCP servers in `mcp.json`. Client-specific manifests carry the same
 components to **Claude Code**, **Codex**, **OpenCode**, and **Cursor** until
@@ -100,7 +100,7 @@ claude mcp login probo-us   # or /mcp in session
 /probo:access-review Q3 GitHub review
 ```
 
-**From the package directory** (catalog resolves `@probo/skills` from npm):
+**From the package directory** (catalog resolves `@trustready/skills` from npm):
 
 ```bash
 claude plugin marketplace add ./packages/skills/.claude-plugin
@@ -200,7 +200,7 @@ directory is discovered, regardless of which agent loads it.
 ## npm package layout
 
 ```
-@probo/skills/
+@trustready/skills/
   plugin.json                        # Agent Plugins manifest
   mcp.json                           # Agent Plugins MCP configuration
   skills/                            # Shared skills (all agents)
@@ -222,7 +222,7 @@ Repo root (monorepo / `getprobo/probo` Git installs):
 ## Validation
 
 ```bash
-npm --workspace @probo/skills run validate
+npm --workspace @trustready/skills run validate
 ```
 
 `scripts/validate.mjs` enforces the Agent Plugins closed manifest and MCP

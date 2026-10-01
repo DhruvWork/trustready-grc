@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,14 +18,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { ButtonSkeleton } from "@probo/ui/src/v2/Button/ButtonSkeleton";
-import { CalloutSkeleton } from "@probo/ui/src/v2/Callout/CalloutSkeleton";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { CheckboxSkeleton } from "@probo/ui/src/v2/Checkbox/CheckboxSkeleton";
-import { TextFieldSkeleton } from "@probo/ui/src/v2/form/TextFieldSkeleton";
-import { SelectSkeleton } from "@probo/ui/src/v2/Select/SelectSkeleton";
-import { HeadingSkeleton } from "@probo/ui/src/v2/typography/HeadingSkeleton";
-import { TextSkeleton } from "@probo/ui/src/v2/typography/TextSkeleton";
+import { ButtonSkeleton } from "@trustready/ui/src/v2/Button/ButtonSkeleton";
+import { CalloutSkeleton } from "@trustready/ui/src/v2/Callout/CalloutSkeleton";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { CheckboxSkeleton } from "@trustready/ui/src/v2/Checkbox/CheckboxSkeleton";
+import { TextFieldSkeleton } from "@trustready/ui/src/v2/form/TextFieldSkeleton";
+import { SelectSkeleton } from "@trustready/ui/src/v2/Select/SelectSkeleton";
+import { HeadingSkeleton } from "@trustready/ui/src/v2/typography/HeadingSkeleton";
+import { TextSkeleton } from "@trustready/ui/src/v2/typography/TextSkeleton";
 
 import { newSamlSsoPageSkeleton } from "./variants";
 

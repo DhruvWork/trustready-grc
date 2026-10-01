@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,8 +19,8 @@
 // SOFTWARE.
 
 import { Toast } from "@base-ui/react/toast";
-import { formatError, type GraphQLError } from "@probo/helpers";
-import { createUseMutation, type MutationNotifier, UnAuthenticatedError } from "@probo/relay";
+import { formatError, type GraphQLError } from "@trustready/helpers";
+import { createUseMutation, type MutationNotifier, UnAuthenticatedError } from "@trustready/relay";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
@@ -28,7 +28,7 @@ import { useParams } from "react-router";
 import { redirectToLogin } from "#/lib/auth/redirectToLogin";
 
 /**
- * Binds the shared awaitable useMutation (`@probo/relay`) to this app's
+ * Binds the shared awaitable useMutation (`@trustready/relay`) to this app's
  * feedback stack: Base UI toasts, i18next titles, `formatError` descriptions,
  * and an unauthenticated redirect to `/auth/login`. This is the only place
  * those opinions are wired — every mutation gets gate handling for free.
@@ -66,6 +66,6 @@ function useMutationNotifier(): MutationNotifier {
   );
 }
 
-export type { MutationFeedback } from "@probo/relay";
+export type { MutationFeedback } from "@trustready/relay";
 
 export const useMutation = createUseMutation(useMutationNotifier);

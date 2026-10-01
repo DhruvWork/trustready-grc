@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Badge } from "@probo/ui/src/v2/Badge/Badge";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Badge } from "@trustready/ui/src/v2/Badge/Badge";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import type { TFunction } from "i18next";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";

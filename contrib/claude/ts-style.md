@@ -63,7 +63,7 @@ const blob = await response.blob();
 
 ### File upload / download
 
-- **Uploads:** collect the file with `react-dropzone` (already a `@probo/ui` dependency) or a native `<input type="file">`, then send a `FormData` body via `fetch` (or the GraphQL upload mechanism if the schema exposes one). Validate type/size client-side with the `@probo/helpers` `fileAccept` helpers before sending; the server still validates.
+- **Uploads:** collect the file with `react-dropzone` (already a `@trustready/ui` dependency) or a native `<input type="file">`, then send a `FormData` body via `fetch` (or the GraphQL upload mechanism if the schema exposes one). Validate type/size client-side with the `@trustready/helpers` `fileAccept` helpers before sending; the server still validates.
 - **Downloads:** prefer a direct link to a backend URL when the endpoint streams a file; use `fetch` + `blob` only when you must read the bytes (e.g. to rename or post-process). Revoke any `URL.createObjectURL` you create.
 
 ```ts

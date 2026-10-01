@@ -55,8 +55,8 @@ Routes only declare `path`, `Fallback`, and `Component` pointing to a lazy-loade
 
 ```tsx
 // In route file (e.g. findingRoutes.ts)
-import { lazy } from "@probo/react-lazy";
-import type { AppRoute } from "@probo/routes";
+import { lazy } from "@trustready/react-lazy";
+import type { AppRoute } from "@trustready/routes";
 import { PageSkeleton } from "#/components/skeletons/PageSkeleton";
 
 export const findingRoutes = [
@@ -409,11 +409,11 @@ The project mutation primitive — awaitable, preserves every `UseMutationConfig
 
 #### Shared hook, app binding
 
-The mechanics live in `@probo/relay` as `createUseMutation(useNotifier)` — a factory that wraps `react-relay`'s `useMutation` (promise wrapping, `onCompleted`/`onError` dispatch, `errorToast` semantics) but knows nothing about toasts or i18n. Each app binds it once to its own feedback stack via a `MutationNotifier` and re-exports the result as the canonical `useMutation`:
+The mechanics live in `@trustready/relay` as `createUseMutation(useNotifier)` — a factory that wraps `react-relay`'s `useMutation` (promise wrapping, `onCompleted`/`onError` dispatch, `errorToast` semantics) but knows nothing about toasts or i18n. Each app binds it once to its own feedback stack via a `MutationNotifier` and re-exports the result as the canonical `useMutation`:
 
 ```tsx
 // apps/compliance-portal/src/lib/relay/useMutation.ts — the only place feedback is wired
-import { createUseMutation, type MutationNotifier } from "@probo/relay";
+import { createUseMutation, type MutationNotifier } from "@trustready/relay";
 
 function useMutationNotifier(): MutationNotifier {
   const toast = Toast.useToastManager();
@@ -430,7 +430,7 @@ function useMutationNotifier(): MutationNotifier {
 export const useMutation = createUseMutation(useMutationNotifier);
 ```
 
-This keeps `@probo/relay` free of UI and i18n dependencies (the toast system, `react-i18next`, and `formatError` stay in the app), while the awaitable behavior is shared. Pass `MutationFeedback` (`successMessage`, `errorToast`) to control notifications without writing `onCompleted`/`onError` by hand.
+This keeps `@trustready/relay` free of UI and i18n dependencies (the toast system, `react-i18next`, and `formatError` stay in the app), while the awaitable behavior is shared. Pass `MutationFeedback` (`successMessage`, `errorToast`) to control notifications without writing `onCompleted`/`onError` by hand.
 
 #### Naming convention
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,12 +18,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { lazy } from "@probo/react-lazy";
+import { lazy } from "@trustready/react-lazy";
 import {
   type AppRoute,
   loaderFromQueryLoader,
   withQueryRef,
-} from "@probo/routes";
+} from "@trustready/routes";
 import { loadQuery } from "react-relay";
 
 import type { ProcessingActivityGraphDPIAListQuery } from "#/__generated__/core/ProcessingActivityGraphDPIAListQuery.graphql";

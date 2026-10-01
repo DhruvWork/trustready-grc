@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,19 +19,19 @@
 // SOFTWARE.
 
 import { ArchiveIcon, DotsThreeVerticalIcon, EnvelopeIcon, TrashIcon } from "@phosphor-icons/react";
-import { dateFormat } from "@probo/i18n";
-import { Avatar } from "@probo/ui/src/v2/Avatar/Avatar";
-import { Badge } from "@probo/ui/src/v2/Badge/Badge";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { Dropdown } from "@probo/ui/src/v2/Dropdown/Dropdown";
-import { DropdownItem } from "@probo/ui/src/v2/Dropdown/DropdownItem";
-import { DropdownPopup } from "@probo/ui/src/v2/Dropdown/DropdownPopup";
-import { DropdownTrigger } from "@probo/ui/src/v2/Dropdown/DropdownTrigger";
-import { IconButton } from "@probo/ui/src/v2/IconButton/IconButton";
-import { Link } from "@probo/ui/src/v2/Link/Link";
-import { Separator } from "@probo/ui/src/v2/Separator/Separator";
-import { Heading } from "@probo/ui/src/v2/typography/Heading";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { dateFormat } from "@trustready/i18n";
+import { Avatar } from "@trustready/ui/src/v2/Avatar/Avatar";
+import { Badge } from "@trustready/ui/src/v2/Badge/Badge";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { Dropdown } from "@trustready/ui/src/v2/Dropdown/Dropdown";
+import { DropdownItem } from "@trustready/ui/src/v2/Dropdown/DropdownItem";
+import { DropdownPopup } from "@trustready/ui/src/v2/Dropdown/DropdownPopup";
+import { DropdownTrigger } from "@trustready/ui/src/v2/Dropdown/DropdownTrigger";
+import { IconButton } from "@trustready/ui/src/v2/IconButton/IconButton";
+import { Link } from "@trustready/ui/src/v2/Link/Link";
+import { Separator } from "@trustready/ui/src/v2/Separator/Separator";
+import { Heading } from "@trustready/ui/src/v2/typography/Heading";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useFragment } from "react-relay";

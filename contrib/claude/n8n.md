@@ -1,6 +1,6 @@
 # n8n Node (`packages/n8n-node`)
 
-Community node package `@probo/n8n-nodes-probo` exposing the Probo API as n8n operations. One `Probo` node with many resources; each resource maps to a set of GraphQL operations against the Console or Connect API.
+Community node package `@trustready/n8n-nodes-probo` exposing the Probo API as n8n operations. One `Probo` node with many resources; each resource maps to a set of GraphQL operations against the Console or Connect API.
 
 ## Directory structure
 

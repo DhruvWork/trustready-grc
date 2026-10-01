@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,21 +19,21 @@
 // SOFTWARE.
 
 import { CheckIcon, WarningIcon } from "@phosphor-icons/react";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { Callout } from "@probo/ui/src/v2/Callout/Callout";
-import { Dialog } from "@probo/ui/src/v2/Dialog/Dialog";
-import { DialogBody } from "@probo/ui/src/v2/Dialog/DialogBody";
-import { DialogDescription } from "@probo/ui/src/v2/Dialog/DialogDescription";
-import { DialogFooter } from "@probo/ui/src/v2/Dialog/DialogFooter";
-import { DialogHeader } from "@probo/ui/src/v2/Dialog/DialogHeader";
-import { DialogPopup } from "@probo/ui/src/v2/Dialog/DialogPopup";
-import { DialogTitle } from "@probo/ui/src/v2/Dialog/DialogTitle";
-import { Field } from "@probo/ui/src/v2/form/Field";
-import { Textarea } from "@probo/ui/src/v2/form/Textarea";
-import { TextField } from "@probo/ui/src/v2/form/TextField";
-import { SegmentedControl } from "@probo/ui/src/v2/SegmentedControl/SegmentedControl";
-import { SegmentedControlItem } from "@probo/ui/src/v2/SegmentedControl/SegmentedControlItem";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { Callout } from "@trustready/ui/src/v2/Callout/Callout";
+import { Dialog } from "@trustready/ui/src/v2/Dialog/Dialog";
+import { DialogBody } from "@trustready/ui/src/v2/Dialog/DialogBody";
+import { DialogDescription } from "@trustready/ui/src/v2/Dialog/DialogDescription";
+import { DialogFooter } from "@trustready/ui/src/v2/Dialog/DialogFooter";
+import { DialogHeader } from "@trustready/ui/src/v2/Dialog/DialogHeader";
+import { DialogPopup } from "@trustready/ui/src/v2/Dialog/DialogPopup";
+import { DialogTitle } from "@trustready/ui/src/v2/Dialog/DialogTitle";
+import { Field } from "@trustready/ui/src/v2/form/Field";
+import { Textarea } from "@trustready/ui/src/v2/form/Textarea";
+import { TextField } from "@trustready/ui/src/v2/form/TextField";
+import { SegmentedControl } from "@trustready/ui/src/v2/SegmentedControl/SegmentedControl";
+import { SegmentedControlItem } from "@trustready/ui/src/v2/SegmentedControl/SegmentedControlItem";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { type FormEvent, useId, useState } from "react";
 import { useTranslation } from "react-i18next";
 

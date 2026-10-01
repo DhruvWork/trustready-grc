@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@ import {
   FullNameRequiredError,
   NDASignatureRequiredError,
   UnAuthenticatedError,
-} from "@probo/relay";
+} from "@trustready/relay";
 
 import { localizedPath, resolveUrlLocale, type UrlLocale } from "#/lib/i18n/locale";
 
@@ -100,7 +100,7 @@ export function gateRedirectPath(
   continueUrl: string,
   locale: UrlLocale = resolveUrlLocale(),
 ): string | null {
-  // Prefer instanceof; fall back to `name` so a duplicated @probo/relay copy
+  // Prefer instanceof; fall back to `name` so a duplicated @trustready/relay copy
   // (or a wrapped error that preserved the name) still redirects.
   if (isGateError(error, FullNameRequiredError, "FullNameRequiredError")) {
     return `${localizedPath(locale, "/full-name")}?continue=${encodeURIComponent(continueUrl)}`;

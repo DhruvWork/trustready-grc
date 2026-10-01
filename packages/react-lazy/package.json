@@ -1,5 +1,5 @@
 {
-  "name": "@probo/react-lazy",
+  "name": "@trustready/react-lazy",
   "version": "1.0.0",
   "description": "Enhanced React lazy loading with retries and error handling",
   "private": true,

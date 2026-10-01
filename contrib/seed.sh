@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright (c) 2026 Probo Inc <hello@probo.com>.
+# Copyright (c) 2026 TrustReady <hello@probo.com>.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 set -euo pipefail
 
-BASE_URL="${PROBO_SEED_URL:-http://localhost:8080}"
+BASE_URL="${TRUSTREADY_SEED_URL:-http://localhost:8080}"
 CONNECT_API="$BASE_URL/api/connect/v1/graphql"
 COOKIE_JAR=$(mktemp)
 trap 'rm -f "$COOKIE_JAR"' EXIT
@@ -77,7 +77,7 @@ wait_for_verified_sign_in() {
   echo "==> Confirm the email address before continuing..."
   echo "  A confirmation message was sent to $EMAIL."
   echo "  Open it and confirm the address. This script continues once sign-in succeeds."
-  echo "  Mailpit: ${PROBO_SEED_MAILPIT_URL:-http://localhost:8025}"
+  echo "  Mailpit: ${TRUSTREADY_SEED_MAILPIT_URL:-http://localhost:8025}"
 
   vars=$(jo input="$(jo email="$EMAIL" password="$PASSWORD")")
   deadline=$((SECONDS + 600))
@@ -218,9 +218,9 @@ resp=$(gql_connect '
   }
 ' "$vars")
 check_error "$resp" "createOAuth2AccessToken"
-PROBO_TOKEN=$(echo "$resp" | jq -r '.data.createOAuth2AccessToken.token')
-export PROBO_TOKEN
-export PROBO_HOST="$BASE_URL"
+TRUSTREADY_TOKEN=$(echo "$resp" | jq -r '.data.createOAuth2AccessToken.token')
+export TRUSTREADY_TOKEN
+export TRUSTREADY_HOST="$BASE_URL"
 echo "  Created OAuth access token"
 
 echo ""
@@ -1236,5 +1236,5 @@ echo "    8 people"
 echo "    8 devices (6 active, 1 pending, 1 revoked)"
 echo ""
 echo "  To use the CLI:"
-echo "    export PROBO_HOST=$BASE_URL"
-echo "    export PROBO_TOKEN=$PROBO_TOKEN"
+echo "    export TRUSTREADY_HOST=$BASE_URL"
+echo "    export TRUSTREADY_TOKEN=$TRUSTREADY_TOKEN"

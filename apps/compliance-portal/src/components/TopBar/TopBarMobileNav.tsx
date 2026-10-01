@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,19 +28,19 @@ import {
   SunIcon,
   XIcon,
 } from "@phosphor-icons/react";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { ButtonLink } from "@probo/ui/src/v2/Button/ButtonLink";
-import { useDisplayMode } from "@probo/ui/src/v2/displayMode/useDisplayMode";
-import { Drawer } from "@probo/ui/src/v2/Drawer/Drawer";
-import { DrawerBody } from "@probo/ui/src/v2/Drawer/DrawerBody";
-import { DrawerClose } from "@probo/ui/src/v2/Drawer/DrawerClose";
-import { DrawerFooter } from "@probo/ui/src/v2/Drawer/DrawerFooter";
-import { DrawerHeader } from "@probo/ui/src/v2/Drawer/DrawerHeader";
-import { DrawerPopup } from "@probo/ui/src/v2/Drawer/DrawerPopup";
-import { DrawerTitle } from "@probo/ui/src/v2/Drawer/DrawerTitle";
-import { DrawerTrigger } from "@probo/ui/src/v2/Drawer/DrawerTrigger";
-import { IconButton } from "@probo/ui/src/v2/IconButton/IconButton";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { ButtonLink } from "@trustready/ui/src/v2/Button/ButtonLink";
+import { useDisplayMode } from "@trustready/ui/src/v2/displayMode/useDisplayMode";
+import { Drawer } from "@trustready/ui/src/v2/Drawer/Drawer";
+import { DrawerBody } from "@trustready/ui/src/v2/Drawer/DrawerBody";
+import { DrawerClose } from "@trustready/ui/src/v2/Drawer/DrawerClose";
+import { DrawerFooter } from "@trustready/ui/src/v2/Drawer/DrawerFooter";
+import { DrawerHeader } from "@trustready/ui/src/v2/Drawer/DrawerHeader";
+import { DrawerPopup } from "@trustready/ui/src/v2/Drawer/DrawerPopup";
+import { DrawerTitle } from "@trustready/ui/src/v2/Drawer/DrawerTitle";
+import { DrawerTrigger } from "@trustready/ui/src/v2/Drawer/DrawerTrigger";
+import { IconButton } from "@trustready/ui/src/v2/IconButton/IconButton";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment } from "react-relay";

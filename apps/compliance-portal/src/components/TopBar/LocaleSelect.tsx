@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,10 +19,10 @@
 // SOFTWARE.
 
 import { GlobeIcon } from "@phosphor-icons/react";
-import { Select } from "@probo/ui/src/v2/Select/Select";
-import { SelectItem } from "@probo/ui/src/v2/Select/SelectItem";
-import { SelectPopup } from "@probo/ui/src/v2/Select/SelectPopup";
-import { SelectTrigger } from "@probo/ui/src/v2/Select/SelectTrigger";
+import { Select } from "@trustready/ui/src/v2/Select/Select";
+import { SelectItem } from "@trustready/ui/src/v2/Select/SelectItem";
+import { SelectPopup } from "@trustready/ui/src/v2/Select/SelectPopup";
+import { SelectTrigger } from "@trustready/ui/src/v2/Select/SelectTrigger";
 import type { RefObject } from "react";
 import { useTranslation } from "react-i18next";
 

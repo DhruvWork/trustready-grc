@@ -3,7 +3,7 @@ name: "Release skills"
 on:
   push:
     tags:
-      - "@probo/skills/v*"
+      - "@trustready/skills/v*"
 
 permissions:
   contents: "read"
@@ -37,7 +37,7 @@ jobs:
             echo "tag version ($TAG_VERSION) does not match package.json version ($PKG_VERSION)" >&2
             exit 1
           fi
-      - run: "npm --workspace @probo/skills run validate"
+      - run: "npm --workspace @trustready/skills run validate"
       - uses: "anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26" # v0.24.2
         with:
           path: ./packages/skills
@@ -61,8 +61,8 @@ jobs:
               done > checksums.txt
           rm -f "$PACKFILE"
           test -s checksums.txt
-      - run: "npm --workspace @probo/skills publish --access public --dry-run"
-      - run: "npm --workspace @probo/skills publish --access public"
+      - run: "npm --workspace @trustready/skills publish --access public --dry-run"
+      - run: "npm --workspace @trustready/skills publish --access public"
       - uses: "actions/attest-sbom@c604332985a26aa8cf1bdc465b92731239ec6b9e" # v4
         with:
           subject-path: "packages/skills/**"

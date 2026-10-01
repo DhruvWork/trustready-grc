@@ -1,10 +1,10 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "probo",
+  "name": "trustready-grc",
   "version": "0.3.2",
   "description": "Open-source compliance workflows powered by the Probo MCP API",
   "author": {
-    "name": "Probo Inc",
+    "name": "TrustReady",
     "email": "hello@probo.com",
     "url": "https://www.probo.com"
   },

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,11 +19,11 @@
 // SOFTWARE.
 
 import { TrashIcon, UserIcon } from "@phosphor-icons/react";
-import { RichEditor } from "@probo/ui";
-import { Avatar } from "@probo/ui/src/v2/Avatar/Avatar";
-import { ErrorBoundary } from "@probo/ui/src/v2/ErrorBoundary/ErrorBoundary";
-import { IconButton } from "@probo/ui/src/v2/IconButton/IconButton";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { RichEditor } from "@trustready/ui";
+import { Avatar } from "@trustready/ui/src/v2/Avatar/Avatar";
+import { ErrorBoundary } from "@trustready/ui/src/v2/ErrorBoundary/ErrorBoundary";
+import { IconButton } from "@trustready/ui/src/v2/IconButton/IconButton";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment } from "react-relay";

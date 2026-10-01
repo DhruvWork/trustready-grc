@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,12 +19,12 @@
 // SOFTWARE.
 
 import { HashIcon } from "@phosphor-icons/react";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { Link } from "@probo/ui/src/v2/Link/Link";
-import { SlackLogo } from "@probo/ui/src/v2/SlackLogo/SlackLogo";
-import { Code } from "@probo/ui/src/v2/typography/Code";
-import { Heading } from "@probo/ui/src/v2/typography/Heading";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { Link } from "@trustready/ui/src/v2/Link/Link";
+import { SlackLogo } from "@trustready/ui/src/v2/SlackLogo/SlackLogo";
+import { Code } from "@trustready/ui/src/v2/typography/Code";
+import { Heading } from "@trustready/ui/src/v2/typography/Heading";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { Trans, useTranslation } from "react-i18next";
 import { graphql, useFragment } from "react-relay";
 import { useParams } from "react-router";

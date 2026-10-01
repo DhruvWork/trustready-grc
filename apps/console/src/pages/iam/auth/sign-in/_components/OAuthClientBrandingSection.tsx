@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -12,9 +12,9 @@
 // OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 // PERFORMANCE OF THIS SOFTWARE.
 
-import { Avatar } from "@probo/ui/src/v2/Avatar/Avatar";
-import { Anchor } from "@probo/ui/src/v2/Link/Anchor";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Avatar } from "@trustready/ui/src/v2/Avatar/Avatar";
+import { Anchor } from "@trustready/ui/src/v2/Link/Anchor";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 
 type OAuthClientBrandingSectionProps = {
   name: string;

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@ import {
   Label,
   Option,
   PropertyRow,
-} from "@probo/ui";
+} from "@trustready/ui";
 import { type ReactNode } from "react";
 import { type Control, type FieldValues, type Path, useFormState } from "react-hook-form";
 import { useTranslation } from "react-i18next";

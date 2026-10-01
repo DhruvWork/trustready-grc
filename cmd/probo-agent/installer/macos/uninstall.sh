@@ -13,8 +13,8 @@
 
 set -u
 
-PROBO_DIR="/Library/Probo"
-BINARY="${PROBO_DIR}/probo-agent"
+TRUSTREADY_DIR="/Library/Probo"
+BINARY="${TRUSTREADY_DIR}/probo-agent"
 LEGACY_BINARY="/usr/local/bin/probo-agent"
 STATE_DIR="/var/lib/probo-agent"
 RUN_DIR="/var/run/probo-agent"
@@ -111,7 +111,7 @@ rm -rf \
 log "Removed Probo Agent.app (if present)"
 
 rm -f "${BINARY}" "${LEGACY_BINARY}"
-rmdir "${PROBO_DIR}" 2>/dev/null || true
+rmdir "${TRUSTREADY_DIR}" 2>/dev/null || true
 rm -rf "${STATE_DIR}" "${RUN_DIR}"
 rm -f \
   /var/log/probo-agent.log \

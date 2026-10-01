@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,15 +18,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { times } from "@probo/helpers";
+import { times } from "@trustready/helpers";
 import {
   IconArrowInbox,
   IconChevronLeft,
   IconChevronRight,
   IconPlusLarge,
   Spinner,
-} from "@probo/ui";
-import { IconMinusLarge } from "@probo/ui/src/Atoms/Icons/IconMinusLarge";
+} from "@trustready/ui";
+import { IconMinusLarge } from "@trustready/ui/src/Atoms/Icons/IconMinusLarge";
 // Vite `?url` import resolves to the bundled worker URL (string); the import-x
 // resolver doesn't understand the suffix, and `vite/client` types cover it.
 // eslint-disable-next-line import-x/default

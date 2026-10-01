@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react";
-import { formatError, type GraphQLError } from "@probo/helpers";
+import { formatError, type GraphQLError } from "@trustready/helpers";
 import {
   Badge,
   Button,
@@ -39,7 +39,7 @@ import {
   Tr,
   useConfirm,
   useToast,
-} from "@probo/ui";
+} from "@trustready/ui";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useFragment, useMutation } from "react-relay";

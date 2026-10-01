@@ -67,7 +67,7 @@ The full MCP specification is at [`pkg/server/api/mcp/v1/specification.yaml`](pk
 
 ### n8n node
 
-The [`@probo/n8n-nodes-probo`](packages/n8n-node/) community node brings Probo into n8n workflows for no-code automation of compliance tasks over the GraphQL API.
+The [`@trustready/n8n-nodes-probo`](packages/n8n-node/) community node brings Probo into n8n workflows for no-code automation of compliance tasks over the GraphQL API.
 
 ## Quick Start
 

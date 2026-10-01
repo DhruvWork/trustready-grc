@@ -1,17 +1,17 @@
 # Cookie banner examples
 
 Three Vite apps that each run a single banner instance. Shared configuration,
-debug, and event UI live in `@probo/example-cookie-banner-shared`.
+debug, and event UI live in `@trustready/example-cookie-banner-shared`.
 
 | App | Workspace | URL |
 | --- | --- | --- |
-| Themed | `@probo/example-cookie-banner-themed` | http://localhost:5180 |
-| Themed TCF | `@probo/example-cookie-banner-themed-tcf` | http://localhost:5181 |
-| Headless | `@probo/example-cookie-banner-headless` | http://localhost:5182 |
+| Themed | `@trustready/example-cookie-banner-themed` | http://localhost:5180 |
+| Themed TCF | `@trustready/example-cookie-banner-themed-tcf` | http://localhost:5181 |
+| Headless | `@trustready/example-cookie-banner-headless` | http://localhost:5182 |
 
 The themed TCF app is the IAB CMP validator path: it installs the `__tcfapi`
 stub before React boots, then calls `startTCF()` and `registerCookieBanner()`.
-The themed app never loads `@probo/cookie-banner-tcf`. The headless app only
+The themed app never loads `@trustready/cookie-banner-tcf`. The headless app only
 registers headless components.
 
 Banner ID, base URL, and GCM persist in each app's `localStorage` under
@@ -26,7 +26,7 @@ inlines them and the app compiles without the configuration form or
 The IAB-facing static app is the themed TCF build:
 
 ```bash
-npm -w @probo/example-cookie-banner-themed-tcf run build
+npm -w @trustready/example-cookie-banner-themed-tcf run build
 ```
 
 ## GitHub Pages
@@ -48,7 +48,7 @@ id compiles the playground form, which this workflow rejects.
 2. From the repo root:
 
 ```bash
-npm -w @probo/example-cookie-banner-themed run dev
-npm -w @probo/example-cookie-banner-themed-tcf run dev
-npm -w @probo/example-cookie-banner-headless run dev
+npm -w @trustready/example-cookie-banner-themed run dev
+npm -w @trustready/example-cookie-banner-themed-tcf run dev
+npm -w @trustready/example-cookie-banner-headless run dev
 ```

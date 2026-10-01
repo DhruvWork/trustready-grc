@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
 import {
   certifications,
   objectEntries,
-} from "@probo/helpers";
-import { usePageTitle } from "@probo/hooks";
+} from "@trustready/helpers";
+import { usePageTitle } from "@trustready/hooks";
 import {
   Badge,
   Button,
@@ -37,7 +37,7 @@ import {
   Th,
   Thead,
   Tr,
-} from "@probo/ui";
+} from "@trustready/ui";
 import { clsx } from "clsx";
 import type { ComponentProps, FocusEvent } from "react";
 import { useRef, useState } from "react";

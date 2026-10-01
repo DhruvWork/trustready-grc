@@ -104,7 +104,7 @@ Signed-off-by: John Doe <john.doe@example.org>
    bin/probod -cfg-file cfg/dev.yaml
 
    # In another terminal - start the frontend
-   npm -w @probo/console run dev
+   npm -w @trustready/console run dev
    ```
 
 The application should now be running at `http://localhost:5173`

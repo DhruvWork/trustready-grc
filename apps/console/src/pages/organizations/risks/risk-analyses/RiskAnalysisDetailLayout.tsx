@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { usePageTitle } from "@probo/hooks";
-import { dateFormat } from "@probo/i18n";
+import { usePageTitle } from "@trustready/hooks";
+import { dateFormat } from "@trustready/i18n";
 import {
   Button,
   Card,
@@ -28,7 +28,7 @@ import {
   PageHeader,
   TabLink,
   Tabs,
-} from "@probo/ui";
+} from "@trustready/ui";
 import { useTranslation } from "react-i18next";
 import {
   ConnectionHandler,

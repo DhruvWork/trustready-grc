@@ -1,5 +1,5 @@
 {
-  "name": "@probo/skills",
+  "name": "@trustready/skills",
   "version": "0.3.2",
   "description": "Multi-agent compliance skills for open-source GRC (Claude Code, Codex, OpenCode) powered by Probo MCP",
   "private": false,
@@ -9,7 +9,7 @@
     "prepublishOnly": "npm run validate"
   },
   "author": {
-    "name": "Probo Inc",
+    "name": "TrustReady",
     "email": "hello@probo.com"
   },
   "files": [

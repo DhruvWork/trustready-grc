@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 import { tv } from "tailwind-variants/lite";
 
 // Document list: category section chrome (title + description). The bordered
-// list surface and row layout live in @probo/ui List.
+// list surface and row layout live in @trustready/ui List.
 
 export const documentSection = tv({
   slots: {

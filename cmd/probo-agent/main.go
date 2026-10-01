@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -326,13 +326,13 @@ func newInstallCmd() *cobra.Command {
 			}
 
 			if enrollmentToken == "" {
-				if v := os.Getenv("PROBO_ENROLLMENT_TOKEN"); v != "" {
+				if v := os.Getenv("TRUSTREADY_ENROLLMENT_TOKEN"); v != "" {
 					enrollmentToken = v
 				}
 			}
 
 			if enrollmentToken == "" {
-				return errors.New("--enrollment-token (or PROBO_ENROLLMENT_TOKEN env var) is required")
+				return errors.New("--enrollment-token (or TRUSTREADY_ENROLLMENT_TOKEN env var) is required")
 			}
 
 			dir := resolveDir(cmd)

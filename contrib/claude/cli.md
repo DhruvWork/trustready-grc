@@ -223,7 +223,7 @@ f.IOStreams.ErrOut  // stderr — status messages, truncation info
 f.IOStreams.IsInteractive()  // true if TTY and not forced non-interactive
 ```
 
-Environment variables: `PROBO_NO_INTERACTIVE=1`, `CI=true`, `TERM=dumb` (non-interactive), `NO_COLOR` (disable color).
+Environment variables: `TRUSTREADY_NO_INTERACTIVE=1`, `CI=true`, `TERM=dumb` (non-interactive), `NO_COLOR` (disable color).
 
 ## OAuth device login (`prb auth login`)
 
@@ -253,7 +253,7 @@ bin/probod -cfg-file cfg/dev.yaml   # API + OAuth at http://localhost:8080
 bin/prb auth login --hostname http://localhost:8080
 ```
 
-Use `http://` explicitly — hosts without a scheme default to HTTPS. Config is stored under the OS user config dir (`prb/config.yaml`). Override with `PROBO_HOST` and `PROBO_TOKEN` for scripting; see `contrib/seed.sh` for a personal API key bootstrap.
+Use `http://` explicitly — hosts without a scheme default to HTTPS. Config is stored under the OS user config dir (`prb/config.yaml`). Override with `TRUSTREADY_HOST` and `TRUSTREADY_TOKEN` for scripting; see `contrib/seed.sh` for a personal API key bootstrap.
 
 ## New resource command checklist
 

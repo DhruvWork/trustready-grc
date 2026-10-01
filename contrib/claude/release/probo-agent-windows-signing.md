@@ -23,7 +23,7 @@ pages still say **Trusted Signing**. Same service (`Microsoft.CodeSigning`).
 | Azure subscription + billing | Pays for Artifact Signing (~Basic SKU) |
 | Resource provider `Microsoft.CodeSigning` | Enables the service on the subscription |
 | Artifact Signing account | Container for identity + certificate profile |
-| Organization **Public** identity validation | Publisher name on the certificate (Probo Inc) |
+| Organization **Public** identity validation | Publisher name on the certificate (TrustReady) |
 | Certificate profile (`PublicTrust`) | Profile the CI job signs with |
 | Entra app registration + service principal | Identity GitHub Actions assumes via OIDC |
 | Federated credential → GitHub Environment | No client secret; tag-triggered releases can sign |
@@ -111,12 +111,12 @@ older “Trusted Signing Identity Verifier” name).
 1. Open the Artifact Signing account → **Access control (IAM)**.
 2. **Add** → **Add role assignment**.
 3. Role: **Artifact Signing Identity Verifier**.
-4. Assign to your user (the human who will submit Probo Inc’s docs).
+4. Assign to your user (the human who will submit TrustReady’s docs).
 5. **Review + assign**.
 
 Without this role, **New identity** stays disabled.
 
-## 4. Organization public identity validation (Probo Inc)
+## 4. Organization public identity validation (TrustReady)
 
 This is the long pole (often **1–20 business days**). Do it before
 relying on a release tag.

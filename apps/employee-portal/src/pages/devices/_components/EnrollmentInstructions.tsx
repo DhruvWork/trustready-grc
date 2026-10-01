@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,13 +18,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Callout } from "@probo/ui/src/v2/Callout/Callout";
-import { Anchor } from "@probo/ui/src/v2/Link/Anchor";
-import { Tabs } from "@probo/ui/src/v2/Tabs/Tabs";
-import { TabsIndicator } from "@probo/ui/src/v2/Tabs/TabsIndicator";
-import { TabsList } from "@probo/ui/src/v2/Tabs/TabsList";
-import { TabsTab } from "@probo/ui/src/v2/Tabs/TabsTab";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Callout } from "@trustready/ui/src/v2/Callout/Callout";
+import { Anchor } from "@trustready/ui/src/v2/Link/Anchor";
+import { Tabs } from "@trustready/ui/src/v2/Tabs/Tabs";
+import { TabsIndicator } from "@trustready/ui/src/v2/Tabs/TabsIndicator";
+import { TabsList } from "@trustready/ui/src/v2/Tabs/TabsList";
+import { TabsTab } from "@trustready/ui/src/v2/Tabs/TabsTab";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,26 +19,26 @@
 // SOFTWARE.
 
 import { Form } from "@base-ui/react/form";
-import { RichEditor } from "@probo/ui";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { Dialog, type DialogProps } from "@probo/ui/src/v2/Dialog/Dialog";
-import { DialogBody } from "@probo/ui/src/v2/Dialog/DialogBody";
-import { DialogClose } from "@probo/ui/src/v2/Dialog/DialogClose";
-import { DialogFooter } from "@probo/ui/src/v2/Dialog/DialogFooter";
-import { DialogHeader } from "@probo/ui/src/v2/Dialog/DialogHeader";
-import { DialogPopup } from "@probo/ui/src/v2/Dialog/DialogPopup";
-import { DialogTitle } from "@probo/ui/src/v2/Dialog/DialogTitle";
-import { DialogTrigger } from "@probo/ui/src/v2/Dialog/DialogTrigger";
-import { ErrorBoundary } from "@probo/ui/src/v2/ErrorBoundary/ErrorBoundary";
-import { Field } from "@probo/ui/src/v2/form/Field";
-import { TextField } from "@probo/ui/src/v2/form/TextField";
-import { Select } from "@probo/ui/src/v2/Select/Select";
-import { SelectItem } from "@probo/ui/src/v2/Select/SelectItem";
-import { SelectLabel } from "@probo/ui/src/v2/Select/SelectLabel";
-import { SelectPopup } from "@probo/ui/src/v2/Select/SelectPopup";
-import { SelectSkeleton } from "@probo/ui/src/v2/Select/SelectSkeleton";
-import { SelectTrigger } from "@probo/ui/src/v2/Select/SelectTrigger";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { RichEditor } from "@trustready/ui";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { Dialog, type DialogProps } from "@trustready/ui/src/v2/Dialog/Dialog";
+import { DialogBody } from "@trustready/ui/src/v2/Dialog/DialogBody";
+import { DialogClose } from "@trustready/ui/src/v2/Dialog/DialogClose";
+import { DialogFooter } from "@trustready/ui/src/v2/Dialog/DialogFooter";
+import { DialogHeader } from "@trustready/ui/src/v2/Dialog/DialogHeader";
+import { DialogPopup } from "@trustready/ui/src/v2/Dialog/DialogPopup";
+import { DialogTitle } from "@trustready/ui/src/v2/Dialog/DialogTitle";
+import { DialogTrigger } from "@trustready/ui/src/v2/Dialog/DialogTrigger";
+import { ErrorBoundary } from "@trustready/ui/src/v2/ErrorBoundary/ErrorBoundary";
+import { Field } from "@trustready/ui/src/v2/form/Field";
+import { TextField } from "@trustready/ui/src/v2/form/TextField";
+import { Select } from "@trustready/ui/src/v2/Select/Select";
+import { SelectItem } from "@trustready/ui/src/v2/Select/SelectItem";
+import { SelectLabel } from "@trustready/ui/src/v2/Select/SelectLabel";
+import { SelectPopup } from "@trustready/ui/src/v2/Select/SelectPopup";
+import { SelectSkeleton } from "@trustready/ui/src/v2/Select/SelectSkeleton";
+import { SelectTrigger } from "@trustready/ui/src/v2/Select/SelectTrigger";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { type ReactElement, Suspense, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useLazyLoadQuery } from "react-relay";

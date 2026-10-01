@@ -173,7 +173,7 @@ bad field — instead of collapsing the whole page — two pieces cooperate:
 
    The compliance-portal wires this in its own
    [`apps/compliance-portal/src/lib/relay/fetch.ts`](../../apps/compliance-portal/src/lib/relay/fetch.ts)
-   (it does **not** use `@probo/relay`'s `makeFetchQuery`, which throws for the
+   (it does **not** use `@trustready/relay`'s `makeFetchQuery`, which throws for the
    whole operation on any known code).
 
 2. **`@throwOnFieldError` on the query/fragment that reads the field.** With the

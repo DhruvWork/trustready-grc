@@ -1,7 +1,7 @@
 # Release `probod` (server group)
 
-This track ships `probod`, `@probo/console`, `@probo/compliance-portal`,
-`@probo/employee-portal`, and `@probo/ui` together as the Docker image and
+This track ships `probod`, `@trustready/console`, `@trustready/compliance-portal`,
+`@trustready/employee-portal`, and `@trustready/ui` together as the Docker image and
 accompanying binary archive. They share the same version.
 
 After confirming commits below, follow the
@@ -29,8 +29,8 @@ If empty or non-user-facing only, do not release this track.
 ## Notes
 
 The changelog covers changes across every bundled component (`probod`,
-`@probo/console`, `@probo/compliance-portal`, `@probo/employee-portal`,
-`@probo/ui`).
+`@trustready/console`, `@trustready/compliance-portal`, `@trustready/employee-portal`,
+`@trustready/ui`).
 
 CI builds the frontends and Go binaries, builds and pushes the
 multi-arch image to `artifact.probo.inc/probo/probo:v<version>` (and

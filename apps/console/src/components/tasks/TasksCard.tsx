@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,17 +19,17 @@
 // SOFTWARE.
 
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
-import { formatError } from "@probo/helpers";
-import { useToast } from "@probo/ui";
-import { Badge } from "@probo/ui/src/v2/Badge/Badge";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { TextField } from "@probo/ui/src/v2/form/TextField";
-import { Select } from "@probo/ui/src/v2/Select/Select";
-import { SelectItem } from "@probo/ui/src/v2/Select/SelectItem";
-import { SelectPopup } from "@probo/ui/src/v2/Select/SelectPopup";
-import { SelectTrigger } from "@probo/ui/src/v2/Select/SelectTrigger";
-import { TooltipProvider } from "@probo/ui/src/v2/Tooltip/TooltipProvider";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { formatError } from "@trustready/helpers";
+import { useToast } from "@trustready/ui";
+import { Badge } from "@trustready/ui/src/v2/Badge/Badge";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { TextField } from "@trustready/ui/src/v2/form/TextField";
+import { Select } from "@trustready/ui/src/v2/Select/Select";
+import { SelectItem } from "@trustready/ui/src/v2/Select/SelectItem";
+import { SelectPopup } from "@trustready/ui/src/v2/Select/SelectPopup";
+import { SelectTrigger } from "@trustready/ui/src/v2/Select/SelectTrigger";
+import { TooltipProvider } from "@trustready/ui/src/v2/Tooltip/TooltipProvider";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { Fragment, type ReactNode, useEffect, useRef, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import {

@@ -1,6 +1,6 @@
-# UI system (`@probo/ui` v2 kit)
+# UI system (`@trustready/ui` v2 kit)
 
-Shared React UI for Probo apps lives in the **`@probo/ui`** workspace package ([`packages/ui`](../../packages/ui)). The **v2 kit** ([`packages/ui/src/v2`](../../packages/ui/src/v2)) is the target system: a flat set of components styled on top of a headless primitive library, consuming the Radix-scale v2 theme. This document describes how to build and style those components.
+Shared React UI for Probo apps lives in the **`@trustready/ui`** workspace package ([`packages/ui`](../../packages/ui)). The **v2 kit** ([`packages/ui/src/v2`](../../packages/ui/src/v2)) is the target system: a flat set of components styled on top of a headless primitive library, consuming the Radix-scale v2 theme. This document describes how to build and style those components.
 
 These rules are the **source of truth**. The legacy tree (`Atoms/`, `Molecules/`, `Layouts/`, `clsx`-mixed `className`, imperative `DialogRef`) is non-compliant code to migrate, not precedent.
 
@@ -18,7 +18,7 @@ These rules are the **source of truth**. The legacy tree (`Atoms/`, `Molecules/`
 
 | Item | Convention |
 |------|------------|
-| Package | **`@probo/ui`** — v2 components under `src/v2`. Apps opt into v2 by importing the v2 theme (see [`v2-tokens.md`](v2-tokens.md)). |
+| Package | **`@trustready/ui`** — v2 components under `src/v2`. Apps opt into v2 by importing the v2 theme (see [`v2-tokens.md`](v2-tokens.md)). |
 | Styling | **Tailwind v4** with the Radix-scale tokens (`bg-sand-3`, `text-sand-12`, `rounded-3`, `text-4`, …). |
 | Variants API | **`tailwind-variants/lite`** only — `import { tv } from "tailwind-variants/lite"`. The `/lite` entrypoint ships **without `tailwind-merge`**, which is required: the numbered scales (`text-1…9`, `rounded-1…6`, `shadow-1…6`, `z-1…6`) collide with the color/utility namespaces and tailwind-merge would silently drop the scale class (e.g. `text-3` next to `text-sand-11`). The legacy v1 kit stays on `tailwind-variants` (with merge). |
 | Class composition | **Do not use `clsx` or `tailwind-merge`.** All conditional styling goes through `tv` variants and slots. |
@@ -276,9 +276,9 @@ export function Text(props: TextProps) {
 Icons come from two sources, in this order of preference:
 
 1. **`@phosphor-icons/react`** — the default icon library. Import the specific icon directly: `import { CookieIcon } from "@phosphor-icons/react"`. Prefer phosphor whenever it has the icon you need.
-2. **`@probo/ui` `Icon*` set** — curated in-house icons. Use these only when phosphor has no suitable equivalent or you need a bespoke Probo-branded icon.
+2. **`@trustready/ui` `Icon*` set** — curated in-house icons. Use these only when phosphor has no suitable equivalent or you need a bespoke Probo-branded icon.
 
-**Never use emoji characters (🍪, ✅, ⚠️, …) as icons.** Emojis render inconsistently, don't inherit `currentColor`, and can't be sized like an SVG. If neither source has what you need, add the icon to `@probo/ui`.
+**Never use emoji characters (🍪, ✅, ⚠️, …) as icons.** Emojis render inconsistently, don't inherit `currentColor`, and can't be sized like an SVG. If neither source has what you need, add the icon to `@trustready/ui`.
 
 ### Phosphor import style
 
@@ -430,7 +430,7 @@ export function ImageCardSkeleton() {
 
 ```tsx
 // Bad — skeleton nested on a namespace object (pulls the full interactive module in)
-import { ImageCard } from "@probo/ui";
+import { ImageCard } from "@trustready/ui";
 <ImageCard.Skeleton />
 
 // Bad — unrelated name / missing pair
@@ -482,7 +482,7 @@ export function ImageCardShell({ image, text }: { image: ReactNode; text: ReactN
 
 ```tsx
 // ImageCard/ImageCardRoot.tsx — Root owns logic; Shell receives region nodes as props
-import { Image, Text } from "@probo/ui";
+import { Image, Text } from "@trustready/ui";
 import { ImageCardShell } from "./ImageCardShell";
 
 export function ImageCardRoot({ image, text }: { image: ReactNode; text: ReactNode }) {
@@ -518,7 +518,7 @@ The kit exposes a styled **`Toaster`** (a `Toast.Portal` + `Toast.Viewport` rend
 ```tsx
 // app root — Base UI provider + the kit's styled viewport, mounted once
 import { Toast } from "@base-ui/react/toast";
-import { Toaster } from "@probo/ui";
+import { Toaster } from "@trustready/ui";
 
 <Toast.Provider>
   <App />

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,9 +18,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { usePageTitle } from "@probo/hooks";
-import { dateFormat, humanizeSeconds } from "@probo/i18n";
-import { Badge, Card, PageHeader, PropertyRow } from "@probo/ui";
+import { usePageTitle } from "@trustready/hooks";
+import { dateFormat, humanizeSeconds } from "@trustready/i18n";
+import { Badge, Card, PageHeader, PropertyRow } from "@trustready/ui";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, type PreloadedQuery, usePreloadedQuery } from "react-relay";

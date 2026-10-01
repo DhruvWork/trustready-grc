@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,9 +19,9 @@
 // SOFTWARE.
 
 const DEFAULT_IIFE
-  = "https://cdn.jsdelivr.net/npm/@probo/cookie-banner/dist/cookie-banner.iife.js";
+  = "https://cdn.jsdelivr.net/npm/@trustready/cookie-banner/dist/cookie-banner.iife.js";
 const TCF_IIFE
-  = "https://cdn.jsdelivr.net/npm/@probo/cookie-banner-tcf/dist/cookie-banner-tcf.iife.js";
+  = "https://cdn.jsdelivr.net/npm/@trustready/cookie-banner-tcf/dist/cookie-banner-tcf.iife.js";
 
 export function cookieBannerEmbedSnippet(input: {
   bannerId: string;

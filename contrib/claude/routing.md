@@ -1,6 +1,6 @@
 # Routing, navigation, and auth
 
-Probo frontends route with [React Router](https://reactrouter.com/) (`react-router` v8), wrapped by the **`@probo/routes`** helpers and lazy-loaded with **`@probo/react-lazy`**. This guide covers how routes are declared, how to navigate and read params, how to use the URL as state, and how authenticated/protected routes are composed. Folder placement of route files is covered in [`app-arborescence.md`](app-arborescence.md); this guide is about the routing API itself.
+Probo frontends route with [React Router](https://reactrouter.com/) (`react-router` v8), wrapped by the **`@trustready/routes`** helpers and lazy-loaded with **`@trustready/react-lazy`**. This guide covers how routes are declared, how to navigate and read params, how to use the URL as state, and how authenticated/protected routes are composed. Folder placement of route files is covered in [`app-arborescence.md`](app-arborescence.md); this guide is about the routing API itself.
 
 ## Related guides
 
@@ -17,8 +17,8 @@ Routes are declared as `AppRoute[]` and converted with `routeFromAppRoute` befor
 
 ```ts
 // routes.ts — one per resource folder (see app-arborescence.md)
-import { lazy } from "@probo/react-lazy";
-import { type AppRoute } from "@probo/routes";
+import { lazy } from "@trustready/react-lazy";
+import { type AppRoute } from "@trustready/routes";
 
 import { MeasuresPageSkeleton } from "./MeasuresPageSkeleton";
 
@@ -41,7 +41,7 @@ export const measureRoutes = [
 The app root spreads each resource's routes and maps them once:
 
 ```tsx
-import { routeFromAppRoute } from "@probo/routes";
+import { routeFromAppRoute } from "@trustready/routes";
 import { measureRoutes } from "./pages/organizations/measures/routes";
 
 const routes = [
@@ -53,7 +53,7 @@ export const router = createBrowserRouter(routes.map(routeFromAppRoute));
 
 Rules:
 - Routes declare only `path`, `Fallback`, `Component` (a lazy loader), `ErrorBoundary`, and `children` — **no Relay logic in the route object** (that lives in the `*Loader`; see [`relay.md`](relay.md)).
-- Use `lazy()` from `@probo/react-lazy` for the `Component` so every page is code-split.
+- Use `lazy()` from `@trustready/react-lazy` for the `Component` so every page is code-split.
 - `Fallback` is the route-level skeleton; reuse the page's `*Skeleton`.
 
 ## Navigation

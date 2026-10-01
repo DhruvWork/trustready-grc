@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,8 @@ import {
   acceptSpreadsheet,
   acceptText,
   getCompliancePortalVisibilityOptions,
-} from "@probo/helpers";
-import { Badge, Button, Dialog, DialogContent, DialogFooter, type DialogRef, Dropzone, Field, Option, Spinner } from "@probo/ui";
+} from "@trustready/helpers";
+import { Badge, Button, Dialog, DialogContent, DialogFooter, type DialogRef, Dropzone, Field, Option, Spinner } from "@trustready/ui";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { type DataID, graphql } from "relay-runtime";

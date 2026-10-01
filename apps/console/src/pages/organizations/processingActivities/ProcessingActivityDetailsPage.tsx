@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { formatError, type GraphQLError } from "@probo/helpers";
+import { formatError, type GraphQLError } from "@trustready/helpers";
 import {
   formatDatetime,
   toDateInput,
-} from "@probo/helpers";
+} from "@trustready/helpers";
 import {
   ActionDropdown,
   Button,
@@ -38,7 +38,7 @@ import {
   Tabs,
   Textarea,
   useToast,
-} from "@probo/ui";
+} from "@trustready/ui";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

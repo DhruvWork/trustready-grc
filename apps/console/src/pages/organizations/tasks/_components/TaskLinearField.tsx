@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { ErrorBoundary } from "@probo/ui/src/v2/ErrorBoundary/ErrorBoundary";
-import { Anchor } from "@probo/ui/src/v2/Link/Anchor";
-import { SelectSkeleton } from "@probo/ui/src/v2/Select/SelectSkeleton";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { ErrorBoundary } from "@trustready/ui/src/v2/ErrorBoundary/ErrorBoundary";
+import { Anchor } from "@trustready/ui/src/v2/Link/Anchor";
+import { SelectSkeleton } from "@trustready/ui/src/v2/Select/SelectSkeleton";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { type ErrorInfo, type ReactNode, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment, useLazyLoadQuery } from "react-relay";

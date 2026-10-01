@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,16 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { peopleRoles } from "@probo/helpers";
-import { Avatar } from "@probo/ui/src/v2/Avatar/Avatar";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { Field } from "@probo/ui/src/v2/form/Field";
-import { TextField } from "@probo/ui/src/v2/form/TextField";
-import { Select } from "@probo/ui/src/v2/Select/Select";
-import { SelectItem } from "@probo/ui/src/v2/Select/SelectItem";
-import { SelectPopup } from "@probo/ui/src/v2/Select/SelectPopup";
-import { SelectTrigger } from "@probo/ui/src/v2/Select/SelectTrigger";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { peopleRoles } from "@trustready/helpers";
+import { Avatar } from "@trustready/ui/src/v2/Avatar/Avatar";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { Field } from "@trustready/ui/src/v2/form/Field";
+import { TextField } from "@trustready/ui/src/v2/form/TextField";
+import { Select } from "@trustready/ui/src/v2/Select/Select";
+import { SelectItem } from "@trustready/ui/src/v2/Select/SelectItem";
+import { SelectPopup } from "@trustready/ui/src/v2/Select/SelectPopup";
+import { SelectTrigger } from "@trustready/ui/src/v2/Select/SelectTrigger";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useFragment } from "react-relay";

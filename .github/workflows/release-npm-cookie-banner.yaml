@@ -3,7 +3,7 @@ name: "Release cookie-banner"
 on:
   push:
     tags:
-      - "@probo/cookie-banner/v*"
+      - "@trustready/cookie-banner/v*"
 
 permissions:
   contents: "read"
@@ -37,7 +37,7 @@ jobs:
             echo "tag version ($TAG_VERSION) does not match package.json version ($PKG_VERSION)" >&2
             exit 1
           fi
-      - run: "npm --workspace @probo/cookie-banner run build"
+      - run: "npm --workspace @trustready/cookie-banner run build"
       - uses: "anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26" # v0.24.2
         with:
           path: ./packages/cookie-banner
@@ -54,8 +54,8 @@ jobs:
           find . -type f | while read file; do
             echo "$(sha256sum "$file" | head -c 64)  $file"
           done > ../checksums.txt
-      - run: "npm --workspace @probo/cookie-banner publish --access public --dry-run"
-      - run: "npm --workspace @probo/cookie-banner publish --access public"
+      - run: "npm --workspace @trustready/cookie-banner publish --access public --dry-run"
+      - run: "npm --workspace @trustready/cookie-banner publish --access public"
       - uses: "actions/attest-sbom@c604332985a26aa8cf1bdc465b92731239ec6b9e" # v4
         with:
           subject-path: "packages/cookie-banner/dist/**"

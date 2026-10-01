@@ -1,4 +1,4 @@
-# @probo/n8n-nodes-probo
+# @trustready/n8n-nodes-probo
 
 n8n community node package for the [Probo](https://www.probo.com) compliance platform. Automate compliance workflows — manage controls, documents, risks, vendors, cookie banners, and more — over the Probo GraphQL API.
 
@@ -26,10 +26,10 @@ Install the package from npm on your self-hosted n8n instance. Only users with t
 3. Enter the npm package name:
 
    ```
-   @probo/n8n-nodes-probo
+   @trustready/n8n-nodes-probo
    ```
 
-   To pin a specific version, append it (for example `@probo/n8n-nodes-probo@0.199.0`).
+   To pin a specific version, append it (for example `@trustready/n8n-nodes-probo@0.199.0`).
 
 4. Accept the community node risk notice and click **Install**.
 5. Restart n8n if the new nodes do not appear in the node palette immediately.
@@ -43,7 +43,7 @@ If you run n8n in Docker or queue mode, you can install the package manually:
 ```bash
 mkdir -p ~/.n8n/nodes
 cd ~/.n8n/nodes
-npm install @probo/n8n-nodes-probo
+npm install @trustready/n8n-nodes-probo
 ```
 
 Restart n8n after installation. See the [manual installation guide](https://docs.n8n.io/integrations/community-nodes/installation/manual-install/) for upgrade and downgrade steps.
@@ -138,7 +138,7 @@ Use the **Execute** resource to run custom GraphQL queries or mutations when a d
 
 - [Probo documentation](https://www.probo.com/docs)
 - [Probo n8n authentication](https://www.probo.com/docs/api/n8n/authentication)
-- [Package on npm](https://www.npmjs.com/package/@probo/n8n-nodes-probo)
+- [Package on npm](https://www.npmjs.com/package/@trustready/n8n-nodes-probo)
 - [Source code](https://github.com/getprobo/probo/tree/main/packages/n8n-node)
 - [Report an issue](https://github.com/getprobo/probo/issues)
 

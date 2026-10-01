@@ -1,6 +1,6 @@
 # Agent skills (`packages/skills`)
 
-npm package [`@probo/skills`](../../packages/skills) ships multi-agent
+npm package [`@trustready/skills`](../../packages/skills) ships multi-agent
 compliance skills and agent plugin wiring powered by the Probo MCP API. It is an
 [Agent Plugins 1.0.0](https://agent-plugins.org/) package, and also carries
 client-specific manifests for **Claude Code**, **Codex**, **OpenCode**, and
@@ -27,7 +27,7 @@ Individual capabilities are namespaced under `probo`:
 - Commands: `/probo:<command-name>` (e.g. `/probo:access-review`,
   `/probo:missing-signatures`)
 
-Published to npm as `@probo/skills`. Agent-specific manifests (`.claude-plugin/`,
+Published to npm as `@trustready/skills`. Agent-specific manifests (`.claude-plugin/`,
 `.codex-plugin/`) ship inside the same package.
 
 ## Directory structure
@@ -89,7 +89,7 @@ Claude Code validates its own manifest strictly. Common pitfalls:
 | `bugs` | string URL | **Not** the npm-style `{ url }` object |
 | `version` | string | Must match `package.json`; validation enforces it |
 
-Run `npm --workspace @probo/skills run validate` before publishing.
+Run `npm --workspace @trustready/skills run validate` before publishing.
 
 ## Probo MCP configuration
 
@@ -119,7 +119,7 @@ Claude Code from starting the OAuth flow.
 3. Validate and test:
 
 ```bash
-npm --workspace @probo/skills run validate
+npm --workspace @trustready/skills run validate
 claude --plugin-dir ./packages/skills
 /probo:<name>
 ```
@@ -145,13 +145,13 @@ OpenCode load the same workflow. Reference docs live under
 
 ## Distribution
 
-Published to npm as `@probo/skills`. Claude marketplace entry:
+Published to npm as `@trustready/skills`. Claude marketplace entry:
 
 ```json
 {
   "source": {
     "source": "npm",
-    "package": "@probo/skills"
+    "package": "@trustready/skills"
   }
 }
 ```

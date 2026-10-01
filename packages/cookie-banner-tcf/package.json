@@ -1,5 +1,5 @@
 {
-  "name": "@probo/cookie-banner-tcf",
+  "name": "@trustready/cookie-banner-tcf",
   "version": "0.1.0",
   "description": "IAB TCF 2.3 addon for the Probo cookie consent banner",
   "type": "module",
@@ -20,7 +20,7 @@
     "test:watch": "vitest"
   },
   "author": {
-    "name": "Probo Inc",
+    "name": "TrustReady",
     "email": "hello@probo.com"
   },
   "files": [
@@ -48,14 +48,14 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@probo/cookie-banner": ">=0.18.0"
+    "@trustready/cookie-banner": ">=0.18.0"
   },
   "dependencies": {
     "@iabtechlabtcf/cmpapi": "1.5.22",
     "@iabtechlabtcf/core": "1.5.22"
   },
   "devDependencies": {
-    "@probo/cookie-banner": "*",
+    "@trustready/cookie-banner": "*",
     "esbuild": "^0.28.2",
     "typescript": "6.0.2",
     "vitest": "^4.1.11"

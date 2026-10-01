@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,19 +19,19 @@
 // SOFTWARE.
 
 import { WarningCircleIcon } from "@phosphor-icons/react";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { ButtonAnchor } from "@probo/ui/src/v2/Button/ButtonAnchor";
-import { Callout } from "@probo/ui/src/v2/Callout/Callout";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { Field } from "@probo/ui/src/v2/form/Field";
-import { Select } from "@probo/ui/src/v2/Select/Select";
-import { SelectItem } from "@probo/ui/src/v2/Select/SelectItem";
-import { SelectPopup } from "@probo/ui/src/v2/Select/SelectPopup";
-import { SelectTrigger } from "@probo/ui/src/v2/Select/SelectTrigger";
-import { SlackLogo } from "@probo/ui/src/v2/SlackLogo/SlackLogo";
-import { Code } from "@probo/ui/src/v2/typography/Code";
-import { Heading } from "@probo/ui/src/v2/typography/Heading";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { ButtonAnchor } from "@trustready/ui/src/v2/Button/ButtonAnchor";
+import { Callout } from "@trustready/ui/src/v2/Callout/Callout";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { Field } from "@trustready/ui/src/v2/form/Field";
+import { Select } from "@trustready/ui/src/v2/Select/Select";
+import { SelectItem } from "@trustready/ui/src/v2/Select/SelectItem";
+import { SelectPopup } from "@trustready/ui/src/v2/Select/SelectPopup";
+import { SelectTrigger } from "@trustready/ui/src/v2/Select/SelectTrigger";
+import { SlackLogo } from "@trustready/ui/src/v2/SlackLogo/SlackLogo";
+import { Code } from "@trustready/ui/src/v2/typography/Code";
+import { Heading } from "@trustready/ui/src/v2/typography/Heading";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useState, useTransition } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useRefetchableFragment } from "react-relay";

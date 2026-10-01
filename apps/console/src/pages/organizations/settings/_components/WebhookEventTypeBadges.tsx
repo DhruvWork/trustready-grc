@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Badge } from "@probo/ui/src/v2/Badge/Badge";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { Popover } from "@probo/ui/src/v2/Popover/Popover";
-import { PopoverPopup } from "@probo/ui/src/v2/Popover/PopoverPopup";
-import { PopoverTrigger } from "@probo/ui/src/v2/Popover/PopoverTrigger";
+import { Badge } from "@trustready/ui/src/v2/Badge/Badge";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { Popover } from "@trustready/ui/src/v2/Popover/Popover";
+import { PopoverPopup } from "@trustready/ui/src/v2/Popover/PopoverPopup";
+import { PopoverTrigger } from "@trustready/ui/src/v2/Popover/PopoverTrigger";
 import { useTranslation } from "react-i18next";
 
 import { webhookEventTypeLabel } from "../_lib/webhookEventTypes";

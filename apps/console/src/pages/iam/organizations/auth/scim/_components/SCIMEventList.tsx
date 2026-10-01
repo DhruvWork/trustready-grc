@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,19 +19,19 @@
 // SOFTWARE.
 
 import { CaretDownIcon, CopyIcon } from "@phosphor-icons/react";
-import { dateTimeFormat } from "@probo/i18n";
-import { useToast } from "@probo/ui";
-import { Badge } from "@probo/ui/src/v2/Badge/Badge";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { Collapsible } from "@probo/ui/src/v2/Collapsible/Collapsible";
-import { CollapsiblePanel } from "@probo/ui/src/v2/Collapsible/CollapsiblePanel";
-import { CollapsibleTrigger } from "@probo/ui/src/v2/Collapsible/CollapsibleTrigger";
-import { IconButton } from "@probo/ui/src/v2/IconButton/IconButton";
-import { List } from "@probo/ui/src/v2/List/List";
-import { ListItem } from "@probo/ui/src/v2/List/ListItem";
-import { Pagination } from "@probo/ui/src/v2/Pagination/Pagination";
-import { Code } from "@probo/ui/src/v2/typography/Code";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { dateTimeFormat } from "@trustready/i18n";
+import { useToast } from "@trustready/ui";
+import { Badge } from "@trustready/ui/src/v2/Badge/Badge";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { Collapsible } from "@trustready/ui/src/v2/Collapsible/Collapsible";
+import { CollapsiblePanel } from "@trustready/ui/src/v2/Collapsible/CollapsiblePanel";
+import { CollapsibleTrigger } from "@trustready/ui/src/v2/Collapsible/CollapsibleTrigger";
+import { IconButton } from "@trustready/ui/src/v2/IconButton/IconButton";
+import { List } from "@trustready/ui/src/v2/List/List";
+import { ListItem } from "@trustready/ui/src/v2/List/ListItem";
+import { Pagination } from "@trustready/ui/src/v2/Pagination/Pagination";
+import { Code } from "@trustready/ui/src/v2/typography/Code";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { graphql, useRefetchableFragment } from "react-relay";

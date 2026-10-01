@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -81,7 +81,7 @@ func DefaultPresenterConfig(baseURL string) PresenterConfig {
 		SenderCompanyName:               "Probo",
 		SenderCompanyWebsiteURL:         "https://www.probo.com",
 		SenderCompanyLogoPath:           brand.StaticPath(brand.SenderCompanyLogo),
-		SenderCompanyHeadquarterAddress: "Probo Inc, 490 Post St, STE 640, San Francisco, CA, 94102, US",
+		SenderCompanyHeadquarterAddress: "TrustReady, 490 Post St, STE 640, San Francisco, CA, 94102, US",
 	}
 }
 

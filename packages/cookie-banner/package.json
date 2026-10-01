@@ -1,5 +1,5 @@
 {
-  "name": "@probo/cookie-banner",
+  "name": "@trustready/cookie-banner",
   "version": "0.19.0",
   "description": "Probo cookie consent banner SDK",
   "type": "module",
@@ -30,7 +30,7 @@
     "test:watch": "vitest"
   },
   "author": {
-    "name": "Probo Inc",
+    "name": "TrustReady",
     "email": "hello@probo.com"
   },
   "files": [

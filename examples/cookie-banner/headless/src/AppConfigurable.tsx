@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ import {
   resolveBannerText,
   resolveLayout,
   type BannerConfig,
-} from "@probo/cookie-banner/headless";
+} from "@trustready/cookie-banner/headless";
 import {
   ConfigForm,
   DebugPanel,
@@ -35,7 +35,7 @@ import {
   isValidBannerApiBaseUrl,
   useConfig,
   useEventLog,
-} from "@probo/example-cookie-banner-shared";
+} from "@trustready/example-cookie-banner-shared";
 import { headlessRootHTML } from "./markup";
 
 const headlessLogger = getExampleLogger("headless");
@@ -125,7 +125,7 @@ export function App() {
 
   return (
     <ExampleShell
-      title="@probo/cookie-banner — headless"
+      title="@trustready/cookie-banner — headless"
       description={
         <>
           Raw headless elements with no themed styling and no TCF. Uses{" "}

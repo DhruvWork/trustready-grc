@@ -313,16 +313,16 @@ jobs:
         run: |
           TAG="${GITHUB_REF_NAME}"
           cp cmd/probo-agent/installer/install.sh archives/install.sh
-          sed -i "s|^RELEASE_TAG=\"__PROBO_AGENT_RELEASE_TAG__\"|RELEASE_TAG=\"${TAG}\"|" archives/install.sh
+          sed -i "s|^RELEASE_TAG=\"__TRUSTREADY_AGENT_RELEASE_TAG__\"|RELEASE_TAG=\"${TAG}\"|" archives/install.sh
           grep 'probo-agent_.*\.tar\.gz' archives/checksums.txt > archives/probo-agent-checksums.txt
           awk '
-            /# __PROBO_AGENT_CHECKSUMS_BEGIN__/ {
+            /# __TRUSTREADY_AGENT_CHECKSUMS_BEGIN__/ {
               print
               while ((getline line < "archives/probo-agent-checksums.txt") > 0) print line
               skip = 1
               next
             }
-            /# __PROBO_AGENT_CHECKSUMS_END__/ {
+            /# __TRUSTREADY_AGENT_CHECKSUMS_END__/ {
               skip = 0
               print
               next
@@ -330,7 +330,7 @@ jobs:
             !skip { print }
             END {
               if (skip) {
-                print "install.sh injection failed: missing # __PROBO_AGENT_CHECKSUMS_END__ marker" > "/dev/stderr"
+                print "install.sh injection failed: missing # __TRUSTREADY_AGENT_CHECKSUMS_END__ marker" > "/dev/stderr"
                 exit 1
               }
             }

@@ -1,4 +1,4 @@
-# @probo/cookie-banner
+# @trustready/cookie-banner
 
 A lightweight, dependency-free cookie consent banner built on Web Components. Bundle it with your app as an ES module, use it headless with full UI control, or drop it in with a single script tag. Works with any framework or plain HTML.
 
@@ -14,7 +14,7 @@ No bundler required — add a `<script>` tag and a settings link in the header o
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/@probo/cookie-banner/dist/cookie-banner.iife.js"
+  src="https://cdn.jsdelivr.net/npm/@trustready/cookie-banner/dist/cookie-banner.iife.js"
   data-banner-id="YOUR_BANNER_ID"
   data-base-url="https://your-probo-instance.com/api/cookie-banner/v1/"
   data-position="bottom-left"
@@ -31,11 +31,11 @@ This renders a fully styled consent dialog. Place `<probo-settings-link>` in you
 For bundled applications (React, Vue, Svelte, Next.js, etc.):
 
 ```bash
-npm install @probo/cookie-banner
+npm install @trustready/cookie-banner
 ```
 
 ```js
-import { registerCookieBanner } from "@probo/cookie-banner";
+import { registerCookieBanner } from "@trustready/cookie-banner";
 
 registerCookieBanner();
 ```
@@ -58,7 +58,7 @@ See [Theming](https://www.probo.com/docs/product/cookie-banner/theming) to custo
 For complete control over the consent UI, use the unstyled Web Component building blocks:
 
 ```js
-import { registerComponents } from "@probo/cookie-banner/headless";
+import { registerComponents } from "@trustready/cookie-banner/headless";
 
 registerComponents();
 ```
@@ -153,7 +153,7 @@ The attribute accepts `"true"`/`"false"`; any other value logs a warning and kee
 
 Full documentation is available at **https://www.probo.com/docs/product/cookie-banner/overview**
 
-IAB TCF 2.3 support lives in [`@probo/cookie-banner-tcf`](../cookie-banner-tcf).
+IAB TCF 2.3 support lives in [`@trustready/cookie-banner-tcf`](../cookie-banner-tcf).
 
 ## License
 

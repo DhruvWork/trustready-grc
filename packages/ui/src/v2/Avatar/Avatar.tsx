@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import { Avatar as BaseAvatar } from "@base-ui/react/avatar";
-import { avatarColor, avatarInitial } from "@probo/helpers";
+import { avatarColor, avatarInitial } from "@trustready/helpers";
 import type { ComponentProps, ReactNode } from "react";
 import type { VariantProps } from "tailwind-variants/lite";
 

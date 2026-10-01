@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,10 +19,10 @@
 // SOFTWARE.
 
 import { CaretDownIcon, PlusIcon } from "@phosphor-icons/react";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { DropdownItem } from "@probo/ui/src/v2/Dropdown/DropdownItem";
-import { DropdownSeparator } from "@probo/ui/src/v2/Dropdown/DropdownSeparator";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { DropdownItem } from "@trustready/ui/src/v2/Dropdown/DropdownItem";
+import { DropdownSeparator } from "@trustready/ui/src/v2/Dropdown/DropdownSeparator";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useTranslation } from "react-i18next";
 import { graphql, type PreloadedQuery, usePaginationFragment, usePreloadedQuery } from "react-relay";
 import { Link } from "react-router";

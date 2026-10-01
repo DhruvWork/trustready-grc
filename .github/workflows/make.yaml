@@ -66,20 +66,20 @@ jobs:
       - uses: "./.github/actions/setup"
         with:
           go: "false"
-      - run: "npm --workspace @probo/emails run build"
+      - run: "npm --workspace @trustready/emails run build"
       - run: "make relay"
       - name: "Build console"
         run: |
-          npm --workspace @probo/console run check
-          NODE_ENV=production npm --workspace @probo/console run build
+          npm --workspace @trustready/console run check
+          NODE_ENV=production npm --workspace @trustready/console run build
       - name: "Build compliance-portal"
         run: |
-          npm --workspace @probo/compliance-portal run check
-          NODE_ENV=production npm --workspace @probo/compliance-portal run build
+          npm --workspace @trustready/compliance-portal run check
+          NODE_ENV=production npm --workspace @trustready/compliance-portal run build
       - name: "Build employee-portal"
         run: |
-          npm --workspace @probo/employee-portal run check
-          NODE_ENV=production npm --workspace @probo/employee-portal run build
+          npm --workspace @trustready/employee-portal run check
+          NODE_ENV=production npm --workspace @trustready/employee-portal run build
       - uses: "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a" # v7
         with:
           name: "frontend-apps"
@@ -246,7 +246,7 @@ jobs:
           echo dev-server > apps/console/dist/index.html
           echo dev-server > apps/compliance-portal/dist/index.html
           echo dev-server > apps/employee-portal/dist/index.html
-      - run: "npm --workspace @probo/emails run build"
+      - run: "npm --workspace @trustready/emails run build"
       - name: "Generate Go code"
         run: |
           go generate ./pkg/server/api/connect/v1
@@ -370,8 +370,8 @@ jobs:
         with:
           go: "false"
       - uses: reviewdog/action-setup@d8a7baabd7f3e8544ee4dbde3ee41d0011c3a93f # v1.5.0
-      - name: "Validate @probo/skills"
-        run: npm --workspace @probo/skills run validate
+      - name: "Validate @trustready/skills"
+        run: npm --workspace @trustready/skills run validate
       - name: "Generate Relay artifacts"
         run: make relay
       - name: "Run eslint"
@@ -494,11 +494,11 @@ jobs:
           echo dev-server > apps/console/dist/index.html
           echo dev-server > apps/compliance-portal/dist/index.html
           echo dev-server > apps/employee-portal/dist/index.html
-      - run: "npm --workspace @probo/emails run build"
+      - run: "npm --workspace @trustready/emails run build"
       - run: "make test"
         env:
           GOTESTSUM_JUNITFILE: "junit.xml"
-          PROBO_TEST_PG_URL: "postgres://probod:probod@localhost:5432/probod_test"
+          TRUSTREADY_TEST_PG_URL: "postgres://probod:probod@localhost:5432/probod_test"
           TEST_FLAGS: "-count=1 -race -cover -coverprofile=coverage.out"
       - name: "Race-test e2e harness packages"
         run: "CGO_ENABLED=1 go test -race -count=1 ./e2e/internal/..."
@@ -588,7 +588,7 @@ jobs:
       - run: "make stack-ps"
       - name: "Run e2e tests"
         env:
-          PROBO_E2E_ARTIFACT_DIR: "${{ github.workspace }}/e2e-artifacts"
+          TRUSTREADY_E2E_ARTIFACT_DIR: "${{ github.workspace }}/e2e-artifacts"
           GOTESTSUM_FORMAT: "testname"
           GOTESTSUM_JUNITFILE: "junit-e2e.xml"
         run: |

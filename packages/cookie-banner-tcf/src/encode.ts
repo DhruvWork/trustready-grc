@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import { GVL, TCModel, TCString, type VendorList } from "@iabtechlabtcf/core";
-import type { BannerConfig, BannerTCF, TCFChoices } from "@probo/cookie-banner";
+import type { BannerConfig, BannerTCF, TCFChoices } from "@trustready/cookie-banner";
 
 export function gdprApplies(config: BannerConfig): boolean {
   return config.regulation === "GDPR" || config.regulation === "UK_GDPR";

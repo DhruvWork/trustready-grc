@@ -1,5 +1,5 @@
 {
-  "name": "@probo/i18n",
+  "name": "@trustready/i18n",
   "version": "1.0.0",
   "author": "",
   "main": "./index.ts",
@@ -17,6 +17,6 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@probo/helpers": "1.0.0"
+    "@trustready/helpers": "1.0.0"
   }
 }

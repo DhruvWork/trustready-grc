@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -92,7 +92,7 @@ func NewCmdRoot(f *cmdutil.Factory) *cobra.Command {
 	cmd.PersistentFlags().Bool(
 		"no-interactive",
 		false,
-		"Disable interactive prompts (also set via PROBO_NO_INTERACTIVE=1, CI=true, or TERM=dumb)",
+		"Disable interactive prompts (also set via TRUSTREADY_NO_INTERACTIVE=1, CI=true, or TERM=dumb)",
 	)
 
 	cmd.PersistentFlags().Bool(

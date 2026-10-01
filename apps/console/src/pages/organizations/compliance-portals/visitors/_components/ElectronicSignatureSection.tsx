@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,17 +19,17 @@
 // SOFTWARE.
 
 import { DownloadSimpleIcon, InfoIcon, SignatureIcon } from "@phosphor-icons/react";
-import { safeOpenUrl } from "@probo/helpers";
-import { dateTimeFormat } from "@probo/i18n";
-import { IconButton } from "@probo/ui/src/v2/IconButton/IconButton";
-import { Popover } from "@probo/ui/src/v2/Popover/Popover";
-import { PopoverPopup } from "@probo/ui/src/v2/Popover/PopoverPopup";
-import { PopoverTrigger } from "@probo/ui/src/v2/Popover/PopoverTrigger";
-import { Timeline } from "@probo/ui/src/v2/Timeline/Timeline";
-import { TimelineContent } from "@probo/ui/src/v2/Timeline/TimelineContent";
-import { TimelineItem } from "@probo/ui/src/v2/Timeline/TimelineItem";
-import { TimelineMarker } from "@probo/ui/src/v2/Timeline/TimelineMarker";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { safeOpenUrl } from "@trustready/helpers";
+import { dateTimeFormat } from "@trustready/i18n";
+import { IconButton } from "@trustready/ui/src/v2/IconButton/IconButton";
+import { Popover } from "@trustready/ui/src/v2/Popover/Popover";
+import { PopoverPopup } from "@trustready/ui/src/v2/Popover/PopoverPopup";
+import { PopoverTrigger } from "@trustready/ui/src/v2/Popover/PopoverTrigger";
+import { Timeline } from "@trustready/ui/src/v2/Timeline/Timeline";
+import { TimelineContent } from "@trustready/ui/src/v2/Timeline/TimelineContent";
+import { TimelineItem } from "@trustready/ui/src/v2/Timeline/TimelineItem";
+import { TimelineMarker } from "@trustready/ui/src/v2/Timeline/TimelineMarker";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useTranslation } from "react-i18next";
 import { useFragment } from "react-relay";
 import { graphql } from "relay-runtime";

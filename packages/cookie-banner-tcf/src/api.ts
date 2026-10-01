@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,8 @@
 
 import { CmpApi } from "@iabtechlabtcf/cmpapi";
 import { TCString } from "@iabtechlabtcf/core";
-import type { BannerConfig, ConsentAction, TCFChoices } from "@probo/cookie-banner";
-import { setLayoutRenderer, setTCFRuntime } from "@probo/cookie-banner";
+import type { BannerConfig, ConsentAction, TCFChoices } from "@trustready/cookie-banner";
+import { setLayoutRenderer, setTCFRuntime } from "@trustready/cookie-banner";
 
 import {
   encodeTCString,

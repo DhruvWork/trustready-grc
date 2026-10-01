@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,15 +27,15 @@ import {
   SunIcon,
   UserIcon,
 } from "@phosphor-icons/react";
-import { Avatar } from "@probo/ui/src/v2/Avatar/Avatar";
-import { useDisplayMode } from "@probo/ui/src/v2/displayMode/useDisplayMode";
-import { Dropdown } from "@probo/ui/src/v2/Dropdown/Dropdown";
-import { DropdownGroup } from "@probo/ui/src/v2/Dropdown/DropdownGroup";
-import { DropdownItem } from "@probo/ui/src/v2/Dropdown/DropdownItem";
-import { DropdownPopup } from "@probo/ui/src/v2/Dropdown/DropdownPopup";
-import { DropdownSeparator } from "@probo/ui/src/v2/Dropdown/DropdownSeparator";
-import { DropdownTrigger } from "@probo/ui/src/v2/Dropdown/DropdownTrigger";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Avatar } from "@trustready/ui/src/v2/Avatar/Avatar";
+import { useDisplayMode } from "@trustready/ui/src/v2/displayMode/useDisplayMode";
+import { Dropdown } from "@trustready/ui/src/v2/Dropdown/Dropdown";
+import { DropdownGroup } from "@trustready/ui/src/v2/Dropdown/DropdownGroup";
+import { DropdownItem } from "@trustready/ui/src/v2/Dropdown/DropdownItem";
+import { DropdownPopup } from "@trustready/ui/src/v2/Dropdown/DropdownPopup";
+import { DropdownSeparator } from "@trustready/ui/src/v2/Dropdown/DropdownSeparator";
+import { DropdownTrigger } from "@trustready/ui/src/v2/Dropdown/DropdownTrigger";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useTranslation } from "react-i18next";
 import { graphql, useFragment } from "react-relay";
 import { Link } from "react-router";

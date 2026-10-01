@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 
 // FOUC guard: apply the OS preference before JS bundles load. Runtime
 // overrides (and further system-preference changes) are owned by
-// @probo/hooks initDisplayMode once the app boots.
+// @trustready/hooks initDisplayMode once the app boots.
 (function () {
   if (!window.matchMedia) return;
   document.documentElement.classList.toggle(

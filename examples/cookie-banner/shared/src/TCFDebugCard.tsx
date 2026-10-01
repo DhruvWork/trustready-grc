@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import { useEffect, useState } from "react";
-import { getConsent } from "@probo/cookie-banner/consent";
+import { getConsent } from "@trustready/cookie-banner/consent";
 
 type TCFAPI = (
   command: string,

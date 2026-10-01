@@ -15,7 +15,7 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "types": ["@probo/eslint-plugin-relay-types"]
+    "types": ["@trustready/eslint-plugin-relay-types"]
   },
   "include": ["src", "eslint.config.mjs"],
 }

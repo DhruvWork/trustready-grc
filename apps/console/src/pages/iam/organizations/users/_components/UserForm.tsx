@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,18 +19,18 @@
 // SOFTWARE.
 
 import { Form } from "@base-ui/react/form";
-import { formatDatetime, getAssignableRoles, getMembershipRole, getMembershipRoles, peopleRoles, type Role } from "@probo/helpers";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { DateField } from "@probo/ui/src/v2/form/DateField";
-import { Field } from "@probo/ui/src/v2/form/Field";
-import { TextField } from "@probo/ui/src/v2/form/TextField";
-import { Select } from "@probo/ui/src/v2/Select/Select";
-import { SelectItem } from "@probo/ui/src/v2/Select/SelectItem";
-import { SelectPopup } from "@probo/ui/src/v2/Select/SelectPopup";
-import { SelectTrigger } from "@probo/ui/src/v2/Select/SelectTrigger";
-import { Heading } from "@probo/ui/src/v2/typography/Heading";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { formatDatetime, getAssignableRoles, getMembershipRole, getMembershipRoles, peopleRoles, type Role } from "@trustready/helpers";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { DateField } from "@trustready/ui/src/v2/form/DateField";
+import { Field } from "@trustready/ui/src/v2/form/Field";
+import { TextField } from "@trustready/ui/src/v2/form/TextField";
+import { Select } from "@trustready/ui/src/v2/Select/Select";
+import { SelectItem } from "@trustready/ui/src/v2/Select/SelectItem";
+import { SelectPopup } from "@trustready/ui/src/v2/Select/SelectPopup";
+import { SelectTrigger } from "@trustready/ui/src/v2/Select/SelectTrigger";
+import { Heading } from "@trustready/ui/src/v2/typography/Heading";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { use, useState } from "react";
 import { useTranslation } from "react-i18next";
 

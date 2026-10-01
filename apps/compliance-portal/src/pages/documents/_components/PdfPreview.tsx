@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@ import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 
 import { SpinnerGapIcon } from "@phosphor-icons/react";
-import { times } from "@probo/helpers";
+import { times } from "@trustready/helpers";
 // Vite `?url` import resolves to the bundled worker URL (string); the import-x
 // resolver doesn't understand the suffix, and `vite/client` types cover it.
 // eslint-disable-next-line import-x/default

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -12,15 +12,15 @@
 // OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 // PERFORMANCE OF THIS SOFTWARE.
 
-import { formatError } from "@probo/helpers";
-import { createUseMutation, type MutationNotifier } from "@probo/relay";
-import { useToast } from "@probo/ui";
+import { formatError } from "@trustready/helpers";
+import { createUseMutation, type MutationNotifier } from "@trustready/relay";
+import { useToast } from "@trustready/ui";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 /**
- * Binds the shared awaitable useMutation (`@probo/relay`) to this app's
- * feedback stack: `@probo/ui` toasts, i18n titles, and `formatError`
+ * Binds the shared awaitable useMutation (`@trustready/relay`) to this app's
+ * feedback stack: `@trustready/ui` toasts, i18n titles, and `formatError`
  * descriptions. This is the only place those opinions are wired.
  *
  * Always import useMutation from `#/lib/relay/useMutation` — never useMutation
@@ -52,6 +52,6 @@ function useMutationNotifier(): MutationNotifier {
   );
 }
 
-export type { MutationFeedback } from "@probo/relay";
+export type { MutationFeedback } from "@trustready/relay";
 
 export const useMutation = createUseMutation(useMutationNotifier);

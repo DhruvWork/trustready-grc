@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,13 +19,13 @@
 // SOFTWARE.
 
 import { ArrowsClockwiseIcon, CopyIcon, PlugsConnectedIcon } from "@phosphor-icons/react";
-import { dateTimeFormat } from "@probo/i18n";
-import { useToast } from "@probo/ui";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { Callout } from "@probo/ui/src/v2/Callout/Callout";
-import { IconButton } from "@probo/ui/src/v2/IconButton/IconButton";
-import { Code } from "@probo/ui/src/v2/typography/Code";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { dateTimeFormat } from "@trustready/i18n";
+import { useToast } from "@trustready/ui";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { Callout } from "@trustready/ui/src/v2/Callout/Callout";
+import { IconButton } from "@trustready/ui/src/v2/IconButton/IconButton";
+import { Code } from "@trustready/ui/src/v2/typography/Code";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useFragment } from "react-relay";

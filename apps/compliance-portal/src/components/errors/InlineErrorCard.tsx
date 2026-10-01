@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -12,8 +12,8 @@
 // OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 // PERFORMANCE OF THIS SOFTWARE.
 
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { InlineError } from "@probo/ui/src/v2/InlineError/InlineError";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { InlineError } from "@trustready/ui/src/v2/InlineError/InlineError";
 import { useTranslation } from "react-i18next";
 
 interface InlineErrorCardProps {

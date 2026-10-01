@@ -6,8 +6,8 @@
 
 /* v1 first: it clears the Tailwind palette on the way in. theme-tokens.css is
  * the reset-free v2 entry, so it adds its scales without wiping the v1 ones. */
-@import "@probo/ui/src/theme.css";
-@import "@probo/ui/src/v2/theme-tokens.css";
+@import "@trustready/ui/src/theme.css";
+@import "@trustready/ui/src/v2/theme-tokens.css";
 @import "tw-animate-css";
 @source "../../../packages/ui/src";
 @source "../../../packages/helpers/src";

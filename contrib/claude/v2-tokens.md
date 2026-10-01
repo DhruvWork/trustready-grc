@@ -134,7 +134,7 @@ v2 is a standalone theme isolated at the build level, not via a runtime DOM scop
 ```css
 /* app index.css — v2 build */
 @import "tailwindcss";
-@import "@probo/ui/src/v2/theme.css";
+@import "@trustready/ui/src/v2/theme.css";
 ```
 
 The v2 theme wipes Tailwind's default palette (`--color-*: initial`), keeping only `transparent`, `black`, `white`, and the Radix scales below. Within a v2 build these color utilities are global — there is no `[data-theme="v2"]` ancestor requirement. A given build is either v1 or v2; the two do not coexist on the same page.

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -286,10 +286,10 @@ func (b *Builder) Build() (*probodconfig.FullConfig, error) {
 						MaxTokens:   new(b.resolver.getEnvIntOrDefault("PROBOD_AGENT_DEFAULT_MAX_TOKENS", 4096)),
 					},
 					Probo: probodconfig.LLMAgentConfig{
-						Provider:    b.resolver.getEnvOrDefault("PROBOD_AGENT_PROBO_PROVIDER", ""),
-						ModelName:   b.resolver.getEnvOrDefault("PROBOD_AGENT_PROBO_MODEL_NAME", ""),
-						Temperature: b.resolver.getEnvFloatPtr("PROBOD_AGENT_PROBO_TEMPERATURE"),
-						MaxTokens:   b.resolver.getEnvIntPtr("PROBOD_AGENT_PROBO_MAX_TOKENS"),
+						Provider:    b.resolver.getEnvOrDefault("PROBOD_AGENT_TRUSTREADY_PROVIDER", ""),
+						ModelName:   b.resolver.getEnvOrDefault("PROBOD_AGENT_TRUSTREADY_MODEL_NAME", ""),
+						Temperature: b.resolver.getEnvFloatPtr("PROBOD_AGENT_TRUSTREADY_TEMPERATURE"),
+						MaxTokens:   b.resolver.getEnvIntPtr("PROBOD_AGENT_TRUSTREADY_MAX_TOKENS"),
 					},
 					EvidenceDescriber: probodconfig.LLMAgentConfig{
 						Provider:    b.resolver.getEnvOrDefault("PROBOD_AGENT_EVIDENCE_DESCRIBER_PROVIDER", ""),

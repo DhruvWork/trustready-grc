@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import { TCString } from "@iabtechlabtcf/core";
-import type { BannerConfig, TCFGVL, TCFRuntime } from "@probo/cookie-banner";
+import type { BannerConfig, TCFGVL, TCFRuntime } from "@trustready/cookie-banner";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { grantForAction, startTCF } from "./api";
@@ -42,7 +42,7 @@ vi.mock("@iabtechlabtcf/cmpapi", () => ({
   },
 }));
 
-vi.mock("@probo/cookie-banner", () => ({
+vi.mock("@trustready/cookie-banner", () => ({
   setLayoutRenderer: vi.fn(),
   setTCFRuntime: (next: TCFRuntime) => {
     runtimeHolder.current = next;

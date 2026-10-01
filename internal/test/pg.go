@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -45,7 +45,7 @@ import (
 
 const (
 	// pgURLEnvVar points the integration tests at a migrated test database.
-	pgURLEnvVar = "PROBO_TEST_PG_URL"
+	pgURLEnvVar = "TRUSTREADY_TEST_PG_URL"
 
 	// defaultPGURL targets the local compose Postgres so tests run with zero
 	// configuration against a developer's stack.
@@ -61,7 +61,7 @@ var (
 )
 
 // PGClient returns a process-wide shared pg.Client connected to the test
-// database described by the PROBO_TEST_PG_URL environment variable (falling
+// database described by the TRUSTREADY_TEST_PG_URL environment variable (falling
 // back to a local compose Postgres), applying the agent_executions migrations on
 // first use. The test is skipped when the default local database is unreachable,
 // but fails when an explicitly configured database is unreachable.

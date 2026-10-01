@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +21,9 @@
 import {
   formatError,
   getStatusVariant,
-} from "@probo/helpers";
-import { usePageTitle } from "@probo/hooks";
-import { dateFormat } from "@probo/i18n";
+} from "@trustready/helpers";
+import { usePageTitle } from "@trustready/hooks";
+import { dateFormat } from "@trustready/i18n";
 import {
   ActionDropdown,
   Badge,
@@ -45,8 +45,8 @@ import {
   Tr,
   useConfirm,
   useToast,
-} from "@probo/ui";
-import { Avatar } from "@probo/ui/src/v2/Avatar/Avatar";
+} from "@trustready/ui";
+import { Avatar } from "@trustready/ui/src/v2/Avatar/Avatar";
 import { Suspense, useState, useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import {

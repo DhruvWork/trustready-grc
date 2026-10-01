@@ -2,13 +2,13 @@
 
 This document describes **how to define and shape** React components in Probo frontends (`apps/compliance-portal`, [`packages/ui`](../../packages/ui), and related apps). It complements styling and package layout in [`contrib/claude/ui.md`](ui.md) and data loading in [`contrib/claude/relay.md`](relay.md).
 
-These rules are the **source of truth**. Where existing code (e.g. `apps/console` or the legacy `@probo/ui` `Atoms/`/`Molecules/` tree) disagrees, the code is non-compliant and should be migrated — it is not precedent.
+These rules are the **source of truth**. Where existing code (e.g. `apps/console` or the legacy `@trustready/ui` `Atoms/`/`Molecules/` tree) disagrees, the code is non-compliant and should be migrated — it is not precedent.
 
 ## Related guides
 
 | Topic | Guide |
 |-------|--------|
-| `@probo/ui`, Tailwind, `tailwind-variants`, folders, skeletons, compound modules | [`contrib/claude/ui.md`](ui.md) |
+| `@trustready/ui`, Tailwind, `tailwind-variants`, folders, skeletons, compound modules | [`contrib/claude/ui.md`](ui.md) |
 | Relay queries, fragments, loaders, `queryRef` | [`contrib/claude/relay.md`](relay.md) |
 | App folder layout, route segments, special folders | [`contrib/claude/app-arborescence.md`](app-arborescence.md) |
 | Error boundaries, error/fallback props, async `try`/`catch` | [`contrib/claude/error-handling.md`](error-handling.md) |

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
 // SOFTWARE.
 
 import { CheckIcon, CopyIcon } from "@phosphor-icons/react";
-import { Button, MermaidDiagram, useToast } from "@probo/ui";
+import { Button, MermaidDiagram, useToast } from "@trustready/ui";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { fetchQuery, graphql, useFragment, useRelayEnvironment } from "react-relay";

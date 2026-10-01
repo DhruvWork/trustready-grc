@@ -1,5 +1,5 @@
 {
-  "extends": "@probo/tsconfig/base.json",
+  "extends": "@trustready/tsconfig/base.json",
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Bundler",

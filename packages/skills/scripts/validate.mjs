@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -646,4 +646,4 @@ if (failed) {
   process.exit(1);
 }
 
-console.log("@probo/skills validation passed");
+console.log("@trustready/skills validation passed");

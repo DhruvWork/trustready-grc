@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,13 +19,13 @@
 // SOFTWARE.
 
 import { PlusMinusIcon, WebhooksLogoIcon } from "@phosphor-icons/react";
-import { dateTimeFormat } from "@probo/i18n";
-import { Badge } from "@probo/ui/src/v2/Badge/Badge";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { IconButton } from "@probo/ui/src/v2/IconButton/IconButton";
-import { Link } from "@probo/ui/src/v2/Link/Link";
-import { Code } from "@probo/ui/src/v2/typography/Code";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { dateTimeFormat } from "@trustready/i18n";
+import { Badge } from "@trustready/ui/src/v2/Badge/Badge";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { IconButton } from "@trustready/ui/src/v2/IconButton/IconButton";
+import { Link } from "@trustready/ui/src/v2/Link/Link";
+import { Code } from "@trustready/ui/src/v2/typography/Code";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useTranslation } from "react-i18next";
 import { useFragment } from "react-relay";
 import { graphql } from "relay-runtime";

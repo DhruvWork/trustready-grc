@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -19,10 +19,10 @@
 // SOFTWARE.
 
 import { CopyIcon } from "@phosphor-icons/react";
-import { useToast } from "@probo/ui";
-import { IconButton } from "@probo/ui/src/v2/IconButton/IconButton";
-import { Code } from "@probo/ui/src/v2/typography/Code";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { useToast } from "@trustready/ui";
+import { IconButton } from "@trustready/ui/src/v2/IconButton/IconButton";
+import { Code } from "@trustready/ui/src/v2/typography/Code";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useTranslation } from "react-i18next";
 
 import { samlConfigurationListItem } from "../variants";

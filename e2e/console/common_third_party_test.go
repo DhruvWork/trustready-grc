@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -111,7 +111,7 @@ func seedCommonThirdParty(t *testing.T, name string) gid.GID {
 func dialTestPg(t *testing.T, ctx context.Context) *pgx.Conn {
 	t.Helper()
 
-	dsn := os.Getenv("PROBO_E2E_PG_URL")
+	dsn := os.Getenv("TRUSTREADY_E2E_PG_URL")
 	if dsn == "" {
 		dsn = "postgres://probod:probod@localhost:5432/probod_test?sslmode=disable"
 	}

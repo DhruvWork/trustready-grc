@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+# Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 # SPDX-License-Identifier: MIT
 
 set -euo pipefail

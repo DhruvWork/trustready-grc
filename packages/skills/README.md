@@ -1,4 +1,4 @@
-# @probo/skills
+# @trustready/skills
 
 Multi-agent compliance skills for open-source GRC workflows. Ships an
 [Agent Plugins 1.0.0](https://agent-plugins.org/) package: Agent
@@ -40,7 +40,7 @@ authenticates with OAuth 2.0, discovered from
 ### Agent Plugins client
 
 Point the client at the package root (`packages/skills` in a clone, or the
-installed `@probo/skills` directory). It reads `plugin.json`, discovers the
+installed `@trustready/skills` directory). It reads `plugin.json`, discovers the
 skills under `skills/`, and loads both servers from `mcp.json`.
 
 ### Claude Code
@@ -56,7 +56,7 @@ claude mcp login probo-us   # or /mcp in session
 ```
 
 **From the package directory** (catalog at
-`packages/skills/.claude-plugin/marketplace.json`, resolves `@probo/skills`
+`packages/skills/.claude-plugin/marketplace.json`, resolves `@trustready/skills`
 from npm):
 
 ```bash
@@ -88,11 +88,11 @@ Commands: `/probo:<command-name>` (e.g. `/probo:access-review`, `/probo:missing-
 See [`contrib/claude/skills.md`](../../contrib/claude/skills.md).
 
 ```bash
-npm --workspace @probo/skills run validate
+npm --workspace @trustready/skills run validate
 claude --plugin-dir ./packages/skills
 ```
 
 ## Release
 
-Published to npm as `@probo/skills`. See
+Published to npm as `@trustready/skills`. See
 [`contrib/claude/release/skills.md`](../../contrib/claude/release/skills.md).

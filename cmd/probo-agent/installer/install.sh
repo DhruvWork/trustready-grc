@@ -14,11 +14,11 @@
 #
 #   # Unattended / MDM
 #   curl -fsSL "…/install.sh" | sudo \
-#     PROBO_SERVER_URL=https://us.probo.com \
-#     PROBO_ENROLLMENT_TOKEN='…' sh
+#     TRUSTREADY_SERVER_URL=https://us.probo.com \
+#     TRUSTREADY_ENROLLMENT_TOKEN='…' sh
 #
 #   # Mirror the release assets (must match the embedded release tag)
-#   PROBO_AGENT_RELEASE_BASE="https://release-base/probo-agent/vX.Y.Z" \
+#   TRUSTREADY_AGENT_RELEASE_BASE="https://release-base/probo-agent/vX.Y.Z" \
 #     curl -fsSL "…/install.sh" | sudo sh
 #
 #   # Explicit flags
@@ -27,14 +27,14 @@
 #     --enrollment-token '…'
 #
 # Environment variables:
-#   PROBO_AGENT_RELEASE_BASE       Release download base URL (default: embedded tag)
-#   PROBO_AGENT_RELEASE_TAG        Override embedded release tag (local dev)
-#   PROBO_AGENT_SKIP_CHECKSUM_VERIFY  Set to true to skip SHA-256 verification (local dev)
-#   PROBO_AGENT_STATE_DIR            Agent state directory passed as --dir (default: /var/lib/probo-agent)
-#   PROBO_SERVER_URL               Probo server base URL
-#   PROBO_ENROLLMENT_TOKEN         One-shot enrollment token
-#   PROBO_NO_AUTO_UPDATE           Set to true to pass --no-auto-update
-#   PROBO_ALLOW_PRERELEASES        Set to true to pass --allow-prereleases
+#   TRUSTREADY_AGENT_RELEASE_BASE       Release download base URL (default: embedded tag)
+#   TRUSTREADY_AGENT_RELEASE_TAG        Override embedded release tag (local dev)
+#   TRUSTREADY_AGENT_SKIP_CHECKSUM_VERIFY  Set to true to skip SHA-256 verification (local dev)
+#   TRUSTREADY_AGENT_STATE_DIR            Agent state directory passed as --dir (default: /var/lib/probo-agent)
+#   TRUSTREADY_SERVER_URL               Probo server base URL
+#   TRUSTREADY_ENROLLMENT_TOKEN         One-shot enrollment token
+#   TRUSTREADY_NO_AUTO_UPDATE           Set to true to pass --no-auto-update
+#   TRUSTREADY_ALLOW_PRERELEASES        Set to true to pass --allow-prereleases
 #
 # Never pass the enrollment token in the curl URL.
 
@@ -47,17 +47,17 @@ BINARY_PATH="/usr/local/bin/probo-agent"
 GITHUB_RELEASES_URL="https://github.com/getprobo/probo/releases/download"
 
 # Injected at release time by .github/workflows/release-probo-agent.yaml
-RELEASE_TAG="__PROBO_AGENT_RELEASE_TAG__"
-if [ -n "${PROBO_AGENT_RELEASE_TAG:-}" ]; then
-  RELEASE_TAG="$PROBO_AGENT_RELEASE_TAG"
+RELEASE_TAG="__TRUSTREADY_AGENT_RELEASE_TAG__"
+if [ -n "${TRUSTREADY_AGENT_RELEASE_TAG:-}" ]; then
+  RELEASE_TAG="$TRUSTREADY_AGENT_RELEASE_TAG"
 fi
 
-RELEASE_BASE="${PROBO_AGENT_RELEASE_BASE:-}"
-SERVER_URL="${PROBO_SERVER_URL:-}"
-ENROLLMENT_TOKEN="${PROBO_ENROLLMENT_TOKEN:-}"
-STATE_DIR="${PROBO_AGENT_STATE_DIR:-}"
-NO_AUTO_UPDATE="${PROBO_NO_AUTO_UPDATE:-}"
-ALLOW_PRERELEASES="${PROBO_ALLOW_PRERELEASES:-}"
+RELEASE_BASE="${TRUSTREADY_AGENT_RELEASE_BASE:-}"
+SERVER_URL="${TRUSTREADY_SERVER_URL:-}"
+ENROLLMENT_TOKEN="${TRUSTREADY_ENROLLMENT_TOKEN:-}"
+STATE_DIR="${TRUSTREADY_AGENT_STATE_DIR:-}"
+NO_AUTO_UPDATE="${TRUSTREADY_NO_AUTO_UPDATE:-}"
+ALLOW_PRERELEASES="${TRUSTREADY_ALLOW_PRERELEASES:-}"
 SKIP_SERVICE=false
 
 die() {
@@ -87,26 +87,26 @@ Usage:
   curl -fsSL "…/install.sh" | sudo sh -s -- --server URL --enrollment-token TOKEN
 
 Environment variables:
-  PROBO_AGENT_RELEASE_BASE          Release download base URL (default: embedded tag)
-  PROBO_AGENT_RELEASE_TAG             Override embedded release tag (local dev)
-  PROBO_AGENT_SKIP_CHECKSUM_VERIFY    Set to true to skip SHA-256 verification (local dev)
-  PROBO_AGENT_STATE_DIR               Agent state directory (--dir; default /var/lib/probo-agent)
-  PROBO_SERVER_URL                    Probo server base URL
-  PROBO_ENROLLMENT_TOKEN              One-shot enrollment token
-  PROBO_NO_AUTO_UPDATE                Set to true to disable auto-update
-  PROBO_ALLOW_PRERELEASES             Set to true to allow prerelease auto-updates
+  TRUSTREADY_AGENT_RELEASE_BASE          Release download base URL (default: embedded tag)
+  TRUSTREADY_AGENT_RELEASE_TAG             Override embedded release tag (local dev)
+  TRUSTREADY_AGENT_SKIP_CHECKSUM_VERIFY    Set to true to skip SHA-256 verification (local dev)
+  TRUSTREADY_AGENT_STATE_DIR               Agent state directory (--dir; default /var/lib/probo-agent)
+  TRUSTREADY_SERVER_URL                    Probo server base URL
+  TRUSTREADY_ENROLLMENT_TOKEN              One-shot enrollment token
+  TRUSTREADY_NO_AUTO_UPDATE                Set to true to disable auto-update
+  TRUSTREADY_ALLOW_PRERELEASES             Set to true to allow prerelease auto-updates
 EOF
 }
 
 embedded_checksums() {
   cat <<'EOF'
-# __PROBO_AGENT_CHECKSUMS_BEGIN__
-# __PROBO_AGENT_CHECKSUMS_END__
+# __TRUSTREADY_AGENT_CHECKSUMS_BEGIN__
+# __TRUSTREADY_AGENT_CHECKSUMS_END__
 EOF
 }
 
 resolve_embedded_release() {
-  if [ "$RELEASE_TAG" = "__PROBO_AGENT_RELEASE_TAG__" ]; then
+  if [ "$RELEASE_TAG" = "__TRUSTREADY_AGENT_RELEASE_TAG__" ]; then
     die "this install.sh was not published by a probo-agent release; curl install.sh from the target release"
   fi
 
@@ -114,7 +114,7 @@ resolve_embedded_release() {
     RELEASE_BASE="${RELEASE_BASE%/}"
     case "$RELEASE_BASE" in
       */"$RELEASE_TAG") ;;
-      *) die "PROBO_AGENT_RELEASE_BASE must end with release tag ${RELEASE_TAG}" ;;
+      *) die "TRUSTREADY_AGENT_RELEASE_BASE must end with release tag ${RELEASE_TAG}" ;;
     esac
     return 0
   fi
@@ -169,7 +169,7 @@ sha256_file() {
 }
 
 verify_embedded_checksum() {
-  case "${PROBO_AGENT_SKIP_CHECKSUM_VERIFY:-}" in
+  case "${TRUSTREADY_AGENT_SKIP_CHECKSUM_VERIFY:-}" in
     1 | true | TRUE | yes | YES) return 0 ;;
   esac
 
@@ -224,7 +224,7 @@ prompt_server_url() {
     return 0
   fi
   if ! can_prompt; then
-    die "PROBO_SERVER_URL is required in non-interactive mode"
+    die "TRUSTREADY_SERVER_URL is required in non-interactive mode"
   fi
 
   printf '\nProbo server URL:\n'
@@ -254,7 +254,7 @@ prompt_enrollment_token() {
     return 0
   fi
   if ! can_prompt; then
-    die "PROBO_ENROLLMENT_TOKEN is required in non-interactive mode"
+    die "TRUSTREADY_ENROLLMENT_TOKEN is required in non-interactive mode"
   fi
 
   read_secret "Enrollment token: "

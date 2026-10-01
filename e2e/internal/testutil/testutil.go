@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -83,11 +83,11 @@ func (s *switchableWriter) switchTo(w io.Writer) {
 
 func Setup() {
 	setupOnce.Do(func() {
-		binaryPath := os.Getenv("PROBO_E2E_BINARY")
-		coverDir := os.Getenv("PROBO_E2E_COVERDIR")
+		binaryPath := os.Getenv("TRUSTREADY_E2E_BINARY")
+		coverDir := os.Getenv("TRUSTREADY_E2E_COVERDIR")
 
 		if binaryPath == "" {
-			fmt.Fprintf(os.Stderr, "e2etest: PROBO_E2E_BINARY is required\n")
+			fmt.Fprintf(os.Stderr, "e2etest: TRUSTREADY_E2E_BINARY is required\n")
 			os.Exit(1)
 		}
 
@@ -100,11 +100,11 @@ func Setup() {
 		}
 
 		opts := configOptions{
-			APIAddr:        os.Getenv("PROBO_E2E_API_ADDR"),
-			BaseURL:        os.Getenv("PROBO_E2E_BASE_URL"),
-			MetricsAddr:    os.Getenv("PROBO_E2E_METRICS_ADDR"),
-			TrustHTTPAddr:  os.Getenv("PROBO_E2E_TRUST_HTTP_ADDR"),
-			TrustHTTPSAddr: os.Getenv("PROBO_E2E_TRUST_HTTPS_ADDR"),
+			APIAddr:        os.Getenv("TRUSTREADY_E2E_API_ADDR"),
+			BaseURL:        os.Getenv("TRUSTREADY_E2E_BASE_URL"),
+			MetricsAddr:    os.Getenv("TRUSTREADY_E2E_METRICS_ADDR"),
+			TrustHTTPAddr:  os.Getenv("TRUSTREADY_E2E_TRUST_HTTP_ADDR"),
+			TrustHTTPSAddr: os.Getenv("TRUSTREADY_E2E_TRUST_HTTPS_ADDR"),
 		}
 
 		configPath, err := generateConfig(opts)
@@ -124,7 +124,7 @@ func Setup() {
 			cmd.Env = os.Environ()
 		}
 
-		verbose := os.Getenv("PROBO_E2E_VERBOSE") != ""
+		verbose := os.Getenv("TRUSTREADY_E2E_VERBOSE") != ""
 		if verbose {
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr

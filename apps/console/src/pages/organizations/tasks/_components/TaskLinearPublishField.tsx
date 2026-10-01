@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,23 +18,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { Combobox } from "@probo/ui/src/v2/Combobox/Combobox";
-import { ComboboxEmpty } from "@probo/ui/src/v2/Combobox/ComboboxEmpty";
-import { ComboboxInput } from "@probo/ui/src/v2/Combobox/ComboboxInput";
-import { ComboboxInputGroup } from "@probo/ui/src/v2/Combobox/ComboboxInputGroup";
-import { ComboboxItem } from "@probo/ui/src/v2/Combobox/ComboboxItem";
-import { ComboboxList } from "@probo/ui/src/v2/Combobox/ComboboxList";
-import { ComboboxPopup } from "@probo/ui/src/v2/Combobox/ComboboxPopup";
-import { Dialog } from "@probo/ui/src/v2/Dialog/Dialog";
-import { DialogClose } from "@probo/ui/src/v2/Dialog/DialogClose";
-import { DialogDescription } from "@probo/ui/src/v2/Dialog/DialogDescription";
-import { DialogFooter } from "@probo/ui/src/v2/Dialog/DialogFooter";
-import { DialogHeader } from "@probo/ui/src/v2/Dialog/DialogHeader";
-import { DialogPopup } from "@probo/ui/src/v2/Dialog/DialogPopup";
-import { DialogTitle } from "@probo/ui/src/v2/Dialog/DialogTitle";
-import { Spinner } from "@probo/ui/src/v2/Spinner/Spinner";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { Combobox } from "@trustready/ui/src/v2/Combobox/Combobox";
+import { ComboboxEmpty } from "@trustready/ui/src/v2/Combobox/ComboboxEmpty";
+import { ComboboxInput } from "@trustready/ui/src/v2/Combobox/ComboboxInput";
+import { ComboboxInputGroup } from "@trustready/ui/src/v2/Combobox/ComboboxInputGroup";
+import { ComboboxItem } from "@trustready/ui/src/v2/Combobox/ComboboxItem";
+import { ComboboxList } from "@trustready/ui/src/v2/Combobox/ComboboxList";
+import { ComboboxPopup } from "@trustready/ui/src/v2/Combobox/ComboboxPopup";
+import { Dialog } from "@trustready/ui/src/v2/Dialog/Dialog";
+import { DialogClose } from "@trustready/ui/src/v2/Dialog/DialogClose";
+import { DialogDescription } from "@trustready/ui/src/v2/Dialog/DialogDescription";
+import { DialogFooter } from "@trustready/ui/src/v2/Dialog/DialogFooter";
+import { DialogHeader } from "@trustready/ui/src/v2/Dialog/DialogHeader";
+import { DialogPopup } from "@trustready/ui/src/v2/Dialog/DialogPopup";
+import { DialogTitle } from "@trustready/ui/src/v2/Dialog/DialogTitle";
+import { Spinner } from "@trustready/ui/src/v2/Spinner/Spinner";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { fetchQuery, graphql, useFragment, useRelayEnvironment } from "react-relay";

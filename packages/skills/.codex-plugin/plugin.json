@@ -1,9 +1,9 @@
 {
-  "name": "probo",
+  "name": "trustready-grc",
   "version": "0.3.2",
   "description": "Open-source compliance workflows powered by Probo MCP (Codex, OpenCode, Claude Code)",
   "author": {
-    "name": "Probo Inc",
+    "name": "TrustReady",
     "email": "hello@probo.com"
   },
   "homepage": "https://github.com/getprobo/probo/tree/main/packages/skills",

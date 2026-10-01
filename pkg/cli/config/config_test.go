@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,10 +30,10 @@ import (
 
 func TestDefaultHost(t *testing.T) {
 	t.Run(
-		"PROBO_TOKEN uses active host instead of first alphabetically",
+		"TRUSTREADY_TOKEN uses active host instead of first alphabetically",
 		func(t *testing.T) {
-			t.Setenv("PROBO_TOKEN", "tok_test")
-			t.Setenv("PROBO_HOST", "")
+			t.Setenv("TRUSTREADY_TOKEN", "tok_test")
+			t.Setenv("TRUSTREADY_HOST", "")
 
 			cfg := &config.Config{
 				ActiveHost: "beta.probo.inc",
@@ -58,10 +58,10 @@ func TestDefaultHost(t *testing.T) {
 	)
 
 	t.Run(
-		"PROBO_TOKEN falls back to first host when no active host",
+		"TRUSTREADY_TOKEN falls back to first host when no active host",
 		func(t *testing.T) {
-			t.Setenv("PROBO_TOKEN", "tok_test")
-			t.Setenv("PROBO_HOST", "")
+			t.Setenv("TRUSTREADY_TOKEN", "tok_test")
+			t.Setenv("TRUSTREADY_HOST", "")
 
 			cfg := &config.Config{
 				Hosts: map[string]*config.HostConfig{
@@ -85,10 +85,10 @@ func TestDefaultHost(t *testing.T) {
 	)
 
 	t.Run(
-		"PROBO_HOST takes precedence over everything",
+		"TRUSTREADY_HOST takes precedence over everything",
 		func(t *testing.T) {
-			t.Setenv("PROBO_HOST", "custom.probo.inc")
-			t.Setenv("PROBO_TOKEN", "tok_env")
+			t.Setenv("TRUSTREADY_HOST", "custom.probo.inc")
+			t.Setenv("TRUSTREADY_TOKEN", "tok_env")
 
 			cfg := &config.Config{
 				ActiveHost: "beta.probo.inc",
@@ -110,8 +110,8 @@ func TestDefaultHost(t *testing.T) {
 	t.Run(
 		"active host is used when no env vars set",
 		func(t *testing.T) {
-			t.Setenv("PROBO_HOST", "")
-			t.Setenv("PROBO_TOKEN", "")
+			t.Setenv("TRUSTREADY_HOST", "")
+			t.Setenv("TRUSTREADY_TOKEN", "")
 
 			cfg := &config.Config{
 				ActiveHost: "beta.probo.inc",

@@ -1,4 +1,4 @@
-// Copyright (c) 2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,26 +20,26 @@
 
 import { Form } from "@base-ui/react/form";
 import { CaretLeftIcon } from "@phosphor-icons/react";
-import { toFieldErrors } from "@probo/helpers";
-import { usePageTitle } from "@probo/hooks";
-import { Button } from "@probo/ui/src/v2/Button/Button";
-import { Card } from "@probo/ui/src/v2/Card/Card";
-import { Combobox } from "@probo/ui/src/v2/Combobox/Combobox";
-import { ComboboxChip } from "@probo/ui/src/v2/Combobox/ComboboxChip";
-import { ComboboxChipRemove } from "@probo/ui/src/v2/Combobox/ComboboxChipRemove";
-import { ComboboxChips } from "@probo/ui/src/v2/Combobox/ComboboxChips";
-import { ComboboxEmpty } from "@probo/ui/src/v2/Combobox/ComboboxEmpty";
-import { ComboboxInput } from "@probo/ui/src/v2/Combobox/ComboboxInput";
-import { ComboboxInputGroup } from "@probo/ui/src/v2/Combobox/ComboboxInputGroup";
-import { ComboboxItem } from "@probo/ui/src/v2/Combobox/ComboboxItem";
-import { ComboboxList } from "@probo/ui/src/v2/Combobox/ComboboxList";
-import { ComboboxPopup } from "@probo/ui/src/v2/Combobox/ComboboxPopup";
-import { ComboboxValue } from "@probo/ui/src/v2/Combobox/ComboboxValue";
-import { Field } from "@probo/ui/src/v2/form/Field";
-import { TextField } from "@probo/ui/src/v2/form/TextField";
-import { Link } from "@probo/ui/src/v2/Link/Link";
-import { Heading } from "@probo/ui/src/v2/typography/Heading";
-import { Text } from "@probo/ui/src/v2/typography/Text";
+import { toFieldErrors } from "@trustready/helpers";
+import { usePageTitle } from "@trustready/hooks";
+import { Button } from "@trustready/ui/src/v2/Button/Button";
+import { Card } from "@trustready/ui/src/v2/Card/Card";
+import { Combobox } from "@trustready/ui/src/v2/Combobox/Combobox";
+import { ComboboxChip } from "@trustready/ui/src/v2/Combobox/ComboboxChip";
+import { ComboboxChipRemove } from "@trustready/ui/src/v2/Combobox/ComboboxChipRemove";
+import { ComboboxChips } from "@trustready/ui/src/v2/Combobox/ComboboxChips";
+import { ComboboxEmpty } from "@trustready/ui/src/v2/Combobox/ComboboxEmpty";
+import { ComboboxInput } from "@trustready/ui/src/v2/Combobox/ComboboxInput";
+import { ComboboxInputGroup } from "@trustready/ui/src/v2/Combobox/ComboboxInputGroup";
+import { ComboboxItem } from "@trustready/ui/src/v2/Combobox/ComboboxItem";
+import { ComboboxList } from "@trustready/ui/src/v2/Combobox/ComboboxList";
+import { ComboboxPopup } from "@trustready/ui/src/v2/Combobox/ComboboxPopup";
+import { ComboboxValue } from "@trustready/ui/src/v2/Combobox/ComboboxValue";
+import { Field } from "@trustready/ui/src/v2/form/Field";
+import { TextField } from "@trustready/ui/src/v2/form/TextField";
+import { Link } from "@trustready/ui/src/v2/Link/Link";
+import { Heading } from "@trustready/ui/src/v2/typography/Heading";
+import { Text } from "@trustready/ui/src/v2/typography/Text";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";

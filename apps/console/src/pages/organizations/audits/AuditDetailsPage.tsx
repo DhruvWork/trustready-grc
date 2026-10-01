@@ -1,4 +1,4 @@
-// Copyright (c) 2025-2026 Probo Inc <hello@probo.com>.
+// Copyright (c) 2025-2026 TrustReady <hello@probo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,8 +25,8 @@ import {
   getAuditStateVariant,
   type GraphQLError,
   toPeriod,
-} from "@probo/helpers";
-import { dateFormat, fileSize } from "@probo/i18n";
+} from "@trustready/helpers";
+import { dateFormat, fileSize } from "@trustready/i18n";
 import {
   ActionDropdown,
   Badge,
@@ -42,7 +42,7 @@ import {
   Option,
   useConfirm,
   useToast,
-} from "@probo/ui";
+} from "@trustready/ui";
 import { useTranslation } from "react-i18next";
 import {
   ConnectionHandler,
