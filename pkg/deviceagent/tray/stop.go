@@ -24,9 +24,9 @@ import "strings"
 
 const (
 	// NOTE: Remove agentExeBaseName after all supported installs run the
-	// tray from probo-agentw.exe.
-	agentExeBaseName    = "probo-agent.exe"
-	agentGUIExeBaseName = "probo-agentw.exe"
+	// tray from trustready-agentw.exe.
+	agentExeBaseName    = "trustready-agent.exe"
+	agentGUIExeBaseName = "trustready-agentw.exe"
 )
 
 func shouldStopInteractiveAgentProcess(

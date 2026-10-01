@@ -34,7 +34,7 @@ WITH report_files AS (
         generate_gid(decode_base64_unpadded(r.tenant_id), 25) AS file_id,
         r.tenant_id,
         r.organization_id,
-        'probod'                   AS bucket_name,
+        'trustreadyd'                   AS bucket_name,
         r.mime_type,
         r.filename                 AS file_name,
         r.object_key::uuid         AS file_key,

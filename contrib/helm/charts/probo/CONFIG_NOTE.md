@@ -67,7 +67,7 @@ metadata:
   name: probo-config
 stringData:
   config.yaml: |
-    probod:
+    trustreadyd:
       encryption-key: {{ .Values.probo.encryptionKey }}
       # ... all config with actual values
 ```

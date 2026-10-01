@@ -8,10 +8,10 @@ bump the version, write a changelog entry, commit, tag, push.
 | Track                   | Tag pattern                    | Entrypoint                       |
 | ----------------------- | ------------------------------ | -------------------------------- |
 | CLI (`prb`)             | `prb/v*`                       | [prb.md](./prb.md)               |
-| Server (`probod` group) | `probod/v*`                    | [probod.md](./probod.md)         |
-| `probod-bootstrap`      | `probod-bootstrap/v*`          | [probod-bootstrap.md](./probod-bootstrap.md) |
-| `proboctl`              | `proboctl/v*`                  | [proboctl.md](./proboctl.md)     |
-| `probo-agent`           | `probo-agent/v*` (or `…-rc.N`) | [probo-agent.md](./probo-agent.md) ([Windows signing setup](./probo-agent-windows-signing.md); [RC](./probo-agent.md#rc-release)) |
+| Server (`trustreadyd` group) | `trustreadyd/v*`                    | [trustreadyd.md](./trustreadyd.md)         |
+| `trustreadyd-bootstrap`      | `trustreadyd-bootstrap/v*`          | [trustreadyd-bootstrap.md](./trustreadyd-bootstrap.md) |
+| `trustreadyctl`              | `trustreadyctl/v*`                  | [trustreadyctl.md](./trustreadyctl.md)     |
+| `trustready-agent`           | `trustready-agent/v*` (or `…-rc.N`) | [trustready-agent.md](./trustready-agent.md) ([Windows signing setup](./trustready-agent-windows-signing.md); [RC](./trustready-agent.md#rc-release)) |
 | `@trustready/n8n-nodes-probo` | `@trustready/n8n-nodes-probo/v*`   | [n8n-nodes-probo.md](./n8n-nodes-probo.md) |
 | `@trustready/cookie-banner`  | `@trustready/cookie-banner/v*`      | [cookie-banner.md](./cookie-banner.md) |
 | `@trustready/cookie-banner-tcf` | `@trustready/cookie-banner-tcf/v*` | [cookie-banner-tcf.md](./cookie-banner-tcf.md) |
@@ -30,11 +30,11 @@ user-facing changes.** Never release a track that has no commits since its
 last tag.
 
 When the user asks for a release **for a specific track** (e.g. "release
-the CLI", "release probod"), open the corresponding entrypoint above and
+the CLI", "release trustreadyd"), open the corresponding entrypoint above and
 follow it.
 
-`probo-agent` is the only track that may ship an RC. When that track is
-in the release set, follow the ask in [probo-agent.md](./probo-agent.md)
+`trustready-agent` is the only track that may ship an RC. When that track is
+in the release set, follow the ask in [trustready-agent.md](./trustready-agent.md)
 before bumping its version.
 
 Versions are SemVer in the **0.x** series. Never bump MAJOR.
@@ -62,21 +62,21 @@ track's paths:
 git log $(git describe --tags --abbrev=0 --match='prb/v*')..HEAD --oneline \
   -- cmd/prb pkg/cli pkg/cmd
 
-# probod (server group: probod + console + compliance-portal + employee-portal + ui)
-git log $(git describe --tags --abbrev=0 --match='probod/v*')..HEAD --oneline \
-  -- cmd/probod apps/console apps/compliance-portal apps/employee-portal packages/ui pkg
+# trustreadyd (server group: trustreadyd + console + compliance-portal + employee-portal + ui)
+git log $(git describe --tags --abbrev=0 --match='trustreadyd/v*')..HEAD --oneline \
+  -- cmd/trustreadyd apps/console apps/compliance-portal apps/employee-portal packages/ui pkg
 
-# probod-bootstrap
-git log $(git describe --tags --abbrev=0 --match='probod-bootstrap/v*')..HEAD --oneline \
-  -- cmd/probod-bootstrap
+# trustreadyd-bootstrap
+git log $(git describe --tags --abbrev=0 --match='trustreadyd-bootstrap/v*')..HEAD --oneline \
+  -- cmd/trustreadyd-bootstrap
 
-# proboctl
-git log $(git describe --tags --abbrev=0 --match='proboctl/v*')..HEAD --oneline \
-  -- cmd/proboctl pkg/proboctl
+# trustreadyctl
+git log $(git describe --tags --abbrev=0 --match='trustreadyctl/v*')..HEAD --oneline \
+  -- cmd/trustreadyctl pkg/trustreadyctl
 
-# probo-agent
-git log $(git describe --tags --abbrev=0 --match='probo-agent/v*')..HEAD --oneline \
-  -- cmd/probo-agent pkg/deviceagent
+# trustready-agent
+git log $(git describe --tags --abbrev=0 --match='trustready-agent/v*')..HEAD --oneline \
+  -- cmd/trustready-agent pkg/deviceagent
 
 # @trustready/n8n-nodes-probo
 git log $(git describe --tags --abbrev=0 --match='@trustready/n8n-nodes-probo/v*')..HEAD --oneline \

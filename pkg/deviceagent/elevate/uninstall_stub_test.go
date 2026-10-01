@@ -29,6 +29,6 @@ import (
 func TestRunElevatedUninstallUnsupported(t *testing.T) {
 	t.Parallel()
 
-	err := RunElevatedUninstall("/usr/local/bin/probo-agent", "/var/lib/probo-agent")
+	err := RunElevatedUninstall("/usr/local/bin/trustready-agent", "/var/lib/trustready-agent")
 	require.Error(t, err)
 }

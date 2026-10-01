@@ -1,0 +1,59 @@
+// Copyright (c) 2026 TrustReady <hello@probo.com>.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+package root
+
+import (
+	"os"
+
+	"github.com/spf13/cobra"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadyctl/cmdutil"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadyctl/commonthirdparty"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadyctl/commontrackerpattern"
+	trustreadyctlcookiebanner "github.com/DhruvWork/trustready-grc/pkg/trustreadyctl/cookiebanner"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadyctl/repair"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadyctl/seed"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadyctl/version"
+)
+
+func NewCmdRoot(f *cmdutil.Factory) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:           "trustreadyctl <command> [flags]",
+		Short:         "Probo instance management CLI",
+		SilenceUsage:  true,
+		SilenceErrors: true,
+	}
+
+	cmd.PersistentFlags().StringVar(
+		&f.PgDSN,
+		"pg-dsn",
+		os.Getenv("DATABASE_URL"),
+		"PostgreSQL connection URL (default: DATABASE_URL env)",
+	)
+
+	cmd.AddCommand(seed.NewCmdSeed(f))
+	cmd.AddCommand(commontrackerpattern.NewCmdCommonTrackerPattern(f))
+	cmd.AddCommand(commonthirdparty.NewCmdCommonThirdParty(f))
+	cmd.AddCommand(trustreadyctlcookiebanner.NewCmdCookieBanner(f))
+	cmd.AddCommand(repair.NewCmdRepair(f))
+	cmd.AddCommand(version.NewCmdVersion(f))
+
+	return cmd
+}

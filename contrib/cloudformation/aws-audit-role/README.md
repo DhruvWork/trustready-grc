@@ -89,7 +89,7 @@ later.
 
 If a self-hosted deployment cannot publish to S3, give the customers the
 upload-a-template path or the Terraform module instead. You can serve the
-YAML from probod for download. That URL cannot drive one-click.
+YAML from trustreadyd for download. That URL cannot drive one-click.
 
 ## The quick-create link
 

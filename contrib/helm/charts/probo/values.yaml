@@ -528,15 +528,15 @@ postgresql:
       memory: "2Gi"
       ephemeral-storage: "5Gi"
   auth:
-    postgresUser: probod
-    postgresPassword: probod
-    database: probod
+    postgresUser: trustreadyd
+    postgresPassword: trustreadyd
+    database: trustreadyd
   # External PostgreSQL configuration (used when enabled=false)
   host: ""  # REQUIRED when enabled=false: PostgreSQL host
   port: 5432
-  username: probod
+  username: trustreadyd
   password: ""  # REQUIRED when enabled=false: PostgreSQL password
-  database: probod
+  database: trustreadyd
   poolSize: 100
   # Minimum number of warm connections kept in the pool. Raising this
   # value avoids TLS + PostgreSQL startup handshake latency on bursty
@@ -568,7 +568,7 @@ postgresql:
 s3:
   # External S3 configuration (used when seaweedfs.enabled=false)
   region: "us-east-1"
-  bucket: "probod"
+  bucket: "trustreadyd"
   # For AWS S3, leave endpoint empty
   # For S3-compatible storage (SeaweedFS, DigitalOcean Spaces, etc.), set the endpoint
   endpoint: ""
@@ -604,8 +604,8 @@ seaweedfs:
     storageClass: ""
 
   auth:
-    accessKey: probod
-    secretKey: probod
+    accessKey: trustreadyd
+    secretKey: trustreadyd
 
 # Headless Chrome for PDF generation
 chrome:

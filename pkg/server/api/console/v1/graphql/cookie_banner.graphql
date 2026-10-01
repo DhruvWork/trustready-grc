@@ -148,7 +148,7 @@ type CookieBanner implements Node {
     defaultLanguage: String!
     publisherCountryCode: String!
     """
-    IAB TCF CMP ID for this instance, from probod config. 4095 is a
+    IAB TCF CMP ID for this instance, from trustreadyd config. 4095 is a
     placeholder until IAB Europe issues a registered ID.
     """
     tcfCmpId: Int! @goField(forceResolver: true)

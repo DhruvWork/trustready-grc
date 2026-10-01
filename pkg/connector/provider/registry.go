@@ -20,7 +20,7 @@
 
 // Package provider holds one Go file per connector provider. Each file
 // exposes a private constructor that returns a *Registration; the
-// builtin set is assembled by NewBuiltinRegistry, which probod calls
+// builtin set is assembled by NewBuiltinRegistry, which trustreadyd calls
 // once at startup and threads as an explicit *Registry into every
 // consumer. The registry carries no package-level state.
 //
@@ -47,20 +47,20 @@ import (
 // constructors, and so on. It is safe for concurrent use.
 //
 // All consumers receive a *Registry constructed by NewBuiltinRegistry
-// at probod startup; no package-level singleton exists.
+// at trustreadyd startup; no package-level singleton exists.
 type Registry struct {
 	mu        sync.RWMutex
 	providers map[coredata.ConnectorProvider]*Registration
 	// managedAPIKeys holds the Probo-supplied API key for providers with
 	// ManagedAPIKey registrations (e.g. Crisp's marketplace plugin token).
-	// Populated by probod from bootstrap config via SetManagedAPIKey; empty
+	// Populated by trustreadyd from bootstrap config via SetManagedAPIKey; empty
 	// until the operator configures the credential.
 	managedAPIKeys map[coredata.ConnectorProvider]string
 	// managedResourceIDs holds an optional Probo-supplied resource identifier
 	// for a ManagedAPIKey provider, distinct from the credential. Crisp needs
 	// it: the plugin token's Basic identifier is not the plugin ID, yet the
 	// per-website plugin API (used for ownership verification) requires the
-	// plugin ID in the path. Populated by probod via SetManagedResourceID;
+	// plugin ID in the path. Populated by trustreadyd via SetManagedResourceID;
 	// empty for providers that need no such identifier.
 	managedResourceIDs map[coredata.ConnectorProvider]string
 }
@@ -395,7 +395,7 @@ func (r *Registry) All() []*Registration {
 }
 
 // PublicClients returns every Registration flagged PublicClient (CIMD,
-// no client_secret). probod uses this to auto-register their OAuth2
+// no client_secret). trustreadyd uses this to auto-register their OAuth2
 // connectors with a deployment-derived client_id and state-signing key.
 // Order is not stable.
 func (r *Registry) PublicClients() []*Registration {
@@ -525,7 +525,7 @@ func (r *Registry) ValidateAPIKey(p coredata.ConnectorProvider, key string) erro
 }
 
 // SetManagedAPIKey records the Probo-supplied API key for a
-// ManagedAPIKey provider (e.g. Crisp). probod calls this from bootstrap
+// ManagedAPIKey provider (e.g. Crisp). trustreadyd calls this from bootstrap
 // config so the create-connector resolver can inject the key and the
 // driver catalog can surface the provider. An empty key is treated as
 // "not configured": it is not stored, keeping the provider hidden.
@@ -555,7 +555,7 @@ func (r *Registry) ManagedAPIKey(p coredata.ConnectorProvider) (string, bool) {
 
 // SetManagedResourceID records an optional Probo-supplied resource
 // identifier for a ManagedAPIKey provider (e.g. the Crisp plugin ID used
-// by the per-website plugin API). probod calls this from bootstrap config
+// by the per-website plugin API). trustreadyd calls this from bootstrap config
 // alongside SetManagedAPIKey. An empty id is treated as "not configured":
 // it is not stored.
 func (r *Registry) SetManagedResourceID(p coredata.ConnectorProvider, id string) {

@@ -54,7 +54,7 @@ func TestClientExchangeEnrollmentToken(t *testing.T) {
 	}))
 	t.Cleanup(srv.Close)
 
-	client := NewClient(srv.URL, "", "probo-agent/test")
+	client := NewClient(srv.URL, "", "trustready-agent/test")
 
 	apiKey, err := client.ExchangeEnrollmentToken(context.Background(), "enroll-token")
 	require.NoError(t, err)
@@ -69,7 +69,7 @@ func TestClientExchangeEnrollmentTokenUnauthorized(t *testing.T) {
 	}))
 	t.Cleanup(srv.Close)
 
-	client := NewClient(srv.URL, "", "probo-agent/test")
+	client := NewClient(srv.URL, "", "trustready-agent/test")
 
 	_, err := client.ExchangeEnrollmentToken(context.Background(), "used-token")
 	require.Error(t, err)

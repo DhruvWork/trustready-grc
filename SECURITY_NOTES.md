@@ -115,7 +115,7 @@ degrade service for other tenants.
 The shared GraphQL handler now enforces a parser token limit that
 rejects oversized queries before execution, a fixed query complexity
 limit, and an LRU query cache, with limits configurable per
-environment via `PROBOD_API_GRAPHQL_*` env vars and Helm values.
+environment via `TRUSTREADYD_API_GRAPHQL_*` env vars and Helm values.
 
 Reported by [Muthu-Devarajan](https://github.com/Muthu-Devarajan).
 ([GHSA-prh2-g8pv-m7p9](https://github.com/getprobo/probo/security/advisories/GHSA-prh2-g8pv-m7p9))

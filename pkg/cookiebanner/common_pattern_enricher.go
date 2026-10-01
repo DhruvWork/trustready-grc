@@ -42,7 +42,7 @@ import (
 // then fans the result out to every linked tracker pattern. It holds the
 // agent dependencies so the enrichment logic can run from either the
 // background worker (one claimed row at a time) or synchronously over a
-// known set of ids (e.g. proboctl). It is enrichment's single source of
+// known set of ids (e.g. trustreadyctl). It is enrichment's single source of
 // truth - the worker is a thin queue poller that delegates here.
 type CommonPatternEnricher struct {
 	pg                *pg.Client

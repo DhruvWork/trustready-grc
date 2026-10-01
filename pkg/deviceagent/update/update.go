@@ -18,11 +18,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Package update self-updates the probo-agent binary from GitHub
+// Package update self-updates the trustready-agent binary from GitHub
 // Releases. The update flow is:
 //
 //  1. List the latest releases for the configured repo, filtering on a
-//     tag prefix (`probo-agent/v` by default).
+//     tag prefix (`trustready-agent/v` by default).
 //  2. Pick the highest semver newer than the agent's current version.
 //  3. Download the matching archive plus checksums.txt, verify SHA-256.
 //  4. Extract the archive and atomically replace the running binary.
@@ -53,12 +53,12 @@ import (
 )
 
 const (
-	// DefaultRepo is the GitHub repository hosting probo-agent
+	// DefaultRepo is the GitHub repository hosting trustready-agent
 	// releases.
 	DefaultRepo = "getprobo/probo"
 	// DefaultTagPrefix is the tag prefix used by the agent's release
-	// pipeline. Releases look like `probo-agent/v0.1.0`.
-	DefaultTagPrefix = "probo-agent/v"
+	// pipeline. Releases look like `trustready-agent/v0.1.0`.
+	DefaultTagPrefix = "trustready-agent/v"
 
 	defaultAPIBaseURL      = "https://api.github.com"
 	defaultAssetBaseURL    = "https://github.com"
@@ -93,7 +93,7 @@ type (
 		// Verifier validates the Sigstore bundle that accompanies
 		// every release. When nil, the default cosign Verifier is
 		// constructed lazily on first Apply, pinned to the
-		// probo-agent release workflow.
+		// trustready-agent release workflow.
 		Verifier Verifier
 
 		// AllowPrereleases includes GitHub prerelease tags when
@@ -284,7 +284,7 @@ func releaseForLayout(
 
 // EnsureGUIBinary installs the Windows GUI companion when it is missing.
 // NOTE: Remove this migration and currentRelease after all supported
-// installs include probo-agentw.exe.
+// installs include trustready-agentw.exe.
 func (u *Updater) EnsureGUIBinary(ctx context.Context) error {
 	if u.ExePath == "" {
 		return errors.New("agent executable path is empty")
@@ -376,7 +376,7 @@ func (u *Updater) apply(ctx context.Context, rel *Release, replaceConsole bool) 
 		return err
 	}
 
-	workDir, err := os.MkdirTemp("", "probo-agent-update-")
+	workDir, err := os.MkdirTemp("", "trustready-agent-update-")
 	if err != nil {
 		return fmt.Errorf("cannot create update workdir: %w", err)
 	}
@@ -593,7 +593,7 @@ func (u *Updater) userAgent() string {
 		return u.UserAgent
 	}
 
-	return "probo-agent-updater"
+	return "trustready-agent-updater"
 }
 
 func (u *Updater) goos() string {
@@ -613,7 +613,7 @@ func (u *Updater) goarch() string {
 }
 
 // parseTag returns the version (e.g. "0.2.0") for a tag whose value
-// starts with prefix (e.g. "probo-agent/v").
+// starts with prefix (e.g. "trustready-agent/v").
 func parseTag(tag, prefix string) (string, bool) {
 	if !strings.HasPrefix(tag, prefix) {
 		return "", false

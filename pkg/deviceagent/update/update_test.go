@@ -52,13 +52,13 @@ func TestParseTag(t *testing.T) {
 		want   string
 		ok     bool
 	}{
-		{"probo-agent/v0.1.0", "probo-agent/v", "0.1.0", true},
-		{"probo-agent/v0.2.0-rc.1", "probo-agent/v", "0.2.0-rc.1", true},
-		{"probo-agent/v1.2.3", "probo-agent/v", "1.2.3", true},
-		{"v1.2.3", "probo-agent/v", "", false},
-		{"probo-agent/vlatest", "probo-agent/v", "", false},
-		{"probo-agent/v", "probo-agent/v", "", false},
-		{"unrelated/v0.1.0", "probo-agent/v", "", false},
+		{"trustready-agent/v0.1.0", "trustready-agent/v", "0.1.0", true},
+		{"trustready-agent/v0.2.0-rc.1", "trustready-agent/v", "0.2.0-rc.1", true},
+		{"trustready-agent/v1.2.3", "trustready-agent/v", "1.2.3", true},
+		{"v1.2.3", "trustready-agent/v", "", false},
+		{"trustready-agent/vlatest", "trustready-agent/v", "", false},
+		{"trustready-agent/v", "trustready-agent/v", "", false},
+		{"unrelated/v0.1.0", "trustready-agent/v", "", false},
 	}
 
 	for _, tc := range cases {
@@ -89,11 +89,11 @@ func TestReadChecksum(t *testing.T) {
 			dir := t.TempDir()
 			file := filepath.Join(dir, "checksums.txt")
 			content := "" +
-				"deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef  probo-agent_Linux_x86_64.tar.gz\n" +
-				"abc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abcd  probo-agent_Darwin_arm64.tar.gz\n"
+				"deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef  trustready-agent_Linux_x86_64.tar.gz\n" +
+				"abc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abcd  trustready-agent_Darwin_arm64.tar.gz\n"
 			require.NoError(t, os.WriteFile(file, []byte(content), 0o600))
 
-			got, err := readChecksum(file, "probo-agent_Darwin_arm64.tar.gz")
+			got, err := readChecksum(file, "trustready-agent_Darwin_arm64.tar.gz")
 			require.NoError(t, err)
 			assert.Equal(t, "abc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abcd", got)
 		},
@@ -106,10 +106,10 @@ func TestReadChecksum(t *testing.T) {
 
 			dir := t.TempDir()
 			file := filepath.Join(dir, "checksums.txt")
-			content := "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef *probo-agent_Linux_x86_64.tar.gz\n"
+			content := "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef *trustready-agent_Linux_x86_64.tar.gz\n"
 			require.NoError(t, os.WriteFile(file, []byte(content), 0o600))
 
-			got, err := readChecksum(file, "probo-agent_Linux_x86_64.tar.gz")
+			got, err := readChecksum(file, "trustready-agent_Linux_x86_64.tar.gz")
 			require.NoError(t, err)
 			assert.Equal(t, "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef", got)
 		},
@@ -124,7 +124,7 @@ func TestReadChecksum(t *testing.T) {
 			file := filepath.Join(dir, "checksums.txt")
 			require.NoError(t, os.WriteFile(file, []byte("deadbeef  other.tar.gz\n"), 0o600))
 
-			_, err := readChecksum(file, "probo-agent_Linux_x86_64.tar.gz")
+			_, err := readChecksum(file, "trustready-agent_Linux_x86_64.tar.gz")
 			require.Error(t, err)
 		},
 	)
@@ -327,7 +327,7 @@ func newTestUpdater(server *fakeReleaseServer, currentVersion, exePath, goos, go
 		AssetBaseURL:   server.URL(),
 		CurrentVersion: currentVersion,
 		ExePath:        exePath,
-		UserAgent:      "probo-agent-test/0.0.0",
+		UserAgent:      "trustready-agent-test/0.0.0",
 		Logger:         log.NewLogger(log.WithName("update-test")),
 		HTTP: &http.Client{
 			Transport: httpclient.DefaultPooledTransport(
@@ -353,9 +353,9 @@ func TestUpdater_CheckLatest(t *testing.T) {
 
 			layout, err := LayoutFor("linux", "amd64")
 			require.NoError(t, err)
-			fake := newFakeReleaseServer(t, "probo-agent/v0.2.0", "0.2.0", layout, []byte("new"))
+			fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0", "0.2.0", layout, []byte("new"))
 
-			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "probo-agent"), "linux", "amd64")
+			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "trustready-agent"), "linux", "amd64")
 			rel, err := u.CheckLatest(context.Background())
 			require.NoError(t, err)
 			assert.Equal(t, "0.2.0", rel.Version)
@@ -370,9 +370,9 @@ func TestUpdater_CheckLatest(t *testing.T) {
 
 			layout, err := LayoutFor("darwin", "arm64")
 			require.NoError(t, err)
-			fake := newFakeReleaseServer(t, "probo-agent/v0.1.0", "0.1.0", layout, []byte("same"))
+			fake := newFakeReleaseServer(t, "trustready-agent/v0.1.0", "0.1.0", layout, []byte("same"))
 
-			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "probo-agent"), "darwin", "arm64")
+			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "trustready-agent"), "darwin", "arm64")
 			_, err = u.CheckLatest(context.Background())
 			assert.ErrorIs(t, err, ErrNoUpdateAvailable)
 		},
@@ -385,10 +385,10 @@ func TestUpdater_CheckLatest(t *testing.T) {
 
 			layout, err := LayoutFor("linux", "amd64")
 			require.NoError(t, err)
-			fake := newFakeReleaseServer(t, "probo-agent/v0.2.0-rc.1", "0.2.0-rc.1", layout, []byte("rc"))
+			fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0-rc.1", "0.2.0-rc.1", layout, []byte("rc"))
 			fake.prerelease = true
 
-			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "probo-agent"), "linux", "amd64")
+			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "trustready-agent"), "linux", "amd64")
 			_, err = u.CheckLatest(context.Background())
 			assert.ErrorIs(t, err, ErrNoUpdateAvailable)
 		},
@@ -401,10 +401,10 @@ func TestUpdater_CheckLatest(t *testing.T) {
 
 			layout, err := LayoutFor("linux", "amd64")
 			require.NoError(t, err)
-			fake := newFakeReleaseServer(t, "probo-agent/v0.2.0-rc.1", "0.2.0-rc.1", layout, []byte("rc"))
+			fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0-rc.1", "0.2.0-rc.1", layout, []byte("rc"))
 			fake.prerelease = true
 
-			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "probo-agent"), "linux", "amd64")
+			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "trustready-agent"), "linux", "amd64")
 			u.AllowPrereleases = true
 			rel, err := u.CheckLatest(context.Background())
 			require.NoError(t, err)
@@ -419,11 +419,11 @@ func TestUpdater_CheckLatest(t *testing.T) {
 
 			layout, err := LayoutFor("linux", "amd64")
 			require.NoError(t, err)
-			fake := newFakeReleaseServer(t, "probo-agent/v0.2.0-rc.1", "0.2.0-rc.1", layout, []byte("rc"))
+			fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0-rc.1", "0.2.0-rc.1", layout, []byte("rc"))
 			fake.prerelease = true
 			fake.draft = true
 
-			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "probo-agent"), "linux", "amd64")
+			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "trustready-agent"), "linux", "amd64")
 			u.AllowPrereleases = true
 			_, err = u.CheckLatest(context.Background())
 			assert.ErrorIs(t, err, ErrNoUpdateAvailable)
@@ -437,14 +437,14 @@ func TestUpdater_CheckLatest(t *testing.T) {
 
 			layout, err := LayoutFor("linux", "amd64")
 			require.NoError(t, err)
-			fake := newFakeReleaseServer(t, "probo-agent/v0.2.0", "0.2.0", layout, []byte("rel"))
+			fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0", "0.2.0", layout, []byte("rel"))
 			fake.listed = []listedRelease{
-				{tag: "probo-agent/v0.2.0-rc.1", prerelease: true},
-				{tag: "probo-agent/v0.1.0"},
-				{tag: "probo-agent/v0.2.0"},
+				{tag: "trustready-agent/v0.2.0-rc.1", prerelease: true},
+				{tag: "trustready-agent/v0.1.0"},
+				{tag: "trustready-agent/v0.2.0"},
 			}
 
-			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "probo-agent"), "linux", "amd64")
+			u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "trustready-agent"), "linux", "amd64")
 			u.AllowPrereleases = true
 			rel, err := u.CheckLatest(context.Background())
 			require.NoError(t, err)
@@ -459,9 +459,9 @@ func TestUpdater_CheckLatest(t *testing.T) {
 
 			layout, err := LayoutFor("linux", "amd64")
 			require.NoError(t, err)
-			fake := newFakeReleaseServer(t, "probo-agent/v0.1.0", "0.1.0", layout, []byte("rel"))
+			fake := newFakeReleaseServer(t, "trustready-agent/v0.1.0", "0.1.0", layout, []byte("rel"))
 
-			u := newTestUpdater(fake, "dev", filepath.Join(t.TempDir(), "probo-agent"), "linux", "amd64")
+			u := newTestUpdater(fake, "dev", filepath.Join(t.TempDir(), "trustready-agent"), "linux", "amd64")
 			rel, err := u.CheckLatest(context.Background())
 			require.NoError(t, err)
 			assert.Equal(t, "0.1.0", rel.Version)
@@ -477,12 +477,12 @@ func TestUpdater_Apply(t *testing.T) {
 	}
 
 	dir := t.TempDir()
-	exePath := filepath.Join(dir, "probo-agent")
+	exePath := filepath.Join(dir, "trustready-agent")
 	require.NoError(t, os.WriteFile(exePath, []byte("old-binary"), 0o755))
 
 	layout, err := LayoutFor("linux", "amd64")
 	require.NoError(t, err)
-	fake := newFakeReleaseServer(t, "probo-agent/v0.2.0", "0.2.0", layout, []byte("new-binary"))
+	fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0", "0.2.0", layout, []byte("new-binary"))
 
 	u := newTestUpdater(fake, "0.1.0", exePath, "linux", "amd64")
 	rel, err := u.CheckLatest(context.Background())
@@ -503,15 +503,15 @@ func TestUpdater_Apply_ReplacesWindowsBinaryPair(t *testing.T) {
 	t.Parallel()
 
 	dir := t.TempDir()
-	exePath := filepath.Join(dir, "probo-agent.exe")
-	guiExePath := filepath.Join(dir, "probo-agentw.exe")
+	exePath := filepath.Join(dir, "trustready-agent.exe")
+	guiExePath := filepath.Join(dir, "trustready-agentw.exe")
 
 	require.NoError(t, os.WriteFile(exePath, []byte("old-console"), 0o755))
 	require.NoError(t, os.WriteFile(guiExePath, []byte("old-gui"), 0o755))
 
 	layout, err := LayoutFor("windows", "amd64")
 	require.NoError(t, err)
-	fake := newFakeReleaseServer(t, "probo-agent/v0.2.0", "0.2.0", layout, []byte("new-console"))
+	fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0", "0.2.0", layout, []byte("new-console"))
 
 	u := newTestUpdater(fake, "0.1.0", exePath, "windows", "amd64")
 	rel, err := u.CheckLatest(context.Background())
@@ -531,14 +531,14 @@ func TestUpdater_EnsureGUIBinary_InstallsMissingCurrentCompanion(t *testing.T) {
 	t.Parallel()
 
 	dir := t.TempDir()
-	exePath := filepath.Join(dir, "probo-agent.exe")
-	guiExePath := filepath.Join(dir, "probo-agentw.exe")
+	exePath := filepath.Join(dir, "trustready-agent.exe")
+	guiExePath := filepath.Join(dir, "trustready-agentw.exe")
 
 	require.NoError(t, os.WriteFile(exePath, []byte("current-console"), 0o755))
 
 	layout, err := LayoutFor("windows", "amd64")
 	require.NoError(t, err)
-	fake := newFakeReleaseServer(t, "probo-agent/v0.2.0", "0.2.0", layout, []byte("release-console"))
+	fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0", "0.2.0", layout, []byte("release-console"))
 
 	u := newTestUpdater(fake, "0.2.0", exePath, "windows", "amd64")
 	require.NoError(t, u.EnsureGUIBinary(context.Background()))
@@ -556,15 +556,15 @@ func TestUpdater_Apply_RejectsWindowsArchiveWithoutGUIBinary(t *testing.T) {
 	t.Parallel()
 
 	dir := t.TempDir()
-	exePath := filepath.Join(dir, "probo-agent.exe")
-	guiExePath := filepath.Join(dir, "probo-agentw.exe")
+	exePath := filepath.Join(dir, "trustready-agent.exe")
+	guiExePath := filepath.Join(dir, "trustready-agentw.exe")
 
 	require.NoError(t, os.WriteFile(exePath, []byte("old-console"), 0o755))
 	require.NoError(t, os.WriteFile(guiExePath, []byte("old-gui"), 0o755))
 
 	layout, err := LayoutFor("windows", "amd64")
 	require.NoError(t, err)
-	fake := newFakeReleaseServer(t, "probo-agent/v0.2.0", "0.2.0", layout, []byte("new-console"))
+	fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0", "0.2.0", layout, []byte("new-console"))
 
 	incompleteLayout := layout
 	incompleteLayout.GUIBinaryName = ""
@@ -578,7 +578,7 @@ func TestUpdater_Apply_RejectsWindowsArchiveWithoutGUIBinary(t *testing.T) {
 
 	err = u.Apply(context.Background(), rel)
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "probo-agentw.exe")
+	assert.Contains(t, err.Error(), "trustready-agentw.exe")
 
 	got, err := os.ReadFile(exePath)
 	require.NoError(t, err)
@@ -594,10 +594,10 @@ func TestUpdater_CheckLatest_SkipsUnsignedRelease(t *testing.T) {
 
 	layout, err := LayoutFor("linux", "amd64")
 	require.NoError(t, err)
-	fake := newFakeReleaseServer(t, "probo-agent/v0.2.0", "0.2.0", layout, []byte("new"))
+	fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0", "0.2.0", layout, []byte("new"))
 	fake.omitBundle = true
 
-	u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "probo-agent"), "linux", "amd64")
+	u := newTestUpdater(fake, "0.1.0", filepath.Join(t.TempDir(), "trustready-agent"), "linux", "amd64")
 	_, err = u.CheckLatest(context.Background())
 	assert.ErrorIs(t, err, ErrNoUpdateAvailable, "release without a sigstore bundle must be ignored")
 }
@@ -606,12 +606,12 @@ func TestUpdater_Apply_RejectsBadSignature(t *testing.T) {
 	t.Parallel()
 
 	dir := t.TempDir()
-	exePath := filepath.Join(dir, "probo-agent")
+	exePath := filepath.Join(dir, "trustready-agent")
 	require.NoError(t, os.WriteFile(exePath, []byte("old-binary"), 0o755))
 
 	layout, err := LayoutFor("linux", "amd64")
 	require.NoError(t, err)
-	fake := newFakeReleaseServer(t, "probo-agent/v0.2.0", "0.2.0", layout, []byte("new-binary"))
+	fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0", "0.2.0", layout, []byte("new-binary"))
 
 	u := newTestUpdater(fake, "0.1.0", exePath, "linux", "amd64")
 	u.Verifier = rejectAllVerifier{err: fmt.Errorf("test: signer identity mismatch")}
@@ -632,12 +632,12 @@ func TestUpdater_Apply_RejectsCorruptedArchive(t *testing.T) {
 	t.Parallel()
 
 	dir := t.TempDir()
-	exePath := filepath.Join(dir, "probo-agent")
+	exePath := filepath.Join(dir, "trustready-agent")
 	require.NoError(t, os.WriteFile(exePath, []byte("old-binary"), 0o755))
 
 	layout, err := LayoutFor("linux", "amd64")
 	require.NoError(t, err)
-	fake := newFakeReleaseServer(t, "probo-agent/v0.2.0", "0.2.0", layout, []byte("new-binary"))
+	fake := newFakeReleaseServer(t, "trustready-agent/v0.2.0", "0.2.0", layout, []byte("new-binary"))
 
 	// Corrupt the archive without updating checksums.
 	fake.archiveBytes = append(fake.archiveBytes, 0xff)

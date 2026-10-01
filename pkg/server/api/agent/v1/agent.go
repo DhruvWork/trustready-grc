@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Package agent_v1 exposes the REST surface that the probo-agent binary
+// Package agent_v1 exposes the REST surface that the trustready-agent binary
 // uses to heartbeat and push device posture results.
 //
 // All endpoints speak JSON; agents should not need a GraphQL client.

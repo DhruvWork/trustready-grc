@@ -289,7 +289,7 @@ func TestEndpointOverrideRejected(t *testing.T) {
 }
 
 // TestEndpointOverrideErrorsNeverEchoCredentials pins that a rejected override
-// keeps its password out of the error, whichever check refuses it. probod
+// keeps its password out of the error, whichever check refuses it. trustreadyd
 // prints this error and refuses to boot, so the message lands in the startup
 // log: an operator who pastes a credentialed URL must not have the secret
 // copied into it. The credentials check is not the one that fires first — a
@@ -448,7 +448,7 @@ func TestDocuSignUsesOverriddenIdentity(t *testing.T) {
 // .env.example against the registry, so the config an operator is told to copy
 // cannot drift from the config that boots. An adversarial review found the
 // earlier version of that block moved Auth, Token and Probe but not Identity,
-// which probod now refuses — the documentation and the invariant have to agree.
+// which trustreadyd now refuses — the documentation and the invariant have to agree.
 func TestDocumentedDocuSignOverrideBoots(t *testing.T) {
 	t.Parallel()
 

@@ -29,7 +29,7 @@ import (
 
 // Per-field outcomes recorded in the common tracker pattern enrichment
 // payload. They mirror the common-third-party enrichment provenance so the
-// proboctl display can compute the same "X/Y resolved" completeness across
+// trustreadyctl display can compute the same "X/Y resolved" completeness across
 // both catalogs.
 const (
 	commonPatternFieldStatusFound    = "found"

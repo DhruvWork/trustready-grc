@@ -35,8 +35,8 @@ func TestInstall_RejectsNonCanonicalExePath(t *testing.T) {
 
 	err := Install(
 		Config{
-			ExePath: "/usr/local/bin/probo-agent",
-			Dir:     "/var/lib/probo-agent",
+			ExePath: "/usr/local/bin/trustready-agent",
+			Dir:     "/var/lib/trustready-agent",
 		},
 	)
 	require.Error(t, err)
@@ -48,7 +48,7 @@ func TestInstall_RejectsEmptyExePath(t *testing.T) {
 
 	err := Install(
 		Config{
-			Dir: "/var/lib/probo-agent",
+			Dir: "/var/lib/trustready-agent",
 		},
 	)
 	require.Error(t, err)

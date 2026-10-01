@@ -38,7 +38,7 @@ WITH
             o.id as organization_id,
             generate_gid(decode_base64_unpadded(o.tenant_id), 25) as file_id,
             o.tenant_id,
-            'probod' as bucket_name,
+            'trustreadyd' as bucket_name,
             'image/png' as mime_type,
             'logo.png' as file_name,
             o.logo_object_key,

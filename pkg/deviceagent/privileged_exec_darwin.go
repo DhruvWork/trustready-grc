@@ -57,7 +57,7 @@ func RemovePrivilegedExecutable() error {
 	return nil
 }
 
-// RemoveLegacyExecutable deletes /usr/local/bin/probo-agent when present.
+// RemoveLegacyExecutable deletes /usr/local/bin/trustready-agent when present.
 func RemoveLegacyExecutable() error {
 	return removePath(LegacyExecutablePath())
 }

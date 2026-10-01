@@ -85,7 +85,7 @@ func New(dir, version string, logger *log.Logger) *Agent {
 	return &Agent{
 		Dir:       dir,
 		Version:   version,
-		UserAgent: fmt.Sprintf("probo-agent/%s", version),
+		UserAgent: fmt.Sprintf("trustready-agent/%s", version),
 		Logger:    logger,
 		collectHostInfo: func() HostInfo {
 			return CollectHostInfo()

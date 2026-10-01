@@ -103,7 +103,7 @@ type (
 		// token and to derive the PKCE verifier. Public clients (CIMD: no
 		// client_secret, authenticated by PKCE) MUST set it to a
 		// server-side secret; confidential clients leave it empty and fall
-		// back to ClientSecret (see stateSalt). It is set by the probod
+		// back to ClientSecret (see stateSalt). It is set by the trustreadyd
 		// wiring, never serialized.
 		StateSigningKey string
 
@@ -277,7 +277,7 @@ func (c *OAuth2Connector) InitiateWithState(
 	opts InitiateOptions,
 ) (string, error) {
 	// An empty salt would HMAC the state token (and derive the PKCE
-	// verifier) with an empty key, making both forgeable. probod always
+	// verifier) with an empty key, making both forgeable. trustreadyd always
 	// sets one, but guard at the type level so a misconfigured connector
 	// fails loudly instead of issuing a forgeable state.
 	salt := c.stateSalt()
@@ -598,7 +598,7 @@ func (c *OAuth2Connector) CompleteWithState(ctx context.Context, r *http.Request
 // OAuth2 state tokens (and PKCE verifiers) for public clients, from a
 // server-side secret (the active OAuth2 server signing key). The domain
 // separator avoids reusing the raw server key directly for an unrelated
-// purpose. probod calls this once at startup and assigns the result to
+// purpose. trustreadyd calls this once at startup and assigns the result to
 // each public client's StateSigningKey.
 //
 // NOTE: the key is derived from the single ACTIVE OAuth2 server signing key.

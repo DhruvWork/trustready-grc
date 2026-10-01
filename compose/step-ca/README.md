@@ -14,12 +14,12 @@ The ACME directory URL is `https://localhost:9000/acme/acme/directory`.
 
 `make dev-config` persists a local ACME account key at
 `cfg/.dev-acme-account-key.pem` (gitignored via `*.pem`). Without a stable
-account key, each `probod` restart registers a new ACME account and in-flight
+account key, each `trustreadyd` restart registers a new ACME account and in-flight
 orders fail poll with `401 unauthorized`.
 
 step-ca shares the `acme-http-01-proxy` container network so HTTP-01 validation
 to `http://<hostname>/.well-known/acme-challenge/...` reaches Caddy on port 80,
-which forwards to probod's trust-center HTTP listener on the host.
+which forwards to trustreadyd's trust-center HTTP listener on the host.
 
 ## Custom domain DNS (optional)
 
@@ -27,5 +27,5 @@ Managed compliance-page domains (`*.probopage.localhost`) resolve via the
 `.localhost` TLD and skip DNS checks.
 
 For customer custom domains in local dev, point DNS at the host via
-`/etc/hosts` and ensure HTTP-01 reaches probod through the
+`/etc/hosts` and ensure HTTP-01 reaches trustreadyd through the
 `acme-http-01-proxy` service on port 80.

@@ -19,7 +19,7 @@
 -- SOFTWARE.
 
 -- Move the source-name retry policy into the claim predicate.
--- The DEFAULT is kept rather than dropped in this migration: probod deploys
+-- The DEFAULT is kept rather than dropped in this migration: trustreadyd deploys
 -- blue/green, so pods running the previous release keep inserting sources
 -- without this column until the rollout finishes, and those writes need it.
 -- Dropping it belongs in a later migration.

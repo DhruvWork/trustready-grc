@@ -3,43 +3,43 @@ services:
     image: "artifact.probo.inc/probo/probo:latest"
     environment:
       # Required secrets (use secure values in production)
-      PROBOD_ENCRYPTION_KEY: ${PROBOD_ENCRYPTION_KEY}
-      PROBOD_AUTH_COOKIE_SECRET: ${PROBOD_AUTH_COOKIE_SECRET}
-      PROBOD_AUTH_PASSWORD_PEPPER: ${PROBOD_AUTH_PASSWORD_PEPPER}
-      PROBOD_TRUST_AUTH_TOKEN_SECRET: ${PROBOD_TRUST_AUTH_TOKEN_SECRET}
+      TRUSTREADYD_ENCRYPTION_KEY: ${TRUSTREADYD_ENCRYPTION_KEY}
+      TRUSTREADYD_AUTH_COOKIE_SECRET: ${TRUSTREADYD_AUTH_COOKIE_SECRET}
+      TRUSTREADYD_AUTH_PASSWORD_PEPPER: ${TRUSTREADYD_AUTH_PASSWORD_PEPPER}
+      TRUSTREADYD_TRUST_AUTH_TOKEN_SECRET: ${TRUSTREADYD_TRUST_AUTH_TOKEN_SECRET}
 
       # Application settings
-      PROBOD_BASE_URL: ${PROBOD_BASE_URL}
-      PROBOD_API_ADDR: ${PROBOD_API_ADDR}
-      PROBOD_API_CORS_ALLOWED_ORIGINS: ${PROBOD_API_CORS_ALLOWED_ORIGINS}
+      TRUSTREADYD_BASE_URL: ${TRUSTREADYD_BASE_URL}
+      TRUSTREADYD_API_ADDR: ${TRUSTREADYD_API_ADDR}
+      TRUSTREADYD_API_CORS_ALLOWED_ORIGINS: ${TRUSTREADYD_API_CORS_ALLOWED_ORIGINS}
 
       # PostgreSQL database
-      PROBOD_PG_ADDR: "postgres:5432"
-      PROBOD_PG_USERNAME: "postgres"
-      PROBOD_PG_PASSWORD: "postgres"
-      PROBOD_PG_DATABASE: "probod"
-      PROBOD_PG_POOL_SIZE: "100"
+      TRUSTREADYD_PG_ADDR: "postgres:5432"
+      TRUSTREADYD_PG_USERNAME: "postgres"
+      TRUSTREADYD_PG_PASSWORD: "postgres"
+      TRUSTREADYD_PG_DATABASE: "trustreadyd"
+      TRUSTREADYD_PG_POOL_SIZE: "100"
 
       # S3-compatible storage (SeaweedFS)
-      PROBOD_AWS_REGION: "us-east-1"
-      PROBOD_AWS_BUCKET: "probod"
-      PROBOD_AWS_ACCESS_KEY_ID: "probod"
-      PROBOD_AWS_SECRET_ACCESS_KEY: "thisisnotasecret"
-      PROBOD_AWS_ENDPOINT: "http://seaweedfs:8333"
-      PROBOD_AWS_USE_PATH_STYLE: "true"
+      TRUSTREADYD_AWS_REGION: "us-east-1"
+      TRUSTREADYD_AWS_BUCKET: "trustreadyd"
+      TRUSTREADYD_AWS_ACCESS_KEY_ID: "trustreadyd"
+      TRUSTREADYD_AWS_SECRET_ACCESS_KEY: "thisisnotasecret"
+      TRUSTREADYD_AWS_ENDPOINT: "http://seaweedfs:8333"
+      TRUSTREADYD_AWS_USE_PATH_STYLE: "true"
 
       # Observability - Metrics & Tracing
-      PROBOD_METRICS_ADDR: "probo:8081"
-      PROBOD_TRACING_ADDR: ""
+      TRUSTREADYD_METRICS_ADDR: "probo:8081"
+      TRUSTREADYD_TRACING_ADDR: ""
 
       # Email notifications
-      PROBOD_SMTP_ADDR: "your.smtp.server:587"
-      PROBOD_SMTP_TLS_REQUIRED: "false"
-      PROBOD_MAILER_SENDER_NAME: "Probo"
-      PROBOD_MAILER_SENDER_EMAIL: "no-reply@notification.getprobo.com"
+      TRUSTREADYD_SMTP_ADDR: "your.smtp.server:587"
+      TRUSTREADYD_SMTP_TLS_REQUIRED: "false"
+      TRUSTREADYD_MAILER_SENDER_NAME: "Probo"
+      TRUSTREADYD_MAILER_SENDER_EMAIL: "no-reply@notification.getprobo.com"
 
       # Chrome for PDF generation
-      PROBOD_CHROME_DP_ADDR: "chrome:9222"
+      TRUSTREADYD_CHROME_DP_ADDR: "chrome:9222"
     ports:
       - "8080:8080"
       - "8081:8081"

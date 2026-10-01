@@ -41,7 +41,7 @@ func extractBinary(archivePath string, layout AssetLayout, workDir string) (stri
 		archivePath,
 		layout,
 		layout.BinaryName,
-		filepath.Join(workDir, "probo-agent.new"),
+		filepath.Join(workDir, "trustready-agent.new"),
 	)
 }
 
@@ -50,7 +50,7 @@ func extractGUIBinary(archivePath string, layout AssetLayout, workDir string) (s
 		archivePath,
 		layout,
 		layout.GUIBinaryName,
-		filepath.Join(workDir, "probo-agentw.new"),
+		filepath.Join(workDir, "trustready-agentw.new"),
 	)
 }
 

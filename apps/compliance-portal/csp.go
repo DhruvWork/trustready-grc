@@ -43,7 +43,7 @@ type contentSecurityPolicyData struct {
 }
 
 // ContentSecurityPolicy returns the compliance-portal CSP with AppOrigin and
-// FileStorageOrigin substituted (PROBOD_BASE_URL origin and the object-storage
+// FileStorageOrigin substituted (TRUSTREADYD_BASE_URL origin and the object-storage
 // origin used after file download redirects).
 func ContentSecurityPolicy(appOrigin string, fileStorageOrigin string) (string, error) {
 	origin, err := baseurl.CSPOrigin(appOrigin)

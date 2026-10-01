@@ -33,7 +33,7 @@ import (
 
 // RunGlobalQueuePackage serializes test packages that exercise process-global
 // database queues. Those workers intentionally claim across every tenant, so
-// separate `go test` package processes sharing probod_test would otherwise
+// separate `go test` package processes sharing trustreadyd_test would otherwise
 // consume each other's fixtures.
 func RunGlobalQueuePackage(m *testing.M) int {
 	lockPath := filepath.Join(os.TempDir(), "probo-global-queue-tests.lock")

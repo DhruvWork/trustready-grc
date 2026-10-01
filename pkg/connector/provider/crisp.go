@@ -50,7 +50,7 @@ func crispRegistration() *Registration {
 		// supplies nothing at all, the install ceremony below yielding the
 		// website id. SupportsAPIKey stays false so the provider is hidden
 		// from the driver catalog until the operator configures
-		// PROBOD_CONNECTOR_CRISP_PLUGIN_TOKEN — it ships deactivated until
+		// TRUSTREADYD_CONNECTOR_CRISP_PLUGIN_TOKEN — it ships deactivated until
 		// Crisp validates the production plugin and activates with no code
 		// change once the token is set.
 		APIKey: &APIKeyConfig{

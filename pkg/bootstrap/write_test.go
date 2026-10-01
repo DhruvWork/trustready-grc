@@ -28,19 +28,19 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/DhruvWork/trustready-grc/pkg/probodconfig"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadydconfig"
 	"sigs.k8s.io/yaml"
 )
 
 func TestWriteConfig(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "probod.yml")
+	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
-	cfg := &probodconfig.FullConfig{
-		Unit: probodconfig.UnitConfig{
-			Metrics: probodconfig.MetricsConfig{Addr: "localhost:9090"},
+	cfg := &trustreadydconfig.FullConfig{
+		Unit: trustreadydconfig.UnitConfig{
+			Metrics: trustreadydconfig.MetricsConfig{Addr: "localhost:9090"},
 		},
-		Probod: probodconfig.Config{
+		Probod: trustreadydconfig.Config{
 			BaseURL:       "http://localhost:8080",
 			EncryptionKey: "test-key",
 		},
@@ -52,7 +52,7 @@ func TestWriteConfig(t *testing.T) {
 	data, err := os.ReadFile(configPath)
 	require.NoError(t, err)
 
-	var loaded probodconfig.FullConfig
+	var loaded trustreadydconfig.FullConfig
 
 	err = yaml.Unmarshal(data, &loaded)
 	require.NoError(t, err)
@@ -64,10 +64,10 @@ func TestWriteConfig(t *testing.T) {
 
 func TestWriteConfig_CreatesDirectory(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "nested", "dir", "probod.yml")
+	configPath := filepath.Join(tmpDir, "nested", "dir", "trustreadyd.yml")
 
-	cfg := &probodconfig.FullConfig{
-		Probod: probodconfig.Config{BaseURL: "http://localhost:8080"},
+	cfg := &trustreadydconfig.FullConfig{
+		Probod: trustreadydconfig.Config{BaseURL: "http://localhost:8080"},
 	}
 
 	err := WriteConfig(cfg, configPath, FormatYAML)
@@ -79,9 +79,9 @@ func TestWriteConfig_CreatesDirectory(t *testing.T) {
 
 func TestWriteConfig_FilePermissions(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "probod.yml")
+	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
-	cfg := &probodconfig.FullConfig{}
+	cfg := &trustreadydconfig.FullConfig{}
 
 	err := WriteConfig(cfg, configPath, FormatYAML)
 	require.NoError(t, err)
@@ -94,17 +94,17 @@ func TestWriteConfig_FilePermissions(t *testing.T) {
 
 func TestWriteConfig_OmitsOptionalFields(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "probod.yml")
+	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
-	cfg := &probodconfig.FullConfig{
-		Unit: probodconfig.UnitConfig{
-			Metrics: probodconfig.MetricsConfig{Addr: "localhost:9090"},
-			Tracing: probodconfig.TracingConfig{Addr: ""},
+	cfg := &trustreadydconfig.FullConfig{
+		Unit: trustreadydconfig.UnitConfig{
+			Metrics: trustreadydconfig.MetricsConfig{Addr: "localhost:9090"},
+			Tracing: trustreadydconfig.TracingConfig{Addr: ""},
 		},
-		Probod: probodconfig.Config{
+		Probod: trustreadydconfig.Config{
 			BaseURL:      "http://localhost:8080",
 			ChromeDPAddr: "",
-			Pg: probodconfig.PgConfig{
+			Pg: trustreadydconfig.PgConfig{
 				Addr:     "localhost:5432",
 				Username: "postgres",
 				Password: "",
@@ -125,14 +125,14 @@ func TestWriteConfig_OmitsOptionalFields(t *testing.T) {
 	err = yaml.Unmarshal(data, &tree)
 	require.NoError(t, err)
 
-	probod, ok := tree["probod"].(map[string]any)
+	trustreadyd, ok := tree["trustreadyd"].(map[string]any)
 	require.True(t, ok)
 
-	assert.Equal(t, "http://localhost:8080", probod["base-url"])
-	assert.NotContains(t, probod, "chrome-dp-addr")
-	assert.NotContains(t, probod, "esign")
+	assert.Equal(t, "http://localhost:8080", trustreadyd["base-url"])
+	assert.NotContains(t, trustreadyd, "chrome-dp-addr")
+	assert.NotContains(t, trustreadyd, "esign")
 
-	pg, ok := probod["pg"].(map[string]any)
+	pg, ok := trustreadyd["pg"].(map[string]any)
 	require.True(t, ok)
 
 	assert.Equal(t, "localhost:5432", pg["addr"])
@@ -155,32 +155,32 @@ func TestWriteConfig_OmitsOptionalFields(t *testing.T) {
 
 func TestWriteConfig_OmitsEmptyOptionalBlocks(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "probod.yml")
+	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
-	cfg := &probodconfig.FullConfig{
-		Probod: probodconfig.Config{
+	cfg := &trustreadydconfig.FullConfig{
+		Probod: trustreadydconfig.Config{
 			BaseURL:       "http://localhost:8080",
 			EncryptionKey: "test-key",
-			Api: probodconfig.APIConfig{
+			Api: trustreadydconfig.APIConfig{
 				Addr: ":8080",
 			},
-			Auth: probodconfig.AuthConfig{
-				Cookie: probodconfig.CookieConfig{
+			Auth: trustreadydconfig.AuthConfig{
+				Cookie: trustreadydconfig.CookieConfig{
 					Name:   "SSID",
 					Secret: "secret",
 				},
-				Password: probodconfig.PasswordConfig{
+				Password: trustreadydconfig.PasswordConfig{
 					Pepper: "pepper",
 				},
 			},
-			CompliancePortal: probodconfig.CompliancePortalConfig{
+			CompliancePortal: trustreadydconfig.CompliancePortalConfig{
 				HTTPAddr: ":80",
 			},
-			CustomDomains: probodconfig.CustomDomainsConfig{
+			CustomDomains: trustreadydconfig.CustomDomainsConfig{
 				RenewalInterval: 3600,
 			},
-			Agents: probodconfig.AgentsConfig{
-				Default: probodconfig.LLMAgentConfig{
+			Agents: trustreadydconfig.AgentsConfig{
+				Default: trustreadydconfig.LLMAgentConfig{
 					Provider:  "openai",
 					ModelName: "gpt-4o",
 				},
@@ -199,31 +199,31 @@ func TestWriteConfig_OmitsEmptyOptionalBlocks(t *testing.T) {
 	err = yaml.Unmarshal(data, &tree)
 	require.NoError(t, err)
 
-	probod, ok := tree["probod"].(map[string]any)
+	trustreadyd, ok := tree["trustreadyd"].(map[string]any)
 	require.True(t, ok)
 
-	assert.NotContains(t, probod, "esign")
+	assert.NotContains(t, trustreadyd, "esign")
 
-	api, ok := probod["api"].(map[string]any)
+	api, ok := trustreadyd["api"].(map[string]any)
 	require.True(t, ok)
 	assert.NotContains(t, api, "cors")
 	assert.NotContains(t, api, "proxy-protocol")
 	assert.NotContains(t, api, "extra-header-fields")
 
-	auth, ok := probod["auth"].(map[string]any)
+	auth, ok := trustreadyd["auth"].(map[string]any)
 	require.True(t, ok)
 	assert.NotContains(t, auth, "google")
 	assert.NotContains(t, auth, "microsoft")
 
-	customDomains, ok := probod["custom-domains"].(map[string]any)
+	customDomains, ok := trustreadyd["custom-domains"].(map[string]any)
 	require.True(t, ok)
 	assert.NotContains(t, customDomains, "acme")
 
-	compliancePortal, ok := probod["trust-center"].(map[string]any)
+	compliancePortal, ok := trustreadyd["trust-center"].(map[string]any)
 	require.True(t, ok)
 	assert.NotContains(t, compliancePortal, "proxy-protocol")
 
-	llm, ok := probod["llm"].(map[string]any)
+	llm, ok := trustreadyd["llm"].(map[string]any)
 	require.True(t, ok)
 	assert.NotContains(t, llm, "probo")
 	assert.NotContains(t, llm, "tools")
@@ -231,23 +231,23 @@ func TestWriteConfig_OmitsEmptyOptionalBlocks(t *testing.T) {
 
 func TestWriteConfig_OmitsEmptyProxyProtocolAndCorsSlices(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "probod.yml")
+	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
-	cfg := &probodconfig.FullConfig{
-		Probod: probodconfig.Config{
+	cfg := &trustreadydconfig.FullConfig{
+		Probod: trustreadydconfig.Config{
 			BaseURL: "http://localhost:8080",
-			Api: probodconfig.APIConfig{
+			Api: trustreadydconfig.APIConfig{
 				Addr: ":8080",
-				ProxyProtocol: probodconfig.ProxyProtocolConfig{
+				ProxyProtocol: trustreadydconfig.ProxyProtocolConfig{
 					TrustedProxies: []string{},
 				},
-				Cors: probodconfig.CorsConfig{
+				Cors: trustreadydconfig.CorsConfig{
 					AllowedOrigins: []string{},
 				},
 			},
-			CompliancePortal: probodconfig.CompliancePortalConfig{
+			CompliancePortal: trustreadydconfig.CompliancePortalConfig{
 				HTTPAddr: ":10080",
-				ProxyProtocol: probodconfig.ProxyProtocolConfig{
+				ProxyProtocol: trustreadydconfig.ProxyProtocolConfig{
 					TrustedProxies: make([]string, 0),
 				},
 			},
@@ -265,27 +265,27 @@ func TestWriteConfig_OmitsEmptyProxyProtocolAndCorsSlices(t *testing.T) {
 	err = yaml.Unmarshal(data, &tree)
 	require.NoError(t, err)
 
-	probod, ok := tree["probod"].(map[string]any)
+	trustreadyd, ok := tree["trustreadyd"].(map[string]any)
 	require.True(t, ok)
 
-	api, ok := probod["api"].(map[string]any)
+	api, ok := trustreadyd["api"].(map[string]any)
 	require.True(t, ok)
 	assert.NotContains(t, api, "proxy-protocol")
 	assert.NotContains(t, api, "cors")
 
-	compliancePortal, ok := probod["trust-center"].(map[string]any)
+	compliancePortal, ok := trustreadyd["trust-center"].(map[string]any)
 	require.True(t, ok)
 	assert.NotContains(t, compliancePortal, "proxy-protocol")
 }
 
 func TestWriteConfig_OmitsEmptyExtraHeaderFieldsMap(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "probod.yml")
+	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
-	cfg := &probodconfig.FullConfig{
-		Probod: probodconfig.Config{
+	cfg := &trustreadydconfig.FullConfig{
+		Probod: trustreadydconfig.Config{
 			BaseURL: "http://localhost:8080",
-			Api: probodconfig.APIConfig{
+			Api: trustreadydconfig.APIConfig{
 				Addr:              ":8080",
 				ExtraHeaderFields: map[string]string{},
 			},
@@ -303,22 +303,22 @@ func TestWriteConfig_OmitsEmptyExtraHeaderFieldsMap(t *testing.T) {
 	err = yaml.Unmarshal(data, &tree)
 	require.NoError(t, err)
 
-	probod, ok := tree["probod"].(map[string]any)
+	trustreadyd, ok := tree["trustreadyd"].(map[string]any)
 	require.True(t, ok)
 
-	api, ok := probod["api"].(map[string]any)
+	api, ok := trustreadyd["api"].(map[string]any)
 	require.True(t, ok)
 	assert.NotContains(t, api, "extra-header-fields")
 }
 
 func TestWriteConfig_CompleteConfig(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "probod.yml")
+	configPath := filepath.Join(tmpDir, "trustreadyd.yml")
 
-	cfg := &probodconfig.FullConfig{
-		Unit: probodconfig.UnitConfig{
-			Metrics: probodconfig.MetricsConfig{Addr: "localhost:8081"},
-			Tracing: probodconfig.TracingConfig{
+	cfg := &trustreadydconfig.FullConfig{
+		Unit: trustreadydconfig.UnitConfig{
+			Metrics: trustreadydconfig.MetricsConfig{Addr: "localhost:8081"},
+			Tracing: trustreadydconfig.TracingConfig{
 				Addr:          "localhost:4317",
 				MaxBatchSize:  512,
 				BatchTimeout:  5,
@@ -326,31 +326,31 @@ func TestWriteConfig_CompleteConfig(t *testing.T) {
 				MaxQueueSize:  2048,
 			},
 		},
-		Probod: probodconfig.Config{
+		Probod: trustreadydconfig.Config{
 			BaseURL:       "http://localhost:8080",
 			EncryptionKey: "test-key",
 			ChromeDPAddr:  "localhost:9222",
-			Api: probodconfig.APIConfig{
+			Api: trustreadydconfig.APIConfig{
 				Addr: ":8080",
-				Cors: probodconfig.CorsConfig{
+				Cors: trustreadydconfig.CorsConfig{
 					AllowedOrigins: []string{"http://localhost:8080"},
 				},
 			},
-			Pg: probodconfig.PgConfig{
+			Pg: trustreadydconfig.PgConfig{
 				Addr:                   "localhost:5432",
 				Username:               "postgres",
 				Password:               "postgres",
-				Database:               "probod",
+				Database:               "trustreadyd",
 				PoolSize:               100,
 				MinPoolSize:            10,
 				MaxConnIdleTimeSeconds: 1800,
 				MaxConnLifetimeSeconds: 3600,
 			},
-			Connectors: []probodconfig.ConnectorConfig{
+			Connectors: []trustreadydconfig.ConnectorConfig{
 				{
 					Provider: "slack",
 					Protocol: "oauth2",
-					RawConfig: probodconfig.ConnectorConfigOAuth2{
+					RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 						ClientID:     "client-id",
 						ClientSecret: "client-secret",
 					},
@@ -368,7 +368,7 @@ func TestWriteConfig_CompleteConfig(t *testing.T) {
 	data, err := os.ReadFile(configPath)
 	require.NoError(t, err)
 
-	var loaded probodconfig.FullConfig
+	var loaded trustreadydconfig.FullConfig
 
 	err = yaml.Unmarshal(data, &loaded)
 	require.NoError(t, err)
@@ -386,13 +386,13 @@ func TestWriteConfig_CompleteConfig(t *testing.T) {
 
 func TestWriteConfig_JSON(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "probod.json")
+	configPath := filepath.Join(tmpDir, "trustreadyd.json")
 
-	cfg := &probodconfig.FullConfig{
-		Unit: probodconfig.UnitConfig{
-			Metrics: probodconfig.MetricsConfig{Addr: "localhost:9090"},
+	cfg := &trustreadydconfig.FullConfig{
+		Unit: trustreadydconfig.UnitConfig{
+			Metrics: trustreadydconfig.MetricsConfig{Addr: "localhost:9090"},
 		},
-		Probod: probodconfig.Config{
+		Probod: trustreadydconfig.Config{
 			BaseURL:       "http://localhost:8080",
 			EncryptionKey: "",
 		},
@@ -409,12 +409,12 @@ func TestWriteConfig_JSON(t *testing.T) {
 	err = json.Unmarshal(data, &tree)
 	require.NoError(t, err)
 
-	probod, ok := tree["probod"].(map[string]any)
+	trustreadyd, ok := tree["trustreadyd"].(map[string]any)
 	require.True(t, ok)
-	assert.Equal(t, "http://localhost:8080", probod["base-url"])
-	assert.Equal(t, "", probod["encryption-key"])
+	assert.Equal(t, "http://localhost:8080", trustreadyd["base-url"])
+	assert.Equal(t, "", trustreadyd["encryption-key"])
 
-	var loaded probodconfig.FullConfig
+	var loaded trustreadydconfig.FullConfig
 
 	err = json.Unmarshal(data, &loaded)
 	require.NoError(t, err)
@@ -425,9 +425,9 @@ func TestWriteConfig_JSON(t *testing.T) {
 
 func TestWriteConfig_UnsupportedFormat(t *testing.T) {
 	tmpDir := t.TempDir()
-	configPath := filepath.Join(tmpDir, "probod.txt")
+	configPath := filepath.Join(tmpDir, "trustreadyd.txt")
 
-	cfg := &probodconfig.FullConfig{}
+	cfg := &trustreadydconfig.FullConfig{}
 
 	err := WriteConfig(cfg, configPath, Format("toml"))
 	require.Error(t, err)

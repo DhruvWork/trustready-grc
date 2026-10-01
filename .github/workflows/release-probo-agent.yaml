@@ -1,9 +1,9 @@
-name: "Release probo-agent"
+name: "Release trustready-agent"
 
 on:
   push:
     tags:
-      - "probo-agent/v*"
+      - "trustready-agent/v*"
 
 permissions:
   contents: "read"
@@ -40,7 +40,7 @@ jobs:
           VERSION="${GITHUB_REF_NAME##*/v}"
 
           go build -ldflags "-s -w -X 'main.version=${VERSION}'" \
-            -gcflags="-e" -o "dist/probo-agent" ./cmd/probo-agent
+            -gcflags="-e" -o "dist/trustready-agent" ./cmd/trustready-agent
       - name: "Create archive"
         env:
           GOOS: "${{ matrix.goos }}"
@@ -56,11 +56,11 @@ jobs:
           esac
 
           mkdir -p archives
-          AGENT_DIR="probo-agent_${OS}_${ARCH}"
+          AGENT_DIR="trustready-agent_${OS}_${ARCH}"
           mkdir -p "staging/${AGENT_DIR}"
-          cp "dist/probo-agent" README.md LICENSE "staging/${AGENT_DIR}/"
-          if [ -f cmd/probo-agent/CHANGELOG.md ]; then
-            cp cmd/probo-agent/CHANGELOG.md "staging/${AGENT_DIR}/"
+          cp "dist/trustready-agent" README.md LICENSE "staging/${AGENT_DIR}/"
+          if [ -f cmd/trustready-agent/CHANGELOG.md ]; then
+            cp cmd/trustready-agent/CHANGELOG.md "staging/${AGENT_DIR}/"
           fi
           tar -czf "archives/${AGENT_DIR}.tar.gz" -C staging "${AGENT_DIR}"
       - uses: "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a" # v7
@@ -72,7 +72,7 @@ jobs:
   build-windows:
     name: "windows (${{ matrix.goarch }})"
     runs-on: "windows-latest"
-    environment: "probo-agent-release"
+    environment: "trustready-agent-release"
     permissions:
       contents: "read"
       id-token: "write"
@@ -107,16 +107,16 @@ jobs:
           New-Item -ItemType Directory -Force -Path dist, archives | Out-Null
           $ldflags = "-s -w -X 'main.version=$Version'"
           $guiLdflags = "-s -w -H windowsgui -X 'main.version=$Version'"
-          go run ./cmd/probo-agent/installer/windows/mkicon `
+          go run ./cmd/trustready-agent/installer/windows/mkicon `
             -png ./pkg/deviceagent/tray/icon_color.png `
-            -syso "./cmd/probo-agent/rsrc_windows_${Arch}.syso" `
+            -syso "./cmd/trustready-agent/rsrc_windows_${Arch}.syso" `
             -arch $Arch
           if ($LASTEXITCODE -ne 0) { throw "mkicon failed" }
           $env:GOOS = "windows"
           $env:GOARCH = $Arch
-          go build -ldflags $ldflags -gcflags="-e" -o dist/probo-agent.exe ./cmd/probo-agent
+          go build -ldflags $ldflags -gcflags="-e" -o dist/trustready-agent.exe ./cmd/trustready-agent
           if ($LASTEXITCODE -ne 0) { throw "go build failed" }
-          go build -ldflags $guiLdflags -gcflags="-e" -o dist/probo-agentw.exe ./cmd/probo-agent
+          go build -ldflags $guiLdflags -gcflags="-e" -o dist/trustready-agentw.exe ./cmd/trustready-agent
           if ($LASTEXITCODE -ne 0) { throw "GUI go build failed" }
       - name: "Azure login"
         uses: "azure/login@7ddb5af1ef8758cf1353cf3b42f940aee27ba21c" # v3.0.2
@@ -131,8 +131,8 @@ jobs:
           signing-account-name: "${{ vars.AZURE_TRUSTED_SIGNING_ACCOUNT }}"
           certificate-profile-name: "${{ vars.AZURE_TRUSTED_SIGNING_PROFILE }}"
           files: |
-            ${{ github.workspace }}/dist/probo-agent.exe
-            ${{ github.workspace }}/dist/probo-agentw.exe
+            ${{ github.workspace }}/dist/trustready-agent.exe
+            ${{ github.workspace }}/dist/trustready-agentw.exe
           file-digest: "SHA256"
           timestamp-rfc3161: "http://timestamp.acs.microsoft.com"
           timestamp-digest: "SHA256"
@@ -146,10 +146,10 @@ jobs:
           $Version = $env:GITHUB_REF_NAME -replace '^.*\/v', ''
           $ArchLabel = "${{ matrix.arch_label }}"
           New-Item -ItemType Directory -Force -Path archives | Out-Null
-          $Msi = Join-Path $PWD "archives/probo-agent_${Version}_windows_${ArchLabel}.msi"
-          & ./cmd/probo-agent/installer/windows/build.ps1 `
-            -Binary ./dist/probo-agent.exe `
-            -GUIBinary ./dist/probo-agentw.exe `
+          $Msi = Join-Path $PWD "archives/trustready-agent_${Version}_windows_${ArchLabel}.msi"
+          & ./cmd/trustready-agent/installer/windows/build.ps1 `
+            -Binary ./dist/trustready-agent.exe `
+            -GUIBinary ./dist/trustready-agentw.exe `
             -Version $Version `
             -Arch "${{ matrix.wix_arch }}" `
             -Output $Msi
@@ -171,14 +171,14 @@ jobs:
         run: |
           $ErrorActionPreference = "Stop"
           $ArchLabel = "${{ matrix.arch_label }}"
-          $AgentDir = "probo-agent_Windows_$ArchLabel"
+          $AgentDir = "trustready-agent_Windows_$ArchLabel"
           $StagingRoot = Join-Path $PWD "staging"
           $Staging = Join-Path $StagingRoot $AgentDir
           New-Item -ItemType Directory -Force -Path $Staging, archives | Out-Null
-          Copy-Item dist/probo-agent.exe, dist/probo-agentw.exe $Staging/
+          Copy-Item dist/trustready-agent.exe, dist/trustready-agentw.exe $Staging/
           Copy-Item README.md, LICENSE $Staging/
-          if (Test-Path cmd/probo-agent/CHANGELOG.md) {
-            Copy-Item cmd/probo-agent/CHANGELOG.md $Staging/
+          if (Test-Path cmd/trustready-agent/CHANGELOG.md) {
+            Copy-Item cmd/trustready-agent/CHANGELOG.md $Staging/
           }
           $Zip = Join-Path $PWD "archives/$AgentDir.zip"
           if (Test-Path $Zip) { Remove-Item $Zip }
@@ -242,43 +242,43 @@ jobs:
           export COPYFILE_DISABLE=1
 
           GOOS=darwin GOARCH=arm64 go build -ldflags "${LDFLAGS}" \
-            -gcflags="-e" -o dist/probo-agent_arm64 ./cmd/probo-agent
+            -gcflags="-e" -o dist/trustready-agent_arm64 ./cmd/trustready-agent
           GOOS=darwin GOARCH=amd64 go build -ldflags "${LDFLAGS}" \
-            -gcflags="-e" -o dist/probo-agent_amd64 ./cmd/probo-agent
+            -gcflags="-e" -o dist/trustready-agent_amd64 ./cmd/trustready-agent
 
           lipo -create \
-            dist/probo-agent_arm64 \
-            dist/probo-agent_amd64 \
-            -output dist/probo-agent_universal
+            dist/trustready-agent_arm64 \
+            dist/trustready-agent_amd64 \
+            -output dist/trustready-agent_universal
 
           for pair in "arm64:arm64" "amd64:x86_64"; do
             GOARCH="${pair%%:*}"
             ARCH="${pair##*:}"
-            AGENT_DIR="probo-agent_Darwin_${ARCH}"
+            AGENT_DIR="trustready-agent_Darwin_${ARCH}"
             mkdir -p "staging/${AGENT_DIR}"
-            cp "dist/probo-agent_${GOARCH}" "staging/${AGENT_DIR}/probo-agent"
+            cp "dist/trustready-agent_${GOARCH}" "staging/${AGENT_DIR}/trustready-agent"
             cp README.md LICENSE "staging/${AGENT_DIR}/"
-            if [ -f cmd/probo-agent/CHANGELOG.md ]; then
-              cp cmd/probo-agent/CHANGELOG.md "staging/${AGENT_DIR}/"
+            if [ -f cmd/trustready-agent/CHANGELOG.md ]; then
+              cp cmd/trustready-agent/CHANGELOG.md "staging/${AGENT_DIR}/"
             fi
             # Match the PKG payload signing identity so auto-update does
             # not replace a Developer ID binary with an ad-hoc one (which
             # multiplies macOS Background Activity entries).
             codesign --force --options runtime --timestamp \
               --identifier com.probo.agent \
-              --sign "${CODESIGN_IDENTITY}" "staging/${AGENT_DIR}/probo-agent"
-            codesign --verify --verbose=2 "staging/${AGENT_DIR}/probo-agent"
+              --sign "${CODESIGN_IDENTITY}" "staging/${AGENT_DIR}/trustready-agent"
+            codesign --verify --verbose=2 "staging/${AGENT_DIR}/trustready-agent"
             tar -czf "archives/${AGENT_DIR}.tar.gz" -C staging "${AGENT_DIR}"
           done
 
-          chmod +x cmd/probo-agent/installer/macos/build.sh \
-            cmd/probo-agent/installer/macos/scripts/preinstall \
-            cmd/probo-agent/installer/macos/scripts/postinstall
+          chmod +x cmd/trustready-agent/installer/macos/build.sh \
+            cmd/trustready-agent/installer/macos/scripts/preinstall \
+            cmd/trustready-agent/installer/macos/scripts/postinstall
 
-          cmd/probo-agent/installer/macos/build.sh \
-            --binary dist/probo-agent_universal \
+          cmd/trustready-agent/installer/macos/build.sh \
+            --binary dist/trustready-agent_universal \
             --version "${VERSION}" \
-            --output "archives/probo-agent_${VERSION}_darwin.pkg"
+            --output "archives/trustready-agent_${VERSION}_darwin.pkg"
       - uses: "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a" # v7
         with:
           name: "archive-darwin"
@@ -312,13 +312,13 @@ jobs:
       - name: "Inject release checksums into install.sh"
         run: |
           TAG="${GITHUB_REF_NAME}"
-          cp cmd/probo-agent/installer/install.sh archives/install.sh
+          cp cmd/trustready-agent/installer/install.sh archives/install.sh
           sed -i "s|^RELEASE_TAG=\"__TRUSTREADY_AGENT_RELEASE_TAG__\"|RELEASE_TAG=\"${TAG}\"|" archives/install.sh
-          grep 'probo-agent_.*\.tar\.gz' archives/checksums.txt > archives/probo-agent-checksums.txt
+          grep 'trustready-agent_.*\.tar\.gz' archives/checksums.txt > archives/trustready-agent-checksums.txt
           awk '
             /# __TRUSTREADY_AGENT_CHECKSUMS_BEGIN__/ {
               print
-              while ((getline line < "archives/probo-agent-checksums.txt") > 0) print line
+              while ((getline line < "archives/trustready-agent-checksums.txt") > 0) print line
               skip = 1
               next
             }
@@ -339,7 +339,7 @@ jobs:
       - name: "Generate SBOM"
         uses: "anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26" # v0.24.2
         with:
-          path: ./cmd/probo-agent
+          path: ./cmd/trustready-agent
           format: cyclonedx-json
           output-file: sbom.json
       - name: "Run vulnerability scan"
@@ -360,13 +360,13 @@ jobs:
       - name: "Extract release notes"
         run: |
           VERSION="${GITHUB_REF_NAME##*/v}"
-          if [ -f cmd/probo-agent/CHANGELOG.md ]; then
+          if [ -f cmd/trustready-agent/CHANGELOG.md ]; then
             awk -v ver="$VERSION" '
               /^## \[/ { if (found) exit; if ($0 ~ "\\[" ver "\\]") found=1 }
               found
-            ' cmd/probo-agent/CHANGELOG.md > release-notes.md
+            ' cmd/trustready-agent/CHANGELOG.md > release-notes.md
           else
-            echo "probo-agent ${VERSION}" > release-notes.md
+            echo "trustready-agent ${VERSION}" > release-notes.md
           fi
       - name: "Create GitHub release"
         env:

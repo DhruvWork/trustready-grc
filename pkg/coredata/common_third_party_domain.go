@@ -50,7 +50,7 @@ type (
 // A domain is unique per catalog entry, not globally: two entries for the same
 // vendor each carry it until one is merged away. The ordering makes the choice
 // deterministic in that window, so attribution cannot flip between two calls
-// or after a vacuum. Collapsing the duplicate is `proboctl common-third-party
+// or after a vacuum. Collapsing the duplicate is `trustreadyctl common-third-party
 // merge`; this only keeps the answer stable until it runs.
 func (d *CommonThirdPartyDomain) LoadByDomain(
 	ctx context.Context,

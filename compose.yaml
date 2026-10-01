@@ -122,7 +122,7 @@ services:
       - "--disable-background-timer-throttling"
       - "--disable-extensions"
 
-  # step-ca validates HTTP-01 on port 80; probod serves challenges on :10080.
+  # step-ca validates HTTP-01 on port 80; trustreadyd serves challenges on :10080.
   # step-ca shares this service's network so loopback :80 hits Caddy, not an
   # isolated container namespace (where *.localhost would miss the proxy).
   acme-http-01-proxy:
@@ -147,7 +147,7 @@ services:
       DOCKER_STEPCA_INIT_DNS_NAMES: "localhost,127.0.0.1,step-ca"
       DOCKER_STEPCA_INIT_REMOTE_MANAGEMENT: "true"
       DOCKER_STEPCA_INIT_ACME: "true"
-      DOCKER_STEPCA_INIT_PASSWORD: "probod-local-dev-ca"
+      DOCKER_STEPCA_INIT_PASSWORD: "trustreadyd-local-dev-ca"
     volumes:
       - "./compose/step-ca:/home/step:rw"
 

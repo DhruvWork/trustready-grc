@@ -32,20 +32,20 @@ import { CopyableCodeBlock } from "./CopyableCodeBlock";
 import { enrollmentInstructions } from "./variants";
 
 const AGENT_RELEASES_URL
-  = "https://github.com/getprobo/probo/releases?q=probo-agent";
+  = "https://github.com/getprobo/probo/releases?q=trustready-agent";
 
-const UNIX_DOWNLOAD_COMMAND = `curl -fsSL "https://github.com/getprobo/probo/releases/download/probo-agent/vX.Y.Z/probo-agent_OS_ARCH.tar.gz" -o /tmp/probo-agent.tar.gz
-tar -xzf /tmp/probo-agent.tar.gz -C /tmp
-sudo install -m 0755 /tmp/probo-agent_OS_ARCH/probo-agent /usr/local/bin/probo-agent
-rm -rf /tmp/probo-agent.tar.gz /tmp/probo-agent_OS_ARCH`;
+const UNIX_DOWNLOAD_COMMAND = `curl -fsSL "https://github.com/getprobo/probo/releases/download/trustready-agent/vX.Y.Z/trustready-agent_OS_ARCH.tar.gz" -o /tmp/trustready-agent.tar.gz
+tar -xzf /tmp/trustready-agent.tar.gz -C /tmp
+sudo install -m 0755 /tmp/trustready-agent_OS_ARCH/trustready-agent /usr/local/bin/trustready-agent
+rm -rf /tmp/trustready-agent.tar.gz /tmp/trustready-agent_OS_ARCH`;
 
-const WINDOWS_DOWNLOAD_COMMAND = `$zip = "$env:TEMP\\probo-agent.zip"
+const WINDOWS_DOWNLOAD_COMMAND = `$zip = "$env:TEMP\\trustready-agent.zip"
 $dst = "$env:ProgramFiles\\Probo"
-Invoke-WebRequest -Uri "https://github.com/getprobo/probo/releases/download/probo-agent/vX.Y.Z/probo-agent_Windows_ARCH.zip" -OutFile $zip
+Invoke-WebRequest -Uri "https://github.com/getprobo/probo/releases/download/trustready-agent/vX.Y.Z/trustready-agent_Windows_ARCH.zip" -OutFile $zip
 Expand-Archive -Path $zip -DestinationPath $env:TEMP -Force
 New-Item -ItemType Directory -Force -Path $dst | Out-Null
-Move-Item -Force "$env:TEMP\\probo-agent_Windows_ARCH\\probo-agent.exe" "$dst\\probo-agent.exe"
-Remove-Item -Recurse -Force $zip, "$env:TEMP\\probo-agent_Windows_ARCH"`;
+Move-Item -Force "$env:TEMP\\trustready-agent_Windows_ARCH\\trustready-agent.exe" "$dst\\trustready-agent.exe"
+Remove-Item -Recurse -Force $zip, "$env:TEMP\\trustready-agent_Windows_ARCH"`;
 
 type InstallOs = "unix" | "windows";
 
@@ -66,13 +66,13 @@ export function EnrollmentInstructions({
   const unixDownloadCommand = `${downloadComment}
 ${UNIX_DOWNLOAD_COMMAND}`;
   const unixInstallCommand = `${enrollComment}
-sudo /usr/local/bin/probo-agent install \\
+sudo /usr/local/bin/trustready-agent install \\
   --server ${serverUrl} \\
   --enrollment-token '${enrollmentToken}'`;
   const windowsDownloadCommand = `${downloadComment}
 ${WINDOWS_DOWNLOAD_COMMAND}`;
   const windowsInstallCommand = `${enrollComment}
-& "$env:ProgramFiles\\Probo\\probo-agent.exe" install \`
+& "$env:ProgramFiles\\Probo\\trustready-agent.exe" install \`
   --server ${serverUrl} \`
   --enrollment-token '${enrollmentToken}'`;
 

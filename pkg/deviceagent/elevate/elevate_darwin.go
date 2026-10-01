@@ -31,7 +31,7 @@ import "errors"
 var ErrPrivilegedHelperRequired = errors.New(
 	"macOS elevation requires the signed Probo Agent.app privileged helper " +
 		"(browser enroll via PKG-installed helper) or sudo " +
-		"(CLI: sudo probo-agent install|uninstall)",
+		"(CLI: sudo trustready-agent install|uninstall)",
 )
 
 func runElevatedInstall(_ InstallOptions, _ string) error {

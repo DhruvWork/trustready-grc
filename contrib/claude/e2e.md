@@ -1,29 +1,29 @@
 # End-to-End Testing
 
-E2E tests live in `e2e/console/` (package `console_test`) and run against a live `bin/probod` instance. The test infrastructure handles server lifecycle, authentication, and test data creation.
+E2E tests live in `e2e/console/` (package `console_test`) and run against a live `bin/trustreadyd` instance. The test infrastructure handles server lifecycle, authentication, and test data creation.
 
 See [`e2e-refactor.md`](e2e-refactor.md) for the suite migration plan,
 fixture-isolation rules, and per-batch acceptance criteria.
 
 ## Prerequisites
 
-E2e uses the local [step-ca](https://github.com/smallstep/certificates) ACME server over HTTPS. The CA is persistent across restarts; install its root once per machine so probod and browsers trust issued custom-domain certificates:
+E2e uses the local [step-ca](https://github.com/smallstep/certificates) ACME server over HTTPS. The CA is persistent across restarts; install its root once per machine so trustreadyd and browsers trust issued custom-domain certificates:
 
 ```bash
 make stack-up
 step certificate install compose/step-ca/certs/root_ca.crt
 ```
 
-Without this step, probod cannot verify the ACME directory endpoint or fetch compliance-portal CIMD metadata over HTTPS.
+Without this step, trustreadyd cannot verify the ACME directory endpoint or fetch compliance-portal CIMD metadata over HTTPS.
 
-You also need the Docker stack running and `bin/probod` built:
+You also need the Docker stack running and `bin/trustreadyd` built:
 
 ```bash
 make stack-up
 make build
 ```
 
-E2e config is built at test startup in `e2e/internal/testutil/testutil.go` (`generateConfig` → `probod-bootstrap`). It points ACME at step-ca but does not set `PROBOD_ACME_ROOT_CA`; local runs rely on the system trust store populated by `step certificate install`. CI passes `PROBOD_ACME_ROOT_CA` in the workflow instead.
+E2e config is built at test startup in `e2e/internal/testutil/testutil.go` (`generateConfig` → `trustreadyd-bootstrap`). It points ACME at step-ca but does not set `TRUSTREADYD_ACME_ROOT_CA`; local runs rely on the system trust store populated by `step certificate install`. CI passes `TRUSTREADYD_ACME_ROOT_CA` in the workflow instead.
 
 ## Running tests
 
@@ -32,9 +32,9 @@ make test-e2e # Run all e2e tests
 ```
 
 The regular target avoids instrumenting the test driver with race and coverage
-flags because probod runs as a separate process. Use
+flags because trustreadyd runs as a separate process. Use
 `make test-e2e E2E_TEST_FLAGS=-race` when changing concurrent harness code, and
-use `make test-e2e-coverage` to run an instrumented probod and collect
+use `make test-e2e-coverage` to run an instrumented trustreadyd and collect
 application coverage. The coverage target writes:
 
 - `coverage-e2e.out` — Go coverage profile
@@ -44,10 +44,10 @@ application coverage. The coverage target writes:
 - `coverage-e2e-packages.txt` — package-level statement coverage
 
 CI runs only `test-e2e`. It does not run `test-e2e-coverage` because the
-instrumented suite is too slow. Coverage is collected from the probod
+instrumented suite is too slow. Coverage is collected from the trustreadyd
 process, not from the E2E test driver. Override `E2E_CORE_COVER_PKGS` when you
 audit a different product-package boundary. The coverage target runs Console
-and MCP packages sequentially because each package starts probod on the same
+and MCP packages sequentially because each package starts trustreadyd on the same
 fixed ports. Trust remains separate until its managed-domain certificate
 harness can be coverage-gated reliably.
 
@@ -179,7 +179,7 @@ naming follows `TestEntity_Operation`.
 
 Keep all console tests in the shared `console_test` package. Splitting domains
 into Go subdirectories would create independent packages and `TestMain`
-processes that contend for the same probod ports and database migrations.
+processes that contend for the same trustreadyd ports and database migrations.
 
 Organize large resources by concern:
 

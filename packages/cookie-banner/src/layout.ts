@@ -21,7 +21,7 @@
 import type { BannerConfig, BannerLayout, BannerText, Presentation } from "./types";
 
 // Strict, GDPR-safe layout used only as a defensive fallback: a config without a
-// `layout` means the (self-hosted) Probo backend predates probod v0.246.0, the
+// `layout` means the (self-hosted) Probo backend predates trustreadyd v0.246.0, the
 // first release that sends it. We keep the banner functional and compliant
 // rather than crashing, and surface the mismatch so operators know to update.
 const STRICT_LAYOUT: BannerLayout = {
@@ -47,7 +47,7 @@ export function resolveLayout(config: BannerConfig): BannerLayout {
   if (!warnedLayout) {
     warnedLayout = true;
     console.error(
-      "[probo] banner config has no `layout`: your self-hosted Probo backend (probod) is older than this SDK. Update probod to v0.246.0 or later. Falling back to strict opt-in.",
+      "[probo] banner config has no `layout`: your self-hosted Probo backend (trustreadyd) is older than this SDK. Update trustreadyd to v0.246.0 or later. Falling back to strict opt-in.",
     );
   }
 

@@ -121,7 +121,7 @@ func TestCommonThirdPartyUpsert_PreservesReview(t *testing.T) {
 		)
 	}))
 
-	// What proboctl upsert does: load the row, patch a field, write it back.
+	// What trustreadyctl upsert does: load the row, patch a field, write it back.
 	require.NoError(t, client.WithTx(ctx, func(ctx context.Context, tx pg.Tx) error {
 		loaded := coredata.CommonThirdParty{}
 		if err := loaded.LoadBySlug(ctx, tx, party.Slug); err != nil {

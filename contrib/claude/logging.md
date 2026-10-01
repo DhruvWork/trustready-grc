@@ -64,10 +64,10 @@ func (r *Renewer) renewDomain(ctx context.Context, domain CustomDomain) {
 
 ### Enrichment chain
 
-The root logger created in `probod` flows through the system, gaining context at each layer:
+The root logger created in `trustreadyd` flows through the system, gaining context at each layer:
 
 ```
-probod (root)
+trustreadyd (root)
   → .Named("http.server")
     → .Named("api")
       → .With(log.String("correlation_id", id))

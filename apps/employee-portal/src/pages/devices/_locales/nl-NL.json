@@ -121,7 +121,7 @@
     "token": {
       "title": "Registratietoken gegenereerd",
       "description": "Deel deze registratietoken alleen met de apparaateigenaar via een beveiligd kanaal. Deze kan één keer worden gebruikt en verloopt na zeven dagen.",
-      "releaseListHint": "Blader door <link>probo-agent releases op GitHub</link> (tags probo-agent/v*) en kies het archief voor uw besturingssysteem en architectuur (bijvoorbeeld probo-agent_Darwin_arm64.tar.gz, probo-agent_Linux_x86_64.tar.gz of probo-agent_Windows_x86_64.zip). Vervang vX.Y.Z, OS en ARCH in het downloadcommando door de waarden van het door u gekozen bestand.",
+      "releaseListHint": "Blader door <link>trustready-agent releases op GitHub</link> (tags trustready-agent/v*) en kies het archief voor uw besturingssysteem en architectuur (bijvoorbeeld trustready-agent_Darwin_arm64.tar.gz, trustready-agent_Linux_x86_64.tar.gz of trustready-agent_Windows_x86_64.zip). Vervang vX.Y.Z, OS en ARCH in het downloadcommando door de waarden van het door u gekozen bestand.",
       "tabUnix": "macOS / Linux",
       "tabWindows": "Windows",
       "installUnix": "Installeren op macOS of Linux (uitvoeren vanuit een shell met sudo-toegang)",

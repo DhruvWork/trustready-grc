@@ -38,7 +38,7 @@ func TestParseCodeSigningIdentity(t *testing.T) {
 		{
 			name: "developer id signed binary",
 			out: "" +
-				"Executable=/Library/Probo/probo-agent\n" +
+				"Executable=/Library/Probo/trustready-agent\n" +
 				"Identifier=com.probo.agent\n" +
 				"Format=Mach-O thin (arm64)\n" +
 				"TeamIdentifier=ABCD123456\n",
@@ -50,12 +50,12 @@ func TestParseCodeSigningIdentity(t *testing.T) {
 		{
 			name: "team identifier not set",
 			out: "" +
-				"Identifier=probo-agent\n" +
+				"Identifier=trustready-agent\n" +
 				"Signature=adhoc\n" +
 				"TeamIdentifier=not set\n",
 			want: codeSigningIdentity{
 				Team:       "",
-				Identifier: "probo-agent",
+				Identifier: "trustready-agent",
 			},
 		},
 		{

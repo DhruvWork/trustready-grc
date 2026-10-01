@@ -25,7 +25,7 @@ helm install my-probo oci://artifact.probo.inc/probo/probo --version <chart-vers
 ```
 
 Replace `<chart-version>` with a released chart version (e.g. `0.1.0`). The
-chart defaults to the probod image tag `v<appVersion>` from
+chart defaults to the trustreadyd image tag `v<appVersion>` from
 `Chart.yaml`.
 
 Configure secrets and external services with `--set` flags or a values file
@@ -61,9 +61,9 @@ helm install my-probo ./charts/probo \
   --set probo.trustAuth.tokenSecret="$TRUST_TOKEN_SECRET" \
   --set-file probo.oauth2.signingKey="./oauth2_signing_key.pem" \
   --set postgresql.enabled=true \
-  --set postgresql.auth.postgresUser="probod" \
+  --set postgresql.auth.postgresUser="trustreadyd" \
   --set postgresql.auth.postgresPassword="your-db-password" \
-  --set postgresql.auth.database="probod" \
+  --set postgresql.auth.database="trustreadyd" \
   --set seaweedfs.enabled=true \
   --set s3.bucket="your-bucket-name" \
   --set s3.accessKeyId="your-access-key" \
@@ -82,7 +82,7 @@ helm install my-probo ./charts/probo \
   --set-file probo.oauth2.signingKey="./oauth2_signing_key.pem" \
   --set probo.mailer.smtp.password="smtp-password" \
   --set postgresql.enabled=true \
-  --set postgresql.auth.postgresPassword="probod" \
+  --set postgresql.auth.postgresPassword="trustreadyd" \
   --set s3.accessKeyId="your-access-key" \
   --set s3.secretAccessKey="your-secret-key" \
   -f ./charts/probo/values.yaml
@@ -322,9 +322,9 @@ spec:
         key: probo/db-password
 ```
 
-### Native AWS resolution (probod-bootstrap)
+### Native AWS resolution (trustreadyd-bootstrap)
 
-Alternatively, `probod-bootstrap` can fetch secrets directly from AWS without
+Alternatively, `trustreadyd-bootstrap` can fetch secrets directly from AWS without
 External Secrets Operator. Point env vars at individual secrets or parameters
 using `awssm://` or `aws://` (Secrets Manager) or `awsps://` (Parameter Store). Plain env
 values are also supported for non-sensitive config.
@@ -332,7 +332,7 @@ values are also supported for non-sensitive config.
 #### Secrets Manager (`awssm://` or `aws://`)
 
 Use the `awssm://<secret-id>` or `aws://<secret-id>` prefix (e.g.
-`PROBOD_ENCRYPTION_KEY=aws://probo/probod/encryption_key`). The path
+`TRUSTREADYD_ENCRYPTION_KEY=aws://probo/trustreadyd/encryption_key`). The path
 after the prefix is the secret name or ARN; the plaintext `SecretString` is
 used directly. Each env var can reference a different secret.
 
@@ -343,16 +343,16 @@ example):
 env:
   - name: AWS_REGION
     value: "us-east-1"
-  - name: PROBOD_BASE_URL
+  - name: TRUSTREADYD_BASE_URL
     value: "https://app.example.com"
-  - name: PROBOD_ENCRYPTION_KEY
-    value: "awssm://probo/probod/encryption_key"
-  - name: PROBOD_AUTH_COOKIE_SECRET
-    value: "awssm://probo/probod/cookie_secret"
-  - name: PROBOD_AUTH_PASSWORD_PEPPER
-    value: "awssm://probo/probod/password_pepper"
-  - name: PROBOD_OAUTH2_SERVER_SIGNING_KEY
-    value: "awssm://probo/probod/oauth2_signing_key"
+  - name: TRUSTREADYD_ENCRYPTION_KEY
+    value: "awssm://probo/trustreadyd/encryption_key"
+  - name: TRUSTREADYD_AUTH_COOKIE_SECRET
+    value: "awssm://probo/trustreadyd/cookie_secret"
+  - name: TRUSTREADYD_AUTH_PASSWORD_PEPPER
+    value: "awssm://probo/trustreadyd/password_pepper"
+  - name: TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY
+    value: "awssm://probo/trustreadyd/oauth2_signing_key"
 ```
 
 Each secret in AWS Secrets Manager stores a single plaintext value (for
@@ -361,7 +361,7 @@ example a base64 key, password, or PEM).
 #### Parameter Store (`awsps://`)
 
 Use the `awsps://<parameter-name>` prefix (e.g.
-`PROBOD_ENCRYPTION_KEY=awsps:///probo/probod/encryption_key`). The path
+`TRUSTREADYD_ENCRYPTION_KEY=awsps:///probo/trustreadyd/encryption_key`). The path
 after `awsps://` is the SSM parameter name; both `String` and `SecureString`
 values are supported.
 
@@ -372,21 +372,21 @@ using SecureString parameters with a custom KMS key):
 env:
   - name: AWS_REGION
     value: "us-east-1"
-  - name: PROBOD_BASE_URL
+  - name: TRUSTREADYD_BASE_URL
     value: "https://app.example.com"
-  - name: PROBOD_ENCRYPTION_KEY
-    value: "awsps:///probo/probod/encryption_key"
-  - name: PROBOD_AUTH_COOKIE_SECRET
-    value: "awsps:///probo/probod/cookie_secret"
-  - name: PROBOD_AUTH_PASSWORD_PEPPER
-    value: "awsps:///probo/probod/password_pepper"
-  - name: PROBOD_OAUTH2_SERVER_SIGNING_KEY
-    value: "awsps:///probo/probod/oauth2_signing_key"
+  - name: TRUSTREADYD_ENCRYPTION_KEY
+    value: "awsps:///probo/trustreadyd/encryption_key"
+  - name: TRUSTREADYD_AUTH_COOKIE_SECRET
+    value: "awsps:///probo/trustreadyd/cookie_secret"
+  - name: TRUSTREADYD_AUTH_PASSWORD_PEPPER
+    value: "awsps:///probo/trustreadyd/password_pepper"
+  - name: TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY
+    value: "awsps:///probo/trustreadyd/oauth2_signing_key"
 ```
 
-When `PROBOD_ENCRYPTION_KEY` is set (including `aws://`, `awssm://`, or
-`awsps://` references), the container entrypoint runs `probod-bootstrap` to
-regenerate the config from all `PROBOD_*` env vars.
+When `TRUSTREADYD_ENCRYPTION_KEY` is set (including `aws://`, `awssm://`, or
+`awsps://` references), the container entrypoint runs `trustreadyd-bootstrap` to
+regenerate the config from all `TRUSTREADYD_*` env vars.
 
 ## Full Values
 
@@ -528,11 +528,11 @@ regenerate the config from all `PROBOD_*` env vars.
 | postgresql.enabled                                      | bool    | `true`                                             | Enable included PostgreSQL container for demo purposes using CloudNativePG                          |
 | postgresql.resources.limits.memory                      | string  | `"2Gi"`                                            | PostgreSQL memory limit                                                                             |
 | postgresql.resources.limits.ephemeral-storage           | string  | `"5Gi"`                                            | PostgreSQL ephemeral storage limit                                                                  |
-| postgresql.auth.postgresUser                            | string  | `"probod"`                                         | PostgreSQL username                                                                                 |
-| postgresql.auth.postgresPassword                        | string  | `"probod"`                                         | PostgreSQL password                                                                                 |
-| postgresql.auth.database                                | string  | `"probod"`                                         | PostgreSQL database name                                                                            |
+| postgresql.auth.postgresUser                            | string  | `"trustreadyd"`                                         | PostgreSQL username                                                                                 |
+| postgresql.auth.postgresPassword                        | string  | `"trustreadyd"`                                         | PostgreSQL password                                                                                 |
+| postgresql.auth.database                                | string  | `"trustreadyd"`                                         | PostgreSQL database name                                                                            |
 | s3.region                                               | string  | `"us-east-1"`                                      | S3 region                                                                                           |
-| s3.bucket                                               | string  | `"probod"`                                         | S3 bucket name                                                                                      |
+| s3.bucket                                               | string  | `"trustreadyd"`                                         | S3 bucket name                                                                                      |
 | s3.endpoint                                             | string  | `""`                                               | S3 endpoint (leave empty for AWS S3, set for S3-compatible storage)                                 |
 | s3.accessKeyId                                          | string  | `""`                                               | **REQUIRED** (when seaweedfs.enabled=false) S3 access key                                           |
 | s3.secretAccessKey                                      | string  | `""`                                               | **REQUIRED** (when seaweedfs.enabled=false) S3 secret key                                           |
@@ -541,8 +541,8 @@ regenerate the config from all `PROBOD_*` env vars.
 | seaweedfs.image.tag                                     | string  | `"latest"`                                         | SeaweedFS image tag                                                                                 |
 | seaweedfs.persistence.enabled                           | bool    | `false`                                            | Enable SeaweedFS persistence                                                                        |
 | seaweedfs.persistence.size                              | string  | `"10Gi"`                                           | SeaweedFS persistent volume size                                                                    |
-| seaweedfs.auth.accessKey                                | string  | `"probod"`                                         | SeaweedFS S3 access key                                                                             |
-| seaweedfs.auth.secretKey                                | string  | `"probod"`                                         | SeaweedFS S3 secret key                                                                             |
+| seaweedfs.auth.accessKey                                | string  | `"trustreadyd"`                                         | SeaweedFS S3 access key                                                                             |
+| seaweedfs.auth.secretKey                                | string  | `"trustreadyd"`                                         | SeaweedFS S3 secret key                                                                             |
 | chrome.enabled                                          | bool    | `true`                                             | Deploy Chrome headless in the cluster for PDF generation                                            |
 | chrome.replicaCount                                     | int     | `1`                                                | Number of Chrome replicas                                                                           |
 | chrome.image.repository                                 | string  | `"chromedp/headless-shell"`                        | Chrome container image repository                                                                   |

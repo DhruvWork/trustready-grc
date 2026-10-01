@@ -30,7 +30,7 @@ import (
 )
 
 const (
-	// DefaultTCFCmpID is used when probod config omits a CMP ID.
+	// DefaultTCFCmpID is used when trustreadyd config omits a CMP ID.
 	// Placeholder until IAB Europe issues Probo a CMP ID. The official IAB
 	// libraries reject ids below 2, so 0 cannot be encoded or passed to CmpApi.
 	DefaultTCFCmpID         = 4095

@@ -27,16 +27,16 @@ import (
 
 // AssetLayout describes the names used by the release pipeline for a
 // (goos, goarch) combination. The fields mirror what the
-// release-probo-agent.yaml workflow produces.
+// release-trustready-agent.yaml workflow produces.
 type AssetLayout struct {
 	// ArchiveName is the file name of the published archive
-	// (e.g. probo-agent_Linux_x86_64.tar.gz).
+	// (e.g. trustready-agent_Linux_x86_64.tar.gz).
 	ArchiveName string
 	// ArchiveDir is the top-level directory inside the archive
-	// (e.g. probo-agent_Linux_x86_64).
+	// (e.g. trustready-agent_Linux_x86_64).
 	ArchiveDir string
 	// BinaryName is the agent binary file name inside the archive
-	// (e.g. probo-agent or probo-agent.exe).
+	// (e.g. trustready-agent or trustready-agent.exe).
 	BinaryName string
 	// GUIBinaryName is the Windows GUI-subsystem binary inside the archive.
 	// It is empty on platforms that ship one binary.
@@ -58,16 +58,16 @@ func LayoutFor(goos, goarch string) (AssetLayout, error) {
 	}
 
 	archLabel := archLabel(goarch)
-	dir := fmt.Sprintf("probo-agent_%s_%s", osLabel, archLabel)
+	dir := fmt.Sprintf("trustready-agent_%s_%s", osLabel, archLabel)
 
-	binary := "probo-agent"
+	binary := "trustready-agent"
 	guiBinary := ""
 	isZip := false
 	ext := "tar.gz"
 
 	if goos == "windows" {
 		binary += ".exe"
-		guiBinary = "probo-agentw.exe"
+		guiBinary = "trustready-agentw.exe"
 		isZip = true
 		ext = "zip"
 	}

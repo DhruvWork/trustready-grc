@@ -200,7 +200,7 @@ func validateEndpointOverride(raw string, isBase bool) error {
 	}
 
 	// Every message below reports the override back to the operator, and this
-	// error is what probod prints when it refuses to boot. An override that
+	// error is what trustreadyd prints when it refuses to boot. An override that
 	// embeds credentials must not put them in that log line, and the
 	// credentials check is not the branch that fires first — a bad scheme on a
 	// credentialed URL reaches the scheme message. Redact once, up front.

@@ -49,7 +49,7 @@ const (
 
 	// defaultPGURL targets the local compose Postgres so tests run with zero
 	// configuration against a developer's stack.
-	defaultPGURL = "postgres://probod:probod@localhost:5432/probod_test"
+	defaultPGURL = "postgres://trustreadyd:trustreadyd@localhost:5432/trustreadyd_test"
 )
 
 var (

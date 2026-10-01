@@ -74,7 +74,7 @@ func ProbeEnrollmentTrust(ctx context.Context, serverURL string) EnrollmentTrust
 		return TrustUnknown
 	}
 
-	client := NewClient(normalized, "", "probo-agent/enroll-probe")
+	client := NewClient(normalized, "", "trustready-agent/enroll-probe")
 	client.HTTP.CheckRedirect = func(*http.Request, []*http.Request) error {
 		return http.ErrUseLastResponse
 	}

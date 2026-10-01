@@ -60,7 +60,7 @@ type (
 		connectorRegistry *connector.Registry
 		baseURL           string
 		// linearAPIBaseURL is the LINEAR_SYNC provider registration's
-		// Endpoints.APIBase, threaded in by probod so a deployment that
+		// Endpoints.APIBase, threaded in by trustreadyd so a deployment that
 		// repoints the Linear Sync connector moves these calls too. See
 		// linear.NewClient.
 		linearAPIBaseURL       string

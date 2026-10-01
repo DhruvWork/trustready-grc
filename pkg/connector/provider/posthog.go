@@ -50,7 +50,7 @@ func posthogRegistration() *Registration {
 		DisplayName: "PostHog",
 
 		// PublicClient: PostHog OAuth uses the CIMD flow — no client_secret,
-		// authenticated by PKCE. probod auto-registers this connector with
+		// authenticated by PKCE. trustreadyd auto-registers this connector with
 		// the deployment's hosted CIMD client_id; no operator OAuth app or
 		// credentials are required.
 		OAuth2: &OAuth2Config{

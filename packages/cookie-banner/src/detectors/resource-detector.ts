@@ -40,7 +40,7 @@ export function resolveResourceReportingEnabled(config: BannerConfig): boolean {
   if (!warnedResourceReporting) {
     warnedResourceReporting = true;
     console.error(
-      "[probo] banner config has no `resource_reporting_enabled`: your self-hosted Probo backend (probod) is older than this SDK. Update probod to match this SDK. Falling back to resource reporting enabled.",
+      "[probo] banner config has no `resource_reporting_enabled`: your self-hosted Probo backend (trustreadyd) is older than this SDK. Update trustreadyd to match this SDK. Falling back to resource reporting enabled.",
     );
   }
 

@@ -61,10 +61,10 @@ func TestUserAgent(t *testing.T) {
 		},
 		{
 			name:      "Probod user agent",
-			component: "probod",
+			component: "trustreadyd",
 			checks: []string{
 				"Probo/",
-				"probod",
+				"trustreadyd",
 				"Go/go",
 			},
 		},

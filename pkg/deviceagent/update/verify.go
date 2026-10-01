@@ -39,10 +39,10 @@ const (
 	expectedSignerIssuer = "https://token.actions.githubusercontent.com"
 
 	// expectedWorkflowPath is the path of the release workflow that
-	// is allowed to produce signed probo-agent artifacts. Anything
+	// is allowed to produce signed trustready-agent artifacts. Anything
 	// signed by a different workflow (or a workflow run outside of
 	// a tagged commit) is rejected.
-	expectedWorkflowPath = ".github/workflows/release-probo-agent.yaml"
+	expectedWorkflowPath = ".github/workflows/release-trustready-agent.yaml"
 )
 
 // Verifier verifies that a Sigstore bundle (`checksums.txt.bundle`)
@@ -73,7 +73,7 @@ func (v rejectAllVerifier) Verify(_ context.Context, _, _ string) error { return
 // CosignVerifier verifies cosign sign-blob bundles using sigstore-go
 // against the Sigstore public-good trust root.
 //
-// The verifier pins the signer identity to the probo-agent release
+// The verifier pins the signer identity to the trustready-agent release
 // workflow on a tagged commit:
 //
 //	issuer:  https://token.actions.githubusercontent.com
@@ -96,7 +96,7 @@ type CosignVerifierConfig struct {
 	// allowed to produce signed releases.
 	WorkflowPath string
 	// TagPrefix is the tag prefix the release workflow signs against
-	// (e.g. "probo-agent/v"). The verifier matches anything after
+	// (e.g. "trustready-agent/v"). The verifier matches anything after
 	// this prefix.
 	TagPrefix string
 	// CacheDir is the on-disk directory used to cache the Sigstore

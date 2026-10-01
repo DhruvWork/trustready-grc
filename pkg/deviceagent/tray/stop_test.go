@@ -39,7 +39,7 @@ func TestShouldStopInteractiveAgentProcess(t *testing.T) {
 	}{
 		{
 			name:      "tray in user session",
-			baseName:  "probo-agentw.exe",
+			baseName:  "trustready-agentw.exe",
 			pid:       42,
 			selfPID:   1,
 			sessionID: 1,
@@ -47,7 +47,7 @@ func TestShouldStopInteractiveAgentProcess(t *testing.T) {
 		},
 		{
 			name:      "legacy tray in user session",
-			baseName:  "probo-agent.exe",
+			baseName:  "trustready-agent.exe",
 			pid:       42,
 			selfPID:   1,
 			sessionID: 1,
@@ -55,7 +55,7 @@ func TestShouldStopInteractiveAgentProcess(t *testing.T) {
 		},
 		{
 			name:      "service in session 0",
-			baseName:  "probo-agent.exe",
+			baseName:  "trustready-agent.exe",
 			pid:       42,
 			selfPID:   1,
 			sessionID: 0,
@@ -63,7 +63,7 @@ func TestShouldStopInteractiveAgentProcess(t *testing.T) {
 		},
 		{
 			name:      "skips current process",
-			baseName:  "probo-agent.exe",
+			baseName:  "trustready-agent.exe",
 			pid:       7,
 			selfPID:   7,
 			sessionID: 1,

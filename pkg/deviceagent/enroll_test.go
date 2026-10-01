@@ -50,7 +50,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 			require.NoError(t, SaveAPIKey(dir, persistedKey))
 			require.NoError(t, SaveConfig(dir, &Config{ServerURL: serverURL}))
 
-			client := NewClient("https://wrong.example.com", "", "probo-agent/test")
+			client := NewClient("https://wrong.example.com", "", "trustready-agent/test")
 
 			apiKey, err := LoadOrExchangeAPIKey(
 				context.Background(),
@@ -73,7 +73,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 			require.NoError(t, SaveAPIKey(dir, persistedKey))
 			require.NoError(t, SaveConfig(dir, &Config{ServerURL: serverURL}))
 
-			client := NewClient(serverURL, "", "probo-agent/test")
+			client := NewClient(serverURL, "", "trustready-agent/test")
 
 			_, err := LoadOrExchangeAPIKey(
 				context.Background(),
@@ -95,7 +95,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 			require.NoError(t, SaveAPIKey(dir, persistedKey))
 			require.NoError(t, SaveConfig(dir, &Config{ServerURL: serverURL}))
 
-			client := NewClient("https://wrong.example.com", "", "probo-agent/test")
+			client := NewClient("https://wrong.example.com", "", "trustready-agent/test")
 
 			apiKey, err := LoadOrExchangeAPIKey(
 				context.Background(),
@@ -117,7 +117,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 			dir := t.TempDir()
 			require.NoError(t, SaveAPIKey(dir, persistedKey))
 
-			client := NewClient(serverURL, "", "probo-agent/test")
+			client := NewClient(serverURL, "", "trustready-agent/test")
 
 			_, err := LoadOrExchangeAPIKey(
 				context.Background(),
@@ -138,7 +138,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 			dir := t.TempDir()
 			require.NoError(t, SaveAPIKey(dir, persistedKey))
 
-			client := NewClient(serverURL, "", "probo-agent/test")
+			client := NewClient(serverURL, "", "trustready-agent/test")
 
 			_, err := LoadOrExchangeAPIKey(
 				context.Background(),
@@ -168,7 +168,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 			t.Cleanup(srv.Close)
 
 			dir := t.TempDir()
-			client := NewClient(srv.URL, "", "probo-agent/test")
+			client := NewClient(srv.URL, "", "trustready-agent/test")
 
 			apiKey, err := LoadOrExchangeAPIKey(
 				context.Background(),
@@ -204,7 +204,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 			t.Cleanup(srv.Close)
 
 			dir := t.TempDir()
-			client := NewClient(srv.URL, "", "probo-agent/test")
+			client := NewClient(srv.URL, "", "trustready-agent/test")
 
 			_, err := LoadOrExchangeAPIKey(
 				context.Background(),
@@ -238,7 +238,7 @@ func TestLoadOrExchangeAPIKey(t *testing.T) {
 			dir := t.TempDir()
 			require.NoError(t, os.Mkdir(filepath.Join(dir, ConfigFileName), 0o700))
 
-			client := NewClient(srv.URL, "", "probo-agent/test")
+			client := NewClient(srv.URL, "", "trustready-agent/test")
 
 			_, err := LoadOrExchangeAPIKey(
 				context.Background(),

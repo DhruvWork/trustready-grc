@@ -39,7 +39,7 @@ import (
 var isolatedEnvStartMu sync.Mutex
 
 type (
-	// IsolatedEnv is a short-lived probod process with its own listen addresses.
+	// IsolatedEnv is a short-lived trustreadyd process with its own listen addresses.
 	// It shares Postgres and Mailpit with the main e2e suite so identities created
 	// against the default server remain visible, which is how a disable-signup
 	// instance is bootstrapped in production (orgs exist before the flag flips).
@@ -91,8 +91,8 @@ func (b *lockedBuffer) Bytes() []byte {
 	return out
 }
 
-// StartIsolatedEnv launches a second probod for gates that depend on process
-// config (for example PROBOD_AUTH_DISABLE_SIGNUP). The process is stopped via
+// StartIsolatedEnv launches a second trustreadyd for gates that depend on process
+// config (for example TRUSTREADYD_AUTH_DISABLE_SIGNUP). The process is stopped via
 // t.Cleanup.
 func StartIsolatedEnv(t testing.TB, opts IsolatedEnvOptions) *IsolatedEnv {
 	t.Helper()
@@ -149,7 +149,7 @@ func StartIsolatedEnv(t testing.TB, opts IsolatedEnvOptions) *IsolatedEnv {
 
 	closeReservedPorts(ports)
 
-	require.NoError(t, cmd.Start(), "cannot start isolated probod")
+	require.NoError(t, cmd.Start(), "cannot start isolated trustreadyd")
 
 	startUnlocked = true
 	isolatedEnvStartMu.Unlock()
@@ -204,7 +204,7 @@ func (e *IsolatedEnv) dumpOutput(contextMsg string, err error) {
 		output = output[len(output)-maxTail:]
 	}
 
-	fmt.Fprintf(os.Stderr, "--- isolated probod output start ---\n%s\n--- isolated probod output end ---\n", output)
+	fmt.Fprintf(os.Stderr, "--- isolated trustreadyd output start ---\n%s\n--- isolated trustreadyd output end ---\n", output)
 }
 
 func reserveTCPPort(t testing.TB) reservedTCPPort {

@@ -26,8 +26,8 @@ import "path/filepath"
 
 const (
 	privilegedExecutableDir  = "/Library/Probo"
-	privilegedExecutableName = "probo-agent"
-	legacyExecutablePath     = "/usr/local/bin/probo-agent"
+	privilegedExecutableName = "trustready-agent"
+	legacyExecutablePath     = "/usr/local/bin/trustready-agent"
 )
 
 // DefaultExecutablePath is the root-owned Darwin install location used by

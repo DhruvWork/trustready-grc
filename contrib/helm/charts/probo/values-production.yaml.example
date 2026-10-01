@@ -409,8 +409,8 @@ postgresql:
   # - DigitalOcean: db-postgresql-nyc1-12345.ondigitalocean.com
   host: "CHANGE_ME_POSTGRES_HOST"
   port: 5432
-  database: "probod"
-  username: "probod"
+  database: "trustreadyd"
+  username: "trustreadyd"
   password: "CHANGE_ME_DB_PASSWORD"
   poolSize: 200
   # Keep 20 connections warm to absorb bursts without paying the

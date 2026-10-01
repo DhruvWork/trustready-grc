@@ -30,7 +30,7 @@ import (
 )
 
 // TestMembershipAccess_DisableSignupJourney covers the private-instance gate:
-// when PROBOD_AUTH_DISABLE_SIGNUP is set, an authenticated identity without an
+// when TRUSTREADYD_AUTH_DISABLE_SIGNUP is set, an authenticated identity without an
 // active organization membership must not create organizations or reach the
 // console API. Members who are not owners also cannot create organizations.
 // Magic-link identity creation itself stays allowed so the compliance portal

@@ -3,7 +3,7 @@
 ## When to use
 
 Use a sandbox when you need to:
-- Run the full service stack (Docker services, probod, console)
+- Run the full service stack (Docker services, trustreadyd, console)
 - Test changes end-to-end with `make test-e2e`
 - Build the full binary with `make build`
 - Run any command that requires Docker or the full service stack
@@ -42,16 +42,16 @@ After `make sandbox-status`, use the VM IP to access services from the host:
 | Grafana    | `http://<vm-ip>:3001`       |
 | Mailpit    | `http://<vm-ip>:8025`       |
 | Keycloak   | `http://<vm-ip>:8082`       |
-| PostgreSQL | `psql -h <vm-ip> -U probod` |
+| PostgreSQL | `psql -h <vm-ip> -U trustreadyd` |
 
 ## Auto-generated configuration
 
 During provisioning, the sandbox automatically generates:
 
-- **`/etc/probod/config.yml`** — probod config with the VM IP as cookie domain, `secure: false`, and correct CORS origins
+- **`/etc/trustreadyd/config.yml`** — trustreadyd config with the VM IP as cookie domain, `secure: false`, and correct CORS origins
 - **`apps/console/.env`** and **`apps/compliance-portal/.env`** — `VITE_API_URL` pointing to the VM IP
 
-Probod config is at `/etc/probod/config.yml`.
+Probod config is at `/etc/trustreadyd/config.yml`.
 
 ### Custom environment variables
 
@@ -64,7 +64,7 @@ AUTH_OIDC_CLIENT_ID=my-client-id
 AUTH_OIDC_CLIENT_SECRET=s3cret
 ```
 
-This file is sourced during provisioning before `probod-bootstrap` runs. Any variable set here overrides the defaults. The sandbox must be recreated (`sandbox-delete` + `sandbox-create`) for changes to take effect.
+This file is sourced during provisioning before `trustreadyd-bootstrap` runs. Any variable set here overrides the defaults. The sandbox must be recreated (`sandbox-delete` + `sandbox-create`) for changes to take effect.
 
 ## Systemd services
 
@@ -73,19 +73,19 @@ The sandbox provisions four systemd services:
 | Service                    | Description                                                | Starts on boot |
 | -------------------------- | ---------------------------------------------------------- | -------------- |
 | `probo-stack`              | Docker Compose stack (Postgres, SeaweedFS, Keycloak, etc.) | Yes            |
-| `probod`                   | Probo API server (depends on `probo-stack`)                | No             |
+| `trustreadyd`                   | Probo API server (depends on `probo-stack`)                | No             |
 | `probo-console`            | Console frontend dev server                                | No             |
 | `probo-compliance-portal`  | Compliance portal frontend dev server                     | No             |
 
-`probo-stack` starts automatically when the VM boots. `probod`, `probo-console`, and `probo-compliance-portal` must be started manually after building.
+`probo-stack` starts automatically when the VM boots. `trustreadyd`, `probo-console`, and `probo-compliance-portal` must be started manually after building.
 
 Manage them with `systemctl`:
 ```bash
-./contrib/lima/sandbox.sh exec -- sudo systemctl start probod probo-console probo-compliance-portal
-./contrib/lima/sandbox.sh exec -- sudo systemctl stop probod
-./contrib/lima/sandbox.sh exec -- sudo systemctl restart probod
-./contrib/lima/sandbox.sh exec -- sudo systemctl status probod
-./contrib/lima/sandbox.sh exec -- sudo journalctl -u probod -f
+./contrib/lima/sandbox.sh exec -- sudo systemctl start trustreadyd probo-console probo-compliance-portal
+./contrib/lima/sandbox.sh exec -- sudo systemctl stop trustreadyd
+./contrib/lima/sandbox.sh exec -- sudo systemctl restart trustreadyd
+./contrib/lima/sandbox.sh exec -- sudo systemctl status trustreadyd
+./contrib/lima/sandbox.sh exec -- sudo journalctl -u trustreadyd -f
 ```
 
 ## Common workflows

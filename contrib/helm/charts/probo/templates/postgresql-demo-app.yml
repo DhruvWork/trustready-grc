@@ -58,27 +58,27 @@ metadata:
   labels:
     {{- include "probo.labels" . | nindent 4 }}
 data:
-  01_probod.sh: |
+  01_trustreadyd.sh: |
     #!/bin/sh
 
     set -eu
 
     psql -v ON_ERROR_STOP=1 -U $POSTGRES_USER <<-EOF
-    ALTER USER probod WITH SUPERUSER;
-    ALTER USER probod PASSWORD {{ .Values.postgresql.auth.postgresPassword | squote }};
-    GRANT ALL PRIVILEGES ON DATABASE probod TO probod;
-    CREATE DATABASE probod_test;
-    GRANT ALL PRIVILEGES ON DATABASE probod_test TO probod;
+    ALTER USER trustreadyd WITH SUPERUSER;
+    ALTER USER trustreadyd PASSWORD {{ .Values.postgresql.auth.postgresPassword | squote }};
+    GRANT ALL PRIVILEGES ON DATABASE trustreadyd TO trustreadyd;
+    CREATE DATABASE trustreadyd_test;
+    GRANT ALL PRIVILEGES ON DATABASE trustreadyd_test TO trustreadyd;
     EOF
 
-    psql -v ON_ERROR_STOP=1 -U $POSTGRES_USER -d probod <<-EOF
-    ALTER SCHEMA public OWNER TO probod;
-    GRANT ALL ON SCHEMA public TO probod;
+    psql -v ON_ERROR_STOP=1 -U $POSTGRES_USER -d trustreadyd <<-EOF
+    ALTER SCHEMA public OWNER TO trustreadyd;
+    GRANT ALL ON SCHEMA public TO trustreadyd;
     EOF
 
-    psql -v ON_ERROR_STOP=1 -U $POSTGRES_USER -d probod_test <<-EOF
-    ALTER SCHEMA public OWNER TO probod;
-    GRANT ALL ON SCHEMA public TO probod;
+    psql -v ON_ERROR_STOP=1 -U $POSTGRES_USER -d trustreadyd_test <<-EOF
+    ALTER SCHEMA public OWNER TO trustreadyd;
+    GRANT ALL ON SCHEMA public TO trustreadyd;
     EOF
 ---
 {{- end -}}

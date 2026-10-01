@@ -25,14 +25,14 @@ import (
 	"strings"
 )
 
-// InstallOptions configures an elevated probo-agent install invocation.
+// InstallOptions configures an elevated trustready-agent install invocation.
 type InstallOptions struct {
 	ExePath   string
 	ServerURL string
 	ConfigDir string // agent config / keystore dir (--dir)
 }
 
-// UninstallOptions configures an elevated probo-agent uninstall invocation.
+// UninstallOptions configures an elevated trustready-agent uninstall invocation.
 type UninstallOptions struct {
 	ExePath   string
 	ConfigDir string

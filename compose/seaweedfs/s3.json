@@ -1,10 +1,10 @@
 {
   "identities": [
     {
-      "name": "probod",
+      "name": "trustreadyd",
       "credentials": [
         {
-          "accessKey": "probod",
+          "accessKey": "trustreadyd",
           "secretKey": "thisisnotasecret"
         }
       ],

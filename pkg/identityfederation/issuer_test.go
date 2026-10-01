@@ -542,7 +542,7 @@ func TestResolveIssuerBaseURL(t *testing.T) {
 		},
 		{
 			// The issuer is a public identifier a customer registers with their
-			// cloud provider, and probod logs it at startup, so credentials must
+			// cloud provider, and trustreadyd logs it at startup, so credentials must
 			// never survive into it.
 			name:       "userinfo is refused",
 			configured: "https://user:pass@proboidentity.com", // trufflehog:ignore

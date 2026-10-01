@@ -32,10 +32,10 @@ func TestRunElevatedInstallRequiresPrivilegedHelper(t *testing.T) {
 	t.Parallel()
 
 	err := RunElevatedInstall(
-		"/Library/Probo/probo-agent",
+		"/Library/Probo/trustready-agent",
 		"https://example.com",
 		"token",
-		"/var/lib/probo-agent",
+		"/var/lib/trustready-agent",
 	)
 	require.ErrorIs(t, err, ErrPrivilegedHelperRequired)
 }
@@ -43,6 +43,6 @@ func TestRunElevatedInstallRequiresPrivilegedHelper(t *testing.T) {
 func TestRunElevatedUninstallRequiresPrivilegedHelper(t *testing.T) {
 	t.Parallel()
 
-	err := RunElevatedUninstall("/Library/Probo/probo-agent", "/var/lib/probo-agent")
+	err := RunElevatedUninstall("/Library/Probo/trustready-agent", "/var/lib/trustready-agent")
 	require.ErrorIs(t, err, ErrPrivilegedHelperRequired)
 }

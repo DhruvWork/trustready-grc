@@ -30,7 +30,7 @@ import (
 )
 
 const (
-	systemdUnitPath = "/etc/systemd/system/probo-agent.service"
+	systemdUnitPath = "/etc/systemd/system/trustready-agent.service"
 )
 
 const systemdUnitTmpl = `[Unit]
@@ -85,7 +85,7 @@ func Install(cfg Config) error {
 		return fmt.Errorf("cannot run systemctl daemon-reload: %w: %s", err, strings.TrimSpace(string(out)))
 	}
 
-	if out, err := exec.Command("systemctl", "enable", "--now", "probo-agent.service").CombinedOutput(); err != nil {
+	if out, err := exec.Command("systemctl", "enable", "--now", "trustready-agent.service").CombinedOutput(); err != nil {
 		return fmt.Errorf("cannot run systemctl enable --now: %w: %s", err, strings.TrimSpace(string(out)))
 	}
 
@@ -93,7 +93,7 @@ func Install(cfg Config) error {
 }
 
 func Uninstall(cfg Config) error {
-	_ = exec.Command("systemctl", "disable", "--now", "probo-agent.service").Run()
+	_ = exec.Command("systemctl", "disable", "--now", "trustready-agent.service").Run()
 
 	if err := os.Remove(systemdUnitPath); err != nil && !errors.Is(err, os.ErrNotExist) {
 		return fmt.Errorf("cannot remove systemd unit: %w", err)

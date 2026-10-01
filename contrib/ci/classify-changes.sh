@@ -59,26 +59,26 @@ done
 
 agent="$(
   contrib/ci/go-package-affected.sh \
-    "$base_sha" "$head_sha" ./cmd/probo-agent
+    "$base_sha" "$head_sha" ./cmd/trustready-agent
 )"
 prb="$(
   contrib/ci/go-package-affected.sh \
     "$base_sha" "$head_sha" ./cmd/prb
 )"
-probod="$(
+trustreadyd="$(
   contrib/ci/go-package-affected.sh \
-    "$base_sha" "$head_sha" ./cmd/probod
+    "$base_sha" "$head_sha" ./cmd/trustreadyd
 )"
-probod_bootstrap="$(
+trustreadyd_bootstrap="$(
   contrib/ci/go-package-affected.sh \
-    "$base_sha" "$head_sha" ./cmd/probod-bootstrap
+    "$base_sha" "$head_sha" ./cmd/trustreadyd-bootstrap
 )"
 
 go_changed="false"
 javascript="false"
 shell="false"
 swift="false"
-e2e="$probod"
+e2e="$trustreadyd"
 frontend="false"
 isolated_package_changed="false"
 isolated_package_only="true"
@@ -90,7 +90,7 @@ for changed_file in "${changed_files[@]}"; do
   # testdata and //go:embed inputs are not skipped; do not rely on *.go.
   # enroll-ui is Swift. Mixed JS/Go trees stay on the extension list.
   case "$changed_file" in
-    cmd/probo-agent/installer/macos/enroll-ui/*)
+    cmd/trustready-agent/installer/macos/enroll-ui/*)
       ;;
     cmd/* | pkg/* | e2e/* | internal/* | \
       *.go | *.graphql | *.tmpl | *.sql | .golangci.yml | \
@@ -142,7 +142,7 @@ for changed_file in "${changed_files[@]}"; do
 
   case "$changed_file" in
     .swift-format | .swiftlint.yml | \
-      cmd/probo-agent/installer/macos/enroll-ui/*)
+      cmd/trustready-agent/installer/macos/enroll-ui/*)
       swift="true"
       ;;
   esac
@@ -155,7 +155,7 @@ for changed_file in "${changed_files[@]}"; do
   esac
 
   # Image + scanner config. Snapshot builds the Docker image (Trivy)
-  # and runs snapshot-scan (Grype). E2E uses Compose + host bin/probod.
+  # and runs snapshot-scan (Grype). E2E uses Compose + host bin/trustreadyd.
   case "$changed_file" in
     Dockerfile | entrypoint.sh | .trivyignore.yaml | .grype.yaml)
       snapshot="true"
@@ -168,9 +168,9 @@ if [[ "$lockfile_changed" == "true" &&
   frontend="true"
 fi
 
-if [[ "$probod" == "true" ||
+if [[ "$trustreadyd" == "true" ||
   "$prb" == "true" ||
-  "$probod_bootstrap" == "true" ||
+  "$trustreadyd_bootstrap" == "true" ||
   "$frontend" == "true" ]]; then
   snapshot="true"
 fi

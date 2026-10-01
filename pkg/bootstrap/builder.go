@@ -31,11 +31,11 @@ import (
 	cloudgcp "github.com/DhruvWork/trustready-grc/pkg/cloud/gcp"
 	"github.com/DhruvWork/trustready-grc/pkg/connector"
 	"github.com/DhruvWork/trustready-grc/pkg/connector/provider"
-	"github.com/DhruvWork/trustready-grc/pkg/probodconfig"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadydconfig"
 )
 
 // connectorEndpointFields are the field segments buildConnectorEndpoints reads
-// off PROBOD_CONNECTOR_<PROVIDER>_ENDPOINT_<FIELD>. checkConnectorEndpointEnvTypos
+// off TRUSTREADYD_CONNECTOR_<PROVIDER>_ENDPOINT_<FIELD>. checkConnectorEndpointEnvTypos
 // keys off the same list so the two never drift apart.
 var connectorEndpointFields = []string{"AUTH", "TOKEN", "PROBE", "IDENTITY", "API_BASE"}
 
@@ -56,7 +56,7 @@ func NewBuilder(resolver *Resolver) *Builder {
 	return &Builder{resolver: resolver}
 }
 
-func (b *Builder) Build() (*probodconfig.FullConfig, error) {
+func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 	if err := b.validateRequired(); err != nil {
 		return nil, err
 	}
@@ -71,340 +71,340 @@ func (b *Builder) Build() (*probodconfig.FullConfig, error) {
 		return nil, fmt.Errorf("cannot get OAuth2 server signing key: %w", err)
 	}
 
-	identityFederationEnabled := b.resolver.getEnvBoolOrDefault("PROBOD_IDENTITY_FEDERATION_ENABLED", false)
+	identityFederationEnabled := b.resolver.getEnvBoolOrDefault("TRUSTREADYD_IDENTITY_FEDERATION_ENABLED", false)
 
 	identityFederationSigningKeys, err := b.buildIdentityFederationSigningKeys(identityFederationEnabled)
 	if err != nil {
 		return nil, err
 	}
 
-	acmeAccountKey, err := probodconfig.ParsePrivateKey(b.resolver.getEnv("PROBOD_ACME_ACCOUNT_KEY"))
+	acmeAccountKey, err := trustreadydconfig.ParsePrivateKey(b.resolver.getEnv("TRUSTREADYD_ACME_ACCOUNT_KEY"))
 	if err != nil {
-		return nil, fmt.Errorf("cannot parse PROBOD_ACME_ACCOUNT_KEY: %w", err)
+		return nil, fmt.Errorf("cannot parse TRUSTREADYD_ACME_ACCOUNT_KEY: %w", err)
 	}
 
 	pgCACertBundle := b.getPgCACertBundle()
 
-	authCookieSameSite, err := probodconfig.ParseCookieSameSite(
-		b.resolver.getEnvOrDefault("PROBOD_AUTH_COOKIE_SAMESITE", "lax"),
+	authCookieSameSite, err := trustreadydconfig.ParseCookieSameSite(
+		b.resolver.getEnvOrDefault("TRUSTREADYD_AUTH_COOKIE_SAMESITE", "lax"),
 	)
 	if err != nil {
-		return nil, fmt.Errorf("cannot parse PROBOD_AUTH_COOKIE_SAMESITE: %w", err)
+		return nil, fmt.Errorf("cannot parse TRUSTREADYD_AUTH_COOKIE_SAMESITE: %w", err)
 	}
 
-	compliancePortalTLSMode, err := probodconfig.ParseCompliancePortalTLSMode(
-		b.resolver.getEnvOrDefault("PROBOD_TRUST_CENTER_TLS_MODE", "direct"),
+	compliancePortalTLSMode, err := trustreadydconfig.ParseCompliancePortalTLSMode(
+		b.resolver.getEnvOrDefault("TRUSTREADYD_TRUST_CENTER_TLS_MODE", "direct"),
 	)
 	if err != nil {
-		return nil, fmt.Errorf("cannot parse PROBOD_TRUST_CENTER_TLS_MODE: %w", err)
+		return nil, fmt.Errorf("cannot parse TRUSTREADYD_TRUST_CENTER_TLS_MODE: %w", err)
 	}
 
-	cfg := &probodconfig.FullConfig{
-		Unit: probodconfig.UnitConfig{
-			Metrics: probodconfig.MetricsConfig{
-				Addr: b.resolver.getEnvOrDefault("PROBOD_METRICS_ADDR", "localhost:8081"),
+	cfg := &trustreadydconfig.FullConfig{
+		Unit: trustreadydconfig.UnitConfig{
+			Metrics: trustreadydconfig.MetricsConfig{
+				Addr: b.resolver.getEnvOrDefault("TRUSTREADYD_METRICS_ADDR", "localhost:8081"),
 			},
-			Tracing: probodconfig.TracingConfig{
-				Addr:          b.resolver.getEnvOrDefault("PROBOD_TRACING_ADDR", "localhost:4318"),
-				MaxBatchSize:  b.resolver.getEnvIntOrDefault("PROBOD_TRACING_MAX_BATCH_SIZE", 512),
-				BatchTimeout:  b.resolver.getEnvIntOrDefault("PROBOD_TRACING_BATCH_TIMEOUT", 5),
-				ExportTimeout: b.resolver.getEnvIntOrDefault("PROBOD_TRACING_EXPORT_TIMEOUT", 30),
-				MaxQueueSize:  b.resolver.getEnvIntOrDefault("PROBOD_TRACING_MAX_QUEUE_SIZE", 2048),
+			Tracing: trustreadydconfig.TracingConfig{
+				Addr:          b.resolver.getEnvOrDefault("TRUSTREADYD_TRACING_ADDR", "localhost:4318"),
+				MaxBatchSize:  b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACING_MAX_BATCH_SIZE", 512),
+				BatchTimeout:  b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACING_BATCH_TIMEOUT", 5),
+				ExportTimeout: b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACING_EXPORT_TIMEOUT", 30),
+				MaxQueueSize:  b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACING_MAX_QUEUE_SIZE", 2048),
 			},
 		},
-		Probod: probodconfig.Config{
-			BaseURL:       b.resolver.getEnv("PROBOD_BASE_URL"),
-			EncryptionKey: b.resolver.getEnv("PROBOD_ENCRYPTION_KEY"),
-			ChromeDPAddr:  b.resolver.getEnv("PROBOD_CHROME_DP_ADDR"),
-			Api: probodconfig.APIConfig{
-				Addr: b.resolver.getEnv("PROBOD_API_ADDR"),
-				ProxyProtocol: probodconfig.ProxyProtocolConfig{
-					TrustedProxies: b.parseOriginsList(b.resolver.getEnv("PROBOD_API_PROXY_PROTOCOL_TRUSTED_PROXIES")),
+		Probod: trustreadydconfig.Config{
+			BaseURL:       b.resolver.getEnv("TRUSTREADYD_BASE_URL"),
+			EncryptionKey: b.resolver.getEnv("TRUSTREADYD_ENCRYPTION_KEY"),
+			ChromeDPAddr:  b.resolver.getEnv("TRUSTREADYD_CHROME_DP_ADDR"),
+			Api: trustreadydconfig.APIConfig{
+				Addr: b.resolver.getEnv("TRUSTREADYD_API_ADDR"),
+				ProxyProtocol: trustreadydconfig.ProxyProtocolConfig{
+					TrustedProxies: b.parseOriginsList(b.resolver.getEnv("TRUSTREADYD_API_PROXY_PROTOCOL_TRUSTED_PROXIES")),
 				},
-				Cors: probodconfig.CorsConfig{
-					AllowedOrigins: b.parseOriginsList(b.resolver.getEnv("PROBOD_API_CORS_ALLOWED_ORIGINS")),
+				Cors: trustreadydconfig.CorsConfig{
+					AllowedOrigins: b.parseOriginsList(b.resolver.getEnv("TRUSTREADYD_API_CORS_ALLOWED_ORIGINS")),
 				},
 				ExtraHeaderFields: nil,
-				GraphQL: probodconfig.GraphQLConfig{
-					ParserTokenLimit:  b.resolver.getEnvIntOrDefault("PROBOD_API_GRAPHQL_PARSER_TOKEN_LIMIT", 15000),
-					ComplexityLimit:   b.resolver.getEnvIntOrDefault("PROBOD_API_GRAPHQL_COMPLEXITY_LIMIT", 2000),
-					QueryCacheSize:    b.resolver.getEnvIntOrDefault("PROBOD_API_GRAPHQL_QUERY_CACHE_SIZE", 1000),
-					DisableSuggestion: b.resolver.getEnvBoolOrDefault("PROBOD_API_GRAPHQL_DISABLE_SUGGESTION", true),
+				GraphQL: trustreadydconfig.GraphQLConfig{
+					ParserTokenLimit:  b.resolver.getEnvIntOrDefault("TRUSTREADYD_API_GRAPHQL_PARSER_TOKEN_LIMIT", 15000),
+					ComplexityLimit:   b.resolver.getEnvIntOrDefault("TRUSTREADYD_API_GRAPHQL_COMPLEXITY_LIMIT", 2000),
+					QueryCacheSize:    b.resolver.getEnvIntOrDefault("TRUSTREADYD_API_GRAPHQL_QUERY_CACHE_SIZE", 1000),
+					DisableSuggestion: b.resolver.getEnvBoolOrDefault("TRUSTREADYD_API_GRAPHQL_DISABLE_SUGGESTION", true),
 				},
 			},
-			Pg: probodconfig.PgConfig{
-				Addr:                         b.resolver.getEnv("PROBOD_PG_ADDR"),
-				Username:                     b.resolver.getEnv("PROBOD_PG_USERNAME"),
-				Password:                     b.resolver.getEnv("PROBOD_PG_PASSWORD"),
-				Database:                     b.resolver.getEnv("PROBOD_PG_DATABASE"),
-				PoolSize:                     int32(b.resolver.getEnvIntOrDefault("PROBOD_PG_POOL_SIZE", 100)),
-				MinPoolSize:                  int32(b.resolver.getEnvIntOrDefault("PROBOD_PG_MIN_POOL_SIZE", 10)),
-				MaxConnIdleTimeSeconds:       b.resolver.getEnvIntOrDefault("PROBOD_PG_MAX_CONN_IDLE_TIME_SECONDS", 1800),
-				MaxConnLifetimeSeconds:       b.resolver.getEnvIntOrDefault("PROBOD_PG_MAX_CONN_LIFETIME_SECONDS", 3600),
-				MaxConnLifetimeJitterSeconds: b.resolver.getEnvIntOrDefault("PROBOD_PG_MAX_CONN_LIFETIME_JITTER_SECONDS", 300),
-				HealthCheckPeriodSeconds:     b.resolver.getEnvIntOrDefault("PROBOD_PG_HEALTH_CHECK_PERIOD_SECONDS", 60),
+			Pg: trustreadydconfig.PgConfig{
+				Addr:                         b.resolver.getEnv("TRUSTREADYD_PG_ADDR"),
+				Username:                     b.resolver.getEnv("TRUSTREADYD_PG_USERNAME"),
+				Password:                     b.resolver.getEnv("TRUSTREADYD_PG_PASSWORD"),
+				Database:                     b.resolver.getEnv("TRUSTREADYD_PG_DATABASE"),
+				PoolSize:                     int32(b.resolver.getEnvIntOrDefault("TRUSTREADYD_PG_POOL_SIZE", 100)),
+				MinPoolSize:                  int32(b.resolver.getEnvIntOrDefault("TRUSTREADYD_PG_MIN_POOL_SIZE", 10)),
+				MaxConnIdleTimeSeconds:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_PG_MAX_CONN_IDLE_TIME_SECONDS", 1800),
+				MaxConnLifetimeSeconds:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_PG_MAX_CONN_LIFETIME_SECONDS", 3600),
+				MaxConnLifetimeJitterSeconds: b.resolver.getEnvIntOrDefault("TRUSTREADYD_PG_MAX_CONN_LIFETIME_JITTER_SECONDS", 300),
+				HealthCheckPeriodSeconds:     b.resolver.getEnvIntOrDefault("TRUSTREADYD_PG_HEALTH_CHECK_PERIOD_SECONDS", 60),
 				CACertBundle:                 pgCACertBundle,
-				Debug:                        b.resolver.getEnvBoolOrDefault("PROBOD_PG_DEBUG", false),
+				Debug:                        b.resolver.getEnvBoolOrDefault("TRUSTREADYD_PG_DEBUG", false),
 			},
-			Auth: probodconfig.AuthConfig{
-				DisableSignup:                       b.resolver.getEnvBoolOrDefault("PROBOD_AUTH_DISABLE_SIGNUP", false),
-				InvitationConfirmationTokenValidity: b.resolver.getEnvIntOrDefault("PROBOD_AUTH_INVITATION_TOKEN_VALIDITY", 3600),
-				PasswordResetTokenValidity:          b.resolver.getEnvIntOrDefault("PROBOD_AUTH_PASSWORD_RESET_TOKEN_VALIDITY", 3600),
-				MagicLinkTokenValidity:              b.resolver.getEnvIntOrDefault("PROBOD_AUTH_MAGIC_LINK_TOKEN_VALIDITY", 900),
-				EmailConfirmationTokenValidity:      b.resolver.getEnvIntOrDefault("PROBOD_AUTH_EMAIL_CONFIRMATION_TOKEN_VALIDITY", 3600),
-				Cookie: probodconfig.CookieConfig{
-					Name:     b.resolver.getEnv("PROBOD_AUTH_COOKIE_NAME"),
-					Domain:   b.resolver.getEnv("PROBOD_AUTH_COOKIE_DOMAIN"),
-					Secret:   b.resolver.getEnv("PROBOD_AUTH_COOKIE_SECRET"),
-					Duration: b.resolver.getEnvIntOrDefault("PROBOD_AUTH_COOKIE_DURATION", 24),
-					Secure:   b.resolver.getEnvBoolOrDefault("PROBOD_AUTH_COOKIE_SECURE", true),
+			Auth: trustreadydconfig.AuthConfig{
+				DisableSignup:                       b.resolver.getEnvBoolOrDefault("TRUSTREADYD_AUTH_DISABLE_SIGNUP", false),
+				InvitationConfirmationTokenValidity: b.resolver.getEnvIntOrDefault("TRUSTREADYD_AUTH_INVITATION_TOKEN_VALIDITY", 3600),
+				PasswordResetTokenValidity:          b.resolver.getEnvIntOrDefault("TRUSTREADYD_AUTH_PASSWORD_RESET_TOKEN_VALIDITY", 3600),
+				MagicLinkTokenValidity:              b.resolver.getEnvIntOrDefault("TRUSTREADYD_AUTH_MAGIC_LINK_TOKEN_VALIDITY", 900),
+				EmailConfirmationTokenValidity:      b.resolver.getEnvIntOrDefault("TRUSTREADYD_AUTH_EMAIL_CONFIRMATION_TOKEN_VALIDITY", 3600),
+				Cookie: trustreadydconfig.CookieConfig{
+					Name:     b.resolver.getEnv("TRUSTREADYD_AUTH_COOKIE_NAME"),
+					Domain:   b.resolver.getEnv("TRUSTREADYD_AUTH_COOKIE_DOMAIN"),
+					Secret:   b.resolver.getEnv("TRUSTREADYD_AUTH_COOKIE_SECRET"),
+					Duration: b.resolver.getEnvIntOrDefault("TRUSTREADYD_AUTH_COOKIE_DURATION", 24),
+					Secure:   b.resolver.getEnvBoolOrDefault("TRUSTREADYD_AUTH_COOKIE_SECURE", true),
 					SameSite: authCookieSameSite,
 				},
-				Password: probodconfig.PasswordConfig{
-					Pepper:     b.resolver.getEnv("PROBOD_AUTH_PASSWORD_PEPPER"),
-					Iterations: b.resolver.getEnvIntOrDefault("PROBOD_AUTH_PASSWORD_ITERATIONS", 1000000),
+				Password: trustreadydconfig.PasswordConfig{
+					Pepper:     b.resolver.getEnv("TRUSTREADYD_AUTH_PASSWORD_PEPPER"),
+					Iterations: b.resolver.getEnvIntOrDefault("TRUSTREADYD_AUTH_PASSWORD_ITERATIONS", 1000000),
 				},
-				SAML: probodconfig.SAMLConfig{
-					SessionDuration:                   b.resolver.getEnvIntOrDefault("PROBOD_SAML_SESSION_DURATION", 604800),
-					CleanupIntervalSeconds:            b.resolver.getEnvIntOrDefault("PROBOD_SAML_CLEANUP_INTERVAL_SECONDS", 0),
+				SAML: trustreadydconfig.SAMLConfig{
+					SessionDuration:                   b.resolver.getEnvIntOrDefault("TRUSTREADYD_SAML_SESSION_DURATION", 604800),
+					CleanupIntervalSeconds:            b.resolver.getEnvIntOrDefault("TRUSTREADYD_SAML_CLEANUP_INTERVAL_SECONDS", 0),
 					Certificate:                       samlCert,
 					PrivateKey:                        samlKey,
-					DomainVerificationIntervalSeconds: b.resolver.getEnvIntOrDefault("PROBOD_SAML_DOMAIN_VERIFICATION_INTERVAL_SECONDS", 60),
-					DomainVerificationResolverAddr:    b.resolver.getEnv("PROBOD_SAML_DOMAIN_VERIFICATION_RESOLVER_ADDR"),
+					DomainVerificationIntervalSeconds: b.resolver.getEnvIntOrDefault("TRUSTREADYD_SAML_DOMAIN_VERIFICATION_INTERVAL_SECONDS", 60),
+					DomainVerificationResolverAddr:    b.resolver.getEnv("TRUSTREADYD_SAML_DOMAIN_VERIFICATION_RESOLVER_ADDR"),
 				},
-				Google: probodconfig.OIDCProviderConfig{
-					ClientID:     b.resolver.getEnv("PROBOD_AUTH_GOOGLE_CLIENT_ID"),
-					ClientSecret: b.resolver.getEnv("PROBOD_AUTH_GOOGLE_CLIENT_SECRET"),
-					Enabled:      b.resolver.getEnv("PROBOD_AUTH_GOOGLE_CLIENT_ID") != "" && b.resolver.getEnv("PROBOD_AUTH_GOOGLE_CLIENT_SECRET") != "",
+				Google: trustreadydconfig.OIDCProviderConfig{
+					ClientID:     b.resolver.getEnv("TRUSTREADYD_AUTH_GOOGLE_CLIENT_ID"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_AUTH_GOOGLE_CLIENT_SECRET"),
+					Enabled:      b.resolver.getEnv("TRUSTREADYD_AUTH_GOOGLE_CLIENT_ID") != "" && b.resolver.getEnv("TRUSTREADYD_AUTH_GOOGLE_CLIENT_SECRET") != "",
 				},
-				Microsoft: probodconfig.OIDCProviderConfig{
-					ClientID:     b.resolver.getEnv("PROBOD_AUTH_MICROSOFT_CLIENT_ID"),
-					ClientSecret: b.resolver.getEnv("PROBOD_AUTH_MICROSOFT_CLIENT_SECRET"),
-					Enabled:      b.resolver.getEnv("PROBOD_AUTH_MICROSOFT_CLIENT_ID") != "" && b.resolver.getEnv("PROBOD_AUTH_MICROSOFT_CLIENT_SECRET") != "",
+				Microsoft: trustreadydconfig.OIDCProviderConfig{
+					ClientID:     b.resolver.getEnv("TRUSTREADYD_AUTH_MICROSOFT_CLIENT_ID"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_AUTH_MICROSOFT_CLIENT_SECRET"),
+					Enabled:      b.resolver.getEnv("TRUSTREADYD_AUTH_MICROSOFT_CLIENT_ID") != "" && b.resolver.getEnv("TRUSTREADYD_AUTH_MICROSOFT_CLIENT_SECRET") != "",
 				},
-				OAuth2Server: probodconfig.OAuth2ServerConfig{
-					SigningKeys: []probodconfig.OAuth2SigningKeyConfig{{
+				OAuth2Server: trustreadydconfig.OAuth2ServerConfig{
+					SigningKeys: []trustreadydconfig.OAuth2SigningKeyConfig{{
 						PrivateKey: oauth2SigningKey,
-						KID:        b.resolver.getEnvOrDefault("PROBOD_OAUTH2_SERVER_SIGNING_KEY_KID", "default"),
+						KID:        b.resolver.getEnvOrDefault("TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY_KID", "default"),
 						Active:     true,
 					}},
-					AccessTokenDuration:       b.resolver.getEnvIntOrDefault("PROBOD_OAUTH2_SERVER_ACCESS_TOKEN_DURATION", 3600),
-					RefreshTokenDuration:      b.resolver.getEnvIntOrDefault("PROBOD_OAUTH2_SERVER_REFRESH_TOKEN_DURATION", 2592000),
-					AuthorizationCodeDuration: b.resolver.getEnvIntOrDefault("PROBOD_OAUTH2_SERVER_AUTHORIZATION_CODE_DURATION", 600),
-					DeviceCodeDuration:        b.resolver.getEnvIntOrDefault("PROBOD_OAUTH2_SERVER_DEVICE_CODE_DURATION", 600),
+					AccessTokenDuration:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_OAUTH2_SERVER_ACCESS_TOKEN_DURATION", 3600),
+					RefreshTokenDuration:      b.resolver.getEnvIntOrDefault("TRUSTREADYD_OAUTH2_SERVER_REFRESH_TOKEN_DURATION", 2592000),
+					AuthorizationCodeDuration: b.resolver.getEnvIntOrDefault("TRUSTREADYD_OAUTH2_SERVER_AUTHORIZATION_CODE_DURATION", 600),
+					DeviceCodeDuration:        b.resolver.getEnvIntOrDefault("TRUSTREADYD_OAUTH2_SERVER_DEVICE_CODE_DURATION", 600),
 					CIMDAllowedClientIDs: b.parseOriginsList(
-						b.resolver.getEnv("PROBOD_OAUTH2_SERVER_CIMD_ALLOWED_CLIENT_IDS"),
+						b.resolver.getEnv("TRUSTREADYD_OAUTH2_SERVER_CIMD_ALLOWED_CLIENT_IDS"),
 					),
 				},
 			},
-			IdentityFederation: probodconfig.IdentityFederationConfig{
+			IdentityFederation: trustreadydconfig.IdentityFederationConfig{
 				Enabled:       identityFederationEnabled,
-				IssuerBaseURL: b.resolver.getEnv("PROBOD_IDENTITY_FEDERATION_ISSUER_BASE_URL"),
+				IssuerBaseURL: b.resolver.getEnv("TRUSTREADYD_IDENTITY_FEDERATION_ISSUER_BASE_URL"),
 				SigningKeys:   identityFederationSigningKeys,
 				CloudFormationTemplateURL: b.resolver.getEnvOrDefault(
-					"PROBOD_IDENTITY_FEDERATION_CLOUDFORMATION_TEMPLATE_URL",
+					"TRUSTREADYD_IDENTITY_FEDERATION_CLOUDFORMATION_TEMPLATE_URL",
 					cloudaws.DefaultCloudFormationTemplateURL,
 				),
 				TerraformModuleSource: b.resolver.getEnvOrDefault(
-					"PROBOD_IDENTITY_FEDERATION_TERRAFORM_MODULE_SOURCE",
+					"TRUSTREADYD_IDENTITY_FEDERATION_TERRAFORM_MODULE_SOURCE",
 					cloudaws.DefaultTerraformModuleSource,
 				),
 				GCPTerraformModuleSource: b.resolver.getEnvOrDefault(
-					"PROBOD_IDENTITY_FEDERATION_GCP_TERRAFORM_MODULE_SOURCE",
+					"TRUSTREADYD_IDENTITY_FEDERATION_GCP_TERRAFORM_MODULE_SOURCE",
 					cloudgcp.DefaultTerraformModuleSource,
 				),
 				AzureTerraformModuleSource: b.resolver.getEnvOrDefault(
-					"PROBOD_IDENTITY_FEDERATION_AZURE_TERRAFORM_MODULE_SOURCE",
+					"TRUSTREADYD_IDENTITY_FEDERATION_AZURE_TERRAFORM_MODULE_SOURCE",
 					cloudazure.DefaultTerraformModuleSource,
 				),
-				AWSEndpoint: b.resolver.getEnv("PROBOD_IDENTITY_FEDERATION_AWS_ENDPOINT"),
+				AWSEndpoint: b.resolver.getEnv("TRUSTREADYD_IDENTITY_FEDERATION_AWS_ENDPOINT"),
 			},
-			ITAM: probodconfig.ITAMConfig{
+			ITAM: trustreadydconfig.ITAMConfig{
 				DeviceEnrollmentTokenValidity: b.resolver.getEnvIntOrDefault(
-					"PROBOD_ITAM_DEVICE_ENROLLMENT_TOKEN_VALIDITY",
+					"TRUSTREADYD_ITAM_DEVICE_ENROLLMENT_TOKEN_VALIDITY",
 					604800,
 				),
 			},
-			CompliancePortal: probodconfig.CompliancePortalConfig{
-				HTTPAddr:   b.resolver.getEnv("PROBOD_TRUST_CENTER_HTTP_ADDR"),
-				HTTPSAddr:  b.resolver.getEnv("PROBOD_TRUST_CENTER_HTTPS_ADDR"),
-				BaseDomain: b.resolver.getEnv("PROBOD_TRUST_CENTER_BASE_DOMAIN"),
+			CompliancePortal: trustreadydconfig.CompliancePortalConfig{
+				HTTPAddr:   b.resolver.getEnv("TRUSTREADYD_TRUST_CENTER_HTTP_ADDR"),
+				HTTPSAddr:  b.resolver.getEnv("TRUSTREADYD_TRUST_CENTER_HTTPS_ADDR"),
+				BaseDomain: b.resolver.getEnv("TRUSTREADYD_TRUST_CENTER_BASE_DOMAIN"),
 				TLSMode:    compliancePortalTLSMode,
-				ProxyProtocol: probodconfig.ProxyProtocolConfig{
-					TrustedProxies: b.parseOriginsList(b.resolver.getEnv("PROBOD_TRUST_CENTER_PROXY_PROTOCOL_TRUSTED_PROXIES")),
+				ProxyProtocol: trustreadydconfig.ProxyProtocolConfig{
+					TrustedProxies: b.parseOriginsList(b.resolver.getEnv("TRUSTREADYD_TRUST_CENTER_PROXY_PROTOCOL_TRUSTED_PROXIES")),
 				},
 			},
-			AWS: probodconfig.AWSConfig{
-				Region:          b.resolver.getEnv("PROBOD_AWS_REGION"),
-				Bucket:          b.resolver.getEnv("PROBOD_AWS_BUCKET"),
-				AccessKeyID:     b.resolver.getEnv("PROBOD_AWS_ACCESS_KEY_ID"),
-				SecretAccessKey: b.resolver.getEnv("PROBOD_AWS_SECRET_ACCESS_KEY"),
-				Endpoint:        b.resolver.getEnv("PROBOD_AWS_ENDPOINT"),
-				UsePathStyle:    b.resolver.getEnvBoolOrDefault("PROBOD_AWS_USE_PATH_STYLE", false),
+			AWS: trustreadydconfig.AWSConfig{
+				Region:          b.resolver.getEnv("TRUSTREADYD_AWS_REGION"),
+				Bucket:          b.resolver.getEnv("TRUSTREADYD_AWS_BUCKET"),
+				AccessKeyID:     b.resolver.getEnv("TRUSTREADYD_AWS_ACCESS_KEY_ID"),
+				SecretAccessKey: b.resolver.getEnv("TRUSTREADYD_AWS_SECRET_ACCESS_KEY"),
+				Endpoint:        b.resolver.getEnv("TRUSTREADYD_AWS_ENDPOINT"),
+				UsePathStyle:    b.resolver.getEnvBoolOrDefault("TRUSTREADYD_AWS_USE_PATH_STYLE", false),
 			},
-			Notifications: probodconfig.NotificationsConfig{
-				Mailer: probodconfig.MailerConfig{
-					SenderName:     b.resolver.getEnv("PROBOD_MAILER_SENDER_NAME"),
-					SenderEmail:    b.resolver.getEnv("PROBOD_MAILER_SENDER_EMAIL"),
-					MailerInterval: b.resolver.getEnvIntOrDefault("PROBOD_MAILER_INTERVAL", 60),
-					SMTP: probodconfig.SMTPConfig{
-						Addr:        b.resolver.getEnv("PROBOD_SMTP_ADDR"),
-						User:        b.resolver.getEnv("PROBOD_SMTP_USER"),
-						Password:    b.resolver.getEnv("PROBOD_SMTP_PASSWORD"),
-						TLSRequired: b.resolver.getEnvBoolOrDefault("PROBOD_SMTP_TLS_REQUIRED", false),
-						HelloName:   b.resolver.getEnv("PROBOD_SMTP_HELLO_NAME"),
+			Notifications: trustreadydconfig.NotificationsConfig{
+				Mailer: trustreadydconfig.MailerConfig{
+					SenderName:     b.resolver.getEnv("TRUSTREADYD_MAILER_SENDER_NAME"),
+					SenderEmail:    b.resolver.getEnv("TRUSTREADYD_MAILER_SENDER_EMAIL"),
+					MailerInterval: b.resolver.getEnvIntOrDefault("TRUSTREADYD_MAILER_INTERVAL", 60),
+					SMTP: trustreadydconfig.SMTPConfig{
+						Addr:        b.resolver.getEnv("TRUSTREADYD_SMTP_ADDR"),
+						User:        b.resolver.getEnv("TRUSTREADYD_SMTP_USER"),
+						Password:    b.resolver.getEnv("TRUSTREADYD_SMTP_PASSWORD"),
+						TLSRequired: b.resolver.getEnvBoolOrDefault("TRUSTREADYD_SMTP_TLS_REQUIRED", false),
+						HelloName:   b.resolver.getEnv("TRUSTREADYD_SMTP_HELLO_NAME"),
 					},
 				},
-				Slack: probodconfig.SlackConfig{
-					SenderInterval: b.resolver.getEnvIntOrDefault("PROBOD_SLACK_SENDER_INTERVAL", 60),
-					SigningSecret:  b.resolver.getEnv("PROBOD_CONNECTOR_SLACK_SIGNING_SECRET"),
+				Slack: trustreadydconfig.SlackConfig{
+					SenderInterval: b.resolver.getEnvIntOrDefault("TRUSTREADYD_SLACK_SENDER_INTERVAL", 60),
+					SigningSecret:  b.resolver.getEnv("TRUSTREADYD_CONNECTOR_SLACK_SIGNING_SECRET"),
 				},
-				Webhook: probodconfig.WebhookConfig{
-					SenderInterval: b.resolver.getEnvIntOrDefault("PROBOD_WEBHOOK_SENDER_INTERVAL", 5),
-					RequestTimeout: b.resolver.getEnvIntOrDefault("PROBOD_WEBHOOK_REQUEST_TIMEOUT", 15),
-					CacheTTL:       b.resolver.getEnvIntOrDefault("PROBOD_WEBHOOK_CACHE_TTL", 86400),
-					StaleAfter:     b.resolver.getEnvIntOrDefault("PROBOD_WEBHOOK_STALE_AFTER", 300),
-					RetryBase:      b.resolver.getEnvIntOrDefault("PROBOD_WEBHOOK_RETRY_BASE", 30),
-					RetryMax:       b.resolver.getEnvIntOrDefault("PROBOD_WEBHOOK_RETRY_MAX", 14400),
-					MaxConcurrency: b.resolver.getEnvIntOrDefault("PROBOD_WEBHOOK_MAX_CONCURRENCY", 5),
+				Webhook: trustreadydconfig.WebhookConfig{
+					SenderInterval: b.resolver.getEnvIntOrDefault("TRUSTREADYD_WEBHOOK_SENDER_INTERVAL", 5),
+					RequestTimeout: b.resolver.getEnvIntOrDefault("TRUSTREADYD_WEBHOOK_REQUEST_TIMEOUT", 15),
+					CacheTTL:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_WEBHOOK_CACHE_TTL", 86400),
+					StaleAfter:     b.resolver.getEnvIntOrDefault("TRUSTREADYD_WEBHOOK_STALE_AFTER", 300),
+					RetryBase:      b.resolver.getEnvIntOrDefault("TRUSTREADYD_WEBHOOK_RETRY_BASE", 30),
+					RetryMax:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_WEBHOOK_RETRY_MAX", 14400),
+					MaxConcurrency: b.resolver.getEnvIntOrDefault("TRUSTREADYD_WEBHOOK_MAX_CONCURRENCY", 5),
 				},
-				Document: probodconfig.DocumentNotificationConfig{
-					Interval:         b.resolver.getEnvIntOrDefault("PROBOD_DOCUMENT_NOTIFICATION_INTERVAL", 300),
-					DebounceDelay:    b.resolver.getEnvIntOrDefault("PROBOD_DOCUMENT_NOTIFICATION_DEBOUNCE_DELAY", 900),
-					ReminderInterval: b.resolver.getEnvIntOrDefault("PROBOD_DOCUMENT_NOTIFICATION_REMINDER_INTERVAL", 86400),
+				Document: trustreadydconfig.DocumentNotificationConfig{
+					Interval:         b.resolver.getEnvIntOrDefault("TRUSTREADYD_DOCUMENT_NOTIFICATION_INTERVAL", 300),
+					DebounceDelay:    b.resolver.getEnvIntOrDefault("TRUSTREADYD_DOCUMENT_NOTIFICATION_DEBOUNCE_DELAY", 900),
+					ReminderInterval: b.resolver.getEnvIntOrDefault("TRUSTREADYD_DOCUMENT_NOTIFICATION_REMINDER_INTERVAL", 86400),
 				},
 			},
-			Agents: func() probodconfig.AgentsConfig {
-				defaultProvider := b.resolver.getEnvOrDefault("PROBOD_AGENT_DEFAULT_PROVIDER", "openai")
+			Agents: func() trustreadydconfig.AgentsConfig {
+				defaultProvider := b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_DEFAULT_PROVIDER", "openai")
 
-				return probodconfig.AgentsConfig{
+				return trustreadydconfig.AgentsConfig{
 					Providers: b.buildLLMProviders(),
-					Default: probodconfig.LLMAgentConfig{
+					Default: trustreadydconfig.LLMAgentConfig{
 						Provider:    defaultProvider,
-						ModelName:   b.resolver.getEnvOrDefault("PROBOD_AGENT_DEFAULT_MODEL_NAME", "gpt-4o"),
-						Temperature: new(b.resolver.getEnvFloatOrDefault("PROBOD_AGENT_DEFAULT_TEMPERATURE", 0.1)),
-						MaxTokens:   new(b.resolver.getEnvIntOrDefault("PROBOD_AGENT_DEFAULT_MAX_TOKENS", 4096)),
+						ModelName:   b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_DEFAULT_MODEL_NAME", "gpt-4o"),
+						Temperature: new(b.resolver.getEnvFloatOrDefault("TRUSTREADYD_AGENT_DEFAULT_TEMPERATURE", 0.1)),
+						MaxTokens:   new(b.resolver.getEnvIntOrDefault("TRUSTREADYD_AGENT_DEFAULT_MAX_TOKENS", 4096)),
 					},
-					Probo: probodconfig.LLMAgentConfig{
-						Provider:    b.resolver.getEnvOrDefault("PROBOD_AGENT_TRUSTREADY_PROVIDER", ""),
-						ModelName:   b.resolver.getEnvOrDefault("PROBOD_AGENT_TRUSTREADY_MODEL_NAME", ""),
-						Temperature: b.resolver.getEnvFloatPtr("PROBOD_AGENT_TRUSTREADY_TEMPERATURE"),
-						MaxTokens:   b.resolver.getEnvIntPtr("PROBOD_AGENT_TRUSTREADY_MAX_TOKENS"),
+					Probo: trustreadydconfig.LLMAgentConfig{
+						Provider:    b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_TRUSTREADY_PROVIDER", ""),
+						ModelName:   b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_TRUSTREADY_MODEL_NAME", ""),
+						Temperature: b.resolver.getEnvFloatPtr("TRUSTREADYD_AGENT_TRUSTREADY_TEMPERATURE"),
+						MaxTokens:   b.resolver.getEnvIntPtr("TRUSTREADYD_AGENT_TRUSTREADY_MAX_TOKENS"),
 					},
-					EvidenceDescriber: probodconfig.LLMAgentConfig{
-						Provider:    b.resolver.getEnvOrDefault("PROBOD_AGENT_EVIDENCE_DESCRIBER_PROVIDER", ""),
-						ModelName:   b.resolver.getEnvOrDefault("PROBOD_AGENT_EVIDENCE_DESCRIBER_MODEL_NAME", ""),
-						Temperature: b.resolver.getEnvFloatPtr("PROBOD_AGENT_EVIDENCE_DESCRIBER_TEMPERATURE"),
-						MaxTokens:   b.resolver.getEnvIntPtr("PROBOD_AGENT_EVIDENCE_DESCRIBER_MAX_TOKENS"),
+					EvidenceDescriber: trustreadydconfig.LLMAgentConfig{
+						Provider:    b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_EVIDENCE_DESCRIBER_PROVIDER", ""),
+						ModelName:   b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_EVIDENCE_DESCRIBER_MODEL_NAME", ""),
+						Temperature: b.resolver.getEnvFloatPtr("TRUSTREADYD_AGENT_EVIDENCE_DESCRIBER_TEMPERATURE"),
+						MaxTokens:   b.resolver.getEnvIntPtr("TRUSTREADYD_AGENT_EVIDENCE_DESCRIBER_MAX_TOKENS"),
 					},
-					ThirdPartyVetter: probodconfig.LLMAgentConfig{
-						Provider:    b.resolver.getEnvOrDefault("PROBOD_AGENT_THIRD_PARTY_VETTER_PROVIDER", ""),
-						ModelName:   b.resolver.getEnvOrDefault("PROBOD_AGENT_THIRD_PARTY_VETTER_MODEL_NAME", ""),
-						Temperature: b.resolver.getEnvFloatPtr("PROBOD_AGENT_THIRD_PARTY_VETTER_TEMPERATURE"),
-						MaxTokens:   b.resolver.getEnvIntPtr("PROBOD_AGENT_THIRD_PARTY_VETTER_MAX_TOKENS"),
+					ThirdPartyVetter: trustreadydconfig.LLMAgentConfig{
+						Provider:    b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_PROVIDER", ""),
+						ModelName:   b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_MODEL_NAME", ""),
+						Temperature: b.resolver.getEnvFloatPtr("TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_TEMPERATURE"),
+						MaxTokens:   b.resolver.getEnvIntPtr("TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_MAX_TOKENS"),
 					},
-					TrackerMapping: probodconfig.LLMAgentConfig{
-						Provider:  b.resolver.getEnvOrDefault("PROBOD_AGENT_TRACKER_MAPPING_PROVIDER", ""),
-						ModelName: b.resolver.getEnvOrDefault("PROBOD_AGENT_TRACKER_MAPPING_MODEL_NAME", ""),
+					TrackerMapping: trustreadydconfig.LLMAgentConfig{
+						Provider:  b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_TRACKER_MAPPING_PROVIDER", ""),
+						ModelName: b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_TRACKER_MAPPING_MODEL_NAME", ""),
 						// The tracker agents emit tiny structured JSON, but
 						// the budget must leave headroom for reasoning
 						// models whose reasoning tokens count against
 						// max_tokens; too small a budget truncates the JSON.
-						Temperature: b.resolver.getEnvFloatPtr("PROBOD_AGENT_TRACKER_MAPPING_TEMPERATURE"),
-						MaxTokens:   new(b.resolver.getEnvIntOrDefault("PROBOD_AGENT_TRACKER_MAPPING_MAX_TOKENS", 4096)),
+						Temperature: b.resolver.getEnvFloatPtr("TRUSTREADYD_AGENT_TRACKER_MAPPING_TEMPERATURE"),
+						MaxTokens:   new(b.resolver.getEnvIntOrDefault("TRUSTREADYD_AGENT_TRACKER_MAPPING_MAX_TOKENS", 4096)),
 					},
-					TrackerEnrichment: probodconfig.LLMAgentConfig{
-						Provider:  b.resolver.getEnvOrDefault("PROBOD_AGENT_TRACKER_ENRICHMENT_PROVIDER", ""),
-						ModelName: b.resolver.getEnvOrDefault("PROBOD_AGENT_TRACKER_ENRICHMENT_MODEL_NAME", ""),
+					TrackerEnrichment: trustreadydconfig.LLMAgentConfig{
+						Provider:  b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_PROVIDER", ""),
+						ModelName: b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_MODEL_NAME", ""),
 						// See the tracker-mapping note: keep ample headroom so
 						// reasoning models do not truncate the structured JSON.
-						Temperature: b.resolver.getEnvFloatPtr("PROBOD_AGENT_TRACKER_ENRICHMENT_TEMPERATURE"),
-						MaxTokens:   new(b.resolver.getEnvIntOrDefault("PROBOD_AGENT_TRACKER_ENRICHMENT_MAX_TOKENS", 4096)),
+						Temperature: b.resolver.getEnvFloatPtr("TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_TEMPERATURE"),
+						MaxTokens:   new(b.resolver.getEnvIntOrDefault("TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_MAX_TOKENS", 4096)),
 					},
-					CommonThirdPartyEnrichment: probodconfig.LLMAgentConfig{
-						Provider:  b.resolver.getEnvOrDefault("PROBOD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_PROVIDER", ""),
-						ModelName: b.resolver.getEnvOrDefault("PROBOD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MODEL_NAME", ""),
+					CommonThirdPartyEnrichment: trustreadydconfig.LLMAgentConfig{
+						Provider:  b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_PROVIDER", ""),
+						ModelName: b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MODEL_NAME", ""),
 						// Agent B browses pages and emits a moderate structured
 						// output; the budget must leave headroom for reasoning
 						// models whose reasoning tokens count against max_tokens.
-						Temperature: b.resolver.getEnvFloatPtr("PROBOD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_TEMPERATURE"),
-						MaxTokens:   new(b.resolver.getEnvIntOrDefault("PROBOD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MAX_TOKENS", 8192)),
+						Temperature: b.resolver.getEnvFloatPtr("TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_TEMPERATURE"),
+						MaxTokens:   new(b.resolver.getEnvIntOrDefault("TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MAX_TOKENS", 8192)),
 					},
-					Slackbot: probodconfig.LLMAgentConfig{
-						Provider:    b.resolver.getEnvOrDefault("PROBOD_AGENT_SLACKBOT_PROVIDER", ""),
-						ModelName:   b.resolver.getEnvOrDefault("PROBOD_AGENT_SLACKBOT_MODEL_NAME", ""),
-						Temperature: b.resolver.getEnvFloatPtr("PROBOD_AGENT_SLACKBOT_TEMPERATURE"),
-						MaxTokens:   b.resolver.getEnvIntPtr("PROBOD_AGENT_SLACKBOT_MAX_TOKENS"),
+					Slackbot: trustreadydconfig.LLMAgentConfig{
+						Provider:    b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_SLACKBOT_PROVIDER", ""),
+						ModelName:   b.resolver.getEnvOrDefault("TRUSTREADYD_AGENT_SLACKBOT_MODEL_NAME", ""),
+						Temperature: b.resolver.getEnvFloatPtr("TRUSTREADYD_AGENT_SLACKBOT_TEMPERATURE"),
+						MaxTokens:   b.resolver.getEnvIntPtr("TRUSTREADYD_AGENT_SLACKBOT_MAX_TOKENS"),
 					},
-					Tools: probodconfig.AgentToolsConfig{
-						FirecrawlAPIKey: b.resolver.getEnv("PROBOD_FIRECRAWL_API_KEY"),
+					Tools: trustreadydconfig.AgentToolsConfig{
+						FirecrawlAPIKey: b.resolver.getEnv("TRUSTREADYD_FIRECRAWL_API_KEY"),
 					},
 				}
 			}(),
-			CustomDomains: probodconfig.CustomDomainsConfig{
-				RenewalInterval:   b.resolver.getEnvIntOrDefault("PROBOD_CUSTOM_DOMAINS_RENEWAL_INTERVAL", 3600),
-				ProvisionInterval: b.resolver.getEnvIntOrDefault("PROBOD_CUSTOM_DOMAINS_PROVISION_INTERVAL", 30),
-				CnameTarget:       b.resolver.getEnvOrDefault("PROBOD_CUSTOM_DOMAINS_CNAME_TARGET", "custom.getprobo.com"),
-				ResolverAddr:      b.resolver.getEnv("PROBOD_CUSTOM_DOMAINS_RESOLVER_ADDR"),
-				CAAIssuerDomain:   b.resolver.getEnvOrDefault("PROBOD_CUSTOM_DOMAINS_CAA_ISSUER_DOMAIN", "letsencrypt.org"),
-				ACME: probodconfig.ACMEConfig{
-					Directory:  b.resolver.getEnv("PROBOD_ACME_DIRECTORY"),
-					Email:      b.resolver.getEnv("PROBOD_ACME_EMAIL"),
-					KeyType:    b.resolver.getEnv("PROBOD_ACME_KEY_TYPE"),
-					RootCA:     b.resolver.getEnv("PROBOD_ACME_ROOT_CA"),
+			CustomDomains: trustreadydconfig.CustomDomainsConfig{
+				RenewalInterval:   b.resolver.getEnvIntOrDefault("TRUSTREADYD_CUSTOM_DOMAINS_RENEWAL_INTERVAL", 3600),
+				ProvisionInterval: b.resolver.getEnvIntOrDefault("TRUSTREADYD_CUSTOM_DOMAINS_PROVISION_INTERVAL", 30),
+				CnameTarget:       b.resolver.getEnvOrDefault("TRUSTREADYD_CUSTOM_DOMAINS_CNAME_TARGET", "custom.getprobo.com"),
+				ResolverAddr:      b.resolver.getEnv("TRUSTREADYD_CUSTOM_DOMAINS_RESOLVER_ADDR"),
+				CAAIssuerDomain:   b.resolver.getEnvOrDefault("TRUSTREADYD_CUSTOM_DOMAINS_CAA_ISSUER_DOMAIN", "letsencrypt.org"),
+				ACME: trustreadydconfig.ACMEConfig{
+					Directory:  b.resolver.getEnv("TRUSTREADYD_ACME_DIRECTORY"),
+					Email:      b.resolver.getEnv("TRUSTREADYD_ACME_EMAIL"),
+					KeyType:    b.resolver.getEnv("TRUSTREADYD_ACME_KEY_TYPE"),
+					RootCA:     b.resolver.getEnv("TRUSTREADYD_ACME_ROOT_CA"),
 					AccountKey: acmeAccountKey,
 				},
 			},
-			SCIMBridge: probodconfig.SCIMBridgeConfig{
-				SyncInterval: b.resolver.getEnvIntOrDefault("PROBOD_SCIM_BRIDGE_SYNC_INTERVAL", 900),
-				PollInterval: b.resolver.getEnvIntOrDefault("PROBOD_SCIM_BRIDGE_POLL_INTERVAL", 30),
+			SCIMBridge: trustreadydconfig.SCIMBridgeConfig{
+				SyncInterval: b.resolver.getEnvIntOrDefault("TRUSTREADYD_SCIM_BRIDGE_SYNC_INTERVAL", 900),
+				PollInterval: b.resolver.getEnvIntOrDefault("TRUSTREADYD_SCIM_BRIDGE_POLL_INTERVAL", 30),
 			},
-			ESign: probodconfig.ESignConfig{
-				TSAURL: b.resolver.getEnv("PROBOD_ESIGN_TSA_URL"),
+			ESign: trustreadydconfig.ESignConfig{
+				TSAURL: b.resolver.getEnv("TRUSTREADYD_ESIGN_TSA_URL"),
 			},
-			EvidenceDescriber: probodconfig.EvidenceDescriberConfig{
-				Interval:       b.resolver.getEnvIntOrDefault("PROBOD_EVIDENCE_DESCRIBER_INTERVAL", 10),
-				StaleAfter:     b.resolver.getEnvIntOrDefault("PROBOD_EVIDENCE_DESCRIBER_STALE_AFTER", 300),
-				MaxConcurrency: b.resolver.getEnvIntOrDefault("PROBOD_EVIDENCE_DESCRIBER_MAX_CONCURRENCY", 10),
+			EvidenceDescriber: trustreadydconfig.EvidenceDescriberConfig{
+				Interval:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_EVIDENCE_DESCRIBER_INTERVAL", 10),
+				StaleAfter:     b.resolver.getEnvIntOrDefault("TRUSTREADYD_EVIDENCE_DESCRIBER_STALE_AFTER", 300),
+				MaxConcurrency: b.resolver.getEnvIntOrDefault("TRUSTREADYD_EVIDENCE_DESCRIBER_MAX_CONCURRENCY", 10),
 			},
-			ThirdPartyVetting: probodconfig.ThirdPartyVettingWorkerConfig{
-				Interval:       b.resolver.getEnvIntOrDefault("PROBOD_THIRD_PARTY_VETTING_INTERVAL", 10),
-				StaleAfter:     b.resolver.getEnvIntOrDefault("PROBOD_THIRD_PARTY_VETTING_STALE_AFTER", 1500),
-				MaxConcurrency: b.resolver.getEnvIntOrDefault("PROBOD_THIRD_PARTY_VETTING_MAX_CONCURRENCY", 1),
+			ThirdPartyVetting: trustreadydconfig.ThirdPartyVettingWorkerConfig{
+				Interval:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_THIRD_PARTY_VETTING_INTERVAL", 10),
+				StaleAfter:     b.resolver.getEnvIntOrDefault("TRUSTREADYD_THIRD_PARTY_VETTING_STALE_AFTER", 1500),
+				MaxConcurrency: b.resolver.getEnvIntOrDefault("TRUSTREADYD_THIRD_PARTY_VETTING_MAX_CONCURRENCY", 1),
 			},
-			TrackerMappingWorker: probodconfig.TrackerMappingWorkerConfig{
-				Interval:       b.resolver.getEnvIntOrDefault("PROBOD_TRACKER_MAPPING_INTERVAL", 10),
-				MaxConcurrency: b.resolver.getEnvIntOrDefault("PROBOD_TRACKER_MAPPING_MAX_CONCURRENCY", 3),
-				StaleAfter:     b.resolver.getEnvIntOrDefault("PROBOD_TRACKER_MAPPING_STALE_AFTER", 600),
-				AgentTimeout:   b.resolver.getEnvIntOrDefault("PROBOD_TRACKER_MAPPING_AGENT_TIMEOUT", 45),
-				AgentMaxTurns:  b.resolver.getEnvIntOrDefault("PROBOD_TRACKER_MAPPING_AGENT_MAX_TURNS", 10),
+			TrackerMappingWorker: trustreadydconfig.TrackerMappingWorkerConfig{
+				Interval:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACKER_MAPPING_INTERVAL", 10),
+				MaxConcurrency: b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACKER_MAPPING_MAX_CONCURRENCY", 3),
+				StaleAfter:     b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACKER_MAPPING_STALE_AFTER", 600),
+				AgentTimeout:   b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACKER_MAPPING_AGENT_TIMEOUT", 45),
+				AgentMaxTurns:  b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACKER_MAPPING_AGENT_MAX_TURNS", 10),
 			},
-			CommonPatternEnrichmentWorker: probodconfig.CommonPatternEnrichmentWorkerConfig{
-				Interval:       b.resolver.getEnvIntOrDefault("PROBOD_COMMON_PATTERN_ENRICHMENT_INTERVAL", 10),
-				MaxConcurrency: b.resolver.getEnvIntOrDefault("PROBOD_COMMON_PATTERN_ENRICHMENT_MAX_CONCURRENCY", 2),
-				StaleAfter:     b.resolver.getEnvIntOrDefault("PROBOD_COMMON_PATTERN_ENRICHMENT_STALE_AFTER", 600),
-				AgentTimeout:   b.resolver.getEnvIntOrDefault("PROBOD_COMMON_PATTERN_ENRICHMENT_AGENT_TIMEOUT", 45),
-				AgentMaxTurns:  b.resolver.getEnvIntOrDefault("PROBOD_COMMON_PATTERN_ENRICHMENT_AGENT_MAX_TURNS", 10),
+			CommonPatternEnrichmentWorker: trustreadydconfig.CommonPatternEnrichmentWorkerConfig{
+				Interval:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_INTERVAL", 10),
+				MaxConcurrency: b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_MAX_CONCURRENCY", 2),
+				StaleAfter:     b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_STALE_AFTER", 600),
+				AgentTimeout:   b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_AGENT_TIMEOUT", 45),
+				AgentMaxTurns:  b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_AGENT_MAX_TURNS", 10),
 			},
-			CommonThirdPartyEnrichmentWorker: probodconfig.CommonThirdPartyEnrichmentWorkerConfig{
-				Interval:            b.resolver.getEnvIntOrDefault("PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_INTERVAL", 10),
-				MaxConcurrency:      b.resolver.getEnvIntOrDefault("PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_CONCURRENCY", 1),
-				StaleAfter:          b.resolver.getEnvIntOrDefault("PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_STALE_AFTER", 900),
-				AgentTimeout:        b.resolver.getEnvIntOrDefault("PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_TIMEOUT", 90),
-				AgentMaxTurns:       b.resolver.getEnvIntOrDefault("PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_MAX_TURNS", 12),
-				ConfidenceThreshold: b.resolver.getEnvFloatOrDefault("PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_CONFIDENCE_THRESHOLD", 0.7),
-				MaxAttempts:         b.resolver.getEnvIntOrDefault("PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_ATTEMPTS", 3),
+			CommonThirdPartyEnrichmentWorker: trustreadydconfig.CommonThirdPartyEnrichmentWorkerConfig{
+				Interval:            b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_INTERVAL", 10),
+				MaxConcurrency:      b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_CONCURRENCY", 1),
+				StaleAfter:          b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_STALE_AFTER", 900),
+				AgentTimeout:        b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_TIMEOUT", 90),
+				AgentMaxTurns:       b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_MAX_TURNS", 12),
+				ConfidenceThreshold: b.resolver.getEnvFloatOrDefault("TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_CONFIDENCE_THRESHOLD", 0.7),
+				MaxAttempts:         b.resolver.getEnvIntOrDefault("TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_ATTEMPTS", 3),
 			},
-			Branding: b.resolver.getEnvBoolOrDefault("PROBOD_BRANDING", true),
-			CookieBanner: probodconfig.CookieBannerConfig{
-				TCFCMPID: b.resolver.getEnvIntOrDefault("PROBOD_COOKIE_BANNER_TCF_CMP_ID", 4095),
+			Branding: b.resolver.getEnvBoolOrDefault("TRUSTREADYD_BRANDING", true),
+			CookieBanner: trustreadydconfig.CookieBannerConfig{
+				TCFCMPID: b.resolver.getEnvIntOrDefault("TRUSTREADYD_COOKIE_BANNER_TCF_CMP_ID", 4095),
 			},
-			Slackbot: probodconfig.SlackbotConfig{
-				Enabled:       b.resolver.getEnvBoolOrDefault("PROBOD_SLACKBOT_ENABLED", false),
-				SigningSecret: b.resolver.getEnv("PROBOD_SLACKBOT_SIGNING_SECRET"),
-				ClientID:      b.resolver.getEnv("PROBOD_SLACKBOT_CLIENT_ID"),
-				ClientSecret:  b.resolver.getEnv("PROBOD_SLACKBOT_CLIENT_SECRET"),
-				RedirectURI:   b.resolver.getEnv("PROBOD_SLACKBOT_REDIRECT_URI"),
+			Slackbot: trustreadydconfig.SlackbotConfig{
+				Enabled:       b.resolver.getEnvBoolOrDefault("TRUSTREADYD_SLACKBOT_ENABLED", false),
+				SigningSecret: b.resolver.getEnv("TRUSTREADYD_SLACKBOT_SIGNING_SECRET"),
+				ClientID:      b.resolver.getEnv("TRUSTREADYD_SLACKBOT_CLIENT_ID"),
+				ClientSecret:  b.resolver.getEnv("TRUSTREADYD_SLACKBOT_CLIENT_SECRET"),
+				RedirectURI:   b.resolver.getEnv("TRUSTREADYD_SLACKBOT_REDIRECT_URI"),
 			},
 		},
 	}
@@ -413,161 +413,161 @@ func (b *Builder) Build() (*probodconfig.FullConfig, error) {
 		return nil, err
 	}
 
-	if slackClientID := b.resolver.getEnv("PROBOD_CONNECTOR_SLACK_CLIENT_ID"); slackClientID != "" {
+	if slackClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_SLACK_CLIENT_ID"); slackClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "SLACK",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     slackClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_SLACK_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_SLACK_CLIENT_SECRET"),
 				},
 				RawSettings: map[string]any{
-					"signing-secret": b.resolver.getEnv("PROBOD_CONNECTOR_SLACK_SIGNING_SECRET"),
+					"signing-secret": b.resolver.getEnv("TRUSTREADYD_CONNECTOR_SLACK_SIGNING_SECRET"),
 				},
 			},
 		)
 	}
 
-	if hubspotClientID := b.resolver.getEnv("PROBOD_CONNECTOR_HUBSPOT_CLIENT_ID"); hubspotClientID != "" {
+	if hubspotClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_HUBSPOT_CLIENT_ID"); hubspotClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "HUBSPOT",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     hubspotClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_HUBSPOT_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_HUBSPOT_CLIENT_SECRET"),
 				},
 			},
 		)
 	}
 
-	if docusignClientID := b.resolver.getEnv("PROBOD_CONNECTOR_DOCUSIGN_CLIENT_ID"); docusignClientID != "" {
+	if docusignClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_DOCUSIGN_CLIENT_ID"); docusignClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "DOCUSIGN",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     docusignClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_DOCUSIGN_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_DOCUSIGN_CLIENT_SECRET"),
 				},
 			},
 		)
 	}
 
-	if notionClientID := b.resolver.getEnv("PROBOD_CONNECTOR_NOTION_CLIENT_ID"); notionClientID != "" {
+	if notionClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_NOTION_CLIENT_ID"); notionClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "NOTION",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     notionClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_NOTION_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_NOTION_CLIENT_SECRET"),
 				},
 			},
 		)
 	}
 
-	if githubClientID := b.resolver.getEnv("PROBOD_CONNECTOR_GITHUB_CLIENT_ID"); githubClientID != "" {
+	if githubClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_CLIENT_ID"); githubClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "GITHUB",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     githubClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_GITHUB_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_CLIENT_SECRET"),
 				},
 			},
 		)
 	}
 
-	if githubAppID := b.resolver.getEnv("PROBOD_CONNECTOR_GITHUB_APP_ID"); githubAppID != "" {
+	if githubAppID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_APP_ID"); githubAppID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "GITHUB",
 				Protocol: connector.ProtocolGitHubApp,
-				RawConfig: probodconfig.ConnectorConfigGitHubApp{
+				RawConfig: trustreadydconfig.ConnectorConfigGitHubApp{
 					AppID:        githubAppID,
-					ClientID:     b.resolver.getEnv("PROBOD_CONNECTOR_GITHUB_APP_CLIENT_ID"),
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_GITHUB_APP_CLIENT_SECRET"),
-					Slug:         b.resolver.getEnv("PROBOD_CONNECTOR_GITHUB_APP_SLUG"),
-					PrivateKey:   b.resolver.getEnv("PROBOD_CONNECTOR_GITHUB_APP_PRIVATE_KEY"),
+					ClientID:     b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_APP_CLIENT_ID"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_APP_CLIENT_SECRET"),
+					Slug:         b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_APP_SLUG"),
+					PrivateKey:   b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_APP_PRIVATE_KEY"),
 				},
 			},
 		)
 	}
 
-	if sentryClientID := b.resolver.getEnv("PROBOD_CONNECTOR_SENTRY_CLIENT_ID"); sentryClientID != "" {
+	if sentryClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_SENTRY_CLIENT_ID"); sentryClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "SENTRY",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     sentryClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_SENTRY_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_SENTRY_CLIENT_SECRET"),
 				},
 			},
 		)
 	}
 
-	if intercomClientID := b.resolver.getEnv("PROBOD_CONNECTOR_INTERCOM_CLIENT_ID"); intercomClientID != "" {
+	if intercomClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_INTERCOM_CLIENT_ID"); intercomClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "INTERCOM",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     intercomClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_INTERCOM_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_INTERCOM_CLIENT_SECRET"),
 				},
 			},
 		)
 	}
 
-	if brexClientID := b.resolver.getEnv("PROBOD_CONNECTOR_BREX_CLIENT_ID"); brexClientID != "" {
+	if brexClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_BREX_CLIENT_ID"); brexClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "BREX",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     brexClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_BREX_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_BREX_CLIENT_SECRET"),
 				},
 			},
 		)
 	}
 
-	if googleWorkspaceClientID := b.resolver.getEnv("PROBOD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_ID"); googleWorkspaceClientID != "" {
+	if googleWorkspaceClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_ID"); googleWorkspaceClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "GOOGLE_WORKSPACE",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     googleWorkspaceClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_SECRET"),
 				},
 			},
 		)
 	}
 
-	if microsoft365ClientID := b.resolver.getEnv("PROBOD_CONNECTOR_MICROSOFT_365_CLIENT_ID"); microsoft365ClientID != "" {
+	if microsoft365ClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_MICROSOFT_365_CLIENT_ID"); microsoft365ClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "MICROSOFT_365",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     microsoft365ClientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_MICROSOFT_365_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_MICROSOFT_365_CLIENT_SECRET"),
 				},
 			},
 		)
@@ -593,25 +593,25 @@ func (b *Builder) Build() (*probodconfig.FullConfig, error) {
 		"ATTIO",
 		"OVHCLOUD",
 	} {
-		clientID := b.resolver.getEnv("PROBOD_CONNECTOR_" + provider + "_CLIENT_ID")
+		clientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_" + provider + "_CLIENT_ID")
 		if clientID == "" {
 			continue
 		}
 
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: provider,
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:     clientID,
-					ClientSecret: b.resolver.getEnv("PROBOD_CONNECTOR_" + provider + "_CLIENT_SECRET"),
+					ClientSecret: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_" + provider + "_CLIENT_SECRET"),
 				},
 			},
 		)
 	}
 
-	if webhookSecret := b.resolver.getEnv("PROBOD_CONNECTOR_LINEAR_SYNC_WEBHOOK_SECRET"); webhookSecret != "" {
+	if webhookSecret := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_LINEAR_SYNC_WEBHOOK_SECRET"); webhookSecret != "" {
 		for i := range cfg.Probod.Connectors {
 			if cfg.Probod.Connectors[i].Provider != "LINEAR_SYNC" {
 				continue
@@ -628,16 +628,16 @@ func (b *Builder) Build() (*probodconfig.FullConfig, error) {
 
 	// Vercel needs the operator-supplied integration slug to resolve the
 	// templated AuthURL ("https://vercel.com/integrations/{integration_slug}/new").
-	if vercelClientID := b.resolver.getEnv("PROBOD_CONNECTOR_VERCEL_CLIENT_ID"); vercelClientID != "" {
+	if vercelClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_VERCEL_CLIENT_ID"); vercelClientID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "VERCEL",
 				Protocol: "oauth2",
-				RawConfig: probodconfig.ConnectorConfigOAuth2{
+				RawConfig: trustreadydconfig.ConnectorConfigOAuth2{
 					ClientID:        vercelClientID,
-					ClientSecret:    b.resolver.getEnv("PROBOD_CONNECTOR_VERCEL_CLIENT_SECRET"),
-					IntegrationSlug: b.resolver.getEnv("PROBOD_CONNECTOR_VERCEL_INTEGRATION_SLUG"),
+					ClientSecret:    b.resolver.getEnv("TRUSTREADYD_CONNECTOR_VERCEL_CLIENT_SECRET"),
+					IntegrationSlug: b.resolver.getEnv("TRUSTREADYD_CONNECTOR_VERCEL_INTEGRATION_SLUG"),
 				},
 			},
 		)
@@ -654,16 +654,16 @@ func (b *Builder) Build() (*probodconfig.FullConfig, error) {
 	// hidden from the driver catalog and both install legs answer 404, so it
 	// ships deactivated and activates the moment Crisp validates the production
 	// plugin and both values are configured.
-	crispPluginToken := b.resolver.getEnv("PROBOD_CONNECTOR_CRISP_PLUGIN_TOKEN")
+	crispPluginToken := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_CRISP_PLUGIN_TOKEN")
 
-	crispPluginID := b.resolver.getEnv("PROBOD_CONNECTOR_CRISP_PLUGIN_ID")
+	crispPluginID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_CRISP_PLUGIN_ID")
 	if crispPluginToken != "" && crispPluginID != "" {
 		cfg.Probod.Connectors = append(
 			cfg.Probod.Connectors,
-			probodconfig.ConnectorConfig{
+			trustreadydconfig.ConnectorConfig{
 				Provider: "CRISP",
 				Protocol: "api_key",
-				RawConfig: probodconfig.ConnectorConfigAPIKey{
+				RawConfig: trustreadydconfig.ConnectorConfigAPIKey{
 					APIKey:     crispPluginToken,
 					ResourceID: crispPluginID,
 				},
@@ -693,9 +693,9 @@ func (b *Builder) validateRequired() error {
 	var missing []string
 
 	required := []string{
-		"PROBOD_ENCRYPTION_KEY",
-		"PROBOD_AUTH_COOKIE_SECRET",
-		"PROBOD_AUTH_PASSWORD_PEPPER",
+		"TRUSTREADYD_ENCRYPTION_KEY",
+		"TRUSTREADYD_AUTH_COOKIE_SECRET",
+		"TRUSTREADYD_AUTH_PASSWORD_PEPPER",
 	}
 
 	for _, key := range required {
@@ -704,49 +704,49 @@ func (b *Builder) validateRequired() error {
 		}
 	}
 
-	if b.oauth2SigningKey == "" && b.resolver.getEnv("PROBOD_OAUTH2_SERVER_SIGNING_KEY") == "" {
-		missing = append(missing, "PROBOD_OAUTH2_SERVER_SIGNING_KEY")
+	if b.oauth2SigningKey == "" && b.resolver.getEnv("TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY") == "" {
+		missing = append(missing, "TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY")
 	}
 
 	// The identity federation issuer is opt-in, so its key is only required once an
 	// operator turns it on. A deployment that never federates to a cloud
 	// provider needs no second key.
-	if b.resolver.getEnvBoolOrDefault("PROBOD_IDENTITY_FEDERATION_ENABLED", false) &&
-		b.resolver.getEnv("PROBOD_IDENTITY_FEDERATION_SIGNING_KEY") == "" {
+	if b.resolver.getEnvBoolOrDefault("TRUSTREADYD_IDENTITY_FEDERATION_ENABLED", false) &&
+		b.resolver.getEnv("TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY") == "" {
 		missing = append(
 			missing,
-			"PROBOD_IDENTITY_FEDERATION_SIGNING_KEY (required when PROBOD_IDENTITY_FEDERATION_ENABLED is true)",
+			"TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY (required when TRUSTREADYD_IDENTITY_FEDERATION_ENABLED is true)",
 		)
 	}
 
-	if slackClientID := b.resolver.getEnv("PROBOD_CONNECTOR_SLACK_CLIENT_ID"); slackClientID != "" {
+	if slackClientID := b.resolver.getEnv("TRUSTREADYD_CONNECTOR_SLACK_CLIENT_ID"); slackClientID != "" {
 		slackRequired := []string{
-			"PROBOD_CONNECTOR_SLACK_CLIENT_SECRET",
-			"PROBOD_CONNECTOR_SLACK_SIGNING_SECRET",
+			"TRUSTREADYD_CONNECTOR_SLACK_CLIENT_SECRET",
+			"TRUSTREADYD_CONNECTOR_SLACK_SIGNING_SECRET",
 		}
 		for _, key := range slackRequired {
 			if b.resolver.getEnv(key) == "" {
-				missing = append(missing, key+" (required when PROBOD_CONNECTOR_SLACK_CLIENT_ID is set)")
+				missing = append(missing, key+" (required when TRUSTREADYD_CONNECTOR_SLACK_CLIENT_ID is set)")
 			}
 		}
 	}
 
-	if b.resolver.getEnvBoolOrDefault("PROBOD_SLACKBOT_ENABLED", false) {
+	if b.resolver.getEnvBoolOrDefault("TRUSTREADYD_SLACKBOT_ENABLED", false) {
 		slackbotRequired := []string{
-			"PROBOD_SLACKBOT_SIGNING_SECRET",
-			"PROBOD_SLACKBOT_CLIENT_ID",
-			"PROBOD_SLACKBOT_CLIENT_SECRET",
-			"PROBOD_SLACKBOT_REDIRECT_URI",
+			"TRUSTREADYD_SLACKBOT_SIGNING_SECRET",
+			"TRUSTREADYD_SLACKBOT_CLIENT_ID",
+			"TRUSTREADYD_SLACKBOT_CLIENT_SECRET",
+			"TRUSTREADYD_SLACKBOT_REDIRECT_URI",
 		}
 		for _, key := range slackbotRequired {
 			if b.resolver.getEnv(key) == "" {
-				missing = append(missing, key+" (required when PROBOD_SLACKBOT_ENABLED is true)")
+				missing = append(missing, key+" (required when TRUSTREADYD_SLACKBOT_ENABLED is true)")
 			}
 		}
 
-		provider := b.resolver.getEnv("PROBOD_AGENT_SLACKBOT_PROVIDER")
+		provider := b.resolver.getEnv("TRUSTREADYD_AGENT_SLACKBOT_PROVIDER")
 		if provider == "" {
-			provider = b.resolver.getEnv("PROBOD_AGENT_DEFAULT_PROVIDER")
+			provider = b.resolver.getEnv("TRUSTREADYD_AGENT_DEFAULT_PROVIDER")
 		}
 
 		if provider == "" {
@@ -757,9 +757,9 @@ func (b *Builder) validateRequired() error {
 
 		switch provider {
 		case "openai":
-			providerAPIKey = "PROBOD_OPENAI_API_KEY"
+			providerAPIKey = "TRUSTREADYD_OPENAI_API_KEY"
 		case "anthropic":
-			providerAPIKey = "PROBOD_ANTHROPIC_API_KEY"
+			providerAPIKey = "TRUSTREADYD_ANTHROPIC_API_KEY"
 		}
 
 		if providerAPIKey != "" && b.resolver.getEnv(providerAPIKey) == "" {
@@ -770,18 +770,18 @@ func (b *Builder) validateRequired() error {
 		}
 	}
 
-	if b.resolver.getEnv("PROBOD_CONNECTOR_GITHUB_APP_ID") != "" {
+	if b.resolver.getEnv("TRUSTREADYD_CONNECTOR_GITHUB_APP_ID") != "" {
 		gitHubAppRequired := []string{
-			"PROBOD_CONNECTOR_GITHUB_APP_CLIENT_ID",
-			"PROBOD_CONNECTOR_GITHUB_APP_CLIENT_SECRET",
-			"PROBOD_CONNECTOR_GITHUB_APP_SLUG",
-			"PROBOD_CONNECTOR_GITHUB_APP_PRIVATE_KEY",
+			"TRUSTREADYD_CONNECTOR_GITHUB_APP_CLIENT_ID",
+			"TRUSTREADYD_CONNECTOR_GITHUB_APP_CLIENT_SECRET",
+			"TRUSTREADYD_CONNECTOR_GITHUB_APP_SLUG",
+			"TRUSTREADYD_CONNECTOR_GITHUB_APP_PRIVATE_KEY",
 		}
 		for _, key := range gitHubAppRequired {
 			if b.resolver.getEnv(key) == "" {
 				missing = append(
 					missing,
-					key+" (required when PROBOD_CONNECTOR_GITHUB_APP_ID is set)",
+					key+" (required when TRUSTREADYD_CONNECTOR_GITHUB_APP_ID is set)",
 				)
 			}
 		}
@@ -822,10 +822,10 @@ func (b *Builder) validateRequired() error {
 	}
 
 	for _, p := range oauthProviders {
-		clientIDKey := "PROBOD_" + p.envPrefix + "_CLIENT_ID"
+		clientIDKey := "TRUSTREADYD_" + p.envPrefix + "_CLIENT_ID"
 		if b.resolver.getEnv(clientIDKey) != "" {
 			for _, suffix := range p.required {
-				key := "PROBOD_" + p.envPrefix + "_" + suffix
+				key := "TRUSTREADYD_" + p.envPrefix + "_" + suffix
 				if b.resolver.getEnv(key) == "" {
 					missing = append(missing, key+" (required when "+clientIDKey+" is set)")
 				}
@@ -846,49 +846,49 @@ func (b *Builder) validateRequired() error {
 
 func validateCookieBannerTCFCmpID(id int) error {
 	if id < 2 || id > 4095 {
-		return fmt.Errorf("PROBOD_COOKIE_BANNER_TCF_CMP_ID must be between 2 and 4095")
+		return fmt.Errorf("TRUSTREADYD_COOKIE_BANNER_TCF_CMP_ID must be between 2 and 4095")
 	}
 
 	return nil
 }
 
-func (b *Builder) getSAMLCredentials() (string, probodconfig.RSAPrivateKey, error) {
+func (b *Builder) getSAMLCredentials() (string, trustreadydconfig.RSAPrivateKey, error) {
 	cert := b.samlCertificate
 	keyPEM := b.samlPrivateKey
 
 	if cert == "" {
-		cert = b.resolver.getEnv("PROBOD_SAML_CERTIFICATE")
+		cert = b.resolver.getEnv("TRUSTREADYD_SAML_CERTIFICATE")
 	}
 
 	if keyPEM == "" {
-		keyPEM = b.resolver.getEnv("PROBOD_SAML_PRIVATE_KEY")
+		keyPEM = b.resolver.getEnv("TRUSTREADYD_SAML_PRIVATE_KEY")
 	}
 
 	if cert == "" || keyPEM == "" {
 		generatedCert, generatedKey, err := GenerateSAMLCertificate()
 		if err != nil {
-			return "", probodconfig.RSAPrivateKey{}, fmt.Errorf("cannot generate SAML certificate: %w", err)
+			return "", trustreadydconfig.RSAPrivateKey{}, fmt.Errorf("cannot generate SAML certificate: %w", err)
 		}
 
 		cert = generatedCert
 		keyPEM = generatedKey
 	}
 
-	key, err := probodconfig.ParseRSAPrivateKey(keyPEM)
+	key, err := trustreadydconfig.ParseRSAPrivateKey(keyPEM)
 	if err != nil {
-		return "", probodconfig.RSAPrivateKey{}, fmt.Errorf("cannot parse SAML private key: %w", err)
+		return "", trustreadydconfig.RSAPrivateKey{}, fmt.Errorf("cannot parse SAML private key: %w", err)
 	}
 
 	return cert, key, nil
 }
 
-func (b *Builder) getOAuth2SigningKey() (probodconfig.RSAPrivateKey, error) {
+func (b *Builder) getOAuth2SigningKey() (trustreadydconfig.RSAPrivateKey, error) {
 	keyPEM := b.oauth2SigningKey
 	if keyPEM == "" {
-		keyPEM = b.resolver.getEnv("PROBOD_OAUTH2_SERVER_SIGNING_KEY")
+		keyPEM = b.resolver.getEnv("TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY")
 	}
 
-	return probodconfig.ParseRSAPrivateKey(keyPEM)
+	return trustreadydconfig.ParseRSAPrivateKey(keyPEM)
 }
 
 // buildIdentityFederationSigningKeys returns the keys published in the identity
@@ -897,21 +897,21 @@ func (b *Builder) getOAuth2SigningKey() (probodconfig.RSAPrivateKey, error) {
 // can still verify a token minted before the swap.
 func (b *Builder) buildIdentityFederationSigningKeys(
 	enabled bool,
-) ([]probodconfig.IdentityFederationSigningKeyConfig, error) {
+) ([]trustreadydconfig.IdentityFederationSigningKeyConfig, error) {
 	if !enabled {
 		return nil, nil
 	}
 
-	kid := b.resolver.getEnvOrDefault("PROBOD_IDENTITY_FEDERATION_SIGNING_KEY_KID", "default")
+	kid := b.resolver.getEnvOrDefault("TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY_KID", "default")
 
-	activeKey, err := probodconfig.ParseRSAPrivateKey(
-		b.resolver.getEnv("PROBOD_IDENTITY_FEDERATION_SIGNING_KEY"),
+	activeKey, err := trustreadydconfig.ParseRSAPrivateKey(
+		b.resolver.getEnv("TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY"),
 	)
 	if err != nil {
-		return nil, fmt.Errorf("cannot parse PROBOD_IDENTITY_FEDERATION_SIGNING_KEY: %w", err)
+		return nil, fmt.Errorf("cannot parse TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY: %w", err)
 	}
 
-	signingKeys := []probodconfig.IdentityFederationSigningKeyConfig{
+	signingKeys := []trustreadydconfig.IdentityFederationSigningKeyConfig{
 		{
 			PrivateKey: activeKey,
 			KID:        kid,
@@ -919,39 +919,39 @@ func (b *Builder) buildIdentityFederationSigningKeys(
 		},
 	}
 
-	previousPrivateKey := b.resolver.getEnv("PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY")
-	previousKID := b.resolver.getEnv("PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID")
+	previousPrivateKey := b.resolver.getEnv("TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY")
+	previousKID := b.resolver.getEnv("TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID")
 
 	if previousPrivateKey == "" && previousKID == "" {
 		return signingKeys, nil
 	}
 
 	if previousPrivateKey == "" {
-		return nil, fmt.Errorf("cannot build identity federation signing keys: PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY is required when PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID is set")
+		return nil, fmt.Errorf("cannot build identity federation signing keys: TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY is required when TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID is set")
 	}
 
 	// A verifier selects the retired key by its own kid, so it cannot be
 	// defaulted: "default" is what an operator who never named a key already
 	// signs with.
 	if previousKID == "" {
-		return nil, fmt.Errorf("cannot build identity federation signing keys: PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID is required when PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY is set")
+		return nil, fmt.Errorf("cannot build identity federation signing keys: TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID is required when TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY is set")
 	}
 
 	if previousKID == kid {
 		return nil, fmt.Errorf(
-			"cannot build identity federation signing keys: PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID must differ from PROBOD_IDENTITY_FEDERATION_SIGNING_KEY_KID, both are %q",
+			"cannot build identity federation signing keys: TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID must differ from TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY_KID, both are %q",
 			kid,
 		)
 	}
 
-	retiredKey, err := probodconfig.ParseRSAPrivateKey(previousPrivateKey)
+	retiredKey, err := trustreadydconfig.ParseRSAPrivateKey(previousPrivateKey)
 	if err != nil {
-		return nil, fmt.Errorf("cannot parse PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY: %w", err)
+		return nil, fmt.Errorf("cannot parse TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY: %w", err)
 	}
 
 	return append(
 		signingKeys,
-		probodconfig.IdentityFederationSigningKeyConfig{
+		trustreadydconfig.IdentityFederationSigningKeyConfig{
 			PrivateKey: retiredKey,
 			KID:        previousKID,
 			Active:     false,
@@ -960,28 +960,28 @@ func (b *Builder) buildIdentityFederationSigningKeys(
 }
 
 func (b *Builder) getPgCACertBundle() string {
-	if path := b.resolver.getEnv("PROBOD_PG_CA_BUNDLE_PATH"); path != "" {
+	if path := b.resolver.getEnv("TRUSTREADYD_PG_CA_BUNDLE_PATH"); path != "" {
 		data, err := os.ReadFile(path)
 		if err == nil {
 			return string(data)
 		}
 	}
 
-	return b.resolver.getEnv("PROBOD_PG_CA_BUNDLE")
+	return b.resolver.getEnv("TRUSTREADYD_PG_CA_BUNDLE")
 }
 
-func (b *Builder) buildLLMProviders() map[string]probodconfig.LLMProviderConfig {
-	providers := map[string]probodconfig.LLMProviderConfig{}
+func (b *Builder) buildLLMProviders() map[string]trustreadydconfig.LLMProviderConfig {
+	providers := map[string]trustreadydconfig.LLMProviderConfig{}
 
-	if apiKey := b.resolver.getEnv("PROBOD_OPENAI_API_KEY"); apiKey != "" {
-		providers["openai"] = probodconfig.LLMProviderConfig{
+	if apiKey := b.resolver.getEnv("TRUSTREADYD_OPENAI_API_KEY"); apiKey != "" {
+		providers["openai"] = trustreadydconfig.LLMProviderConfig{
 			Type:   "openai",
 			APIKey: apiKey,
 		}
 	}
 
-	if apiKey := b.resolver.getEnv("PROBOD_ANTHROPIC_API_KEY"); apiKey != "" {
-		providers["anthropic"] = probodconfig.LLMProviderConfig{
+	if apiKey := b.resolver.getEnv("TRUSTREADYD_ANTHROPIC_API_KEY"); apiKey != "" {
+		providers["anthropic"] = trustreadydconfig.LLMProviderConfig{
 			Type:   "anthropic",
 			APIKey: apiKey,
 		}
@@ -1015,7 +1015,7 @@ func (b *Builder) parseOriginsList(s string) []string {
 }
 
 // buildConnectorEndpoints collects per-provider endpoint overrides from
-// PROBOD_CONNECTOR_<PROVIDER>_ENDPOINT_{AUTH,TOKEN,PROBE,IDENTITY,API_BASE},
+// TRUSTREADYD_CONNECTOR_<PROVIDER>_ENDPOINT_{AUTH,TOKEN,PROBE,IDENTITY,API_BASE},
 // letting a deployment point a connector at a vendor sandbox without a code
 // change.
 //
@@ -1026,13 +1026,13 @@ func (b *Builder) parseOriginsList(s string) []string {
 // same blindness is why checkConnectorEndpointEnvTypos below exists as a
 // separate, explicit environment scan.
 //
-// probod rejects an override that names an unknown provider or a field the
+// trustreadyd rejects an override that names an unknown provider or a field the
 // provider does not resolve statically, so a typo fails at startup rather than
 // sitting in the config doing nothing. Building the registry can itself fail
 // on a bad Registration, which is why this returns an error instead of
 // panicking: that failure is an operator-visible startup condition here, not
 // the programmer error NewBuiltinRegistry treats it as elsewhere.
-func (b *Builder) buildConnectorEndpoints() (map[string]probodconfig.ConnectorEndpointsConfig, error) {
+func (b *Builder) buildConnectorEndpoints() (map[string]trustreadydconfig.ConnectorEndpointsConfig, error) {
 	reg, err := provider.NewBuiltinRegistryWith()
 	if err != nil {
 		return nil, fmt.Errorf("cannot build connector provider registry: %w", err)
@@ -1047,12 +1047,12 @@ func (b *Builder) buildConnectorEndpoints() (map[string]probodconfig.ConnectorEn
 		return nil, err
 	}
 
-	var endpoints map[string]probodconfig.ConnectorEndpointsConfig
+	var endpoints map[string]trustreadydconfig.ConnectorEndpointsConfig
 
 	for _, r := range reg.All() {
-		prefix := "PROBOD_CONNECTOR_" + string(r.Provider) + "_ENDPOINT_"
+		prefix := "TRUSTREADYD_CONNECTOR_" + string(r.Provider) + "_ENDPOINT_"
 
-		e := probodconfig.ConnectorEndpointsConfig{
+		e := trustreadydconfig.ConnectorEndpointsConfig{
 			Auth:     b.resolver.getEnv(prefix + "AUTH"),
 			Token:    b.resolver.getEnv(prefix + "TOKEN"),
 			Probe:    b.resolver.getEnv(prefix + "PROBE"),
@@ -1060,12 +1060,12 @@ func (b *Builder) buildConnectorEndpoints() (map[string]probodconfig.ConnectorEn
 			APIBase:  b.resolver.getEnv(prefix + "API_BASE"),
 		}
 
-		if e == (probodconfig.ConnectorEndpointsConfig{}) {
+		if e == (trustreadydconfig.ConnectorEndpointsConfig{}) {
 			continue
 		}
 
 		if endpoints == nil {
-			endpoints = make(map[string]probodconfig.ConnectorEndpointsConfig)
+			endpoints = make(map[string]trustreadydconfig.ConnectorEndpointsConfig)
 		}
 
 		endpoints[string(r.Provider)] = e
@@ -1076,11 +1076,11 @@ func (b *Builder) buildConnectorEndpoints() (map[string]probodconfig.ConnectorEn
 
 // checkConnectorEndpointEnvTypos scans the environment (when the resolver has
 // an enumerator — production always does, via NewResolver(nil)) for
-// PROBOD_CONNECTOR_*_ENDPOINT_* keys and rejects any whose provider segment is
+// TRUSTREADYD_CONNECTOR_*_ENDPOINT_* keys and rejects any whose provider segment is
 // not in known or whose field segment is not one of connectorEndpointFields.
 //
 // This exists because buildConnectorEndpoints's getEnv calls above are blind
-// to a typo: PROBOD_CONNECTOR_GITHBU_ENDPOINT_API_BASE resolves to "" exactly
+// to a typo: TRUSTREADYD_CONNECTOR_GITHBU_ENDPOINT_API_BASE resolves to "" exactly
 // like an unset key, so the misspelled provider's endpoint silently keeps
 // pointing at production while the operator believes they repointed it.
 // getEnv cannot see a key it never asked for; only a full-environment scan
@@ -1089,7 +1089,7 @@ func (b *Builder) buildConnectorEndpoints() (map[string]probodconfig.ConnectorEn
 // getEnv-only behaviour.
 func (b *Builder) checkConnectorEndpointEnvTypos(known map[string]bool) error {
 	const (
-		prefix = "PROBOD_CONNECTOR_"
+		prefix = "TRUSTREADYD_CONNECTOR_"
 		infix  = "_ENDPOINT_"
 	)
 

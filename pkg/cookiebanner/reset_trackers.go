@@ -50,7 +50,7 @@ type ResetTrackersResult struct {
 
 // ResetBannerTrackers re-arms the tracker pipeline for a banner's
 // uncategorised, non-excluded patterns. It is an operator action
-// (proboctl), tenant-scoped via the provided Scoper.
+// (trustreadyctl), tenant-scoped via the provided Scoper.
 //
 // With mappingOnly, it only clears each pattern's catalog/vendor links
 // and re-arms mapping, for iterating on the mapping agent without

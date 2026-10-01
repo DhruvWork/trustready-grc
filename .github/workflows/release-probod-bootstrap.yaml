@@ -1,9 +1,9 @@
-name: "Release probod-bootstrap"
+name: "Release trustreadyd-bootstrap"
 
 on:
   push:
     tags:
-      - "probod-bootstrap/v*"
+      - "trustreadyd-bootstrap/v*"
 
 permissions:
   contents: "read"
@@ -47,7 +47,7 @@ jobs:
           if [ "$GOOS" = "windows" ]; then EXT=".exe"; fi
 
           go build -ldflags "-s -w -X 'main.version=${VERSION}'" \
-            -gcflags="-e" -o "dist/probod-bootstrap${EXT}" ./cmd/probod-bootstrap/main.go
+            -gcflags="-e" -o "dist/trustreadyd-bootstrap${EXT}" ./cmd/trustreadyd-bootstrap/main.go
       - name: "Create archive"
         env:
           GOOS: "${{ matrix.goos }}"
@@ -68,9 +68,9 @@ jobs:
           if [ "$GOOS" = "windows" ]; then EXT=".exe"; fi
 
           mkdir -p archives
-          DIR="probod-bootstrap_${OS}_${ARCH}"
+          DIR="trustreadyd-bootstrap_${OS}_${ARCH}"
           mkdir -p "staging/${DIR}"
-          cp "dist/probod-bootstrap${EXT}" README.md LICENSE cmd/probod-bootstrap/CHANGELOG.md "staging/${DIR}/"
+          cp "dist/trustreadyd-bootstrap${EXT}" README.md LICENSE cmd/trustreadyd-bootstrap/CHANGELOG.md "staging/${DIR}/"
           if [ "$GOOS" = "windows" ]; then
             (cd staging && zip -r "../archives/${DIR}.zip" "${DIR}")
           else
@@ -109,7 +109,7 @@ jobs:
       - name: "Generate SBOM"
         uses: "anchore/sbom-action@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26" # v0.24.2
         with:
-          path: ./cmd/probod-bootstrap
+          path: ./cmd/trustreadyd-bootstrap
           format: cyclonedx-json
           output-file: sbom.json
       - name: "Run vulnerability scan"
@@ -133,7 +133,7 @@ jobs:
           awk -v ver="$VERSION" '
             /^## \[/ { if (found) exit; if ($0 ~ "\\[" ver "\\]") found=1 }
             found
-          ' cmd/probod-bootstrap/CHANGELOG.md > release-notes.md
+          ' cmd/trustreadyd-bootstrap/CHANGELOG.md > release-notes.md
       - name: "Create GitHub release"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

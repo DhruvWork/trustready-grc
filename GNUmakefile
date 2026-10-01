@@ -19,7 +19,7 @@ ECHO ?= echo
 GOLINTCMD ?= golangci-lint
 SWIFTLINTCMD ?= swiftlint
 SWIFTCMD ?= swift
-SWIFT_ENROLL_UI ?= cmd/probo-agent/installer/macos/enroll-ui
+SWIFT_ENROLL_UI ?= cmd/trustready-agent/installer/macos/enroll-ui
 SWIFT_FORMAT_CONFIG ?= .swift-format
 SWIFTLINT_CONFIG ?= .swiftlint.yml
 
@@ -32,11 +32,11 @@ SHFMTFLAGS ?= -i 2 -ci -bn
 # First-party shell scripts linted by lint-shell / fmt-shell (CI).
 # Add every new first-party *.sh here; do not include vendored/submodule scripts.
 SHELL_SCRIPTS := \
-	cmd/probo-agent/installer/install.sh \
-	cmd/probo-agent/installer/macos/build.sh \
-	cmd/probo-agent/installer/macos/reinstall.sh \
-	cmd/probo-agent/installer/macos/uninstall.sh \
-	compose/postgres/01_probod.sh \
+	cmd/trustready-agent/installer/install.sh \
+	cmd/trustready-agent/installer/macos/build.sh \
+	cmd/trustready-agent/installer/macos/reinstall.sh \
+	cmd/trustready-agent/installer/macos/uninstall.sh \
+	compose/postgres/01_trustreadyd.sh \
 	contrib/ci/classify-changes.sh \
 	contrib/ci/go-package-affected.sh \
 	contrib/lima/provision.sh \
@@ -51,15 +51,15 @@ DOCKER_BUILD=	DOCKER_BUILDKIT=1 $(DOCKER) build $(DOCKER_BUILD_FLAGS)
 DOCKER_COMPOSE=	$(DOCKER) compose -f compose.yaml $(DOCKER_COMPOSE_FLAGS)
 
 PRB_VERSION=             $(shell cat cmd/prb/VERSION)
-PROBOD_VERSION=          $(shell cat cmd/probod/VERSION)
-PROBOD_BOOTSTRAP_VERSION=$(shell cat cmd/probod-bootstrap/VERSION)
-PROBOCTL_VERSION=        $(shell cat cmd/proboctl/VERSION)
-TRUSTREADY_AGENT_VERSION=     $(shell cat cmd/probo-agent/VERSION)
+TRUSTREADYD_VERSION=          $(shell cat cmd/trustreadyd/VERSION)
+TRUSTREADYD_BOOTSTRAP_VERSION=$(shell cat cmd/trustreadyd-bootstrap/VERSION)
+TRUSTREADYCTL_VERSION=        $(shell cat cmd/trustreadyctl/VERSION)
+TRUSTREADY_AGENT_VERSION=     $(shell cat cmd/trustready-agent/VERSION)
 
 PRB_LDFLAGS=             -ldflags "-X 'main.version=$(PRB_VERSION)'"
-PROBOD_LDFLAGS=          -ldflags "-X 'main.version=$(PROBOD_VERSION)' -X 'main.env=prod'"
-PROBOD_BOOTSTRAP_LDFLAGS=-ldflags "-X 'main.version=$(PROBOD_BOOTSTRAP_VERSION)'"
-PROBOCTL_LDFLAGS=        -ldflags "-X 'main.version=$(PROBOCTL_VERSION)'"
+TRUSTREADYD_LDFLAGS=          -ldflags "-X 'main.version=$(TRUSTREADYD_VERSION)' -X 'main.env=prod'"
+TRUSTREADYD_BOOTSTRAP_LDFLAGS=-ldflags "-X 'main.version=$(TRUSTREADYD_BOOTSTRAP_VERSION)'"
+TRUSTREADYCTL_LDFLAGS=        -ldflags "-X 'main.version=$(TRUSTREADYCTL_VERSION)'"
 TRUSTREADY_AGENT_LDFLAGS=     -ldflags "-X 'main.version=$(TRUSTREADY_AGENT_VERSION)'"
 TRUSTREADY_AGENT_GUI_LDFLAGS= -ldflags "-H windowsgui -X 'main.version=$(TRUSTREADY_AGENT_VERSION)'"
 
@@ -81,7 +81,7 @@ E2E_TEST_FLAGS?=
 E2E_CONFIG ?= $(CURDIR)/e2e/console/testdata/config.yaml
 E2E_COVER_DIR ?= $(CURDIR)/coverage/e2e
 E2E_BINARY ?=
-E2E_COVERAGE_BINARY ?= $(CURDIR)/bin/probod-coverage
+E2E_COVERAGE_BINARY ?= $(CURDIR)/bin/trustreadyd-coverage
 E2E_CORE_COVER_PKGS ?= github.com/DhruvWork/trustready-grc/pkg/coredata,github.com/DhruvWork/trustready-grc/pkg/probo,github.com/DhruvWork/trustready-grc/pkg/server/api/console/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/connect/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/complianceportal/v1,github.com/DhruvWork/trustready-grc/pkg/server/api/mcp/v1,github.com/DhruvWork/trustready-grc/pkg/accessreview,github.com/DhruvWork/trustready-grc/pkg/agentexecution,github.com/DhruvWork/trustready-grc/pkg/complianceportal/management,github.com/DhruvWork/trustready-grc/pkg/complianceportal/visitor,github.com/DhruvWork/trustready-grc/pkg/cookiebanner,github.com/DhruvWork/trustready-grc/pkg/riskmanagement,github.com/DhruvWork/trustready-grc/pkg/thirdparty,github.com/DhruvWork/trustready-grc/pkg/webhook
 
 DOCKER_REGISTRY=	artifact.probo.inc
@@ -108,21 +108,21 @@ EMBEDDED= apps/console/dist/index.html \
 	apps/employee-portal/dist/index.html \
 	@trustready/emails
 
-PROBOD_BIN_EXTRA_DEPS=
-PROBOD_BIN=	bin/probod
-PROBOD_SRC=	cmd/probod/main.go
+TRUSTREADYD_BIN_EXTRA_DEPS=
+TRUSTREADYD_BIN=	bin/trustreadyd
+TRUSTREADYD_SRC=	cmd/trustreadyd/main.go
 
 PRB_BIN=	bin/prb
 PRB_SRC=	cmd/prb/main.go
 
-PROBOD_BOOTSTRAP_BIN=	bin/probod-bootstrap
-PROBOD_BOOTSTRAP_SRC=	cmd/probod-bootstrap/main.go
+TRUSTREADYD_BOOTSTRAP_BIN=	bin/trustreadyd-bootstrap
+TRUSTREADYD_BOOTSTRAP_SRC=	cmd/trustreadyd-bootstrap/main.go
 
-PROBOCTL_BIN=	bin/proboctl
-PROBOCTL_SRC=	cmd/proboctl/main.go
+TRUSTREADYCTL_BIN=	bin/trustreadyctl
+TRUSTREADYCTL_SRC=	cmd/trustreadyctl/main.go
 
-TRUSTREADY_AGENT_BIN=	bin/probo-agent
-TRUSTREADY_AGENT_SRC=	./cmd/probo-agent
+TRUSTREADY_AGENT_BIN=	bin/trustready-agent
+TRUSTREADY_AGENT_SRC=	./cmd/trustready-agent
 # Menu bar / tray enrollment is macOS and Windows; only macOS needs CGO.
 TRUSTREADY_AGENT_TARGET_OS=	$(if $(GOOS),$(GOOS),$(shell $(GO) env GOOS))
 TRUSTREADY_AGENT_BINS=	$(TRUSTREADY_AGENT_BIN)
@@ -131,7 +131,7 @@ ifeq ($(TRUSTREADY_AGENT_TARGET_OS),darwin)
 TRUSTREADY_AGENT_CGO=	1
 endif
 ifeq ($(TRUSTREADY_AGENT_TARGET_OS),windows)
-TRUSTREADY_AGENT_GUI_BIN=	bin/probo-agentw
+TRUSTREADY_AGENT_GUI_BIN=	bin/trustready-agentw
 TRUSTREADY_AGENT_BINS+=	$(TRUSTREADY_AGENT_GUI_BIN)
 endif
 
@@ -228,23 +228,23 @@ test-bench: TEST_FLAGS+=-bench=.
 test-bench: test ## Run benchmark tests
 
 .PHONY: test-e2e
-test-e2e: $(PROBOD_BIN) ## Run console e2e tests
+test-e2e: $(TRUSTREADYD_BIN) ## Run console e2e tests
 	$(MAKE) test-e2e-run E2E_BINARY=$(E2E_BINARY)
 
 .PHONY: test-e2e-run
 test-e2e-run: CGO_ENABLED=1
 test-e2e-run:
-	TRUSTREADY_E2E_BINARY=$(or $(E2E_BINARY),$(CURDIR)/$(PROBOD_BIN)) \
+	TRUSTREADY_E2E_BINARY=$(or $(E2E_BINARY),$(CURDIR)/$(TRUSTREADYD_BIN)) \
 	TRUSTREADY_E2E_CONFIG=$(E2E_CONFIG) \
 	GOTESTSUM_FORMAT=testname $(GO_BASE) tool gotestsum -- $(E2E_TEST_FLAGS) -count=1 ./e2e/internal/... ./e2e/console/...
 
-.PHONY: bin/probod-coverage
-bin/probod-coverage: CGO_ENABLED=0
-bin/probod-coverage: generate embed
-	$(GO_BUILD) $(PROBOD_LDFLAGS) -cover -covermode=atomic -o $@ $(PROBOD_SRC)
+.PHONY: bin/trustreadyd-coverage
+bin/trustreadyd-coverage: CGO_ENABLED=0
+bin/trustreadyd-coverage: generate embed
+	$(GO_BUILD) $(TRUSTREADYD_LDFLAGS) -cover -covermode=atomic -o $@ $(TRUSTREADYD_SRC)
 
 .PHONY: test-e2e-coverage
-test-e2e-coverage: bin/probod-coverage ## Run e2e tests with coverage
+test-e2e-coverage: bin/trustreadyd-coverage ## Run e2e tests with coverage
 	$(MAKE) test-e2e-coverage-run E2E_BINARY=$(E2E_BINARY)
 
 .PHONY: test-e2e-coverage-run
@@ -272,7 +272,7 @@ coverage-combined: coverage-report test-e2e-coverage ## Generate combined covera
 	$(GO) tool cover -html=coverage-combined.out -o=coverage-combined.html
 
 .PHONY: build
-build: $(PROBOD_BIN) bin/prb bin/probod-bootstrap bin/proboctl $(TRUSTREADY_AGENT_BINS)
+build: $(TRUSTREADYD_BIN) bin/prb bin/trustreadyd-bootstrap bin/trustreadyctl $(TRUSTREADY_AGENT_BINS)
 
 CFG_DEV_OAUTH2_KEY       = cfg/.dev-oauth2-signing-key.pem
 CFG_DEV_IDENTITY_FEDERATION_KEY   = cfg/.dev-identity-federation-signing-key.pem
@@ -280,7 +280,7 @@ CFG_DEV_ACME_ACCOUNT_KEY = cfg/.dev-acme-account-key.pem
 DEV_ENV                  = .env
 
 .PHONY: dev-config
-dev-config: cfg/dev.yaml ## Generate cfg/dev.yaml via probod-bootstrap (picks up edits to .env)
+dev-config: cfg/dev.yaml ## Generate cfg/dev.yaml via trustreadyd-bootstrap (picks up edits to .env)
 
 $(CFG_DEV_OAUTH2_KEY):
 	@$(MKDIR) $(@D)
@@ -292,55 +292,55 @@ $(CFG_DEV_IDENTITY_FEDERATION_KEY):
 	@$(MKDIR) $(@D)
 	$(OPENSSL) genrsa -out $@ 2048
 
-# Stable ACME account key for local step-ca. Without this, each probod restart
+# Stable ACME account key for local step-ca. Without this, each trustreadyd restart
 # registers a new account and orphaned in-flight orders return 401 unauthorized.
 $(CFG_DEV_ACME_ACCOUNT_KEY):
 	@$(MKDIR) $(@D)
 	$(OPENSSL) ecparam -name prime256v1 -genkey -noout -out $@
 
-cfg/dev.yaml: bin/probod-bootstrap $(CFG_DEV_OAUTH2_KEY) $(CFG_DEV_IDENTITY_FEDERATION_KEY) $(CFG_DEV_ACME_ACCOUNT_KEY) compose/step-ca/certs/root_ca.crt $(wildcard $(DEV_ENV))
+cfg/dev.yaml: bin/trustreadyd-bootstrap $(CFG_DEV_OAUTH2_KEY) $(CFG_DEV_IDENTITY_FEDERATION_KEY) $(CFG_DEV_ACME_ACCOUNT_KEY) compose/step-ca/certs/root_ca.crt $(wildcard $(DEV_ENV))
 	@$(MKDIR) $(@D)
 	set -a; \
-	PROBOD_BASE_URL=http://localhost:8080; \
-	PROBOD_API_ADDR=:8080; \
-	PROBOD_ENCRYPTION_KEY="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; \
-	PROBOD_AUTH_COOKIE_NAME=SSID; \
-	PROBOD_AUTH_COOKIE_DOMAIN=localhost; \
-	PROBOD_AUTH_COOKIE_SECRET="this-is-a-secure-secret-for-cookie-signing-at-least-32-bytes"; \
-	PROBOD_AUTH_PASSWORD_PEPPER="this-is-a-secure-pepper-for-password-hashing-at-least-32-bytes"; \
-	PROBOD_AUTH_COOKIE_SECURE=false; \
-	PROBOD_OAUTH2_SERVER_SIGNING_KEY="$$($(CAT) $(CFG_DEV_OAUTH2_KEY))"; \
-	PROBOD_IDENTITY_FEDERATION_ENABLED=true; \
-	PROBOD_IDENTITY_FEDERATION_SIGNING_KEY="$$($(CAT) $(CFG_DEV_IDENTITY_FEDERATION_KEY))"; \
-	PROBOD_API_CORS_ALLOWED_ORIGINS="http://localhost:8080,http://localhost:5173,http://localhost:5174,http://localhost:5175"; \
-	PROBOD_PG_ADDR=localhost:5432; \
-	PROBOD_PG_USERNAME=postgres; \
-	PROBOD_PG_PASSWORD=postgres; \
-	PROBOD_PG_DATABASE=probod; \
-	PROBOD_TRUST_CENTER_HTTP_ADDR=:10080; \
-	PROBOD_TRUST_CENTER_HTTPS_ADDR=:443; \
-	PROBOD_TRUST_CENTER_BASE_DOMAIN=probopage.localhost; \
-	PROBOD_TRUST_CENTER_TLS_MODE=direct; \
-	PROBOD_AWS_REGION=us-east-1; \
-	PROBOD_AWS_BUCKET=probod; \
-	PROBOD_AWS_ACCESS_KEY_ID=probod; \
-	PROBOD_AWS_SECRET_ACCESS_KEY=thisisnotasecret; \
-	PROBOD_AWS_ENDPOINT=http://127.0.0.1:8333; \
-	PROBOD_SMTP_ADDR=localhost:1025; \
-	PROBOD_MAILER_SENDER_EMAIL=no-reply@notification.getprobo.com; \
-	PROBOD_MAILER_SENDER_NAME=Probo; \
-	PROBOD_OPENAI_API_KEY=thisisnotasecret; \
-	PROBOD_AGENT_THIRD_PARTY_VETTER_PROVIDER=openai; \
-	PROBOD_AGENT_THIRD_PARTY_VETTER_MODEL_NAME=gpt-4o; \
-	PROBOD_CHROME_DP_ADDR=localhost:9222; \
-	PROBOD_ACME_DIRECTORY=https://localhost:9000/acme/acme/directory; \
-	PROBOD_ACME_EMAIL=admin@probo.com; \
-	PROBOD_ACME_KEY_TYPE=EC256; \
-	PROBOD_ACME_ACCOUNT_KEY="$$($(CAT) $(CFG_DEV_ACME_ACCOUNT_KEY))"; \
-	PROBOD_ACME_ROOT_CA="$$($(CAT) compose/step-ca/certs/root_ca.crt)"; \
+	TRUSTREADYD_BASE_URL=http://localhost:8080; \
+	TRUSTREADYD_API_ADDR=:8080; \
+	TRUSTREADYD_ENCRYPTION_KEY="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; \
+	TRUSTREADYD_AUTH_COOKIE_NAME=SSID; \
+	TRUSTREADYD_AUTH_COOKIE_DOMAIN=localhost; \
+	TRUSTREADYD_AUTH_COOKIE_SECRET="this-is-a-secure-secret-for-cookie-signing-at-least-32-bytes"; \
+	TRUSTREADYD_AUTH_PASSWORD_PEPPER="this-is-a-secure-pepper-for-password-hashing-at-least-32-bytes"; \
+	TRUSTREADYD_AUTH_COOKIE_SECURE=false; \
+	TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY="$$($(CAT) $(CFG_DEV_OAUTH2_KEY))"; \
+	TRUSTREADYD_IDENTITY_FEDERATION_ENABLED=true; \
+	TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY="$$($(CAT) $(CFG_DEV_IDENTITY_FEDERATION_KEY))"; \
+	TRUSTREADYD_API_CORS_ALLOWED_ORIGINS="http://localhost:8080,http://localhost:5173,http://localhost:5174,http://localhost:5175"; \
+	TRUSTREADYD_PG_ADDR=localhost:5432; \
+	TRUSTREADYD_PG_USERNAME=postgres; \
+	TRUSTREADYD_PG_PASSWORD=postgres; \
+	TRUSTREADYD_PG_DATABASE=trustreadyd; \
+	TRUSTREADYD_TRUST_CENTER_HTTP_ADDR=:10080; \
+	TRUSTREADYD_TRUST_CENTER_HTTPS_ADDR=:443; \
+	TRUSTREADYD_TRUST_CENTER_BASE_DOMAIN=probopage.localhost; \
+	TRUSTREADYD_TRUST_CENTER_TLS_MODE=direct; \
+	TRUSTREADYD_AWS_REGION=us-east-1; \
+	TRUSTREADYD_AWS_BUCKET=trustreadyd; \
+	TRUSTREADYD_AWS_ACCESS_KEY_ID=trustreadyd; \
+	TRUSTREADYD_AWS_SECRET_ACCESS_KEY=thisisnotasecret; \
+	TRUSTREADYD_AWS_ENDPOINT=http://127.0.0.1:8333; \
+	TRUSTREADYD_SMTP_ADDR=localhost:1025; \
+	TRUSTREADYD_MAILER_SENDER_EMAIL=no-reply@notification.getprobo.com; \
+	TRUSTREADYD_MAILER_SENDER_NAME=Probo; \
+	TRUSTREADYD_OPENAI_API_KEY=thisisnotasecret; \
+	TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_PROVIDER=openai; \
+	TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_MODEL_NAME=gpt-4o; \
+	TRUSTREADYD_CHROME_DP_ADDR=localhost:9222; \
+	TRUSTREADYD_ACME_DIRECTORY=https://localhost:9000/acme/acme/directory; \
+	TRUSTREADYD_ACME_EMAIL=admin@probo.com; \
+	TRUSTREADYD_ACME_KEY_TYPE=EC256; \
+	TRUSTREADYD_ACME_ACCOUNT_KEY="$$($(CAT) $(CFG_DEV_ACME_ACCOUNT_KEY))"; \
+	TRUSTREADYD_ACME_ROOT_CA="$$($(CAT) compose/step-ca/certs/root_ca.crt)"; \
 	if [ -f $(DEV_ENV) ]; then . $(DEV_ENV); fi; \
 	set +a; \
-	./bin/probod-bootstrap -output $@
+	./bin/trustreadyd-bootstrap -output $@
 
 .PHONY: sbom-docker
 sbom-docker: docker-build
@@ -353,7 +353,7 @@ sbom-docker: docker-build
 sbom:
 	$(SYFT) dir:. -o cyclonedx-json \
 		--source-name "probo" \
-		--source-version "$(PROBOD_VERSION)" \
+		--source-version "$(TRUSTREADYD_VERSION)" \
 		> sbom.json
 
 .PHONY: scan-sbom
@@ -379,21 +379,21 @@ scan-license: ## Check dependencies licenses compliance
 docker-build:
 	$(DOCKER_BUILD) --tag $(DOCKER_IMAGE_NAME):$(DOCKER_TAG_NAME) --file Dockerfile .
 
-.PHONY: $(PROBOD_BIN)
-$(PROBOD_BIN): generate embed
-	$(GO_BUILD) $(PROBOD_LDFLAGS) -o $(PROBOD_BIN) $(PROBOD_SRC)
+.PHONY: $(TRUSTREADYD_BIN)
+$(TRUSTREADYD_BIN): generate embed
+	$(GO_BUILD) $(TRUSTREADYD_LDFLAGS) -o $(TRUSTREADYD_BIN) $(TRUSTREADYD_SRC)
 
 .PHONY: bin/prb
 bin/prb:
 	$(GO_BUILD) $(PRB_LDFLAGS) -o $(PRB_BIN) $(PRB_SRC)
 
-.PHONY: $(PROBOD_BOOTSTRAP_BIN)
-$(PROBOD_BOOTSTRAP_BIN):
-	$(GO_BUILD) $(PROBOD_BOOTSTRAP_LDFLAGS) -o $(PROBOD_BOOTSTRAP_BIN) $(PROBOD_BOOTSTRAP_SRC)
+.PHONY: $(TRUSTREADYD_BOOTSTRAP_BIN)
+$(TRUSTREADYD_BOOTSTRAP_BIN):
+	$(GO_BUILD) $(TRUSTREADYD_BOOTSTRAP_LDFLAGS) -o $(TRUSTREADYD_BOOTSTRAP_BIN) $(TRUSTREADYD_BOOTSTRAP_SRC)
 
-.PHONY: bin/proboctl
-bin/proboctl:
-	$(GO_BUILD) $(PROBOCTL_LDFLAGS) -o $(PROBOCTL_BIN) $(PROBOCTL_SRC)
+.PHONY: bin/trustreadyctl
+bin/trustreadyctl:
+	$(GO_BUILD) $(TRUSTREADYCTL_LDFLAGS) -o $(TRUSTREADYCTL_BIN) $(TRUSTREADYCTL_SRC)
 
 .PHONY: $(TRUSTREADY_AGENT_BIN)
 $(TRUSTREADY_AGENT_BIN): CGO_ENABLED=$(TRUSTREADY_AGENT_CGO)
@@ -549,7 +549,7 @@ stack-ps: ## List the docker stack containers
 
 .PHONY: psql
 psql: ## Open a psql shell to the postgres container
-	$(DOCKER_COMPOSE) exec postgres psql -U probod -d probod
+	$(DOCKER_COMPOSE) exec postgres psql -U trustreadyd -d trustreadyd
 
 compose/step-ca/certs/root_ca.crt:
 	# step-ca runs as UID 1000 and creates 0700 dirs. On Linux CI the host

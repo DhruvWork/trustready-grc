@@ -32,7 +32,7 @@ import (
 )
 
 // injectCrossTenantFK bypasses the application entirely and writes a foreign
-// key directly via SQL against the same Postgres database the e2e probod
+// key directly via SQL against the same Postgres database the e2e trustreadyd
 // instance is running against. This simulates a cross-tenant reference that
 // exists in the row despite the application's own write-time validation --
 // e.g. a future regression in that specific check, a data migration bug, or

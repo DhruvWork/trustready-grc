@@ -26,9 +26,9 @@ If empty or non-user-facing only, do not release this track.
 ## Notes
 
 The chart has its own SemVer (`version`). `appVersion` in `Chart.yaml` is
-the default probod application version the chart deploys (image tag
+the default trustreadyd application version the chart deploys (image tag
 `v<appVersion>`). Bump `appVersion` when the chart should default
-to a newer probod release.
+to a newer trustreadyd release.
 
 CI packages the chart and pushes it to
 `oci://artifact.probo.inc/probo/probo`, then publishes a GitHub Release.

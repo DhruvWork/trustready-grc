@@ -79,7 +79,7 @@ jobs:
           helm install my-probo oci://artifact.probo.inc/probo/probo --version ${VERSION}
           \`\`\`
 
-          Defaults to probod image tag \`v${APP_VERSION}\`.
+          Defaults to trustreadyd image tag \`v${APP_VERSION}\`.
           EOF
       - name: "Create GitHub release"
         env:

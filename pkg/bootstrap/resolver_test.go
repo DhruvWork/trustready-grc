@@ -30,8 +30,8 @@ import (
 func TestResolver_ResolveLiteralEnv(t *testing.T) {
 	t.Parallel()
 
-	r := NewResolver(mockEnv(map[string]string{"PROBOD_FOO": "bar"}))
-	assert.Equal(t, "bar", r.getEnv("PROBOD_FOO"))
+	r := NewResolver(mockEnv(map[string]string{"TRUSTREADYD_FOO": "bar"}))
+	assert.Equal(t, "bar", r.getEnv("TRUSTREADYD_FOO"))
 	require.NoError(t, r.Err())
 }
 
@@ -43,12 +43,12 @@ func TestResolver_ResolveEmptyAWSSecretsManagerRef(t *testing.T) {
 			t.Parallel()
 
 			r := NewResolver(mockEnv(map[string]string{
-				"PROBOD_ENCRYPTION_KEY": value,
+				"TRUSTREADYD_ENCRYPTION_KEY": value,
 			}))
 
-			assert.Empty(t, r.getEnv("PROBOD_ENCRYPTION_KEY"))
+			assert.Empty(t, r.getEnv("TRUSTREADYD_ENCRYPTION_KEY"))
 			require.Error(t, r.Err())
-			assert.Contains(t, r.Err().Error(), "cannot resolve PROBOD_ENCRYPTION_KEY")
+			assert.Contains(t, r.Err().Error(), "cannot resolve TRUSTREADYD_ENCRYPTION_KEY")
 			assert.Contains(t, r.Err().Error(), "empty AWS reference")
 		})
 	}
@@ -58,21 +58,21 @@ func TestResolver_ResolveEmptyAWSParameterStoreRef(t *testing.T) {
 	t.Parallel()
 
 	r := NewResolver(mockEnv(map[string]string{
-		"PROBOD_ENCRYPTION_KEY": "awsps://",
+		"TRUSTREADYD_ENCRYPTION_KEY": "awsps://",
 	}))
 
-	assert.Empty(t, r.getEnv("PROBOD_ENCRYPTION_KEY"))
+	assert.Empty(t, r.getEnv("TRUSTREADYD_ENCRYPTION_KEY"))
 	require.Error(t, r.Err())
-	assert.Contains(t, r.Err().Error(), "cannot resolve PROBOD_ENCRYPTION_KEY")
+	assert.Contains(t, r.Err().Error(), "cannot resolve TRUSTREADYD_ENCRYPTION_KEY")
 	assert.Contains(t, r.Err().Error(), "empty AWS reference")
 }
 
 func TestParseAWSSecretsManagerRef(t *testing.T) {
 	t.Parallel()
 
-	secretID, ok := parseAWSSecretsManagerRef("awssm://probo/probod/encryption_key")
+	secretID, ok := parseAWSSecretsManagerRef("awssm://probo/trustreadyd/encryption_key")
 	require.True(t, ok)
-	assert.Equal(t, "probo/probod/encryption_key", secretID)
+	assert.Equal(t, "probo/trustreadyd/encryption_key", secretID)
 
 	_, ok = parseAWSSecretsManagerRef("literal-value")
 	assert.False(t, ok)
@@ -80,17 +80,17 @@ func TestParseAWSSecretsManagerRef(t *testing.T) {
 	_, ok = parseAWSSecretsManagerRef("awssm://")
 	assert.False(t, ok)
 
-	legacySecretID, ok := parseAWSSecretsManagerRef("aws://probo/probod/encryption_key")
+	legacySecretID, ok := parseAWSSecretsManagerRef("aws://probo/trustreadyd/encryption_key")
 	require.True(t, ok)
-	assert.Equal(t, "probo/probod/encryption_key", legacySecretID)
+	assert.Equal(t, "probo/trustreadyd/encryption_key", legacySecretID)
 }
 
 func TestParseAWSParameterStoreRef(t *testing.T) {
 	t.Parallel()
 
-	paramName, ok := parseAWSParameterStoreRef("awsps:///probo/probod/encryption_key")
+	paramName, ok := parseAWSParameterStoreRef("awsps:///probo/trustreadyd/encryption_key")
 	require.True(t, ok)
-	assert.Equal(t, "/probo/probod/encryption_key", paramName)
+	assert.Equal(t, "/probo/trustreadyd/encryption_key", paramName)
 
 	_, ok = parseAWSParameterStoreRef("literal-value")
 	assert.False(t, ok)
@@ -108,6 +108,6 @@ func TestEmptyAWSRefPrefix(t *testing.T) {
 		assert.Equal(t, value, prefix)
 	}
 
-	_, empty := emptyAWSRefPrefix("awssm://probo/probod/encryption_key")
+	_, empty := emptyAWSRefPrefix("awssm://probo/trustreadyd/encryption_key")
 	assert.False(t, empty)
 }

@@ -28,7 +28,7 @@ WITH
             e.id as evidence_id,
             generate_gid(decode_base64_unpadded(e.tenant_id), 25) as file_id,
             e.tenant_id,
-            'probod' as bucket_name,
+            'trustreadyd' as bucket_name,
             e.mime_type,
             e.filename,
             e.object_key,

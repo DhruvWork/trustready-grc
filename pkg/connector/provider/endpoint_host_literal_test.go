@@ -109,19 +109,19 @@ var literalAllowlist = []allowedLiteral{
 		reason:  "defaultAssetBaseURL: release asset downloads for the same self-updater; see above",
 	},
 	{
-		file:    "pkg/proboctl/seed/common-tracker-patterns/common_tracker_patterns.go",
+		file:    "pkg/trustreadyctl/seed/common-tracker-patterns/common_tracker_patterns.go",
 		literal: "https://github.com/jkwakman/Open-Cookie-Database.git",
 		reason:  "the public dataset the seed command clones; a fixed upstream source, unrelated to any connector",
 	},
 	{
-		file:    "pkg/proboctl/seed/common-tracker-patterns/common_tracker_patterns.go",
+		file:    "pkg/trustreadyctl/seed/common-tracker-patterns/common_tracker_patterns.go",
 		literal: "(https://github.com/jkwakman/Open-Cookie-Database). ",
 		reason:  "the same dataset named in that command's help text",
 	},
 	{
 		file:    "internal/cmd/genmodels/main.go",
 		literal: "https://openrouter.ai/api/v1/models",
-		reason:  "a developer-run code generator fetching the public model catalog at build time; it never runs in probod and holds no connection credential",
+		reason:  "a developer-run code generator fetching the public model catalog at build time; it never runs in trustreadyd and holds no connection credential",
 	},
 }
 

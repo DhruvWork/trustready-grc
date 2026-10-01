@@ -6,14 +6,14 @@ The project uses a `GNUmakefile` at the root. Builds run with `--jobs=$(nproc)` 
 
 | Target                       | Purpose                                                                                                |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `make build`                 | Build `bin/probod`, `bin/prb`, and `bin/probod-bootstrap` (does not include frontend apps and Relay)   |
-| `make build WITH_APPS=1`     | Build `bin/probod`, `bin/prb`, and `bin/probod-bootstrap` (includes frontend apps, codegen, and Relay) |
+| `make build`                 | Build `bin/trustreadyd`, `bin/prb`, and `bin/trustreadyd-bootstrap` (does not include frontend apps and Relay)   |
+| `make build WITH_APPS=1`     | Build `bin/trustreadyd`, `bin/prb`, and `bin/trustreadyd-bootstrap` (includes frontend apps, codegen, and Relay) |
 | `make test`                  | Run tests with race detection and coverage (packages that contain tests only; excludes e2e)            |
 | `make test MODULE=./pkg/foo` | Run tests for a single module                                                                          |
 | `make test-verbose`          | Tests with verbose output                                                                              |
 | `make test-short`            | Short tests only                                                                                       |
 | `make test-bench`            | Run benchmarks                                                                                         |
-| `make test-e2e`              | Run console end-to-end tests (requires `bin/probod`)                                                   |
+| `make test-e2e`              | Run console end-to-end tests (requires `bin/trustreadyd`)                                                   |
 | `make lint`                  | Run Go + JS linters: `vet` + `go-fmt` + `go-fix` + `go-lint` + `lint-js`                              |
 | `make lint-swift`            | Opt-in: lint Swift enroll-ui (`swift-fmt` + `swift-lint`; needs Swift + SwiftLint; CI runs this on Linux) |
 | `make lint-shell`            | Opt-in: lint `SHELL_SCRIPTS` (`shfmt -d` + `shellcheck`; CI runs this)                                 |
@@ -89,7 +89,7 @@ Individual codegen is driven by `go generate`:
 | `DOCKER_BUILD_FLAGS` | (empty)                                   | Extra flags for `docker build`             |
 | `SWIFTLINTCMD`       | `swiftlint`                               | SwiftLint binary                           |
 | `SWIFTCMD`           | `swift`                                   | Swift toolchain binary (`swift format`)    |
-| `SWIFT_ENROLL_UI`    | `cmd/probo-agent/installer/macos/enroll-ui` | Path to the Swift SPM package            |
+| `SWIFT_ENROLL_UI`    | `cmd/trustready-agent/installer/macos/enroll-ui` | Path to the Swift SPM package            |
 | `SHELLCHECKCMD`      | `shellcheck`                              | ShellCheck binary                          |
 | `SHFMTCMD`           | `shfmt`                                   | shfmt binary                               |
 | `SHFMTFLAGS`         | `-i 2 -ci -bn`                            | Flags passed to `shfmt`                    |

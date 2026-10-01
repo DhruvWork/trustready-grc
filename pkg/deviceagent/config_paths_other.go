@@ -25,11 +25,11 @@ package deviceagent
 // DefaultConfigDir returns the directory under which the agent's config
 // and keystore live on non-Windows hosts.
 func DefaultConfigDir() string {
-	return "/var/lib/probo-agent"
+	return "/var/lib/trustready-agent"
 }
 
 // DefaultEnrollmentRunDir returns the runtime directory for the public
 // enrollment marker and enrolling.lock on non-Windows hosts.
 func DefaultEnrollmentRunDir() string {
-	return "/var/run/probo-agent"
+	return "/var/run/trustready-agent"
 }

@@ -484,7 +484,7 @@ type OAuth2Config struct {
 
 	// PublicClient marks a provider that authenticates as a public client (no
 	// client_secret) via PKCE, using the Client ID Metadata Document (CIMD)
-	// flow. probod auto-registers such providers with no operator credentials:
+	// flow. trustreadyd auto-registers such providers with no operator credentials:
 	// the client_id is the deployment's hosted CIMD URL (baseURL +
 	// connector.CIMDMetadataPath) and the state token is signed with a
 	// server-derived key. Set TokenEndpointAuth to "none" alongside this.

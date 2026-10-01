@@ -1,9 +1,9 @@
-name: "Release probod"
+name: "Release trustreadyd"
 
 on:
   push:
     tags:
-      - "probod/v*"
+      - "trustreadyd/v*"
 
 permissions:
   contents: "read"
@@ -90,15 +90,15 @@ jobs:
           GOARCH: "${{ matrix.goarch }}"
         run: |
           VERSION="${GITHUB_REF_NAME##*/v}"
-          BOOTSTRAP_VERSION="$(cat cmd/probod-bootstrap/VERSION)"
+          BOOTSTRAP_VERSION="$(cat cmd/trustreadyd-bootstrap/VERSION)"
           EXT=""
           if [ "$GOOS" = "windows" ]; then EXT=".exe"; fi
 
           go build -ldflags "-s -w -X 'main.version=${VERSION}' -X 'main.env=prod'" \
-            -gcflags="-e" -o "dist/probod${EXT}" ./cmd/probod/main.go
+            -gcflags="-e" -o "dist/trustreadyd${EXT}" ./cmd/trustreadyd/main.go
 
           go build -ldflags "-s -w -X 'main.version=${BOOTSTRAP_VERSION}'" \
-            -gcflags="-e" -o "dist/probod-bootstrap${EXT}" ./cmd/probod-bootstrap/main.go
+            -gcflags="-e" -o "dist/trustreadyd-bootstrap${EXT}" ./cmd/trustreadyd-bootstrap/main.go
       - name: "Create archive"
         env:
           GOOS: "${{ matrix.goos }}"
@@ -119,14 +119,14 @@ jobs:
           if [ "$GOOS" = "windows" ]; then EXT=".exe"; fi
 
           mkdir -p archives
-          PROBOD_DIR="probod_${OS}_${ARCH}"
-          mkdir -p "staging/${PROBOD_DIR}"
-          cp "dist/probod${EXT}" "dist/probod-bootstrap${EXT}" \
-            README.md LICENSE cmd/probod/CHANGELOG.md "staging/${PROBOD_DIR}/"
+          TRUSTREADYD_DIR="trustreadyd_${OS}_${ARCH}"
+          mkdir -p "staging/${TRUSTREADYD_DIR}"
+          cp "dist/trustreadyd${EXT}" "dist/trustreadyd-bootstrap${EXT}" \
+            README.md LICENSE cmd/trustreadyd/CHANGELOG.md "staging/${TRUSTREADYD_DIR}/"
           if [ "$GOOS" = "windows" ]; then
-            (cd staging && zip -r "../archives/${PROBOD_DIR}.zip" "${PROBOD_DIR}")
+            (cd staging && zip -r "../archives/${TRUSTREADYD_DIR}.zip" "${TRUSTREADYD_DIR}")
           else
-            tar -czf "archives/${PROBOD_DIR}.tar.gz" -C staging "${PROBOD_DIR}"
+            tar -czf "archives/${TRUSTREADYD_DIR}.tar.gz" -C staging "${TRUSTREADYD_DIR}"
           fi
       - uses: "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a" # v7
         with:
@@ -185,7 +185,7 @@ jobs:
           docker buildx build \
             --platform "${PLATFORM}" \
             --build-arg "BASE_IMAGE=docker.io/library/ubuntu@sha256:c4a8d5503dfb2a3eb8ab5f807da5bc69a85730fb49b5cfca2330194ebcc41c7b" \
-            --label "org.opencontainers.image.title=probod" \
+            --label "org.opencontainers.image.title=trustreadyd" \
             --label "org.opencontainers.image.description=Probo compliance management platform" \
             --label "org.opencontainers.image.url=https://github.com/getprobo/probo" \
             --label "org.opencontainers.image.source=https://github.com/getprobo/probo" \
@@ -262,7 +262,7 @@ jobs:
           DIGEST: ${{ steps.digest.outputs.digest }}
         run: |
           cosign verify \
-            --certificate-identity-regexp '^https://github.com/getprobo/probo/.github/workflows/release-probod.yaml@refs/tags/probod/v' \
+            --certificate-identity-regexp '^https://github.com/getprobo/probo/.github/workflows/release-trustreadyd.yaml@refs/tags/trustreadyd/v' \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
             "artifact.probo.inc/probo/probo@${DIGEST}"
 
@@ -345,7 +345,7 @@ jobs:
           awk -v ver="$VERSION" '
             /^## \[/ { if (found) exit; if ($0 ~ "\\[" ver "\\]") found=1 }
             found
-          ' cmd/probod/CHANGELOG.md > release-notes.md
+          ' cmd/trustreadyd/CHANGELOG.md > release-notes.md
           cat >> release-notes.md << EOF
 
           ## Docker Images

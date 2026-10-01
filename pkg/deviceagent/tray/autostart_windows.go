@@ -49,7 +49,7 @@ func RegisterAutoStart(exePath string, runDir string) error {
 
 // RefreshAutoStart updates the Run entry without starting another tray process.
 // NOTE: Remove this function with the Run-entry migration after all
-// supported installs register probo-agentw.exe.
+// supported installs register trustready-agentw.exe.
 func RefreshAutoStart(exePath string, runDir string) error {
 	_, err := registerAutoStart(exePath, runDir)
 
@@ -87,7 +87,7 @@ func trayRunCommand(exePath string, runDir string) string {
 }
 
 func guiExecutablePath(exePath string) string {
-	name := "probo-agentw"
+	name := "trustready-agentw"
 	if filepath.Ext(exePath) != "" {
 		name = agentGUIExeBaseName
 	}

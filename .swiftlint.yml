@@ -18,10 +18,10 @@ only_rules:
   - vertical_whitespace
 
 included:
-  - cmd/probo-agent/installer/macos/enroll-ui
+  - cmd/trustready-agent/installer/macos/enroll-ui
 
 excluded:
-  - cmd/probo-agent/installer/macos/enroll-ui/.build
+  - cmd/trustready-agent/installer/macos/enroll-ui/.build
   - "**/*.generated.swift"
   - "**/*.tmpl"
 

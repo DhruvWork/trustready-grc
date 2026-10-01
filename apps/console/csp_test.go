@@ -34,7 +34,7 @@ func TestContentSecurityPolicy_SubstitutesOrigins(t *testing.T) {
 
 	policy, err := console.ContentSecurityPolicy(
 		"https://app.example.com",
-		"https://probod.s3.eu-west-1.amazonaws.com",
+		"https://trustreadyd.s3.eu-west-1.amazonaws.com",
 	)
 	require.NoError(t, err)
 	require.NotEmpty(t, policy)
@@ -49,12 +49,12 @@ func TestContentSecurityPolicy_SubstitutesOrigins(t *testing.T) {
 	assert.Contains(
 		t,
 		policy,
-		"img-src 'self' data: https://app.example.com https://probod.s3.eu-west-1.amazonaws.com https://www.google.com https://*.gstatic.com",
+		"img-src 'self' data: https://app.example.com https://trustreadyd.s3.eu-west-1.amazonaws.com https://www.google.com https://*.gstatic.com",
 	)
 	assert.Contains(
 		t,
 		policy,
-		"connect-src 'self' https://app.example.com https://probod.s3.eu-west-1.amazonaws.com",
+		"connect-src 'self' https://app.example.com https://trustreadyd.s3.eu-west-1.amazonaws.com",
 	)
 
 	for part := range strings.FieldsSeq(policy) {
@@ -72,7 +72,7 @@ func TestContentSecurityPolicy_RejectsAppOriginInjection(t *testing.T) {
 
 	_, err := console.ContentSecurityPolicy(
 		"https://evil.com;frame-ancestors",
-		"https://probod.s3.eu-west-1.amazonaws.com",
+		"https://trustreadyd.s3.eu-west-1.amazonaws.com",
 	)
 	require.Error(t, err)
 	assert.Contains(t, err.Error(), "invalid CSP app origin")

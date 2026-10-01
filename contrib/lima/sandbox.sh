@@ -146,7 +146,7 @@ cmd_status() {
     echo "  Grafana:    http://${ip}:3001"
     echo "  Mailpit:    http://${ip}:8025"
     echo "  Keycloak:   http://${ip}:8082"
-    echo "  PostgreSQL: psql -h ${ip} -U probod"
+    echo "  PostgreSQL: psql -h ${ip} -U trustreadyd"
   fi
 }
 

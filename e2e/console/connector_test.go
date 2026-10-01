@@ -528,7 +528,7 @@ func TestDeleteConnector(t *testing.T) {
 // website id), so installSupported is true exactly where apiKeyManaged and
 // apiKeySupported are false.
 //
-// It is in the catalog at all only because the e2e probod configures the plugin
+// It is in the catalog at all only because the e2e trustreadyd configures the plugin
 // token and plugin id; without both, Crisp ships deactivated and is absent.
 func TestCrispConnectsByAppInstall(t *testing.T) {
 	t.Parallel()
@@ -584,5 +584,5 @@ func TestCrispConnectsByAppInstall(t *testing.T) {
 		assert.Empty(t, driver.APIKeyExtraSettings, "the ceremony supplies the website id, not a form")
 	}
 
-	assert.True(t, crispFound, "crisp is configured in the e2e probod and must be in the catalog")
+	assert.True(t, crispFound, "crisp is configured in the e2e trustreadyd and must be in the catalog")
 }

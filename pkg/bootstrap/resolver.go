@@ -43,7 +43,7 @@ const (
 // os.Environ's "KEY=VALUE" form. EnvGetter looks up one key at a time and so
 // can never notice a key nobody asked for; an enumerator lets a caller scan
 // the whole environment instead — used to catch a typo'd
-// PROBOD_CONNECTOR_<PROVIDER>_ENDPOINT_<FIELD> variable that getEnv's
+// TRUSTREADYD_CONNECTOR_<PROVIDER>_ENDPOINT_<FIELD> variable that getEnv's
 // one-key-at-a-time interface would otherwise silently resolve to "" and
 // ignore. Optional: nil for a Resolver built from a custom lookup (every
 // existing test), which simply skips any scan built on top of it.

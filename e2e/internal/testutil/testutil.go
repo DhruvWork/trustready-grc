@@ -51,7 +51,7 @@ type TestEnv struct {
 	outputWriter   *switchableWriter
 }
 
-// configOptions tunes the generated probod config. Zero values keep the
+// configOptions tunes the generated trustreadyd config. Zero values keep the
 // default shared e2e suite settings.
 type configOptions struct {
 	DisableSignup  bool
@@ -208,7 +208,7 @@ func (e *TestEnv) dumpOutputOnFailure(context string, err error) {
 			output = output[len(output)-maxTail:]
 		}
 
-		fmt.Fprintf(os.Stderr, "--- probod output start ---\n%s\n--- probod output end ---\n", output)
+		fmt.Fprintf(os.Stderr, "--- trustreadyd output start ---\n%s\n--- trustreadyd output end ---\n", output)
 	} else {
 		fmt.Fprintf(os.Stderr, "e2etest: no captured output available\n")
 	}
@@ -278,7 +278,7 @@ func GetMailpitBaseURL() string {
 	return testEnv.MailpitBaseURL
 }
 
-// generateConfig builds a probod config for the e2e suite via the
+// generateConfig builds a trustreadyd config for the e2e suite via the
 // bootstrap package (which auto-generates SAML credentials) and
 // writes it to a temp file. A fresh OAuth2 signing key is minted
 // here and injected via env. Returns the path.
@@ -325,96 +325,96 @@ func generateConfig(opts configOptions) (string, error) {
 
 	env := map[string]string{
 		// Required.
-		"PROBOD_ENCRYPTION_KEY":            "thisisnotasecretAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
-		"PROBOD_AUTH_COOKIE_SECRET":        "this-is-a-secure-secret-for-cookie-signing-at-least-32-bytes",
-		"PROBOD_AUTH_PASSWORD_PEPPER":      "this-is-a-secure-pepper-for-password-hashing-at-least-32-bytes",
-		"PROBOD_OAUTH2_SERVER_SIGNING_KEY": oauth2SigningKey,
+		"TRUSTREADYD_ENCRYPTION_KEY":            "thisisnotasecretAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+		"TRUSTREADYD_AUTH_COOKIE_SECRET":        "this-is-a-secure-secret-for-cookie-signing-at-least-32-bytes",
+		"TRUSTREADYD_AUTH_PASSWORD_PEPPER":      "this-is-a-secure-pepper-for-password-hashing-at-least-32-bytes",
+		"TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY": oauth2SigningKey,
 
 		// Identity federation issuer. No issuer base URL is set, so the issuer is derived
 		// as {base-url}/federation.
-		"PROBOD_IDENTITY_FEDERATION_ENABLED":     "true",
-		"PROBOD_IDENTITY_FEDERATION_SIGNING_KEY": identityFederationSigningKey,
+		"TRUSTREADYD_IDENTITY_FEDERATION_ENABLED":     "true",
+		"TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY": identityFederationSigningKey,
 
 		// Unit.
-		"PROBOD_METRICS_ADDR": metricsAddr,
-		"PROBOD_TRACING_ADDR": "localhost:14317",
+		"TRUSTREADYD_METRICS_ADDR": metricsAddr,
+		"TRUSTREADYD_TRACING_ADDR": "localhost:14317",
 
 		// Probod base.
-		"PROBOD_BASE_URL": baseURL,
+		"TRUSTREADYD_BASE_URL": baseURL,
 
 		// API.
-		"PROBOD_API_ADDR":                 apiAddr,
-		"PROBOD_API_CORS_ALLOWED_ORIGINS": baseURL,
+		"TRUSTREADYD_API_ADDR":                 apiAddr,
+		"TRUSTREADYD_API_CORS_ALLOWED_ORIGINS": baseURL,
 
 		// PG.
-		"PROBOD_PG_DATABASE":      "probod_test",
-		"PROBOD_PG_POOL_SIZE":     "20",
-		"PROBOD_PG_MIN_POOL_SIZE": "2",
+		"TRUSTREADYD_PG_DATABASE":      "trustreadyd_test",
+		"TRUSTREADYD_PG_POOL_SIZE":     "20",
+		"TRUSTREADYD_PG_MIN_POOL_SIZE": "2",
 
 		// Auth.
-		"PROBOD_AUTH_COOKIE_SECURE":       "false",
-		"PROBOD_AUTH_PASSWORD_ITERATIONS": "600000",
-		"PROBOD_AUTH_DISABLE_SIGNUP":      disableSignup,
+		"TRUSTREADYD_AUTH_COOKIE_SECURE":       "false",
+		"TRUSTREADYD_AUTH_PASSWORD_ITERATIONS": "600000",
+		"TRUSTREADYD_AUTH_DISABLE_SIGNUP":      disableSignup,
 
 		// OAuth2 server durations kept small for faster e2e flows.
-		"PROBOD_OAUTH2_SERVER_ACCESS_TOKEN_DURATION":       "10",
-		"PROBOD_OAUTH2_SERVER_REFRESH_TOKEN_DURATION":      "10",
-		"PROBOD_OAUTH2_SERVER_AUTHORIZATION_CODE_DURATION": "5",
-		"PROBOD_OAUTH2_SERVER_DEVICE_CODE_DURATION":        "15",
+		"TRUSTREADYD_OAUTH2_SERVER_ACCESS_TOKEN_DURATION":       "10",
+		"TRUSTREADYD_OAUTH2_SERVER_REFRESH_TOKEN_DURATION":      "10",
+		"TRUSTREADYD_OAUTH2_SERVER_AUTHORIZATION_CODE_DURATION": "5",
+		"TRUSTREADYD_OAUTH2_SERVER_DEVICE_CODE_DURATION":        "15",
 
 		// Connector catalog. No test completes this external OAuth flow, but
 		// one deterministic configured protocol lets catalog tests assert the
 		// configuredProtocols migration rather than ambient deployment state.
-		"PROBOD_CONNECTOR_GITHUB_CLIENT_ID":           "e2e-github-client-id",
-		"PROBOD_CONNECTOR_GITHUB_CLIENT_SECRET":       "e2e-github-client-secret",
-		"PROBOD_CONNECTOR_LINEAR_CLIENT_ID":           "e2e-linear-client-id",
-		"PROBOD_CONNECTOR_LINEAR_CLIENT_SECRET":       "e2e-linear-client-secret",
-		"PROBOD_CONNECTOR_LINEAR_SYNC_CLIENT_ID":      "e2e-linear-sync-client-id",
-		"PROBOD_CONNECTOR_LINEAR_SYNC_CLIENT_SECRET":  "e2e-linear-sync-client-secret",
-		"PROBOD_CONNECTOR_LINEAR_SYNC_WEBHOOK_SECRET": "e2e-linear-webhook-secret",
+		"TRUSTREADYD_CONNECTOR_GITHUB_CLIENT_ID":           "e2e-github-client-id",
+		"TRUSTREADYD_CONNECTOR_GITHUB_CLIENT_SECRET":       "e2e-github-client-secret",
+		"TRUSTREADYD_CONNECTOR_LINEAR_CLIENT_ID":           "e2e-linear-client-id",
+		"TRUSTREADYD_CONNECTOR_LINEAR_CLIENT_SECRET":       "e2e-linear-client-secret",
+		"TRUSTREADYD_CONNECTOR_LINEAR_SYNC_CLIENT_ID":      "e2e-linear-sync-client-id",
+		"TRUSTREADYD_CONNECTOR_LINEAR_SYNC_CLIENT_SECRET":  "e2e-linear-sync-client-secret",
+		"TRUSTREADYD_CONNECTOR_LINEAR_SYNC_WEBHOOK_SECRET": "e2e-linear-webhook-secret",
 
 		// Crisp is the only app-install provider, and it stays out of the
 		// catalog entirely until BOTH of these are set. Configuring it here is
 		// what lets the catalog test assert installSupported rather than
 		// asserting that an unconfigured provider is absent.
-		"PROBOD_CONNECTOR_CRISP_PLUGIN_TOKEN": "e2e-plugin-identifier:e2e-plugin-key",
-		"PROBOD_CONNECTOR_CRISP_PLUGIN_ID":    "e2e-crisp-plugin-id",
+		"TRUSTREADYD_CONNECTOR_CRISP_PLUGIN_TOKEN": "e2e-plugin-identifier:e2e-plugin-key",
+		"TRUSTREADYD_CONNECTOR_CRISP_PLUGIN_ID":    "e2e-crisp-plugin-id",
 
 		// Trust center. Compliance pages are served exclusively over this
 		// dedicated listener, addressed by Host/SNI. The managed base domain
 		// yields {slug}.probopage.localhost subdomains for pages without a
 		// customer custom domain.
-		"PROBOD_TRUST_CENTER_HTTP_ADDR":   trustHTTPAddr,
-		"PROBOD_TRUST_CENTER_HTTPS_ADDR":  trustHTTPSAddr,
-		"PROBOD_TRUST_CENTER_BASE_DOMAIN": "probopage.localhost",
-		"PROBOD_TRUST_CENTER_TLS_MODE":    "direct",
+		"TRUSTREADYD_TRUST_CENTER_HTTP_ADDR":   trustHTTPAddr,
+		"TRUSTREADYD_TRUST_CENTER_HTTPS_ADDR":  trustHTTPSAddr,
+		"TRUSTREADYD_TRUST_CENTER_BASE_DOMAIN": "probopage.localhost",
+		"TRUSTREADYD_TRUST_CENTER_TLS_MODE":    "direct",
 
 		// Keep certificate provisioning snappy so trust-center e2e flows do not
 		// wait on the default 30s poll (step-ca validates HTTP-01 via port 80).
-		"PROBOD_CUSTOM_DOMAINS_PROVISION_INTERVAL": "1",
+		"TRUSTREADYD_CUSTOM_DOMAINS_PROVISION_INTERVAL": "1",
 
 		// AWS / S3 (SeaweedFS).
-		"PROBOD_AWS_BUCKET":            "probod-test",
-		"PROBOD_AWS_ACCESS_KEY_ID":     "probod",
-		"PROBOD_AWS_SECRET_ACCESS_KEY": "thisisnotasecret",
-		"PROBOD_AWS_ENDPOINT":          "http://127.0.0.1:8333",
+		"TRUSTREADYD_AWS_BUCKET":            "trustreadyd-test",
+		"TRUSTREADYD_AWS_ACCESS_KEY_ID":     "trustreadyd",
+		"TRUSTREADYD_AWS_SECRET_ACCESS_KEY": "thisisnotasecret",
+		"TRUSTREADYD_AWS_ENDPOINT":          "http://127.0.0.1:8333",
 
 		// Mailer.
-		"PROBOD_MAILER_SENDER_NAME":  "Probo Test",
-		"PROBOD_MAILER_SENDER_EMAIL": "no-reply@test.getprobo.com",
-		"PROBOD_MAILER_INTERVAL":     "1",
+		"TRUSTREADYD_MAILER_SENDER_NAME":  "Probo Test",
+		"TRUSTREADYD_MAILER_SENDER_EMAIL": "no-reply@test.getprobo.com",
+		"TRUSTREADYD_MAILER_INTERVAL":     "1",
 
 		// Drain webhook data promptly so event-persistence assertions do not
 		// queue behind the rest of the parallel E2E suite.
-		"PROBOD_WEBHOOK_SENDER_INTERVAL": "1",
+		"TRUSTREADYD_WEBHOOK_SENDER_INTERVAL": "1",
 
 		// LLM.
-		"PROBOD_OPENAI_API_KEY": "thisisnotasecret",
+		"TRUSTREADYD_OPENAI_API_KEY": "thisisnotasecret",
 
 		// Custom domains.
-		"PROBOD_CUSTOM_DOMAINS_CNAME_TARGET": "custom.test.getprobo.com",
-		"PROBOD_ACME_DIRECTORY":              "https://localhost:9000/acme/acme/directory",
-		"PROBOD_ACME_EMAIL":                  "admin@test.getprobo.com",
+		"TRUSTREADYD_CUSTOM_DOMAINS_CNAME_TARGET": "custom.test.getprobo.com",
+		"TRUSTREADYD_ACME_DIRECTORY":              "https://localhost:9000/acme/acme/directory",
+		"TRUSTREADYD_ACME_EMAIL":                  "admin@test.getprobo.com",
 	}
 
 	builder := bootstrap.NewBuilder(bootstrap.NewResolver(func(key string) string {
@@ -435,7 +435,7 @@ func generateConfig(opts configOptions) (string, error) {
 		return "", fmt.Errorf("create temp dir: %w", err)
 	}
 
-	path := filepath.Join(tmpDir, "probod.yml")
+	path := filepath.Join(tmpDir, "trustreadyd.yml")
 
 	if err := bootstrap.WriteConfig(cfg, path, bootstrap.FormatYAML); err != nil {
 		return "", fmt.Errorf("write config: %w", err)

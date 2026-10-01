@@ -35,7 +35,7 @@ import (
 	"github.com/DhruvWork/trustready-grc/pkg/connector"
 	"github.com/DhruvWork/trustready-grc/pkg/crypto/keys"
 	"github.com/DhruvWork/trustready-grc/pkg/crypto/pem"
-	"github.com/DhruvWork/trustready-grc/pkg/probodconfig"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadydconfig"
 )
 
 // The configuration decodes key material as it is read, so a test that reaches
@@ -97,10 +97,10 @@ func mockEnumerator(env map[string]string) EnvEnumerator {
 
 func requiredEnv() map[string]string {
 	return map[string]string{
-		"PROBOD_ENCRYPTION_KEY":            "test-encryption-key-32-bytes-long",
-		"PROBOD_AUTH_COOKIE_SECRET":        "test-cookie-secret-32-bytes-long!",
-		"PROBOD_AUTH_PASSWORD_PEPPER":      "test-password-pepper-32-bytes-lo",
-		"PROBOD_OAUTH2_SERVER_SIGNING_KEY": testSigningKeyPEM(),
+		"TRUSTREADYD_ENCRYPTION_KEY":            "test-encryption-key-32-bytes-long",
+		"TRUSTREADYD_AUTH_COOKIE_SECRET":        "test-cookie-secret-32-bytes-long!",
+		"TRUSTREADYD_AUTH_PASSWORD_PEPPER":      "test-password-pepper-32-bytes-lo",
+		"TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY": testSigningKeyPEM(),
 	}
 }
 
@@ -113,99 +113,99 @@ func TestBuilder_Build_MissingRequiredEnvVars(t *testing.T) {
 		{
 			name:        "all missing",
 			env:         map[string]string{},
-			wantMissing: []string{"PROBOD_ENCRYPTION_KEY", "PROBOD_AUTH_COOKIE_SECRET", "PROBOD_AUTH_PASSWORD_PEPPER", "PROBOD_OAUTH2_SERVER_SIGNING_KEY"},
+			wantMissing: []string{"TRUSTREADYD_ENCRYPTION_KEY", "TRUSTREADYD_AUTH_COOKIE_SECRET", "TRUSTREADYD_AUTH_PASSWORD_PEPPER", "TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY"},
 		},
 		{
 			name: "missing oauth2 signing key",
 			env: map[string]string{
-				"PROBOD_ENCRYPTION_KEY":       "key",
-				"PROBOD_AUTH_COOKIE_SECRET":   "secret",
-				"PROBOD_AUTH_PASSWORD_PEPPER": "pepper",
+				"TRUSTREADYD_ENCRYPTION_KEY":       "key",
+				"TRUSTREADYD_AUTH_COOKIE_SECRET":   "secret",
+				"TRUSTREADYD_AUTH_PASSWORD_PEPPER": "pepper",
 			},
-			wantMissing: []string{"PROBOD_OAUTH2_SERVER_SIGNING_KEY"},
+			wantMissing: []string{"TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY"},
 		},
 		{
 			name: "missing encryption key",
 			env: map[string]string{
-				"PROBOD_AUTH_COOKIE_SECRET":   "secret",
-				"PROBOD_AUTH_PASSWORD_PEPPER": "pepper",
+				"TRUSTREADYD_AUTH_COOKIE_SECRET":   "secret",
+				"TRUSTREADYD_AUTH_PASSWORD_PEPPER": "pepper",
 			},
-			wantMissing: []string{"PROBOD_ENCRYPTION_KEY"},
+			wantMissing: []string{"TRUSTREADYD_ENCRYPTION_KEY"},
 		},
 		{
 			name: "missing cookie secret",
 			env: map[string]string{
-				"PROBOD_ENCRYPTION_KEY":       "key",
-				"PROBOD_AUTH_PASSWORD_PEPPER": "pepper",
+				"TRUSTREADYD_ENCRYPTION_KEY":       "key",
+				"TRUSTREADYD_AUTH_PASSWORD_PEPPER": "pepper",
 			},
-			wantMissing: []string{"PROBOD_AUTH_COOKIE_SECRET"},
+			wantMissing: []string{"TRUSTREADYD_AUTH_COOKIE_SECRET"},
 		},
 		{
 			name: "slack connector missing required fields",
 			env: map[string]string{
-				"PROBOD_ENCRYPTION_KEY":            "key",
-				"PROBOD_AUTH_COOKIE_SECRET":        "secret",
-				"PROBOD_AUTH_PASSWORD_PEPPER":      "pepper",
-				"PROBOD_CONNECTOR_SLACK_CLIENT_ID": "client-id",
+				"TRUSTREADYD_ENCRYPTION_KEY":            "key",
+				"TRUSTREADYD_AUTH_COOKIE_SECRET":        "secret",
+				"TRUSTREADYD_AUTH_PASSWORD_PEPPER":      "pepper",
+				"TRUSTREADYD_CONNECTOR_SLACK_CLIENT_ID": "client-id",
 			},
-			wantMissing: []string{"PROBOD_CONNECTOR_SLACK_CLIENT_SECRET", "PROBOD_CONNECTOR_SLACK_SIGNING_SECRET"},
+			wantMissing: []string{"TRUSTREADYD_CONNECTOR_SLACK_CLIENT_SECRET", "TRUSTREADYD_CONNECTOR_SLACK_SIGNING_SECRET"},
 		},
 		{
 			name: "enabled slackbot missing required fields",
 			env: map[string]string{
-				"PROBOD_ENCRYPTION_KEY":            "key",
-				"PROBOD_AUTH_COOKIE_SECRET":        "secret",
-				"PROBOD_AUTH_PASSWORD_PEPPER":      "pepper",
-				"PROBOD_SLACKBOT_ENABLED":          "true",
-				"PROBOD_OAUTH2_SERVER_SIGNING_KEY": "signing-key",
+				"TRUSTREADYD_ENCRYPTION_KEY":            "key",
+				"TRUSTREADYD_AUTH_COOKIE_SECRET":        "secret",
+				"TRUSTREADYD_AUTH_PASSWORD_PEPPER":      "pepper",
+				"TRUSTREADYD_SLACKBOT_ENABLED":          "true",
+				"TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY": "signing-key",
 			},
 			wantMissing: []string{
-				"PROBOD_SLACKBOT_SIGNING_SECRET",
-				"PROBOD_SLACKBOT_CLIENT_ID",
-				"PROBOD_SLACKBOT_CLIENT_SECRET",
-				"PROBOD_SLACKBOT_REDIRECT_URI",
-				"PROBOD_OPENAI_API_KEY",
+				"TRUSTREADYD_SLACKBOT_SIGNING_SECRET",
+				"TRUSTREADYD_SLACKBOT_CLIENT_ID",
+				"TRUSTREADYD_SLACKBOT_CLIENT_SECRET",
+				"TRUSTREADYD_SLACKBOT_REDIRECT_URI",
+				"TRUSTREADYD_OPENAI_API_KEY",
 			},
 		},
 		{
 			name: "google workspace connector missing required fields",
 			env: map[string]string{
-				"PROBOD_ENCRYPTION_KEY":                       "key",
-				"PROBOD_AUTH_COOKIE_SECRET":                   "secret",
-				"PROBOD_AUTH_PASSWORD_PEPPER":                 "pepper",
-				"PROBOD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_ID": "client-id",
+				"TRUSTREADYD_ENCRYPTION_KEY":                       "key",
+				"TRUSTREADYD_AUTH_COOKIE_SECRET":                   "secret",
+				"TRUSTREADYD_AUTH_PASSWORD_PEPPER":                 "pepper",
+				"TRUSTREADYD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_ID": "client-id",
 			},
-			wantMissing: []string{"PROBOD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_SECRET"},
+			wantMissing: []string{"TRUSTREADYD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_SECRET"},
 		},
 		{
 			name: "microsoft 365 connector missing required fields",
 			env: map[string]string{
-				"PROBOD_ENCRYPTION_KEY":                    "key",
-				"PROBOD_AUTH_COOKIE_SECRET":                "secret",
-				"PROBOD_AUTH_PASSWORD_PEPPER":              "pepper",
-				"PROBOD_CONNECTOR_MICROSOFT_365_CLIENT_ID": "client-id",
+				"TRUSTREADYD_ENCRYPTION_KEY":                    "key",
+				"TRUSTREADYD_AUTH_COOKIE_SECRET":                "secret",
+				"TRUSTREADYD_AUTH_PASSWORD_PEPPER":              "pepper",
+				"TRUSTREADYD_CONNECTOR_MICROSOFT_365_CLIENT_ID": "client-id",
 			},
-			wantMissing: []string{"PROBOD_CONNECTOR_MICROSOFT_365_CLIENT_SECRET"},
+			wantMissing: []string{"TRUSTREADYD_CONNECTOR_MICROSOFT_365_CLIENT_SECRET"},
 		},
 		{
 			name: "cal.com connector missing required fields",
 			env: map[string]string{
-				"PROBOD_ENCRYPTION_KEY":              "key",
-				"PROBOD_AUTH_COOKIE_SECRET":          "secret",
-				"PROBOD_AUTH_PASSWORD_PEPPER":        "pepper",
-				"PROBOD_CONNECTOR_CAL_COM_CLIENT_ID": "client-id",
+				"TRUSTREADYD_ENCRYPTION_KEY":              "key",
+				"TRUSTREADYD_AUTH_COOKIE_SECRET":          "secret",
+				"TRUSTREADYD_AUTH_PASSWORD_PEPPER":        "pepper",
+				"TRUSTREADYD_CONNECTOR_CAL_COM_CLIENT_ID": "client-id",
 			},
-			wantMissing: []string{"PROBOD_CONNECTOR_CAL_COM_CLIENT_SECRET"},
+			wantMissing: []string{"TRUSTREADYD_CONNECTOR_CAL_COM_CLIENT_SECRET"},
 		},
 		{
 			name: "calendly connector missing required fields",
 			env: map[string]string{
-				"PROBOD_ENCRYPTION_KEY":               "key",
-				"PROBOD_AUTH_COOKIE_SECRET":           "secret",
-				"PROBOD_AUTH_PASSWORD_PEPPER":         "pepper",
-				"PROBOD_CONNECTOR_CALENDLY_CLIENT_ID": "client-id",
+				"TRUSTREADYD_ENCRYPTION_KEY":               "key",
+				"TRUSTREADYD_AUTH_COOKIE_SECRET":           "secret",
+				"TRUSTREADYD_AUTH_PASSWORD_PEPPER":         "pepper",
+				"TRUSTREADYD_CONNECTOR_CALENDLY_CLIENT_ID": "client-id",
 			},
-			wantMissing: []string{"PROBOD_CONNECTOR_CALENDLY_CLIENT_SECRET"},
+			wantMissing: []string{"TRUSTREADYD_CONNECTOR_CALENDLY_CLIENT_SECRET"},
 		},
 	}
 
@@ -233,13 +233,13 @@ func TestBuilder_Build_InvalidCookieBannerTCFCmpID(t *testing.T) {
 				t.Parallel()
 
 				env := requiredEnv()
-				env["PROBOD_COOKIE_BANNER_TCF_CMP_ID"] = id
+				env["TRUSTREADYD_COOKIE_BANNER_TCF_CMP_ID"] = id
 
 				b := NewBuilder(NewResolver(mockEnv(env)))
 				_, err := b.Build()
 
 				require.Error(t, err)
-				assert.Contains(t, err.Error(), "PROBOD_COOKIE_BANNER_TCF_CMP_ID must be between 2 and 4095")
+				assert.Contains(t, err.Error(), "TRUSTREADYD_COOKIE_BANNER_TCF_CMP_ID must be between 2 and 4095")
 			},
 		)
 	}
@@ -249,13 +249,13 @@ func TestBuilder_Build_InvalidCompliancePortalTLSMode(t *testing.T) {
 	t.Parallel()
 
 	env := requiredEnv()
-	env["PROBOD_TRUST_CENTER_TLS_MODE"] = "passthrough"
+	env["TRUSTREADYD_TRUST_CENTER_TLS_MODE"] = "passthrough"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	_, err := b.Build()
 
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "cannot parse PROBOD_TRUST_CENTER_TLS_MODE")
+	assert.Contains(t, err.Error(), "cannot parse TRUSTREADYD_TRUST_CENTER_TLS_MODE")
 }
 
 func TestBuilder_Build_Defaults(t *testing.T) {
@@ -325,7 +325,7 @@ func TestBuilder_Build_Defaults(t *testing.T) {
 	assert.Empty(t, cfg.Probod.CompliancePortal.HTTPAddr)
 	assert.Empty(t, cfg.Probod.CompliancePortal.HTTPSAddr)
 	assert.Empty(t, cfg.Probod.CompliancePortal.BaseDomain)
-	assert.Equal(t, probodconfig.CompliancePortalTLSModeDirect, cfg.Probod.CompliancePortal.TLSMode)
+	assert.Equal(t, trustreadydconfig.CompliancePortalTLSModeDirect, cfg.Probod.CompliancePortal.TLSMode)
 	assert.Nil(t, cfg.Probod.CompliancePortal.ProxyProtocol.TrustedProxies)
 
 	// AWS config
@@ -435,145 +435,145 @@ func TestBuilder_Build_Defaults(t *testing.T) {
 func TestBuilder_Build_CustomValues(t *testing.T) {
 	env := requiredEnv()
 	// Unit
-	env["PROBOD_METRICS_ADDR"] = "0.0.0.0:9090"
-	env["PROBOD_TRACING_ADDR"] = "jaeger:4317"
-	env["PROBOD_TRACING_MAX_BATCH_SIZE"] = "1024"
+	env["TRUSTREADYD_METRICS_ADDR"] = "0.0.0.0:9090"
+	env["TRUSTREADYD_TRACING_ADDR"] = "jaeger:4317"
+	env["TRUSTREADYD_TRACING_MAX_BATCH_SIZE"] = "1024"
 	// Probod
-	env["PROBOD_BASE_URL"] = "https://app.example.com"
-	env["PROBOD_CHROME_DP_ADDR"] = "chrome:9222"
+	env["TRUSTREADYD_BASE_URL"] = "https://app.example.com"
+	env["TRUSTREADYD_CHROME_DP_ADDR"] = "chrome:9222"
 	// API
-	env["PROBOD_API_ADDR"] = "0.0.0.0:8080"
-	env["PROBOD_API_CORS_ALLOWED_ORIGINS"] = "https://app.example.com,https://admin.example.com"
-	env["PROBOD_API_PROXY_PROTOCOL_TRUSTED_PROXIES"] = "10.0.0.1,10.0.0.2"
-	env["PROBOD_API_GRAPHQL_PARSER_TOKEN_LIMIT"] = "20000"
-	env["PROBOD_API_GRAPHQL_COMPLEXITY_LIMIT"] = "5000"
-	env["PROBOD_API_GRAPHQL_QUERY_CACHE_SIZE"] = "2000"
-	env["PROBOD_API_GRAPHQL_DISABLE_SUGGESTION"] = "false"
+	env["TRUSTREADYD_API_ADDR"] = "0.0.0.0:8080"
+	env["TRUSTREADYD_API_CORS_ALLOWED_ORIGINS"] = "https://app.example.com,https://admin.example.com"
+	env["TRUSTREADYD_API_PROXY_PROTOCOL_TRUSTED_PROXIES"] = "10.0.0.1,10.0.0.2"
+	env["TRUSTREADYD_API_GRAPHQL_PARSER_TOKEN_LIMIT"] = "20000"
+	env["TRUSTREADYD_API_GRAPHQL_COMPLEXITY_LIMIT"] = "5000"
+	env["TRUSTREADYD_API_GRAPHQL_QUERY_CACHE_SIZE"] = "2000"
+	env["TRUSTREADYD_API_GRAPHQL_DISABLE_SUGGESTION"] = "false"
 	// PG
-	env["PROBOD_PG_ADDR"] = "postgres.example.com:5432"
-	env["PROBOD_PG_USERNAME"] = "probo"
-	env["PROBOD_PG_PASSWORD"] = "secret123"
-	env["PROBOD_PG_DATABASE"] = "probo_prod"
-	env["PROBOD_PG_POOL_SIZE"] = "200"
-	env["PROBOD_PG_MIN_POOL_SIZE"] = "25"
-	env["PROBOD_PG_MAX_CONN_IDLE_TIME_SECONDS"] = "900"
-	env["PROBOD_PG_MAX_CONN_LIFETIME_SECONDS"] = "7200"
-	env["PROBOD_PG_MAX_CONN_LIFETIME_JITTER_SECONDS"] = "600"
-	env["PROBOD_PG_HEALTH_CHECK_PERIOD_SECONDS"] = "30"
-	env["PROBOD_PG_DEBUG"] = "true"
+	env["TRUSTREADYD_PG_ADDR"] = "postgres.example.com:5432"
+	env["TRUSTREADYD_PG_USERNAME"] = "probo"
+	env["TRUSTREADYD_PG_PASSWORD"] = "secret123"
+	env["TRUSTREADYD_PG_DATABASE"] = "probo_prod"
+	env["TRUSTREADYD_PG_POOL_SIZE"] = "200"
+	env["TRUSTREADYD_PG_MIN_POOL_SIZE"] = "25"
+	env["TRUSTREADYD_PG_MAX_CONN_IDLE_TIME_SECONDS"] = "900"
+	env["TRUSTREADYD_PG_MAX_CONN_LIFETIME_SECONDS"] = "7200"
+	env["TRUSTREADYD_PG_MAX_CONN_LIFETIME_JITTER_SECONDS"] = "600"
+	env["TRUSTREADYD_PG_HEALTH_CHECK_PERIOD_SECONDS"] = "30"
+	env["TRUSTREADYD_PG_DEBUG"] = "true"
 	// Auth
-	env["PROBOD_AUTH_DISABLE_SIGNUP"] = "true"
-	env["PROBOD_AUTH_INVITATION_TOKEN_VALIDITY"] = "7200"
-	env["PROBOD_AUTH_PASSWORD_RESET_TOKEN_VALIDITY"] = "1800"
-	env["PROBOD_AUTH_MAGIC_LINK_TOKEN_VALIDITY"] = "600"
-	env["PROBOD_AUTH_EMAIL_CONFIRMATION_TOKEN_VALIDITY"] = "43200"
-	env["PROBOD_AUTH_COOKIE_DOMAIN"] = ".example.com"
-	env["PROBOD_AUTH_COOKIE_DURATION"] = "48"
-	env["PROBOD_AUTH_COOKIE_SAMESITE"] = "strict"
+	env["TRUSTREADYD_AUTH_DISABLE_SIGNUP"] = "true"
+	env["TRUSTREADYD_AUTH_INVITATION_TOKEN_VALIDITY"] = "7200"
+	env["TRUSTREADYD_AUTH_PASSWORD_RESET_TOKEN_VALIDITY"] = "1800"
+	env["TRUSTREADYD_AUTH_MAGIC_LINK_TOKEN_VALIDITY"] = "600"
+	env["TRUSTREADYD_AUTH_EMAIL_CONFIRMATION_TOKEN_VALIDITY"] = "43200"
+	env["TRUSTREADYD_AUTH_COOKIE_DOMAIN"] = ".example.com"
+	env["TRUSTREADYD_AUTH_COOKIE_DURATION"] = "48"
+	env["TRUSTREADYD_AUTH_COOKIE_SAMESITE"] = "strict"
 	// SAML
-	env["PROBOD_SAML_DOMAIN_VERIFICATION_INTERVAL_SECONDS"] = "120"
-	env["PROBOD_SAML_DOMAIN_VERIFICATION_RESOLVER_ADDR"] = "1.1.1.1:53"
+	env["TRUSTREADYD_SAML_DOMAIN_VERIFICATION_INTERVAL_SECONDS"] = "120"
+	env["TRUSTREADYD_SAML_DOMAIN_VERIFICATION_RESOLVER_ADDR"] = "1.1.1.1:53"
 	// Trust center
-	env["PROBOD_TRUST_CENTER_HTTP_ADDR"] = ":8080"
-	env["PROBOD_TRUST_CENTER_HTTPS_ADDR"] = ":8443"
-	env["PROBOD_TRUST_CENTER_BASE_DOMAIN"] = "probopage.example.com"
-	env["PROBOD_TRUST_CENTER_TLS_MODE"] = "external"
-	env["PROBOD_TRUST_CENTER_PROXY_PROTOCOL_TRUSTED_PROXIES"] = "10.0.1.1,10.0.1.2"
+	env["TRUSTREADYD_TRUST_CENTER_HTTP_ADDR"] = ":8080"
+	env["TRUSTREADYD_TRUST_CENTER_HTTPS_ADDR"] = ":8443"
+	env["TRUSTREADYD_TRUST_CENTER_BASE_DOMAIN"] = "probopage.example.com"
+	env["TRUSTREADYD_TRUST_CENTER_TLS_MODE"] = "external"
+	env["TRUSTREADYD_TRUST_CENTER_PROXY_PROTOCOL_TRUSTED_PROXIES"] = "10.0.1.1,10.0.1.2"
 	// AWS
-	env["PROBOD_AWS_REGION"] = "eu-west-1"
-	env["PROBOD_AWS_BUCKET"] = "probo-files"
-	env["PROBOD_AWS_ACCESS_KEY_ID"] = "AKIAIOSFODNN7EXAMPLE"
-	env["PROBOD_AWS_SECRET_ACCESS_KEY"] = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
-	env["PROBOD_AWS_ENDPOINT"] = "https://s3.example.com"
-	env["PROBOD_AWS_USE_PATH_STYLE"] = "true"
+	env["TRUSTREADYD_AWS_REGION"] = "eu-west-1"
+	env["TRUSTREADYD_AWS_BUCKET"] = "probo-files"
+	env["TRUSTREADYD_AWS_ACCESS_KEY_ID"] = "AKIAIOSFODNN7EXAMPLE"
+	env["TRUSTREADYD_AWS_SECRET_ACCESS_KEY"] = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+	env["TRUSTREADYD_AWS_ENDPOINT"] = "https://s3.example.com"
+	env["TRUSTREADYD_AWS_USE_PATH_STYLE"] = "true"
 	// Notifications
-	env["PROBOD_WEBHOOK_SENDER_INTERVAL"] = "10"
-	env["PROBOD_WEBHOOK_REQUEST_TIMEOUT"] = "20"
-	env["PROBOD_WEBHOOK_CACHE_TTL"] = "3600"
-	env["PROBOD_WEBHOOK_STALE_AFTER"] = "600"
-	env["PROBOD_WEBHOOK_RETRY_BASE"] = "60"
-	env["PROBOD_WEBHOOK_RETRY_MAX"] = "7200"
-	env["PROBOD_WEBHOOK_MAX_CONCURRENCY"] = "8"
-	env["PROBOD_CONNECTOR_SLACK_SIGNING_SECRET"] = "slack-signing-secret"
-	env["PROBOD_DOCUMENT_NOTIFICATION_INTERVAL"] = "120"
-	env["PROBOD_DOCUMENT_NOTIFICATION_DEBOUNCE_DELAY"] = "60"
-	env["PROBOD_DOCUMENT_NOTIFICATION_REMINDER_INTERVAL"] = "43200"
+	env["TRUSTREADYD_WEBHOOK_SENDER_INTERVAL"] = "10"
+	env["TRUSTREADYD_WEBHOOK_REQUEST_TIMEOUT"] = "20"
+	env["TRUSTREADYD_WEBHOOK_CACHE_TTL"] = "3600"
+	env["TRUSTREADYD_WEBHOOK_STALE_AFTER"] = "600"
+	env["TRUSTREADYD_WEBHOOK_RETRY_BASE"] = "60"
+	env["TRUSTREADYD_WEBHOOK_RETRY_MAX"] = "7200"
+	env["TRUSTREADYD_WEBHOOK_MAX_CONCURRENCY"] = "8"
+	env["TRUSTREADYD_CONNECTOR_SLACK_SIGNING_SECRET"] = "slack-signing-secret"
+	env["TRUSTREADYD_DOCUMENT_NOTIFICATION_INTERVAL"] = "120"
+	env["TRUSTREADYD_DOCUMENT_NOTIFICATION_DEBOUNCE_DELAY"] = "60"
+	env["TRUSTREADYD_DOCUMENT_NOTIFICATION_REMINDER_INTERVAL"] = "43200"
 	// Firecrawl
-	env["PROBOD_FIRECRAWL_API_KEY"] = "fc-test-key"
+	env["TRUSTREADYD_FIRECRAWL_API_KEY"] = "fc-test-key"
 	// Agents — providers
-	env["PROBOD_OPENAI_API_KEY"] = "sk-test-key"
-	env["PROBOD_ANTHROPIC_API_KEY"] = "sk-ant-test-key"
+	env["TRUSTREADYD_OPENAI_API_KEY"] = "sk-test-key"
+	env["TRUSTREADYD_ANTHROPIC_API_KEY"] = "sk-ant-test-key"
 	// Agents — default
-	env["PROBOD_AGENT_DEFAULT_PROVIDER"] = "openai"
-	env["PROBOD_AGENT_DEFAULT_MODEL_NAME"] = "gpt-4-turbo"
-	env["PROBOD_AGENT_DEFAULT_TEMPERATURE"] = "0.5"
-	env["PROBOD_AGENT_DEFAULT_MAX_TOKENS"] = "8192"
+	env["TRUSTREADYD_AGENT_DEFAULT_PROVIDER"] = "openai"
+	env["TRUSTREADYD_AGENT_DEFAULT_MODEL_NAME"] = "gpt-4-turbo"
+	env["TRUSTREADYD_AGENT_DEFAULT_TEMPERATURE"] = "0.5"
+	env["TRUSTREADYD_AGENT_DEFAULT_MAX_TOKENS"] = "8192"
 	// Agents — evidence-describer override
-	env["PROBOD_AGENT_EVIDENCE_DESCRIBER_PROVIDER"] = "anthropic"
-	env["PROBOD_AGENT_EVIDENCE_DESCRIBER_MODEL_NAME"] = "claude-sonnet-4-20250514"
-	env["PROBOD_AGENT_EVIDENCE_DESCRIBER_TEMPERATURE"] = "0.2"
-	env["PROBOD_AGENT_EVIDENCE_DESCRIBER_MAX_TOKENS"] = "4096"
+	env["TRUSTREADYD_AGENT_EVIDENCE_DESCRIBER_PROVIDER"] = "anthropic"
+	env["TRUSTREADYD_AGENT_EVIDENCE_DESCRIBER_MODEL_NAME"] = "claude-sonnet-4-20250514"
+	env["TRUSTREADYD_AGENT_EVIDENCE_DESCRIBER_TEMPERATURE"] = "0.2"
+	env["TRUSTREADYD_AGENT_EVIDENCE_DESCRIBER_MAX_TOKENS"] = "4096"
 	// Agents — third-party-vetter override
-	env["PROBOD_AGENT_THIRD_PARTY_VETTER_PROVIDER"] = "openai"
-	env["PROBOD_AGENT_THIRD_PARTY_VETTER_MODEL_NAME"] = "gpt-4o"
-	env["PROBOD_AGENT_THIRD_PARTY_VETTER_TEMPERATURE"] = "0.3"
-	env["PROBOD_AGENT_THIRD_PARTY_VETTER_MAX_TOKENS"] = "8192"
+	env["TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_PROVIDER"] = "openai"
+	env["TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_MODEL_NAME"] = "gpt-4o"
+	env["TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_TEMPERATURE"] = "0.3"
+	env["TRUSTREADYD_AGENT_THIRD_PARTY_VETTER_MAX_TOKENS"] = "8192"
 	// Agents — tracker-mapping override
-	env["PROBOD_AGENT_TRACKER_MAPPING_PROVIDER"] = "openai"
-	env["PROBOD_AGENT_TRACKER_MAPPING_MODEL_NAME"] = "gpt-4o-mini"
-	env["PROBOD_AGENT_TRACKER_MAPPING_TEMPERATURE"] = "0.1"
-	env["PROBOD_AGENT_TRACKER_MAPPING_MAX_TOKENS"] = "1024"
+	env["TRUSTREADYD_AGENT_TRACKER_MAPPING_PROVIDER"] = "openai"
+	env["TRUSTREADYD_AGENT_TRACKER_MAPPING_MODEL_NAME"] = "gpt-4o-mini"
+	env["TRUSTREADYD_AGENT_TRACKER_MAPPING_TEMPERATURE"] = "0.1"
+	env["TRUSTREADYD_AGENT_TRACKER_MAPPING_MAX_TOKENS"] = "1024"
 	// Agents — tracker-enrichment override
-	env["PROBOD_AGENT_TRACKER_ENRICHMENT_PROVIDER"] = "openai"
-	env["PROBOD_AGENT_TRACKER_ENRICHMENT_MODEL_NAME"] = "gpt-4o"
-	env["PROBOD_AGENT_TRACKER_ENRICHMENT_TEMPERATURE"] = "0.2"
-	env["PROBOD_AGENT_TRACKER_ENRICHMENT_MAX_TOKENS"] = "2048"
+	env["TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_PROVIDER"] = "openai"
+	env["TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_MODEL_NAME"] = "gpt-4o"
+	env["TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_TEMPERATURE"] = "0.2"
+	env["TRUSTREADYD_AGENT_TRACKER_ENRICHMENT_MAX_TOKENS"] = "2048"
 	// Tracker worker tuning override
-	env["PROBOD_TRACKER_MAPPING_INTERVAL"] = "20"
-	env["PROBOD_TRACKER_MAPPING_MAX_CONCURRENCY"] = "5"
-	env["PROBOD_TRACKER_MAPPING_STALE_AFTER"] = "1200"
-	env["PROBOD_TRACKER_MAPPING_AGENT_TIMEOUT"] = "30"
-	env["PROBOD_TRACKER_MAPPING_AGENT_MAX_TURNS"] = "6"
-	env["PROBOD_COMMON_PATTERN_ENRICHMENT_INTERVAL"] = "15"
-	env["PROBOD_COMMON_PATTERN_ENRICHMENT_MAX_CONCURRENCY"] = "4"
-	env["PROBOD_COMMON_PATTERN_ENRICHMENT_STALE_AFTER"] = "900"
-	env["PROBOD_COMMON_PATTERN_ENRICHMENT_AGENT_TIMEOUT"] = "50"
-	env["PROBOD_COMMON_PATTERN_ENRICHMENT_AGENT_MAX_TURNS"] = "5"
+	env["TRUSTREADYD_TRACKER_MAPPING_INTERVAL"] = "20"
+	env["TRUSTREADYD_TRACKER_MAPPING_MAX_CONCURRENCY"] = "5"
+	env["TRUSTREADYD_TRACKER_MAPPING_STALE_AFTER"] = "1200"
+	env["TRUSTREADYD_TRACKER_MAPPING_AGENT_TIMEOUT"] = "30"
+	env["TRUSTREADYD_TRACKER_MAPPING_AGENT_MAX_TURNS"] = "6"
+	env["TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_INTERVAL"] = "15"
+	env["TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_MAX_CONCURRENCY"] = "4"
+	env["TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_STALE_AFTER"] = "900"
+	env["TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_AGENT_TIMEOUT"] = "50"
+	env["TRUSTREADYD_COMMON_PATTERN_ENRICHMENT_AGENT_MAX_TURNS"] = "5"
 	// Common third party enrichment agent + worker tuning override
-	env["PROBOD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_PROVIDER"] = "openai"
-	env["PROBOD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MODEL_NAME"] = "gpt-4o"
-	env["PROBOD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MAX_TOKENS"] = "16384"
-	env["PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_INTERVAL"] = "25"
-	env["PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_CONCURRENCY"] = "2"
-	env["PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_STALE_AFTER"] = "1200"
-	env["PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_TIMEOUT"] = "120"
-	env["PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_MAX_TURNS"] = "8"
-	env["PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_CONFIDENCE_THRESHOLD"] = "0.85"
-	env["PROBOD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_ATTEMPTS"] = "5"
-	env["PROBOD_THIRD_PARTY_VETTING_INTERVAL"] = "15"
-	env["PROBOD_THIRD_PARTY_VETTING_STALE_AFTER"] = "1800"
-	env["PROBOD_THIRD_PARTY_VETTING_MAX_CONCURRENCY"] = "2"
+	env["TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_PROVIDER"] = "openai"
+	env["TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MODEL_NAME"] = "gpt-4o"
+	env["TRUSTREADYD_AGENT_COMMON_THIRD_PARTY_ENRICHMENT_MAX_TOKENS"] = "16384"
+	env["TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_INTERVAL"] = "25"
+	env["TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_CONCURRENCY"] = "2"
+	env["TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_STALE_AFTER"] = "1200"
+	env["TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_TIMEOUT"] = "120"
+	env["TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_AGENT_MAX_TURNS"] = "8"
+	env["TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_CONFIDENCE_THRESHOLD"] = "0.85"
+	env["TRUSTREADYD_COMMON_THIRD_PARTY_ENRICHMENT_MAX_ATTEMPTS"] = "5"
+	env["TRUSTREADYD_THIRD_PARTY_VETTING_INTERVAL"] = "15"
+	env["TRUSTREADYD_THIRD_PARTY_VETTING_STALE_AFTER"] = "1800"
+	env["TRUSTREADYD_THIRD_PARTY_VETTING_MAX_CONCURRENCY"] = "2"
 	// Custom domains
-	env["PROBOD_CUSTOM_DOMAINS_RESOLVER_ADDR"] = "1.1.1.1:53"
-	env["PROBOD_ACME_ACCOUNT_KEY"] = testECKeyPEM()
+	env["TRUSTREADYD_CUSTOM_DOMAINS_RESOLVER_ADDR"] = "1.1.1.1:53"
+	env["TRUSTREADYD_ACME_ACCOUNT_KEY"] = testECKeyPEM()
 	// SCIM bridge
-	env["PROBOD_SCIM_BRIDGE_SYNC_INTERVAL"] = "1800"
-	env["PROBOD_SCIM_BRIDGE_POLL_INTERVAL"] = "60"
+	env["TRUSTREADYD_SCIM_BRIDGE_SYNC_INTERVAL"] = "1800"
+	env["TRUSTREADYD_SCIM_BRIDGE_POLL_INTERVAL"] = "60"
 	// ESign
-	env["PROBOD_ESIGN_TSA_URL"] = "http://custom.tsa.example.com"
+	env["TRUSTREADYD_ESIGN_TSA_URL"] = "http://custom.tsa.example.com"
 	// Branding
-	env["PROBOD_BRANDING"] = "false"
+	env["TRUSTREADYD_BRANDING"] = "false"
 	// Cookie banner
-	env["PROBOD_COOKIE_BANNER_TCF_CMP_ID"] = "123"
+	env["TRUSTREADYD_COOKIE_BANNER_TCF_CMP_ID"] = "123"
 	// Slackbot
-	env["PROBOD_SLACKBOT_ENABLED"] = "true"
-	env["PROBOD_SLACKBOT_SIGNING_SECRET"] = "slackbot-signing-secret"
-	env["PROBOD_SLACKBOT_CLIENT_ID"] = "slackbot-client-id"
-	env["PROBOD_SLACKBOT_CLIENT_SECRET"] = "slackbot-client-secret"
-	env["PROBOD_SLACKBOT_REDIRECT_URI"] = "https://console.example.com/api/console/v1/slackbot/install/complete"
-	env["PROBOD_AGENT_SLACKBOT_PROVIDER"] = "openai"
-	env["PROBOD_AGENT_SLACKBOT_MODEL_NAME"] = "gpt-4o-mini"
-	env["PROBOD_AGENT_SLACKBOT_MAX_TOKENS"] = "2048"
+	env["TRUSTREADYD_SLACKBOT_ENABLED"] = "true"
+	env["TRUSTREADYD_SLACKBOT_SIGNING_SECRET"] = "slackbot-signing-secret"
+	env["TRUSTREADYD_SLACKBOT_CLIENT_ID"] = "slackbot-client-id"
+	env["TRUSTREADYD_SLACKBOT_CLIENT_SECRET"] = "slackbot-client-secret"
+	env["TRUSTREADYD_SLACKBOT_REDIRECT_URI"] = "https://console.example.com/api/console/v1/slackbot/install/complete"
+	env["TRUSTREADYD_AGENT_SLACKBOT_PROVIDER"] = "openai"
+	env["TRUSTREADYD_AGENT_SLACKBOT_MODEL_NAME"] = "gpt-4o-mini"
+	env["TRUSTREADYD_AGENT_SLACKBOT_MAX_TOKENS"] = "2048"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -617,7 +617,7 @@ func TestBuilder_Build_CustomValues(t *testing.T) {
 	assert.Equal(t, 43200, cfg.Probod.Auth.EmailConfirmationTokenValidity)
 	assert.Equal(t, ".example.com", cfg.Probod.Auth.Cookie.Domain)
 	assert.Equal(t, 48, cfg.Probod.Auth.Cookie.Duration)
-	assert.Equal(t, probodconfig.CookieSameSiteStrict, cfg.Probod.Auth.Cookie.SameSite)
+	assert.Equal(t, trustreadydconfig.CookieSameSiteStrict, cfg.Probod.Auth.Cookie.SameSite)
 	// SAML
 	assert.Equal(t, 120, cfg.Probod.Auth.SAML.DomainVerificationIntervalSeconds)
 	assert.Equal(t, "1.1.1.1:53", cfg.Probod.Auth.SAML.DomainVerificationResolverAddr)
@@ -625,7 +625,7 @@ func TestBuilder_Build_CustomValues(t *testing.T) {
 	assert.Equal(t, ":8080", cfg.Probod.CompliancePortal.HTTPAddr)
 	assert.Equal(t, ":8443", cfg.Probod.CompliancePortal.HTTPSAddr)
 	assert.Equal(t, "probopage.example.com", cfg.Probod.CompliancePortal.BaseDomain)
-	assert.Equal(t, probodconfig.CompliancePortalTLSModeExternal, cfg.Probod.CompliancePortal.TLSMode)
+	assert.Equal(t, trustreadydconfig.CompliancePortalTLSModeExternal, cfg.Probod.CompliancePortal.TLSMode)
 	assert.Equal(t, []string{"10.0.1.1", "10.0.1.2"}, cfg.Probod.CompliancePortal.ProxyProtocol.TrustedProxies)
 	// AWS
 	assert.Equal(t, "eu-west-1", cfg.Probod.AWS.Region)
@@ -732,8 +732,8 @@ func TestBuilder_Build_CustomValues(t *testing.T) {
 
 func TestBuilder_Build_GoogleWorkspaceConnector(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_ID"] = "gw-client-id"
-	env["PROBOD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_SECRET"] = "gw-client-secret"
+	env["TRUSTREADYD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_ID"] = "gw-client-id"
+	env["TRUSTREADYD_CONNECTOR_GOOGLE_WORKSPACE_CLIENT_SECRET"] = "gw-client-secret"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -746,7 +746,7 @@ func TestBuilder_Build_GoogleWorkspaceConnector(t *testing.T) {
 	connector := cfg.Probod.Connectors[0]
 	assert.Equal(t, "GOOGLE_WORKSPACE", connector.Provider)
 	assert.Equal(t, "oauth2", string(connector.Protocol))
-	rawConfig := connector.RawConfig.(probodconfig.ConnectorConfigOAuth2)
+	rawConfig := connector.RawConfig.(trustreadydconfig.ConnectorConfigOAuth2)
 	assert.Equal(t, "gw-client-id", rawConfig.ClientID)
 	assert.Equal(t, "gw-client-secret", rawConfig.ClientSecret)
 }
@@ -755,11 +755,11 @@ func TestBuilder_Build_GitHubAppConnector(t *testing.T) {
 	t.Parallel()
 
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_GITHUB_APP_ID"] = "123456"
-	env["PROBOD_CONNECTOR_GITHUB_APP_CLIENT_ID"] = "Iv1.example"
-	env["PROBOD_CONNECTOR_GITHUB_APP_CLIENT_SECRET"] = "client-secret"
-	env["PROBOD_CONNECTOR_GITHUB_APP_SLUG"] = "probo"
-	env["PROBOD_CONNECTOR_GITHUB_APP_PRIVATE_KEY"] = "private-key"
+	env["TRUSTREADYD_CONNECTOR_GITHUB_APP_ID"] = "123456"
+	env["TRUSTREADYD_CONNECTOR_GITHUB_APP_CLIENT_ID"] = "Iv1.example"
+	env["TRUSTREADYD_CONNECTOR_GITHUB_APP_CLIENT_SECRET"] = "client-secret"
+	env["TRUSTREADYD_CONNECTOR_GITHUB_APP_SLUG"] = "probo"
+	env["TRUSTREADYD_CONNECTOR_GITHUB_APP_PRIVATE_KEY"] = "private-key"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -773,7 +773,7 @@ func TestBuilder_Build_GitHubAppConnector(t *testing.T) {
 	assert.Equal(t, "GITHUB", c.Provider)
 	assert.Equal(t, connector.ProtocolGitHubApp, c.Protocol)
 
-	raw := c.RawConfig.(probodconfig.ConnectorConfigGitHubApp)
+	raw := c.RawConfig.(trustreadydconfig.ConnectorConfigGitHubApp)
 	assert.Equal(t, "123456", raw.AppID)
 	assert.Equal(t, "Iv1.example", raw.ClientID)
 	assert.Equal(t, "client-secret", raw.ClientSecret)
@@ -783,8 +783,8 @@ func TestBuilder_Build_GitHubAppConnector(t *testing.T) {
 
 func TestBuilder_Build_Microsoft365Connector(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_MICROSOFT_365_CLIENT_ID"] = "ms365-client-id"
-	env["PROBOD_CONNECTOR_MICROSOFT_365_CLIENT_SECRET"] = "ms365-client-secret"
+	env["TRUSTREADYD_CONNECTOR_MICROSOFT_365_CLIENT_ID"] = "ms365-client-id"
+	env["TRUSTREADYD_CONNECTOR_MICROSOFT_365_CLIENT_SECRET"] = "ms365-client-secret"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -797,7 +797,7 @@ func TestBuilder_Build_Microsoft365Connector(t *testing.T) {
 	connector := cfg.Probod.Connectors[0]
 	assert.Equal(t, "MICROSOFT_365", connector.Provider)
 	assert.Equal(t, "oauth2", string(connector.Protocol))
-	rawConfig := connector.RawConfig.(probodconfig.ConnectorConfigOAuth2)
+	rawConfig := connector.RawConfig.(trustreadydconfig.ConnectorConfigOAuth2)
 	assert.Equal(t, "ms365-client-id", rawConfig.ClientID)
 	assert.Equal(t, "ms365-client-secret", rawConfig.ClientSecret)
 }
@@ -816,8 +816,8 @@ func TestBuilder_Build_AccessReviewConnectors(t *testing.T) {
 
 	env := requiredEnv()
 	for _, provider := range providers {
-		env["PROBOD_CONNECTOR_"+provider+"_CLIENT_ID"] = strings.ToLower(provider) + "-id"
-		env["PROBOD_CONNECTOR_"+provider+"_CLIENT_SECRET"] = strings.ToLower(provider) + "-secret"
+		env["TRUSTREADYD_CONNECTOR_"+provider+"_CLIENT_ID"] = strings.ToLower(provider) + "-id"
+		env["TRUSTREADYD_CONNECTOR_"+provider+"_CLIENT_SECRET"] = strings.ToLower(provider) + "-secret"
 	}
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
@@ -829,7 +829,7 @@ func TestBuilder_Build_AccessReviewConnectors(t *testing.T) {
 
 	require.Len(t, cfg.Probod.Connectors, len(providers))
 
-	byProvider := make(map[string]probodconfig.ConnectorConfig, len(cfg.Probod.Connectors))
+	byProvider := make(map[string]trustreadydconfig.ConnectorConfig, len(cfg.Probod.Connectors))
 	for _, c := range cfg.Probod.Connectors {
 		byProvider[c.Provider] = c
 	}
@@ -838,7 +838,7 @@ func TestBuilder_Build_AccessReviewConnectors(t *testing.T) {
 		c, ok := byProvider[provider]
 		require.True(t, ok, "missing %s connector", provider)
 		assert.Equal(t, "oauth2", string(c.Protocol))
-		raw := c.RawConfig.(probodconfig.ConnectorConfigOAuth2)
+		raw := c.RawConfig.(trustreadydconfig.ConnectorConfigOAuth2)
 		assert.NotEmpty(t, raw.ClientID, "%s client-id", provider)
 		assert.NotEmpty(t, raw.ClientSecret, "%s client-secret", provider)
 		assert.Empty(t, raw.IntegrationSlug, "%s should not carry integration-slug", provider)
@@ -847,9 +847,9 @@ func TestBuilder_Build_AccessReviewConnectors(t *testing.T) {
 
 func TestBuilder_Build_VercelConnector(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_VERCEL_CLIENT_ID"] = "vercel-id"
-	env["PROBOD_CONNECTOR_VERCEL_CLIENT_SECRET"] = "vercel-secret"
-	env["PROBOD_CONNECTOR_VERCEL_INTEGRATION_SLUG"] = "probo-app"
+	env["TRUSTREADYD_CONNECTOR_VERCEL_CLIENT_ID"] = "vercel-id"
+	env["TRUSTREADYD_CONNECTOR_VERCEL_CLIENT_SECRET"] = "vercel-secret"
+	env["TRUSTREADYD_CONNECTOR_VERCEL_INTEGRATION_SLUG"] = "probo-app"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -862,7 +862,7 @@ func TestBuilder_Build_VercelConnector(t *testing.T) {
 	c := cfg.Probod.Connectors[0]
 	assert.Equal(t, "VERCEL", c.Provider)
 	assert.Equal(t, "oauth2", string(c.Protocol))
-	raw := c.RawConfig.(probodconfig.ConnectorConfigOAuth2)
+	raw := c.RawConfig.(trustreadydconfig.ConnectorConfigOAuth2)
 	assert.Equal(t, "vercel-id", raw.ClientID)
 	assert.Equal(t, "vercel-secret", raw.ClientSecret)
 	assert.Equal(t, "probo-app", raw.IntegrationSlug)
@@ -870,9 +870,9 @@ func TestBuilder_Build_VercelConnector(t *testing.T) {
 
 func TestBuilder_Build_LinearWebhookSecret(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_LINEAR_SYNC_CLIENT_ID"] = "linear-sync-client-id"
-	env["PROBOD_CONNECTOR_LINEAR_SYNC_CLIENT_SECRET"] = "linear-sync-client-secret"
-	env["PROBOD_CONNECTOR_LINEAR_SYNC_WEBHOOK_SECRET"] = "linear-sync-webhook-secret"
+	env["TRUSTREADYD_CONNECTOR_LINEAR_SYNC_CLIENT_ID"] = "linear-sync-client-id"
+	env["TRUSTREADYD_CONNECTOR_LINEAR_SYNC_CLIENT_SECRET"] = "linear-sync-client-secret"
+	env["TRUSTREADYD_CONNECTOR_LINEAR_SYNC_WEBHOOK_SECRET"] = "linear-sync-webhook-secret"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -885,7 +885,7 @@ func TestBuilder_Build_LinearWebhookSecret(t *testing.T) {
 	c := cfg.Probod.Connectors[0]
 	assert.Equal(t, "LINEAR_SYNC", c.Provider)
 	assert.Equal(t, "oauth2", string(c.Protocol))
-	raw := c.RawConfig.(probodconfig.ConnectorConfigOAuth2)
+	raw := c.RawConfig.(trustreadydconfig.ConnectorConfigOAuth2)
 	assert.Equal(t, "linear-sync-client-id", raw.ClientID)
 	assert.Equal(t, "linear-sync-client-secret", raw.ClientSecret)
 	assert.Equal(t, "linear-sync-webhook-secret", cfg.Probod.GetLinearWebhookSecret())
@@ -893,9 +893,9 @@ func TestBuilder_Build_LinearWebhookSecret(t *testing.T) {
 
 func TestBuilder_Build_SlackConnector(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_SLACK_CLIENT_ID"] = "slack-client-id"
-	env["PROBOD_CONNECTOR_SLACK_CLIENT_SECRET"] = "slack-client-secret"
-	env["PROBOD_CONNECTOR_SLACK_SIGNING_SECRET"] = "slack-signing-secret"
+	env["TRUSTREADYD_CONNECTOR_SLACK_CLIENT_ID"] = "slack-client-id"
+	env["TRUSTREADYD_CONNECTOR_SLACK_CLIENT_SECRET"] = "slack-client-secret"
+	env["TRUSTREADYD_CONNECTOR_SLACK_SIGNING_SECRET"] = "slack-signing-secret"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -908,7 +908,7 @@ func TestBuilder_Build_SlackConnector(t *testing.T) {
 	connector := cfg.Probod.Connectors[0]
 	assert.Equal(t, "SLACK", connector.Provider)
 	assert.Equal(t, "oauth2", string(connector.Protocol))
-	rawConfig := connector.RawConfig.(probodconfig.ConnectorConfigOAuth2)
+	rawConfig := connector.RawConfig.(trustreadydconfig.ConnectorConfigOAuth2)
 	assert.Equal(t, "slack-client-id", rawConfig.ClientID)
 	assert.Equal(t, "slack-client-secret", rawConfig.ClientSecret)
 
@@ -918,8 +918,8 @@ func TestBuilder_Build_SlackConnector(t *testing.T) {
 
 func TestBuilder_Build_CrispConnector(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_CRISP_PLUGIN_TOKEN"] = "plugin-identifier:plugin-key"
-	env["PROBOD_CONNECTOR_CRISP_PLUGIN_ID"] = "e979a1c3-2c41-4e93-a8ed-410ace27318e"
+	env["TRUSTREADYD_CONNECTOR_CRISP_PLUGIN_TOKEN"] = "plugin-identifier:plugin-key"
+	env["TRUSTREADYD_CONNECTOR_CRISP_PLUGIN_ID"] = "e979a1c3-2c41-4e93-a8ed-410ace27318e"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -932,7 +932,7 @@ func TestBuilder_Build_CrispConnector(t *testing.T) {
 	connector := cfg.Probod.Connectors[0]
 	assert.Equal(t, "CRISP", connector.Provider)
 	assert.Equal(t, "api_key", string(connector.Protocol))
-	rawConfig := connector.RawConfig.(probodconfig.ConnectorConfigAPIKey)
+	rawConfig := connector.RawConfig.(trustreadydconfig.ConnectorConfigAPIKey)
 	assert.Equal(t, "plugin-identifier:plugin-key", rawConfig.APIKey)
 	assert.Equal(t, "e979a1c3-2c41-4e93-a8ed-410ace27318e", rawConfig.ResourceID)
 }
@@ -957,7 +957,7 @@ func TestBuilder_Build_CrispConnectorAbsentWithoutPluginID(t *testing.T) {
 	// the plugin ID to verify website ownership, so a half-configured Crisp
 	// connector stays hidden rather than activating in a broken state.
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_CRISP_PLUGIN_TOKEN"] = "plugin-identifier:plugin-key"
+	env["TRUSTREADYD_CONNECTOR_CRISP_PLUGIN_TOKEN"] = "plugin-identifier:plugin-key"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -986,8 +986,8 @@ func TestBuilder_Build_SAMLAutoGeneration(t *testing.T) {
 
 func TestBuilder_Build_SAMLFromEnv(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_SAML_CERTIFICATE"] = "env-cert"
-	env["PROBOD_SAML_PRIVATE_KEY"] = testOtherSigningKeyPEM()
+	env["TRUSTREADYD_SAML_CERTIFICATE"] = "env-cert"
+	env["TRUSTREADYD_SAML_PRIVATE_KEY"] = testOtherSigningKeyPEM()
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 
@@ -1032,13 +1032,13 @@ func TestBuilder_Build_OAuth2Defaults(t *testing.T) {
 
 func TestBuilder_Build_OAuth2FromEnv(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_OAUTH2_SERVER_SIGNING_KEY"] = testOtherSigningKeyPEM()
-	env["PROBOD_OAUTH2_SERVER_SIGNING_KEY_KID"] = "env-kid"
-	env["PROBOD_OAUTH2_SERVER_ACCESS_TOKEN_DURATION"] = "10"
-	env["PROBOD_OAUTH2_SERVER_REFRESH_TOKEN_DURATION"] = "20"
-	env["PROBOD_OAUTH2_SERVER_AUTHORIZATION_CODE_DURATION"] = "30"
-	env["PROBOD_OAUTH2_SERVER_DEVICE_CODE_DURATION"] = "40"
-	env["PROBOD_OAUTH2_SERVER_CIMD_ALLOWED_CLIENT_IDS"] = "https://chatgpt.com/oauth/client.json,https://claude.ai/oauth/client.json"
+	env["TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY"] = testOtherSigningKeyPEM()
+	env["TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY_KID"] = "env-kid"
+	env["TRUSTREADYD_OAUTH2_SERVER_ACCESS_TOKEN_DURATION"] = "10"
+	env["TRUSTREADYD_OAUTH2_SERVER_REFRESH_TOKEN_DURATION"] = "20"
+	env["TRUSTREADYD_OAUTH2_SERVER_AUTHORIZATION_CODE_DURATION"] = "30"
+	env["TRUSTREADYD_OAUTH2_SERVER_DEVICE_CODE_DURATION"] = "40"
+	env["TRUSTREADYD_OAUTH2_SERVER_CIMD_ALLOWED_CLIENT_IDS"] = "https://chatgpt.com/oauth/client.json,https://claude.ai/oauth/client.json"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 
@@ -1079,11 +1079,11 @@ func TestBuilder_Build_OAuth2Preset(t *testing.T) {
 	assert.Equal(t, testOtherSigningKeyPEM(), cfg.Probod.Auth.OAuth2Server.SigningKeys[0].PrivateKey.PEM())
 }
 
-// A key that cannot be decoded fails in probod-bootstrap, rather than at the
-// next start of probod.
+// A key that cannot be decoded fails in trustreadyd-bootstrap, rather than at the
+// next start of trustreadyd.
 func TestBuilder_Build_InvalidSigningKey(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_OAUTH2_SERVER_SIGNING_KEY"] = "not-a-pem-key"
+	env["TRUSTREADYD_OAUTH2_SERVER_SIGNING_KEY"] = "not-a-pem-key"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 
@@ -1111,11 +1111,11 @@ func TestBuilder_Build_IdentityFederationDisabledByDefault(t *testing.T) {
 
 func TestBuilder_Build_IdentityFederationInstallArtifactsFromEnv(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_IDENTITY_FEDERATION_CLOUDFORMATION_TEMPLATE_URL"] = "https://example.com/audit-role.yaml"
-	env["PROBOD_IDENTITY_FEDERATION_TERRAFORM_MODULE_SOURCE"] = "example/terraform-aws-audit-role"
-	env["PROBOD_IDENTITY_FEDERATION_GCP_TERRAFORM_MODULE_SOURCE"] = "example/terraform-gcp-audit-role"
-	env["PROBOD_IDENTITY_FEDERATION_AZURE_TERRAFORM_MODULE_SOURCE"] = "example/terraform-azurerm-audit-role"
-	env["PROBOD_IDENTITY_FEDERATION_AWS_ENDPOINT"] = "http://127.0.0.1:4566"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_CLOUDFORMATION_TEMPLATE_URL"] = "https://example.com/audit-role.yaml"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_TERRAFORM_MODULE_SOURCE"] = "example/terraform-aws-audit-role"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_GCP_TERRAFORM_MODULE_SOURCE"] = "example/terraform-gcp-audit-role"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_AZURE_TERRAFORM_MODULE_SOURCE"] = "example/terraform-azurerm-audit-role"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_AWS_ENDPOINT"] = "http://127.0.0.1:4566"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 
@@ -1131,8 +1131,8 @@ func TestBuilder_Build_IdentityFederationInstallArtifactsFromEnv(t *testing.T) {
 
 func TestBuilder_Build_IdentityFederationDisabledSkipsSigningKey(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_IDENTITY_FEDERATION_ENABLED"] = "false"
-	env["PROBOD_IDENTITY_FEDERATION_SIGNING_KEY"] = "unused-identity-federation-key"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_ENABLED"] = "false"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY"] = "unused-identity-federation-key"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 
@@ -1145,10 +1145,10 @@ func TestBuilder_Build_IdentityFederationDisabledSkipsSigningKey(t *testing.T) {
 
 func TestBuilder_Build_IdentityFederationEnabledFromEnv(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_IDENTITY_FEDERATION_ENABLED"] = "true"
-	env["PROBOD_IDENTITY_FEDERATION_ISSUER_BASE_URL"] = "https://proboidentity.com"
-	env["PROBOD_IDENTITY_FEDERATION_SIGNING_KEY"] = testSigningKeyPEM()
-	env["PROBOD_IDENTITY_FEDERATION_SIGNING_KEY_KID"] = "env-identity-federation-kid"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_ENABLED"] = "true"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_ISSUER_BASE_URL"] = "https://proboidentity.com"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY"] = testSigningKeyPEM()
+	env["TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY_KID"] = "env-identity-federation-kid"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 
@@ -1168,8 +1168,8 @@ func TestBuilder_Build_IdentityFederationEnabledFromEnv(t *testing.T) {
 
 func TestBuilder_Build_IdentityFederationEnabledDefaultsKID(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_IDENTITY_FEDERATION_ENABLED"] = "true"
-	env["PROBOD_IDENTITY_FEDERATION_SIGNING_KEY"] = testSigningKeyPEM()
+	env["TRUSTREADYD_IDENTITY_FEDERATION_ENABLED"] = "true"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY"] = testSigningKeyPEM()
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 
@@ -1182,14 +1182,14 @@ func TestBuilder_Build_IdentityFederationEnabledDefaultsKID(t *testing.T) {
 
 func TestBuilder_Build_IdentityFederationEnabledRequiresSigningKey(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_IDENTITY_FEDERATION_ENABLED"] = "true"
+	env["TRUSTREADYD_IDENTITY_FEDERATION_ENABLED"] = "true"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 
 	_, err := b.Build()
 
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "PROBOD_IDENTITY_FEDERATION_SIGNING_KEY")
+	assert.Contains(t, err.Error(), "TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY")
 }
 
 func TestBuilder_Build_IdentityFederationPreviousSigningKey(t *testing.T) {
@@ -1197,9 +1197,9 @@ func TestBuilder_Build_IdentityFederationPreviousSigningKey(t *testing.T) {
 
 	enabledEnv := func() map[string]string {
 		env := requiredEnv()
-		env["PROBOD_IDENTITY_FEDERATION_ENABLED"] = "true"
-		env["PROBOD_IDENTITY_FEDERATION_SIGNING_KEY"] = testSigningKeyPEM()
-		env["PROBOD_IDENTITY_FEDERATION_SIGNING_KEY_KID"] = "current"
+		env["TRUSTREADYD_IDENTITY_FEDERATION_ENABLED"] = "true"
+		env["TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY"] = testSigningKeyPEM()
+		env["TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY_KID"] = "current"
 
 		return env
 	}
@@ -1210,8 +1210,8 @@ func TestBuilder_Build_IdentityFederationPreviousSigningKey(t *testing.T) {
 			t.Parallel()
 
 			env := enabledEnv()
-			env["PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY"] = testOtherSigningKeyPEM()
-			env["PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID"] = "retired"
+			env["TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY"] = testOtherSigningKeyPEM()
+			env["TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID"] = "retired"
 
 			b := NewBuilder(NewResolver(mockEnv(env)))
 
@@ -1255,14 +1255,14 @@ func TestBuilder_Build_IdentityFederationPreviousSigningKey(t *testing.T) {
 			t.Parallel()
 
 			env := enabledEnv()
-			env["PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY"] = testOtherSigningKeyPEM()
+			env["TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY"] = testOtherSigningKeyPEM()
 
 			b := NewBuilder(NewResolver(mockEnv(env)))
 
 			_, err := b.Build()
 
 			require.Error(t, err)
-			assert.Contains(t, err.Error(), "PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID is required")
+			assert.Contains(t, err.Error(), "TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID is required")
 		},
 	)
 
@@ -1272,14 +1272,14 @@ func TestBuilder_Build_IdentityFederationPreviousSigningKey(t *testing.T) {
 			t.Parallel()
 
 			env := enabledEnv()
-			env["PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID"] = "retired"
+			env["TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID"] = "retired"
 
 			b := NewBuilder(NewResolver(mockEnv(env)))
 
 			_, err := b.Build()
 
 			require.Error(t, err)
-			assert.Contains(t, err.Error(), "PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY is required")
+			assert.Contains(t, err.Error(), "TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY is required")
 		},
 	)
 
@@ -1289,22 +1289,22 @@ func TestBuilder_Build_IdentityFederationPreviousSigningKey(t *testing.T) {
 			t.Parallel()
 
 			env := enabledEnv()
-			env["PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY"] = testOtherSigningKeyPEM()
-			env["PROBOD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID"] = "current"
+			env["TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY"] = testOtherSigningKeyPEM()
+			env["TRUSTREADYD_IDENTITY_FEDERATION_PREVIOUS_SIGNING_KEY_KID"] = "current"
 
 			b := NewBuilder(NewResolver(mockEnv(env)))
 
 			_, err := b.Build()
 
 			require.Error(t, err)
-			assert.Contains(t, err.Error(), "must differ from PROBOD_IDENTITY_FEDERATION_SIGNING_KEY_KID")
+			assert.Contains(t, err.Error(), "must differ from TRUSTREADYD_IDENTITY_FEDERATION_SIGNING_KEY_KID")
 		},
 	)
 }
 
 func TestBuilder_Build_PgCABundleFromEnv(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_PG_CA_BUNDLE"] = "test-ca-bundle-content"
+	env["TRUSTREADYD_PG_CA_BUNDLE"] = "test-ca-bundle-content"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -1323,7 +1323,7 @@ func TestBuilder_Build_PgCABundleFromFile(t *testing.T) {
 	require.NoError(t, err)
 
 	env := requiredEnv()
-	env["PROBOD_PG_CA_BUNDLE_PATH"] = caFile
+	env["TRUSTREADYD_PG_CA_BUNDLE_PATH"] = caFile
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -1337,7 +1337,7 @@ func TestBuilder_Build_PgCABundleFromFile(t *testing.T) {
 
 func TestBuilder_Build_AuthCookieSameSiteInvalid(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_AUTH_COOKIE_SAMESITE"] = "invalid"
+	env["TRUSTREADYD_AUTH_COOKIE_SAMESITE"] = "invalid"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -1345,13 +1345,13 @@ func TestBuilder_Build_AuthCookieSameSiteInvalid(t *testing.T) {
 
 	_, err := b.Build()
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "PROBOD_AUTH_COOKIE_SAMESITE")
+	assert.Contains(t, err.Error(), "TRUSTREADYD_AUTH_COOKIE_SAMESITE")
 }
 
 func TestBuilder_Build_AuthCookieSameSiteNoneRequiresSecure(t *testing.T) {
 	env := requiredEnv()
-	env["PROBOD_AUTH_COOKIE_SAMESITE"] = "none"
-	env["PROBOD_AUTH_COOKIE_SECURE"] = "false"
+	env["TRUSTREADYD_AUTH_COOKIE_SAMESITE"] = "none"
+	env["TRUSTREADYD_AUTH_COOKIE_SECURE"] = "false"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -1412,13 +1412,13 @@ func TestBuilder_Build_ConnectorEndpointOverrides(t *testing.T) {
 	t.Parallel()
 
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_DOCUSIGN_ENDPOINT_AUTH"] = "https://account-d.docusign.com/oauth/auth"
-	env["PROBOD_CONNECTOR_DOCUSIGN_ENDPOINT_TOKEN"] = "https://account-d.docusign.com/oauth/token"
-	env["PROBOD_CONNECTOR_DOCUSIGN_ENDPOINT_PROBE"] = "https://account-d.docusign.com/oauth/userinfo"
-	env["PROBOD_CONNECTOR_DOCUSIGN_ENDPOINT_IDENTITY"] = "https://account-d.docusign.com/oauth/userinfo"
-	env["PROBOD_CONNECTOR_SLACK_ENDPOINT_AUTH"] = "https://auth.slack.test/oauth/v2/authorize"
-	env["PROBOD_CONNECTOR_SLACK_ENDPOINT_TOKEN"] = "https://api.slack.test/oauth.v2.access"
-	env["PROBOD_CONNECTOR_SLACK_ENDPOINT_API_BASE"] = "https://api.slack.test"
+	env["TRUSTREADYD_CONNECTOR_DOCUSIGN_ENDPOINT_AUTH"] = "https://account-d.docusign.com/oauth/auth"
+	env["TRUSTREADYD_CONNECTOR_DOCUSIGN_ENDPOINT_TOKEN"] = "https://account-d.docusign.com/oauth/token"
+	env["TRUSTREADYD_CONNECTOR_DOCUSIGN_ENDPOINT_PROBE"] = "https://account-d.docusign.com/oauth/userinfo"
+	env["TRUSTREADYD_CONNECTOR_DOCUSIGN_ENDPOINT_IDENTITY"] = "https://account-d.docusign.com/oauth/userinfo"
+	env["TRUSTREADYD_CONNECTOR_SLACK_ENDPOINT_AUTH"] = "https://auth.slack.test/oauth/v2/authorize"
+	env["TRUSTREADYD_CONNECTOR_SLACK_ENDPOINT_TOKEN"] = "https://api.slack.test/oauth.v2.access"
+	env["TRUSTREADYD_CONNECTOR_SLACK_ENDPOINT_API_BASE"] = "https://api.slack.test"
 
 	b := NewBuilder(NewResolver(mockEnv(env)))
 	b.samlCertificate = "test-cert"
@@ -1465,13 +1465,13 @@ func TestBuilder_Build_NoConnectorEndpointOverrides(t *testing.T) {
 // TestBuilder_Build_ConnectorEndpointTypoUnknownProvider pins the fix for a
 // typo the operator would otherwise never see: getEnv resolves an unset key
 // to "" exactly like a typo'd one, so
-// PROBOD_CONNECTOR_GITHBU_ENDPOINT_API_BASE silently did nothing before this
+// TRUSTREADYD_CONNECTOR_GITHBU_ENDPOINT_API_BASE silently did nothing before this
 // scan existed, while the operator believed GitHub was repointed.
 func TestBuilder_Build_ConnectorEndpointTypoUnknownProvider(t *testing.T) {
 	t.Parallel()
 
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_GITHBU_ENDPOINT_API_BASE"] = "https://api.github.com"
+	env["TRUSTREADYD_CONNECTOR_GITHBU_ENDPOINT_API_BASE"] = "https://api.github.com"
 
 	resolver := NewResolver(mockEnv(env))
 	resolver.SetEnumerator(mockEnumerator(env))
@@ -1482,18 +1482,18 @@ func TestBuilder_Build_ConnectorEndpointTypoUnknownProvider(t *testing.T) {
 
 	_, err := b.Build()
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "PROBOD_CONNECTOR_GITHBU_ENDPOINT_API_BASE")
+	assert.Contains(t, err.Error(), "TRUSTREADYD_CONNECTOR_GITHBU_ENDPOINT_API_BASE")
 	assert.Contains(t, err.Error(), "GITHBU")
 }
 
 // TestBuilder_Build_ConnectorEndpointTypoUnknownField mirrors the provider-typo
 // case for a misspelled field segment: GITHUB is a real provider, but BASEURL
-// is not one of the five endpoint fields probod resolves.
+// is not one of the five endpoint fields trustreadyd resolves.
 func TestBuilder_Build_ConnectorEndpointTypoUnknownField(t *testing.T) {
 	t.Parallel()
 
 	env := requiredEnv()
-	env["PROBOD_CONNECTOR_GITHUB_ENDPOINT_BASEURL"] = "https://api.github.com"
+	env["TRUSTREADYD_CONNECTOR_GITHUB_ENDPOINT_BASEURL"] = "https://api.github.com"
 
 	resolver := NewResolver(mockEnv(env))
 	resolver.SetEnumerator(mockEnumerator(env))
@@ -1504,6 +1504,6 @@ func TestBuilder_Build_ConnectorEndpointTypoUnknownField(t *testing.T) {
 
 	_, err := b.Build()
 	require.Error(t, err)
-	assert.Contains(t, err.Error(), "PROBOD_CONNECTOR_GITHUB_ENDPOINT_BASEURL")
+	assert.Contains(t, err.Error(), "TRUSTREADYD_CONNECTOR_GITHUB_ENDPOINT_BASEURL")
 	assert.Contains(t, err.Error(), "BASEURL")
 }

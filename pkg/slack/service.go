@@ -30,7 +30,7 @@ type Service struct {
 	logger             *log.Logger
 	slackSigningSecret string
 	// slackAPIBaseURL is the SLACK provider registration's Endpoints.APIBase,
-	// threaded in by probod so a deployment that repoints the Slack connector
+	// threaded in by trustreadyd so a deployment that repoints the Slack connector
 	// moves these calls too. See NewClient.
 	slackAPIBaseURL string
 }

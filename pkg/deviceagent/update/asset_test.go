@@ -38,14 +38,14 @@ func TestLayoutFor(t *testing.T) {
 		guiBinary    string
 		isZip        bool
 	}{
-		{"linux", "amd64", "probo-agent_Linux_x86_64.tar.gz", "probo-agent_Linux_x86_64", "probo-agent", "", false},
-		{"linux", "arm64", "probo-agent_Linux_arm64.tar.gz", "probo-agent_Linux_arm64", "probo-agent", "", false},
-		{"darwin", "amd64", "probo-agent_Darwin_x86_64.tar.gz", "probo-agent_Darwin_x86_64", "probo-agent", "", false},
-		{"darwin", "arm64", "probo-agent_Darwin_arm64.tar.gz", "probo-agent_Darwin_arm64", "probo-agent", "", false},
-		{"windows", "amd64", "probo-agent_Windows_x86_64.zip", "probo-agent_Windows_x86_64", "probo-agent.exe", "probo-agentw.exe", true},
-		{"windows", "arm64", "probo-agent_Windows_arm64.zip", "probo-agent_Windows_arm64", "probo-agent.exe", "probo-agentw.exe", true},
-		{"freebsd", "amd64", "probo-agent_Freebsd_x86_64.tar.gz", "probo-agent_Freebsd_x86_64", "probo-agent", "", false},
-		{"freebsd", "arm64", "probo-agent_Freebsd_arm64.tar.gz", "probo-agent_Freebsd_arm64", "probo-agent", "", false},
+		{"linux", "amd64", "trustready-agent_Linux_x86_64.tar.gz", "trustready-agent_Linux_x86_64", "trustready-agent", "", false},
+		{"linux", "arm64", "trustready-agent_Linux_arm64.tar.gz", "trustready-agent_Linux_arm64", "trustready-agent", "", false},
+		{"darwin", "amd64", "trustready-agent_Darwin_x86_64.tar.gz", "trustready-agent_Darwin_x86_64", "trustready-agent", "", false},
+		{"darwin", "arm64", "trustready-agent_Darwin_arm64.tar.gz", "trustready-agent_Darwin_arm64", "trustready-agent", "", false},
+		{"windows", "amd64", "trustready-agent_Windows_x86_64.zip", "trustready-agent_Windows_x86_64", "trustready-agent.exe", "trustready-agentw.exe", true},
+		{"windows", "arm64", "trustready-agent_Windows_arm64.zip", "trustready-agent_Windows_arm64", "trustready-agent.exe", "trustready-agentw.exe", true},
+		{"freebsd", "amd64", "trustready-agent_Freebsd_x86_64.tar.gz", "trustready-agent_Freebsd_x86_64", "trustready-agent", "", false},
+		{"freebsd", "arm64", "trustready-agent_Freebsd_arm64.tar.gz", "trustready-agent_Freebsd_arm64", "trustready-agent", "", false},
 	}
 
 	for _, tc := range cases {

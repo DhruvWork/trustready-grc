@@ -1,9 +1,9 @@
-# Set up Azure Trusted Signing for `probo-agent`
+# Set up Azure Trusted Signing for `trustready-agent`
 
 This guide walks through everything needed before the first
 Authenticode-signed Windows release. The release workflow
-(`.github/workflows/release-probo-agent.yaml`) builds on `windows-latest`,
-signs `probo-agent.exe`, `probo-agentw.exe`, and the MSI with
+(`.github/workflows/release-trustready-agent.yaml`) builds on `windows-latest`,
+signs `trustready-agent.exe`, `trustready-agentw.exe`, and the MSI with
 **Azure Artifact Signing** (formerly Trusted Signing). Then it
 publishes the zip and MSI files.
 
@@ -27,7 +27,7 @@ pages still say **Trusted Signing**. Same service (`Microsoft.CodeSigning`).
 | Certificate profile (`PublicTrust`) | Profile the CI job signs with |
 | Entra app registration + service principal | Identity GitHub Actions assumes via OIDC |
 | Federated credential → GitHub Environment | No client secret; tag-triggered releases can sign |
-| GitHub Environment `probo-agent-release` | Scopes OIDC (tag wildcards are not supported) |
+| GitHub Environment `trustready-agent-release` | Scopes OIDC (tag wildcards are not supported) |
 | GitHub secrets + variables | Wired into `build-windows` |
 
 Suggested concrete names (adjust if they collide globally):
@@ -36,10 +36,10 @@ Suggested concrete names (adjust if they collide globally):
 |------|-----------------|
 | Resource group | `rg-probo-codesigning` |
 | Artifact Signing account | `probo-codesigning` (3–24 chars, globally unique) |
-| Certificate profile | `probo-agent` |
+| Certificate profile | `trustready-agent` |
 | Region / endpoint | e.g. East US → `https://eus.codesigning.azure.net/` |
-| Entra app | `github-probo-agent-codesign` |
-| GitHub Environment | `probo-agent-release` (must match the workflow) |
+| Entra app | `github-trustready-agent-codesign` |
+| GitHub Environment | `trustready-agent-release` (must match the workflow) |
 
 Region → endpoint map (pick the region of the account):
 
@@ -154,7 +154,7 @@ Tips:
 
 1. Artifact Signing account → **Certificate profiles** → **Create**.
 2. Type: **Public Trust** (not Private Trust; Private is for internal-only).
-3. Profile name (e.g. `probo-agent`) → GitHub variable
+3. Profile name (e.g. `trustready-agent`) → GitHub variable
    `AZURE_TRUSTED_SIGNING_PROFILE`.
 4. Select the **Completed** organization identity for CN/O.
 5. Leave street / postal off unless you intentionally want them on the
@@ -173,7 +173,7 @@ Prefer **federated credentials** (no long-lived client secret).
 
 1. Azure Portal → **Microsoft Entra ID** → **App registrations** →
    **New registration**.
-2. Name: e.g. `github-probo-agent-codesign`.
+2. Name: e.g. `github-trustready-agent-codesign`.
 3. Supported account types: **Single tenant**.
 4. Redirect URI: leave empty.
 5. **Register**.
@@ -183,9 +183,9 @@ Prefer **federated credentials** (no long-lived client secret).
 
 ### 6.2 Federated credential (GitHub Environment)
 
-Tag name wildcards (`probo-agent/v*`) are **not** supported in Entra
+Tag name wildcards (`trustready-agent/v*`) are **not** supported in Entra
 federated credentials. The release workflow therefore uses the GitHub
-Environment `probo-agent-release`.
+Environment `trustready-agent-release`.
 
 1. On the app → **Certificates & secrets** → **Federated credentials** →
    **Add credential**.
@@ -193,14 +193,14 @@ Environment `probo-agent-release`.
 3. Organization: `getprobo`
 4. Repository: `probo`
 5. Entity type: **Environment**
-6. Environment name: `probo-agent-release` (exact match)
-7. Name the credential (e.g. `github-probo-agent-release`)
+6. Environment name: `trustready-agent-release` (exact match)
+7. Name the credential (e.g. `github-trustready-agent-release`)
 8. Audience: leave default (`api://AzureADTokenExchange`)
 
 Expected subject (for debugging):
 
 ```text
-repo:getprobo/probo:environment:probo-agent-release
+repo:getprobo/probo:environment:trustready-agent-release
 ```
 
 ### 6.3 Grant signing permission
@@ -221,12 +221,12 @@ on humans only.
 ### 7.1 Environment
 
 1. GitHub repo **Settings** → **Environments** → **New environment**.
-2. Name: `probo-agent-release`.
+2. Name: `trustready-agent-release`.
 3. Optional but recommended: required reviewers, and restrict to tags
-   matching `probo-agent/v*` if your plan supports deployment branch/tag
+   matching `trustready-agent/v*` if your plan supports deployment branch/tag
    policies.
 
-The `build-windows` job already sets `environment: probo-agent-release`.
+The `build-windows` job already sets `environment: trustready-agent-release`.
 
 ### 7.2 Secrets
 
@@ -247,7 +247,7 @@ Same page → **Variables**:
 |----------|---------|
 | `AZURE_TRUSTED_SIGNING_ENDPOINT` | `https://eus.codesigning.azure.net/` |
 | `AZURE_TRUSTED_SIGNING_ACCOUNT` | `probo-codesigning` |
-| `AZURE_TRUSTED_SIGNING_PROFILE` | `probo-agent` |
+| `AZURE_TRUSTED_SIGNING_PROFILE` | `trustready-agent` |
 
 Endpoint **must** match the account’s region.
 
@@ -255,11 +255,11 @@ Endpoint **must** match the account’s region.
 
 1. Confirm identity validation status is **Completed** and the Public
    Trust profile exists.
-2. Push a prerelease tag, e.g. `probo-agent/v0.0.0-rc.1`
+2. Push a prerelease tag, e.g. `trustready-agent/v0.0.0-rc.1`
    (after the usual version/changelog process, or a disposable test tag
    on a branch that contains the workflow). The tag must be
-   `probo-agent/vX.Y.Z-rc.N`.
-3. Watch **Release probo-agent** → **windows (amd64)** / **windows (arm64)**:
+   `trustready-agent/vX.Y.Z-rc.N`.
+3. Watch **Release trustready-agent** → **windows (amd64)** / **windows (arm64)**:
    - Azure login succeeds (OIDC)
    - Executable signing succeeds
    - WiX MSI build succeeds
@@ -281,7 +281,7 @@ Endpoint **must** match the account’s region.
 ## 9. What this does *not* cover
 
 - Local unsigned MSI layout testing (see
-  [probo-agent.md](./probo-agent.md) — WiX `build.ps1` without Azure).
+  [trustready-agent.md](./trustready-agent.md) — WiX `build.ps1` without Azure).
 - Buying a traditional DigiCert/Sectigo EV PFX (out of scope; CI uses
   Artifact Signing only).
 - MSI-based auto-update (zip remains the update channel).
@@ -293,9 +293,9 @@ Endpoint **must** match the account’s region.
 - [ ] Identity Verifier role on the human operator
 - [ ] Organization Public identity validation **Completed**
 - [ ] Public Trust certificate profile created
-- [ ] Entra app + federated credential for Environment `probo-agent-release`
+- [ ] Entra app + federated credential for Environment `trustready-agent-release`
 - [ ] Certificate Profile Signer role on the Entra app
-- [ ] GitHub Environment `probo-agent-release` exists
+- [ ] GitHub Environment `trustready-agent-release` exists
 - [ ] Secrets `AZURE_CLIENT_ID` / `AZURE_TENANT_ID` / `AZURE_SUBSCRIPTION_ID`
 - [ ] Vars `AZURE_TRUSTED_SIGNING_ENDPOINT` / `_ACCOUNT` / `_PROFILE`
 - [ ] Prerelease tag signed successfully for both Windows arches

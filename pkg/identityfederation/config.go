@@ -31,7 +31,7 @@ import (
 )
 
 const (
-	// PathPrefix is where probod serves the route tree in every deployment. The
+	// PathPrefix is where trustreadyd serves the route tree in every deployment. The
 	// SaaS edge maps its public apex onto it, so only the advertised issuer
 	// differs and it comes from configuration.
 	PathPrefix = "/federation"
@@ -89,7 +89,7 @@ func ResolveIssuerBaseURL(
 // cloud providers, so callers can surface a deployment that will never federate.
 // Loopback returns nil: it is never registered.
 //
-// The caller decides the severity. probod only warns, because a derived base is
+// The caller decides the severity. trustreadyd only warns, because a derived base is
 // deliberately exempt from the provider rules so that localhost and CI start.
 // Without it, an unusable issuer would surface only when a customer installs the
 // connector, long after it is pinned in their cloud resources.
@@ -153,7 +153,7 @@ func ValidateIssuerBaseURL(issuerBaseURL, appBaseURL *baseurl.BaseURL) error {
 		)
 	}
 
-	// probod matches on path only, so an issuer on the application host is
+	// trustreadyd matches on path only, so an issuer on the application host is
 	// reachable at exactly one path. Any other path serves the console SPA's
 	// HTML, and a root path serves the OAuth2 server's discovery document with
 	// the wrong issuer and key set. Another host is unconstrained: it arrives
@@ -180,7 +180,7 @@ func ValidateIssuerBaseURL(issuerBaseURL, appBaseURL *baseurl.BaseURL) error {
 	return nil
 }
 
-// servedIssuerPath returns the only path on the application host where probod
+// servedIssuerPath returns the only path on the application host where trustreadyd
 // serves the route tree. Derived like the default issuer base, so an application
 // base URL that already carries a path keeps working.
 func servedIssuerPath(appBaseURL *baseurl.BaseURL) (string, error) {

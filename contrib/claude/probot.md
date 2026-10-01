@@ -90,7 +90,7 @@ for the agreed retention window:
 
 ## Reliability workers
 
-`probod` starts exactly one provider-neutral `agent-execution-worker`. It
+`trustreadyd` starts exactly one provider-neutral `agent-execution-worker`. It
 schedules conversational executions from `agent_executions`/`agent_inputs`,
 using the agent-profile and execution-adapter registries. GraphQL exposes
 executions for observability and approval only; it does not create one-shot

@@ -95,13 +95,13 @@ Signed-off-by: John Doe <john.doe@example.org>
    make dev-config
    ```
 
-   The target stashes two dev-only RSA signing keys so tokens survive probod restarts: `cfg/.dev-oauth2-signing-key.pem` for the OAuth2 authorization server and `cfg/.dev-identity-federation-signing-key.pem` for the identity federation issuer, which signs with its own key so rotating the OAuth2 key cannot break cloud access. It also sources `.env` if present so you can override defaults without editing the Makefile. `cfg/dev.yaml`, `.env`, and both signing keys are all gitignored. Re-run the target to regenerate.
+   The target stashes two dev-only RSA signing keys so tokens survive trustreadyd restarts: `cfg/.dev-oauth2-signing-key.pem` for the OAuth2 authorization server and `cfg/.dev-identity-federation-signing-key.pem` for the identity federation issuer, which signs with its own key so rotating the OAuth2 key cannot break cloud access. It also sources `.env` if present so you can override defaults without editing the Makefile. `cfg/dev.yaml`, `.env`, and both signing keys are all gitignored. Re-run the target to regenerate.
 
 7. Start the development servers:
 
    ```bash
    # In one terminal - start the API server
-   bin/probod -cfg-file cfg/dev.yaml
+   bin/trustreadyd -cfg-file cfg/dev.yaml
 
    # In another terminal - start the frontend
    npm -w @trustready/console run dev

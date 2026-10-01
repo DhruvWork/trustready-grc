@@ -1,6 +1,6 @@
-# Release `probod` (server group)
+# Release `trustreadyd` (server group)
 
-This track ships `probod`, `@trustready/console`, `@trustready/compliance-portal`,
+This track ships `trustreadyd`, `@trustready/console`, `@trustready/compliance-portal`,
 `@trustready/employee-portal`, and `@trustready/ui` together as the Docker image and
 accompanying binary archive. They share the same version.
 
@@ -9,26 +9,26 @@ After confirming commits below, follow the
 
 ## Track facts
 
-- **Tag pattern**: `probod/v*`
-- **Version source**: `cmd/probod/VERSION` (single `X.Y.Z` line)
-- **Version bump**: Edit `cmd/probod/VERSION` directly
-- **Changelog**: `cmd/probod/CHANGELOG.md` (covers every bundled component)
-- **Files to stage**: `cmd/probod/VERSION`, `cmd/probod/CHANGELOG.md`
-- **Workflow**: `.github/workflows/release-probod.yaml`
-- **Path filter**: `cmd/probod apps/console apps/compliance-portal apps/employee-portal packages/ui pkg`
+- **Tag pattern**: `trustreadyd/v*`
+- **Version source**: `cmd/trustreadyd/VERSION` (single `X.Y.Z` line)
+- **Version bump**: Edit `cmd/trustreadyd/VERSION` directly
+- **Changelog**: `cmd/trustreadyd/CHANGELOG.md` (covers every bundled component)
+- **Files to stage**: `cmd/trustreadyd/VERSION`, `cmd/trustreadyd/CHANGELOG.md`
+- **Workflow**: `.github/workflows/release-trustreadyd.yaml`
+- **Path filter**: `cmd/trustreadyd apps/console apps/compliance-portal apps/employee-portal packages/ui pkg`
 
 ## Detect commits
 
 ```shell
-git log $(git describe --tags --abbrev=0 --match='probod/v*')..HEAD --oneline \
-  -- cmd/probod apps/console apps/compliance-portal apps/employee-portal packages/ui pkg
+git log $(git describe --tags --abbrev=0 --match='trustreadyd/v*')..HEAD --oneline \
+  -- cmd/trustreadyd apps/console apps/compliance-portal apps/employee-portal packages/ui pkg
 ```
 
 If empty or non-user-facing only, do not release this track.
 
 ## Notes
 
-The changelog covers changes across every bundled component (`probod`,
+The changelog covers changes across every bundled component (`trustreadyd`,
 `@trustready/console`, `@trustready/compliance-portal`, `@trustready/employee-portal`,
 `@trustready/ui`).
 

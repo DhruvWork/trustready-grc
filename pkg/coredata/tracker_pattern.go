@@ -1469,7 +1469,7 @@ WHERE
 
 // ResetAndRequestMappingByCookieCategoryID detaches every pattern in the
 // given category from its catalog row and copied description, then
-// re-arms mapping. Operators run this (via proboctl) on a banner's
+// re-arms mapping. Operators run this (via trustreadyctl) on a banner's
 // uncategorised category to force a clean re-map when iterating on the
 // mapping agent. Excluded patterns are left untouched - exclusion is a
 // deliberate suppression. The cookie_category_id key scopes the reset to

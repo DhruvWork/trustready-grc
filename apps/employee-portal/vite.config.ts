@@ -167,12 +167,12 @@ function bucketIsVirtualHostable(bucket: string, https: boolean): boolean {
 }
 
 // Origin after private /api/files/v1/{id} 307s — mirrors
-// pkg/awsconfig.CSPFileStorageOrigin from PROBOD_AWS_*.
+// pkg/awsconfig.CSPFileStorageOrigin from TRUSTREADYD_AWS_*.
 function fileStorageOriginFromEnv(env: Record<string, string>): string {
-  const endpoint = env.PROBOD_AWS_ENDPOINT?.trim() ?? "";
-  const region = env.PROBOD_AWS_REGION?.trim() || defaultAWSRegion;
-  const bucket = env.PROBOD_AWS_BUCKET?.trim() ?? "";
-  const usePathStyle = envBool(env.PROBOD_AWS_USE_PATH_STYLE, false);
+  const endpoint = env.TRUSTREADYD_AWS_ENDPOINT?.trim() ?? "";
+  const region = env.TRUSTREADYD_AWS_REGION?.trim() || defaultAWSRegion;
+  const bucket = env.TRUSTREADYD_AWS_BUCKET?.trim() ?? "";
+  const usePathStyle = envBool(env.TRUSTREADYD_AWS_USE_PATH_STYLE, false);
 
   if (!bucket) {
     return "";

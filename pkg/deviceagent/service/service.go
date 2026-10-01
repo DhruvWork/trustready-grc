@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// Package service installs and uninstalls OS service units for probo-agent.
+// Package service installs and uninstalls OS service units for trustready-agent.
 package service
 
 // Config carries installation parameters shared across platforms.
@@ -34,6 +34,6 @@ type Config struct {
 // Default service identifiers by platform.
 const (
 	DefaultLabel       = "com.probo.agent"
-	DefaultUnixName    = "probo-agent"
+	DefaultUnixName    = "trustready-agent"
 	DefaultWindowsName = "ProboAgent"
 )

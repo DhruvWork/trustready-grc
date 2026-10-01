@@ -192,11 +192,11 @@ The following parameters **must** be configured:
 | `probo.oauth2.signingKey` | OAuth2 signing key (PEM private key) | `""` (required) |
 | `postgresql.host`      | PostgreSQL host                 | `""` (required) |
 | `postgresql.port`      | PostgreSQL port                 | `5432` |
-| `postgresql.database`  | Database name                   | `probod` |
-| `postgresql.username`  | Database user                   | `probod` |
+| `postgresql.database`  | Database name                   | `trustreadyd` |
+| `postgresql.username`  | Database user                   | `trustreadyd` |
 | `postgresql.caBundle`  | PostgreSQL TLS CA certificate bundle (inline) | `""` |
 | `postgresql.caBundlePath` | PostgreSQL TLS CA certificate bundle (file path) | `""` |
-| `s3.bucket`            | S3 bucket name                  | `probod` |
+| `s3.bucket`            | S3 bucket name                  | `trustreadyd` |
 | `s3.region`            | AWS region                      | `us-east-1` |
 | `s3.endpoint`          | S3 endpoint (for S3-compatible) | `""` |
 | `s3.usePathStyle`      | Use path-style URLs for selected S3-compatible backends | `false` |
@@ -229,8 +229,8 @@ For managed PostgreSQL providers (notably PostgreSQL >= 15), ensure the
 Probo role can own and modify the `public` schema before first startup:
 
 ```sql
-ALTER SCHEMA public OWNER TO probod;
-GRANT ALL ON SCHEMA public TO probod;
+ALTER SCHEMA public OWNER TO trustreadyd;
+GRANT ALL ON SCHEMA public TO trustreadyd;
 ```
 
 Probo migrations also require these extensions to be installable:

@@ -321,7 +321,7 @@ func TestDeleteIfUnreferenced_RefusesOnceEnriched(t *testing.T) {
 // load-then-upsert caller can and cannot rely on. The write itself must land
 // on the loaded row and preserve created_at; the inserted flag must not be
 // trusted, because the receiver already carries that row's id and the
-// comparison behind the flag cannot tell the branches apart. proboctl's
+// comparison behind the flag cannot tell the branches apart. trustreadyctl's
 // upsert therefore reports from its own LoadBySlug result rather than from
 // this return value.
 func TestCommonThirdPartyUpsert_LoadedReceiverKeepsItsRow(t *testing.T) {

@@ -242,13 +242,13 @@ prb auth login --hostname <host>
 
 Existing tokens may be backfilled by migration; fresh logins need the client row and `CLIClientScopes` updated.
 
-### Local development against probod
+### Local development against trustreadyd
 
 ```sh
 make stack-up
 make build
 make dev-config
-bin/probod -cfg-file cfg/dev.yaml   # API + OAuth at http://localhost:8080
+bin/trustreadyd -cfg-file cfg/dev.yaml   # API + OAuth at http://localhost:8080
 
 bin/prb auth login --hostname http://localhost:8080
 ```

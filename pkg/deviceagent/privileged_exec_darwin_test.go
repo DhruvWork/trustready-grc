@@ -34,17 +34,17 @@ import (
 func TestDefaultExecutablePath(t *testing.T) {
 	t.Parallel()
 
-	assert.Equal(t, "/Library/Probo/probo-agent", DefaultExecutablePath())
-	assert.Equal(t, "/usr/local/bin/probo-agent", LegacyExecutablePath())
+	assert.Equal(t, "/Library/Probo/trustready-agent", DefaultExecutablePath())
+	assert.Equal(t, "/usr/local/bin/trustready-agent", LegacyExecutablePath())
 }
 
 func TestIsCanonicalExecutable(t *testing.T) {
 	t.Parallel()
 
-	assert.True(t, IsCanonicalExecutable("/Library/Probo/probo-agent"))
-	assert.True(t, IsCanonicalExecutable("/Library/Probo/../Probo/probo-agent"))
-	assert.False(t, IsCanonicalExecutable("/usr/local/bin/probo-agent"))
-	assert.False(t, IsCanonicalExecutable("/tmp/probo-agent"))
+	assert.True(t, IsCanonicalExecutable("/Library/Probo/trustready-agent"))
+	assert.True(t, IsCanonicalExecutable("/Library/Probo/../Probo/trustready-agent"))
+	assert.False(t, IsCanonicalExecutable("/usr/local/bin/trustready-agent"))
+	assert.False(t, IsCanonicalExecutable("/tmp/trustready-agent"))
 }
 
 func TestShouldMigrateExecutable(t *testing.T) {
@@ -58,36 +58,36 @@ func TestShouldMigrateExecutable(t *testing.T) {
 	}{
 		{
 			name: "already canonical",
-			exe:  "/Library/Probo/probo-agent",
+			exe:  "/Library/Probo/trustready-agent",
 			want: false,
 		},
 		{
 			name: "legacy path",
-			exe:  "/usr/local/bin/probo-agent",
+			exe:  "/usr/local/bin/trustready-agent",
 			want: true,
 		},
 		{
 			name:         "legacy path after plist retarget",
-			exe:          "/usr/local/bin/probo-agent",
-			plistProgram: "/Library/Probo/probo-agent",
+			exe:          "/usr/local/bin/trustready-agent",
+			plistProgram: "/Library/Probo/trustready-agent",
 			want:         false,
 		},
 		{
 			name:         "matches existing plist",
-			exe:          "/tmp/probo-agent",
-			plistProgram: "/tmp/probo-agent",
+			exe:          "/tmp/trustready-agent",
+			plistProgram: "/tmp/trustready-agent",
 			want:         true,
 		},
 		{
 			name:         "unrelated path with no plist",
-			exe:          "/tmp/probo-agent",
+			exe:          "/tmp/trustready-agent",
 			plistProgram: "",
 			want:         false,
 		},
 		{
 			name:         "unrelated path with other plist",
 			exe:          "/tmp/other",
-			plistProgram: "/Library/Probo/probo-agent",
+			plistProgram: "/Library/Probo/trustready-agent",
 			want:         false,
 		},
 	}
@@ -109,7 +109,7 @@ func TestValidatePrivilegedNode_RejectsSymlink(t *testing.T) {
 
 	dir := t.TempDir()
 	target := filepath.Join(dir, "target")
-	link := filepath.Join(dir, "probo-agent")
+	link := filepath.Join(dir, "trustready-agent")
 
 	require.NoError(t, os.WriteFile(target, []byte("x"), 0o755))
 	require.NoError(t, os.Symlink(target, link))
@@ -125,7 +125,7 @@ func TestEnsurePrivilegedExecutable_CopiesAndLocks(t *testing.T) {
 	root := t.TempDir()
 	src := filepath.Join(t.TempDir(), "src")
 	dstDir := filepath.Join(root, "Probo")
-	dst := filepath.Join(dstDir, "probo-agent")
+	dst := filepath.Join(dstDir, "trustready-agent")
 
 	require.NoError(t, os.WriteFile(src, []byte("agent"), 0o700))
 
@@ -155,7 +155,7 @@ func TestEnsurePrivilegedExecutable_RefusesSymlinkDir(t *testing.T) {
 	src := filepath.Join(t.TempDir(), "src")
 	realDir := filepath.Join(root, "real")
 	dstDir := filepath.Join(root, "Probo")
-	dst := filepath.Join(dstDir, "probo-agent")
+	dst := filepath.Join(dstDir, "trustready-agent")
 
 	require.NoError(t, os.WriteFile(src, []byte("agent"), 0o755))
 	require.NoError(t, os.Mkdir(realDir, 0o755))

@@ -43,7 +43,7 @@ type contentSecurityPolicyData struct {
 }
 
 // ContentSecurityPolicy returns the console CSP with AppOrigin and
-// FileStorageOrigin substituted (PROBOD_BASE_URL origin and the object-storage
+// FileStorageOrigin substituted (TRUSTREADYD_BASE_URL origin and the object-storage
 // origin used after private-file redirects).
 func ContentSecurityPolicy(appOrigin string, fileStorageOrigin string) (string, error) {
 	origin, err := baseurl.CSPOrigin(appOrigin)

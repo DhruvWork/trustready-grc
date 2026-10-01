@@ -92,7 +92,7 @@ jobs:
 
   # ── Snapshot: Linux/amd64 (Docker) and FreeBSD/arm64 (staging) ──
   build-snapshot-binary:
-    name: "probod binary (${{ matrix.goos }}/${{ matrix.goarch }})"
+    name: "trustreadyd binary (${{ matrix.goos }}/${{ matrix.goarch }})"
     if: github.event_name == 'push'
     needs: [build-apps]
     runs-on: "runs-on=${{ github.run_id }}/runner=4cpu-linux-x64/extras=s3-cache"
@@ -132,10 +132,10 @@ jobs:
           if [ "$GOOS" = "windows" ]; then EXT=".exe"; fi
 
           go build -ldflags "-s -w -X 'main.version=snapshot' -X 'main.env=prod'" \
-            -gcflags="-e" -o "dist/probod${EXT}" ./cmd/probod/main.go
+            -gcflags="-e" -o "dist/trustreadyd${EXT}" ./cmd/trustreadyd/main.go
 
           go build -ldflags "-s -w" \
-            -gcflags="-e" -o "dist/probod-bootstrap${EXT}" ./cmd/probod-bootstrap/main.go
+            -gcflags="-e" -o "dist/trustreadyd-bootstrap${EXT}" ./cmd/trustreadyd-bootstrap/main.go
 
           go build -ldflags "-s -w -X 'main.version=snapshot'" \
             -gcflags="-e" -o "dist/prb${EXT}" ./cmd/prb/main.go
@@ -226,9 +226,9 @@ jobs:
           severity-cutoff: critical
           output-format: table
 
-  # ── Build probod group (PR + push validation) ────────────────────────
+  # ── Build trustreadyd group (PR + push validation) ────────────────────────
   build:
-    name: "build-probod"
+    name: "build-trustreadyd"
     if: needs.changes.outputs.e2e == 'true'
     needs: [changes]
     runs-on: "runs-on=${{ github.run_id }}/runner=8cpu-linux-x64/extras=s3-cache"
@@ -253,26 +253,26 @@ jobs:
           go generate ./pkg/server/api/mcp/v1
           go generate ./pkg/server/api/console/v1
           go generate ./pkg/server/api/complianceportal/v1
-      - name: "Build probod group binaries"
+      - name: "Build trustreadyd group binaries"
         env:
           CGO_ENABLED: "0"
         run: |
           pids=()
           go build -ldflags "-s -w -X 'main.version=snapshot' -X 'main.env=prod'" \
-            -gcflags="-e" -o bin/probod ./cmd/probod/main.go & pids+=($!)
+            -gcflags="-e" -o bin/trustreadyd ./cmd/trustreadyd/main.go & pids+=($!)
           go build -ldflags "-s -w" \
-            -gcflags="-e" -o bin/probod-bootstrap ./cmd/probod-bootstrap/main.go & pids+=($!)
+            -gcflags="-e" -o bin/trustreadyd-bootstrap ./cmd/trustreadyd-bootstrap/main.go & pids+=($!)
           go build -ldflags "-s -w -X 'main.version=snapshot'" \
             -gcflags="-e" -o bin/prb ./cmd/prb/main.go & pids+=($!)
           for pid in "${pids[@]}"; do wait "$pid"; done
       - uses: "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a" # v7
         with:
-          name: "probod-ci"
-          path: "bin/probod"
+          name: "trustreadyd-ci"
+          path: "bin/trustreadyd"
           retention-days: 1
 
-  build-probo-agent:
-    name: "build-probo-agent"
+  build-trustready-agent:
+    name: "build-trustready-agent"
     if: needs.changes.outputs.agent == 'true'
     needs: [changes]
     runs-on: "runs-on=${{ github.run_id }}/runner=4cpu-linux-x64/extras=s3-cache"
@@ -286,12 +286,12 @@ jobs:
       - uses: "./.github/actions/setup"
         with:
           node: "false"
-      - name: "Build probo-agent"
+      - name: "Build trustready-agent"
         env:
           CGO_ENABLED: "0"
         run: |
           go build -ldflags "-s -w -X 'main.version=snapshot'" \
-            -gcflags="-e" -o bin/probo-agent ./cmd/probo-agent
+            -gcflags="-e" -o bin/trustready-agent ./cmd/trustready-agent
 
   lint-go:
     name: "lint-go"
@@ -415,7 +415,7 @@ jobs:
           swiftlint version
       - name: "Run swift format"
         run: |
-          sources="$(find cmd/probo-agent/installer/macos/enroll-ui \( -name '*.swift' ! -name '*.generated.swift' ! -path '*/.build/*' \) | sort)"
+          sources="$(find cmd/trustready-agent/installer/macos/enroll-ui \( -name '*.swift' ! -name '*.generated.swift' ! -path '*/.build/*' \) | sort)"
           swift format lint --configuration .swift-format --strict --parallel $sources
       - name: "Run SwiftLint"
         run: swiftlint lint --strict --config .swiftlint.yml --cache-path /tmp/swiftlint-cache
@@ -498,7 +498,7 @@ jobs:
       - run: "make test"
         env:
           GOTESTSUM_JUNITFILE: "junit.xml"
-          TRUSTREADY_TEST_PG_URL: "postgres://probod:probod@localhost:5432/probod_test"
+          TRUSTREADY_TEST_PG_URL: "postgres://trustreadyd:trustreadyd@localhost:5432/trustreadyd_test"
           TEST_FLAGS: "-count=1 -race -cover -coverprofile=coverage.out"
       - name: "Race-test e2e harness packages"
         run: "CGO_ENABLED=1 go test -race -count=1 ./e2e/internal/..."
@@ -537,10 +537,10 @@ jobs:
           node: "false"
       - uses: "actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c" # v8
         with:
-          name: "probod-ci"
+          name: "trustreadyd-ci"
           path: "bin"
-      - name: "Prepare probod"
-        run: "chmod +x bin/probod"
+      - name: "Prepare trustreadyd"
+        run: "chmod +x bin/trustreadyd"
       - name: "Configure Docker image source"
         # Pull requests from forks don't get repository secrets, so
         # HARBOR_USERNAME/HARBOR_PASSWORD are unavailable and logging into
@@ -592,9 +592,9 @@ jobs:
           GOTESTSUM_FORMAT: "testname"
           GOTESTSUM_JUNITFILE: "junit-e2e.xml"
         run: |
-          PROBOD_ACME_ROOT_CA="$(cat compose/step-ca/certs/root_ca.crt)" \
+          TRUSTREADYD_ACME_ROOT_CA="$(cat compose/step-ca/certs/root_ca.crt)" \
             make test-e2e-run \
-              E2E_BINARY="${{ github.workspace }}/bin/probod" \
+              E2E_BINARY="${{ github.workspace }}/bin/trustreadyd" \
               E2E_TEST_FLAGS="-parallel=8"
       - name: "Upload test results"
         uses: "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a" # v7

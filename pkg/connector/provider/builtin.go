@@ -45,7 +45,7 @@ func NewBuiltinRegistry() *Registry {
 }
 
 // NewBuiltinRegistryWith builds the registry with opts applied, returning an
-// error rather than panicking so probod can surface a bad endpoint override as
+// error rather than panicking so trustreadyd can surface a bad endpoint override as
 // a startup failure naming the offending provider and field.
 func NewBuiltinRegistryWith(opts ...Option) (*Registry, error) {
 	var options registryOptions

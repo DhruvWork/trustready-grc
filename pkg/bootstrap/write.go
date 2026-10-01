@@ -26,7 +26,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/DhruvWork/trustready-grc/pkg/probodconfig"
+	"github.com/DhruvWork/trustready-grc/pkg/trustreadydconfig"
 	"sigs.k8s.io/yaml"
 )
 
@@ -37,7 +37,7 @@ const (
 	FormatJSON Format = "json"
 )
 
-func WriteConfig(cfg *probodconfig.FullConfig, path string, format Format) error {
+func WriteConfig(cfg *trustreadydconfig.FullConfig, path string, format Format) error {
 	dir := filepath.Dir(path)
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return fmt.Errorf("create directory %s: %w", dir, err)

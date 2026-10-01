@@ -32,7 +32,7 @@ WITH
             vcr.id as report_id,
             generate_gid(decode_base64_unpadded(vcr.tenant_id), 25) as file_id,
             vcr.tenant_id,
-            'probod' as bucket_name,
+            'trustreadyd' as bucket_name,
             'application/pdf' as mime_type,
             vcr.report_name,
             vcr.file_key,

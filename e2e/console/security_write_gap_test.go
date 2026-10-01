@@ -85,7 +85,7 @@ func TestSecurity_WriteGap_PublishRiskListApproverIDs(t *testing.T) {
 // needs a separate authenticated visitor identity and NDA acceptance. To keep
 // this test focused on the fix under test (the Update mutation's FK validation)
 // rather than that unrelated flow, the access row's prerequisite state is
-// seeded directly via SQL against the same Postgres database the e2e probod
+// seeded directly via SQL against the same Postgres database the e2e trustreadyd
 // instance runs against, then the real updateCompliancePortalAccess mutation is
 // exercised through the live GraphQL API.
 func TestSecurity_WriteGap_CompliancePortalAccessDocuments(t *testing.T) {
