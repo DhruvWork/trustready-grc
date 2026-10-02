@@ -2,9 +2,5 @@
 bin
 tmp
 node_modules
-dist
-Dockerfile
 compose
 **/node_modules
-**/dist
-

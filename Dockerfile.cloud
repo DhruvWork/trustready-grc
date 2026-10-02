@@ -1,0 +1,29 @@
+# Multi-stage build so the Go server can be compiled in the cloud (ACR Tasks)
+# without needing prebuilt binaries or a local Go/Docker toolchain.
+FROM golang:1.27.1 AS build
+WORKDIR /src
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /out/trustreadyd ./cmd/trustreadyd \
+ && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /out/trustreadyd-bootstrap ./cmd/trustreadyd-bootstrap
+
+FROM ubuntu:24.04
+LABEL org.opencontainers.image.source="https://github.com/DhruvWork/trustready-grc"
+LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.vendor="TrustReady"
+
+RUN useradd -m trustready \
+ && apt-get update \
+ && apt-get install -y ca-certificates libcap2-bin \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /out/trustreadyd /usr/local/bin/trustreadyd
+COPY --from=build /out/trustreadyd-bootstrap /usr/local/bin/trustreadyd-bootstrap
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN chmod +x /usr/local/bin/trustreadyd /usr/local/bin/trustreadyd-bootstrap /usr/local/bin/entrypoint.sh \
+ && setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/trustreadyd \
+ && mkdir -p /etc/trustreadyd \
+ && chown trustready:trustready /etc/trustreadyd
+
+USER trustready
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
