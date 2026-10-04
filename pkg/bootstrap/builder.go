@@ -110,6 +110,7 @@ func (b *Builder) Build() (*trustreadydconfig.FullConfig, error) {
 				BatchTimeout:  b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACING_BATCH_TIMEOUT", 5),
 				ExportTimeout: b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACING_EXPORT_TIMEOUT", 30),
 				MaxQueueSize:  b.resolver.getEnvIntOrDefault("TRUSTREADYD_TRACING_MAX_QUEUE_SIZE", 2048),
+				SamplingRatio: b.resolver.getEnvFloatOrDefault("TRUSTREADY_TRACING_SAMPLING_RATIO", 1.0),
 			},
 		},
 		TrustReadyd: trustreadydconfig.Config{
