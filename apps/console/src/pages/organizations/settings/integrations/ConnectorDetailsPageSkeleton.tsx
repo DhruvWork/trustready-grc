@@ -18,31 +18,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { CodeIcon, MagnifyingGlassIcon } from "@phosphor-icons/react";
-import { TabLink, Tabs } from "@probo/ui";
-import { useTranslation } from "react-i18next";
-import { Outlet, useParams } from "react-router";
+import { ListSkeleton } from "@probo/ui/src/v2/List/ListSkeleton";
+import { HeadingSkeleton } from "@probo/ui/src/v2/typography/HeadingSkeleton";
 
-import { useOrganizationId } from "#/hooks/useOrganizationId";
+import { connectorDetailsPageSkeleton } from "./variants";
 
-export default function CookieBannerDiscoveryLayout() {
-  const { t } = useTranslation("organizations/cookie-banners");
-  const organizationId = useOrganizationId();
-  const { cookieBannerId } = useParams<{ cookieBannerId: string }>();
+export function ConnectorDetailsPageSkeleton() {
+  const { root, header, titleRow, title, body }
+    = connectorDetailsPageSkeleton();
 
   return (
-    <>
-      <Tabs>
-        <TabLink to={`/organizations/${organizationId}/privacy/cookie-banners/${cookieBannerId}/discovery`} end>
-          <MagnifyingGlassIcon size={20} />
-          {t("configLayout.tabs.trackers")}
-        </TabLink>
-        <TabLink to={`/organizations/${organizationId}/privacy/cookie-banners/${cookieBannerId}/discovery/resources`}>
-          <CodeIcon size={20} />
-          {t("configLayout.tabs.resources")}
-        </TabLink>
-      </Tabs>
-      <Outlet />
-    </>
+    <div className={root()}>
+      <div className={header()}>
+        <div className={titleRow()}>
+          <div className={title()}>
+            <HeadingSkeleton size={6} className="w-40" />
+          </div>
+        </div>
+      </div>
+      <div className={body()}>
+        <ListSkeleton count={1} />
+      </div>
+    </div>
   );
 }

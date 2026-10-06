@@ -139,6 +139,7 @@ type (
 		SubdivisionCode  *coredata.SubdivisionCode
 		ConsentMode      *coredata.CookieConsentMode
 		TC               *string
+		Origin           string
 	}
 
 	DetectedCookie struct {
@@ -584,6 +585,22 @@ func CanonicalizeOrigin(raw string) string {
 	}
 
 	return u.Scheme + "://" + host
+}
+
+func IsReflectableOrigin(raw string) bool {
+	if raw == "" || raw == "null" {
+		return false
+	}
+
+	return validator.Origin()(raw) == nil
+}
+
+func storedConsentOrigin(raw string) *string {
+	if !IsReflectableOrigin(raw) {
+		return nil
+	}
+
+	return &raw
 }
 
 func (s *Service) ensureDraftVersion(
@@ -1359,6 +1376,21 @@ func (s *Service) UpdateCookieBanner(
 			if snapshotChanged {
 				if _, err := s.ensureDraftVersionForBanner(ctx, tx, scope, banner.ID); err != nil {
 					return fmt.Errorf("cannot ensure draft version: %w", err)
+				}
+			}
+
+			if nameChanged && banner.Capabilities.Corsless {
+				var published coredata.CookieBannerVersion
+
+				err := published.LoadLatestPublishedByCookieBannerID(ctx, tx, scope, banner.ID)
+				if err != nil && !errors.Is(err, coredata.ErrResourceNotFound) {
+					return fmt.Errorf("cannot load latest published version: %w", err)
+				}
+
+				if err == nil {
+					if err := banner.SetPolicyGenerationRequested(ctx, tx); err != nil {
+						return fmt.Errorf("cannot request tracker policy generation: %w", err)
+					}
 				}
 			}
 
@@ -2632,6 +2664,7 @@ func (s *Service) RecordConsent(
 				SubdivisionCode:       req.SubdivisionCode,
 				ConsentMode:           req.ConsentMode,
 				TC:                    optionalNonEmptyString(req.TC),
+				Origin:                storedConsentOrigin(req.Origin),
 				CreatedAt:             time.Now(),
 			}
 

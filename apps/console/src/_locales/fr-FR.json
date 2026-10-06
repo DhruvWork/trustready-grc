@@ -971,6 +971,9 @@
     "empty": "Aucune personne disponible",
     "remove": "Retirer {{name}}"
   },
+  "userSelect": {
+    "loadMore": "Charger plus"
+  },
   "peopleSelectField": {
     "placeholder": "Sélectionner un propriétaire",
     "none": "Aucun"
@@ -1266,12 +1269,12 @@
   },
   "measureGraph": {
     "messages": {
-      "deleted": "Mesure supprimée avec succès.",
-      "updated": "Mesure mise à jour avec succès."
+      "deleted": "Contrôle interne supprimé avec succès.",
+      "updated": "Contrôle interne mis à jour avec succès."
     },
     "errors": {
-      "delete": "Échec de la suppression de la mesure",
-      "update": "Échec de la mise à jour de la mesure"
+      "delete": "Échec de la suppression du contrôle interne",
+      "update": "Échec de la mise à jour du contrôle interne"
     }
   },
   "obligationGraph": {
@@ -1348,7 +1351,6 @@
       "revoked": "Révoqué"
     },
     "compliancePortalVisibility": {
-      "none": "Aucune",
       "restricted": "Restreint",
       "public": "Public"
     },
@@ -2202,8 +2204,9 @@
     "context": "Contexte",
     "webhooks": "Webhooks",
     "slackBot": "SlackBot",
+    "integrations": "INTÉGRATIONS",
     "tasks": "Tâches",
-    "measures": "Mesures",
+    "measures": "Contrôles internes",
     "risks": "Risques",
     "allRisks": "Tous les risques",
     "riskAnalyses": "Analyses des risques",
@@ -2255,7 +2258,8 @@
     "compliancePortalsRightRequests": "Demandes de droits",
     "cookieBanners": "Bannières de cookies",
     "cookieBannersConfigure": "Configurer",
-    "cookieBannersDiscovery": "Découverte",
+    "cookieBannersTrackers": "Traceurs",
+    "cookieBannersResources": "Ressources",
     "cookieBannersTrail": "Journal",
     "cookieBannersTCF": "TCF",
     "cookieBannerSwitcher": {
@@ -3761,9 +3765,27 @@
     }
   },
   "measureDetailPage": {
-    "deleteConfirmation": "Cette action supprimera définitivement la mesure « {{name}} ». Elle est irréversible.",
+    "deleteConfirmation": "Cette action supprimera définitivement le contrôle interne « {{name}} ». Elle est irréversible.",
     "fields": {
-      "selectState": "Sélectionner un état"
+      "selectState": "Sélectionner un statut",
+      "code": "Code",
+      "owner": "Responsable",
+      "reviewer": "Relecteur",
+      "operatingFrequency": "Fréquence d’exploitation",
+      "evidenceCadence": "Cadence des preuves",
+      "testingCadence": "Cadence des tests",
+      "nextEvidenceDue": "Preuve due",
+      "nextTestDue": "Test dû"
+    },
+    "operatingModes": {
+      "continuous": "Continu",
+      "event": "Lors d’un événement"
+    },
+    "implementationStatuses": {
+      "not_implemented": "Non mis en œuvre",
+      "in_progress": "En cours",
+      "implemented": "Mis en œuvre",
+      "operating": "En exploitation"
     },
     "actions": {
       "edit": "Modifier",
@@ -3787,29 +3809,29 @@
     }
   },
   "measuresPage": {
-    "title": "Mesures",
-    "description": "Les mesures sont des actions mises en œuvre pour réduire le risque. Ajoutez-en pour suivre leur état de mise en œuvre.",
+    "title": "Contrôles internes",
+    "description": "Les contrôles internes sont des dispositifs nommés, avec un responsable, qui tournent selon une cadence, produisent des preuves et couvrent plusieurs exigences de référentiel.",
     "messages": {
-      "imported": "Mesures importées avec succès.",
+      "imported": "Contrôles internes importés avec succès.",
       "error": "Erreur",
       "success": "Succès",
-      "deleted": "Mesure supprimée avec succès"
+      "deleted": "Contrôle interne supprimé avec succès"
     },
     "errors": {
-      "import": "Échec de l’importation des mesures",
-      "delete": "Échec de la suppression de la mesure"
+      "import": "Échec de l’importation des contrôles internes",
+      "delete": "Échec de la suppression du contrôle interne"
     },
-    "deleteConfirmation": "Cette action supprimera définitivement la mesure « {{name}} ». Cette action est irréversible.",
+    "deleteConfirmation": "Cette action supprimera définitivement le contrôle interne « {{name}} ». Cette action est irréversible.",
     "actions": {
       "import": "Importer",
-      "newMeasure": "Nouvelle mesure",
+      "newMeasure": "Nouveau contrôle interne",
       "loading": "Chargement...",
       "loadMore": "Charger plus",
       "edit": "Modifier",
       "delete": "Supprimer"
     },
     "filters": {
-      "searchPlaceholder": "Rechercher des mesures...",
+      "searchPlaceholder": "Rechercher des contrôles internes...",
       "allStates": "Tous les états",
       "allCategories": "Toutes les catégories"
     },
@@ -3820,13 +3842,15 @@
       "not_started": "Non commencé"
     },
     "columns": {
-      "measure": "Mesure",
+      "measure": "Contrôle interne",
+      "code": "Code",
       "category": "Catégorie",
-      "state": "État"
+      "state": "État",
+      "status": "Statut"
     },
     "empty": {
-      "title": "Aucune mesure pour l’instant",
-      "description": "Créez votre première mesure pour commencer."
+      "title": "Aucun contrôle interne pour l’instant",
+      "description": "Créez votre premier contrôle interne pour commencer."
     }
   },
   "linkedThirdPartiesCard": {
@@ -3913,29 +3937,44 @@
   },
   "measureFormDialog": {
     "breadcrumb": {
-      "measures": "Mesures",
-      "editMeasure": "Modifier la mesure",
-      "newMeasure": "Nouvelle mesure"
+      "measures": "Contrôles internes",
+      "editMeasure": "Modifier le contrôle interne",
+      "newMeasure": "Nouveau contrôle interne"
     },
     "messages": {
-      "created": "Mesure créée avec succès."
+      "created": "Contrôle interne créé avec succès."
     },
     "errors": {
-      "create": "Échec de la création de la mesure"
+      "create": "Échec de la création du contrôle interne"
     },
     "validation": {
       "nameRequired": "Le nom est requis",
-      "categoryRequired": "La catégorie est requise"
+      "categoryRequired": "La catégorie est requise",
+      "reviewerDistinct": "Le relecteur doit être une personne différente du responsable",
+      "operatingIntervalRequired": "Indiquez tous les combien le contrôle s’exécute"
     },
     "fields": {
-      "name": "Nom de la mesure",
-      "namePlaceholder": "Titre de la mesure",
+      "name": "Nom",
+      "namePlaceholder": "Titre du contrôle",
       "description": "Description",
       "descriptionPlaceholder": "Ajouter une description",
       "category": "Catégorie",
       "categoryPlaceholder": "Sélectionner une catégorie",
       "state": "État",
-      "statePlaceholder": "Sélectionner un état"
+      "statePlaceholder": "Sélectionner un état",
+      "code": "Code",
+      "codePlaceholder": "IC-ACCESS-01",
+      "notSet": "Non défini",
+      "controlType": "Type",
+      "nature": "Nature",
+      "operatingFrequency": "Fréquence d’exploitation",
+      "operatingEvent": "Événement",
+      "operatingEventPlaceholder": "lorsqu’une personne part",
+      "evidenceCadence": "Cadence des preuves",
+      "testingCadence": "Cadence des tests",
+      "implementationStatus": "Statut de mise en œuvre",
+      "owner": "Responsable",
+      "reviewer": "Relecteur"
     },
     "properties": "Propriétés",
     "states": {
@@ -3946,9 +3985,30 @@
       "unknown": "Inconnu",
       "not_implemented": "Non mis en œuvre"
     },
+    "controlTypes": {
+      "preventive": "Préventif",
+      "detective": "Détectif",
+      "corrective": "Correctif"
+    },
+    "natures": {
+      "manual": "Manuel"
+    },
+    "operatingModes": {
+      "continuous": "Continu",
+      "event": "Lorsqu’un événement se produit",
+      "periodic": "Tous les"
+    },
+    "implementationStatuses": {
+      "not_implemented": "Non mis en œuvre",
+      "in_progress": "En cours",
+      "implemented": "Mis en œuvre",
+      "operating": "En exploitation"
+    },
     "actions": {
-      "create": "Créer une mesure",
-      "update": "Mettre à jour la mesure"
+      "create": "Créer le contrôle interne",
+      "update": "Mettre à jour le contrôle interne",
+      "addDuration": "Ajouter une durée",
+      "clearDuration": "Effacer la durée"
     }
   },
   "measureEvidencesTab": {

@@ -18,51 +18,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-export function getActionLabel(
-  action: string,
-  t: (key: string) => string,
-): string {
-  switch (action) {
-    case "ACCEPT_ALL":
-      return t("consentRecordsPage.actions.acceptAll");
-    case "REJECT_ALL":
-      return t("consentRecordsPage.actions.rejectAll");
-    case "CUSTOMIZE":
-      return t("consentRecordsPage.actions.customize");
-    case "GPC":
-      return t("consentRecordsPage.actions.gpc");
-    case "ACKNOWLEDGE":
-      return t("consentRecordsPage.actions.acknowledge");
-    default:
-      return action;
-  }
-}
+import { Select as BaseSelect } from "@base-ui/react/select";
+import type { ComponentProps } from "react";
 
-export function getActionVariant(
-  action: string,
-): "success" | "danger" | "warning" | "neutral" {
-  switch (action) {
-    case "ACCEPT_ALL":
-      return "success";
-    case "REJECT_ALL":
-      return "danger";
-    case "CUSTOMIZE":
-      return "warning";
-    case "GPC":
-      return "neutral";
-    case "ACKNOWLEDGE":
-      return "neutral";
-    default:
-      return "neutral";
-  }
-}
+export type SelectListProps
+  = & Omit<ComponentProps<typeof BaseSelect.List>, "className">
+    & { className?: string };
 
-export function formatAnonymizedIp(ip: string): string {
-  if (ip.includes(".")) {
-    return ip.replace(/\.0$/, ".*");
-  }
-  if (ip.endsWith("::")) {
-    return ip + "*";
-  }
-  return ip;
+// Listbox for the options. Mounting it makes the popup `role="presentation"`
+// and this element the listbox, so a control in the popup (pagination) can sit
+// outside the listbox and stay reachable by keyboard.
+export function SelectList(props: SelectListProps) {
+  const { className, ...rest } = props;
+
+  return <BaseSelect.List className={className} {...rest} />;
 }

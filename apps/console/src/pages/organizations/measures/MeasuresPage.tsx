@@ -94,8 +94,10 @@ const measureRowFragment = graphql`
   fragment MeasuresPageRowFragment on Measure {
     id
     name
+    code
     category
     state
+    implementationStatus
     canUpdate: permission(action: "core:measure:update")
     canDelete: permission(action: "core:measure:delete")
     ...MeasureFormDialogMeasureFragment
@@ -157,10 +159,7 @@ const importMeasuresMutation = graphql`
     importMeasure(input: $input) {
       measureEdges @appendEdge(connections: $connections) {
         node {
-          id
-          name
-          category
-          state
+          ...MeasuresPageRowFragment
         }
       }
     }
@@ -378,8 +377,10 @@ export default function MeasuresPage({ queryRef }: MeasuresPageProps) {
                 <Table>
                   <Thead>
                     <Tr>
+                      <Th>{t("measuresPage.columns.code")}</Th>
                       <Th>{t("measuresPage.columns.measure")}</Th>
                       <Th>{t("measuresPage.columns.category")}</Th>
+                      <Th>{t("measuresPage.columns.status")}</Th>
                       <Th>{t("measuresPage.columns.state")}</Th>
                       {hasAnyAction && <Th />}
                     </Tr>
@@ -492,8 +493,14 @@ function MeasureRow(props: MeasureRowProps) {
     <>
       <MeasureFormDialog measure={measure} ref={dialogRef} />
       <Tr to={`/organizations/${organizationId}/governance/measures/${measure.id}`}>
+        <Td>{measure.code}</Td>
         <Td>{measure.name}</Td>
         <Td>{measure.category}</Td>
+        <Td>
+          {measure.implementationStatus
+            ? t(`measureDetailPage.implementationStatuses.${measure.implementationStatus.toLowerCase()}`)
+            : null}
+        </Td>
         <Td width={120}>
           <MeasureBadge state={measure.state} />
         </Td>

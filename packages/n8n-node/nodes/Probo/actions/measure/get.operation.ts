@@ -52,7 +52,28 @@ export async function execute(
 					name
 					description
 					category
+					code
+					controlType
+					nature
+					operatingFrequency {
+						mode
+						interval
+						event
+					}
+					evidenceCadence
+					testingCadence
+					nextEvidenceDue
+					nextTestDue
+					implementationStatus
 					state
+					owner {
+						id
+						fullName
+					}
+					reviewer {
+						id
+						fullName
+					}
 					createdAt
 					updatedAt
 				}

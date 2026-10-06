@@ -28,6 +28,7 @@ import (
 	"github.com/spf13/cobra"
 	"go.probo.inc/probo/pkg/cli/api"
 	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"go.probo.inc/probo/pkg/cmd/measure/fields"
 )
 
 const createMutation = `
@@ -38,6 +39,8 @@ mutation($input: CreateMeasureInput!) {
         id
         name
         category
+        code
+        implementationStatus
         state
       }
     }
@@ -49,10 +52,12 @@ type createResponse struct {
 	CreateMeasure struct {
 		MeasureEdge struct {
 			Node struct {
-				ID       string `json:"id"`
-				Name     string `json:"name"`
-				Category string `json:"category"`
-				State    string `json:"state"`
+				ID                   string  `json:"id"`
+				Name                 string  `json:"name"`
+				Category             string  `json:"category"`
+				Code                 *string `json:"code"`
+				ImplementationStatus string  `json:"implementationStatus"`
+				State                string  `json:"state"`
 			} `json:"node"`
 		} `json:"measureEdge"`
 	} `json:"createMeasure"`
@@ -60,15 +65,26 @@ type createResponse struct {
 
 func NewCmdCreate(f *cmdutil.Factory) *cobra.Command {
 	var (
-		flagOrg         string
-		flagName        string
-		flagCategory    string
-		flagDescription string
+		flagOrg                  string
+		flagName                 string
+		flagCategory             string
+		flagDescription          string
+		flagCode                 string
+		flagControlType          string
+		flagNature               string
+		flagOperatingMode        string
+		flagOperatingFrequency   string
+		flagOperatingEvent       string
+		flagEvidenceCadence      string
+		flagTestingCadence       string
+		flagImplementationStatus string
+		flagOwnerID              string
+		flagReviewerID           string
 	)
 
 	cmd := &cobra.Command{
 		Use:   "create",
-		Short: "Create a new measure",
+		Short: "Create an internal control",
 		Example: `  # Create a measure interactively
   prb measure create
 
@@ -141,6 +157,22 @@ func NewCmdCreate(f *cmdutil.Factory) *cobra.Command {
 				input["description"] = flagDescription
 			}
 
+			if err := fields.SetMeasureFields(cmd, input, fields.MeasureFieldFlags{
+				Code:                 flagCode,
+				ControlType:          flagControlType,
+				Nature:               flagNature,
+				OperatingMode:        flagOperatingMode,
+				OperatingFrequency:   flagOperatingFrequency,
+				OperatingEvent:       flagOperatingEvent,
+				EvidenceCadence:      flagEvidenceCadence,
+				TestingCadence:       flagTestingCadence,
+				ImplementationStatus: flagImplementationStatus,
+				OwnerID:              flagOwnerID,
+				ReviewerID:           flagReviewerID,
+			}); err != nil {
+				return err
+			}
+
 			data, err := client.Do(
 				createMutation,
 				map[string]any{"input": input},
@@ -170,6 +202,20 @@ func NewCmdCreate(f *cmdutil.Factory) *cobra.Command {
 	cmd.Flags().StringVar(&flagName, "name", "", "Measure name (required)")
 	cmd.Flags().StringVar(&flagCategory, "category", "", "Measure category (required)")
 	cmd.Flags().StringVar(&flagDescription, "description", "", "Measure description")
+	fields.AddMeasureFieldFlags(
+		cmd,
+		&flagCode,
+		&flagControlType,
+		&flagNature,
+		&flagOperatingMode,
+		&flagOperatingFrequency,
+		&flagOperatingEvent,
+		&flagEvidenceCadence,
+		&flagTestingCadence,
+		&flagImplementationStatus,
+		&flagOwnerID,
+		&flagReviewerID,
+	)
 
 	return cmd
 }

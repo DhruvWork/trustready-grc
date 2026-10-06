@@ -18,128 +18,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Avatar } from "@probo/ui/src/v2/Avatar/Avatar";
-import { Select } from "@probo/ui/src/v2/Select/Select";
-import { SelectItem } from "@probo/ui/src/v2/Select/SelectItem";
-import { SelectPopup } from "@probo/ui/src/v2/Select/SelectPopup";
-import { SelectTrigger } from "@probo/ui/src/v2/Select/SelectTrigger";
-import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 
-import { usePeople } from "#/hooks/graph/PeopleGraph";
-import { useOrganizationId } from "#/hooks/useOrganizationId";
-
-import { tasksCard } from "./variants";
+import { UserSelect } from "#/components/form/UserSelect";
 
 interface TaskUserFilterProps {
   value: string | null;
   onValueChange: (value: string | null) => void;
 }
 
-interface PersonOption {
-  id: string;
-  fullName: string;
-  emailAddress: string;
-  avatarUrl?: string;
-}
-
 export function TaskUserFilter({ value, onValueChange }: TaskUserFilterProps) {
-  return (
-    <Suspense fallback={<TaskUserFilterSelect value={value} disabled people={[]} onValueChange={onValueChange} />}>
-      <TaskUserFilterLoaded value={value} onValueChange={onValueChange} />
-    </Suspense>
-  );
-}
-
-function TaskUserFilterLoaded({ value, onValueChange }: TaskUserFilterProps) {
-  const organizationId = useOrganizationId();
-  const people = usePeople(organizationId);
-
-  return (
-    <TaskUserFilterSelect
-      value={value}
-      onValueChange={onValueChange}
-      people={people.map(person => ({
-        id: person.id,
-        fullName: person.fullName,
-        emailAddress: person.emailAddress,
-        avatarUrl: person.avatar?.downloadUrl ?? undefined,
-      }))}
-    />
-  );
-}
-
-interface TaskUserFilterSelectProps extends TaskUserFilterProps {
-  disabled?: boolean;
-  people: PersonOption[];
-}
-
-function TaskUserFilterSelect({
-  value,
-  onValueChange,
-  disabled,
-  people,
-}: TaskUserFilterSelectProps) {
   const { t } = useTranslation();
-  const { userOption } = tasksCard();
-  const names = new Map(people.map(person => [person.id, person]));
-  const selected = value == null ? undefined : names.get(value);
+  const emptyLabel = t("tasksCard.filters.allUsers");
 
   return (
-    <Select
+    <UserSelect
       value={value}
-      disabled={disabled}
       onValueChange={onValueChange}
-    >
-      <SelectTrigger
-        size={2}
-        placeholder={t("tasksCard.filters.allUsers")}
-        aria-label={t("tasksCard.filters.user")}
-      >
-        {(selectedId: string | null) => {
-          if (selectedId == null) {
-            return t("tasksCard.filters.allUsers");
-          }
-          const person = names.get(selectedId) ?? selected;
-          if (person == null) {
-            return selectedId;
-          }
-          return (
-            <span className={userOption()}>
-              <Avatar
-                size={1}
-                radius="full"
-                name={person.fullName}
-                email={person.emailAddress}
-                src={person.avatarUrl}
-              />
-              <span className="truncate">{person.fullName}</span>
-            </span>
-          );
-        }}
-      </SelectTrigger>
-      <SelectPopup align="start">
-        <SelectItem value={null}>
-          {t("tasksCard.filters.allUsers")}
-        </SelectItem>
-        {value != null && selected == null && (
-          <SelectItem value={value}>{value}</SelectItem>
-        )}
-        {people.map(person => (
-          <SelectItem key={person.id} value={person.id}>
-            <span className={userOption()}>
-              <Avatar
-                size={1}
-                radius="full"
-                name={person.fullName}
-                email={person.emailAddress}
-                src={person.avatarUrl}
-              />
-              <span className="truncate">{person.fullName}</span>
-            </span>
-          </SelectItem>
-        ))}
-      </SelectPopup>
-    </Select>
+      emptyLabel={emptyLabel}
+      ariaLabel={t("tasksCard.filters.user")}
+      placeholder={emptyLabel}
+    />
   );
 }

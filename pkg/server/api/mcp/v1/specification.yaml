@@ -699,7 +699,12 @@ components:
           description: Organization ID
         name:
           type: string
-          description: Organization name
+          description: Operating name
+        legal_name:
+          type:
+            - string
+            - "null"
+          description: Registered legal name. Use this in legal documents when it is set; name is the operating name.
         created_at:
           type: string
           format: date-time
@@ -2474,6 +2479,93 @@ components:
           $ref: "#/components/schemas/MeasureState"
           description: Measure state as of the requested instant
 
+    InternalControlType:
+      type: string
+      enum:
+        - PREVENTIVE
+        - DETECTIVE
+        - CORRECTIVE
+      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.InternalControlType
+
+    InternalControlNature:
+      type: string
+      enum:
+        - MANUAL
+      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.InternalControlNature
+
+    InternalControlOperatingMode:
+      type: string
+      enum:
+        - CONTINUOUS
+        - EVENT
+        - PERIODIC
+      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.InternalControlOperatingMode
+
+    InternalControlOperatingFrequency:
+      type: object
+      required:
+        - mode
+      oneOf:
+        - title: Continuous
+          properties:
+            mode:
+              type: string
+              enum:
+                - CONTINUOUS
+            interval:
+              type: "null"
+            event:
+              type: "null"
+          required:
+            - mode
+        - title: Event
+          properties:
+            mode:
+              type: string
+              enum:
+                - EVENT
+            interval:
+              type: "null"
+          required:
+            - mode
+        - title: Periodic
+          properties:
+            mode:
+              type: string
+              enum:
+                - PERIODIC
+            interval:
+              $ref: "#/components/schemas/TimeSpan"
+            event:
+              type: "null"
+          required:
+            - mode
+            - interval
+      properties:
+        mode:
+          $ref: "#/components/schemas/InternalControlOperatingMode"
+          description: Continuous, event, or periodic
+        interval:
+          anyOf:
+            - $ref: "#/components/schemas/TimeSpan"
+            - type: "null"
+          description: ISO-8601 duration, required when the mode is periodic and forbidden otherwise
+        event:
+          type:
+            - string
+            - "null"
+          description: What triggers an event-driven control, for example when someone leaves
+      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.InternalControlOperatingFrequency
+
+    InternalControlImplementationStatus:
+      type: string
+      enum:
+        - NOT_IMPLEMENTED
+        - IN_PROGRESS
+        - IMPLEMENTED
+        - OPERATING
+      go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.InternalControlImplementationStatus
+
     MeasureState:
       type: string
       enum:
@@ -2512,6 +2604,7 @@ components:
         - category
         - name
         - state
+        - implementation_status
         - created_at
         - updated_at
       properties:
@@ -2532,6 +2625,63 @@ components:
         state:
           $ref: "#/components/schemas/MeasureState"
           description: Measure state
+        code:
+          type:
+            - string
+            - "null"
+          description: Stable human reference, for example IC-ACCESS-01
+        control_type:
+          anyOf:
+            - $ref: "#/components/schemas/InternalControlType"
+            - type: "null"
+          description: Preventive, detective, or corrective
+        nature:
+          anyOf:
+            - $ref: "#/components/schemas/InternalControlNature"
+            - type: "null"
+          description: Manual
+        operating_frequency:
+          anyOf:
+            - $ref: "#/components/schemas/InternalControlOperatingFrequency"
+            - type: "null"
+          description: Whether the control runs continuously, when an event occurs, or on a duration
+        evidence_cadence:
+          anyOf:
+            - $ref: "#/components/schemas/TimeSpan"
+            - type: "null"
+          description: How often evidence is collected, as an ISO-8601 duration
+        testing_cadence:
+          anyOf:
+            - $ref: "#/components/schemas/TimeSpan"
+            - type: "null"
+          description: How often effectiveness is tested, as an ISO-8601 duration
+        next_evidence_due:
+          type:
+            - string
+            - "null"
+          format: date-time
+          description: Next evidence collection, derived from the evidence cadence
+        next_test_due:
+          type:
+            - string
+            - "null"
+          format: date-time
+          description: Next effectiveness test, derived from the testing cadence
+        implementation_status:
+          $ref: "#/components/schemas/InternalControlImplementationStatus"
+          description: Whether the control is not implemented, in progress, implemented, or operating
+        owner_id:
+          anyOf:
+            - type: string
+              $ref: "#/components/schemas/GID"
+            - type: "null"
+          description: Owner profile ID
+        reviewer_id:
+          anyOf:
+            - type: string
+              $ref: "#/components/schemas/GID"
+            - type: "null"
+          description: Reviewer profile ID
         created_at:
           type: string
           format: date-time
@@ -2890,6 +3040,33 @@ components:
         category:
           type: string
           description: Measure category
+        code:
+          type: string
+          description: Stable human reference, for example IC-ACCESS-01
+        control_type:
+          $ref: "#/components/schemas/InternalControlType"
+          description: Preventive, detective, or corrective
+        nature:
+          $ref: "#/components/schemas/InternalControlNature"
+          description: Manual
+        operating_frequency:
+          $ref: "#/components/schemas/InternalControlOperatingFrequency"
+          description: Whether the control runs continuously, when an event occurs, or on a duration
+        evidence_cadence:
+          $ref: "#/components/schemas/TimeSpan"
+          description: How often evidence is collected, as an ISO-8601 duration
+        testing_cadence:
+          $ref: "#/components/schemas/TimeSpan"
+          description: How often effectiveness is tested, as an ISO-8601 duration
+        implementation_status:
+          $ref: "#/components/schemas/InternalControlImplementationStatus"
+          description: Whether the control is not implemented, in progress, implemented, or operating
+        owner_id:
+          $ref: "#/components/schemas/GID"
+          description: Owner profile ID
+        reviewer_id:
+          $ref: "#/components/schemas/GID"
+          description: Reviewer profile ID
 
     AddMeasureOutput:
       type: object
@@ -2920,6 +3097,57 @@ components:
         state:
           $ref: "#/components/schemas/MeasureState"
           description: Measure state
+        code:
+          type: ["string", "null"]
+          description: Stable human reference, for example IC-ACCESS-01
+          go.probo.inc/mcpgen/omittable: true
+        control_type:
+          anyOf:
+            - $ref: "#/components/schemas/InternalControlType"
+            - type: "null"
+          description: Preventive, detective, or corrective
+          go.probo.inc/mcpgen/omittable: true
+        nature:
+          anyOf:
+            - $ref: "#/components/schemas/InternalControlNature"
+            - type: "null"
+          description: Manual
+          go.probo.inc/mcpgen/omittable: true
+        operating_frequency:
+          anyOf:
+            - $ref: "#/components/schemas/InternalControlOperatingFrequency"
+            - type: "null"
+          description: Whether the control runs continuously, when an event occurs, or on a duration
+          go.probo.inc/mcpgen/omittable: true
+        evidence_cadence:
+          anyOf:
+            - $ref: "#/components/schemas/TimeSpan"
+            - type: "null"
+          description: How often evidence is collected, as an ISO-8601 duration
+          go.probo.inc/mcpgen/omittable: true
+        testing_cadence:
+          anyOf:
+            - $ref: "#/components/schemas/TimeSpan"
+            - type: "null"
+          description: How often effectiveness is tested, as an ISO-8601 duration
+          go.probo.inc/mcpgen/omittable: true
+        implementation_status:
+          $ref: "#/components/schemas/InternalControlImplementationStatus"
+          description: Whether the control is not implemented, in progress, implemented, or operating
+        owner_id:
+          anyOf:
+            - type: string
+              $ref: "#/components/schemas/GID"
+            - type: "null"
+          description: Owner profile ID
+          go.probo.inc/mcpgen/omittable: true
+        reviewer_id:
+          anyOf:
+            - type: string
+              $ref: "#/components/schemas/GID"
+            - type: "null"
+          description: Reviewer profile ID
+          go.probo.inc/mcpgen/omittable: true
 
     UpdateMeasureOutput:
       type: object
@@ -6120,7 +6348,6 @@ components:
     CompliancePortalVisibility:
       type: string
       enum:
-        - NONE
         - RESTRICTED
         - PUBLIC
       go.probo.inc/mcpgen/type: go.probo.inc/probo/pkg/coredata.CompliancePortalVisibility
@@ -13176,6 +13403,7 @@ components:
       required:
         - resource_reporting
         - tcf
+        - corsless
       properties:
         resource_reporting:
           type: boolean
@@ -13183,6 +13411,9 @@ components:
         tcf:
           type: boolean
           description: Whether IAB TCF is enabled for this banner
+        corsless:
+          type: boolean
+          description: Whether this banner accepts any website origin
 
     CookieBannerCapabilitiesInput:
       type: object
@@ -13785,6 +14016,11 @@ components:
             - string
             - "null"
           description: IAB TCF consent string
+        origin:
+          type:
+            - string
+            - "null"
+          description: Request origin that recorded this consent
         created_at:
           type: string
           format: date-time

@@ -45,7 +45,7 @@ func NewCmdUnlinkThirdParty(f *cmdutil.Factory) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "unlink-third-party",
-		Short: "Unlink a third party from a measure",
+		Short: "Unlink a third party from an internal control",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := f.Config()
 			if err != nil {
@@ -80,7 +80,7 @@ func NewCmdUnlinkThirdParty(f *cmdutil.Factory) *cobra.Command {
 
 			_, _ = fmt.Fprintf(
 				f.IOStreams.Out,
-				"Unlinked third party %s from measure %s\n",
+				"Unlinked third party %s from internal control %s\n",
 				flagThirdPartyID,
 				flagMeasureID,
 			)
@@ -89,7 +89,7 @@ func NewCmdUnlinkThirdParty(f *cmdutil.Factory) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&flagMeasureID, "measure-id", "", "Measure ID (required)")
+	cmd.Flags().StringVar(&flagMeasureID, "measure-id", "", "Internal control ID (required)")
 	cmd.Flags().StringVar(&flagThirdPartyID, "third-party-id", "", "Third party ID (required)")
 
 	_ = cmd.MarkFlagRequired("measure-id")

@@ -24,6 +24,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"go.gearno.de/crypto/uuid"
@@ -33,6 +34,7 @@ import (
 	"go.probo.inc/probo/pkg/page"
 	"go.probo.inc/probo/pkg/prosemirror"
 	taskpkg "go.probo.inc/probo/pkg/task"
+	"go.probo.inc/probo/pkg/timespan"
 	"go.probo.inc/probo/pkg/validator"
 )
 
@@ -42,18 +44,36 @@ type (
 	}
 
 	CreateMeasureRequest struct {
-		OrganizationID gid.GID
-		Name           string
-		Description    *string
-		Category       string
+		OrganizationID       gid.GID
+		Name                 string
+		Description          *string
+		Category             string
+		Code                 *string
+		ControlType          *coredata.InternalControlType
+		Nature               *coredata.InternalControlNature
+		OperatingFrequency   *coredata.InternalControlOperatingFrequency
+		EvidenceCadence      *timespan.TimeSpan
+		TestingCadence       *timespan.TimeSpan
+		ImplementationStatus *coredata.InternalControlImplementationStatus
+		OwnerID              *gid.GID
+		ReviewerID           *gid.GID
 	}
 
 	UpdateMeasureRequest struct {
-		ID          gid.GID
-		Name        *string
-		Description **string
-		Category    *string
-		State       *coredata.MeasureState
+		ID                   gid.GID
+		Name                 *string
+		Description          **string
+		Category             *string
+		State                *coredata.MeasureState
+		Code                 **string
+		ControlType          **coredata.InternalControlType
+		Nature               **coredata.InternalControlNature
+		OperatingFrequency   **coredata.InternalControlOperatingFrequency
+		EvidenceCadence      **timespan.TimeSpan
+		TestingCadence       **timespan.TimeSpan
+		ImplementationStatus *coredata.InternalControlImplementationStatus
+		OwnerID              **gid.GID
+		ReviewerID           **gid.GID
 	}
 
 	ImportMeasureRequest struct {
@@ -83,10 +103,29 @@ type (
 func (cmr *CreateMeasureRequest) Validate() error {
 	v := validator.New()
 
+	cmr.Code = normalizeMeasureCode(cmr.Code)
+	normalizeOperatingFrequency(cmr.OperatingFrequency)
+	cmr.EvidenceCadence = normalizeNonPositiveCadence(cmr.EvidenceCadence)
+	cmr.TestingCadence = normalizeNonPositiveCadence(cmr.TestingCadence)
+
 	v.Check(cmr.OrganizationID, "organization_id", validator.Required(), validator.GID(coredata.OrganizationEntityType))
 	v.Check(cmr.Name, "name", validator.SafeTextNoNewLine(TitleMaxLength))
 	v.Check(cmr.Description, "description", validator.SafeText(ContentMaxLength))
 	v.Check(cmr.Category, "category", validator.Required(), validator.SafeText(TitleMaxLength))
+	v.Check(cmr.Code, "code", validator.SafeTextNoNewLine(TitleMaxLength))
+	v.Check(cmr.ControlType, "control_type", validator.OneOfSlice(coredata.InternalControlTypes()))
+	v.Check(cmr.Nature, "nature", validator.OneOfSlice(coredata.InternalControlNatures()))
+	v.Check(cmr.OperatingFrequency, "operating_frequency", validOperatingFrequency())
+	v.Check(cmr.EvidenceCadence, "evidence_cadence", positiveTimeSpan())
+	v.Check(cmr.TestingCadence, "testing_cadence", positiveTimeSpan())
+	v.Check(cmr.ImplementationStatus, "implementation_status", validator.OneOfSlice(coredata.InternalControlImplementationStatuses()))
+	v.Check(cmr.OwnerID, "owner_id", validator.GID(coredata.MembershipProfileEntityType))
+	v.Check(cmr.ReviewerID, "reviewer_id", validator.GID(coredata.MembershipProfileEntityType))
+	v.Check(
+		measurePeople{ownerID: cmr.OwnerID, reviewerID: cmr.ReviewerID},
+		"reviewer_id",
+		distinctMeasurePeople(),
+	)
 
 	return v.Error()
 }
@@ -94,11 +133,29 @@ func (cmr *CreateMeasureRequest) Validate() error {
 func (umr *UpdateMeasureRequest) Validate() error {
 	v := validator.New()
 
+	normalizeOmittableMeasureCode(umr.Code)
+
+	if umr.OperatingFrequency != nil {
+		normalizeOperatingFrequency(*umr.OperatingFrequency)
+	}
+
+	normalizeOmittableCadence(umr.EvidenceCadence)
+	normalizeOmittableCadence(umr.TestingCadence)
+
 	v.Check(umr.ID, "id", validator.Required(), validator.GID(coredata.MeasureEntityType))
 	v.Check(umr.Name, "name", validator.SafeTextNoNewLine(TitleMaxLength))
 	v.Check(umr.Description, "description", validator.SafeText(ContentMaxLength))
 	v.Check(umr.Category, "category", validator.SafeText(TitleMaxLength))
 	v.Check(umr.State, "state", validator.OneOfSlice(coredata.MeasureStates()))
+	v.Check(umr.Code, "code", validator.SafeTextNoNewLine(TitleMaxLength))
+	v.Check(umr.ControlType, "control_type", validator.OneOfSlice(coredata.InternalControlTypes()))
+	v.Check(umr.Nature, "nature", validator.OneOfSlice(coredata.InternalControlNatures()))
+	v.Check(umr.OperatingFrequency, "operating_frequency", validOperatingFrequency())
+	v.Check(umr.EvidenceCadence, "evidence_cadence", positiveTimeSpan())
+	v.Check(umr.TestingCadence, "testing_cadence", positiveTimeSpan())
+	v.Check(umr.ImplementationStatus, "implementation_status", validator.OneOfSlice(coredata.InternalControlImplementationStatuses()))
+	v.Check(umr.OwnerID, "owner_id", validator.GID(coredata.MembershipProfileEntityType))
+	v.Check(umr.ReviewerID, "reviewer_id", validator.GID(coredata.MembershipProfileEntityType))
 
 	return v.Error()
 }
@@ -464,15 +521,16 @@ func (s MeasureService) Import(
 				measureID := gid.New(organization.ID.TenantID(), coredata.MeasureEntityType)
 
 				measure := &coredata.Measure{
-					ID:             measureID,
-					OrganizationID: organization.ID,
-					Name:           req.Measures[i].Name,
-					Description:    nil,
-					Category:       req.Measures[i].Category,
-					State:          coredata.MeasureStateNotStarted,
-					ReferenceID:    req.Measures[i].ReferenceID,
-					CreatedAt:      now,
-					UpdatedAt:      now,
+					ID:                   measureID,
+					OrganizationID:       organization.ID,
+					Name:                 req.Measures[i].Name,
+					Description:          nil,
+					Category:             req.Measures[i].Category,
+					State:                coredata.MeasureStateNotStarted,
+					ReferenceID:          req.Measures[i].ReferenceID,
+					ImplementationStatus: coredata.InternalControlImplementationStatusNotImplemented,
+					CreatedAt:            now,
+					UpdatedAt:            now,
 				}
 
 				importedMeasures = append(importedMeasures, measure)
@@ -657,11 +715,26 @@ func (s MeasureService) Update(
 				measure.Category = *req.Category
 			}
 
-			if req.State != nil {
-				measure.State = *req.State
+			now := time.Now()
+			applyMeasureUpdate(&req, measure, now)
+
+			if err := distinctMeasurePeopleError(measure.OwnerID, measure.ReviewerID); err != nil {
+				return err
 			}
 
-			measure.UpdatedAt = time.Now()
+			if measure.OwnerID != nil {
+				if err := loadMeasureProfile(ctx, conn, scope, *measure.OwnerID, measure.OrganizationID); err != nil {
+					return err
+				}
+			}
+
+			if measure.ReviewerID != nil {
+				if err := loadMeasureProfile(ctx, conn, scope, *measure.ReviewerID, measure.OrganizationID); err != nil {
+					return err
+				}
+			}
+
+			measure.UpdatedAt = now
 
 			if err := measure.Update(ctx, conn, scope); err != nil {
 				return fmt.Errorf("cannot update measure: %w", err)
@@ -716,16 +789,53 @@ func (s MeasureService) Create(
 				return fmt.Errorf("cannot load organization: %w", err)
 			}
 
+			if req.OwnerID != nil {
+				if err := loadMeasureProfile(ctx, conn, scope, *req.OwnerID, organization.ID); err != nil {
+					return err
+				}
+			}
+
+			if req.ReviewerID != nil {
+				if err := loadMeasureProfile(ctx, conn, scope, *req.ReviewerID, organization.ID); err != nil {
+					return err
+				}
+			}
+
+			status := coredata.InternalControlImplementationStatusNotImplemented
+			state := coredata.MeasureStateNotStarted
+
+			if req.ImplementationStatus != nil {
+				status = *req.ImplementationStatus
+				if mapped, ok := coredata.MeasureStateForImplementationStatus(status); ok {
+					state = mapped
+				}
+			}
+
+			operatingMode, operatingInterval, operatingEvent := req.OperatingFrequency.Columns()
+
 			measure = &coredata.Measure{
-				ID:             gid.New(organization.ID.TenantID(), coredata.MeasureEntityType),
-				OrganizationID: organization.ID,
-				Name:           req.Name,
-				Description:    req.Description,
-				Category:       req.Category,
-				ReferenceID:    "custom-measure-" + referenceID.String(),
-				State:          coredata.MeasureStateNotStarted,
-				CreatedAt:      now,
-				UpdatedAt:      now,
+				ID:                   gid.New(organization.ID.TenantID(), coredata.MeasureEntityType),
+				OrganizationID:       organization.ID,
+				Name:                 req.Name,
+				Description:          req.Description,
+				Category:             req.Category,
+				ReferenceID:          "custom-measure-" + referenceID.String(),
+				Code:                 req.Code,
+				ControlType:          req.ControlType,
+				Nature:               req.Nature,
+				OperatingMode:        operatingMode,
+				OperatingInterval:    operatingInterval,
+				OperatingEvent:       operatingEvent,
+				EvidenceCadence:      req.EvidenceCadence,
+				TestingCadence:       req.TestingCadence,
+				NextEvidenceDue:      coredata.NextInternalControlDue(now, req.EvidenceCadence),
+				NextTestDue:          coredata.NextInternalControlDue(now, req.TestingCadence),
+				ImplementationStatus: status,
+				OwnerID:              req.OwnerID,
+				ReviewerID:           req.ReviewerID,
+				State:                state,
+				CreatedAt:            now,
+				UpdatedAt:            now,
 			}
 
 			if err := measure.Insert(ctx, conn, scope); err != nil {
@@ -1007,6 +1117,275 @@ func insertMeasureEvent(
 	event := coredata.NewMeasureEvent(measure, eventType, now)
 	if err := event.Insert(ctx, conn, scope); err != nil {
 		return fmt.Errorf("cannot insert measure event: %w", err)
+	}
+
+	return nil
+}
+
+type measurePeople struct {
+	ownerID    *gid.GID
+	reviewerID *gid.GID
+}
+
+func normalizeMeasureCode(code *string) *string {
+	if code == nil {
+		return nil
+	}
+
+	trimmed := strings.TrimSpace(*code)
+	if trimmed == "" {
+		return nil
+	}
+
+	return &trimmed
+}
+
+func normalizeOmittableMeasureCode(code **string) {
+	if code == nil || *code == nil {
+		return
+	}
+
+	*code = normalizeMeasureCode(*code)
+}
+
+func distinctMeasurePeople() validator.ValidatorFunc {
+	return func(value any) *validator.ValidationError {
+		pair, ok := value.(measurePeople)
+		if !ok || pair.ownerID == nil || pair.reviewerID == nil || *pair.ownerID != *pair.reviewerID {
+			return nil
+		}
+
+		return &validator.ValidationError{
+			Code:    validator.ErrorCodeCustom,
+			Message: "must be a different person from the owner",
+		}
+	}
+}
+
+func distinctMeasurePeopleError(ownerID, reviewerID *gid.GID) error {
+	validationError := distinctMeasurePeople()(measurePeople{ownerID: ownerID, reviewerID: reviewerID})
+	if validationError == nil {
+		return nil
+	}
+
+	validationError.Field = "reviewer_id"
+
+	return validator.ValidationErrors{validationError}
+}
+
+func normalizeNonPositiveCadence(cadence *timespan.TimeSpan) *timespan.TimeSpan {
+	if cadence == nil || !cadenceAdvances(*cadence) {
+		return nil
+	}
+
+	return cadence
+}
+
+func normalizeOmittableCadence(cadence **timespan.TimeSpan) {
+	if cadence == nil || *cadence == nil {
+		return
+	}
+
+	*cadence = normalizeNonPositiveCadence(*cadence)
+}
+
+func cadenceAdvances(span timespan.TimeSpan) bool {
+	if span.IsZero() {
+		return false
+	}
+
+	anchor := time.Unix(0, 0).UTC()
+
+	return span.AddTo(anchor).After(anchor)
+}
+
+func setOmittable[T any](dest **T, src **T) {
+	if src == nil {
+		return
+	}
+
+	*dest = *src
+}
+
+func assignCadence(
+	current **timespan.TimeSpan,
+	due **time.Time,
+	next **timespan.TimeSpan,
+	now time.Time,
+) {
+	if next == nil {
+		return
+	}
+
+	if *next == nil {
+		*current = nil
+
+		if due != nil {
+			*due = nil
+		}
+
+		return
+	}
+
+	changed := *current == nil || **current != **next
+	*current = *next
+
+	if changed && due != nil {
+		*due = coredata.NextInternalControlDue(now, *next)
+	}
+}
+
+func applyMeasureUpdate(req *UpdateMeasureRequest, measure *coredata.Measure, now time.Time) {
+	setOmittable(&measure.Code, req.Code)
+	setOmittable(&measure.ControlType, req.ControlType)
+	setOmittable(&measure.Nature, req.Nature)
+	assignOperatingFrequency(measure, req.OperatingFrequency)
+	assignCadence(&measure.EvidenceCadence, &measure.NextEvidenceDue, req.EvidenceCadence, now)
+	assignCadence(&measure.TestingCadence, &measure.NextTestDue, req.TestingCadence, now)
+	setOmittable(&measure.OwnerID, req.OwnerID)
+	setOmittable(&measure.ReviewerID, req.ReviewerID)
+
+	// Resending the current status must not rewrite a legacy state such as
+	// NOT_STARTED. A real status change wins over a state sent in the same
+	// request, because operating controls share the implemented state.
+	if req.ImplementationStatus != nil && measure.ImplementationStatus != *req.ImplementationStatus {
+		measure.ImplementationStatus = *req.ImplementationStatus
+		if state, ok := coredata.MeasureStateForImplementationStatus(*req.ImplementationStatus); ok {
+			measure.State = state
+		}
+
+		return
+	}
+
+	if req.State != nil && measure.State != *req.State {
+		measure.State = *req.State
+		measure.ImplementationStatus = coredata.ImplementationStatusForMeasureState(*req.State)
+	}
+}
+
+func normalizeOperatingFrequency(freq *coredata.InternalControlOperatingFrequency) {
+	if freq == nil {
+		return
+	}
+
+	freq.Event = normalizeOperatingEvent(freq.Event)
+}
+
+func normalizeOperatingEvent(event *string) *string {
+	if event == nil {
+		return nil
+	}
+
+	trimmed := strings.TrimSpace(*event)
+	if trimmed == "" {
+		return nil
+	}
+
+	return &trimmed
+}
+
+func assignOperatingFrequency(measure *coredata.Measure, next **coredata.InternalControlOperatingFrequency) {
+	if next == nil {
+		return
+	}
+
+	mode, interval, event := (*next).Columns()
+	measure.OperatingMode = mode
+	measure.OperatingInterval = interval
+	measure.OperatingEvent = event
+}
+
+func validOperatingFrequency() validator.ValidatorFunc {
+	return func(value any) *validator.ValidationError {
+		freq, ok := value.(coredata.InternalControlOperatingFrequency)
+		if !ok {
+			return nil
+		}
+
+		if !freq.Mode.IsValid() {
+			return &validator.ValidationError{
+				Code:    validator.ErrorCodeInvalidEnum,
+				Message: "must be CONTINUOUS, EVENT, or PERIODIC",
+			}
+		}
+
+		if freq.Event != nil {
+			if err := validator.SafeTextNoNewLine(TitleMaxLength)(*freq.Event); err != nil {
+				return err
+			}
+		}
+
+		switch freq.Mode {
+		case coredata.InternalControlOperatingModeContinuous:
+			if freq.Interval != nil || freq.Event != nil {
+				return &validator.ValidationError{
+					Code:    validator.ErrorCodeCustom,
+					Message: "continuous frequency has no interval or event",
+				}
+			}
+		case coredata.InternalControlOperatingModeEvent:
+			if freq.Interval != nil {
+				return &validator.ValidationError{
+					Code:    validator.ErrorCodeCustom,
+					Message: "event frequency has no interval",
+				}
+			}
+		case coredata.InternalControlOperatingModePeriodic:
+			if freq.Event != nil {
+				return &validator.ValidationError{
+					Code:    validator.ErrorCodeCustom,
+					Message: "periodic frequency has no event",
+				}
+			}
+
+			if freq.Interval == nil || freq.Interval.IsZero() {
+				return &validator.ValidationError{
+					Code:    validator.ErrorCodeRequired,
+					Message: "periodic frequency requires a duration",
+				}
+			}
+
+			if err := positiveTimeSpan()(*freq.Interval); err != nil {
+				return err
+			}
+		}
+
+		return nil
+	}
+}
+
+func positiveTimeSpan() validator.ValidatorFunc {
+	return func(value any) *validator.ValidationError {
+		span, ok := value.(timespan.TimeSpan)
+		if !ok || span.IsZero() || cadenceAdvances(span) {
+			return nil
+		}
+
+		return &validator.ValidationError{
+			Code:    validator.ErrorCodeCustom,
+			Message: "must be a positive duration",
+		}
+	}
+}
+
+func loadMeasureProfile(
+	ctx context.Context,
+	conn pg.Querier,
+	scope coredata.Scoper,
+	profileID gid.GID,
+	organizationID gid.GID,
+) error {
+	profile := &coredata.MembershipProfile{}
+	if err := profile.LoadByID(ctx, conn, scope, profileID); err != nil {
+		if errors.Is(err, coredata.ErrResourceNotFound) {
+			return coredata.ErrResourceNotFound
+		}
+
+		return fmt.Errorf("cannot load membership profile: %w", err)
+	}
+
+	if profile.OrganizationID != organizationID {
+		return coredata.ErrResourceNotFound
 	}
 
 	return nil

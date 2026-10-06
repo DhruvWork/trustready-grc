@@ -27,13 +27,24 @@ import (
 
 func NewMeasure(m *coredata.Measure) *Measure {
 	return &Measure{
-		ID:          m.ID,
-		Category:    m.Category,
-		Name:        m.Name,
-		Description: m.Description,
-		State:       m.State,
-		CreatedAt:   m.CreatedAt,
-		UpdatedAt:   m.UpdatedAt,
+		ID:                   m.ID,
+		Category:             m.Category,
+		Name:                 m.Name,
+		Description:          m.Description,
+		State:                m.State,
+		Code:                 m.Code,
+		ControlType:          m.ControlType,
+		Nature:               m.Nature,
+		OperatingFrequency:   newOperatingFrequency(m),
+		EvidenceCadence:      m.EvidenceCadence,
+		TestingCadence:       m.TestingCadence,
+		NextEvidenceDue:      m.NextEvidenceDue,
+		NextTestDue:          m.NextTestDue,
+		ImplementationStatus: m.ImplementationStatus,
+		OwnerID:              m.OwnerID,
+		ReviewerID:           m.ReviewerID,
+		CreatedAt:            m.CreatedAt,
+		UpdatedAt:            m.UpdatedAt,
 	}
 }
 
@@ -91,5 +102,17 @@ func NewListMeasuresOutput(measurePage *page.Page[*coredata.Measure, coredata.Me
 	return ListMeasuresOutput{
 		NextCursor: nextCursor,
 		Measures:   measures,
+	}
+}
+
+func newOperatingFrequency(m *coredata.Measure) *coredata.InternalControlOperatingFrequency {
+	if m.OperatingMode == nil {
+		return nil
+	}
+
+	return &coredata.InternalControlOperatingFrequency{
+		Mode:     *m.OperatingMode,
+		Interval: m.OperatingInterval,
+		Event:    m.OperatingEvent,
 	}
 }

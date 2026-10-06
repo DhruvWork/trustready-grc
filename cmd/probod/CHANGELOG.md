@@ -4,6 +4,82 @@ All notable changes to `probod` (the server, including the bundled `@probo/conso
 
 ## Unreleased
 
+## [0.303.0] - 2026-10-05
+
+### Added
+
+- Organizations have an optional registered legal name, separate from the
+  operating name. It is editable from the workspace general settings and
+  exposed on the GraphQL, MCP, CLI and n8n surfaces. Blank values are
+  rejected; only an explicit null clears it
+- Cookie banners can be made CORSless (ops-only) so one banner can be
+  shared by deployments whose origins are not known ahead of time. The
+  tracker policy names the banner instead of an origin
+- Every consent record stores and shows the request origin
+
+### Changed
+
+- The publisher country setting is hidden on cookie banners without TCF
+
+### Fixed
+
+- Listing risks ordered by `UPDATED_AT` no longer panics when building the
+  next-page cursor
+
+## [0.302.0] - 2026-10-05
+
+### Added
+
+- Measures are presented as internal controls. A control has a stable
+  code, a type, an implementation status, an owner and a reviewer. It
+  runs continuously, when an event happens, or on a positive interval,
+  and has its own evidence and testing cadences (ISO-8601 durations)
+  that set the next due dates. Only the manual nature is accepted for
+  now. The GraphQL and MCP APIs keep the Measure names
+- A shared, paginated user selector loads organization profiles 200 at a
+  time. The task list filter and the task assignee field use it
+
+### Changed
+
+- A control-scoped token can read the owner and reviewer profiles of a
+  control
+
+## [0.301.0] - 2026-10-02
+
+### Added
+
+- Settings > Integrations lists the vendors Probo holds a connector for
+  and the ones it can still connect to. A connector opens to the accounts
+  recorded against it and can be disconnected there; disconnect is
+  refused while an access review source or SCIM configuration still uses
+  the credential, and the message names which one
+
+### Changed
+
+- Trust center files no longer have a hidden (`NONE`) visibility; delete
+  the file instead. Unlinking a document or audit from a trust center now
+  clears its visitor access requests, and the console asks for
+  confirmation first
+
+### Fixed
+
+- Back links from tracker, visitor, and user detail pages keep the list's
+  filters instead of resetting them
+
+## [0.300.0] - 2026-10-02
+
+### Changed
+
+- Cookie banner Discovery is split into separate Trackers and Resources
+  pages in the nav, and Discovery and Trail no longer show the banner
+  header and publish actions, which stay on Configure
+- Trackers and Resources lists are rebuilt on the v2 kit, with filters,
+  pagination, and column sort kept in the URL so views are shareable
+- Tracker edits (description, category, max age, inclusion) move from
+  inline row forms to the tracker detail page, which also lists
+  detections in a table. Row actions follow update and delete
+  permissions
+
 ## [0.299.1] - 2026-10-01
 
 ### Fixed

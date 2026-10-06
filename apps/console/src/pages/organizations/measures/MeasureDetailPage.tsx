@@ -19,11 +19,13 @@
 // SOFTWARE.
 
 import {
-  measureStates,
+  internalControlImplementationStatuses,
 } from "@probo/helpers";
 import { usePageTitle } from "@probo/hooks";
+import { dateFormat, formatDuration } from "@probo/i18n";
 import {
   ActionDropdown,
+  Badge,
   Button,
   DropdownItem,
   IconCheckmark1,
@@ -56,6 +58,7 @@ import { Outlet, useNavigate, useParams } from "react-router";
 
 import type { MeasureDetailPageNodeQuery } from "#/__generated__/core/MeasureDetailPageNodeQuery.graphql";
 import type { MeasureDetailPageTasksCountQuery } from "#/__generated__/core/MeasureDetailPageTasksCountQuery.graphql";
+import type { InternalControlImplementationStatus } from "#/__generated__/core/MeasureGraphUpdateMutation.graphql";
 import {
   MeasureConnectionKey,
   useDeleteMeasureMutation,
@@ -83,6 +86,23 @@ export const measureNodeQuery = graphql`
         name
         description
         state
+        code
+        implementationStatus
+        operatingFrequency {
+          mode
+          interval
+          event
+        }
+        evidenceCadence
+        testingCadence
+        nextEvidenceDue
+        nextTestDue
+        owner {
+          fullName
+        }
+        reviewer {
+          fullName
+        }
         canUpdate: permission(action: "core:measure:update")
         canDelete: permission(action: "core:measure:delete")
         canListTasks: permission(action: "core:task:list")
@@ -133,6 +153,38 @@ function TasksCountBadge({ measureId }: { measureId: string }) {
   return <TabBadge>{count}</TabBadge>;
 }
 
+function ReadOnlyImplementationStatus({
+  state,
+  implementationStatus,
+}: {
+  state?: string | null;
+  implementationStatus?: string | null;
+}) {
+  const { t } = useTranslation();
+
+  if (state === "NOT_STARTED" || state === "NOT_APPLICABLE" || state === "UNKNOWN") {
+    return <MeasureBadge state={state} />;
+  }
+
+  if (implementationStatus === "OPERATING") {
+    return (
+      <Badge variant="success">
+        {t("measureDetailPage.implementationStatuses.operating")}
+      </Badge>
+    );
+  }
+
+  if (
+    implementationStatus === "NOT_IMPLEMENTED"
+    || implementationStatus === "IN_PROGRESS"
+    || implementationStatus === "IMPLEMENTED"
+  ) {
+    return <MeasureBadge state={implementationStatus} />;
+  }
+
+  return null;
+}
+
 type Props = {
   queryRef: PreloadedQuery<MeasureDetailPageNodeQuery>;
 };
@@ -142,7 +194,7 @@ export default function MeasureDetailPage(props: Props) {
   const organizationId = useOrganizationId();
   const data = usePreloadedQuery<MeasureDetailPageNodeQuery>(measureNodeQuery, props.queryRef);
   const measure = data.node;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   usePageTitle(measure.name ?? "");
   const [deleteMeasure] = useDeleteMeasureMutation();
   const navigate = useNavigate();
@@ -185,21 +237,36 @@ export default function MeasureDetailPage(props: Props) {
     );
   };
 
-  const onStateChange = (state: string) => {
+  const onStatusChange = (implementationStatus: InternalControlImplementationStatus) => {
     void updateMeasure({
       variables: {
         input: {
           id: measureId,
-          state,
+          implementationStatus,
         },
       },
     });
   };
 
+  const dueDate = (value?: string | null) => {
+    if (!value) {
+      return null;
+    }
+
+    return dateFormat(i18n.language, value, { dateStyle: "medium" });
+  };
+
+  const operating = operatingFrequencyLabel(measure.operatingFrequency, t);
+
   return (
     <div className="space-y-6">
       <PageHeader title={measure.name} description={measure.description}>
-        {!measure.canUpdate && <MeasureBadge state={measure.state!} />}
+        {!measure.canUpdate && (
+          <ReadOnlyImplementationStatus
+            state={measure.state}
+            implementationStatus={measure.implementationStatus}
+          />
+        )}
         {measure.canUpdate && (
           <>
             <MeasureFormDialog measure={measure}>
@@ -209,15 +276,19 @@ export default function MeasureDetailPage(props: Props) {
             </MeasureFormDialog>
             <Select
               disabled={isUpdating}
-              onValueChange={state => void onStateChange(state)}
-              name="state"
+              onValueChange={(status) => {
+                if ((internalControlImplementationStatuses as readonly string[]).includes(status)) {
+                  onStatusChange(status as InternalControlImplementationStatus);
+                }
+              }}
+              name="implementationStatus"
               placeholder={t("measureDetailPage.fields.selectState")}
               className="rounded-full"
-              value={measure.state}
+              value={measure.implementationStatus ?? undefined}
             >
-              {measureStates.map(state => (
-                <Option key={state} value={state}>
-                  {t(`measureDetailPage.states.${state.toLowerCase()}`)}
+              {internalControlImplementationStatuses.map(status => (
+                <Option key={status} value={status}>
+                  {t(`measureDetailPage.implementationStatuses.${status.toLowerCase()}`)}
                 </Option>
               ))}
             </Select>
@@ -235,6 +306,64 @@ export default function MeasureDetailPage(props: Props) {
           </ActionDropdown>
         )}
       </PageHeader>
+      <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-txt-tertiary">
+        {measure.code && (
+          <span>
+            {t("measureDetailPage.fields.code")}
+            {": "}
+            {measure.code}
+          </span>
+        )}
+        {measure.owner?.fullName && (
+          <span>
+            {t("measureDetailPage.fields.owner")}
+            {": "}
+            {measure.owner.fullName}
+          </span>
+        )}
+        {measure.reviewer?.fullName && (
+          <span>
+            {t("measureDetailPage.fields.reviewer")}
+            {": "}
+            {measure.reviewer.fullName}
+          </span>
+        )}
+        {operating && (
+          <span>
+            {t("measureDetailPage.fields.operatingFrequency")}
+            {": "}
+            {operating}
+          </span>
+        )}
+        {formatDuration(measure.evidenceCadence, t) && (
+          <span>
+            {t("measureDetailPage.fields.evidenceCadence")}
+            {": "}
+            {formatDuration(measure.evidenceCadence, t)}
+          </span>
+        )}
+        {dueDate(measure.nextEvidenceDue) && (
+          <span>
+            {t("measureDetailPage.fields.nextEvidenceDue")}
+            {": "}
+            {dueDate(measure.nextEvidenceDue)}
+          </span>
+        )}
+        {formatDuration(measure.testingCadence, t) && (
+          <span>
+            {t("measureDetailPage.fields.testingCadence")}
+            {": "}
+            {formatDuration(measure.testingCadence, t)}
+          </span>
+        )}
+        {dueDate(measure.nextTestDue) && (
+          <span>
+            {t("measureDetailPage.fields.nextTestDue")}
+            {": "}
+            {dueDate(measure.nextTestDue)}
+          </span>
+        )}
+      </div>
 
       <Tabs>
         <TabLink
@@ -288,4 +417,28 @@ export default function MeasureDetailPage(props: Props) {
       <Outlet context={{ measure }} />
     </div>
   );
+}
+
+function operatingFrequencyLabel(
+  frequency: {
+    readonly mode: string;
+    readonly interval?: string | null;
+    readonly event?: string | null;
+  } | null | undefined,
+  t: (key: string, options?: { count?: number }) => string,
+): string | null {
+  if (!frequency) {
+    return null;
+  }
+
+  switch (frequency.mode) {
+    case "CONTINUOUS":
+      return t("measureDetailPage.operatingModes.continuous");
+    case "EVENT":
+      return frequency.event || t("measureDetailPage.operatingModes.event");
+    case "PERIODIC":
+      return formatDuration(frequency.interval, t);
+    default:
+      return null;
+  }
 }

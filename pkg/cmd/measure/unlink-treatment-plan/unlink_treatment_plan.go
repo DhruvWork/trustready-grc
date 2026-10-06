@@ -45,7 +45,7 @@ func NewCmdUnlinkTreatmentPlan(f *cmdutil.Factory) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "unlink-treatment-plan",
-		Short: "Unlink a treatment plan from a measure",
+		Short: "Unlink a treatment plan from an internal control",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := f.Config()
 			if err != nil {
@@ -80,7 +80,7 @@ func NewCmdUnlinkTreatmentPlan(f *cmdutil.Factory) *cobra.Command {
 
 			_, _ = fmt.Fprintf(
 				f.IOStreams.Out,
-				"Unlinked treatment plan %s from measure %s\n",
+				"Unlinked treatment plan %s from internal control %s\n",
 				flagTreatmentPlanID,
 				flagMeasureID,
 			)
@@ -89,7 +89,7 @@ func NewCmdUnlinkTreatmentPlan(f *cmdutil.Factory) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&flagMeasureID, "measure-id", "", "Measure ID (required)")
+	cmd.Flags().StringVar(&flagMeasureID, "measure-id", "", "Internal control ID (required)")
 	cmd.Flags().StringVar(&flagTreatmentPlanID, "treatment-plan-id", "", "Treatment plan ID (required)")
 
 	_ = cmd.MarkFlagRequired("measure-id")

@@ -27,6 +27,7 @@ import (
 	"github.com/spf13/cobra"
 	"go.probo.inc/probo/pkg/cli/api"
 	"go.probo.inc/probo/pkg/cmd/cmdutil"
+	"go.probo.inc/probo/pkg/cmd/measure/fields"
 )
 
 const updateMutation = `
@@ -36,6 +37,8 @@ mutation($input: UpdateMeasureInput!) {
       id
       name
       category
+      code
+      implementationStatus
       state
     }
   }
@@ -55,15 +58,26 @@ type updateResponse struct {
 
 func NewCmdUpdate(f *cmdutil.Factory) *cobra.Command {
 	var (
-		flagName        string
-		flagDescription string
-		flagCategory    string
-		flagState       string
+		flagName                 string
+		flagDescription          string
+		flagCategory             string
+		flagState                string
+		flagCode                 string
+		flagControlType          string
+		flagNature               string
+		flagOperatingMode        string
+		flagOperatingFrequency   string
+		flagOperatingEvent       string
+		flagEvidenceCadence      string
+		flagTestingCadence       string
+		flagImplementationStatus string
+		flagOwnerID              string
+		flagReviewerID           string
 	)
 
 	cmd := &cobra.Command{
 		Use:   "update <id>",
-		Short: "Update a measure",
+		Short: "Update an internal control",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cfg, err := f.Config()
@@ -108,6 +122,29 @@ func NewCmdUpdate(f *cmdutil.Factory) *cobra.Command {
 				input["state"] = flagState
 			}
 
+			operatingMode := flagOperatingMode
+			operatingEvent := flagOperatingEvent
+
+			if err := preserveOperatingFrequency(cmd, client, args[0], &operatingMode, &operatingEvent); err != nil {
+				return err
+			}
+
+			if err := fields.SetMeasureFields(cmd, input, fields.MeasureFieldFlags{
+				Code:                 flagCode,
+				ControlType:          flagControlType,
+				Nature:               flagNature,
+				OperatingMode:        operatingMode,
+				OperatingFrequency:   flagOperatingFrequency,
+				OperatingEvent:       operatingEvent,
+				EvidenceCadence:      flagEvidenceCadence,
+				TestingCadence:       flagTestingCadence,
+				ImplementationStatus: flagImplementationStatus,
+				OwnerID:              flagOwnerID,
+				ReviewerID:           flagReviewerID,
+			}); err != nil {
+				return err
+			}
+
 			if len(input) == 1 {
 				return fmt.Errorf("at least one field must be specified for update")
 			}
@@ -141,6 +178,111 @@ func NewCmdUpdate(f *cmdutil.Factory) *cobra.Command {
 	cmd.Flags().StringVar(&flagDescription, "description", "", "Measure description")
 	cmd.Flags().StringVar(&flagCategory, "category", "", "Measure category")
 	cmd.Flags().StringVar(&flagState, "state", "", "Measure state: NOT_STARTED, IN_PROGRESS, NOT_APPLICABLE, IMPLEMENTED")
+	fields.AddMeasureFieldFlags(
+		cmd,
+		&flagCode,
+		&flagControlType,
+		&flagNature,
+		&flagOperatingMode,
+		&flagOperatingFrequency,
+		&flagOperatingEvent,
+		&flagEvidenceCadence,
+		&flagTestingCadence,
+		&flagImplementationStatus,
+		&flagOwnerID,
+		&flagReviewerID,
+	)
 
 	return cmd
+}
+
+const operatingFrequencyQuery = `
+query($id: ID!) {
+  node(id: $id) {
+    __typename
+    ... on Measure {
+      operatingFrequency {
+        mode
+        event
+      }
+    }
+  }
+}
+`
+
+type storedOperatingFrequency struct {
+	Mode  string
+	Event string
+}
+
+func preserveOperatingFrequency(
+	cmd *cobra.Command,
+	client *api.Client,
+	id string,
+	mode *string,
+	event *string,
+) error {
+	sendingFrequency := cmd.Flags().Changed("operating-mode") ||
+		cmd.Flags().Changed("operating-frequency") ||
+		cmd.Flags().Changed("operating-event")
+	if !sendingFrequency {
+		return nil
+	}
+
+	needsMode := !cmd.Flags().Changed("operating-mode")
+	needsEvent := !cmd.Flags().Changed("operating-event") && (needsMode || *mode == "EVENT")
+
+	if !needsMode && !needsEvent {
+		return nil
+	}
+
+	current, err := currentOperatingFrequency(client, id)
+	if err != nil {
+		return err
+	}
+
+	if needsMode {
+		*mode = current.Mode
+	}
+
+	if needsEvent && *mode == "EVENT" {
+		*event = current.Event
+	}
+
+	return nil
+}
+
+func currentOperatingFrequency(client *api.Client, id string) (storedOperatingFrequency, error) {
+	data, err := client.Do(operatingFrequencyQuery, map[string]any{"id": id})
+	if err != nil {
+		return storedOperatingFrequency{}, err
+	}
+
+	var resp struct {
+		Node *struct {
+			Typename           string `json:"__typename"`
+			OperatingFrequency *struct {
+				Mode  string  `json:"mode"`
+				Event *string `json:"event"`
+			} `json:"operatingFrequency"`
+		} `json:"node"`
+	}
+	if err := json.Unmarshal(data, &resp); err != nil {
+		return storedOperatingFrequency{}, fmt.Errorf("cannot parse response: %w", err)
+	}
+
+	if resp.Node == nil || resp.Node.Typename != "Measure" {
+		return storedOperatingFrequency{}, fmt.Errorf("measure %s not found", id)
+	}
+
+	if resp.Node.OperatingFrequency == nil {
+		return storedOperatingFrequency{}, nil
+	}
+
+	current := storedOperatingFrequency{Mode: resp.Node.OperatingFrequency.Mode}
+	if resp.Node.OperatingFrequency.Event != nil {
+		current.Event = *resp.Node.OperatingFrequency.Event
+	}
+
+	return current, nil
 }

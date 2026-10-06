@@ -42,18 +42,18 @@ func NewCmdDelete(f *cmdutil.Factory) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "delete <id>",
-		Short: "Delete a measure",
+		Short: "Delete an internal control",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !flagYes {
 				if !f.IOStreams.IsInteractive() {
-					return fmt.Errorf("cannot delete measure: confirmation required, use --yes to confirm")
+					return fmt.Errorf("cannot delete internal control: confirmation required, use --yes to confirm")
 				}
 
 				var confirmed bool
 
 				err := huh.NewConfirm().
-					Title(fmt.Sprintf("Delete measure %s?", args[0])).
+					Title(fmt.Sprintf("Delete internal control %s?", args[0])).
 					Value(&confirmed).
 					Run()
 				if err != nil {
@@ -97,7 +97,7 @@ func NewCmdDelete(f *cmdutil.Factory) *cobra.Command {
 
 			_, _ = fmt.Fprintf(
 				f.IOStreams.Out,
-				"Deleted measure %s\n",
+				"Deleted internal control %s\n",
 				args[0],
 			)
 

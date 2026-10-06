@@ -40,7 +40,9 @@ query($id: ID!, $first: Int, $after: CursorKey, $orderBy: MeasureOrder, $filter:
           node {
             id
             name
+            code
             category
+            implementationStatus
             state
           }
         }
@@ -55,10 +57,12 @@ query($id: ID!, $first: Int, $after: CursorKey, $orderBy: MeasureOrder, $filter:
 `
 
 type measure struct {
-	ID       string `json:"id"`
-	Name     string `json:"name"`
-	Category string `json:"category"`
-	State    string `json:"state"`
+	ID                   string  `json:"id"`
+	Name                 string  `json:"name"`
+	Code                 *string `json:"code"`
+	Category             string  `json:"category"`
+	ImplementationStatus string  `json:"implementationStatus"`
+	State                string  `json:"state"`
 }
 
 func NewCmdList(f *cmdutil.Factory) *cobra.Command {
@@ -73,15 +77,15 @@ func NewCmdList(f *cmdutil.Factory) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:     "list",
-		Short:   "List measures in an organization",
+		Short:   "List internal controls in an organization",
 		Aliases: []string{"ls"},
-		Example: `  # List measures in the default organization
+		Example: `  # List internal controls in the default organization
   prb measure list
 
-  # Filter measures by name
+  # Filter internal controls by name
   prb measure list --filter "encryption"
 
-  # List measures sorted by name
+  # List internal controls sorted by name
   prb measure ls --order-by NAME --json`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -172,28 +176,35 @@ func NewCmdList(f *cmdutil.Factory) *cobra.Command {
 			}
 
 			if len(measures) == 0 {
-				_, _ = fmt.Fprintln(f.IOStreams.Out, "No measures found.")
+				_, _ = fmt.Fprintln(f.IOStreams.Out, "No internal controls found.")
 				return nil
 			}
 
 			rows := make([][]string, 0, len(measures))
 			for _, m := range measures {
+				code := ""
+				if m.Code != nil {
+					code = *m.Code
+				}
+
 				rows = append(rows, []string{
 					m.ID,
+					code,
 					m.Name,
 					m.Category,
+					m.ImplementationStatus,
 					m.State,
 				})
 			}
 
-			t := cmdutil.NewTable("ID", "NAME", "CATEGORY", "STATE").Rows(rows...)
+			t := cmdutil.NewTable("ID", "CODE", "NAME", "CATEGORY", "STATUS", "STATE").Rows(rows...)
 
 			_, _ = fmt.Fprintln(f.IOStreams.Out, t)
 
 			if totalCount > len(measures) {
 				_, _ = fmt.Fprintf(
 					f.IOStreams.ErrOut,
-					"\nShowing %d of %d measures\n",
+					"\nShowing %d of %d internal controls\n",
 					len(measures),
 					totalCount,
 				)
@@ -204,10 +215,10 @@ func NewCmdList(f *cmdutil.Factory) *cobra.Command {
 	}
 
 	cmd.Flags().StringVar(&flagOrg, "org", "", "Organization ID")
-	cmd.Flags().IntVarP(&flagLimit, "limit", "L", 30, "Maximum number of measures to list")
+	cmd.Flags().IntVarP(&flagLimit, "limit", "L", 30, "Maximum number of internal controls to list")
 	cmd.Flags().StringVar(&flagOrderBy, "order-by", "", "Order by field (CREATED_AT, NAME)")
 	cmd.Flags().StringVar(&flagOrderDir, "order-direction", "DESC", "Sort direction (ASC, DESC)")
-	cmd.Flags().StringVarP(&flagFilter, "filter", "q", "", "Filter measures by search query")
+	cmd.Flags().StringVarP(&flagFilter, "filter", "q", "", "Filter internal controls by search query")
 	flagOutput = cmdutil.AddOutputFlag(cmd)
 
 	return cmd

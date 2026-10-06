@@ -60,45 +60,56 @@
     "visitorSoftware": "Logiciel du visiteur",
     "undetermined": "Indéterminé"
   },
-  "trackerPatternRowEdit": {
-    "fields": { "description": "Description", "descriptionPlaceholder": "Description", "maxAge": "Âge maximal" },
-    "actions": { "save": "Enregistrer", "cancel": "Annuler" }
-  },
   "trackerPatternRow": {
-    "messages": { "successTitle": "Succès", "cookieDeleted": "Cookie supprimé", "cookieMoved": "Cookie déplacé", "cookieUpdated": "Cookie mis à jour" },
-    "errors": { "title": "Erreur", "deleteCookie": "Échec de la suppression du cookie", "moveCookie": "Échec du déplacement du cookie", "updateCookie": "Échec de la mise à jour du cookie" },
+    "messages": { "trackerDeleted": "Traceur supprimé", "cookieMoved": "Cookie déplacé" },
+    "errors": { "deleteTracker": "Échec de la suppression du traceur", "moveCookie": "Échec du déplacement du cookie", "updateCookie": "Échec de la mise à jour du cookie" },
     "deleteConfirmation": "Voulez-vous vraiment supprimer \"{{name}}\" ?",
-    "actions": { "edit": "Modifier", "include": "Inclure", "exclude": "Exclure", "delete": "Supprimer" },
+    "dialogs": { "deleteTitle": "Supprimer le traceur" },
+    "actions": { "include": "Inclure", "exclude": "Exclure", "delete": "Supprimer", "cancel": "Annuler", "more": "Plus d’actions", "description": "Afficher la description" },
     "types": { "cookie": "Cookie", "localStorage": "localStorage", "sessionStorage": "sessionStorage", "indexedDb": "IndexedDB", "cacheStorage": "Stockage en cache" },
     "sources": { "script": "Script", "preExisting": "Préexistant", "http": "HTTP", "extension": "Extension" },
     "duration": { "session": "Session", "persistent": "Persistant" }
   },
   "trackerProperties": {
-    "messages": { "successTitle": "Succès", "moved": "Cookie déplacé", "copiedTitle": "Copié", "idCopied": "ID du traceur commun copié dans le presse-papiers" },
-    "errors": { "title": "Erreur", "move": "Échec du déplacement du cookie", "copy": "Échec de la copie de l’ID du traceur commun" },
-    "properties": { "pattern": "Modèle", "matchType": "Type de correspondance", "type": "Type", "source": "Source", "category": "Catégorie", "thirdParty": "Tiers", "maxAge": "Âge maximal", "description": "Description", "descriptionSource": "Source de la description", "excluded": "Exclu", "detectedCount": "Traceurs distincts détectés", "lastMatched": "Dernière correspondance" },
-    "matchTypes": { "exact": "Exact", "glob": "Glob" },
-    "trackerTypes": { "cookie": "Cookie", "localStorage": "localStorage", "sessionStorage": "sessionStorage", "indexedDb": "IndexedDB", "cacheStorage": "Stockage en cache" },
-    "sources": { "script": "Script", "preExisting": "Préexistant", "http": "HTTP", "extension": "Extension" },
-    "manual": "Manuel", "boolean": { "yes": "Oui", "no": "Non" }
+    "messages": { "moved": "Cookie déplacé", "updated": "Traceur mis à jour", "copiedTitle": "Copié", "idCopied": "ID du traceur commun copié dans le presse-papiers" },
+    "errors": { "title": "Erreur", "move": "Échec du déplacement du cookie", "update": "Échec de la mise à jour du traceur", "copy": "Échec de la copie de l’ID du traceur commun" },
+    "properties": { "attribution": "Attribution", "sourceId": "Source", "category": "Catégorie", "maxAge": "Âge maximal", "maxAgeUnit": "Unité", "description": "Description", "descriptionPlaceholder": "Description" },
+    "actions": { "back": "Traceurs", "copyId": "Copier l’ID du traceur commun" },
+    "attribution": {
+      "firstParty": "Il s’agit d’un traceur de première partie.",
+      "visitorSoftware": "Ce traceur est défini par le logiciel du visiteur.",
+      "thirdParty": "Il s’agit d’un traceur tiers de {{name}}.",
+      "thirdPartyUnnamed": "Il s’agit d’un traceur tiers.",
+      "undetermined": "L’attribution de ce traceur n’est pas déterminée."
+    },
+    "manual": "Manuel"
   },
   "detectedTrackersSection": {
-    "title": "Traceurs détectés",
+    "title": "Détections",
     "columns": { "identifier": "Identifiant", "initiatorUrl": "URL initiatrice", "maxAge": "Âge maximal (secondes)", "source": "Source", "detectionTime": "Heure de détection" },
-    "empty": "Aucun traceur détecté pour ce modèle pour le moment."
+    "empty": "Aucune détection pour ce traceur pour le moment.",
+    "sort": { "initiatorUrl": "Trier par URL initiatrice", "detectionTime": "Trier par heure de détection" },
+    "actions": { "showMore": "Afficher plus" },
+    "summary_one": "{{count}} détection · Dernière correspondance {{date}}",
+    "summary_other": "{{count}} détections · Dernière correspondance {{date}}",
+    "summaryNever_one": "{{count}} détection · Pas encore de correspondance",
+    "summaryNever_other": "{{count}} détections · Pas encore de correspondance"
   },
   "moveToCategorySelect": { "empty": "Aucune catégorie" },
-  "moveToCategoryDropdown": { "empty": "Aucune catégorie" },
   "detectedTrackerRow": {
-    "sources": { "script": "Script", "preExisting": "Préexistant", "http": "HTTP", "extension": "Extension" },
     "duration": { "second_one": "{{count}} seconde", "second_other": "{{count}} secondes" }
   },
   "trackersPage": {
-    "filters": { "search": "Rechercher par nom ou description...", "allThirdParties": "Tous les tiers", "allCategories": "Toutes les catégories" },
+    "title": "Traceurs",
+    "description": "Traceurs détectés par cette bannière et la catégorie à laquelle chacun appartient.",
+    "filters": { "search": "Rechercher par nom ou description...", "allThirdParties": "Tous les tiers", "allCategories": "Toutes les catégories", "source": "Source", "type": "Type", "category": "Catégorie", "thirdParty": "Tiers" },
     "types": { "all": "Tous les types", "cookie": "Cookie", "localStorage": "localStorage", "sessionStorage": "sessionStorage", "indexedDb": "IndexedDB", "cacheStorage": "Stockage en cache" },
     "sources": { "all": "Toutes les sources", "script": "Script", "preExisting": "Préexistant", "http": "HTTP", "extension": "Extension" },
-    "columns": { "name": "Nom", "thirdParty": "Tiers", "source": "Source", "category": "Catégorie", "maxAge": "Âge maximal", "lastMatched": "Dernière correspondance" },
-    "empty": { "title": "Aucun modèle de traceur", "description": "Aucun modèle de cookie n’a encore été détecté. Les modèles apparaîtront ici lorsqu’ils seront détectés." }
+    "columns": { "name": "Nom", "attribution": "Attribution", "source": "Source", "category": "Catégorie", "maxAge": "Âge maximal", "lastMatched": "Dernière correspondance" },
+    "sort": { "name": "Trier par nom", "source": "Trier par source", "lastMatched": "Trier par dernière correspondance" },
+    "actions": { "previous": "Précédent", "next": "Suivant" },
+    "empty": { "title": "Aucun traceur", "description": "Aucun traceur n’a encore été détecté. Ils apparaîtront ici lorsqu’ils seront détectés." },
+    "emptyFiltered": "Aucun traceur correspondant"
   },
   "codeSnippets": {
     "title": "Extrait JavaScript",
@@ -127,22 +138,24 @@
     "languages": { "english": "Anglais", "french": "Français", "german": "Allemand", "spanish": "Espagnol", "dutch": "Néerlandais" },
     "actions": { "saving": "Enregistrement...", "save": "Enregistrer" }
   },
-  "trackerResourceRowEdit": {
-    "fields": { "displayNamePlaceholder": "Nom d’affichage", "descriptionPlaceholder": "Description" },
-    "actions": { "save": "Enregistrer", "cancel": "Annuler" }
-  },
   "trackerResourceRow": {
-    "messages": { "successTitle": "Succès", "deleted": "Ressource supprimée", "moved": "Ressource déplacée", "updated": "Ressource mise à jour" },
-    "errors": { "title": "Erreur", "delete": "Échec de la suppression de la ressource", "move": "Échec du déplacement de la ressource", "update": "Échec de la mise à jour de la ressource" },
+    "messages": { "deleted": "Ressource supprimée", "moved": "Ressource déplacée" },
+    "errors": { "delete": "Échec de la suppression de la ressource", "move": "Échec du déplacement de la ressource", "update": "Échec de la mise à jour de la ressource" },
     "deleteConfirmation": "Voulez-vous vraiment supprimer \"{{name}}\" ?",
-    "actions": { "edit": "Modifier", "include": "Inclure", "exclude": "Exclure", "delete": "Supprimer" },
+    "dialogs": { "deleteTitle": "Supprimer la ressource" },
+    "actions": { "include": "Inclure", "exclude": "Exclure", "delete": "Supprimer", "cancel": "Annuler", "more": "Plus d’actions" },
     "types": { "script": "Script", "iframe": "Iframe", "image": "Image", "stylesheet": "Feuille de style", "font": "Police", "beacon": "Balise", "fetch": "Fetch", "media": "Média", "serviceWorker": "Service worker" }
   },
   "resourcesPage": {
-    "filters": { "search": "Rechercher par origine ou chemin..." },
+    "title": "Ressources",
+    "description": "Scripts, iframes et autres ressources détectés par cette bannière.",
+    "filters": { "search": "Rechercher par origine ou chemin...", "type": "Type" },
     "types": { "all": "Tous les types", "script": "Script", "iframe": "Iframe", "image": "Image", "stylesheet": "Feuille de style", "font": "Police", "beacon": "Balise", "fetch": "Fetch", "media": "Média", "serviceWorker": "Service worker" },
     "columns": { "type": "Type", "origin": "Origine", "path": "Chemin", "category": "Catégorie", "lastDetected": "Dernière détection" },
-    "empty": { "title": "Aucune ressource non catégorisée", "description": "Toutes les ressources détectées ont été catégorisées. Les nouvelles ressources apparaîtront ici lorsqu’elles seront détectées." }
+    "sort": { "origin": "Trier par origine", "lastDetected": "Trier par dernière détection" },
+    "actions": { "previous": "Précédent", "next": "Suivant" },
+    "empty": { "title": "Aucune ressource non catégorisée", "description": "Toutes les ressources détectées ont été catégorisées. Les nouvelles ressources apparaîtront ici lorsqu’elles seront détectées." },
+    "emptyFiltered": "Aucune ressource correspondante"
   },
   "themePreview": {
     "title": "Thème", "defaultSnippet": "/* Thème par défaut utilisé — aucune surcharge nécessaire */",
@@ -192,14 +205,16 @@
     "empty": "Aucune catégorie pour le moment. Ajoutez une catégorie pour commencer à gérer les cookies."
   },
   "consentRecordsPage": {
+    "title": "Journal",
+    "description": "Choix de consentement effectués par les visiteurs sur cette bannière.",
     "filters": { "allActions": "Toutes les actions", "visitorId": "ID du visiteur", "bannerVersion": "Version de la bannière" },
     "actions": { "acceptAll": "Tout accepter", "rejectAll": "Tout refuser", "customize": "Personnaliser", "gpc": "GPC", "acknowledge": "Accusé de réception" },
-    "columns": { "visitorId": "ID du visiteur", "action": "Action", "bannerVersion": "Version de la bannière", "ipAddress": "Adresse IP", "sdkVersion": "Version du SDK", "regulation": "Réglementation", "source": "Source", "country": "Pays", "subdivision": "Subdivision", "date": "Date" },
+    "columns": { "visitorId": "ID du visiteur", "action": "Action", "bannerVersion": "Version de la bannière", "origin": "Origine", "ipAddress": "Adresse IP", "sdkVersion": "Version du SDK", "regulation": "Réglementation", "source": "Source", "country": "Pays", "subdivision": "Subdivision", "date": "Date" },
     "empty": { "title": "Aucun enregistrement de consentement", "description": "Les enregistrements de consentement apparaîtront ici dès que des visiteurs interagiront avec votre bannière de cookies." }
   },
   "consentRecordPage": {
     "title": "Enregistrement de consentement",
-    "properties": { "visitorId": "ID du visiteur", "action": "Action", "bannerVersion": "Version de la bannière", "ipAddress": "Adresse IP", "userAgent": "Agent utilisateur", "sdkVersion": "Version du SDK", "regulation": "Réglementation", "regulationSource": "Source réglementaire", "country": "Pays", "subdivision": "Subdivision", "tc": "Chaîne TC", "date": "Date" },
+    "properties": { "visitorId": "ID du visiteur", "action": "Action", "bannerVersion": "Version de la bannière", "origin": "Origine", "ipAddress": "Adresse IP", "userAgent": "Agent utilisateur", "sdkVersion": "Version du SDK", "regulation": "Réglementation", "regulationSource": "Source réglementaire", "country": "Pays", "subdivision": "Subdivision", "tc": "Chaîne TC", "date": "Date" },
     "actions": { "accept_all": "Tout accepter", "reject_all": "Tout refuser", "customize": "Personnaliser", "gpc": "GPC", "acknowledge": "Accusé de réception" },
     "consentData": "Données de consentement",
     "required": "(Obligatoire)",
@@ -215,7 +230,7 @@
     "deleteConfirmation": "Cette action supprimera définitivement la bannière de cookies \"{{name}}\". Elle est irréversible.",
     "status": { "active": "Active", "inactive": "Inactive" },
     "actions": { "publishing": "Publication...", "publish": "Publier les modifications", "activate": "Activer", "deactivate": "Désactiver", "delete": "Supprimer" },
-    "tabs": { "display": "Affichage", "settings": "Paramètres", "translations": "Traductions", "trackers": "Traceurs", "resources": "Ressources" }
+    "tabs": { "display": "Affichage", "settings": "Paramètres", "translations": "Traductions" }
   },
   "newCookieBannerPage": {
     "pageTitle": "Nouvelle bannière de cookies",

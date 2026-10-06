@@ -32,6 +32,11 @@ export const table = tv({
     cell: "box-border border-b border-sand-a3 align-inherit",
     columnHeader: "font-medium text-sand-11",
     rowHeader: "font-normal",
+    sortButton: [
+      "inline-flex max-w-full items-center gap-1 appearance-none border-0 bg-transparent p-0 font-inherit text-sand-11 cursor-pointer",
+      "outline-none focus-visible:ring-2 focus-visible:ring-sand-8 focus-visible:ring-offset-1 focus-visible:ring-offset-sand-1",
+    ],
+    sortIcon: "shrink-0",
   },
   variants: {
     size: {
@@ -39,16 +44,19 @@ export const table = tv({
         root: "rounded-3",
         table: "text-2",
         cell: "h-9 px-2 py-2",
+        sortIcon: "size-3",
       },
       2: {
         root: "rounded-4",
         table: "text-2",
         cell: "h-11 px-3 py-3",
+        sortIcon: "size-3",
       },
       3: {
         root: "rounded-4",
         table: "text-3",
         cell: "h-12 px-4 py-3",
+        sortIcon: "size-4",
       },
     },
     variant: {
@@ -100,13 +108,24 @@ export const table = tv({
     interactive: {
       true: {
         row: [
-          "relative isolate cursor-pointer",
+          "relative isolate cursor-pointer hover:bg-sand-a2",
           "[&_td]:pointer-events-none [&_th]:pointer-events-none",
         ],
         // Important: the row's `[&_td]:pointer-events-none` is a descendant
         // selector and otherwise beats a plain `pointer-events-auto` on the
         // cell, so the overlay steals :hover from trailing controls.
         cell: "relative z-1 pointer-events-auto!",
+      },
+    },
+    sort: {
+      none: {
+        sortButton: "hover:text-sand-12",
+      },
+      ascending: {
+        sortButton: "text-sand-12",
+      },
+      descending: {
+        sortButton: "text-sand-12",
       },
     },
   },

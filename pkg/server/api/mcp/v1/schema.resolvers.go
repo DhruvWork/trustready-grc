@@ -493,10 +493,19 @@ func (r *Resolver) AddMeasureTool(ctx context.Context, req *mcp.CallToolRequest,
 	measure, err := svc.Measures.Create(
 		ctx, scope,
 		probo.CreateMeasureRequest{
-			OrganizationID: input.OrganizationID,
-			Name:           input.Name,
-			Description:    input.Description,
-			Category:       input.Category,
+			OrganizationID:       input.OrganizationID,
+			Name:                 input.Name,
+			Description:          input.Description,
+			Category:             input.Category,
+			Code:                 input.Code,
+			ControlType:          input.ControlType,
+			Nature:               input.Nature,
+			OperatingFrequency:   input.OperatingFrequency,
+			EvidenceCadence:      input.EvidenceCadence,
+			TestingCadence:       input.TestingCadence,
+			ImplementationStatus: input.ImplementationStatus,
+			OwnerID:              input.OwnerID,
+			ReviewerID:           input.ReviewerID,
 		},
 	)
 	if err != nil {
@@ -519,11 +528,20 @@ func (r *Resolver) UpdateMeasureTool(ctx context.Context, req *mcp.CallToolReque
 	measure, err := svc.Measures.Update(
 		ctx, scope,
 		probo.UpdateMeasureRequest{
-			ID:          input.ID,
-			Name:        input.Name,
-			Description: UnwrapOmittable(input.Description),
-			Category:    input.Category,
-			State:       input.State,
+			ID:                   input.ID,
+			Name:                 input.Name,
+			Description:          UnwrapOmittable(input.Description),
+			Category:             input.Category,
+			State:                input.State,
+			Code:                 UnwrapOmittable(input.Code),
+			ControlType:          UnwrapOmittable(input.ControlType),
+			Nature:               UnwrapOmittable(input.Nature),
+			OperatingFrequency:   UnwrapOmittable(input.OperatingFrequency),
+			EvidenceCadence:      UnwrapOmittable(input.EvidenceCadence),
+			TestingCadence:       UnwrapOmittable(input.TestingCadence),
+			ImplementationStatus: input.ImplementationStatus,
+			OwnerID:              UnwrapOmittable(input.OwnerID),
+			ReviewerID:           UnwrapOmittable(input.ReviewerID),
 		},
 	)
 	if err != nil {
@@ -8868,7 +8886,7 @@ func (r *Resolver) ListCompliancePortalDocumentsTool(ctx context.Context, req *m
 	entries := make([]*types.CompliancePortalCatalogDocument, len(documentPage.Data))
 	for i, document := range documentPage.Data {
 		link := linksByDocumentID[document.ID]
-		if link == nil || link.Visibility == coredata.CompliancePortalVisibilityNone {
+		if link == nil {
 			return nil, types.ListCompliancePortalDocumentsOutput{}, fmt.Errorf("missing compliance portal document link")
 		}
 
@@ -10278,47 +10296,6 @@ func (r *Resolver) UnlinkTaskExternalTool(ctx context.Context, req *mcp.CallTool
 	return nil, types.UnlinkTaskExternalOutput{
 		Task: taskWithLink,
 	}, nil
-}
-
-func (r *Resolver) taskExternalLinksByTasks(
-	ctx context.Context,
-	scope coredata.Scoper,
-	tasks []*coredata.Task,
-) (map[gid.GID]*coredata.TaskExternalLink, error) {
-	if r.task.Sync == nil || len(tasks) == 0 {
-		return nil, nil
-	}
-
-	ids := make([]gid.GID, 0, len(tasks))
-	for _, task := range tasks {
-		ids = append(ids, task.ID)
-	}
-
-	return r.task.Sync.GetLinksByTaskIDs(ctx, scope, ids)
-}
-
-func (r *Resolver) taskWithExternalLink(
-	ctx context.Context,
-	scope coredata.Scoper,
-	task *coredata.Task,
-) (*types.Task, error) {
-	result := types.NewTask(task)
-	if r.task.Sync == nil {
-		return result, nil
-	}
-
-	link, err := r.task.Sync.GetLinkByTaskID(ctx, scope, task.ID)
-	if err != nil {
-		if errors.Is(err, coredata.ErrResourceNotFound) {
-			return result, nil
-		}
-
-		return nil, err
-	}
-
-	result.ExternalLink = types.NewTaskExternalLink(link)
-
-	return result, nil
 }
 
 func (r *Resolver) ListConnectorsTool(ctx context.Context, req *mcp.CallToolRequest, input *types.ListConnectorsInput) (*mcp.CallToolResult, types.ListConnectorsOutput, error) {

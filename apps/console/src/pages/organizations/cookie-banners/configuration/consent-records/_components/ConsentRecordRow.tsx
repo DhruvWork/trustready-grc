@@ -30,7 +30,7 @@ import { useOrganizationId } from "#/hooks/useOrganizationId";
 import {
   formatAnonymizedIp,
   getActionVariant,
-} from "./consentRecordHelpers";
+} from "../_lib/consentRecordHelpers";
 
 const consentRecordFragment = graphql`
   fragment ConsentRecordRowFragment on CookieConsentRecord {
@@ -46,6 +46,7 @@ const consentRecordFragment = graphql`
     regulationSource
     countryCode
     subdivisionCode
+    origin
     createdAt
   }
 `;
@@ -78,6 +79,9 @@ export function ConsentRecordRow({ recordKey }: ConsentRecordRowProps) {
               </span>
             )
           : <span className="text-txt-tertiary">-</span>}
+      </Td>
+      <Td>
+        <span className="font-mono text-sm">{record.origin || "-"}</span>
       </Td>
       <Td>
         <span className="font-mono text-sm">
