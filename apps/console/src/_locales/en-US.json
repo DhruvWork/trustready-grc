@@ -1406,6 +1406,8 @@
     "slackBot": "SlackBot",
     "integrations": "INTEGRATIONS",
     "tasks": "Tasks",
+    "reportCreation": "Report Creation",
+    "reportCreationDescription": "Run an Azure security scan and download the report.",
     "measures": "Internal controls",
     "risks": "Risks",
     "allRisks": "All Risks",

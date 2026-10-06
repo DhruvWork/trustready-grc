@@ -111,6 +111,10 @@ function GovernanceNavPanelInner({ queryRef, group }: GovernanceNavPanelInnerPro
           to={navHref(organizationId, group, "statements-of-applicability")}
         />
       )}
+      <NavPanelItem
+        label={t("nav.reportCreation")}
+        to={navHref(organizationId, group, "report-creation")}
+      />
     </>
   );
 }

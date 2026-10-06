@@ -2206,6 +2206,8 @@
     "slackBot": "SlackBot",
     "integrations": "INTEGRATIES",
     "tasks": "Taken",
+    "reportCreation": "Rapport aanmaken",
+    "reportCreationDescription": "Start een Azure-beveiligingsscan en download het rapport.",
     "measures": "Interne controles",
     "risks": "Risico's",
     "allRisks": "Alle risico's",

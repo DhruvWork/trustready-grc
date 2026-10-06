@@ -2206,6 +2206,8 @@
     "slackBot": "SlackBot",
     "integrations": "INTÉGRATIONS",
     "tasks": "Tâches",
+    "reportCreation": "Création de rapport",
+    "reportCreationDescription": "Lancez une analyse de sécurité Azure et téléchargez le rapport.",
     "measures": "Contrôles internes",
     "risks": "Risques",
     "allRisks": "Tous les risques",
