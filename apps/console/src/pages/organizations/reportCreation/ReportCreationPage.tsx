@@ -23,8 +23,10 @@ import { useTranslation } from "react-i18next";
 
 // The TrustReady Security audit service (run Azure scan -> findings -> PDF report).
 // Embedded so the scan/report workflow lives alongside the GRC console.
+// The `?v=` cache-buster changes the embed URL so a browser drops any cached
+// copy of the report app shell after a redeploy (its own assets are hashed).
 const REPORT_APP_URL
-  = "https://trustready-web.niceglacier-3b15d07e.uksouth.azurecontainerapps.io/";
+  = "https://trustready-web.niceglacier-3b15d07e.uksouth.azurecontainerapps.io/?v=2";
 
 export default function ReportCreationPage() {
   const { t } = useTranslation();
