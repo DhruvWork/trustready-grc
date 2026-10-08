@@ -23,7 +23,9 @@ package files_v1
 import (
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -181,13 +183,64 @@ func (h *Handler) handleGetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	presignedURL, err := h.fileSvc.GeneratePresignedURL(ctx, f, presignedURLExpiry)
+	// Stream the file through the app rather than redirecting to a presigned
+	// object-storage URL. Self-hosted deployments (e.g. the bundled SeaweedFS
+	// gateway) publish an internal-only storage endpoint, so a presigned URL is
+	// not reachable from the browser; proxying keeps downloads working and stays
+	// same-origin (the session cookie is sent).
+	conds := filemanager.FileConditions{
+		IfNoneMatch: r.Header.Get("If-None-Match"),
+		IfRange:     r.Header.Get("If-Range"),
+		Range:       r.Header.Get("Range"),
+	}
+	if ifModifiedSince := r.Header.Get("If-Modified-Since"); ifModifiedSince != "" {
+		if t, parseErr := http.ParseTime(ifModifiedSince); parseErr == nil {
+			conds.IfModifiedSince = t
+		}
+	}
+
+	obj, err := h.fileSvc.OpenFile(ctx, f, conds)
 	if err != nil {
-		h.logger.ErrorCtx(ctx, "cannot generate file URL", log.Error(err), log.String("file_id", fileIDStr))
+		h.logger.ErrorCtx(ctx, "cannot open file", log.Error(err), log.String("file_id", fileIDStr))
 		jsonx.RenderInternalServerError(w)
 
 		return
 	}
 
-	http.Redirect(w, r, presignedURL, http.StatusTemporaryRedirect)
+	defer func() { _ = obj.Body.Close() }()
+
+	w.Header().Set("Accept-Ranges", "bytes")
+	if obj.ETag != "" {
+		w.Header().Set("ETag", obj.ETag)
+	}
+
+	if obj.NotModified {
+		w.WriteHeader(http.StatusNotModified)
+		return
+	}
+
+	if obj.RangeNotSatisfiable {
+		w.Header().Set("Content-Range", fmt.Sprintf("bytes */%d", f.FileSize))
+		w.WriteHeader(http.StatusRequestedRangeNotSatisfiable)
+
+		return
+	}
+
+	w.Header().Set("Content-Type", f.MimeType)
+	w.Header().Set("Content-Length", strconv.FormatInt(obj.ContentLength, 10))
+	w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%q", f.FileName))
+
+	if !obj.LastModified.IsZero() {
+		w.Header().Set("Last-Modified", obj.LastModified.UTC().Format(http.TimeFormat))
+	}
+
+	if obj.PartialContent {
+		w.Header().Set("Content-Range", obj.ContentRange)
+		w.WriteHeader(http.StatusPartialContent)
+	}
+
+	if _, err := io.Copy(w, obj.Body); err != nil {
+		h.logger.ErrorCtx(ctx, "cannot stream file", log.Error(err), log.String("file_id", fileIDStr))
+		return
+	}
 }
