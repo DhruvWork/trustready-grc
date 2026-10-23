@@ -40,13 +40,6 @@ const NAV_DESTINATIONS = [
     isVisible: permissions => permissions.canListTasks,
   },
   {
-    id: "report-creation",
-    group: "governance",
-    labelKey: "nav.reportCreation",
-    path: "report-creation",
-    isVisible: () => true,
-  },
-  {
     id: "measures",
     group: "governance",
     labelKey: "nav.measures",

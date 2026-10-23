@@ -1406,7 +1406,7 @@
     "slackBot": "SlackBot",
     "integrations": "INTEGRATIONS",
     "tasks": "Tasks",
-    "reportCreation": "Report Creation",
+    "reportCreation": "Cloud Scanner",
     "reportCreationDescription": "Run an Azure security scan and download the report.",
     "measures": "Internal controls",
     "risks": "Risks",
@@ -1492,7 +1492,7 @@
   },
   "viewerMembershipDropdown": {
     "errors": { "requestFailed": "Request failed", "cannotSignOut": "Cannot sign out" },
-    "actions": { "oauthTokens": "OAuth tokens", "employeePortal": "Employee Portal", "switchToDarkMode": "Switch to dark mode", "switchToLightMode": "Switch to light mode", "help": "Help", "logout": "Logout" }
+    "actions": { "oauthTokens": "OAuth tokens", "employeePortal": "Employee Portal", "cloudScanner": "Cloud Scanner", "switchToDarkMode": "Switch to dark mode", "switchToLightMode": "Switch to light mode", "help": "Help", "logout": "Logout" }
   },
   "usersPage": {
     "empty": "No users",

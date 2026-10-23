@@ -2206,7 +2206,7 @@
     "slackBot": "SlackBot",
     "integrations": "INTÉGRATIONS",
     "tasks": "Tâches",
-    "reportCreation": "Création de rapport",
+    "reportCreation": "Scanner cloud",
     "reportCreationDescription": "Lancez une analyse de sécurité Azure et téléchargez le rapport.",
     "measures": "Contrôles internes",
     "risks": "Risques",
@@ -2297,6 +2297,7 @@
     "actions": {
       "oauthTokens": "Jetons OAuth",
       "employeePortal": "Portail employé",
+      "cloudScanner": "Scanner cloud",
       "switchToDarkMode": "Passer en mode sombre",
       "switchToLightMode": "Passer en mode clair",
       "help": "Aide",

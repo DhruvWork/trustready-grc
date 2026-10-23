@@ -22,6 +22,7 @@ import {
   CaretRightIcon,
   FileTextIcon,
   KeyIcon,
+  MagnifyingGlassIcon,
   SignOutIcon,
 } from "@phosphor-icons/react";
 import { formatError } from "@probo/helpers";
@@ -179,6 +180,12 @@ export function ViewerMembershipMenu({ organizationKey }: ViewerMembershipMenuPr
             render={<a href={employeePortalHref(organizationId)} />}
           >
             {t("viewerMembershipDropdown.actions.employeePortal")}
+          </DropdownItem>
+          <DropdownItem
+            iconStart={<MagnifyingGlassIcon />}
+            render={<Link to={`/organizations/${organizationId}/governance/report-creation`} />}
+          >
+            {t("viewerMembershipDropdown.actions.cloudScanner")}
           </DropdownItem>
           <DropdownSeparator />
           <DropdownItem

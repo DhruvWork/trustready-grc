@@ -2206,7 +2206,7 @@
     "slackBot": "SlackBot",
     "integrations": "INTEGRATIES",
     "tasks": "Taken",
-    "reportCreation": "Rapport aanmaken",
+    "reportCreation": "Cloudscanner",
     "reportCreationDescription": "Start een Azure-beveiligingsscan en download het rapport.",
     "measures": "Interne controles",
     "risks": "Risico's",
@@ -2297,6 +2297,7 @@
     "actions": {
       "oauthTokens": "OAuth-tokens",
       "employeePortal": "Medewerkersportaal",
+      "cloudScanner": "Cloudscanner",
       "switchToDarkMode": "Overschakelen naar donkere modus",
       "switchToLightMode": "Overschakelen naar lichte modus",
       "help": "Help",
