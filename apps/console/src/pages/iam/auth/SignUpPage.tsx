@@ -109,37 +109,25 @@ function SignUpPageContent(props: { queryRef: NonNullable<ReturnType<typeof useQ
       <div className="flex w-full flex-col gap-8">
         <div className="flex flex-col gap-1">
           <Heading level={1} size={4} weight="medium" align="center" highContrast>
-            {t("signUpPage.checkEmail.title")}
+            {t("signUpPage.created.title")}
           </Heading>
           <Text size={2} align="center" className="block">
-            {t("signUpPage.checkEmail.description", { email: signedUpEmail })}
+            {t("signUpPage.created.description", { email: signedUpEmail })}
           </Text>
         </div>
 
-        <Text align="center" size={2} className="block">
-          {t("signUpPage.checkEmail.resend")}
-          {" "}
-          <Link
-            to={{
-              pathname: "/auth/resend-verification-email",
-              search: authSearch,
-            }}
-            state={{ email: signedUpEmail }}
-          >
-            {t("signUpPage.actions.resend")}
-          </Link>
-        </Text>
-
-        <Text align="center" size={2} className="block">
-          <Link
-            to={{
-              pathname: "/auth/login",
-              search: authSearch,
-            }}
-          >
-            {t("signUpPage.actions.backToLogin")}
-          </Link>
-        </Text>
+        <ButtonLink
+          to={{
+            pathname: "/auth/login",
+            search: authSearch,
+          }}
+          variant="soft"
+          color="neutral"
+          size={3}
+          className="w-full"
+        >
+          {t("signUpPage.created.action")}
+        </ButtonLink>
       </div>
     );
   }
