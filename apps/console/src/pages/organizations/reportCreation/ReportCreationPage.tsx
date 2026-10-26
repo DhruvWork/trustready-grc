@@ -77,14 +77,16 @@ export default function ReportCreationPage() {
         fetch(`${API}/audits`, { credentials: "include" }),
       ]);
       if (frameworksRes.ok) {
-        const body = (await frameworksRes.json()) as { frameworks?: Framework[] };
-        setFrameworks(body.frameworks ?? []);
-        if (!framework && body.frameworks?.length) {
-          setFramework(body.frameworks[0].name);
+        const body = (await frameworksRes.json()) as { frameworks?: Framework[] } | Framework[];
+        const list = Array.isArray(body) ? body : (body.frameworks ?? []);
+        setFrameworks(list);
+        if (!framework && list.length) {
+          setFramework(list[0].name);
         }
       }
       if (auditsRes.ok) {
-        setAudits((await auditsRes.json()) as Audit[]);
+        const body = (await auditsRes.json()) as { audits?: Audit[] } | Audit[];
+        setAudits(Array.isArray(body) ? body : (body.audits ?? []));
       }
     }
     catch {
