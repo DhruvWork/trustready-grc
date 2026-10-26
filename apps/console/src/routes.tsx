@@ -70,7 +70,7 @@ const routes = [
       {
         path: "login",
         Component: lazy(
-          () => import("./pages/iam/auth/sign-in/SignInPageLoader"),
+          () => import("./pages/iam/auth/sign-in/PasswordSignInPage"),
         ),
       },
       {

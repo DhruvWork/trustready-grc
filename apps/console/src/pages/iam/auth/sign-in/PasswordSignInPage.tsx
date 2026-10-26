@@ -30,7 +30,7 @@ import { Text } from "@probo/ui/src/v2/typography/Text";
 import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { useMutation } from "react-relay";
-import { matchPath, useLocation, useNavigate, useSearchParams } from "react-router";
+import { matchPath, useNavigate, useSearchParams } from "react-router";
 import { graphql } from "relay-runtime";
 
 import type { PasswordSignInPageMutation } from "#/__generated__/iam/PasswordSignInPageMutation.graphql";
@@ -49,7 +49,6 @@ const signInMutation = graphql`
 `;
 
 export default function PasswordSignInPage() {
-  const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const postAuthRedirectUrl = usePostAuthRedirectUrl();
@@ -177,12 +176,6 @@ export default function PasswordSignInPage() {
             label={t("passwordSignInPage.actions.register")}
           />
         </Suspense>
-
-        <Text align="center" size={2} className="block">
-          <Link to={{ pathname: "/auth/login", search: location.search }}>
-            {t("passwordSignInPage.actions.backToLogin")}
-          </Link>
-        </Text>
       </div>
     </div>
   );
