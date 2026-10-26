@@ -58,6 +58,7 @@ import (
 	"go.probo.inc/probo/pkg/saferedirect"
 	"go.probo.inc/probo/pkg/securecookie"
 	agent_v1 "go.probo.inc/probo/pkg/server/api/agent/v1"
+	cloudscanner_v1 "go.probo.inc/probo/pkg/server/api/cloudscanner/v1"
 	connect_v1 "go.probo.inc/probo/pkg/server/api/connect/v1"
 	console_v1 "go.probo.inc/probo/pkg/server/api/console/v1"
 	cookiebanner_v1 "go.probo.inc/probo/pkg/server/api/cookiebanner/v1"
@@ -139,6 +140,7 @@ type (
 		linearHandler       http.Handler
 		connectHandler      http.Handler
 		agentHandler        http.Handler
+		cloudScannerHandler http.Handler
 	}
 )
 
@@ -262,8 +264,9 @@ func NewServer(cfg Config) (*Server, error) {
 	}))
 
 	return &Server{
-		cfg:  cfg,
-		csrf: csrf,
+		cfg:                 cfg,
+		csrf:                csrf,
+		cloudScannerHandler: cloudscanner_v1.NewHandler(cfg.IAM, cfg.Cookie),
 		consoleHandler: console_v1.NewMux(
 			cfg.Logger.Named("console.v1"),
 			cfg.Probo,
@@ -405,6 +408,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	router.Group(func(r chi.Router) {
 		r.Use(cors.Handler(corsOpts))
 		r.Mount("/console/v1", http.StripPrefix("/console/v1", s.consoleHandler))
+		r.Mount("/cloud-scanner/v1", http.StripPrefix("/cloud-scanner/v1", s.cloudScannerHandler))
 		r.Mount("/connect/v1", http.StripPrefix("/connect/v1", s.connectHandler))
 		r.Mount("/files/v1", http.StripPrefix("/files/v1", s.filesHandler))
 		r.Mount("/mcp/v1", http.StripPrefix("/mcp/v1", s.mcpHandler))
