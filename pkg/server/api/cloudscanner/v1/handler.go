@@ -76,6 +76,13 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// The scanner identity is keyed by email. An unverified (or just changed)
+	// address must never be allowed to inherit an existing scanner identity.
+	if !identity.EmailAddressVerified {
+		writeError(w, http.StatusForbidden, "email verification required")
+		return
+	}
+
 	if h.baseURL == "" {
 		writeError(w, http.StatusServiceUnavailable, "cloud scanner is not configured")
 		return
